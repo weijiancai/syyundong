@@ -1,0 +1,64 @@
+<?php
+$DB_Config = require 'config.inc.php';
+$debug = require 'debug.php';
+$Public_Config =  array(
+	//错误指向
+ 	/* 'TMPL_EXCEPTION_FILE'=>'D:\APP\Modules\Public\Tpl\default\Public\error1.html',
+	'ERROR_PAGE'=>'D:\APP\Modules\Public\Tpl\default\Public\error1.html', 
+	'TMPL_ACTION_SUCCESS' => 'home@Public:success',
+	'TMPL_ACTION_ERROR'   => 'home@Public:error',  */
+	//URL模式
+	'LOG_RECORD' => false,
+	'LIMIT_REFLESH_TIME'=>'10',
+	'DEFAULT_MODULE'     => 'Index',
+	'URL_CASE_INSENSITIVE'  => true,
+	'DEFAULT_THEME'	=> 'default',
+	'TMPL_L_DELIM'	=>'<{',
+	'TMPL_R_DELIM'	=>'}>',
+    'URL_MODEL'=>2,
+	'URL_PATHINFO_DEPR'	=>'/',
+	'URL_ROUTER_ON'   => true,
+	'URL_ROUTE_RULES' => array(
+		
+	),
+	'URL_HTML_SUFFIX'	=>'.html',
+	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
+	'HTML_CACHE_ON'	=> false,
+	//SESSION
+    'SESSION_AUTO_START' => true,
+    'SESSION_OPTIONS'	=> array(
+    	'domain'=>'.songyuan163.com'
+    ),
+	/*COOKIE*/
+	'COOKIE_EXPIRE' => 24*3600*15,
+	'COOKIE_DOMAIN'         => '.songyuan163.com',
+	'COOKIE_PATH'	=> '/',
+	
+	/*调试状态*/
+	'APP_STATUS' => 'debug',
+	'SHOW_PAGE_TRACE'	 => true,
+	'SHOW_ERROR_MSG' => true,
+	'DEFAULT_CHARSET'       => 'utf-8',
+	
+	/*子域名服务*/
+	'APP_GROUP_MODE'	 => 1,
+	'APP_GROUP_LIST'     => 'Home', 
+	'DEFAULT_GROUP'      => 'Home',
+	'HTML_CACHE_ON'	=>true,
+	'HTML_CACHE_TIME'	=>true,
+	
+	/*TokenBuild行为配置*/
+	'TOKEN_ON'	=>true,
+	'TOKEN_NAME'	=>'__hash__',
+	'TOKEN_TYPE'	=>'md5',
+	'TOKEN_RESET'=>true,
+	
+	/*模板替换*/
+	'TMPL_PARSE_STRING'  =>array(
+	 '__WWW__'=>'http://www.songyuan163.com',
+	 '__WAP__' =>'http://m.songyuan163.com',
+	),
+	
+);
+return array_merge($DB_Config,$Public_Config,$debug);
+?>
