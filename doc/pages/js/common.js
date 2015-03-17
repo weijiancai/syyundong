@@ -17,10 +17,10 @@ $.validator.setDefaults({
     },
     /*highlight: function (element) { // hightlight error inputs
         $(element).addClass('text-error'); // set error class to the control group
-    },*/
+    },
     unhighlight: function (element) { // revert the change dony by hightlight
         $(element).removeClass('text-error').tooltip('destroy');
-    },
+    },*/
     success: function (label, element) {
         $(element).tooltip('destroy');
     },
