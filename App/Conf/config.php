@@ -19,20 +19,12 @@ $Public_Config =  array(
 	'URL_PATHINFO_DEPR'	=>'/',
 	'URL_ROUTER_ON'   => true,
 	'URL_ROUTE_RULES' => array(
-		
+		'/^Public$/' => 'Public/top',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
 	'HTML_CACHE_ON'	=> false,
-	//SESSION
-    'SESSION_AUTO_START' => true,
-    'SESSION_OPTIONS'	=> array(
-    	'domain'=>'.songyuan163.com'
-    ),
-	/*COOKIE*/
-	'COOKIE_EXPIRE' => 24*3600*15,
-	'COOKIE_DOMAIN'         => '.songyuan163.com',
-	'COOKIE_PATH'	=> '/',
+	
 	
 	/*调试状态*/
 	'APP_STATUS' => 'debug',
@@ -42,7 +34,7 @@ $Public_Config =  array(
 	
 	/*子域名服务*/
 	'APP_GROUP_MODE'	 => 1,
-	'APP_GROUP_LIST'     => 'Home', 
+	'APP_GROUP_LIST'     => 'Home,Public,Game', 
 	'DEFAULT_GROUP'      => 'Home',
 	'HTML_CACHE_ON'	=>true,
 	'HTML_CACHE_TIME'	=>true,
@@ -55,8 +47,7 @@ $Public_Config =  array(
 	
 	/*模板替换*/
 	'TMPL_PARSE_STRING'  =>array(
-	 '__WWW__'=>'http://www.songyuan163.com',
-	 '__WAP__' =>'http://m.songyuan163.com',
+
 	),
 	
 );
