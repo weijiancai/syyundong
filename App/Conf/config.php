@@ -34,7 +34,7 @@ $Public_Config =  array(
 	
 	/*子域名服务*/
 	'APP_GROUP_MODE'	 => 1,
-	'APP_GROUP_LIST'     => 'Home,Public,Game', 
+	'APP_GROUP_LIST'     => 'Home,Public,Game,Activity', 
 	'DEFAULT_GROUP'      => 'Home',
 	'HTML_CACHE_ON'	=>true,
 	'HTML_CACHE_TIME'	=>true,
