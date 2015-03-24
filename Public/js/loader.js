@@ -10,7 +10,8 @@ var loader_config = {
         'jqueryUI': 'jquery-ui-1.10.3.custom.min',
         'common': 'common',
         'page_login': 'pages/login',
-        'page_forgetPassword': 'pages/forgetPassword'
+        'page_forgetPassword': 'pages/forgetPassword',
+        'page_index': 'pages/index'
     },
     shim: {
         'bootstrap': {
@@ -28,6 +29,10 @@ var loader_config = {
         'page_forgetPassword': {
             deps: ['common'],
             exports: 'page_forgetPassword'
+        },
+        'page_index': {
+            deps: ['jquery', 'bootstrap'],
+            exports: 'page_index'
         }
     }
 };

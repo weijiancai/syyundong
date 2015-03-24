@@ -1,4 +1,7 @@
 $(function() {
+    // 注册body id
+    $('body').attr('id', 'login-page');
+
     $('#loginForm').validate({
         rules: {
             loginName: "required",
