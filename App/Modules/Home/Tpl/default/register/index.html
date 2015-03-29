@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="http://static.wisdom-china.cn/iyuesai/www/images/favicon.ico"/>
+    <link rel="bookmark" href="http://static.wisdom-china.cn/iyuesai/www/images/favicon.ico"/>
+    <link rel="icon" href="http://static.wisdom-china.cn/iyuesai/www/images/favicon.ico" type="image/x-icon"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+    <meta name="author" content="www.iyuesai.com"/>
+    <meta name="Copyright" content="www.iyuesai.com"/>
+    <meta name="Description" content="爱约赛|智美赛事|注册"/>
+    <meta name="Keywords" content="爱约赛|智美赛事|注册"/>
+    <title>爱约赛|智美赛事|注册</title>
+    <script type="text/javascript" src="__PUBLIC__/js/loader.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/register/regval.js"></script>
+</head>
+<body id="signup-page">
+<div id="header" class="clearfix">
+    <div class="header-head">
+        <div class="container clearfix" data-selector="headerHead">
+            <div id="NTGUID__2">
+                <div class="pull-left">
+                    <a href="__APP__/login/login.html">登录</a>
+                    <a href="__APP__/register">注册</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="header-body">
+        <div class="container clearfix" id="header-body">
+            <a href="__APP__"><img src="__PUBLIC__/images/default/logo.png" class="logo" alt="爱约赛"/></a>
+
+            <div id="i_user_center" class="pull-right user-info" data-selector="userCenterInfo"></div>
+            <div class="header-adwrap" data-selector="headerAdv"></div>
+        </div>
+    </div>
+    <h4 id="header-title">注册</h4>
+
+    <div class="clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="span16">
+                    <div class="signup-block clearfix">
+                        <div class="signup-wrap">
+                            <div class="process-stage">
+                                <ul>
+                                    <li class="current"><i>1</i>设置登录信息</li>
+                                    <li><i>2</i>填写账户信息</li>
+                                    <li><i>3</i>注册成功</li>
+                                </ul>
+                            </div>
+                            <form name="registerForm" action="__APP__/Register/adddata"
+                                  method="POST">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td><p>手机号码</p> <input type="text" class="span3" id="mobile"
+                                                               name="mobile"/>
+                                            <span id="mobilemes" style="color:red;font-size:12px"></span>
+                                            <!--<p>没有手机？使用<a href="../auth/register-email">邮箱注册</a></p> --></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p>图片验证码</p> <input type="text" class="span1" id="picCode" name="picCode"/>
+                                            <img style="width:90px;height:30px;" src="__APP__/verify" id="verifyImg"
+                                                 onclick="fleshVerify()"/>
+                                            <span id="picmes" style="color:red;font-size:12px"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p>手机验证码</p> <input type="text" class="span1" id="signupCode"
+                                                                name="signupCode"/>
+                                            <button id="getCodeBtn" type="button" class="btn btn-warning"
+                                                    data-selector="request-code"> 免费获取验证码<span></span></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><p>密码</p> <input class="span3" type="password" id="password"
+                                                             name="password"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p>确认密码</p> <input class="span3" type="password" id="confirmPass"
+                                                               name="confirmPass" validate-title="确认密码"
+                                                               validate-rules="[['required'],['equalto',{'name':'signupPass'}]]"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label validate-title="服务条款" validate-rules="[['required','必须同意服务条款']]"
+                                                   validate-group="checkbox"> <input type="checkbox" name="signupAgr"/>同意
+                                        </label> <a href="../auth/register/note/signup-agreement"
+                                                    target="_blank">注册协议</a> 和 <a
+                                                href="../auth/register/note/signup-corp" target="_blank">隐私保护</a>、<a
+                                                href="../auth/register/note/signup-legal" target="_blank">法律声明</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <!--<input type="button" class="btn btn-warning btn-large span3" onclick="regsub()" value="提交"/></input>-->
+                                            <input type="submit" class="btn btn-warning btn-large span3"
+                                                   onclick="regsub()"    /></input>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script language="JavaScript">
+        function fleshVerify() {
+            //重载验证码
+            document.getElementById('verifyImg').src = '__APP__/verify';
+        }
+    </script>
+    <include file="Public@default:Public:bottom"/>
+</body>
+</html>
