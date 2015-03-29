@@ -24,8 +24,9 @@ class RegisterAction extends Action
         if ($this->isPost()) {
             $date['mobile'] = trim(I('post.mobile'));
             $date['password'] = base64_encode(strtoupper(md5(I('post.password'))));;
-            $result = D('Users')->data($date)->add();
+            $result = D('DbUser')->data($date)->add();
             if (false !== $result) {
+                $this->assign('');
                 $this->display('profile');
             }
         } else {

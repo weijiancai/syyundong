@@ -2,6 +2,7 @@
 /**
 *@时间:20150325
 *@功能:查询赛事信息
+*@VIEW:
 *@Author：liuliting
 */
 class IndexAction extends Action {
