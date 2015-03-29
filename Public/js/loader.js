@@ -60,7 +60,6 @@ _script.src = "/syyundong/Public/js/require.js";
 _script.async = true;
 _script.onload = function() {
     require.config(loader_config);
-
     // 加载模块
     require(Loader.modules);
 };

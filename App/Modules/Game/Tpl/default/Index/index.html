@@ -1,50 +1,4 @@
 <include file="Public@default:Public:top" />
-<body id="match">
-  <!-- 引入头部 -->
-       <div class="header-nav">
-            <div class="container clearfix">
-
-                <div id="navigation">
-                    <a href="javascript:;" class="navigation-title">全部赛事活动<i></i></a>
-                    <!-- && start 赛事活动： dz_sort -->
-                    <ul class="navigation-list">
-                        <li class="navigation-item">
-                            <div class="navigation-item-static">
-                                <dl>
-                                    <dt>
-                                        马拉松/路跑
-                                    </dt>
-                                    <dd>
-                                        <a href="game/17">广州马拉松</a>
-                                        <a href="game/74">杭州马拉松</a>
-                                        <a href="game/search?keyword=四季跑">四季跑</a>
-                                    </dd>
-                                </dl>
-                            </div>
-                            <div class="navigation-item-content">
-                                <ul>
-                                    <li><a href="game/search?keyword=马拉松">马拉松</a></li>
-                                    <li><a href="game/search?keyword=路跑">路跑</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                    <!-- && end -->
-                </div>
-                <div id="site-navigation">
-                    <ul class="site-navigation-list clearfix">
-                        <li class="site-navigation-item"><a href="" class="menu-root current">首页</a></li>
-                        <li class="site-navigation-item"><a href="Game" class="menu-root ">赛事</a></li>
-                        <li class="site-navigation-item"><a href="Activity" class="menu-root ">约活动</a></li>
-                        <li class="site-navigation-item"><a href="friends/index" class="menu-root ">赛友圈</a></li>
-                        <li class="site-navigation-item"><a href="venue/search" class="menu-root ">场馆</a></li>
-                        <li class="site-navigation-item"><a href="club" class="menu-root ">马赛客</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
   <h4 id="header-title">赛事</h4>
   <div class="search-engines">
     <div class="container">
@@ -93,7 +47,42 @@
               <!-- 比赛中 ＝ match-going   -->
               <!-- 已结束 ＝ match-end   -->
               
-              
+              <volist name="game" id="vo">
+			  <li>
+                <div class="item-list-content">
+                  <div class="item-list-wrap clearfix">
+                    <div class="thumbnail-wrap">
+                      <span class="icon-match icon-match-label"></span>
+  	                    <a href="/Game/416"><img src="http://static.wisdom-china.cn//images/1/5812/9608/7979/2d635d606ec5362d4b2c228b9d568422_2_220x140.jpg?640x442" alt="免抽签！进军纽约马拉松" title="免抽签！进军纽约马拉松"></a>
+                    </div>
+                    <div class="item-list-right" onclick="window.location.href='/game/416'">
+                      <p class="item-list-ttl">
+                        <span class="icon-55 match-enroll"></span>
+                        <strong><span>[马拉松]</span><a href="/game/416"><{$vo.name}></a></strong>
+                      </p>
+                      <div class="item-list-detail">
+                        <p>
+                        <span>时间：</span>
+            					  <!-- 同一天 -->
+            				 	  2015年11月01日 08:00-14:30
+                        </p>
+                        <p><span>地点：</span>美国纽约</p>
+                        <p><span>费用：</span>12100元（报名费）</p>
+                        <p><span>主办：</span>
+                            仕春体育
+                        </p>
+                        <p class="item-list-bottom">
+                          <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（14）</a>
+                          <a href="javascript:void(0);"><i class="icon-match icon-comment"></i>0人评论</a>
+                          <!--<a href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名8人（剩余42人）</a>
+                            -->
+                        </p>
+                      </div>
+                    </div>
+                      <a href="javascript:;" class="btn btn-warning item-list-reg" data-gameid=416 data-action="/game/apply/416" data-selector="joinMatch">我要报名</a>
+                  </div>
+                </div>			  
+			  </volist>
 			  <li>
                 <div class="item-list-content">
                   <div class="item-list-wrap clearfix">

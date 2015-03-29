@@ -19,7 +19,8 @@ $Public_Config =  array(
 	'URL_PATHINFO_DEPR'	=>'/',
 	'URL_ROUTER_ON'   => true,
 	'URL_ROUTE_RULES' => array(
-		'/^Public$/' => 'Public/top',
+        '/^verify/'=>'home/index/verify',
+		'login/'=>'home/index/login/',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
@@ -34,7 +35,7 @@ $Public_Config =  array(
 	
 	/*子域名服务*/
 	'APP_GROUP_MODE'	 => 1,
-	'APP_GROUP_LIST'     => 'Home,Public,Game,Activity', 
+	'APP_GROUP_LIST'     => 'Home,Public,Game,Activity,Syyundong2015', 
 	'DEFAULT_GROUP'      => 'Home',
 	'HTML_CACHE_ON'	=>true,
 	'HTML_CACHE_TIME'	=>true,
@@ -44,7 +45,10 @@ $Public_Config =  array(
 	'TOKEN_NAME'	=>'__hash__',
 	'TOKEN_TYPE'	=>'md5',
 	'TOKEN_RESET'=>true,
-	
+
+    /*SESSION开启*/
+    'SESSION_AUTO_START' =>true,
+
 	/*模板替换*/
 	'TMPL_PARSE_STRING'  =>array(
 

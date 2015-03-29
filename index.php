@@ -5,5 +5,5 @@
 
 	define('APP_DEBUG',true);
 	
-	require './ThinkPHP/ThinkPHP.php';
+	require './Codes/Codes.php';
 ?>
