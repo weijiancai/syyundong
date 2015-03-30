@@ -11,7 +11,8 @@ var loader_config = {
         'common': 'common',
         'page_login': 'pages/login',
         'page_forgetPassword': 'pages/forgetPassword',
-        'page_index': 'pages/index'
+        'page_index': 'pages/index',
+        'page_register': 'pages/register'
     },
     shim: {
         'bootstrap': {
@@ -33,6 +34,10 @@ var loader_config = {
         'page_index': {
             deps: ['jquery', 'bootstrap'],
             exports: 'page_index'
+        },
+        'page_register': {
+            deps: ['common'],
+            exports: 'page_register'
         }
     }
 };
