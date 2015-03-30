@@ -1,10 +1,10 @@
 <?php
-/**
-*@时间:20150325
-*@功能:查询赛事信息
-*@VIEW:
-*@Author：liuliting
-*/
+	/**
+	*	@时间:20150325
+	*	@功能:查询赛事信息
+	*	@VIEW:v_game_activity
+	*	@Author：liuliting
+	*/
 class IndexAction extends Action {
 	public function index(){
         import('ORG.Util.Page');
@@ -18,5 +18,18 @@ class IndexAction extends Action {
         $this->assign('game',$list);
         $this->assign('count',$count);
 		$this->display();
+	}
+	/*
+	 * @时间:20150325
+	 * @功能：发起赛事
+	 */
+	public function publish(){
+		//首先判断用户是否登录
+		$mark = I('session.mark');
+		if($mark){
+			$this->display();
+		}else{
+			$this->redirect('/login/login');
+		}
 	}
 }

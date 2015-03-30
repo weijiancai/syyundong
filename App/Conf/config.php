@@ -20,7 +20,7 @@ $Public_Config =  array(
 	'URL_ROUTER_ON'   => true,
 	'URL_ROUTE_RULES' => array(
         '/^verify/'=>'home/index/verify',
-		'login/'=>'home/index/login/',
+        '/^Game\/publish/' => 'Game/Index/publish',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
