@@ -1,8 +1,33 @@
 <?php
 /**
+ *  $功能：加密算法
+ */
+function enCode($string = '', $skey = 'dGzni5DcMNi1QaKF8507YcoWkqhzTCPI')
+{
+    $skey = array_reverse(str_split($skey));
+    $strArr = str_split(base64_encode($string));
+    $strCount = count($strArr);
+    foreach ($skey as $key => $value) {
+        $key < $strCount && $strArr[$key] .= $value;
+    }
+    return str_replace('=', 'O0O0O', join('', $strArr));
+}
+/**
+ *  $功能：解密算法
+ */
+function deCode($string = '', $skey = 'dGzni5DcMNi1QaKF8507YcoWkqhzTCPI') {
+    $skey = array_reverse(str_split($skey));
+    $strArr = str_split(str_replace('O0O0O', '=', $string), 2);
+    $strCount = count($strArr);
+    foreach ($skey as $key => $value) {
+        $key < $strCount && $strArr[$key] = $strArr[$key][0];
+    }
+    return base64_decode(join('', $strArr));
+}
+
+/**
  * @功能：防御XSS攻击
  */
-
 function remove_xss($val)
 {
     $val = preg_replace('/([\x00-\x08,\x0b-\x0c,\x0e-\x19])/', '', $val);

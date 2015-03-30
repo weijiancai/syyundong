@@ -11,10 +11,9 @@ class loginModel extends Model
      */
     public function login($name = NULL, $pwd = NULL)
     {
-        $date['password'] = trim($pwd);
         $date['mobile'] = trim($name);
+        $date['password'] = base64_encode(strtoupper(md5($pwd)));
         $model = D('DbUser');
-        dump($date);
         $data = $model->field('id,mobile,password')->where($date)->find();
         if ($data == null) {
             return 3;

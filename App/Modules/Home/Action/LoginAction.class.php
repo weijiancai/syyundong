@@ -11,14 +11,14 @@ class LoginAction extends Action
      */
     public function index()
     {
+        extract($_POST);
+        extract($_GET);
         if (IS_POST) {
             if (empty($_POST['loginName']) && empty($_POST['loginPass'])) {
                 $this->error('账号密码都不能为空');
             } else {
-                $loginName = remove_xss($_POST['loginName']);
-                $loginPass = remove_xss(I('post.loginPass'));
-                dump($loginName);
-                dump($loginPass);
+                $loginName = I('post.loginName');
+                $loginPass = I('post.loginPass');
                 $wz = I('post.wz');
                 $data = D('Login')->login($loginName, $loginPass);
                 if ($data == 1) {
