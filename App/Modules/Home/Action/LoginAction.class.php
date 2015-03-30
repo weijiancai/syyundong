@@ -15,8 +15,10 @@ class LoginAction extends Action
             if (empty($_POST['loginName']) && empty($_POST['loginPass'])) {
                 $this->error('账号密码都不能为空');
             } else {
-                $loginName = remove_xss(I('post.loginName'));
+                $loginName = remove_xss($_POST['loginName']);
                 $loginPass = remove_xss(I('post.loginPass'));
+                dump($loginName);
+                dump($loginPass);
                 $wz = I('post.wz');
                 $data = D('Login')->login($loginName, $loginPass);
                 if ($data == 1) {

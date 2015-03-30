@@ -2,7 +2,7 @@
  * Created by wei_jc on 2015/3/15.
  */
 var loader_config = {
-    baseUrl: '/syyundong/Public/js/',
+    baseUrl: '/Public/js/',
     paths: {
         'jquery': 'lib/jquery-1.11.1',
         'validate': 'lib/jquery.validate',
@@ -48,7 +48,7 @@ var Loader = {
 };
 
 // 写入css
-var baseCssUrl = '/syyundong/Public/css';
+var baseCssUrl = '/Public/css';
 document.write('<link type="text/css" rel="stylesheet" href="' + baseCssUrl + '/common.min.css">');
 document.write('<link type="text/css" rel="stylesheet" href="' + baseCssUrl + '/public.css">');
 document.write('<link type="text/css" rel="stylesheet" href="' + baseCssUrl + '/zm.css">');
@@ -56,7 +56,7 @@ document.write('<link type="text/css" rel="stylesheet" href="' + baseCssUrl + '/
 // 写入script
 var _script = document.createElement("script");
 _script.type = "text/javascript";
-_script.src = "/syyundong/Public/js/require.js";
+_script.src = "/Public/js/require.js";
 _script.async = true;
 _script.onload = function() {
     require.config(loader_config);
