@@ -25,8 +25,7 @@ $Public_Config =  array(
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
 	'HTML_CACHE_ON'	=> false,
-	
-	
+
 	/*调试状态*/
 	'APP_STATUS' => 'debug',
 	'SHOW_PAGE_TRACE'	 => true,
