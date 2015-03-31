@@ -13,7 +13,8 @@ var loader_config = {
         'page_forgetPassword': 'pages/forgetPassword',
         'page_index': 'pages/index',
         'page_register': 'pages/register',
-        'page_publish': 'pages/publish'
+        'page_publish': 'pages/publish',
+        'page_match': 'pages/match'
     },
     shim: {
         'bootstrap': {
@@ -43,6 +44,10 @@ var loader_config = {
         'page_publish': {
             deps: ['common'],
             exports: 'page_publish'
+        },
+        'page_match': {
+            deps: ['common'],
+            exports: 'page_match'
         }
     }
 };

@@ -50,7 +50,12 @@ class IndexAction extends Action {
         $date['apply_email'] = I('post.applyEmail');
         $result  = $model->add($date);
         if(false!==$result){
-            $this->display();
+            //申请人ID
+            $this->assign('applyID',date(Ymd).$result);
+            $this->assign('name',I('post.name'));
+            $this->assign('applyPhone',I('post.applyPhone'));
+            $this->assign('applyEmail',I('post.applyEmail'));
+            $this->display('applyresult');
         }else{
             $this->error();
         }
