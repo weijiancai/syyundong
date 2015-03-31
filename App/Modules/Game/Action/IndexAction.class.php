@@ -32,4 +32,27 @@ class IndexAction extends Action {
 			$this->redirect('/login/login');
 		}
 	}
+    /*
+     * @时间:20150325
+     * @功能：发布赛事
+     */
+    public function addgame(){
+        $model = D('DbGame');
+        $date['sport_id'] = I('post.sportTypeId');
+        $date['name'] = I('post.name');
+        $date['province'] = I('post.provinceId');
+        $date['sponor'] = I('post.sponor');
+        $date['phone'] = I('post.phone');
+        $date['limit_count'] = I('post.limitCount');
+        $date['content'] = I('post.description');
+        $date['apply_name'] = I('post.applyName');
+        $date['apply_phone'] = I('post.applyPhone');
+        $date['apply_email'] = I('post.applyEmail');
+        $result  = $model->add($date);
+        if(false!==$result){
+            $this->display();
+        }else{
+            $this->error();
+        }
+    }
 }

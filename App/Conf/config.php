@@ -21,6 +21,7 @@ $Public_Config =  array(
 	'URL_ROUTE_RULES' => array(
         '/^verify/'=>'home/index/verify',
         '/^Game\/publish/' => 'Game/index/publish',
+        '/^Game\/addgame/' => 'Game/index/addgame',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
