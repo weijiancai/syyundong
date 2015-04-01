@@ -8,11 +8,13 @@
 class IndexAction extends Action {
 	public function index(){
         import('ORG.Util.Page');
-        $model = D('DbGame');
-        $Page  = new Page($count,5);
+        $model = D('VGameActivity');
+        $where['type'] = array('eq','game');
+        $count = $model->where($where)->count();
+        $Page  = new Page($count,10);
         $Page->setConfig("theme","%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
         $Page->rollPage = 10;
-        $list = $model->limit($Page->firstRow.','.$Page->listRows)->select();
+        $list = $model->limit($Page->firstRow.','.$Page->listRows)->where($where)->select();
         $show = $Page->show();
         $this->assign('page',$show);
         $this->assign('game',$list);
