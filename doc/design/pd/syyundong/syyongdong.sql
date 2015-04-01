@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2015/3/11 23:43:41                           */
+/* Created on:     2015/4/1 22:48:58                            */
 /*==============================================================*/
 
 
@@ -131,7 +131,7 @@ create table db_activity
    end_date             datetime not null comment '结束时间',
    limit_count          int not null comment '活动人数',
    join_need_info       varchar(32) comment '参加活动所需填写资料（1 真实姓名，2 性别，3 手机号码， 4 身份证号）',
-   is_verify            char(1) not null comment '是否需要审核',
+   is_need_verify       char(1) not null comment '是否需要审核',
    cost_type            int(1) not null comment '费用类型（0 免费，1 收费）',
    cost                 decimal comment '费用',
    province             varchar(32) not null comment '省',
@@ -176,6 +176,8 @@ create table db_game
    about_hotal          text comment '入住酒店',
    input_date           datetime not null comment '录入时间',
    input_user           int not null comment '录入人',
+   is_verify            char(1) not null comment '是否已审核',
+   verify_date          datetime comment '审核时间',
    primary key (id)
 );
 
@@ -217,7 +219,7 @@ create table db_user
    certificate_num      varchar(64) comment '证件号码',
    high                 int comment '身高',
    weight               decimal comment '体重',
-   mobile               varchar(16) comment '手机',
+   mobile               varchar(16) comment '手机号码',
    email                varchar(64) comment '邮箱',
    postal_code          varchar(16) comment '邮编',
    address              varchar(128) comment '通讯地址',
@@ -257,7 +259,7 @@ alter table db_venue comment '场馆';
 /*==============================================================*/
 create table dz_sport
 (
-   id                   int not null comment '项目ID',
+   id                   int not null auto_increment comment '项目ID',
    name                 varchar(64) not null comment '项目名称',
    sport_type           int(1) not null comment '项目类型（0 赛事/活动/场馆，1 赛事，2 活动，3 场馆）',
    level                int(1) comment '级别',
@@ -427,6 +429,7 @@ create table op_join_activity
    certificate_num      varchar(64) comment '身份证号',
    verify_state         int(1) not null comment '审核状态（0 待审核，1 通过，2 不通过）',
    input_date           datetime not null comment '录入时间',
+   verify_date          datetime comment '审核时间',
    primary key (join_id)
 );
 
@@ -502,7 +505,15 @@ create VIEW  v_banner_images
 
     as
 
-    select v_game_activity.id, type, size1_url url, banner_desc from v_game_activity,db_images where v_game_activity.image = db_images.id and status=1 and type='game' ORDER BY focus_count desc, join_count desc LIMIT 0, 6;
+    SELECT
+      v_game_activity.id,
+      type,
+      size1_url url,
+      banner_desc
+    FROM v_game_activity, db_images
+    WHERE v_game_activity.image = db_images.id AND status = 1 AND type = 'game'
+    ORDER BY focus_count DESC, join_count DESC
+    LIMIT 0, 6;
 
 /*==============================================================*/
 /* View: v_choice_game                                          */
@@ -540,7 +551,13 @@ create VIEW  v_doyen_user
 
     as
 
-    select db_user.id, name from db_user, v_user_topic_count where db_user.id = v_user_topic_count.user_id order by topic_count desc limit 0, 8;
+    SELECT
+      db_user.id,
+      name
+    FROM db_user, v_user_topic_count
+    WHERE db_user.id = v_user_topic_count.user_id
+    ORDER BY topic_count DESC
+    LIMIT 0, 8;
 
 /*==============================================================*/
 /* View: v_game_activity                                        */
@@ -570,7 +587,7 @@ create VIEW  v_game_activity
       (select count(1) from op_game_topic where op_game_topic.game_id=db_game.id) topic_count,
       (case when (now() < reg_end_date && join_count < limit_count) then 1 when (now() > reg_end_date || join_count = limit_count) then 2 when (now() >= start_date and now() < end_date) then 3 else 4 end) status
     FROM
-      db_game, v_game_join_count where db_game.id = v_game_join_count.game_id
+      db_game left join v_game_join_count on (db_game.id = v_game_join_count.game_id) where is_verify='T'
     UNION ALL
     SELECT
       id,
@@ -592,8 +609,8 @@ create VIEW  v_game_activity
       (select count(1) from op_focus where op_focus.source_id=db_activity.id and sport_type=2) focus_count,
       0 topic_count,
       (case when (now() < reg_end_date or join_count < limit_count) then 1 when (now() > reg_end_date || join_count = limit_count) then 2 when (now() >= start_date and now() < end_date) then 3 else 4 end) status
-    FROM    
-      db_activity, v_activity_join_count where db_activity.id = v_activity_join_count.activity_id;
+    FROM
+      db_activity left join v_activity_join_count on (db_activity.id = v_activity_join_count.activity_id);
 
 /*==============================================================*/
 /* View: v_game_join_count                                      */
@@ -670,7 +687,7 @@ create VIEW  v_topic
       (select name from db_user where db_user.id = op_game_topic.user_id) user_name,
       (select name from db_game where db_game.id = op_game_topic.game_id) game_name
     FROM
-      op_game_topic,v_topic_comment_count where op_game_topic.id = v_topic_comment_count.topic_id;
+      op_game_topic left join v_topic_comment_count on (op_game_topic.id = v_topic_comment_count.topic_id);
 
 /*==============================================================*/
 /* View: v_topic_comment_count                                  */
