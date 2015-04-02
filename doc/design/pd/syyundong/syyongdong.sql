@@ -565,7 +565,6 @@ create VIEW  v_doyen_user
 create VIEW  v_game_activity
 
     as
-
     SELECT
       id,
       name,
@@ -582,10 +581,10 @@ create VIEW  v_game_activity
       input_user,
       input_date,
       'game' type,
-      join_count,
+      ifnull(join_count, 0) join_count,
       (select count(1) from op_focus where op_focus.source_id=db_game.id and sport_type=1) focus_count,
       (select count(1) from op_game_topic where op_game_topic.game_id=db_game.id) topic_count,
-      (case when (now() < reg_end_date && join_count < limit_count) then 1 when (now() > reg_end_date || join_count = limit_count) then 2 when (now() >= start_date and now() < end_date) then 3 else 4 end) status
+      (case when (now() < reg_end_date and ifnull(join_count, 0) < limit_count) then 1 when (now() > reg_end_date or ifnull(join_count, 0) = limit_count) then 2 when (now() >= start_date and now() < end_date) then 3 else 4 end) status
     FROM
       db_game left join v_game_join_count on (db_game.id = v_game_join_count.game_id) where is_verify='T'
     UNION ALL
@@ -605,12 +604,12 @@ create VIEW  v_game_activity
       input_user,
       input_date,
       'activity' type,
-      join_count,
+      ifnull(join_count, 0) join_count,
       (select count(1) from op_focus where op_focus.source_id=db_activity.id and sport_type=2) focus_count,
       0 topic_count,
-      (case when (now() < reg_end_date or join_count < limit_count) then 1 when (now() > reg_end_date || join_count = limit_count) then 2 when (now() >= start_date and now() < end_date) then 3 else 4 end) status
+      (case when (now() < reg_end_date or ifnull(join_count, 0) < limit_count) then 1 when (now() > reg_end_date or ifnull(join_count, 0) = limit_count) then 2 when (now() >= start_date and now() < end_date) then 3 else 4 end) status
     FROM
-      db_activity left join v_activity_join_count on (db_activity.id = v_activity_join_count.activity_id);
+      db_activity left join v_activity_join_count on (db_activity.id = v_activity_join_count.activity_id)
 
 /*==============================================================*/
 /* View: v_game_join_count                                      */
