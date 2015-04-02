@@ -63,15 +63,15 @@
                         <p>
                         <span>时间：</span>
             					  <!-- 不是同一天 -->
-            					  2016年03月23日 00:00&nbsp;-&nbsp;2016年04月19日 00:00
+                            <{$vo.id|getGameTime=$vo['status']}>
                         </p>
-                        <p><span>地点：</span>全国范围</p>
-                        <p><span>费用：</span>0元（报名费）</p>
+                        <p><span>地点：</span><{$vo.address}></p>
+                        <p><span>费用：</span><{$vo.cost}>元（报名费）</p>
                         <p><span>主办：</span>
                             爱约赛
                         </p>
                         <p class="item-list-bottom">
-                          <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（103）</a>
+                          <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（<{$vo.focus_count}>）</a>
                           <a href="javascript:void(0);"><i class="icon-match icon-comment"></i>0人评论</a>
                           <!--<a href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名928人（剩余2,072人）</a>
                             -->
@@ -93,29 +93,37 @@
           <!-- 赛事列表 结束 -->
           <!-- 分页 开始 -->
 <div class="main-block pagging-block">
-  <form id="paging-form" action="#">
-  <div class="paging-wrap">
-	        <span class="text">共 30页, 292条记录</span>
-      	<span class="disabled">首页</span>
-      	<span class="disabled">上一页</span>
-      <span class="current"> 1</span>
-	      <a href="javascript:;" onclick="jumpPage(2, 10);">2</a>
-	      <a href="javascript:;" onclick="jumpPage(3, 10);">3</a>
-	      <a href="javascript:;" onclick="jumpPage(4, 10);">4</a>
-	      <a href="javascript:;" onclick="jumpPage(5, 10);">5</a>
-	      <a href="javascript:;" onclick="jumpPage(2,10 );" class="next">下一页</a>     
-	      <a href="javascript:;" onclick="jumpPage(30,10 );" >末页</a>       
-      <label class="page-stage">
-     
-                到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':30,'min':1}]]" > 页
-      <input type="submit" class="btn" value="确定"/>              
-      </label>
+    <form action="">
+    <div class="paging-wrap">
+    <{$page}>
 
-  	 <!--end of pageBean?? && (pages.total > -1) -->
-  <input type="hidden" name="pageNum" id="pageNum" value="1" />
-  <input type="hidden" name="pageSize" id="pageSize" value="10" />
-  </div>
-  </form>
+        <label class="page-stage">到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':30,'min':1}]]" > 页
+       <input type="submit" class="btn" value="确定"/>
+       </label>
+
+       </div>
+    </form>
+        <!--<form id="paging-form" action="#">-->
+  <!--<div class="paging-wrap">-->
+	        <!--<span class="text">共 30页, 292条记录</span>-->
+      	<!--<span class="disabled">首页</span>-->
+      	<!--<span class="disabled">上一页</span>-->
+      <!--<span class="current"> 1</span>-->
+	      <!--<a href="javascript:;" onclick="jumpPage(2, 10);">2</a>-->
+	      <!--<a href="javascript:;" onclick="jumpPage(3, 10);">3</a>-->
+	      <!--<a href="javascript:;" onclick="jumpPage(4, 10);">4</a>-->
+	      <!--<a href="javascript:;" onclick="jumpPage(5, 10);">5</a>-->
+	      <!--<a href="javascript:;" onclick="jumpPage(2,10 );" class="next">下一页</a>     -->
+	      <!--<a href="javascript:;" onclick="jumpPage(30,10 );" >末页</a>       -->
+      <!--<label class="page-stage">到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':30,'min':1}]]" > 页-->
+      <!--<input type="submit" class="btn" value="确定"/>              -->
+      <!--</label>-->
+
+  	 <!--&lt;!&ndash;end of pageBean?? && (pages.total > -1) &ndash;&gt;-->
+  <!--<input type="hidden" name="pageNum" id="pageNum" value="1" />-->
+  <!--<input type="hidden" name="pageSize" id="pageSize" value="10" />-->
+  <!--</div>-->
+  <!--</form>-->
 </div>
 <script type="text/javascript">
 $(function(){
@@ -161,38 +169,17 @@ $(function(){
               <i class="icon-match icon-reload"></i>换一组
             </a>
             <ul class="side-item-col clearfix">
-              <li>
-                <div class="side-item-thumb"><a href="/game/421"><img src="http://static.wisdom-china.cn//images/1/9879/9370/1227/722e53beb8dbbd36d8d8a5c739e2a64c_2_220x140.jpg?640x442" alt=""></a></div>
-                <h5><a href="/game/421">四季跑城市PK赛</a></h5>
-                <p>
-                  <span class="pull-left">广东省</span>                         
-                  <span class="pull-right"><em> 928</em>人参加</span>
-                </p>
-              </li>
-              <li>
-                <div class="side-item-thumb"><a href="/game/413"><img src="http://static.wisdom-china.cn//images/1/8091/5624/5558/1cb14c4b397d193d5bfc2a2d89d07e69_2_220x140.jpg?640x442" alt=""></a></div>
-                <h5><a href="/game/413">2015四季跑·天津站预报名开通！</a></h5>
-                <p>
-                  <span class="pull-left">天津市</span>                         
-                  <span class="pull-right"><em> 24</em>人参加</span>
-                </p>
-              </li>
-              <li>
-                <div class="side-item-thumb"><a href="/game/408"><img src="http://static.wisdom-china.cn//images/1/9867/6452/8602/10ce4fdd265ae1cb6edec3de43fa9cd7_2_220x140.jpg?640x442" alt=""></a></div>
-                <h5><a href="/game/408">2015四季跑·重庆站预报名开启！</a></h5>
-                <p>
-                  <span class="pull-left">重庆市</span>                         
-                  <span class="pull-right"><em> 11</em>人参加</span>
-                </p>
-              </li>
-              <li>
-                <div class="side-item-thumb"><a href="/game/418"><img src="http://static.wisdom-china.cn//images/1/9912/5515/1154/269151546d8a62d89807fc8de3e52427_2_220x140.jpg?640x442" alt=""></a></div>
-                <h5><a href="/game/418">新加坡Sundown国际马拉松之旅</a></h5>
-                <p>
-                  <span class="pull-left">其他</span>                         
-                  <span class="pull-right"><em> 5</em>人参加</span>
-                </p>
-              </li>
+               <!-- <volist name="hot" id="vo">
+                    <li>
+                        <div class="side-item-thumb"><a href="/game/421"><img src="http://static.wisdom-china.cn//images/1/9879/9370/1227/722e53beb8dbbd36d8d8a5c739e2a64c_2_220x140.jpg?640x442" alt=""></a></div>
+                        <h5><a href="/game/421"><{$vo.name}></a></h5>
+                        <p>
+                            <span class="pull-left"><{$vo.province}></span>
+                            <span class="pull-right"><em> 928</em>人参加</span>
+                        </p>
+                    </li>
+                </volist>-->
+
             </ul>
           </div>
           <div class="side-block">
@@ -202,16 +189,9 @@ $(function(){
                 <span>热门赛事排行</span>
               </h4>
               <ul data-selector="eventsRankings">
-                <li><i class="top0">1</i><a href="/game/411">2015四季跑·深圳站报名开启！</a></li>
-                <li><i class="top1">2</i><a href="/game/413">2015四季跑·天津站预报名开通！</a></li>
-                <li><i class="top2">3</i><a href="/game/375">SNOW RUN 野雪跑！高清写真免费下！</a></li>
-                <li><i>4</i><a href="/game/408">2015四季跑·重庆站预报名开启！</a></li>
-                <li><i>5</i><a href="/game/357">爱约赛马拉松CLUB会员限量招募！</a></li>
-                <li><i>6</i><a href="/game/405">城市动员！2015七城联动跑</a></li>
-                <li><i>7</i><a href="/game/373">出征首尔！跑马就送小米手环</a></li>
-                <li><i>8</i><a href="/game/355">挑战严冬！冬天未过去 脚步不停止！</a></li>
-                <li><i>9</i><a href="/game/344">马拉松Break4精英团招募！</a></li>
-                <li><i>10</i><a href="/game/361">澳洲黄金海岸马拉松招募！</a></li>
+                  <volist name="hot" id="vo" key="k">
+                      <li><i class="top<{$k}>"><{$k}></i><a href="/game/<{$vo.id}>"><{$vo.name}></a></li>
+                  </volist>
               </ul>
             </div>
           </div>

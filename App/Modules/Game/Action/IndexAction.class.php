@@ -19,6 +19,7 @@ class IndexAction extends Action {
         $this->assign('page',$show);
         $this->assign('game',$list);
         $this->assign('count',$count);
+        $this->hotgame();
 		$this->display();
 	}
 	/*
@@ -62,4 +63,23 @@ class IndexAction extends Action {
             $this->error();
         }
     }
+    /*
+   * @时间:20150402
+   * @功能：热门赛事排行
+   */
+    public function hotgame(){
+        $model = D(VHotGameRanking);
+        $hot  = $model->limit(10)->select();
+        $this->assign('hot',$hot);
+    }
+
+    /*
+   * @时间:20150402
+   * @功能：热门赛事推荐
+   */
+/*    public function hotgame(){
+        $model = D(VHotGameRanking);
+        $hot  = $model->limit(4)->select();
+        $this->assign('hot',$hot);
+    }*/
 }

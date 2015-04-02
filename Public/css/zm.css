@@ -1056,13 +1056,13 @@ padding: 0;
   background-color:#DADADA;
   font-style: normal;
 }
-.side-block .events-rankings li i.top0{
+.side-block .events-rankings li i.top1{
   background-color: #FB6A6A;
 }
-.side-block .events-rankings li i.top1{
+.side-block .events-rankings li i.top2{
   background-color: #F5A623;
 }
-.side-block .events-rankings li i.top2{
+.side-block .events-rankings li i.top3{
   background-color: #B0D6EA;
 }
 .side-block .events-rankings li a{

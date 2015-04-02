@@ -12,10 +12,12 @@ function enCode($string = '', $skey = 'dGzni5DcMNi1QaKF8507YcoWkqhzTCPI')
     }
     return str_replace('=', 'O0O0O', join('', $strArr));
 }
+
 /**
  *  $功能：解密算法
  */
-function deCode($string = '', $skey = 'dGzni5DcMNi1QaKF8507YcoWkqhzTCPI') {
+function deCode($string = '', $skey = 'dGzni5DcMNi1QaKF8507YcoWkqhzTCPI')
+{
     $skey = array_reverse(str_split($skey));
     $strArr = str_split(str_replace('O0O0O', '=', $string), 2);
     $strCount = count($strArr);
@@ -66,6 +68,23 @@ function remove_xss($val)
         }
     }
     return $val;
+}
+
+/**
+ * @功能：根据赛事状态返回时间
+ * @时间：20150402
+ */
+function getGameTime($id, $state)
+{
+    $model = D('VGameActivity');
+    if ($state == 1) {
+        $result = $model->field('reg_begin_date,reg_end_date')->where('id=' . $id)->find();
+        $time = $result['reg_begin_date'] . '—' . $result['reg_end_date'];
+    } else {
+        $result = $model->field('start_date,end_date')->where('id=' . $id)->find();
+        $time = $result['start_date'] . '—' . $result['end_date'];
+    }
+    return $time;
 }
 
 ?>

@@ -50,6 +50,8 @@ ALTER TABLE  op_user_friend DROP FOREIGN KEY FK_userFriend_user_friendId;
 
 ALTER TABLE  op_user_friend DROP FOREIGN KEY FK_userFriend_user_userId;
 
+ALTER TABLE  op_recommend DROP FOREIGN KEY FK_game_activity_id;;
+
 drop view  if exists v_activity_join_count;
 
 drop view  if exists v_banner_images;
@@ -116,6 +118,8 @@ drop table if exists op_message;
 
 drop table if exists op_user_friend;
 
+drop table if exists op_recommend;
+
 /*==============================================================*/
 /* Table: db_activity                                           */
 /*==============================================================*/
@@ -159,6 +163,7 @@ create table db_game
    end_date             datetime not null comment '结束时间',
    limit_count          int not null comment '人数限制',
    cost                 decimal comment '报名费',
+   host                 varchar(128) not null comment '举办单位',
    province             varchar(16) not null comment '举办城市',
    address              varchar(128) not null comment '地点',
    sponor               varchar(128) not null comment '赛事发起方',
@@ -490,6 +495,21 @@ create table op_user_friend
 alter table op_user_friend comment '赛友';
 
 /*==============================================================*/
+/* Table: op_comment                                            */
+/*==============================================================*/
+create table op_recommend
+(
+  id                   int not null auto_increment comment 'ID',
+  gc_id                int not null comment '赛事/活动id',
+  recommend_type       varchar(16) not null comment '推荐类型(game 赛事，activity 活动)',
+  sort_num             int not null comment '排序',
+  primary key (id)
+);
+
+alter table op_recommend comment '赛事/活动推荐';
+
+
+/*==============================================================*/
 /* View: v_activity_join_count                                  */
 /*==============================================================*/
 create VIEW  v_activity_join_count
@@ -578,6 +598,7 @@ create VIEW  v_game_activity
       cost,
       province,
       address,
+      sponor,
       input_user,
       input_date,
       'game' type,
@@ -601,6 +622,7 @@ create VIEW  v_game_activity
       cost,
       province,
       address,
+      ''sponor,
       input_user,
       input_date,
       'activity' type,
@@ -655,9 +677,9 @@ create VIEW  v_hot_activity
 /*==============================================================*/
 create VIEW  v_hot_game_ranking
 
-    as
+as
 
-    select id, name from v_game_activity where type='game' ORDER BY focus_count desc, join_count LIMIT 0, 10;
+  select id, name from v_game_activity where type='game' ORDER BY focus_count desc, join_count LIMIT 0, 10;
 
 /*==============================================================*/
 /* View: v_recommend_venues                                     */
@@ -774,4 +796,5 @@ alter table op_user_friend add constraint FK_userFriend_user_friendId foreign ke
 
 alter table op_user_friend add constraint FK_userFriend_user_userId foreign key (user_id)
       references db_user (id) on delete cascade on update cascade;
+
 
