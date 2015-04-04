@@ -474,21 +474,21 @@ h4#header-title{
 }
 #index .search-engines .panel .banner ul{
 	position: absolute;
-	left: 0px;
-	top: 0px;
+	/*left: 0px;
+	top: 0px;*/
 	z-index: 10;
 	width: 100%;
 	display: block;
 	overflow: hidden;
 }
-#index .search-engines .panel .banner li{
+/*#index .search-engines .panel .banner li{
 	float: left;
 	vertical-align: top;
 	width: 100%;
 	overflow: hidden;
 	position: relative;
 	z-index: 10;
-}
+}*/
 #index .search-engines .panel .banner li img{
 	width: 505px;
 	height: 355px;
@@ -1846,3 +1846,113 @@ h4#header-title{
 	font-size: 14px;
 }
 
+/* 主页 */
+#index .tabs-panel ul.tabs-head {
+    display: block;
+    height: 38px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+#index .tabs-panel ul.tabs-head a {
+    display: inline-block;
+    vertical-align: bottom;
+    line-height: 32px;
+    height: 32px;
+    color: #444;
+    font-size: 16px;
+    text-align: center;
+    width: 142px;
+    border-bottom: 1px solid #fff;
+    background-color: #f1f1f1;
+    padding: 0;
+}
+
+#index .tabs-panel ul.tabs-head a:hover {
+    text-decoration: none;
+    background-color: #DCD7D7;
+}
+
+#index .tabs-panel ul.tabs-head a.active {
+    background-color: #fff;
+    border: 1px solid #EBEBEB;
+    height: 37px;
+    color: #F69513;
+    line-height: 37px;
+    border-bottom: 1px solid #fff;
+}
+
+#index .tabs-panel div.tabs-body {
+    margin-top: -1px;
+    border: 1px solid #EBEBEB;
+    height: 245px;
+    display: block;
+    background-color: #fff;
+}
+
+#index input.span5, #findGame input.span2, #findActivity input.span2, #findVenues input.span2 {
+    margin: 0;
+}
+
+#index .datadropdown .datadropdown-head {
+    margin-bottom: -6px;
+}
+
+.tabs-body table {
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.tabs-body  th {
+    text-align: left;
+    width: 62px;
+    color: #999;
+}
+
+.tabs-body  input {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.tabs-body  th, .tabs-body  td {
+    padding: 9px 0;
+}
+
+.tabs-body  .span5 {
+    width: 350px;
+}
+
+.tabs-body  .radio {
+    padding-top: 0;
+    font-size: 12px;
+    line-height: 20px;
+    margin-left: 5px;
+}
+
+.tabs-body  .btn-warning {
+    background: #F5A623;
+    width: 120px;
+    height: 28px;
+    border: 0;
+}
+
+.tabs-body  .btn-warning:hover {
+    background: #F49801;
+}
+
+.carousel-indicators {
+    bottom: 10px;
+    left: 40%;
+    list-style: outside none none;
+    padding-left: 0;
+    position: absolute;
+    text-align: center;
+    width: 60%;
+    z-index: 15;
+    top:auto;
+    right: auto;
+}

@@ -3,8 +3,37 @@
 <div class="search-engines">
     <div class="container">
         <div class="panel">
-            <div class="banner" data-selector="banner">
+            <div id="carousel-example-generic" class="carousel slide banner" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+                </ol>
+
                 <!-- && start banner轮播图片： dz_sort -->
+                <!-- Wrapper for slides -->
+                <ul class="carousel-inner" role="listbox">
+                    <li class="item active">
+                        <img src="http://static.wisdom-china.cn//images/1/8096/7486/9557/10ce4fdd265ae1cb6edec3de43fa9cd7_2_505x355.jpg?640x442" alt="夜跑马拉松！狮城跑者狂欢之夜">
+                        <div class="carousel-caption desc">
+                            <a href="game/418" class="banner-title" target="_blank">夜跑马拉松！狮城跑者狂欢之夜</a>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <img src="http://static.wisdom-china.cn//images/1/5031/3986/5275/269151546d8a62d89807fc8de3e52427_2_505x355.jpg?640x442" alt="夜跑马拉松！狮城跑者狂欢之夜">
+                        <div class="carousel-caption desc">
+                            <a href="game/418" class="banner-title" target="_blank">夜跑马拉松！狮城跑者狂欢之夜</a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- && end -->
+            </div>
+            <!--<div class="banner" data-selector="banner">
+
                 <ul>
                     <li>
                         <a href="game/418" target="_blank"><img src="http://static.wisdom-china.cn//images/1/5031/3986/5275/269151546d8a62d89807fc8de3e52427_2_505x355.jpg?640x442" alt="夜跑马拉松！狮城跑者狂欢之夜" /></a>
@@ -15,12 +44,150 @@
                         </div>
                     </li>
                 </ul>
-                <!-- && end -->
+
                 <div class="banner-controller"></div>
-            </div>
+            </div>-->
             <div class="search-panel">
-                <div class="search-template" data-selector="searchTemplate" data-match-action="/game/search" data-activity-action="/activitycommon/search" data-venues-action="/venue/search">
-                    <div class="module-loading" style="height: 285px;"></div>
+                <div class="tabs-panel">
+                    <ul class="nav nav-tabs tabs-head">
+                        <li class="active"><a href="#findGame" data-toggle="tab">找赛事</a></li>
+                        <li><a href="#findActivity" data-toggle="tab">找活动</a></li>
+                        <li><a href="#findVenues" data-toggle="tab">找场馆</a></li>
+                    </ul>
+
+                    <div class="tab-content tabs-body">
+                        <div class="tab-pane active" id="findGame">
+                            <form method="get" action="/game/search">
+                                <input type="hidden" value="all" name="provinceId">
+                                <input type="hidden" value="all" name="cityId">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <th>关键字</th>
+                                        <td><input type="text" style="margin:0;" placeholder="（选填）运动名/地区" name="keyword" class="span5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>运动项目</th>
+                                        <td>
+                                            <div data-selector="eventItem" class="datadropdown">
+                                                <div class="datadropdown-head">
+                                                    <input type="hidden" value="all" name="sportTypeId">
+                                                    <input type="text" placeholder="全部" readonly="readonly" class="span2 datadropdown-action">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>赛事状态</th>
+                                        <td>
+                                            <label class="radio inline"><input type="radio" value="" checked="checked" name="state"><span>全部</span></label>
+                                            <label class="radio inline"><input type="radio" value="1" name="state"><span>报名中</span></label>
+                                            <label class="radio inline"><input type="radio" value="4" name="state"><span>进行中</span></label>
+                                            <label class="radio inline"><input type="radio" value="5" name="state"><span>已结束</span></label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>比赛日期</th>
+                                        <td>
+                                            <label class="radio inline"><input type="radio" value="all" checked="checked" name="timeType" data-selector="eventDate"><span>全部</span></label>
+                                            <label class="radio inline"><input type="radio" value="week" name="timeType" data-selector="eventDate"><span>未来一周</span></label>
+                                            <label class="radio inline"><input type="radio" value="month" name="timeType" data-selector="eventDate"><span>未来一月</span></label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>城市</th>
+                                        <td class="clearfix">
+                                            <select data-selector="hotCity"><option value="所有城市">所有城市</option><option value="北京">北京</option><option value="上海">上海</option><option value="广东">广东</option><option value="天津">天津</option><option value="湖南">湖南</option><option value="浙江">浙江</option><option value="河北">河北</option></select>
+                                            <div class="pull-right">
+                                                <button class="btn btn-warning" type="submit">搜索</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="findActivity">
+                            <form method="get" action="/activitycommon/search">
+                                <input type="hidden" value="all" name="provinceId">
+                                <input type="hidden" value="all" name="cityId">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <th>关键字</th>
+                                        <td><input type="text" placeholder="（选填）运动名/地区" name="keyword" class="span5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>运动项目</th>
+                                        <td>
+                                            <div data-selector="activityItem" class="datadropdown">
+                                                <div class="datadropdown-head">
+                                                    <input type="hidden" value="all" name="sportTypeId">
+                                                    <input type="text" placeholder="全部" readonly="readonly" class="span2 datadropdown-action">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>活动日期</th>
+                                        <td style="position: relative;z-index: 200;">
+                                            <label class="radio inline"><input type="radio" value="all" checked="checked" name="timeType" data-selector="eventDate"><span>全部</span></label>
+                                            <label class="radio inline"><input type="radio" value="week" name="timeType" data-selector="eventDate"><span>未来一周</span></label>
+                                            <label class="radio inline"><input type="radio" value="month" name="timeType" data-selector="eventDate"><span>未来一月</span></label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td class="clearfix">
+                                            <div class="pull-right">
+                                                <button class="btn btn-warning" type="submit">搜索</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="findVenues">
+                            <form method="get" action="/venue/search">
+                                <input type="hidden" value="all" name="provinceId">
+                                <input type="hidden" value="all" name="cityId">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <th>关键字</th>
+                                        <td><input type="text" placeholder="（选填）运动名/地区" name="keyword" class="span5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>运动项目</th>
+                                        <td>
+                                            <div data-selector="venuesItem" class="datadropdown">
+                                                <div class="datadropdown-head">
+                                                    <input type="hidden" value="all" name="sportTypeId">
+                                                    <input type="text" placeholder="全部" readonly="readonly" class="span2 datadropdown-action">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>城市</th>
+                                        <td>
+                                            <select data-selector="hotCity"><option value="所有城市">所有城市</option><option value="北京">北京</option><option value="上海">上海</option><option value="广州">广州</option><option value="深圳">深圳</option></select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td class="clearfix">
+                                            <div class="pull-right">
+                                                <button class="btn btn-warning" type="submit">搜索</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="button-panel">
                     <a href="game/publish" class="publish-button"><i class="icon50 icon50-event"></i>发布赛事</a>
