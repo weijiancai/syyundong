@@ -5,6 +5,7 @@ $(function() {
     $('#registerForm').validate({
         rules: {
             mobile: "required",
+            picCode: "required",
             password: 'required',
             confirmPass: {
                 required: true,
@@ -13,6 +14,7 @@ $(function() {
         },
         messages: {
             mobile: "手机号码不能为空！",
+            picCode: "验证码不能为空！",
             password: '密码不能为空！',
             confirmPass: {
                 required: '确认密码不能为空！',
