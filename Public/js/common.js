@@ -28,3 +28,15 @@ $.validator.setDefaults({
         //error.addClass('help-small no-left-padding').insertAfter(element.closest('.input-icon'));
     }
 });
+
+/* 主页导航 */
+$(function() {
+    var $navigation = $('#navigation');
+    $navigation.find('div.navigation-item-static').hover(function () {
+        $navigation.find('div.navigation-item-content').hide();
+        $(this).parent().find('div.navigation-item-content').show();
+    });
+    $navigation.find('ul').mouseleave(function() {
+        $navigation.find('div.navigation-item-content').hide();
+    });
+});

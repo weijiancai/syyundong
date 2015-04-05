@@ -34,7 +34,7 @@ var loader_config = {
             exports: 'page_forgetPassword'
         },
         'page_index': {
-            deps: ['jquery', 'bootstrap'],
+            deps: ['common'],
             exports: 'page_index'
         },
         'page_register': {
