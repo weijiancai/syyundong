@@ -4,6 +4,76 @@
     <div class="container">
         <div class="row">
             <div class="span12">
+                <div class="main-block">
+                    <form id="searchEnginesForm" method="get">
+                        <div>
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <th><i class="icon16 icon16-search-city"></i>省市：</th>
+                                    <td>
+                                        <select class="span2" style="margin-left: 0;margin-top:10px;" name="provinceId" id="provinceId"><option value="all">全部省份</option><option value="2">北京市</option><option value="360">天津市</option><option value="691">河北省</option><option value="3352">山西省</option><option value="5021">内蒙古</option><option value="6373">辽宁省</option><option value="8144">吉林省</option><option value="9239">黑龙江</option><option value="11330">上海市</option><option value="11613">江苏省</option><option value="13539">浙江省</option><option value="15391">安徽省</option><option value="17266">福建省</option><option value="18634">江西省</option><option value="20799">山东省</option><option value="23139">河南省</option><option value="25898">湖北省</option><option value="27561">湖南省</option><option value="30374">广东省</option><option value="32864">广西</option><option value="34336">海南省</option><option value="34712">重庆市</option><option value="35869">四川省</option><option value="40206">贵州省</option><option value="41902">云南省</option><option value="43748">西藏</option><option value="44605">陕西省</option><option value="46517">甘肃省</option><option value="48081">青海省</option><option value="48579">宁夏</option><option value="48911">新疆</option></select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th valign="top"><i class="icon16 icon16-search-items"></i>项目：<input type="hidden" data-selector="itemsValue" value="all" name="sportTypeId"></th>
+                                    <td valign="top">
+                                        <div data-selector="itemsList" class="item-panel" id="sportTypePanel">
+                                            <dl>
+                                                <dt>
+                                                    <a href="javascript:;" class="radio-item current" data-value="all" data-selector="itemsItem">全部</a>
+                                                    <a href="javascript:;" class="taber-item" data-type="1" data-selector="typeTaber">球类项目</a>
+                                                    <a href="javascript:;" class="taber-item" data-type="2" data-selector="typeTaber">户外运动</a>
+                                                    <a href="javascript:;" class="taber-item" data-type="4" data-selector="typeTaber">全民健身</a>
+                                                    <a href="javascript:;" class="taber-item" data-type="5" data-selector="typeTaber">其他运动</a>
+                                                    <a href="javascript:;" class="taber-item" data-type="37" data-selector="typeTaber">马拉松路跑</a>
+                                                </dt>
+                                                <dd data-type="1" class="hide">
+                                                    <a href="javascript:;" class="radio-item" data-value="8" data-selector="itemsItem">羽毛球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="9" data-selector="itemsItem">乒乓球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="10" data-selector="itemsItem">台球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="11" data-selector="itemsItem">网球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="40" data-selector="itemsItem">足球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="41" data-selector="itemsItem">篮球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="57" data-selector="itemsItem">曲棍球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="58" data-selector="itemsItem">垒球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="59" data-selector="itemsItem">棒球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="60" data-selector="itemsItem">高尔夫</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="61" data-selector="itemsItem">排球</a>
+                                                </dd>
+                                                <dd data-type="2" class="hide"><a href="javascript:;" class="radio-item" data-value="12" data-selector="itemsItem">自行车</a><a href="javascript:;" class="radio-item" data-value="13" data-selector="itemsItem">轮滑</a><a href="javascript:;" class="radio-item" data-value="14" data-selector="itemsItem">定向</a><a href="javascript:;" class="radio-item" data-value="15" data-selector="itemsItem">攀岩</a><a href="javascript:;" class="radio-item" data-value="16" data-selector="itemsItem">山地户外活动</a><a href="javascript:;" class="radio-item" data-value="47" data-selector="itemsItem">航海模型</a><a href="javascript:;" class="radio-item" data-value="63" data-selector="itemsItem">铁人三项</a><a href="javascript:;" class="radio-item" data-value="64" data-selector="itemsItem">钓鱼</a><a href="javascript:;" class="radio-item" data-value="69" data-selector="itemsItem">滑雪</a></dd><dd data-type="4" class="hide"><a href="javascript:;" class="radio-item" data-value="27" data-selector="itemsItem">门球</a><a href="javascript:;" class="radio-item" data-value="28" data-selector="itemsItem">健美</a><a href="javascript:;" class="radio-item" data-value="29" data-selector="itemsItem">体育舞蹈</a><a href="javascript:;" class="radio-item" data-value="30" data-selector="itemsItem">健美操</a><a href="javascript:;" class="radio-item" data-value="31" data-selector="itemsItem">排舞</a><a href="javascript:;" class="radio-item" data-value="38" data-selector="itemsItem">瑜伽</a><a href="javascript:;" class="radio-item" data-value="39" data-selector="itemsItem">中国风健身舞</a><a href="javascript:;" class="radio-item" data-value="46" data-selector="itemsItem">龙舟</a><a href="javascript:;" class="radio-item" data-value="56" data-selector="itemsItem">划船器</a><a href="javascript:;" class="radio-item" data-value="65" data-selector="itemsItem">大力士</a><a href="javascript:;" class="radio-item" data-value="66" data-selector="itemsItem">保龄球</a><a href="javascript:;" class="radio-item" data-value="67" data-selector="itemsItem">肚皮舞</a><a href="javascript:;" class="radio-item" data-value="68" data-selector="itemsItem">脚斗士</a><a href="javascript:;" class="radio-item" data-value="70" data-selector="itemsItem">徒步</a></dd><dd data-type="5" class="hide"><a href="javascript:;" class="radio-item" data-value="32" data-selector="itemsItem">跆拳道</a><a href="javascript:;" class="radio-item" data-value="36" data-selector="itemsItem">风筝</a><a href="javascript:;" class="radio-item" data-value="43" data-selector="itemsItem">举重</a><a href="javascript:;" class="radio-item" data-value="44" data-selector="itemsItem">射击</a><a href="javascript:;" class="radio-item" data-value="45" data-selector="itemsItem">射箭</a><a href="javascript:;" class="radio-item" data-value="55" data-selector="itemsItem">游泳</a></dd><dd data-type="37" class="hide"><a href="javascript:;" class="radio-item" data-value="6" data-selector="itemsItem">马拉松</a><a href="javascript:;" class="radio-item" data-value="7" data-selector="itemsItem">路跑</a></dd></dl>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th valign="top"><i class="icon16 icon16-search-date"></i>时间：<input type="hidden" data-selector="dateValue" value="all" name="timeType"></th>
+                                    <td valign="top">
+                                        <div id="dateList" class="item-panel">
+                                            <a data-selector="dateItem" class="radio-item current" data-value="all" href="javascript:;">全部</a>
+                                            <a data-selector="dateItem" class="radio-item" data-value="today" href="javascript:;">今天</a>
+                                            <a data-selector="dateItem" class="radio-item" data-value="tomorrow" href="javascript:;">明天</a>
+                                            <a data-selector="dateItem" class="radio-item" data-value="weekend" href="javascript:;">周末</a>
+                                            <a data-selector="dateItem" class="radio-item" data-value="week" href="javascript:;">未来一周</a>
+                                            <a data-selector="dateItem" class="radio-item" data-value="month" href="javascript:;">未来一个月</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="input-prepend input-append">
+                                            <span class="add-on"><i class="icon16 icon16-search-search"></i></span>
+                                            <input type="text" value="" name="keyword" class="span4" id="inputKeyword">
+                                            <button type="button" class="btn btn-warning" id="btnSearchKeyword">搜本类</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+
+
                 <!-- 赛事筛选模块 开始 -->
                 <div class="main-block" data-selector="searchEngines" data-for="match"
                      data-params="{'criteria':'startDate','statusIn':'0','statusOver':'0','statusReg':'0'}"
@@ -228,6 +298,10 @@
     <input type="hidden" id="state_over" name="statusOver" value="<{$_REQUEST['statusOver']}>"/>
     <input type="hidden" id="orderByNew" name="orderByNew" value="<{$_REQUEST['orderByNew']}>"/>
     <input type="hidden" id="order" name="order"/>
+    <input type="hidden" id="province" name="province"/>
+    <input type="hidden" id="sportType" name="sportType"/>
+    <input type="hidden" id="date" name="date"/>
+    <input type="hidden" id="keyword" name="keyword"/>
 </form>
 <script type="text/javascript">Loader.load(['page.match']);</script>
 

@@ -1956,3 +1956,115 @@ h4#header-title{
     top:auto;
     right: auto;
 }
+
+/* 赛事 */
+#match-page #searchEnginesForm {
+    line-height: 22px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+
+#match-page #searchEnginesForm table {
+    width: 100%;
+    margin: 0;
+}
+
+#match-page #searchEnginesForm th {
+    width: 72px;
+    font-weight: normal;
+    text-align: left;
+    color: #313131;
+}
+
+#match-page #searchEnginesForm th, #match-page #searchEnginesForm td {
+    padding-bottom: 15px;
+}
+
+#match-page #searchEnginesForm .icon16 {
+    margin-right: 6px;
+}
+
+#match-page #searchEnginesForm a.radio-item, #match-page #searchEnginesForm a.taber-item {
+    display: inline-block;
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+    margin: 0 5px 5px 0;
+    padding: 0 8px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    text-align: center;
+    color: #555;
+    word-break: break-all;
+    vertical-align: top;
+}
+
+#match-page #searchEnginesForm a.radio-item.current {
+    background-color: #F5A623;
+    color: #fff;
+}
+
+#match-page #searchEnginesForm a.taber-item {
+    border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    -moz-border-radius: 3px 3px 0 0;
+    position: relative;
+    z-index: 10;
+    padding: 0 10px;
+}
+
+#match-page #searchEnginesForm a.taber-item.current {
+    border: 1px solid #F5A623;
+    border-bottom: 1px solid #fff;
+    color: #F5A623;
+    height: 22px;
+}
+
+#match-page #searchEnginesForm .input-prepend .add-on {
+    background-color: #fff;
+    border-right: 0;
+    position: relative;
+    z-index: 10;
+    padding: 4px 2px 4px 6px;
+}
+
+#match-page #searchEnginesForm .input-prepend .add-on .icon16 {
+    margin: 0;
+}
+
+#match-page #searchEnginesForm .input-prepend input {
+    border-left: 0;
+    margin-left: -1px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+
+#match-page #searchEnginesForm .input-prepend .span4 {
+    margin: 0;
+}
+
+#match-page #searchEnginesForm .input-prepend .btn {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+#match-page #searchEnginesForm .input-prepend input:focus {
+    border-color: #ebebeb;
+}
+
+#match-page #searchEnginesForm .item-panel {
+    overflow: hidden;
+    margin-bottom: -5px;
+}
+
+#match-page #searchEnginesForm .item-panel dd {
+    border-top: 1px solid #F5A623;
+    padding-top: 10px;
+    margin-top: -6px;
+}
+
+#match-page #searchEnginesForm .item-panel dt {
+    font-weight: normal;
+}

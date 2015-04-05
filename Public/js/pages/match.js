@@ -5,37 +5,26 @@ $(function () {
     // 注册body id
     $('body').attr('id', 'match-page');
 
-    var url = "Game/search?";
     var $form = $('#searchForm');
-    var $stateReg = $('#state_reg');
-    var $stateIn = $('#state_in');
-    var $stateOver = $('#state_over');
     // 报名中
     $('#statusReg').change(function () {
-        if ($(this).get(0).checked) {
-            $stateReg.val('T');
-        } else {
-            $stateReg.val('F');
-        }
-        $form.submit();
+        submit('state_reg', $(this).get(0).checked ? 'T' : 'F');
     });
     // 比赛中
     $('#statusIn').change(function () {
-        if ($(this).get(0).checked) {
-            $stateIn.val('T');
-        } else {
-            $stateIn.val('F');
-        }
-        $form.submit();
+        submit('state_in', $(this).get(0).checked ? 'T' : 'F');
     });
     // 已结束
     $('#statusOver').change(function () {
-        if ($(this).get(0).checked) {
-            $stateOver.val('T');
-        } else {
-            $stateOver.val('F');
+        submit('state_over', $(this).get(0).checked ? 'T' : 'F');
+    });
+
+    // 省
+    $('#provinceId').change(function () {
+        var province = $(this).val();
+        if (province != '') {
+            submit('province', province);
         }
-        $form.submit();
     });
 
 
@@ -58,32 +47,44 @@ $(function () {
         $form.submit();
     });
 
-/*    $('.order-group li a').click(function () {
-        $(this).attr('data-value');
-    });
-    //provinceId=all&sportTypeId=all&timeType=all&keyword=&statusIn=0
-    // &statusOver=0&statusReg=0&criteria=startDate
-    $('#statusReg').click(function () {
-        if ($('#statusReg').prop("checked") == true) {
-            var url = "Game/search?statusReg="+statusReg+"&statusIn=0&statusOver=0";
+    // 运动项目
+    var $sportTypePanel = $('#sportTypePanel');
+    $sportTypePanel.find('dt a').each(function(index) {
+        if(index == 0) {
+            $(this).click(function() {
+                submit('sportType', '');
+            });
+        } else {
+            $(this).click(function() {
+                $($sportTypePanel).find('dt a.current:gt(0)').removeClass('current');
+                $(this).addClass('current');
+                $sportTypePanel.find('dd').hide().eq(index - 1).show();
+            });
         }
-        window.location.href = url;
     });
-    $('#statusIn').click(function () {
-        if ($('#statusReg').prop("checked") == true) {
-            url += "&statusReg=" + statusIn;
-        }
-        window.location.href = url;
+    $sportTypePanel.find('dd a').click(function() {
+        $(this).addClass('current');
+        submit('sportType', $(this).data('value'));
     });
-    $('#statusOver').click(function () {
-        if ($('#statusReg').prop("checked") == true) {
-            url += "&statusReg=" + statusOver;
-        }
-        window.location.href = url;
-    });*/
 
-    if (url != 'Game/search?') {
-        window.location.href = url;
+    // 时间
+    $('#dateList').find('a').click(function() {
+        submit('date', $(this).data('value'));
+    });
+
+    // 关键字
+    $('#btnSearchKeyword').click(function() {
+        var value = $('#inputKeyword').val();
+
+        if(value != '') {
+            submit('keyword', value);
+        }
+    });
+
+    // 提交
+    function submit(id, value) {
+        $('#' + id).val(value);
+        $form.submit();
     }
 
 });
