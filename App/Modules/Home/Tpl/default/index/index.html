@@ -239,16 +239,9 @@
             <h4 class="slider-title"> <img src="http://static.wisdom-china.cn/iyuesai/images/pages/index-icon1.png" /> <span>热门赛事排行</span> </h4>
             <!-- && start 热门赛事排行：v_hot_game-->
             <ul data-selector="eventsRankings">
-                <li><i>1</i><a href="game/405">城市动员！2015七城联动跑</a></li>
-                <li><i>2</i><a href="game/357">爱约赛马拉松CLUB会员限量招募</a></li>
-                <li><i>3</i><a href="game/373">2015首尔马拉松</a></li>
-                <li><i>4</i><a href="game/355">挑战严冬！冬天未过去 脚步不停止！</a></li>
-                <li><i>5</i><a href="game/344">马拉松Break4精英团招募！</a></li>
-                <li><i>6</i><a href="game/361">澳洲黄金海岸马拉松招募！</a></li>
-                <li><i>7</i><a href="game/339">最美厦马记录你的最美时刻</a></li>
-                <li><i>8</i><a href="game/345">2015“蒸蒸日上”四环跑</a></li>
-                <li><i>9</i><a href="game/353">海航“爱&middot;跑”拍出最有爱的你！</a></li>
-                <li><i>10</i><a href="game/356">亲历NBA赛场，观圣诞大战！</a></li>
+                <volist name="hot" id="vo" key="k">
+                    <li><i class="top<{$k}>"><{$k}></i><a href="/game/<{$vo.id}>"><{$vo.name}></a></li>
+                </volist>
             </ul>
             <!-- && end-->
         </div>

@@ -1,211 +1,239 @@
-<include file="Public@default:Public:top" />
-  <h4 id="header-title">赛事</h4>
-  <div class="search-engines">
+<include file="Public@default:Public:top"/>
+<h4 id="header-title">赛事</h4>
+<div class="search-engines">
     <div class="container">
-      <div class="row">
-        <div class="span12">
-          <!-- 赛事筛选模块 开始 -->
-          <div class="main-block" data-selector="searchEngines" data-for="match" data-params="{'criteria':'startDate','statusIn':'0','statusOver':'0','statusReg':'0'}" data-action="/game/search"></div>
-          <!-- 赛事筛选模块 结束 -->
-          <div class="main-block order-block">
-            <ul class="order-group">
-              <li  class="current"  ><a href="javascript:;" data-selector="orderBy" data-name="criteria" data-value="startDate">默认排序 <i class="icon-match icon-down"></i></a></li>
-               <li  ><a href="javascript:;" data-selector="orderBy" data-name="criteria" data-value="createDate">最新赛事 <i class="icon-match icon-down"></i></a></li>
-              <li  ><a href="javascript:;" data-selector="orderBy" data-name="criteria" data-value="followCount">最热赛事 <i class="icon-match icon-down"></i></a></li>
-            </ul>
-            <div class="item-statu-filter">
-              <label><input type="checkbox" data-selector="resultStatus" name="statusReg" id="statusReg"  value="1"    >报名中</label>
-  			  <label><input type="checkbox" data-selector="resultStatus" name="statusIn" id="statusIn" value="1"  >比赛中</label>  
-              <label><input type="checkbox" data-selector="resultStatus" name="statusOver" id="statusOver" value="1"    >已结束</label>            
-            </div>
-            
-            <div class="filter-paging">
-                          <a href="javascript:void(0);" class="page-prev"  class="disabled" >
-                <i class="icon-match icon-prev"></i>
-              </a>
-              <span>1/30</span>
-              <a href="javascript:void(0);" class="page-next" onclick="jumpPage(2,10 );"  >
-                <i class="icon-match icon-next"></i>
-              </a>
-            </div>
-          
-
-            </div>
-          <!--  赛事列表 开始 -->
-          <div class="main-block item-list">
-            <ul>
-              <!-- 循环 开始 -->  
-
-              <!-- 精选赛事 ＝ match-chosen -->
-              <!-- 人气最高 ＝ match-hot -->
-              <!-- 报名中 ＝ match-on   -->
-              <!-- 进行中 ＝ match-up   -->
-              <!-- 已结束 ＝ match-end   -->
-               <!-- 筹备中 ＝ match-arrange   -->
-              <!-- 报名中 ＝ match-enroll   -->
-              <!-- 待开赛 ＝ match-ready   -->
-              <!-- 比赛中 ＝ match-going   -->
-              <!-- 已结束 ＝ match-end   -->
-                <volist name="game" id="vo">
-			  <li>
-                <div class="item-list-content">
-                  <div class="item-list-wrap clearfix">
-                    <div class="thumbnail-wrap">
-                      <span class="icon-match icon-match-label"></span>
-  	                    <a href="/game/<{$vo.id}>"><img src="http://static.wisdom-china.cn//images/1/9879/9370/1227/722e53beb8dbbd36d8d8a5c739e2a64c_2_220x140.jpg?640x442" alt="四季跑城市PK赛" title="四季跑城市PK赛"></a>
+        <div class="row">
+            <div class="span12">
+                <!-- 赛事筛选模块 开始 -->
+                <div class="main-block" data-selector="searchEngines" data-for="match"
+                     data-params="{'criteria':'startDate','statusIn':'0','statusOver':'0','statusReg':'0'}"
+                     data-action="/game/search"></div>
+                <!-- 赛事筛选模块 结束 -->
+                <div class="main-block order-block">
+                    <ul class="order-group" id="order-group">
+                        <li <if condition="$_REQUEST['orderByNew'] eq S"> class="current" </if>><a href="javascript:;" data-selector="orderBy" data-name="criteria"
+                                               data-value="startDate">默认排序 <i class="icon-match icon-down"></i></a></li>
+                        <li <if condition="$_REQUEST['orderByNew'] eq C"> class="current" </if>><a href="javascript:;" data-selector="orderBy" data-name="criteria" data-value="createDate">最新赛事
+                            <i class="icon-match icon-down"></i></a></li>
+                        <li <if condition="$_REQUEST['orderByNew'] eq F"> class="current" </if>><a href="javascript:;" data-selector="orderBy" data-name="criteria"
+                               data-value="followCount">最热赛事 <i class="icon-match icon-down"></i></a></li>
+                    </ul>
+                    <div class="item-statu-filter">
+                        <label><input type="checkbox" name="statusReg" id="statusReg" value="1" <if condition="$_REQUEST['statusReg'] eq T">checked</if>>报名中</label>
+                        <label><input type="checkbox" name="statusIn" id="statusIn" value="3" <if condition="$_REQUEST['statusIn'] eq T">checked</if>>比赛中</label>
+                        <label><input type="checkbox" name="statusOver" id="statusOver" value="4" <if condition="$_REQUEST['statusOver'] eq T">checked</if>>已结束</label>
                     </div>
-                    <div class="item-list-right" onclick="window.location.href='/game/421'">
-                      <p class="item-list-ttl">
-                        <span class="icon-55 match-enroll"></span>
-                        <strong><span>[路跑]</span><a href="/game/<{$vo.id}>"><{$vo.name}></a></strong>
-                      </p>
-                      <div class="item-list-detail">
-                        <p>
-                        <span>时间：</span>
-            					  <!-- 不是同一天 -->
-                            <{$vo.id|getGameTime=$vo['status']}>
-                        </p>
-                        <p><span>地点：</span><{$vo.address}></p>
-                        <p><span>费用：</span><{$vo.cost}>元（报名费）</p>
-                        <p><span>主办：</span>
-                            爱约赛
-                        </p>
-                        <p class="item-list-bottom">
-                          <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（<{$vo.focus_count}>）</a>
-                          <a href="javascript:void(0);"><i class="icon-match icon-comment"></i>0人评论</a>
-                          <!--<a href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名928人（剩余2,072人）</a>
-                            -->
-                        </p>
-                      </div>
+
+                    <div class="filter-paging">
+                        <a href="javascript:void(0);" class="page-prev" class="disabled">
+                            <i class="icon-match icon-prev"></i>
+                        </a>
+                        <span>1/30</span>
+                        <a href="javascript:void(0);" class="page-next" onclick="jumpPage(2,10 );">
+                            <i class="icon-match icon-next"></i>
+                        </a>
                     </div>
-                      <a href="javascript:;" class="btn btn-warning item-list-reg" data-gameid=421 data-action="/game/apply/421" data-selector="joinMatch">我要报名</a>
-                  </div>
+
+
                 </div>
-                <!--注释分享功能  
-                <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]四季跑城市PK赛','url':'/game/421','pic':'http://static.wisdom-china.cn//images/1/9879/9370/1227/722e53beb8dbbd36d8d8a5c739e2a64c_2_220x140.jpg?640x442','summary':'    时间：2016年03月23日 00:00&nbsp;-&nbsp;2016年04月19日 00:00    地点：全国范围    主办：爱约赛'});</script></div>
-              -->
-              </li>
-              </volist>
+                <!--  赛事列表 开始 -->
+                <div class="main-block item-list">
+                    <ul>
+                        <!-- 循环 开始 -->
 
-              <!-- 循环 结束 -->
-            </ul>
-          </div>
-          <!-- 赛事列表 结束 -->
-          <!-- 分页 开始 -->
-<div class="main-block pagging-block">
-    <form action="">
-    <div class="paging-wrap">
-    <{$page}>
+                        <!-- 精选赛事 ＝ match-chosen -->
+                        <!-- 人气最高 ＝ match-hot -->
+                        <!-- 报名中 ＝ match-on   -->
+                        <!-- 进行中 ＝ match-up   -->
+                        <!-- 已结束 ＝ match-end   -->
+                        <!-- 筹备中 ＝ match-arrange   -->
+                        <!-- 报名中 ＝ match-enroll   -->
+                        <!-- 待开赛 ＝ match-ready   -->
+                        <!-- 比赛中 ＝ match-going   -->
+                        <!-- 已结束 ＝ match-end   -->
+                        <volist name="game" id="vo">
+                            <li>
+                                <div class="item-list-content">
+                                    <div class="item-list-wrap clearfix">
+                                        <div class="thumbnail-wrap">
+                                            <span class="icon-match icon-match-label"></span>
+                                            <a href="/game/<{$vo.id}>"><img
+                                                    src="http://static.wisdom-china.cn//images/1/9879/9370/1227/722e53beb8dbbd36d8d8a5c739e2a64c_2_220x140.jpg?640x442"
+                                                    alt="四季跑城市PK赛" title="四季跑城市PK赛"></a>
+                                        </div>
+                                        <div class="item-list-right" onclick="window.location.href='/game/421'">
+                                            <p class="item-list-ttl">
+                                                <span class="icon-55 match-enroll"></span>
+                                                <strong><span>[路跑]</span><a
+                                                        href="/game/<{$vo.id}>"><{$vo.name}></a></strong>
+                                            </p>
 
-        <label class="page-stage">到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':30,'min':1}]]" > 页
-       <input type="submit" class="btn" value="确定"/>
-       </label>
+                                            <div class="item-list-detail">
+                                                <p>
+                                                    <span>时间：</span>
+                                                    <!-- 不是同一天 -->
+                                                    <!--<{$vo.id|getGameTime=$vo['status']}>-->
+                                                    <{$vo.start_date}>——<{$vo.end_date}>
+                                                </p>
 
-       </div>
-    </form>
-        <!--<form id="paging-form" action="#">-->
-  <!--<div class="paging-wrap">-->
-	        <!--<span class="text">共 30页, 292条记录</span>-->
-      	<!--<span class="disabled">首页</span>-->
-      	<!--<span class="disabled">上一页</span>-->
-      <!--<span class="current"> 1</span>-->
-	      <!--<a href="javascript:;" onclick="jumpPage(2, 10);">2</a>-->
-	      <!--<a href="javascript:;" onclick="jumpPage(3, 10);">3</a>-->
-	      <!--<a href="javascript:;" onclick="jumpPage(4, 10);">4</a>-->
-	      <!--<a href="javascript:;" onclick="jumpPage(5, 10);">5</a>-->
-	      <!--<a href="javascript:;" onclick="jumpPage(2,10 );" class="next">下一页</a>     -->
-	      <!--<a href="javascript:;" onclick="jumpPage(30,10 );" >末页</a>       -->
-      <!--<label class="page-stage">到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':30,'min':1}]]" > 页-->
-      <!--<input type="submit" class="btn" value="确定"/>              -->
-      <!--</label>-->
+                                                <p><span>地点：</span><{$vo.address}></p>
 
-  	 <!--&lt;!&ndash;end of pageBean?? && (pages.total > -1) &ndash;&gt;-->
-  <!--<input type="hidden" name="pageNum" id="pageNum" value="1" />-->
-  <!--<input type="hidden" name="pageSize" id="pageSize" value="10" />-->
-  <!--</div>-->
-  <!--</form>-->
-</div>
-<script type="text/javascript">
-$(function(){
-	define(['valid','simplevalidtips'],function(){
-    $(function(){
-      var pf = $('#paging-form');
-      pf.valid({
-        'success':function(){
-          jumpPage($('#pageNumText',pf).val(),$('#pageSize',pf).val());
-          return false;
-        }
-      });
-      $("[validate-rules]",pf).SimpleValidTips();
-    });
-  });
-});
-  
-</script>
-          
+                                                <p><span>费用：</span><{$vo.cost}>元（报名费）</p>
 
-          <!-- 分页 结束 -->
-        </div>
+                                                <p><span>主办：</span>
+                                                    爱约赛
+                                                </p>
 
-        <div class="span4">
-          <div class="side-block match-post-game">
-            <a href="__APP__/Game/publish"><img src="http://static.wisdom-china.cn/iyuesai/images/pages/match-post-game.jpg" alt=""></a>
-          </div>
-          <!--
-          <div class="side-block side-search-col">
-            <h4 class="slider-title">赛事结果查询</h4>
-            <form name="" action="">
-              <p>
-                <i class="icon-match icon-zoom"></i>
-                <input type="text" class="input-large">
-                <submit class="btn btn-warning">查询</submit>
-              </p>
-            </form>
-          </div>
-          -->
-          <div class="side-block">
-            <h4 class="slider-title">热门赛事推荐</h4>
-            <a href="javascript:void(0);" class="public-reload-link" style="display:none">
-              <i class="icon-match icon-reload"></i>换一组
-            </a>
-            <ul class="side-item-col clearfix">
-               <!-- <volist name="hot" id="vo">
-                    <li>
-                        <div class="side-item-thumb"><a href="/game/421"><img src="http://static.wisdom-china.cn//images/1/9879/9370/1227/722e53beb8dbbd36d8d8a5c739e2a64c_2_220x140.jpg?640x442" alt=""></a></div>
-                        <h5><a href="/game/421"><{$vo.name}></a></h5>
-                        <p>
-                            <span class="pull-left"><{$vo.province}></span>
-                            <span class="pull-right"><em> 928</em>人参加</span>
-                        </p>
-                    </li>
-                </volist>-->
+                                                <p class="item-list-bottom">
+                                                    <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（<{$vo.focus_count}>）</a>
+                                                    <a href="javascript:void(0);"><i
+                                                            class="icon-match icon-comment"></i>0人评论</a>
+                                                    <!--<a href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名928人（剩余2,072人）</a>
+                                                      -->
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <a href="javascript:;" class="btn btn-warning item-list-reg" data-gameid=421
+                                           data-action="/game/apply/421" data-selector="joinMatch">我要报名</a>
+                                    </div>
+                                </div>
+                                <!--注释分享功能
+                                <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]四季跑城市PK赛','url':'/game/421','pic':'http://static.wisdom-china.cn//images/1/9879/9370/1227/722e53beb8dbbd36d8d8a5c739e2a64c_2_220x140.jpg?640x442','summary':'    时间：2016年03月23日 00:00&nbsp;-&nbsp;2016年04月19日 00:00    地点：全国范围    主办：爱约赛'});</script></div>
+                              -->
+                            </li>
+                        </volist>
 
-            </ul>
-          </div>
-          <div class="side-block">
-            <div class="events-rankings">
-              <h4 class="slider-title">
-                <img src="http://static.wisdom-china.cn/iyuesai/images/pages/index-icon1.png">
-                <span>热门赛事排行</span>
-              </h4>
-              <ul data-selector="eventsRankings">
-                  <volist name="hot" id="vo" key="k">
-                      <li><i class="top<{$k}>"><{$k}></i><a href="/game/<{$vo.id}>"><{$vo.name}></a></li>
-                  </volist>
-              </ul>
+                        <!-- 循环 结束 -->
+                    </ul>
+                </div>
+                <!-- 赛事列表 结束 -->
+                <!-- 分页 开始 -->
+                <div class="main-block pagging-block">
+                    <form action="">
+                        <div class="paging-wrap">
+                            <{$page}>
+
+                            <label class="page-stage">到第 <input type="text" id="pageNumText" name="pageNumText"
+                                                                validate-title="页码"
+                                                                validate-rules="[['required'],['number',{'max':30,'min':1}]]">
+                                页
+                                <input type="submit" class="btn" value="确定"/>
+                            </label>
+
+                        </div>
+                    </form>
+                    <!--<form id="paging-form" action="#">-->
+                    <!--<div class="paging-wrap">-->
+                    <!--<span class="text">共 30页, 292条记录</span>-->
+                    <!--<span class="disabled">首页</span>-->
+                    <!--<span class="disabled">上一页</span>-->
+                    <!--<span class="current"> 1</span>-->
+                    <!--<a href="javascript:;" onclick="jumpPage(2, 10);">2</a>-->
+                    <!--<a href="javascript:;" onclick="jumpPage(3, 10);">3</a>-->
+                    <!--<a href="javascript:;" onclick="jumpPage(4, 10);">4</a>-->
+                    <!--<a href="javascript:;" onclick="jumpPage(5, 10);">5</a>-->
+                    <!--<a href="javascript:;" onclick="jumpPage(2,10 );" class="next">下一页</a>     -->
+                    <!--<a href="javascript:;" onclick="jumpPage(30,10 );" >末页</a>       -->
+                    <!--<label class="page-stage">到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':30,'min':1}]]" > 页-->
+                    <!--<input type="submit" class="btn" value="确定"/>              -->
+                    <!--</label>-->
+
+                    <!--&lt;!&ndash;end of pageBean?? && (pages.total > -1) &ndash;&gt;-->
+                    <!--<input type="hidden" name="pageNum" id="pageNum" value="1" />-->
+                    <!--<input type="hidden" name="pageSize" id="pageSize" value="10" />-->
+                    <!--</div>-->
+                    <!--</form>-->
+                </div>
+                <!--<script type="text/javascript">
+                $(function(){
+                    define(['valid','simplevalidtips'],function(){
+                    $(function(){
+                      var pf = $('#paging-form');
+                      pf.valid({
+                        'success':function(){
+                          jumpPage($('#pageNumText',pf).val(),$('#pageSize',pf).val());
+                          return false;
+                        }
+                      });
+                      $("[validate-rules]",pf).SimpleValidTips();
+                    });
+                  });
+                });
+
+                </script>-->
+
+
+                <!-- 分页 结束 -->
             </div>
-          </div>
-    </div>
-    </div>
-  </div>
- </div>
-<include file="Public@default:Public:bottom" />     
 
-  <script>Loader.get('pages/match.js');</script>
-	<script>
+            <div class="span4">
+                <div class="side-block match-post-game">
+                    <a href="__APP__/Game/publish"><img
+                            src="http://static.wisdom-china.cn/iyuesai/images/pages/match-post-game.jpg" alt=""></a>
+                </div>
+                <!--
+                <div class="side-block side-search-col">
+                  <h4 class="slider-title">赛事结果查询</h4>
+                  <form name="" action="">
+                    <p>
+                      <i class="icon-match icon-zoom"></i>
+                      <input type="text" class="input-large">
+                      <submit class="btn btn-warning">查询</submit>
+                    </p>
+                  </form>
+                </div>
+                -->
+                <div class="side-block">
+                    <h4 class="slider-title">热门赛事推荐</h4>
+                    <a href="javascript:void(0);" class="public-reload-link" style="display:none">
+                        <i class="icon-match icon-reload"></i>换一组
+                    </a>
+                    <ul class="side-item-col clearfix">
+                        <volist name="recommend" id="vo">
+                            <li>
+                                <div class="side-item-thumb"><a href="/game/421"><img
+                                        src="http://static.wisdom-china.cn//images/1/9879/9370/1227/722e53beb8dbbd36d8d8a5c739e2a64c_2_220x140.jpg?640x442"
+                                        alt=""></a></div>
+                                <h5><a href="/game/421"><{$vo.name}></a></h5>
+
+                                <p>
+                                    <span class="pull-left"><{$vo.province}></span>
+                                    <span class="pull-right"><em> 928</em>人参加</span>
+                                </p>
+                            </li>
+                        </volist>
+
+                    </ul>
+                </div>
+                <div class="side-block">
+                    <div class="events-rankings">
+                        <h4 class="slider-title">
+                            <img src="http://static.wisdom-china.cn/iyuesai/images/pages/index-icon1.png">
+                            <span>热门赛事排行</span>
+                        </h4>
+                        <ul data-selector="eventsRankings">
+                            <volist name="hot" id="vo" key="k">
+                                <li><i class="top<{$k}>"><{$k}></i><a href="/game/<{$vo.id}>"><{$vo.name}></a></li>
+                            </volist>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form id="searchForm" action="__APP__/Game?">
+    <input type="hidden" id="state_reg" name="statusReg" value="<{$_REQUEST['statusReg']}>"/>
+    <input type="hidden" id="state_in" name="statusIn" value="<{$_REQUEST['statusIn']}>"/>
+    <input type="hidden" id="state_over" name="statusOver" value="<{$_REQUEST['statusOver']}>"/>
+    <input type="hidden" id="orderByNew" name="orderByNew" value="<{$_REQUEST['orderByNew']}>"/>
+    <input type="hidden" id="order" name="order"/>
+</form>
+<script type="text/javascript">Loader.load(['page.match']);</script>
+
+<include file="Public@default:Public:bottom"/>
+<!--<script>
 	function jumpPage(pageNo,pageSize){	
 		iyuesai.api.setSearchEnginesParams({'pageNum':pageNo,'pageSize':pageSize},function(){this.submit();});
 	};
-	</script>
-</body>
-</html>
+</script>-->

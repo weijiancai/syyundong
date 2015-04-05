@@ -8,8 +8,18 @@ class IndexAction extends Action
 {
     public function index()
     {
-
+        $this->hotgame();
         $this->display();
+    }
+
+    /*
+     * @功能注册图片验证码
+     * @时间：20150405
+     */
+    public function hotgame(){
+        $model = D(VHotGameRanking);
+        $hot  = $model->limit(10)->select();
+        $this->assign('hot',$hot);
     }
     /*
      * @功能注册图片验证码

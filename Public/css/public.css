@@ -666,13 +666,13 @@ h4#header-title{
 	background-color:#DADADA;
 	font-style: normal;
 }
-#index .events-rankings li i.top0{
+#index .events-rankings li i.top1{
 	background-color: #FB6A6A;
 }
-#index .events-rankings li i.top1{
+#index .events-rankings li i.top2{
 	background-color: #F5A623;
 }
-#index .events-rankings li i.top2{
+#index .events-rankings li i.top3{
 	background-color: #B0D6EA;
 }
 #index .events-rankings li a{
