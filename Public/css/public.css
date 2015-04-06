@@ -1958,33 +1958,33 @@ h4#header-title{
 }
 
 /* 赛事 */
-#match-page #searchEnginesForm {
+#searchEnginesForm {
     line-height: 22px;
     margin-top: -10px;
     margin-bottom: -10px;
 }
 
-#match-page #searchEnginesForm table {
+#searchEnginesForm table {
     width: 100%;
     margin: 0;
 }
 
-#match-page #searchEnginesForm th {
+#searchEnginesForm th {
     width: 72px;
     font-weight: normal;
     text-align: left;
     color: #313131;
 }
 
-#match-page #searchEnginesForm th, #match-page #searchEnginesForm td {
+#searchEnginesForm th, #searchEnginesForm td {
     padding-bottom: 15px;
 }
 
-#match-page #searchEnginesForm .icon16 {
+#searchEnginesForm .icon16 {
     margin-right: 6px;
 }
 
-#match-page #searchEnginesForm a.radio-item, #match-page #searchEnginesForm a.taber-item {
+#searchEnginesForm a.radio-item, #searchEnginesForm a.taber-item {
     display: inline-block;
     line-height: 20px;
     height: 20px;
@@ -2000,12 +2000,12 @@ h4#header-title{
     vertical-align: top;
 }
 
-#match-page #searchEnginesForm a.radio-item.current {
+#searchEnginesForm a.radio-item.current {
     background-color: #F5A623;
     color: #fff;
 }
 
-#match-page #searchEnginesForm a.taber-item {
+#searchEnginesForm a.taber-item {
     border-radius: 3px 3px 0 0;
     -webkit-border-radius: 3px 3px 0 0;
     -moz-border-radius: 3px 3px 0 0;
@@ -2014,14 +2014,14 @@ h4#header-title{
     padding: 0 10px;
 }
 
-#match-page #searchEnginesForm a.taber-item.current {
+#searchEnginesForm a.taber-item.current {
     border: 1px solid #F5A623;
     border-bottom: 1px solid #fff;
     color: #F5A623;
     height: 22px;
 }
 
-#match-page #searchEnginesForm .input-prepend .add-on {
+#searchEnginesForm .input-prepend .add-on {
     background-color: #fff;
     border-right: 0;
     position: relative;
@@ -2029,11 +2029,11 @@ h4#header-title{
     padding: 4px 2px 4px 6px;
 }
 
-#match-page #searchEnginesForm .input-prepend .add-on .icon16 {
+#searchEnginesForm .input-prepend .add-on .icon16 {
     margin: 0;
 }
 
-#match-page #searchEnginesForm .input-prepend input {
+#searchEnginesForm .input-prepend input {
     border-left: 0;
     margin-left: -1px;
     box-shadow: none;
@@ -2041,34 +2041,31 @@ h4#header-title{
     -moz-box-shadow: none;
 }
 
-#match-page #searchEnginesForm .input-prepend .span4 {
+#searchEnginesForm .input-prepend .span4 {
     margin: 0;
 }
 
-#match-page #searchEnginesForm .input-prepend .btn {
+#searchEnginesForm .input-prepend .btn {
     padding-left: 25px;
     padding-right: 25px;
 }
 
-#match-page #searchEnginesForm .input-prepend input:focus {
+#searchEnginesForm .input-prepend input:focus {
     border-color: #ebebeb;
 }
 
-#match-page #searchEnginesForm .item-panel {
+#searchEnginesForm .item-panel {
     overflow: hidden;
     margin-bottom: -5px;
 }
 
-#match-page #searchEnginesForm .item-panel dd {
+#searchEnginesForm .item-panel dd {
     border-top: 1px solid #F5A623;
     padding-top: 10px;
     margin-top: -6px;
 }
 
-#match-page #searchEnginesForm .item-panel dt {
+#searchEnginesForm .item-panel dt {
     font-weight: normal;
 }
 /* 赛事详细页 */
-#match-page .tab {
-    display: none;
-}
