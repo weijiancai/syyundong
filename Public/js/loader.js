@@ -4,6 +4,7 @@
  */
 var loader_config = {
     baseUrl: '/Public/js/',
+    urlArgs: "bust=" +  (new Date()).getTime(),
     paths: {
         'jquery': 'lib/jquery-1.11.1',
         'validate': 'lib/jquery.validate',
