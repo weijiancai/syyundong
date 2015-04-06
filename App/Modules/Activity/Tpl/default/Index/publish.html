@@ -1,0 +1,176 @@
+<include file="Public@default:Public:top"/>
+  <div class="container container-margin">
+    <div class="activity-publish">
+      <h4 class="form-title">创建活动</h4>
+
+      <form action="./爱约赛 爱运动 爱约赛 活动_files/爱约赛 爱运动 爱约赛 活动.htm" method="post" iyuesai-plugins-valid="0.6058584155980498">
+       	 <input type="hidden" id="editable" name="editable" value="false">
+       	 <input type="hidden" id="id" name="id" value=""> 
+        <div class="form-content clearfix">
+          <div class="pull-left">
+            <table class="form-table">
+              <tbody>
+                <tr>
+                  <th>
+                    <span class="help-required">*</span>活动分类:<span class="muted">选择分类可以被其他人更容易找到</span>
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="datadropdown" data-selector="eventItem">
+                      <div class="datadropdown-head">
+                        <input type="hidden" id="sportTypeId" name="sportTypeId" value="">
+                        <input type="text" class="span4 datadropdown-action" validate-title="活动分类" validate-rules="[[&#39;required&#39;]]" readonly="" placeholder="选择活动分类" id="sportTypeName" name="sportTypeName" value="">
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <span class="help-required">*</span>活动名称:<span class="muted">为它起个响亮的标题吧，不要超过40个字</span>
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" class="span5" id="name" name="name" value="" validate-title="活动名称" validate-rules="[[&#39;required&#39;],[&#39;length&#39;,{&#39;max&#39;:40}]]">
+                  </td>
+                </tr>
+                
+                     
+                 <tr>
+                  <th>
+                    <span class="help-required">*</span>报名时间:
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="datepicker-panel">
+                      <input type="text" class="span-date hasDatepicker" data-selector="startDate" placeholder="开始时间" readonly="readonly" validate-title="报名开始时间" validate-rules="[[&#39;required&#39;]]" id="regBeginDate" name="regBeginDate" value="2015-04-06 16:04:52">
+                      &nbsp;至&nbsp;
+                      <input type="text" class="span-date hasDatepicker" data-selector="endDate" placeholder="截止时间" readonly="readonly" validate-title="报名截止时间" validate-rules="[[&#39;required&#39;],[&#39;dyncheck&#39;,&#39;checkEndDate&#39;]]" id="regEndDate" name="regEndDate">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <span class="help-required">*</span>活动时间:
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="datepicker-panel">
+                      <input type="text" class="span-date hasDatepicker" data-selector="activityStartDate" placeholder="开始时间" readonly="readonly" validate-title="活动开始时间" validate-rules="[[&#39;required&#39;],[&#39;dyncheck&#39;,&#39;checkActivityStartDate&#39;]]" id="startDate" name="startDate">
+                      &nbsp;至&nbsp;
+                      <input type="text" class="span-date hasDatepicker" data-selector="activityEndDate" placeholder="截止时间" readonly="readonly" validate-title="活动截止时间" validate-rules="[[&#39;required&#39;],[&#39;dyncheck&#39;,&#39;checkActivityEndDate&#39;]]" id="endDate" name="endDate">
+                    </div>
+                  </td>
+                </tr>
+                  
+                          
+         
+                <tr>
+                  <th>
+                    <span class="help-required">*</span>活动人数:
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" class="span5" validate-title="活动人数" validate-rules="[[&#39;required&#39;],[&#39;number&#39;,{min:1}]]" id="limitCount" name="limitCount" value="">
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <span class="help-required">*</span>参加活动所需填写资料:
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="checkbox inline"><input type="checkbox" id="field_trueName" name="field_trueName" value="1"><span>真实姓名</span></label>
+                    <label class="checkbox inline"><input type="checkbox" id="field_gender" name="field_gender" value="1"><span>性别</span></label>
+                    <label class="checkbox inline"><input type="checkbox" id="field_mobile" name="field_mobile" value="1"><span>手机</span></label>
+                    <label class="checkbox inline"><input type="checkbox" id="field_certificateNum" value="1" name="field_certificateNum"><span>身份证号</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <span class="help-required">*</span>参加活动是否需要审核:
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="checkbox inline">
+                    
+                       <input type="checkbox" checked="checked" id="needCheck" name="needCheck" value="1">                    
+                    <span>是</span></label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pull-right">
+            <table class="form-table">
+              <tbody>
+                <tr>
+                  <th>活动费用</th>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="radio inline"><input data-selector="money" type="radio" name="money" checked="checked" value="1"><span>免费</span></label>
+                    <label class="radio inline"><input data-selector="money" type="radio" name="money" value="2"><span>收费</span></label>
+                   
+                   每人活动费用(元)&nbsp;&nbsp;<input data-selector="price" type="text" id="price" name="price" class="span1" validate-title="活动费用" validate-rules="[[&#39;dynrule&#39;,&#39;payment&#39;]]" disabled="">
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <span class="help-required">*</span>活动地点:
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <p>
+                      <select class="span2" data-selector="provinceSelect" data-value="" name="provinceId"><option value="2">北京市</option><option value="360">天津市</option><option value="691">河北省</option><option value="3352">山西省</option><option value="5021">内蒙古</option><option value="6373">辽宁省</option><option value="8144">吉林省</option><option value="9239">黑龙江</option><option value="11330">上海市</option><option value="11613">江苏省</option><option value="13539">浙江省</option><option value="15391">安徽省</option><option value="17266">福建省</option><option value="18634">江西省</option><option value="20799">山东省</option><option value="23139">河南省</option><option value="25898">湖北省</option><option value="27561">湖南省</option><option value="30374">广东省</option><option value="32864">广西</option><option value="34336">海南省</option><option value="34712">重庆市</option><option value="35869">四川省</option><option value="40206">贵州省</option><option value="41902">云南省</option><option value="43748">西藏</option><option value="44605">陕西省</option><option value="46517">甘肃省</option><option value="48081">青海省</option><option value="48579">宁夏</option><option value="48911">新疆</option></select>&nbsp;&nbsp;
+                      <select class="span2" data-selector="citySelect" name="cityId" data-value=""><option value="3">市区</option><option value="318">县</option></select>
+                    </p>
+                    <p>
+                      <select class="span2" data-selector="regionSelect" name="regionId" data-value=""><option value="4">东城区</option><option value="15">西城区</option><option value="23">崇文区</option><option value="31">宣武区</option><option value="40">朝阳区</option><option value="84">海淀区</option><option value="114">丰台区</option><option value="136">石景山区</option><option value="147">门头沟区</option><option value="162">房山区</option><option value="193">通州区</option><option value="211">顺义区</option><option value="239">昌平区</option><option value="258">大兴区</option><option value="278">怀柔区</option><option value="297">平谷区</option></select>&nbsp;&nbsp;
+                      <!-- <select class="span2" data-selector="businessSelect" name="businessId" data-value=""></select> -->
+                    </p>
+                                       
+                    <p>
+                      <input type="text" class="span5" placeholder="详细地址" id="place" name="place" validate-title="详细地址" validate-rules="[[&#39;required&#39;]]" value="">
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+        </div>
+        <div class="form-content form-content-nopt">
+          <table class="form-table">
+            <tbody>
+              <tr>
+                <th><span class="help-required">*</span>活动描述:</th>
+              </tr>
+              <tr>
+                <td>        
+          
+                <textarea rows="10" id="description" name="description" validate-title="活动描述" validate-rules="[[&#39;required&#39;]]" style="height: 200px;"></textarea><pre style="position: absolute; z-index: -10; left: -9999px; top: auto; padding: 10px 0px; font-size: 14px; line-height: 20px; width: 860px; font-family: &#39;Microsoft yahei&#39;, Arial; white-space: pre-wrap; word-wrap: break-word; font-weight: 400;"></pre>
+                
+               </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="form-content-foot form-content-nopt clearfix">
+          <div class="pull-right">
+            <button class="btn btn-warning" type="submit">发布活动</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript">Loader.load(['page.publish'])</script>
+
+<include file="Public@default:Public:bottom"/>
