@@ -1,5 +1,6 @@
 /**
  * Created by wei_jc on 2015/3/15.
+ * loader
  */
 var loader_config = {
     baseUrl: '/Public/js/',
