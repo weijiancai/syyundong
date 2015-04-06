@@ -1438,13 +1438,6 @@ padding: 0;
   margin-bottom: 30px;
   position: relative;
 }
-#match-page .side-block{
-  padding: 20px;
-  background: #FFF;
-  min-height: 10px;
-  position: relative;
-  margin-bottom: 30px;
-}
 #match-page .match-page-summary{
   width: 700px;
 }
