@@ -9,6 +9,7 @@ var loader_config = {
         'bootstrap': 'lib/bootstrap',
         'jqueryUI': 'jquery-ui-1.10.3.custom.min',
         'common': 'common',
+        'common_footer': 'common_footer',
         'page_login': 'pages/login',
         'page_forgetPassword': 'pages/forgetPassword',
         'page_index': 'pages/index',
@@ -24,6 +25,10 @@ var loader_config = {
         'common': {
             deps: ['jquery', 'bootstrap', 'validate'],
             exports: 'common'
+        },
+        'common_footer': {
+            deps: ['common'],
+            exports: 'common_footer'
         },
         'page_login': {
             deps: ['common'],
@@ -55,6 +60,8 @@ var loader_config = {
 var Loader = {
     modules: [],
     load: function(modules) {
+        // 加入公共底部js
+        modules.push('common_footer');
         for(var i = 0; i < modules.length; i++) {
             modules[i] = modules[i].replace('.', '_');
         }
