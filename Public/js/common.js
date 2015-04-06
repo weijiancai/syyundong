@@ -32,6 +32,18 @@ $.validator.setDefaults({
 /* 主页导航 */
 $(function() {
     var $navigation = $('#navigation');
+
+    if($(document.body).attr('id') != 'index') {
+        $navigation.find('> a.navigation-title').hover(function() {
+            $navigation.find('> ul').addClass('hover');
+        });
+
+        $navigation.find('ul').mouseleave(function() {
+            $navigation.find('> ul').removeClass('hover');
+        });
+    }
+
+
     $navigation.find('div.navigation-item-static').hover(function () {
         $navigation.find('div.navigation-item-content').hide();
         $(this).parent().find('div.navigation-item-content').show();

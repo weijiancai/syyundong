@@ -193,7 +193,7 @@ h4#header-title{
 	top: 40px;
 	left: 0px;
 	z-index: 50;
-	display: block;
+	display: none;
 	height: 363px;
 }
 #navigation .navigation-list.hover{
