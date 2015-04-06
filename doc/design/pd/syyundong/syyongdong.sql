@@ -599,6 +599,7 @@ create VIEW  v_game_activity
       province,
       address,
       sponsor,
+      ''interest_count,
       input_user,
       input_date,
       'game' type,
