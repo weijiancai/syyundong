@@ -2068,3 +2068,7 @@ h4#header-title{
 #match-page #searchEnginesForm .item-panel dt {
     font-weight: normal;
 }
+/* 赛事详细页 */
+#match-page .tab {
+    display: none;
+}

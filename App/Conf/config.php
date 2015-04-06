@@ -22,7 +22,7 @@ $Public_Config =  array(
         '/^verify/'=>'home/index/verify',
         '/^Game\/publish/' => 'Game/index/publish',
         '/^Game\/addgame/' => 'Game/index/addgame',
-        '/^Game\/(\d+)$/' => 'Game/view?id=:1',
+        '/^Game\/(\d+)$/' => 'Game/index/game_detail?id=:1',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
