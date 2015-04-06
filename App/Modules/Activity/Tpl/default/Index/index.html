@@ -1,684 +1,755 @@
 <include file="Public@default:Public:top" />
 
-  <h4 id="header-title">约活动</h4>
-  <!-- 约活动 
-  
- <div class="substation clearfix">
- <dl>
-<dd>
-  <a href="/activitycommon/search">
-</dd>
-<dd>  
-  <a href="/activitycommon/search?provinceId=2&cityId=3&regionId=all&sportTypeId=all&timeType=all&keyword=&statusIn=0&statusOver=0&statusReg=0&criteria=2">
- </dd>
- <dd> 
-  <a href="/activitycommon/search?provinceId=2&cityId=3&regionId=all&sportTypeId=all&timeType=all&keyword=&statusIn=0&statusOver=0&statusReg=0&criteria=3">
-</dd>
- </dl>
- -->	
- 
-  <div class="search-engines">
+<div class="search-engines">
     <div class="container">
-      <div class="row">
-        <div class="span12">
-          <!-- 赛事筛选模块 开始 -->
-          <div class="main-block" data-selector="searchEngines" data-for="activity" data-params="{'criteria':'1','statusIn':'0','statusOver':'0','statusReg':'0'}"
-            data-action="/activitycommon/search"></div>
+        <div class="row">
+            <div class="span12">
+                <!-- 赛事筛选模块 开始 -->
+                <div data-action="/activitycommon/search" data-params="{'criteria':'1','statusIn':'0','statusOver':'0','statusReg':'0'}" data-for="activity" data-selector="searchEngines" class="main-block"><style>#NTGUID__1{      line-height: 22px;      margin-top: -10px;      margin-bottom: -10px;    }#NTGUID__1 table{      width: 100%;      margin: 0;    }#NTGUID__1 th{      width: 72px;      font-weight: normal;      text-align: left;      color: #313131;    }#NTGUID__1 th,#NTGUID__1 td{      padding-bottom: 15px;    }#NTGUID__1 .icon16{      margin-right: 6px;    }#NTGUID__1 a.radio-item,#NTGUID__1 a.taber-item{      display: inline-block;      line-height: 20px;      height: 20px;      overflow: hidden;      margin: 0 5px 5px 0;      padding: 0 8px;      border-radius: 3px;      -webkit-border-radius: 3px;      -moz-border-radius: 3px;      text-align: center;      color: #555;      word-break: break-all;      vertical-align: top;    }#NTGUID__1 a.radio-item.current{      background-color: #F5A623;      color: #fff;    }#NTGUID__1 a.taber-item{      border-radius: 3px 3px 0 0;      -webkit-border-radius: 3px 3px 0 0;      -moz-border-radius: 3px 3px 0 0;      position: relative;      z-index: 10;      padding: 0 10px;    }#NTGUID__1 a.taber-item.current{      border: 1px solid #F5A623;      border-bottom: 1px solid #fff;      color: #F5A623;      height: 22px;    }#NTGUID__1 .input-prepend .add-on{      background-color: #fff;      border-right: 0;      position: relative;      z-index: 10;      padding: 4px 2px 4px 6px;    }#NTGUID__1 .input-prepend .add-on .icon16{      margin: 0;    }#NTGUID__1 .input-prepend input{      border-left:0;      margin-left: -1px;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;    }#NTGUID__1 .input-prepend .span4{      margin: 0;    }#NTGUID__1 .input-prepend .btn{      padding-left: 25px;      padding-right: 25px;    }#NTGUID__1 .input-prepend input:focus{      border-color: #ebebeb;    }#NTGUID__1 .item-panel{      overflow: hidden;      margin-bottom: -5px;    }#NTGUID__1 .item-panel dd{      border-top: 1px solid #F5A623;      padding-top: 10px;      margin-top: -6px;    }#NTGUID__1 .item-panel dt{      font-weight: normal;    }  </style><div id="NTGUID__1">
+                    <form id="searchEnginesForm" method="get" action="/activitycommon/search">
+                        <div data-selector="province">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <th><i class="icon16 icon16-search-city"></i>省市：</th>
+                                    <td>
+                                        <select data-selector="tplProvince" class="span2" name="provinceId"><option value="all">全部省份</option><option value="2">北京市</option><option value="360">天津市</option><option value="691">河北省</option><option value="3352">山西省</option><option value="5021">内蒙古</option><option value="6373">辽宁省</option><option value="8144">吉林省</option><option value="9239">黑龙江</option><option value="11330">上海市</option><option value="11613">江苏省</option><option value="13539">浙江省</option><option value="15391">安徽省</option><option value="17266">福建省</option><option value="18634">江西省</option><option value="20799">山东省</option><option value="23139">河南省</option><option value="25898">湖北省</option><option value="27561">湖南省</option><option value="30374">广东省</option><option value="32864">广西</option><option value="34336">海南省</option><option value="34712">重庆市</option><option value="35869">四川省</option><option value="40206">贵州省</option><option value="41902">云南省</option><option value="43748">西藏</option><option value="44605">陕西省</option><option value="46517">甘肃省</option><option value="48081">青海省</option><option value="48579">宁夏</option><option value="48911">新疆</option></select>
 
-          <!-- 赛事筛选模块 结束 -->
+                                        <select data-selector="tplCity" style="margin-left:10px;" class="span2" name="cityId"><option value="all">全部城市</option></select>
 
-          <div class="main-block order-block">
-            <ul class="order-group">
-              <li class="current"  ><a href="javascript:;" data-selector="orderBy"
-                data-name="criteria" data-value="1">默认排序 <i class="icon-match icon-down"></i></a></li>
-              <li ><a href="javascript:;" data-selector="orderBy"
-                data-name="criteria" data-value="2">最新活动 <i class="icon-match icon-down"></i></a></li>
-              <li ><a href="javascript:;" data-selector="orderBy"
-                data-name="criteria" data-value="3">最热活动 <i class="icon-match icon-down"></i></a></li>
+                                    </td>
+                                </tr>
 
-            </ul>
-            <div class="item-statu-filter">
-              <label><input type="checkbox" data-selector="resultStatus" name="statusReg" id="statusReg" value="1" >召集中</label> <label><input type="checkbox"
-                data-selector="resultStatus" name="statusIn" id="statusIn" value="1" >进行中</label> <label><input type="checkbox" data-selector="resultStatus"
-                name="statusOver" id="statusOver" value="1" >已结束</label>
+                                <tr>
+                                    <th valign="top"><i class="icon16 icon16-search-region"></i>区域：<input type="hidden" data-selector="regionValue" value="all" name="regionId"></th>
+                                    <td valign="top"><div data-selector="regionList" class="item-panel"><a href="javascript:;" class="radio-item current" data-value="all" data-selector="regionItem">全部</a></div></td>
+                                </tr>
+
+
+                                <tr>
+                                    <th valign="top"><i class="icon16 icon16-search-items"></i>项目：<input type="hidden" data-selector="itemsValue" value="all" name="sportTypeId"></th>
+                                    <td valign="top">
+                                        <div data-selector="itemsList" class="item-panel">
+                                            <dl>
+                                                <dt><a href="javascript:;" class="radio-item current" data-value="all" data-selector="itemsItem">全部</a><a href="javascript:;" class="radio-item" data-value="6" data-selector="itemsItem">马拉松</a><a href="javascript:;" class="radio-item" data-value="7" data-selector="itemsItem">路跑</a><a href="javascript:;" class="radio-item" data-value="8" data-selector="itemsItem">羽毛球</a><a href="javascript:;" class="radio-item" data-value="9" data-selector="itemsItem">乒乓球</a><a href="javascript:;" class="radio-item" data-value="10" data-selector="itemsItem">台球</a><a href="javascript:;" class="radio-item" data-value="11" data-selector="itemsItem">网球</a><a href="javascript:;" class="radio-item" data-value="12" data-selector="itemsItem">自行车</a><a href="javascript:;" class="radio-item" data-value="16" data-selector="itemsItem">山地户外活动</a><a href="javascript:;" class="radio-item" data-value="38" data-selector="itemsItem">瑜伽</a><a href="javascript:;" class="radio-item" data-value="40" data-selector="itemsItem">足球</a><a href="javascript:;" class="radio-item" data-value="41" data-selector="itemsItem">篮球</a><a href="javascript:;" class="radio-item" data-value="55" data-selector="itemsItem">游泳</a><a href="javascript:;" class="radio-item" data-value="64" data-selector="itemsItem">钓鱼</a><a href="javascript:;" class="radio-item" data-value="68" data-selector="itemsItem">脚斗士</a><a href="javascript:;" class="radio-item" data-value="69" data-selector="itemsItem">滑雪</a><a href="javascript:;" class="radio-item" data-value="70" data-selector="itemsItem">徒步</a></dt>
+                                            </dl>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th valign="top"><i class="icon16 icon16-search-date"></i>时间：<input type="hidden" data-selector="dateValue" value="all" name="timeType"></th>
+                                    <td valign="top"><div data-selector="dateList" class="item-panel"><a data-selector="dateItem" class="radio-item current" data-value="all" href="javascript:;">全部</a><a data-selector="dateItem" class="radio-item" data-value="today" href="javascript:;">今天</a><a data-selector="dateItem" class="radio-item" data-value="tomorrow" href="javascript:;">明天</a><a data-selector="dateItem" class="radio-item" data-value="weekend" href="javascript:;">周末</a><a data-selector="dateItem" class="radio-item" data-value="week" href="javascript:;">未来一周</a><a data-selector="dateItem" class="radio-item" data-value="month" href="javascript:;">未来一个月</a></div></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="input-prepend input-append">
+                                            <span class="add-on"><i class="icon16 icon16-search-search"></i></span>
+                                            <input type="text" value="" name="keyword" class="span4">
+                                            <button class="btn btn-warning" type="submit">搜本类</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <input type="hidden" name="criteria" value="1"><input type="hidden" name="statusIn" value="0"><input type="hidden" name="statusOver" value="0"><input type="hidden" name="statusReg" value="0"></form>
+                </div>
+
+
+                </div>
+
+                <!-- 赛事筛选模块 结束 -->
+
+                <div class="main-block order-block">
+                    <ul class="order-group">
+                        <li class="current"><a data-value="1" data-name="criteria" data-selector="orderBy" href="javascript:;">默认排序 <i class="icon-match icon-down"></i></a></li>
+                        <li><a data-value="2" data-name="criteria" data-selector="orderBy" href="javascript:;">最新活动 <i class="icon-match icon-down"></i></a></li>
+                        <li><a data-value="3" data-name="criteria" data-selector="orderBy" href="javascript:;">最热活动 <i class="icon-match icon-down"></i></a></li>
+
+                    </ul>
+                    <div class="item-statu-filter">
+                        <label><input type="checkbox" value="1" id="statusReg" name="statusReg" data-selector="resultStatus">召集中</label> <label><input type="checkbox" value="1" id="statusIn" name="statusIn" data-selector="resultStatus">进行中</label> <label><input type="checkbox" value="1" id="statusOver" name="statusOver" data-selector="resultStatus">已结束</label>
+                    </div>
+
+                    <div class="filter-paging">
+                        <a class="page-prev" href="javascript:void(0);">
+                            <i class="icon-match icon-prev"></i>
+                        </a>
+                        <span>1/44</span>
+                        <a onclick="jumpPage(2,10 );" class="page-next" href="javascript:void(0);">
+                            <i class="icon-match icon-next"></i>
+                        </a>
+                    </div>
+
+
+                </div>
+
+
+
+                <!--  赛事列表 开始 -->
+                <div class="main-block item-list">
+                    <ul>
+                        <!-- 循环 开始 -->
+                        <li class="match-chosen">
+                            <div class="item-list-content">
+                                <div class="item-list-wrap clearfix">
+                                    <div class="activity-list-thumb">
+                                        <a href="/friend/passport_90499/timeline"> <span class="avator-56"> <img title="" alt="
+                            " src="http://static.wisdom-china.cn//images/1/3062/3496/5020/4e7534c95270255ea7935200ce3d8469_2_120x120.jpg">
+                        </span>
+                                            <p>给我个盒子</p>
+                                        </a>
+                                    </div>
+                                    <div class="item-list-right">
+                                        <p class="item-list-ttl">
+                                            <a href="/activitycommon/685"> <strong><span>[路跑]</span>郑开排酸罢，奥森duang起来~</strong>
+                                            </a></p><a href="/activitycommon/685">
+                                    </a><div class="item-list-detail"><a href="/activitycommon/685">
+                                        <p>
+                                            <span>活动时间：</span>
+                                            2015年04月04日 16:00 -
+                                            04月10日 18:00
+                                        </p>
+                                        <p>
+                                            <span>报名截止：</span>04月04日 00:00
+
+                                        </p>
+
+                                        <p>
+                                            <span>地点：</span>朝阳区奥林匹克森林公园
+                                        </p>
+                                        <p>
+                                            <span>费用：</span>免费
+                                        </p>
+                                    </a><p class="item-list-bottom"><a href="/activitycommon/685">
+
+                                        <i class="icon-match icon-like"></i>35人感兴趣
+                                        <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
+                                        <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名0人（剩余15人） </a>
+                                    </p>
+                                    </div>
+                                    </div>
+
+                                    <button disabled="" class="btn item-list-reg btn-show">报名已结束</button>
+
+                                </div>
+                            </div>
+                            <!--注释分享功能
+                            <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]郑开排酸罢，奥森duang起来~','url':'/activitycommon/685','summary':'    地点：朝阳区奥林匹克森林公园    活动时间：2015年04月04日 16:00 - 04月10日 18:00 '});</script></div>
+                            -->
+                        </li>                 <li class="match-chosen">
+                        <div class="item-list-content">
+                            <div class="item-list-wrap clearfix">
+                                <div class="activity-list-thumb">
+                                    <a href="/friend/passport_88918/timeline"> <span class="avator-56"> <img title="" alt="
+                            " src="http://static.wisdom-china.cn//images/1/1315/8665/7863/60dd9c3a7f0a5e41c03ce3b43e3e4b4c_2_80x80.jpg">
+                        </span>
+                                        <p>瓶中的风信子</p>
+                                    </a>
+                                </div>
+                                <div class="item-list-right">
+                                    <p class="item-list-ttl">
+                                        <a href="/activitycommon/684"> <strong><span>[山地户外活动]</span>【清明】白石山上白云飘，gogogo~</strong>
+                                        </a></p><a href="/activitycommon/684">
+                                </a><div class="item-list-detail"><a href="/activitycommon/684">
+                                    <p>
+                                        <span>活动时间：</span>
+                                        2015年04月04日 00:30 -
+                                        04月05日 20:00
+                                    </p>
+                                    <p>
+                                        <span>报名截止：</span>04月03日 20:00
+
+                                    </p>
+
+                                    <p>
+                                        <span>地点：</span>涞源县白石山世界地质公园
+                                    </p>
+                                    <p>
+                                        <span>费用：</span>230元
+                                    </p>
+                                </a><p class="item-list-bottom"><a href="/activitycommon/684">
+
+                                    <i class="icon-match icon-like"></i>21人感兴趣
+                                    <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
+                                    <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名0人（剩余30人） </a>
+                                </p>
+                                </div>
+                                </div>
+
+                                <button disabled="" class="btn item-list-reg btn-show">报名已结束</button>
+
+                            </div>
+                        </div>
+                        <!--注释分享功能
+                        <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[山地户外活动]【清明】白石山上白云飘，gogogo~','url':'/activitycommon/684','summary':'    地点：涞源县白石山世界地质公园    活动时间：2015年04月04日 00:30 - 04月05日 20:00 '});</script></div>
+                        -->
+                    </li>                 <li class="match-chosen">
+                        <div class="item-list-content">
+                            <div class="item-list-wrap clearfix">
+                                <div class="activity-list-thumb">
+                                    <a href="/friend/passport_70511/timeline"> <span class="avator-56"> <img title="" alt="
+                            " src="http://static.wisdom-china.cn//images/1/6000/7477/8913/94b9dcb639ace68c534da99952e42e45_2_80x80.jpg">
+                        </span>
+                                        <p>二寨主学文化</p>
+                                    </a>
+                                </div>
+                                <div class="item-list-right">
+                                    <p class="item-list-ttl">
+                                        <a href="/activitycommon/683"> <strong><span>[自行车]</span>清明踏青&mdash;&mdash;十三陵水库</strong>
+                                        </a></p><a href="/activitycommon/683">
+                                </a><div class="item-list-detail"><a href="/activitycommon/683">
+                                    <p>
+                                        <span>活动时间：</span>
+                                        2015年04月04日 07:30 -
+                                        04月04日 16:00
+                                    </p>
+                                    <p>
+                                        <span>报名截止：</span>04月03日 20:00
+
+                                    </p>
+
+                                    <p>
+                                        <span>地点：</span>昌平区十三陵水库
+                                    </p>
+                                    <p>
+                                        <span>费用：</span>免费
+                                    </p>
+                                </a><p class="item-list-bottom"><a href="/activitycommon/683">
+
+                                    <i class="icon-match icon-like"></i>30人感兴趣
+                                    <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
+                                    <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名1人（剩余10人） </a>
+                                </p>
+                                </div>
+                                </div>
+
+                                <button disabled="" class="btn item-list-reg btn-show">报名已结束</button>
+
+                            </div>
+                        </div>
+                        <!--注释分享功能
+                        <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[自行车]清明踏青——十三陵水库','url':'/activitycommon/683','summary':'    地点：昌平区十三陵水库    活动时间：2015年04月04日 07:30 - 04月04日 16:00 '});</script></div>
+                        -->
+                    </li>                 <li class="match-chosen">
+                        <div class="item-list-content">
+                            <div class="item-list-wrap clearfix">
+                                <div class="activity-list-thumb">
+                                    <a href="/friend/passport_152706/timeline"> <span class="avator-56"> <img title="" alt="
+                            " src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/1103402448/B60060F7248C88152424347DA6303C2C/100/B60060F7248C88152424347DA6303C2C_2_80x80.png">
+                        </span>
+                                        <p>QQ网友</p>
+                                    </a>
+                                </div>
+                                <div class="item-list-right">
+                                    <p class="item-list-ttl">
+                                        <a href="/activitycommon/682"> <strong><span>[足球]</span>踢球</strong>
+                                        </a></p><a href="/activitycommon/682">
+                                </a><div class="item-list-detail"><a href="/activitycommon/682">
+                                    <p>
+                                        <span>活动时间：</span>
+                                        2015年04月07日 16:43 -
+                                        04月08日 00:00
+                                    </p>
+                                    <p>
+                                        <span>报名截止：</span>04月07日 16:13
+
+                                    </p>
+
+                                    <p>
+                                        <span>地点：</span>北京市|市区|大兴区|天安门
+                                    </p>
+                                    <p>
+                                        <span>费用：</span>1,000元
+                                    </p>
+                                </a><p class="item-list-bottom"><a href="/activitycommon/682">
+
+                                    <i class="icon-match icon-like"></i>23人感兴趣
+                                    <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
+                                    <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名1人（剩余9人） </a>
+                                </p>
+                                </div>
+                                </div>
+
+                                <button data-activityid="682" data-selector="joinBtn" class="btn btn-warning item-list-reg">我要参加</button>
+
+                            </div>
+                        </div>
+                        <!--注释分享功能
+                        <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[足球]踢球','url':'/activitycommon/682','summary':'    地点：北京市|市区|大兴区|天安门    活动时间：2015年04月07日 16:43 - 04月08日 00:00 '});</script></div>
+                        -->
+                    </li>                 <li class="match-chosen">
+                        <div class="item-list-content">
+                            <div class="item-list-wrap clearfix">
+                                <div class="activity-list-thumb">
+                                    <a href="/friend/passport_79008/timeline"> <span class="avator-56"> <img title="" alt="
+                            " src="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_80x80.png?140x140">
+                        </span>
+                                        <p>Luna1</p>
+                                    </a>
+                                </div>
+                                <div class="item-list-right">
+                                    <p class="item-list-ttl">
+                                        <a href="/activitycommon/344"> <strong><span>[马拉松]</span>哈哈哈</strong>
+                                        </a></p><a href="/activitycommon/344">
+                                </a><div class="item-list-detail"><a href="/activitycommon/344">
+                                    <p>
+                                        <span>活动时间：</span>
+                                        2016年12月18日 16:53 -
+                                        12月19日 00:00
+                                    </p>
+                                    <p>
+                                        <span>报名截止：</span>12月18日 16:23
+
+                                    </p>
+
+                                    <p>
+                                        <span>地点：</span>新疆|巴州|且末县|TT GG
+                                    </p>
+                                    <p>
+                                        <span>费用：</span>10,000元
+                                    </p>
+                                </a><p class="item-list-bottom"><a href="/activitycommon/344">
+
+                                    <i class="icon-match icon-like"></i>1,122人感兴趣
+                                    <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
+                                    <i class="icon-match icon-comment"></i>5人评论 <i class="icon-match icon-enroll"></i>已报名7人（剩余13人） </a>
+                                </p>
+                                </div>
+                                </div>
+
+                                <button data-activityid="344" data-selector="joinBtn" class="btn btn-warning item-list-reg">我要参加</button>
+
+                            </div>
+                        </div>
+                        <!--注释分享功能
+                        <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[马拉松]哈哈哈','url':'/activitycommon/344','summary':'    地点：新疆|巴州|且末县|TT GG    活动时间：2016年12月18日 16:53 - 12月19日 00:00 '});</script></div>
+                        -->
+                    </li>                 <li class="match-chosen">
+                        <div class="item-list-content">
+                            <div class="item-list-wrap clearfix">
+                                <div class="activity-list-thumb">
+                                    <a href="/friend/passport_81013/timeline"> <span class="avator-56"> <img title="" alt="
+                            " src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/1103402448/20E47D386C1F71F6A16E91317D988472/100/20E47D386C1F71F6A16E91317D988472_2_80x80.png">
+                        </span>
+                                        <p>天真的笑声只在梦里出现</p>
+                                    </a>
+                                </div>
+                                <div class="item-list-right">
+                                    <p class="item-list-ttl">
+                                        <a href="/activitycommon/447"> <strong><span>[自行车]</span>。。。</strong>
+                                        </a></p><a href="/activitycommon/447">
+                                </a><div class="item-list-detail"><a href="/activitycommon/447">
+                                    <p>
+                                        <span>活动时间：</span>
+                                        2016年05月07日 10:18 -
+                                        05月08日 00:00
+                                    </p>
+                                    <p>
+                                        <span>报名截止：</span>05月07日 09:48
+
+                                    </p>
+
+                                    <p>
+                                        <span>地点：</span>北京市|市区|海淀区|西二旗
+                                    </p>
+                                    <p>
+                                        <span>费用：</span>1,000元
+                                    </p>
+                                </a><p class="item-list-bottom"><a href="/activitycommon/447">
+
+                                    <i class="icon-match icon-like"></i>1,011人感兴趣
+                                    <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
+                                    <i class="icon-match icon-comment"></i>1人评论 <i class="icon-match icon-enroll"></i>已报名5人（剩余15人） </a>
+                                </p>
+                                </div>
+                                </div>
+
+                                <button data-activityid="447" data-selector="joinBtn" class="btn btn-warning item-list-reg">我要参加</button>
+
+                            </div>
+                        </div>
+                        <!--注释分享功能
+                        <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[自行车]。。。','url':'/activitycommon/447','summary':'    地点：北京市|市区|海淀区|西二旗    活动时间：2016年05月07日 10:18 - 05月08日 00:00 '});</script></div>
+                        -->
+                    </li>                 <li class="match-chosen">
+                        <div class="item-list-content">
+                            <div class="item-list-wrap clearfix">
+                                <div class="activity-list-thumb">
+                                    <a href="/friend/passport_80189/timeline"> <span class="avator-56"> <img title="" alt="
+                            " src="http://static.wisdom-china.cn//images/1/6760/4442/4639/ebee10514b0ccfb2c32a9ceb680e7089_2_120x120.jpg">
+                        </span>
+                                        <p>与猫球</p>
+                                    </a>
+                                </div>
+                                <div class="item-list-right">
+                                    <p class="item-list-ttl">
+                                        <a href="/activitycommon/387"> <strong><span>[羽毛球]</span>大连市市民健身中心（一二九街）与猫球球友会 报名QQ群：371430885</strong>
+                                        </a></p><a href="/activitycommon/387">
+                                </a><div class="item-list-detail"><a href="/activitycommon/387">
+                                    <p>
+                                        <span>活动时间：</span>
+                                        2016年01月01日 00:00 -
+                                        12月31日 00:00
+                                    </p>
+                                    <p>
+                                        <span>报名截止：</span>12月26日 00:00
+
+                                    </p>
+
+                                    <p>
+                                        <span>地点：</span>辽宁省大连市市民健身中心（一二九街）
+                                    </p>
+                                    <p>
+                                        <span>费用：</span>免费
+                                    </p>
+                                </a><p class="item-list-bottom"><a href="/activitycommon/387">
+
+                                    <i class="icon-match icon-like"></i>1,003人感兴趣
+                                    <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
+                                    <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名1人（剩余9,999人） </a>
+                                </p>
+                                </div>
+                                </div>
+
+                                <button data-activityid="387" data-selector="joinBtn" class="btn btn-warning item-list-reg">我要参加</button>
+
+                            </div>
+                        </div>
+                        <!--注释分享功能
+                        <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[羽毛球]大连市市民健身中心（一二九街）与猫球球友会 报名QQ群：371430885','url':'/activitycommon/387','summary':'    地点：辽宁省大连市市民健身中心（一二九街）    活动时间：2016年01月01日 00:00 - 12月31日 00:00 '});</script></div>
+                        -->
+                    </li>                 <li class="match-chosen">
+                        <div class="item-list-content">
+                            <div class="item-list-wrap clearfix">
+                                <div class="activity-list-thumb">
+                                    <a href="/friend/passport_80214/timeline"> <span class="avator-56"> <img title="" alt="
+                            " src="http://static.wisdom-china.cn//images/1/2363/0254/6161/8969288f4245120e7c3870287cce0ff3_2_120x120.jpg">
+                        </span>
+                                        <p>Football</p>
+                                    </a>
+                                </div>
+                                <div class="item-list-right">
+                                    <p class="item-list-ttl">
+                                        <a href="/activitycommon/389"> <strong><span>[足球]</span>7人或8人制足球友谊赛</strong>
+                                        </a></p><a href="/activitycommon/389">
+                                </a><div class="item-list-detail"><a href="/activitycommon/389">
+                                    <p>
+                                        <span>活动时间：</span>
+                                        2015年12月27日 00:00 -
+                                        12月31日 00:00
+                                    </p>
+                                    <p>
+                                        <span>报名截止：</span>12月26日 00:00
+
+                                    </p>
+
+                                    <p>
+                                        <span>地点：</span>黄埔区
+                                    </p>
+                                    <p>
+                                        <span>费用：</span>免费
+                                    </p>
+                                </a><p class="item-list-bottom"><a href="/activitycommon/389">
+
+                                    <i class="icon-match icon-like"></i>1,084人感兴趣
+                                    <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
+                                    <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名3人（剩余10人） </a>
+                                </p>
+                                </div>
+                                </div>
+
+                                <button data-activityid="389" data-selector="joinBtn" class="btn btn-warning item-list-reg">我要参加</button>
+
+                            </div>
+                        </div>
+                        <!--注释分享功能
+                        <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[足球]7人或8人制足球友谊赛','url':'/activitycommon/389','summary':'    地点：黄埔区    活动时间：2015年12月27日 00:00 - 12月31日 00:00 '});</script></div>
+                        -->
+                    </li>                 <li class="match-chosen">
+                        <div class="item-list-content">
+                            <div class="item-list-wrap clearfix">
+                                <div class="activity-list-thumb">
+                                    <a href="/friend/passport_70153/timeline"> <span class="avator-56"> <img title="" alt="
+                            " src="http://static.wisdom-china.cn//images/1/8727/8959/5684/06361f5fd94dc4898298f60cfe88a162_2_80x80.jpg">
+                        </span>
+                                        <p>弓箭手</p>
+                                    </a>
+                                </div>
+                                <div class="item-list-right">
+                                    <p class="item-list-ttl">
+                                        <a href="/activitycommon/530"> <strong><span>[路跑]</span>闵瑞路(三鲁与浦星段)平时训练约跑</strong>
+                                        </a></p><a href="/activitycommon/530">
+                                </a><div class="item-list-detail"><a href="/activitycommon/530">
+                                    <p>
+                                        <span>活动时间：</span>
+                                        2015年12月17日 14:00 -
+                                        12月18日 00:00
+                                    </p>
+                                    <p>
+                                        <span>报名截止：</span>12月17日 13:30
+
+                                    </p>
+
+                                    <p>
+                                        <span>地点：</span>上海市|市区|闵行区|闵瑞路
+                                    </p>
+                                    <p>
+                                        <span>费用：</span>免费
+                                    </p>
+                                </a><p class="item-list-bottom"><a href="/activitycommon/530">
+
+                                    <i class="icon-match icon-like"></i>992人感兴趣
+                                    <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
+                                    <i class="icon-match icon-comment"></i>2人评论 <i class="icon-match icon-enroll"></i>已报名1人（剩余19人） </a>
+                                </p>
+                                </div>
+                                </div>
+
+                                <button data-activityid="530" data-selector="joinBtn" class="btn btn-warning item-list-reg">我要参加</button>
+
+                            </div>
+                        </div>
+                        <!--注释分享功能
+                        <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]闵瑞路(三鲁与浦星段)平时训练约跑','url':'/activitycommon/530','summary':'    地点：上海市|市区|闵行区|闵瑞路    活动时间：2015年12月17日 14:00 - 12月18日 00:00 '});</script></div>
+                        -->
+                    </li>                 <li class="match-chosen">
+                        <div class="item-list-content">
+                            <div class="item-list-wrap clearfix">
+                                <div class="activity-list-thumb">
+                                    <a href="/friend/passport_85975/timeline"> <span class="avator-56"> <img title="" alt="
+                            " src="http://static.wisdom-china.cn//images/1/proxy/tp4!sinaimg!cn/2787664675/180/5642688218/1/2787664675_2_80x80.png">
+                        </span>
+                                        <p>推推哥有个小萌女</p>
+                                    </a>
+                                </div>
+                                <div class="item-list-right">
+                                    <p class="item-list-ttl">
+                                        <a href="/activitycommon/627"> <strong><span>[网球]</span>湖南临澧</strong>
+                                        </a></p><a href="/activitycommon/627">
+                                </a><div class="item-list-detail"><a href="/activitycommon/627">
+                                    <p>
+                                        <span>活动时间：</span>
+                                        2015年04月16日 00:04 -
+                                        04月17日 00:00
+                                    </p>
+                                    <p>
+                                        <span>报名截止：</span>04月15日 23:34
+
+                                    </p>
+
+                                    <p>
+                                        <span>地点：</span>湖南省|常德市|临澧县|实验小学
+                                    </p>
+                                    <p>
+                                        <span>费用：</span>免费
+                                    </p>
+                                </a><p class="item-list-bottom"><a href="/activitycommon/627">
+
+                                    <i class="icon-match icon-like"></i>869人感兴趣
+                                    <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
+                                    <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名1人（剩余13人） </a>
+                                </p>
+                                </div>
+                                </div>
+
+                                <button data-activityid="627" data-selector="joinBtn" class="btn btn-warning item-list-reg">我要参加</button>
+
+                            </div>
+                        </div>
+                        <!--注释分享功能
+                        <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[网球]湖南临澧','url':'/activitycommon/627','summary':'    地点：湖南省|常德市|临澧县|实验小学    活动时间：2015年04月16日 00:04 - 04月17日 00:00 '});</script></div>
+                        -->
+                    </li>
+                        <!-- 循环 结束 -->
+                    </ul>
+                </div>
+                <!-- 赛事列表 结束 -->
+                <!-- 分页 开始 -->
+                <div class="main-block pagging-block">
+                    <form action="#" id="paging-form" iyuesai-plugins-valid="0.8516564773382357">
+                        <div class="paging-wrap">
+                            <span class="text">共 44页, 432条记录</span>
+                            <span class="disabled">首页</span>
+                            <span class="disabled">上一页</span>
+                            <span class="current"> 1</span>
+                            <a onclick="jumpPage(2, 10);" href="javascript:;">2</a>
+                            <a onclick="jumpPage(3, 10);" href="javascript:;">3</a>
+                            <a onclick="jumpPage(4, 10);" href="javascript:;">4</a>
+                            <a onclick="jumpPage(5, 10);" href="javascript:;">5</a>
+                            <a class="next" onclick="jumpPage(2,10 );" href="javascript:;">下一页</a>
+                            <a onclick="jumpPage(44,10 );" href="javascript:;">末页</a>
+                            <label class="page-stage">
+
+                                到第 <input type="text" validate-rules="[['required'],['number',{'max':44,'min':1}]]" validate-title="页码" name="pageNumText" id="pageNumText"> 页
+                                <input type="submit" value="确定" class="btn">
+                            </label>
+
+                            <!--end of pageBean?? && (pages.total > -1) -->
+                            <input type="hidden" value="1" id="pageNum" name="pageNum">
+                            <input type="hidden" value="10" id="pageSize" name="pageSize">
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 分页 结束 -->
             </div>
+            <div class="span4">
+                <div class="side-block text-center">
+                    <a href="/activity/publish"><img alt="约活动 发布活动" src="http://static.wisdom-china.cn/iyuesai/images/pages/activity-pub.png"></a>
+                </div>
 
-            <div class="filter-paging">
-                          <a href="javascript:void(0);" class="page-prev"  class="disabled" >
-                <i class="icon-match icon-prev"></i>
-              </a>
-              <span>1/42</span>
-              <a href="javascript:void(0);" class="page-next" onclick="jumpPage(2,10 );"  >
-                <i class="icon-match icon-next"></i>
-              </a>
+                <div data-url="/activitycommon/getHighPVActivity" data-number="4" data-params="{'regionId':1,'pageNum':0,'pageSize':4}" data-change="hide" data-title="热门活动推荐" data-selector="similarActivities" class="side-block"><style>#NTGUID__4 dt{    overflow: hidden;    margin-bottom: 5px;  }#NTGUID__4 dt h4{    margin: 0;    color: #363636;    font-size: 20px;  }#NTGUID__4 dd ul{    display: block;  }#NTGUID__4 dd li{    overflow: hidden;    border-bottom: 1px dotted #ddd;    padding:10px 0;    display: none;  }#NTGUID__4 dd li h4{    font-size: 14px;    margin: 0;    padding: 0;    white-space: nowrap;    overflow: hidden;    text-overflow:ellipsis;    margin-bottom: 5px;  }#NTGUID__4 dd li h4 a:hover{    font-size: 14px;    color: #F5A623;  }#NTGUID__4 dd li p{    margin: 0;    padding: 0;    line-height: 22px;    color: #555;  }#NTGUID__4 dd li.last{    border: 0;    padding-bottom: 0;  }#NTGUID__4 .text-warning{    font-size: 18px;    vertical-align: bottom;  }  </style><div id="NTGUID__4">
+                    <dl>
+                        <dt class="clearfix">
+                        <div class="pull-left">
+                            <h4>热门活动推荐</h4>
+                        </div>
+
+                        </dt>
+                        <dd data-selector="subRoot"><div id="NTGUID__4NDTGUID__8">
+                            <ul>
+
+                                <li style="display: list-item;">
+                                    <h4><a title="哈哈哈" href="/activitycommon/344">哈哈哈</a></h4>
+                                    <p class="clearfix">
+                                        <span class="pull-left"><i class="icon16 icon16-person"></i>1122人感兴趣</span>
+                                        <span class="pull-right"><span class="text-warning">7</span>人已报名/<span class="muted">剩余13人</span></span>
+                                    </p>
+                                    <p>费用：10000</p>
+                                    <p>地区：且末县</p>
+                                </li>
+
+                                <li style="display: list-item;">
+                                    <h4><a title="7人或8人制足球友谊赛" href="/activitycommon/389">7人或8人制足球友谊赛</a></h4>
+                                    <p class="clearfix">
+                                        <span class="pull-left"><i class="icon16 icon16-person"></i>1084人感兴趣</span>
+                                        <span class="pull-right"><span class="text-warning">0</span>人已报名/<span class="muted">剩余10人</span></span>
+                                    </p>
+                                    <p>费用：0</p>
+                                    <p>地区：黄埔区</p>
+                                </li>
+
+                                <li style="display: list-item;">
+                                    <h4><a title="。。。" href="/activitycommon/447">。。。</a></h4>
+                                    <p class="clearfix">
+                                        <span class="pull-left"><i class="icon16 icon16-person"></i>1011人感兴趣</span>
+                                        <span class="pull-right"><span class="text-warning">5</span>人已报名/<span class="muted">剩余15人</span></span>
+                                    </p>
+                                    <p>费用：1000</p>
+                                    <p>地区：海淀区</p>
+                                </li>
+
+                                <li class="last" style="display: list-item;">
+                                    <h4><a title="大连市市民健身中心（一二九街）与猫球球友会 报名QQ群：371430885" href="/activitycommon/387">大连市市民健身中心（一二九街）与猫球球友会 报名QQ群：371430885</a></h4>
+                                    <p class="clearfix">
+                                        <span class="pull-left"><i class="icon16 icon16-person"></i>1003人感兴趣</span>
+                                        <span class="pull-right"><span class="text-warning">0</span>人已报名/<span class="muted">剩余9999人</span></span>
+                                    </p>
+                                    <p>费用：0</p>
+                                    <p>地区：西岗区</p>
+                                </li>
+
+                            </ul>
+                        </div>
+                        </dd>
+                    </dl>
+
+                </div>
+
+
+                </div>
+
+                <!--
+              <div class="side-block">
+                <h4 class="slider-title">活动攻略</h4>
+                <a href="/venue/search" class="public-reload-link">更多</a>
+
+                <ul class="side-item-col clearfix">
+
+                </ul>
+              </div>
+              -->
+                <div class="side-block">
+                    <h4 class="slider-title">运动达人</h4>
+                    <!-- <a href="javascript:void(0);" class="public-reload-link">更多</a> -->
+
+                    <ul class="side-tolent-col">
+
+                        <li><a href="/friend/passport_70513/timeline">
+                            <div class="side-tolent-thumb pull-left">
+                                <img alt="" src="http://static.wisdom-china.cn//images/1/4099/3327/2686/70a6120dff978b3805196c9e6ae5751b_2_80x80.jpg">
+
+                            </div>   <i class="icon16 icon16-boy"></i>
+                            <div class="side-tolent-right">
+                                <p class="side-tolent-name">
+                                    <strong>进击的刺猬</strong>
+                                </p>
+                                <p class="side-tolent-detail"></p>
+                            </div>
+
+                        </a></li>
+                        <li><a href="/friend/passport_70511/timeline">
+                            <div class="side-tolent-thumb pull-left">
+                                <img alt="" src="http://static.wisdom-china.cn//images/1/6000/7477/8913/94b9dcb639ace68c534da99952e42e45_2_80x80.jpg">
+
+                            </div>   <i class="icon16 icon16-boy"></i>
+                            <div class="side-tolent-right">
+                                <p class="side-tolent-name">
+                                    <strong>二寨主学文化</strong>
+                                </p>
+                                <p class="side-tolent-detail"></p>
+                            </div>
+
+                        </a></li>
+                        <li><a href="/friend/passport_71205/timeline">
+                            <div class="side-tolent-thumb pull-left">
+                                <img alt="" src="http://static.wisdom-china.cn//images/1/1649/5914/3888/5b97a87e7df2ebd01db13c069e6f07c7_2_80x80.jpg">
+
+                            </div>   <i class="icon16 icon16-boy"></i>
+                            <div class="side-tolent-right">
+                                <p class="side-tolent-name">
+                                    <strong>贫道法号能吃</strong>
+                                </p>
+                                <p class="side-tolent-detail"></p>
+                            </div>
+
+                        </a></li>
+                        <li><a href="/friend/passport_75738/timeline">
+                            <div class="side-tolent-thumb pull-left">
+                                <img alt="" src="http://static.wisdom-china.cn//images/1/7335/8476/7715/69028241400141fc8ab1a5c1a3728e1b_2_80x80.jpg">
+
+                            </div>  <i class="icon16 icon16-unknow">?</i>
+                            <div class="side-tolent-right">
+                                <p class="side-tolent-name">
+                                    <strong>别人家的183</strong>
+                                </p>
+                                <p class="side-tolent-detail"></p>
+                            </div>
+
+                        </a></li>
+                        <li><a href="/friend/passport_75735/timeline">
+                            <div class="side-tolent-thumb pull-left">
+                                <img alt="" src="http://static.wisdom-china.cn//images/1/6938/0314/7362/798f196ea55e47a1529d8c330b832350_2_80x80.jpg">
+
+                            </div>  <i class="icon16 icon16-unknow">?</i>
+                            <div class="side-tolent-right">
+                                <p class="side-tolent-name">
+                                    <strong>七零一厂</strong>
+                                </p>
+                                <p class="side-tolent-detail"></p>
+                            </div>
+
+                        </a></li>
+
+                    </ul>
+                </div>
             </div>
-          
-
-            </div>
-
-
-
-            <!--  赛事列表 开始 -->
-            <div class="main-block item-list">
-              <ul>
-                <!-- 循环 开始 -->
-                <li class="match-chosen">
-                  <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                      <div class="activity-list-thumb">
-                        <a href="/friend/passport_70125/timeline"> <span class="avator-56"> <img
-                            src="http://static.wisdom-china.cn//images/1/6901/1619/5402/ce244f69c826b87f29381c5c62dc29b5_2_120x120.jpg" alt="
-                            " title="">
-                        </span>
-                          <p>京西跑团</p>
-                        </a>
-                      </div>
-                      <div class="item-list-right">
-                        <p class="item-list-ttl">
-                          <a href="/activitycommon/666"> <strong><span>[路跑]</span>京西跑团环湖跑第13期</strong>
-                        </p>
-                        <div class="item-list-detail">
-                          <p>
-                            <span>活动时间：</span>
-                            2015年03月21日 08:00 -
-                            03月21日 10:00 
-                          </p>
-                          <p>
-                            <span>报名截止：</span>03月21日 07:00 
-
-                          </p>
-
-                          <p>
-                            <span>地点：</span>莲石湖骑行道0起点小广场
-                          </p>
-                          <p>
-                            <span>费用：</span>免费
-                          </p>
-                          <p class="item-list-bottom">
-
-                            <i class="icon-match icon-like"></i>24人感兴趣
-                            <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
-                            <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名0人（剩余30人） </a>
-                          </p>
-                        </div>
-                      </div>
-
-                      <button class="btn item-list-reg btn-show" disabled>报名已结束</button>
-
-                    </div>
-                  </div>
-                  <!--注释分享功能
-                  <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]京西跑团环湖跑第13期','url':'/activitycommon/666','summary':'    地点：莲石湖骑行道0起点小广场    活动时间：2015年03月21日 08:00 - 03月21日 10:00 '});</script></div>
-                  -->
-                </li>                 <li class="match-chosen">
-                  <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                      <div class="activity-list-thumb">
-                        <a href="/friend/passport_90505/timeline"> <span class="avator-56"> <img
-                            src="http://static.wisdom-china.cn//images/1/3765/0507/2652/c443808a72aec922f55eb97d8c4b813a_2_80x80.jpg" alt="
-                            " title="">
-                        </span>
-                          <p>小确幸</p>
-                        </a>
-                      </div>
-                      <div class="item-list-right">
-                        <p class="item-list-ttl">
-                          <a href="/activitycommon/669"> <strong><span>[山地户外活动]</span>水泉沟一日徒步</strong>
-                        </p>
-                        <div class="item-list-detail">
-                          <p>
-                            <span>活动时间：</span>
-                            2015年03月22日 08:40 -
-                            03月22日 17:00 
-                          </p>
-                          <p>
-                            <span>报名截止：</span>03月20日 18:00 
-
-                          </p>
-
-                          <p>
-                            <span>地点：</span>延庆县水屯沟 
-                          </p>
-                          <p>
-                            <span>费用：</span>50元
-                          </p>
-                          <p class="item-list-bottom">
-
-                            <i class="icon-match icon-like"></i>13人感兴趣
-                            <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
-                            <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名1人（剩余9人） </a>
-                          </p>
-                        </div>
-                      </div>
-
-                      <button class="btn item-list-reg btn-show" disabled>报名已结束</button>
-
-                    </div>
-                  </div>
-                  <!--注释分享功能
-                  <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[山地户外活动]水泉沟一日徒步','url':'/activitycommon/669','summary':'    地点：延庆县水屯沟     活动时间：2015年03月22日 08:40 - 03月22日 17:00 '});</script></div>
-                  -->
-                </li>                 <li class="match-chosen">
-                  <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                      <div class="activity-list-thumb">
-                        <a href="/friend/passport_90508/timeline"> <span class="avator-56"> <img
-                            src="http://static.wisdom-china.cn//images/1/4566/0655/4003/3d99cbdde73669b873667cbb102bd233_2_80x80.jpg" alt="
-                            " title="">
-                        </span>
-                          <p>孤独的人在海岸</p>
-                        </a>
-                      </div>
-                      <div class="item-list-right">
-                        <p class="item-list-ttl">
-                          <a href="/activitycommon/668"> <strong><span>[路跑]</span>备战4月鉴真半马，跑起！</strong>
-                        </p>
-                        <div class="item-list-detail">
-                          <p>
-                            <span>活动时间：</span>
-                            2015年03月28日 19:00 -
-                            03月28日 21:00 
-                          </p>
-                          <p>
-                            <span>报名截止：</span>03月27日 18:00 
-
-                          </p>
-
-                          <p>
-                            <span>地点：</span>春江路18路公交车站
-                          </p>
-                          <p>
-                            <span>费用：</span>免费
-                          </p>
-                          <p class="item-list-bottom">
-
-                            <i class="icon-match icon-like"></i>14人感兴趣
-                            <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
-                            <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名0人（剩余10人） </a>
-                          </p>
-                        </div>
-                      </div>
-
-                      <button class="btn btn-warning item-list-reg" data-selector="joinBtn" data-activityid="668">我要参加</button>
-
-                    </div>
-                  </div>
-                  <!--注释分享功能
-                  <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]备战4月鉴真半马，跑起！','url':'/activitycommon/668','summary':'    地点：春江路18路公交车站    活动时间：2015年03月28日 19:00 - 03月28日 21:00 '});</script></div>
-                  -->
-                </li>                 <li class="match-chosen">
-                  <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                      <div class="activity-list-thumb">
-                        <a href="/friend/passport_83934/timeline"> <span class="avator-56"> <img
-                            src="http://static.wisdom-china.cn//images/1/3652/9290/9862/32cec937c389f5322c1119c79173eb30_2_80x80.jpg" alt="
-                            " title="">
-                        </span>
-                          <p>大哥别涨价了</p>
-                        </a>
-                      </div>
-                      <div class="item-list-right">
-                        <p class="item-list-ttl">
-                          <a href="/activitycommon/653"> <strong><span>[路跑]</span>东营马拉松备战跑</strong>
-                        </p>
-                        <div class="item-list-detail">
-                          <p>
-                            <span>活动时间：</span>
-                            2015年03月21日 08:00 -
-                            03月21日 15:00 
-                          </p>
-                          <p>
-                            <span>报名截止：</span>03月20日 13:00 
-
-                          </p>
-
-                          <p>
-                            <span>地点：</span>西一路东营森林乐园
-                          </p>
-                          <p>
-                            <span>费用：</span>免费
-                          </p>
-                          <p class="item-list-bottom">
-
-                            <i class="icon-match icon-like"></i>27人感兴趣
-                            <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
-                            <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名1人（剩余7人） </a>
-                          </p>
-                        </div>
-                      </div>
-
-                      <button class="btn item-list-reg btn-show" disabled>报名已结束</button>
-
-                    </div>
-                  </div>
-                  <!--注释分享功能
-                  <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]东营马拉松备战跑','url':'/activitycommon/653','summary':'    地点：西一路东营森林乐园    活动时间：2015年03月21日 08:00 - 03月21日 15:00 '});</script></div>
-                  -->
-                </li>                 <li class="match-chosen">
-                  <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                      <div class="activity-list-thumb">
-                        <a href="/friend/passport_79008/timeline"> <span class="avator-56"> <img
-                            src="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_80x80.png?140x140" alt="
-                            " title="">
-                        </span>
-                          <p>Luna1</p>
-                        </a>
-                      </div>
-                      <div class="item-list-right">
-                        <p class="item-list-ttl">
-                          <a href="/activitycommon/344"> <strong><span>[马拉松]</span>哈哈哈</strong>
-                        </p>
-                        <div class="item-list-detail">
-                          <p>
-                            <span>活动时间：</span>
-                            2016年12月18日 16:53 -
-                            12月19日 00:00 
-                          </p>
-                          <p>
-                            <span>报名截止：</span>12月18日 16:23 
-
-                          </p>
-
-                          <p>
-                            <span>地点：</span>新疆|巴州|且末县|TT GG
-                          </p>
-                          <p>
-                            <span>费用：</span>10,000元
-                          </p>
-                          <p class="item-list-bottom">
-
-                            <i class="icon-match icon-like"></i>1,071人感兴趣
-                            <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
-                            <i class="icon-match icon-comment"></i>5人评论 <i class="icon-match icon-enroll"></i>已报名5人（剩余15人） </a>
-                          </p>
-                        </div>
-                      </div>
-
-                      <button class="btn btn-warning item-list-reg" data-selector="joinBtn" data-activityid="344">我要参加</button>
-
-                    </div>
-                  </div>
-                  <!--注释分享功能
-                  <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[马拉松]哈哈哈','url':'/activitycommon/344','summary':'    地点：新疆|巴州|且末县|TT GG    活动时间：2016年12月18日 16:53 - 12月19日 00:00 '});</script></div>
-                  -->
-                </li>                 <li class="match-chosen">
-                  <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                      <div class="activity-list-thumb">
-                        <a href="/friend/passport_81013/timeline"> <span class="avator-56"> <img
-                            src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/1103402448/20E47D386C1F71F6A16E91317D988472/100/20E47D386C1F71F6A16E91317D988472_2_80x80.png" alt="
-                            " title="">
-                        </span>
-                          <p>天真的笑声只在梦里出现</p>
-                        </a>
-                      </div>
-                      <div class="item-list-right">
-                        <p class="item-list-ttl">
-                          <a href="/activitycommon/447"> <strong><span>[自行车]</span>。。。</strong>
-                        </p>
-                        <div class="item-list-detail">
-                          <p>
-                            <span>活动时间：</span>
-                            2016年05月07日 10:18 -
-                            05月08日 00:00 
-                          </p>
-                          <p>
-                            <span>报名截止：</span>05月07日 09:48 
-
-                          </p>
-
-                          <p>
-                            <span>地点：</span>北京市|市区|海淀区|西二旗
-                          </p>
-                          <p>
-                            <span>费用：</span>1,000元
-                          </p>
-                          <p class="item-list-bottom">
-
-                            <i class="icon-match icon-like"></i>964人感兴趣
-                            <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
-                            <i class="icon-match icon-comment"></i>1人评论 <i class="icon-match icon-enroll"></i>已报名4人（剩余16人） </a>
-                          </p>
-                        </div>
-                      </div>
-
-                      <button class="btn btn-warning item-list-reg" data-selector="joinBtn" data-activityid="447">我要参加</button>
-
-                    </div>
-                  </div>
-                  <!--注释分享功能
-                  <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[自行车]。。。','url':'/activitycommon/447','summary':'    地点：北京市|市区|海淀区|西二旗    活动时间：2016年05月07日 10:18 - 05月08日 00:00 '});</script></div>
-                  -->
-                </li>                 <li class="match-chosen">
-                  <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                      <div class="activity-list-thumb">
-                        <a href="/friend/passport_80189/timeline"> <span class="avator-56"> <img
-                            src="http://static.wisdom-china.cn//images/1/6760/4442/4639/ebee10514b0ccfb2c32a9ceb680e7089_2_120x120.jpg" alt="
-                            " title="">
-                        </span>
-                          <p>与猫球</p>
-                        </a>
-                      </div>
-                      <div class="item-list-right">
-                        <p class="item-list-ttl">
-                          <a href="/activitycommon/387"> <strong><span>[羽毛球]</span>大连市市民健身中心（一二九街）与猫球球友会 报名QQ群：371430885</strong>
-                        </p>
-                        <div class="item-list-detail">
-                          <p>
-                            <span>活动时间：</span>
-                            2016年01月01日 00:00 -
-                            12月31日 00:00 
-                          </p>
-                          <p>
-                            <span>报名截止：</span>12月26日 00:00 
-
-                          </p>
-
-                          <p>
-                            <span>地点：</span>辽宁省大连市市民健身中心（一二九街）
-                          </p>
-                          <p>
-                            <span>费用：</span>免费
-                          </p>
-                          <p class="item-list-bottom">
-
-                            <i class="icon-match icon-like"></i>972人感兴趣
-                            <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
-                            <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名1人（剩余9,999人） </a>
-                          </p>
-                        </div>
-                      </div>
-
-                      <button class="btn btn-warning item-list-reg" data-selector="joinBtn" data-activityid="387">我要参加</button>
-
-                    </div>
-                  </div>
-                  <!--注释分享功能
-                  <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[羽毛球]大连市市民健身中心（一二九街）与猫球球友会 报名QQ群：371430885','url':'/activitycommon/387','summary':'    地点：辽宁省大连市市民健身中心（一二九街）    活动时间：2016年01月01日 00:00 - 12月31日 00:00 '});</script></div>
-                  -->
-                </li>                 <li class="match-chosen">
-                  <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                      <div class="activity-list-thumb">
-                        <a href="/friend/passport_80214/timeline"> <span class="avator-56"> <img
-                            src="http://static.wisdom-china.cn//images/1/2363/0254/6161/8969288f4245120e7c3870287cce0ff3_2_120x120.jpg" alt="
-                            " title="">
-                        </span>
-                          <p>Football</p>
-                        </a>
-                      </div>
-                      <div class="item-list-right">
-                        <p class="item-list-ttl">
-                          <a href="/activitycommon/389"> <strong><span>[足球]</span>7人或8人制足球友谊赛</strong>
-                        </p>
-                        <div class="item-list-detail">
-                          <p>
-                            <span>活动时间：</span>
-                            2015年12月27日 00:00 -
-                            12月31日 00:00 
-                          </p>
-                          <p>
-                            <span>报名截止：</span>12月26日 00:00 
-
-                          </p>
-
-                          <p>
-                            <span>地点：</span>黄埔区
-                          </p>
-                          <p>
-                            <span>费用：</span>免费
-                          </p>
-                          <p class="item-list-bottom">
-
-                            <i class="icon-match icon-like"></i>1,049人感兴趣
-                            <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
-                            <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名3人（剩余10人） </a>
-                          </p>
-                        </div>
-                      </div>
-
-                      <button class="btn btn-warning item-list-reg" data-selector="joinBtn" data-activityid="389">我要参加</button>
-
-                    </div>
-                  </div>
-                  <!--注释分享功能
-                  <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[足球]7人或8人制足球友谊赛','url':'/activitycommon/389','summary':'    地点：黄埔区    活动时间：2015年12月27日 00:00 - 12月31日 00:00 '});</script></div>
-                  -->
-                </li>                 <li class="match-chosen">
-                  <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                      <div class="activity-list-thumb">
-                        <a href="/friend/passport_70153/timeline"> <span class="avator-56"> <img
-                            src="http://static.wisdom-china.cn//images/1/8727/8959/5684/06361f5fd94dc4898298f60cfe88a162_2_80x80.jpg" alt="
-                            " title="">
-                        </span>
-                          <p>弓箭手</p>
-                        </a>
-                      </div>
-                      <div class="item-list-right">
-                        <p class="item-list-ttl">
-                          <a href="/activitycommon/530"> <strong><span>[路跑]</span>闵瑞路(三鲁与浦星段)平时训练约跑</strong>
-                        </p>
-                        <div class="item-list-detail">
-                          <p>
-                            <span>活动时间：</span>
-                            2015年12月17日 14:00 -
-                            12月18日 00:00 
-                          </p>
-                          <p>
-                            <span>报名截止：</span>12月17日 13:30 
-
-                          </p>
-
-                          <p>
-                            <span>地点：</span>上海市|市区|闵行区|闵瑞路
-                          </p>
-                          <p>
-                            <span>费用：</span>免费
-                          </p>
-                          <p class="item-list-bottom">
-
-                            <i class="icon-match icon-like"></i>950人感兴趣
-                            <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
-                            <i class="icon-match icon-comment"></i>2人评论 <i class="icon-match icon-enroll"></i>已报名0人（剩余20人） </a>
-                          </p>
-                        </div>
-                      </div>
-
-                      <button class="btn btn-warning item-list-reg" data-selector="joinBtn" data-activityid="530">我要参加</button>
-
-                    </div>
-                  </div>
-                  <!--注释分享功能
-                  <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]闵瑞路(三鲁与浦星段)平时训练约跑','url':'/activitycommon/530','summary':'    地点：上海市|市区|闵行区|闵瑞路    活动时间：2015年12月17日 14:00 - 12月18日 00:00 '});</script></div>
-                  -->
-                </li>                 <li class="match-chosen">
-                  <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                      <div class="activity-list-thumb">
-                        <a href="/friend/passport_85975/timeline"> <span class="avator-56"> <img
-                            src="http://static.wisdom-china.cn//images/1/proxy/tp4!sinaimg!cn/2787664675/180/5642688218/1/2787664675_2_80x80.png" alt="
-                            " title="">
-                        </span>
-                          <p>推推哥有个小萌女</p>
-                        </a>
-                      </div>
-                      <div class="item-list-right">
-                        <p class="item-list-ttl">
-                          <a href="/activitycommon/627"> <strong><span>[网球]</span>湖南临澧</strong>
-                        </p>
-                        <div class="item-list-detail">
-                          <p>
-                            <span>活动时间：</span>
-                            2015年04月16日 00:04 -
-                            04月17日 00:00 
-                          </p>
-                          <p>
-                            <span>报名截止：</span>04月15日 23:34 
-
-                          </p>
-
-                          <p>
-                            <span>地点：</span>湖南省|常德市|临澧县|实验小学
-                          </p>
-                          <p>
-                            <span>费用：</span>免费
-                          </p>
-                          <p class="item-list-bottom">
-
-                            <i class="icon-match icon-like"></i>836人感兴趣
-                            <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
-                            <i class="icon-match icon-comment"></i>0人评论 <i class="icon-match icon-enroll"></i>已报名0人（剩余14人） </a>
-                          </p>
-                        </div>
-                      </div>
-
-                      <button class="btn btn-warning item-list-reg" data-selector="joinBtn" data-activityid="627">我要参加</button>
-
-                    </div>
-                  </div>
-                  <!--注释分享功能
-                  <div class="item-share"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[网球]湖南临澧','url':'/activitycommon/627','summary':'    地点：湖南省|常德市|临澧县|实验小学    活动时间：2015年04月16日 00:04 - 04月17日 00:00 '});</script></div>
-                  -->
-                </li> 
-                <!-- 循环 结束 -->
-              </ul>
-            </div>
-            <!-- 赛事列表 结束 -->
-            <!-- 分页 开始 -->
-<div class="main-block pagging-block">
-  <form id="paging-form" action="#">
-  <div class="paging-wrap">
-	        <span class="text">共 42页, 414条记录</span>
-      	<span class="disabled">首页</span>
-      	<span class="disabled">上一页</span>
-      <span class="current"> 1</span>
-	      <a href="javascript:;" onclick="jumpPage(2, 10);">2</a>
-	      <a href="javascript:;" onclick="jumpPage(3, 10);">3</a>
-	      <a href="javascript:;" onclick="jumpPage(4, 10);">4</a>
-	      <a href="javascript:;" onclick="jumpPage(5, 10);">5</a>
-	      <a href="javascript:;" onclick="jumpPage(2,10 );" class="next">下一页</a>     
-	      <a href="javascript:;" onclick="jumpPage(42,10 );" >末页</a>       
-      <label class="page-stage">
-     
-                到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':42,'min':1}]]" > 页
-      <input type="submit" class="btn" value="确定"/>              
-      </label>
-
-  	 <!--end of pageBean?? && (pages.total > -1) -->
-  <input type="hidden" name="pageNum" id="pageNum" value="1" />
-  <input type="hidden" name="pageSize" id="pageSize" value="10" />
-  </div>
-  </form>
-</div>
-
-            <!-- 分页 结束 -->
-          </div>
-         <div class="span4">
-            <div class="side-block text-center">
-              <a href="/activity/publish"><img src="http://static.wisdom-china.cn/iyuesai/images/pages/activity-pub.png"
-                alt="约活动 发布活动"></a>
-            </div>
-
-            <div class="side-block" data-selector="similarActivities" data-title="热门活动推荐" data-change="hide"
-              data-params="{'regionId':1,'pageNum':0,'pageSize':4}"  data-number="4"
-              data-url="/activitycommon/getHighPVActivity"></div>
-
-            <!--
-          <div class="side-block">
-            <h4 class="slider-title">活动攻略</h4>
-            <a href="/venue/search" class="public-reload-link">更多</a>
-            
-            <ul class="side-item-col clearfix">
-     
-            </ul>
-          </div>
-          -->
-            <div class="side-block">
-              <h4 class="slider-title">运动达人</h4>
-              <!-- <a href="javascript:void(0);" class="public-reload-link">更多</a> -->
-
-              <ul class="side-tolent-col">
-                 
-                <li><a href="/friend/passport_70513/timeline">
-                    <div class="side-tolent-thumb pull-left">
-                       <img src="http://static.wisdom-china.cn//images/1/4099/3327/2686/70a6120dff978b3805196c9e6ae5751b_2_80x80.jpg" alt=""> 
-
-                    </div>   <i
-                    class="icon16 icon16-boy"></i> 
-                    <div class="side-tolent-right">
-                      <p class="side-tolent-name">
-                        <strong>进击的刺猬</strong>
-                      </p>
-                      <p class="side-tolent-detail"></p>
-                    </div>
-
-                </a></li> 
-                <li><a href="/friend/passport_70511/timeline">
-                    <div class="side-tolent-thumb pull-left">
-                       <img src="http://static.wisdom-china.cn//images/1/6000/7477/8913/94b9dcb639ace68c534da99952e42e45_2_80x80.jpg" alt=""> 
-
-                    </div>   <i
-                    class="icon16 icon16-boy"></i> 
-                    <div class="side-tolent-right">
-                      <p class="side-tolent-name">
-                        <strong>二寨主学文化</strong>
-                      </p>
-                      <p class="side-tolent-detail"></p>
-                    </div>
-
-                </a></li> 
-                <li><a href="/friend/passport_71205/timeline">
-                    <div class="side-tolent-thumb pull-left">
-                       <img src="http://static.wisdom-china.cn//images/1/1649/5914/3888/5b97a87e7df2ebd01db13c069e6f07c7_2_80x80.jpg" alt=""> 
-
-                    </div>   <i
-                    class="icon16 icon16-boy"></i> 
-                    <div class="side-tolent-right">
-                      <p class="side-tolent-name">
-                        <strong>贫道法号能吃</strong>
-                      </p>
-                      <p class="side-tolent-detail"></p>
-                    </div>
-
-                </a></li> 
-                <li><a href="/friend/passport_75738/timeline">
-                    <div class="side-tolent-thumb pull-left">
-                       <img src="http://static.wisdom-china.cn//images/1/7335/8476/7715/69028241400141fc8ab1a5c1a3728e1b_2_80x80.jpg" alt=""> 
-
-                    </div>  <i class="icon16 icon16-unknow">?</i>
-                    <div class="side-tolent-right">
-                      <p class="side-tolent-name">
-                        <strong>别人家的183</strong>
-                      </p>
-                      <p class="side-tolent-detail"></p>
-                    </div>
-
-                </a></li> 
-                <li><a href="/friend/passport_75735/timeline">
-                    <div class="side-tolent-thumb pull-left">
-                       <img src="http://static.wisdom-china.cn//images/1/6938/0314/7362/798f196ea55e47a1529d8c330b832350_2_80x80.jpg" alt=""> 
-
-                    </div>  <i class="icon16 icon16-unknow">?</i>
-                    <div class="side-tolent-right">
-                      <p class="side-tolent-name">
-                        <strong>七零一厂</strong>
-                      </p>
-                      <p class="side-tolent-detail"></p>
-                    </div>
-
-                </a></li>  
-
-              </ul>
-            </div>
-          </div>
-      </div>
+        </div>
     </div>
-  </div>
-
-    <!--    </form> -->
+</div>
 
 <script type="text/javascript">Loader.load(['page.activity']);</script>
 <include file="Public@default:Public:bottom" />
