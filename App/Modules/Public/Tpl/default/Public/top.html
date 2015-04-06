@@ -67,115 +67,34 @@
         </div>
        <div class="header-nav">
             <div class="container clearfix">
-
+			<?php $sport  = D('Public/Index')->event();?>
                 <div id="navigation">
                     <a href="javascript:;" class="navigation-title">全部赛事活动<i></i></a>
                     <!-- && start 赛事活动： dz_sort -->
                     <ul class="navigation-list">
-                        <li class="navigation-item">
+						<volist name="sport" id="vo">
+	                        <li class="navigation-item">
                             <div class="navigation-item-static">
                                 <dl>
-                                    <dt>马拉松/路跑</dt>
-                                    <dd><a href="/game/17">广州马拉松</a><a href="/game/74">杭州马拉松</a><a href="/game/search?keyword=四季跑">四季跑</a></dd>
+                                    <dt><{$vo.name}></dt>
+                                    <dd>
+										<volist name="vo.child" id="v">
+											<eq name="v.sport_show" value="1">
+											<a href="/game/17"><{$v.name}></a>
+											</eq>
+										</volist>
+                                    </dd>
                                 </dl>
                             </div>
                             <div class="navigation-item-content">
-
                                 <ul>
-                                    <li><a href="/game/search?keyword=马拉松">马拉松</a></li>
-                                    <li><a href="/game/search?keyword=路跑">路跑</a></li>
+									<volist name="vo.child" id="v">
+											<li><a href="/game/search?keyword=马拉松"><{$v.name}></a></li>
+									</volist>
                                 </ul>
                             </div>
                         </li>
-                        <li class="navigation-item">
-                            <div class="navigation-item-static">
-                                <dl>
-                                    <dt>全民健身</dt>
-                                    <dd><a href="/game/search?keyword=健美">健美</a><a href="/game/search?keyword=体育舞蹈">体育舞蹈</a><a href="/game/search?keyword=毽球">毽球</a><a href="/game/search?keyword=门球">门球</a></dd>
-                                </dl>
-                            </div>
-                            <div class="navigation-item-content">
-
-                                <ul>
-                                    <li><a href="/game/search?keyword=龙舟">龙舟</a></li>
-                                    <li><a href="/game/search?keyword=门球">门球</a></li>
-                                    <li><a href="/game/search?keyword=健美">健美</a></li>
-                                    <li><a href="/game/search?keyword=体育舞蹈">体育舞蹈</a></li>
-                                    <li><a href="/game/search?keyword=健美操">健美操</a></li>
-                                    <li><a href="/game/search?keyword=全健排舞">全健排舞</a></li>
-                                    <li><a href="/game/search?keyword=大力士">大力士</a></li>
-                                    <li><a href="/game/search?keyword=飞镖">飞镖</a></li>
-                                    <li><a href="/game/search?keyword=武术">武术</a></li>
-                                    <li><a href="/game/search?keyword=毽球">毽球</a></li>
-                                    <li><a href="/game/search?keyword=游泳">游泳</a></li>
-                                    <li><a href="/game/search?keyword=软式网球">软式网球</a></li>
-                                    <li><a href="/game/search?keyword=保龄球">保龄球</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="navigation-item">
-                            <div class="navigation-item-static">
-                                <dl>
-                                    <dt>球类运动</dt>
-                                    <dd><a href="/game/search?keyword=台球">台球</a><a href="/game/search?keyword=篮球">篮球</a><a href="/game/search?keyword=羽毛球">羽毛球</a><a href="/game/search?keyword=高尔夫">高尔夫</a><a href="/game/search?keyword=排球">排球</a><a href="/game/search?keyword=乒乓球">乒乓球</a><a href="/game/search?keyword=网球">网球</a></dd>
-                                </dl>
-                            </div>
-                            <div class="navigation-item-content">
-
-                                <ul>
-                                    <li><a href="/game/search?keyword=羽毛球">羽毛球</a></li>
-                                    <li><a href="/game/search?keyword=台球">台球</a></li>
-                                    <li><a href="/game/search?keyword=网球">网球</a></li>
-                                    <li><a href="/game/search?keyword=足球">足球</a></li>
-                                    <li><a href="/game/search?keyword=篮球">篮球</a></li>
-                                    <li><a href="/game/search?keyword=高尔夫球">高尔夫球</a></li>
-                                    <li><a href="/game/search?keyword=橄榄球">橄榄球</a></li>
-                                    <li><a href="/game/search?keyword=排球">排球</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="navigation-item">
-                            <div class="navigation-item-static">
-                                <dl>
-                                    <dt>户外运动</dt>
-                                    <dd><a href="/game/search?keyword=定向">定向</a><a href="/game/search?keyword=模型">模型</a><a href="/game/search?keyword=自行车">自行车</a><a href="/game/search?keyword=轮滑">轮滑</a><a href="/game/search?keyword=钓鱼">钓鱼</a><a href="/game/search?keyword=攀岩">攀岩</a><a href="/game/search?keyword=登山">登山</a><a href="/game/search?keyword=铁人三项">铁人三项</a></dd>
-                                </dl>
-                            </div>
-                            <div class="navigation-item-content">
-
-                                <ul>
-                                    <li><a href="/game/search?keyword=自行车">自行车</a></li>
-                                    <li><a href="/game/search?keyword=轮滑">轮滑</a></li>
-                                    <li><a href="/game/search?keyword=定向">定向</a></li>
-                                    <li><a href="/game/search?keyword=攀岩">攀岩</a></li>
-                                    <li><a href="/game/search?keyword=山地户外运动">山地户外运动</a></li>
-                                    <li><a href="/game/search?keyword=登山">登山</a></li>
-                                    <li><a href="/game/search?keyword=铁人三项">铁人三项</a></li>
-                                    <li><a href="/game/search?keyword=钓鱼">钓鱼</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="navigation-item">
-                            <div class="navigation-item-static last">
-                                <dl>
-                                    <dt>综合其他</dt>
-                                    <dd><a href="/game/search?keyword=信鸽">信鸽</a><a href="/game/search?keyword=汽车">汽车</a><a href="/game/search?keyword=象棋">象棋</a><a href="/game/search?keyword=桥牌">桥牌</a><a href="/game/search?keyword=电子竞技">电子竞技</a><a href="/game/search?keyword=跆拳道">跆拳道</a><a href="/game/search?keyword=摔跤">摔跤</a><a href="/game/search?keyword=围棋">围棋</a></dd>
-                                </dl>
-                            </div>
-                            <div class="navigation-item-content">
-
-                                <ul>
-                                    <li><a href="/game/search?keyword=跆拳道">跆拳道</a></li>
-                                    <li><a href="/game/search?keyword=拔河">拔河</a></li>
-                                    <li><a href="/game/search?keyword=棋牌">棋牌</a></li>
-                                    <li><a href="/game/search?keyword=体操">体操</a></li>
-                                    <li><a href="/game/search?keyword=蹦床">蹦床</a></li>
-                                    <li><a href="/game/search?keyword=田径">田径</a></li>
-                                    <li><a href="/game/search?keyword=拳击">拳击</a></li>
-                                    <li><a href="/game/search?keyword=电子竞技">电子竞技</a></li>
-                                </ul>
-                            </div>
-                        </li>
+						</volist>
                     </ul>
                     <!-- && end -->
                 </div>

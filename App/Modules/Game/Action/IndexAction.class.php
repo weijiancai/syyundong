@@ -33,19 +33,24 @@ class IndexAction extends Action
             $order = 'focus_count desc';
         }
         //关键字
-        /*if(){
-
-        }*/
-        import('ORG.Util.Page');
-        $model = D('VGameActivity');
-        if ($status) {
+        if($_GET['keyword']){
+            $map['name'] = array('like','%'.$_GET['keyword'].'%');
+        }
+        //赛事分类
+        if($_GET['sportType']){
+            $map['sport_id'] = array('eq',$_GET['sportType']);
+        }
+        if($_GET['state']){
+            $map['status'] = $_GET['state'];
+        }else if ($status) {
             $map['status'] = $status;
         }
+        import('ORG.Util.Page');
+        $model = D('VGameActivity');
         $map['type'] = array('eq', 'game');
         $count = $model->where($map)->count();
         $Page = new Page($count, 3);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
-        //  $Page->url = '__APP_/Game?statusReg='.$_GET['statusReg'].'&statusIn='.$_GET['statusIn'].'&statusOver='.$_GET['statusIn'].'&orderByNew='.$_GET['orderByNew'].'&order='.$_GET['orderByNew'].'&page'.$page;
         $Page->rollPage = 10;
         $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
         $show = $Page->show();

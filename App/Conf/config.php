@@ -52,7 +52,7 @@ $Public_Config =  array(
 
 	/*模板替换*/
 	'TMPL_PARSE_STRING'  =>array(
-        '__APP__'=>'http://www.syyundong.com',
+     //   '__APP__'=>'http://www.syyundong.com',
 	),
 
 );
