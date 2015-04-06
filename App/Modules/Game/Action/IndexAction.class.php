@@ -128,11 +128,12 @@ class IndexAction extends Action
     * @时间:20150402
     * @功能：赛事详细页面
     */
-    public function view()
+    public function game_detail()
     {
         $id = $_GET['id'];
         $model = D('VGameActivity');
         $model->where('id=' . $id)->find();
-        $this->assign('');
+		dump('55');
+        $this->display();
     }
 }
