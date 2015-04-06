@@ -5,9 +5,7 @@
 */
 class IndexAction extends Action {
 	//首页内容
-	public function index(){	
-		 $list = M('DzSport')->select();
-		dump($list);
+	public function index(){
 		$this->display();
 	}
 }

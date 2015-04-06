@@ -137,7 +137,8 @@ class IndexAction extends Action
     {
         $id = $_GET['id'];
         $model = D('VGameActivity');
-        $model->where('id=' . $id)->find();
+        $vo = $model->where('id='. $id)->find();
+        $this->assign('vo',$vo);
         $this->display();
     }
 }
