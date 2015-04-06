@@ -138,7 +138,6 @@ class IndexAction extends Action
         $id = $_GET['id'];
         $model = D('VGameActivity');
         $model->where('id=' . $id)->find();
-		dump('55');
         $this->display();
     }
 }

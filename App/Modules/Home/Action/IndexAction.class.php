@@ -13,7 +13,7 @@ class IndexAction extends Action
     }
 
     /*
-     * @功能注册图片验证码
+     * @功能:热门赛事排行
      * @时间：20150405
      */
     public function hotgame(){
