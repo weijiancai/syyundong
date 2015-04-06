@@ -252,18 +252,397 @@
                     </div>
                     <!-- 发布话题 end-->
                     <!-- tab start-->
-                    <div class="public-tab-wrap clearfix" data-selector="relevantTabs">
-                        <a href="#matchtopic" class="tab current">话题<span>(共6话题)</span></a>
-                        <a href="#matchflow" class="tab">图片墙<span>(共2张)</span></a>
+                    <div class="public-tab-wrap clearfix" id="relevantTabs">
+                        <a href="javascript:void(0);" class="tab current" data-ref="gameTopic">话题<span>(共6话题)</span></a>
+                        <a href="javascript:void(0);" class="tab" data-ref="gameFlow">图片墙<span>(共2张)</span></a>
                         <!-- <a href="/friends/game/416" class="btn btn-warning">发布话题</a> -->
                     </div>
                     <!-- tab end -->
                     <!-- 话题 列表 开始 -->
-                    <div class="tab-content-wrap" data-selector="topic-box" data-params="{'pageSize':5,'pageNum':0}" data-comment-action="/topic/comment-add" data-like-action="/topic/comment-like" data-url="/friends/tag-topics/300">
+                    <div id="gameTopic" class="tab-content-wrap" style="display: block;">
+                        <style>#NTGUID__4 .comment-pop{      background: #f5f5f5;      padding: 0 10px 10px 10px;      border-radius: 5px;      -moz-border-radius: 5px;      -webkit-border-radius: 5px;      zoom:1;      margin-top: 10px;      position: relative;    }#NTGUID__4 .comment-pop:after{      content: "";      width: 0;      height: 0;      border: transparent solid 8px;      position: absolute;      border-bottom-color: #f5f5f5;      right: 95px;      top: -16px;    }#NTGUID__4 .topicli{      display: none;    }#NTGUID__4 .comment-list dl{      border-bottom: 1px dotted #E0E0E0;      padding: 15px 0;      display: none;    }#NTGUID__4 .comment-list dl dt{      float: left;      width: 50px;      overflow: hidden;    }#NTGUID__4 .comment-list dl dt img{      border-radius: 50%;      -webkit-border-radius: 50%;      -moz-border-radius: 50%;      width: 40px;      height: 40px;    }#NTGUID__4 .comment-list dl dd{      display: block;      margin-left: 60px;    }#NTGUID__4 .comment-list dl dd .user-header{      display: block;      font-size: 14px;      margin-bottom: 5px;    }#NTGUID__4 .comment-list dl dd .user-header table{      width: 100%;      margin: 0;    }#NTGUID__4 .comment-list dl dd .user-header th{      text-align: left;      font-weight: normal;    }#NTGUID__4 .comment-list dl dd .user-header td{      text-align: right;    }#NTGUID__4 .comment-list dl dd .user-header span{      color: #C3C3C3;      margin-left: 20px;      font-size: 12px;      font-weight: normal;    }#NTGUID__4 .comment-list dl dd .user-header a{      color: #555;    }#NTGUID__4 .comment-list dl dd .comment-content{      margin: 0;      padding: 0;      font-size: 14px;      line-height: 22px;      overflow: hidden;      width: 90%;      color: #333;      font-weight: normal;      text-shadow: none;      -webkit-text-shadow: none;      -moz-text-shadow: none;    }#NTGUID__4 .comment-list .comment-textarea{      display: block;      width: 96%;      resize: none;    }#NTGUID__4 .comment-list .btn-warning{      padding-left: 20px;      padding-right: 20px;    }#NTGUID__4 .comment-list p{      margin: 0;      padding: 0;    }#NTGUID__4 .comment-list .reply-panel p a{      font-size: 14px;      color: #999;    }#NTGUID__4 .comment-list .reply-panel .reply-form{      display: none;      position: relative;      border: 1px solid #F5A623;      margin-top: 5px;      padding: 5px 0;      background: #fff;      border-radius: 4px;      -webkit-border-radius: 4px;      -moz-border-radius: 4px;    }#NTGUID__4 .comment-list .reply-panel .reply-form i.icon-up{      display: inline-block;      width:0;      height:0;      border-width:6px;      border-color:transparent transparent #fff transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 42px;      top: -13px;      z-index: 5;    }#NTGUID__4 .comment-list .reply-panel .reply-form .btn{      position: absolute;      right: 5px;      top: 5px;    }#NTGUID__4 .comment-list .reply-panel .reply-form em.icon-down{      display: inline-block;      width:0;      height:0;      border-width:8px;      border-color:transparent transparent #F5A623 transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 40px;      top: -17px;      z-index: 1;    }#NTGUID__4 .comment-list .reply-panel .reply-form input{      background: #fff;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;      width: 450px;      resize:none;    }#NTGUID__4 .comment-list .reply-panel .reply-form input:focus{      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;    }  </style>
+                        <div id="NTGUID__4">
+                        <ul data-selector="topicData" class="topic-list clearfix"><div id="NTGUID__4NDTGUID__b">
+
+                            <li class="topicli clearfix" style="display: list-item;">
+                                <!-- 作者头像 开始 -->
+                                <div class="topic-host-thumb pull-left">
+                                    <a target="_blank" href="/friend/passport_86004/timeline"><img title="生如、夏花" src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/101156472/8517C34DB0EA88496CDC4F156A0DA36B/100/8517C34DB0EA88496CDC4F156A0DA36B_2_40x40.png"></a>
+                                </div>
+                                <!-- 作者头像 结束 -->
+                                <!-- 话题内容 开始 -->
+                                <div class="topic-right">
+                                    <p class="topic-info">
+                                        <a target="_blank" href="/friend/passport_86004/timeline">生如、夏花
+                                        </a>
+                                        <span title="2015-03-27 00:03:54" data-timestamp="1427385834000" class="topic-time">10天前</span>
+                                    </p>
+                                    <pre class="topic-des"><a target="_blank" href="/topic/10836">跑在曼哈顿！让自己融入10万人流，感受大桥震动的惊心动魄！</a></pre>
+
+                                    <p class="topic-img-wrap">
+
+                                    </p>
+
+                                    <div class="topic-bottom text-right">
+
+                                        <p class="topic-source pull-left">
+                                            发表在<a target="_blank" href="/friends/tag/300">纽约马拉松</a>
+                                        </p>
+
+
+                                        <a data-selector="comment-btn" href="javascript:void(0);">
+                                            <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">0</span>
+                                        </a>
+                                        <a data-params="{'id':10836}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">1</span></a>
+                                    </div>
+                                    <!-- 评论框 开始 -->
+                                    <div class="comment-pop clearfix hide">
+                                        <div class="comment-form">
+                                            <form method="post" action="/topic/comment-add" iyuesai-plugins-valid="0.570147542071335">
+                                                <input type="hidden" value="10836" name="topicId">
+                                                <input type="hidden" value="passport_86004" name="userId">
+                                                <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
+                                                <button class="btn btn-warning pull-right" type="submit">评论</button>
+                                            </form>
+                                        </div>
+                                        <div data-params="{'topicId':10836, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list">
+                                        </div>
+                                        <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
+                                            <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10836">查看全部评论</a>
+                                        </div>
+                                    </div>
+                                    <!-- 评论框 结束 -->
+                                </div>
+                                <!-- 话题内容 结束 -->
+                            </li>
+
+                            <li class="topicli clearfix" style="display: list-item;">
+                                <!-- 作者头像 开始 -->
+                                <div class="topic-host-thumb pull-left">
+                                    <a target="_blank" href="/friend/passport_90924/timeline"><img title="赛巴斯酱" src="http://static.wisdom-china.cn//images/1/7872/9875/3381/e3d252e8a5a04392167d3a8a1d0afa7c_2_40x40.jpg"></a>
+                                </div>
+                                <!-- 作者头像 结束 -->
+                                <!-- 话题内容 开始 -->
+                                <div class="topic-right">
+                                    <p class="topic-info">
+                                        <a target="_blank" href="/friend/passport_90924/timeline">赛巴斯酱
+                                        </a>
+                                        <span title="2015-03-02 16:05:34" data-timestamp="1425283534000" class="topic-time">2015-03-02 16:05:34</span>
+                                    </p>
+                                    <pre class="topic-des"><a target="_blank" href="/topic/10331">都没有时间跑步, 跑到一半跑不下来了会不会很丢脸...</a></pre>
+
+                                    <p class="topic-img-wrap">
+
+                                    </p>
+
+                                    <div class="topic-bottom text-right">
+
+                                        <p class="topic-source pull-left">
+                                            发表在<a target="_blank" href="/friends/tag/300">纽约马拉松</a>
+                                        </p>
+
+
+                                        <a data-selector="comment-btn" href="javascript:void(0);">
+                                            <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">0</span>
+                                        </a>
+                                        <a data-params="{'id':10331}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">0</span></a>
+                                    </div>
+                                    <!-- 评论框 开始 -->
+                                    <div class="comment-pop clearfix hide">
+                                        <div class="comment-form">
+                                            <form method="post" action="/topic/comment-add" iyuesai-plugins-valid="0.9216297655887579">
+                                                <input type="hidden" value="10331" name="topicId">
+                                                <input type="hidden" value="passport_90924" name="userId">
+                                                <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
+                                                <button class="btn btn-warning pull-right" type="submit">评论</button>
+                                            </form>
+                                        </div>
+                                        <div data-params="{'topicId':10331, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list">
+                                        </div>
+                                        <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
+                                            <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10331">查看全部评论</a>
+                                        </div>
+                                    </div>
+                                    <!-- 评论框 结束 -->
+                                </div>
+                                <!-- 话题内容 结束 -->
+                            </li>
+
+                            <li class="topicli clearfix" style="display: list-item;">
+                                <!-- 作者头像 开始 -->
+                                <div class="topic-host-thumb pull-left">
+                                    <a target="_blank" href="/friend/passport_81330/timeline"><img title="赤峰浪子" src="http://static.wisdom-china.cn//images/1/0297/2262/5398/22db90b08ea870e778c3596a2b8223fd_2_40x40.jpg"></a>
+                                </div>
+                                <!-- 作者头像 结束 -->
+                                <!-- 话题内容 开始 -->
+                                <div class="topic-right">
+                                    <p class="topic-info">
+                                        <a target="_blank" href="/friend/passport_81330/timeline">赤峰浪子
+                                        </a>
+                                        <span title="2015-03-02 10:24:51" data-timestamp="1425263091000" class="topic-time">2015-03-02 10:24:51</span>
+                                    </p>
+                                    <pre class="topic-des"><a target="_blank" href="/topic/10318">女子马拉松史上最伟大的选手之一，英国名将拉德克里夫08年夺冠的身姿~可惜今后的纽约马再也见不到女神的身影了，4月26日伦敦马将是这位42岁老将的告别演出，在惋惜中为她加油~</a></pre>
+
+                                    <p class="topic-img-wrap">
+
+                                        <a data-large="/images/1/1247/1634/2721/509e337e7e1fdbbd0c1d1af7c4b1acbb_0_0.jpg" data-userurl="/friend/passport_81330/timeline" data-nickname="赤峰浪子" data-photo="http://static.wisdom-china.cn//images/1/0297/2262/5398/22db90b08ea870e778c3596a2b8223fd_2_25x25.jpg" data-url="/topic/10318" data-selector="zoom" data-index="0" href="javascript:;">
+                                            <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/1247/1634/2721/509e337e7e1fdbbd0c1d1af7c4b1acbb_2_80x80.jpg">
+                                        </a>
+
+                                        <a data-large="/images/1/9611/7721/6350/14a6a936775b1b8c26f170c4e52a50fc_0_0.jpg" data-userurl="/friend/passport_81330/timeline" data-nickname="赤峰浪子" data-photo="http://static.wisdom-china.cn//images/1/0297/2262/5398/22db90b08ea870e778c3596a2b8223fd_2_25x25.jpg" data-url="/topic/10318" data-selector="zoom" data-index="1" href="javascript:;">
+                                            <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/9611/7721/6350/14a6a936775b1b8c26f170c4e52a50fc_2_80x80.jpg">
+                                        </a>
+
+                                        <a data-large="/images/1/7526/8187/4077/39a0520f59564affaf601a1af81d57c2_0_0.jpg" data-userurl="/friend/passport_81330/timeline" data-nickname="赤峰浪子" data-photo="http://static.wisdom-china.cn//images/1/0297/2262/5398/22db90b08ea870e778c3596a2b8223fd_2_25x25.jpg" data-url="/topic/10318" data-selector="zoom" data-index="2" href="javascript:;">
+                                            <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/7526/8187/4077/39a0520f59564affaf601a1af81d57c2_2_80x80.jpg">
+                                        </a>
+
+                                    </p>
+
+                                    <div class="topic-bottom text-right">
+
+                                        <p class="topic-source pull-left">
+                                            发表在<a target="_blank" href="/friends/tag/300">纽约马拉松</a>
+                                        </p>
+
+
+                                        <a data-selector="comment-btn" href="javascript:void(0);">
+                                            <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">1</span>
+                                        </a>
+                                        <a data-params="{'id':10318}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">3</span></a>
+                                    </div>
+                                    <!-- 评论框 开始 -->
+                                    <div class="comment-pop clearfix hide">
+                                        <div class="comment-form">
+                                            <form method="post" action="/topic/comment-add" iyuesai-plugins-valid="0.42546400180203425">
+                                                <input type="hidden" value="10318" name="topicId">
+                                                <input type="hidden" value="passport_81330" name="userId">
+                                                <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
+                                                <button class="btn btn-warning pull-right" type="submit">评论</button>
+                                            </form>
+                                        </div>
+                                        <div data-params="{'topicId':10318, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list">
+                                        </div>
+                                        <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
+                                            <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10318">查看全部评论</a>
+                                        </div>
+                                    </div>
+                                    <!-- 评论框 结束 -->
+                                </div>
+                                <!-- 话题内容 结束 -->
+                            </li>
+
+                            <li class="topicli clearfix" style="display: list-item;">
+                                <!-- 作者头像 开始 -->
+                                <div class="topic-host-thumb pull-left">
+                                    <a target="_blank" href="/friend/passport_81335/timeline"><img title="陆师傅要跑步" src="http://static.wisdom-china.cn//images/1/4097/3150/5016/48041881f5ca4ee8d50bf2ca2b1d5b28_2_40x40.jpg"></a>
+                                </div>
+                                <!-- 作者头像 结束 -->
+                                <!-- 话题内容 开始 -->
+                                <div class="topic-right">
+                                    <p class="topic-info">
+                                        <a target="_blank" href="/friend/passport_81335/timeline">陆师傅要跑步
+                                        </a>
+                                        <span title="2015-03-02 10:16:59" data-timestamp="1425262619000" class="topic-time">2015-03-02 10:16:59</span>
+                                    </p>
+                                    <pre class="topic-des"><a target="_blank" href="/topic/10317">一直很向往这种十万人跑过纽约桥的场景，大概可以体会到古代大军压境的感觉吧！跑马的速度，比起急行军可是还要有声势的！</a></pre>
+
+                                    <p class="topic-img-wrap">
+
+                                        <a data-large="/images/1/1831/0272/3456/4bf9a3eacadf7cfa04110b2ba86affee_0_0.jpg" data-userurl="/friend/passport_81335/timeline" data-nickname="陆师傅要跑步" data-photo="http://static.wisdom-china.cn//images/1/4097/3150/5016/48041881f5ca4ee8d50bf2ca2b1d5b28_2_25x25.jpg" data-url="/topic/10317" data-selector="zoom" data-index="0" href="javascript:;">
+                                            <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/1831/0272/3456/4bf9a3eacadf7cfa04110b2ba86affee_2_80x80.jpg">
+                                        </a>
+
+                                        <a data-large="/images/1/9167/6251/5262/ac8ecdf2e2bc357b7b8e7774be93f3e0_0_0.jpg" data-userurl="/friend/passport_81335/timeline" data-nickname="陆师傅要跑步" data-photo="http://static.wisdom-china.cn//images/1/4097/3150/5016/48041881f5ca4ee8d50bf2ca2b1d5b28_2_25x25.jpg" data-url="/topic/10317" data-selector="zoom" data-index="1" href="javascript:;">
+                                            <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/9167/6251/5262/ac8ecdf2e2bc357b7b8e7774be93f3e0_2_80x80.jpg">
+                                        </a>
+
+                                    </p>
+
+                                    <div class="topic-bottom text-right">
+
+                                        <p class="topic-source pull-left">
+                                            发表在<a target="_blank" href="/friends/tag/300">纽约马拉松</a>
+                                        </p>
+
+
+                                        <a data-selector="comment-btn" href="javascript:void(0);">
+                                            <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">1</span>
+                                        </a>
+                                        <a data-params="{'id':10317}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">4</span></a>
+                                    </div>
+                                    <!-- 评论框 开始 -->
+                                    <div class="comment-pop clearfix hide">
+                                        <div class="comment-form">
+                                            <form method="post" action="/topic/comment-add" iyuesai-plugins-valid="0.3566536706589697">
+                                                <input type="hidden" value="10317" name="topicId">
+                                                <input type="hidden" value="passport_81335" name="userId">
+                                                <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
+                                                <button class="btn btn-warning pull-right" type="submit">评论</button>
+                                            </form>
+                                        </div>
+                                        <div data-params="{'topicId':10317, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list">
+                                        </div>
+                                        <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
+                                            <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10317">查看全部评论</a>
+                                        </div>
+                                    </div>
+                                    <!-- 评论框 结束 -->
+                                </div>
+                                <!-- 话题内容 结束 -->
+                            </li>
+
+                            <li class="topicli clearfix" style="display: list-item;">
+                                <!-- 作者头像 开始 -->
+                                <div class="topic-host-thumb pull-left">
+                                    <a target="_blank" href="/friend/passport_70511/timeline"><img title="二寨主学文化" src="http://static.wisdom-china.cn//images/1/6000/7477/8913/94b9dcb639ace68c534da99952e42e45_2_40x40.jpg"></a>
+                                </div>
+                                <!-- 作者头像 结束 -->
+                                <!-- 话题内容 开始 -->
+                                <div class="topic-right">
+                                    <p class="topic-info">
+                                        <a target="_blank" href="/friend/passport_70511/timeline">二寨主学文化
+                                        </a>
+                                        <span title="2015-03-02 10:10:16" data-timestamp="1425262216000" class="topic-time">2015-03-02 10:10:16</span>
+                                    </p>
+                                    <pre class="topic-des"><a target="_blank" href="/topic/10316">怎么着怎么着……我听说冠军除了奖金还有一辆奔驰？好吧，反正跟我有没有什么关系，奖品一定会被非洲黑叔叔们开走的=。=</a></pre>
+
+                                    <p class="topic-img-wrap">
+
+                                    </p>
+
+                                    <div class="topic-bottom text-right">
+
+                                        <p class="topic-source pull-left">
+                                            发表在<a target="_blank" href="/friends/tag/300">纽约马拉松</a>
+                                        </p>
+
+
+                                        <a data-selector="comment-btn" href="javascript:void(0);">
+                                            <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">2</span>
+                                        </a>
+                                        <a data-params="{'id':10316}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">4</span></a>
+                                    </div>
+                                    <!-- 评论框 开始 -->
+                                    <div class="comment-pop clearfix hide">
+                                        <div class="comment-form">
+                                            <form method="post" action="/topic/comment-add" iyuesai-plugins-valid="0.02817130561899117">
+                                                <input type="hidden" value="10316" name="topicId">
+                                                <input type="hidden" value="passport_70511" name="userId">
+                                                <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
+                                                <button class="btn btn-warning pull-right" type="submit">评论</button>
+                                            </form>
+                                        </div>
+                                        <div data-params="{'topicId':10316, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list">
+                                        </div>
+                                        <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
+                                            <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10316">查看全部评论</a>
+                                        </div>
+                                    </div>
+                                    <!-- 评论框 结束 -->
+                                </div>
+                                <!-- 话题内容 结束 -->
+                            </li>
+
+                        </div>
+
+
+                        </ul>
+                        <button data-selector="seeMore" class="btn btn-block">查看更多</button>
+                    </div>
+
+
                     </div>
                     <!-- 话题 列表 结束 -->
                     <!-- 图片墙 开始 -->
-                    <div class="tab-content-wrap hide" data-selector="fluidImageWall" data-params="{'pageNum':0,'pageSize':10}" data-url="/friends/tag-photos/300" data-comment-url="/topic/comment-add" data-follow-url="/topic/comment-like"></div>
+                    <div id="gameFlow" class="tab-content-wrap hide" style="display: none;"><style>#NTGUID__5 .container-fluid{    padding: 20px;    width: 660px;    margin: 0 auto;  }#NTGUID__5 .box{    margin-bottom: 30px;    float: left;    width: 315px;    transform-origin:left top;    -webkit-transform-origin: left top;    -moz-transform-origin: left top;  }#NTGUID__5 .box img{    max-width: 100%;    width: 100%;  }#NTGUID__5 .box dt{    padding: 10px 10px;    width: 293px;    border:1px solid #EBEBEB;    border-top: 0;    background-color: #fff;  }#NTGUID__5 .box dt .user-info{    overflow: hidden;  }#NTGUID__5 .box dt .user-avatar{    width: 40px;    font-weight: normal;  }#NTGUID__5 .box dt .user-avatar img{    border-radius: 50%;    -webkit-border-radius: 50%;    -moz-border-radius: 50%;    transform:rotate(0deg);    transition-duration:0.5s;    transition-timing-function:cubic-bezier;    transition-delay:0.5s;  }#NTGUID__5 .box dt .user-avatar a:hover img{        transition-duration:0.5s;    transition-timing-function:cubic-bezier;    transition-delay:0.5s;    transform:rotate(360deg);  }#NTGUID__5 .box dt .user-name{    line-height: 40px;    overflow: hidden;    width: 130px;    margin-left: 10px;  }#NTGUID__5 .box dt .user-name a{    color: #999;  }#NTGUID__5 .box dt .user-name a:hover{    color:#F5A623;  }#NTGUID__5 .box dt .create-date{    color:#999;    line-height: 40px;  }#NTGUID__5 .box dt .comment-panel{    display: none;    margin-top: 10px;    padding-top: 10px;    border-top :1px solid #EBEBEB;  }#NTGUID__5 .box dt .comment-panel textarea{    width: 95%;    resize: none;  }#NTGUID__5 .box dt .comment-panel .btn{    margin-top: 10px;  }#NTGUID__5 .box dd{    position: relative;    overflow: hidden;  }#NTGUID__5 .box dd .topic-share{    overflow: hidden;    position: absolute;    padding:5px;    padding-left:0;    background:#fff;    border-radius: 0 0 0 4px;    -webkit-border-radius: 0 0 0 4px;    -moz-border-radius: 0 0 0 4px;    right: -80px;    top: 0px;    box-shadow: 0 0 5px rgba(0,0,0,0.3);    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.3);    border: 1px solid #9999;    border-width: 0 0 1px 1px;    height: 24px;  }#NTGUID__5 .box dd .topic-share a{    float: left;    margin-left: 5px;  }#NTGUID__5 .box dd .topic-container{    position: absolute;    bottom: 0px;    left: 0px;    width: 100%;    overflow: hidden;    display: none;  }#NTGUID__5 .box dd .topic-container .topic-background{    position: absolute;    left: 0px;    bottom: 0px;    overflow: hidden;    height: 100%;    width: 100%;    background-color: #000;    opacity: 0.6;    filter: alpha(opacity=60);    z-index: 1;  }#NTGUID__5 .box dd .topic-content{    padding: 10px;    overflow: hidden;    position: relative;    z-index: 5;    color: #fff;    line-height: 20px;  }#NTGUID__5 .box dd .topic-content p{    margin-bottom: 0;  }#NTGUID__5 .box dd .topic-content p.text-right a{    margin-left: 10px;    color:#999;  }</style><div id="NTGUID__5">
+                        <div class="container-fluid" data-selector="masonry" style="position: relative; height: 345px;">
+                            <div class="box" style="position: absolute; left: 20px; top: 20px; opacity: 1; transition-property: transform, opacity; transition-duration: 0.5s; transform: translate3d(0px, 0px, 0px);">
+                                <dl>
+                                    <dd>
+                                        <a href="/topic/10318"><img src="http://static.wisdom-china.cn//images/1/1247/1634/2721/509e337e7e1fdbbd0c1d1af7c4b1acbb_1_315x.jpg"></a>
+                                        <div class="topic-share clearfix" style="right: -185px;">
+                                            <a target="_blank" title="分享到qq空间" class="shareto shareto-qzone" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=zDey5D5hxEaececk&amp;url=http://www.iyuesai.com/topic/10318&amp;pic=http://static.wisdom-china.cn//images/1/1247/1634/2721/509e337e7e1fdbbd0c1d1af7c4b1acbb_1_400x.jpg&amp;title=爱约赛&amp;summary=跑在曼哈顿！让自己融入10万人流，感受大桥震动的惊心动魄！爱约赛|赛事|免抽签！进军纽约马拉松"></a>
+                                            <a target="_blank" title="分享到新浪微博" class="shareto shareto-tsina" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=1868074881&amp;url=http://www.iyuesai.com/topic/10318&amp;pic=http://static.wisdom-china.cn//images/1/1247/1634/2721/509e337e7e1fdbbd0c1d1af7c4b1acbb_1_400x.jpg&amp;title=爱约赛&amp;summary=跑在曼哈顿！让自己融入10万人流，感受大桥震动的惊心动魄！爱约赛|赛事|免抽签！进军纽约马拉松"></a>
+                                        </div>
+                                        <div class="topic-container" style="display: none;">
+                                            <i class="topic-background"></i>
+                                            <div class="topic-content">
+                                                <p>女子马拉松史上最伟大的选手之一，英国名将拉德克里夫08年夺冠的身姿~可惜今后的纽约马再也见不到女神的身影了，4月26日伦敦马将是这位42岁老将的告别演出，在惋惜...</p>
+                                                <p class="text-right">
+                                                    <a data-selector="doComment" data-status="1" href="javascript:;"><i class="icon20 icon20-comment"></i>评论<span class="text-error">1</span></a>
+                                                    <a data-params="{'id':10318}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">3</span></a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <dt>
+                                    <div class="user-info clearfix">
+                                        <div class="pull-left user-avatar">
+                                            <a href="/friend/passport_81330/timeline"><img title="赤峰浪子" src="http://static.wisdom-china.cn//images/1/0297/2262/5398/22db90b08ea870e778c3596a2b8223fd_2_40x40.jpg"></a>
+                                        </div>
+                                        <div class="pull-left user-name">
+                                            <a href="/friend/passport_81330/timeline">赤峰浪子</a>
+                                        </div>
+                                        <div title="2015-03-02 10:24:51" data-timestamp="1425263091000" class="pull-right create-date">2015-03-02 10:24:51</div>
+                                    </div>
+                                    <div class="comment-panel">
+                                        <form method="post" action="/topic/comment-add" iyuesai-plugins-valid="0.42038238240160963">
+                                            <input type="hidden" value="10318" name="topicId">
+                                            <input type="hidden" value="passport_81330" name="userId">
+                                            <textarea max-length="140" validate-rules="[['required'],['length',{'max':140}]]" validate-title="评论内容" rows="3" name="content"></textarea>
+                                            <button type="submit" class="btn btn-block btn-warning">评论</button>
+                                        </form>
+                                    </div>
+                                    </dt>
+                                </dl>
+                            </div>
+
+                            <div class="box" style="position: absolute; left: 365px; top: 20px; opacity: 1; transition-property: transform, opacity; transition-duration: 0.5s; transform: translate3d(0px, 0px, 0px);">
+                                <dl>
+                                    <dd>
+                                        <a href="/topic/10317"><img src="http://static.wisdom-china.cn//images/1/1831/0272/3456/4bf9a3eacadf7cfa04110b2ba86affee_1_315x.jpg"></a>
+                                        <div class="topic-share clearfix" style="right: -185px;">
+                                            <a target="_blank" title="分享到qq空间" class="shareto shareto-qzone" href="http://www.jiathis.com/send/?webid=qzone&amp;appkey=zDey5D5hxEaececk&amp;url=http://www.iyuesai.com/topic/10317&amp;pic=http://static.wisdom-china.cn//images/1/1831/0272/3456/4bf9a3eacadf7cfa04110b2ba86affee_1_400x.jpg&amp;title=爱约赛&amp;summary=跑在曼哈顿！让自己融入10万人流，感受大桥震动的惊心动魄！爱约赛|赛事|免抽签！进军纽约马拉松"></a>
+                                            <a target="_blank" title="分享到新浪微博" class="shareto shareto-tsina" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=1868074881&amp;url=http://www.iyuesai.com/topic/10317&amp;pic=http://static.wisdom-china.cn//images/1/1831/0272/3456/4bf9a3eacadf7cfa04110b2ba86affee_1_400x.jpg&amp;title=爱约赛&amp;summary=跑在曼哈顿！让自己融入10万人流，感受大桥震动的惊心动魄！爱约赛|赛事|免抽签！进军纽约马拉松"></a>
+                                        </div>
+                                        <div class="topic-container" style="display: none;">
+                                            <i class="topic-background"></i>
+                                            <div class="topic-content">
+                                                <p>一直很向往这种十万人跑过纽约桥的场景，大概可以体会到古代大军压境的感觉吧！跑马的速度，比起急行军可是还要有声势的！</p>
+                                                <p class="text-right">
+                                                    <a data-selector="doComment" data-status="1" href="javascript:;"><i class="icon20 icon20-comment"></i>评论<span class="text-error">1</span></a>
+                                                    <a data-params="{'id':10317}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">4</span></a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </dd>
+                                    <dt>
+                                    <div class="user-info clearfix">
+                                        <div class="pull-left user-avatar">
+                                            <a href="/friend/passport_81335/timeline"><img title="陆师傅要跑步" src="http://static.wisdom-china.cn//images/1/4097/3150/5016/48041881f5ca4ee8d50bf2ca2b1d5b28_2_40x40.jpg"></a>
+                                        </div>
+                                        <div class="pull-left user-name">
+                                            <a href="/friend/passport_81335/timeline">陆师傅要跑步</a>
+                                        </div>
+                                        <div title="2015-03-02 10:16:59" data-timestamp="1425262619000" class="pull-right create-date">2015-03-02 10:16:59</div>
+                                    </div>
+                                    <div class="comment-panel">
+                                        <form method="post" action="/topic/comment-add" iyuesai-plugins-valid="0.5928783025562274">
+                                            <input type="hidden" value="10317" name="topicId">
+                                            <input type="hidden" value="passport_81335" name="userId">
+                                            <textarea max-length="140" validate-rules="[['required'],['length',{'max':140}]]" validate-title="评论内容" rows="3" name="content"></textarea>
+                                            <button type="submit" class="btn btn-block btn-warning">评论</button>
+                                        </form>
+                                    </div>
+                                    </dt>
+                                </dl>
+                            </div></div>
+                        <button data-selector="seeMoreList" class="btn btn-block" disabled="">没有更多</button>
+                    </div>
+
+
+                    </div>
                     <!-- 图片墙 结束 -->
                 </div>
             </div>

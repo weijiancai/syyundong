@@ -24,4 +24,18 @@ $(function () {
             }
         });
     });
+
+    $('#relevantTabs').find('a').each(function (index) {
+        $(this).click(function () {
+            $(this).parent().find('a').removeClass('current');
+            $(this).addClass('current');
+            if(index == 0) {
+                $('#gameTopic').show();
+                $('#gameFlow').hide();
+            } else {
+                $('#gameTopic').hide();
+                $('#gameFlow').show();
+            }
+        });
+    });
 });
