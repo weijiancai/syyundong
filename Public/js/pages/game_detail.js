@@ -6,8 +6,13 @@ $(function () {
     $('body').attr('id', 'match-page');
     //
     var $detailTabs = $('#detailTabs');
-    $detailTabs.find('a').click(function () {
-        $detailTabs.find('a').removeClass('current');
-        $(this).addClass('current');
+    var $tabs = $('#tabs');
+    $detailTabs.find('a').each(function (index) {
+        $(this).click(function () {
+            $detailTabs.find('a').removeClass('current');
+            $(this).addClass('current');
+
+            $tabs.find('.tab').hide().eq(index).show();
+        });
     });
 });

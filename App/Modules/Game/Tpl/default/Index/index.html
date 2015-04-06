@@ -213,25 +213,6 @@
                     <!--</div>-->
                     <!--</form>-->
                 </div>
-                <!--<script type="text/javascript">
-                $(function(){
-                    define(['valid','simplevalidtips'],function(){
-                    $(function(){
-                      var pf = $('#paging-form');
-                      pf.valid({
-                        'success':function(){
-                          jumpPage($('#pageNumText',pf).val(),$('#pageSize',pf).val());
-                          return false;
-                        }
-                      });
-                      $("[validate-rules]",pf).SimpleValidTips();
-                    });
-                  });
-                });
-
-                </script>-->
-
-
                 <!-- 分页 结束 -->
             </div>
 
@@ -305,8 +286,3 @@
 <script type="text/javascript">Loader.load(['page.game']);</script>
 
 <include file="Public@default:Public:bottom"/>
-<!--<script>
-	function jumpPage(pageNo,pageSize){	
-		iyuesai.api.setSearchEnginesParams({'pageNum':pageNo,'pageSize':pageSize},function(){this.submit();});
-	};
-</script>-->
