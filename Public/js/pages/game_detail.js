@@ -9,10 +9,19 @@ $(function () {
     var $tabs = $('#tabs');
     $detailTabs.find('a').each(function (index) {
         $(this).click(function () {
+            if($(this).text() == '赛友圈') {
+                alert('跳转到赛友圈！');
+                return;
+            }
             $detailTabs.find('a').removeClass('current');
             $(this).addClass('current');
 
             $tabs.find('.tab').hide().eq(index).show();
+            if(index == 0) {
+                $('#detail_bottom').show();
+            } else {
+                $('#detail_bottom').hide();
+            }
         });
     });
 });
