@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2015/4/1 22:48:58                            */
+/* Created on:     2015/4/6 23:50:18                            */
 /*==============================================================*/
 
 
@@ -50,8 +50,6 @@ ALTER TABLE  op_user_friend DROP FOREIGN KEY FK_userFriend_user_friendId;
 
 ALTER TABLE  op_user_friend DROP FOREIGN KEY FK_userFriend_user_userId;
 
-ALTER TABLE  op_recommend DROP FOREIGN KEY FK_game_activity_id;;
-
 drop view  if exists v_activity_join_count;
 
 drop view  if exists v_banner_images;
@@ -75,6 +73,8 @@ drop view  if exists v_topic;
 drop view  if exists v_topic_comment_count;
 
 drop view  if exists v_user_topic_count;
+
+drop view  if exists v_venue;
 
 drop table if exists db_activity;
 
@@ -118,8 +118,6 @@ drop table if exists op_message;
 
 drop table if exists op_user_friend;
 
-drop table if exists op_recommend;
-
 /*==============================================================*/
 /* Table: db_activity                                           */
 /*==============================================================*/
@@ -145,6 +143,7 @@ create table db_activity
    content              text comment '赛事介绍',
    input_date           datetime not null comment '录入时间',
    input_user           int not null comment '录入人',
+   interest_count       int comment '感兴趣人数',
    primary key (id)
 );
 
@@ -163,10 +162,9 @@ create table db_game
    end_date             datetime not null comment '结束时间',
    limit_count          int not null comment '人数限制',
    cost                 decimal comment '报名费',
-   host                 varchar(128) not null comment '举办单位',
    province             varchar(16) not null comment '举办城市',
    address              varchar(128) not null comment '地点',
-   sponsor               varchar(128) not null comment '赛事发起方',
+   sponsor              varchar(128) not null comment '赛事发起方',
    phone                varchar(16) not null comment '联系方式',
    apply_name           varchar(16) not null comment '申请人姓名',
    apply_phone          varchar(16) not null comment '申请人电话',
@@ -252,6 +250,7 @@ create table db_venue
    address              varchar(128) not null comment '地点',
    phone                varchar(32) comment '电话',
    person_cost          int not null comment '人均',
+   star_count           int comment '评分',
    input_date           datetime not null comment '录入时间',
    input_user           int not null comment '录入人',
    primary key (id)
@@ -271,6 +270,7 @@ create table dz_sport
    pid                  int not null comment '父项目ID',
    input_date           datetime not null comment '录入时间',
    input_user           int not null comment '录入人',
+   sport_show           int comment '展示类型',
    primary key (id)
 );
 
@@ -331,7 +331,7 @@ create table op_focus
    id                   int not null auto_increment comment '评论ID',
    user_id              int not null comment '用户ID',
    source_id            int not null comment '来源ID',
-   sport_type           int(1) not null comment '运动项目（0 赛事/活动/场馆，1 赛事，2 活动，3 场馆）',
+   source_type          int(1) not null comment '来源类型（1 赛事，2 活动，3 场馆， 4 话题）',
    primary key (id)
 );
 
@@ -495,21 +495,6 @@ create table op_user_friend
 alter table op_user_friend comment '赛友';
 
 /*==============================================================*/
-/* Table: op_comment                                            */
-/*==============================================================*/
-create table op_recommend
-(
-  id                   int not null auto_increment comment 'ID',
-  gc_id                int not null comment '赛事/活动id',
-  recommend_type       varchar(16) not null comment '推荐类型(game 赛事，activity 活动)',
-  sort_num             int not null comment '排序',
-  primary key (id)
-);
-
-alter table op_recommend comment '赛事/活动推荐';
-
-
-/*==============================================================*/
 /* View: v_activity_join_count                                  */
 /*==============================================================*/
 create VIEW  v_activity_join_count
@@ -542,27 +527,36 @@ create VIEW  v_choice_game
 
     as
 
-    select 
-    id,
-    name,
-    sport_id,
-    image,
-    reg_begin_date,
-    reg_end_date,
-    start_date,
-    end_date,
-    limit_count,
-    cost,
-    province,
-    address,
-    input_user,
-    input_date,
-    type,
-    join_count,
-    focus_count,
-    topic_count,
-    status
-     from v_game_activity where (status=1 or status=2 or status=3) and type='game' ORDER BY focus_count desc, join_count;
+    select
+       id,
+       name,
+       sport_id,
+       image,
+       reg_begin_date,
+       reg_end_date,
+       start_date,
+       end_date,
+       limit_count,
+       cost,
+       province,
+       sponsor,
+       interest_count,
+       input_date,
+       type,
+       join_count,
+       focus_count,
+       topic_count,
+       status
+    from
+       v_game_activity
+    where
+       (status = 1
+       or status = 2
+       or status = 3)
+       and type = 'game'
+    order by
+       focus_count DESC,
+       join_count ASC;
 
 /*==============================================================*/
 /* View: v_doyen_user                                           */
@@ -585,6 +579,7 @@ create VIEW  v_doyen_user
 create VIEW  v_game_activity
 
     as
+
     SELECT
       id,
       name,
@@ -597,9 +592,9 @@ create VIEW  v_game_activity
       limit_count,
       cost,
       province,
-      address,
       sponsor,
       ''interest_count,
+      address,
       input_user,
       input_date,
       'game' type,
@@ -622,8 +617,9 @@ create VIEW  v_game_activity
       limit_count,
       cost,
       province,
-      address,
       ''sponsor,
+      interest_count,
+      address,
       input_user,
       input_date,
       'activity' type,
@@ -632,7 +628,7 @@ create VIEW  v_game_activity
       0 topic_count,
       (case when (now() < reg_end_date or ifnull(join_count, 0) < limit_count) then 1 when (now() > reg_end_date or ifnull(join_count, 0) = limit_count) then 2 when (now() >= start_date and now() < end_date) then 3 else 4 end) status
     FROM
-      db_activity left join v_activity_join_count on (db_activity.id = v_activity_join_count.activity_id)
+      db_activity left join v_activity_join_count on (db_activity.id = v_activity_join_count.activity_id);
 
 /*==============================================================*/
 /* View: v_game_join_count                                      */
@@ -651,36 +647,46 @@ create VIEW  v_hot_activity
     as
 
     select
-      id,
-      name,
-      sport_id,
-      image,
-      reg_begin_date,
-      reg_end_date,
-      start_date,
-      end_date,
-      limit_count,
-      cost,
-      province,
-      address,
-      input_user,
-      input_date,
-      type,
-      join_count,
-      focus_count,
-      topic_count,
-      status,
-      (select local_url from db_images where db_images.id = input_user) user_image
-    from v_game_activity where (status=1 or status=2 or status=3) and type='activity' ORDER BY join_count desc, focus_count desc limit 0, 6;
+       id,
+       name,
+       sport_id,
+       image,
+       reg_begin_date,
+       reg_end_date,
+       start_date,
+       end_date,
+       limit_count,
+       cost,
+       province,
+       sponsor,
+       interest_count,
+       input_date,
+       type,
+       join_count,
+       focus_count,
+       topic_count,
+       status,
+       (select local_url from db_images where db_images.id = input_user) user_image
+    from
+       v_game_activity
+    where
+       (status = 1
+       or status = 2
+       or status = 3)
+       and type = 'activity'
+    order by
+       join_count DESC,
+       focus_count desc limit 0 ASC,
+       6 ASC;
 
 /*==============================================================*/
 /* View: v_hot_game_ranking                                     */
 /*==============================================================*/
 create VIEW  v_hot_game_ranking
 
-as
+    as
 
-  select id, name from v_game_activity where type='game' ORDER BY focus_count desc, join_count LIMIT 0, 10;
+    select id, name from v_game_activity where type='game' ORDER BY focus_count desc, join_count LIMIT 0, 10;
 
 /*==============================================================*/
 /* View: v_recommend_venues                                     */
@@ -728,6 +734,31 @@ create VIEW  v_user_topic_count
     as
 
     select user_id, count(1) topic_count from op_game_topic GROUP BY user_id;
+
+/*==============================================================*/
+/* View: v_venue                                                */
+/*==============================================================*/
+create VIEW  v_venue
+
+    as
+
+    SELECT
+      id,
+      name,
+      image,
+      sport_id,
+      province,
+      city,
+      region,
+      address,
+      phone,
+      person_cost,
+      star_count,
+      input_date,
+      input_user,
+      (select count(1) from op_focus where source_id=id and source_type='3') followCount,
+      (select count(1) from op_comment where source_id=id and source_type='3') commentCount
+    FROM db_venue;
 
 alter table db_activity add constraint FK_activity_sport_id foreign key (sport_id)
       references dz_sport (id) on delete restrict on update restrict;
@@ -797,5 +828,4 @@ alter table op_user_friend add constraint FK_userFriend_user_friendId foreign ke
 
 alter table op_user_friend add constraint FK_userFriend_user_userId foreign key (user_id)
       references db_user (id) on delete cascade on update cascade;
-
 
