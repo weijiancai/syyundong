@@ -74,12 +74,6 @@ var Loader = {
     }
 };
 
-// 写入css
-var baseCssUrl = '/Public/css';
-document.write('<link type="text/css" rel="stylesheet" href="' + baseCssUrl + '/common.min.css">');
-document.write('<link type="text/css" rel="stylesheet" href="' + baseCssUrl + '/public.css">');
-document.write('<link type="text/css" rel="stylesheet" href="' + baseCssUrl + '/zm.css">');
-
 // 写入script
 var _script = document.createElement("script");
 _script.type = "text/javascript";
