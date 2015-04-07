@@ -97,7 +97,16 @@
                                     <tr>
                                         <th>城市</th>
                                         <td class="clearfix">
-                                            <select data-selector="hotCity"><option value="所有城市">所有城市</option><option value="北京">北京</option><option value="上海">上海</option><option value="广东">广东</option><option value="天津">天津</option><option value="湖南">湖南</option><option value="浙江">浙江</option><option value="河北">河北</option></select>
+                                            <select data-selector="hotCity">
+                                                <option value="所有城市">所有城市</option>
+                                                <option value="北京">北京</option>
+                                                <option value="上海">上海</option>
+                                                <option value="广东">广东</option>
+                                                <option value="天津">天津</option>
+                                                <option value="湖南">湖南</option>
+                                                <option value="浙江">浙江</option>
+                                                <option value="河北">河北</option>
+                                            </select>
                                             <div class="pull-right">
                                                 <button class="btn btn-warning" type="submit">搜索</button>
                                             </div>
@@ -403,23 +412,26 @@
                     <dd class="root-content hide" style="display: block;">
                         <!-- && start 热门活动：v_hot_activity -->
                         <ul class="clearfix">
+                            <volist name="hot_activity" id="vo">
                             <li class="">
                                 <div class="li-content clearfix">
                                     <dl>
                                         <dd>
-                                            <h4><a href="/activitycommon/651">春天出窝季 斗牛搞起来</a></h4>
-                                            <p>时间：2015-03-14 19:00</p>
-                                            <p>地点：北京师范大学篮球场</p>
-                                            <p>费用：0</p>
+                                            <h4><a href="/activitycommon/<{$vo.id}>"><{$vo.name}></a></h4>
+                                            <p>时间：<{$vo.start_Date}></p>
+                                            <p>地点：<{$vo.address}></p>
+                                            <p>费用：<{$vo.cost}></p>
                                             <p>
-                                                <span class="info-text"><i class="icon16 icon16-person"></i>54人感兴趣</span>
+                                                <span class="info-text"><i class="icon16 icon16-person"></i><{$vo.focus_count}>人感兴趣</span>
                                                 <span class="info-text"><i class="icon16 icon16-joined"></i>已报名6人</span>
                                             </p>
                                         </dd>
-                                        <dt><a href="/friend/passport_91603/timeline"><img title="牛牛的牛牛" src="http://static.wisdom-china.cn//images/1/6759/5285/7571/a4bf810fdcbd80ed72272d7bf120f732_2_56x56.png"><br>牛牛的牛牛</a></dt>
+                                        <dt><a href="/friend/passport_91603/timeline">
+                                            <img title="牛牛的牛牛" src="http://static.wisdom-china.cn//images/1/6759/5285/7571/a4bf810fdcbd80ed72272d7bf120f732_2_56x56.png"><br><{$vo.input_user}></a></dt>
                                     </dl>
                                 </div>
                             </li>
+                           </volist>
                         </ul>
                         <!-- && end -->
                     </dd>

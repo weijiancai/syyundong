@@ -9,6 +9,7 @@ class IndexAction extends Action
     public function index()
     {
         $this->hotgame();
+        $this->hot_activity();
         $this->display();
     }
 
@@ -22,7 +23,15 @@ class IndexAction extends Action
         $this->assign('hot',$hot);
     }
     /*
-     * @功能注册图片验证码
+     * @功能:热门活动
+     * @时间：20150405
+     */
+    public function hot_activity(){
+        $hot  = D(VHotActivity)->select();
+        $this->assign('hot_activity',$hot);
+    }
+    /*
+     * @功能注册图片验证码s
      * @时间：20150328
      */
     Public function verify()

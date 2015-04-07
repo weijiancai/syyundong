@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2015-04-05 22:33:47
+Date: 2015-04-07 16:28:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,30 +27,37 @@ CREATE TABLE `dz_sport` (
   `pid` int(11) NOT NULL COMMENT '父项目ID',
   `input_date` datetime NOT NULL COMMENT '录入时间',
   `input_user` int(11) NOT NULL COMMENT '录入人',
+  `sport_show` int(11) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='赛事活动项目';
 
 -- ----------------------------
 -- Records of dz_sport
 -- ----------------------------
-INSERT INTO `dz_sport` VALUES ('1', '球类项目', '1', '1', '0', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('2', '户外运动', '1', '1', '0', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('3', '全民健身', '1', '1', '0', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('4', '其他运动', '1', '1', '0', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('5', '马拉松路跑', '1', '1', '0', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('6', '羽毛球', '1', '2', '2', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('7', '瑜伽', '1', '2', '3', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('8', '台球', '1', '2', '1', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('9', '网球', '1', '2', '1', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('10', '自行车', '1', '2', '2', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('11', '轮滑', '1', '2', '3', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('12', '门球', '1', '2', '1', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('13', '健美', '1', '2', '3', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('14', '游泳', '1', '2', '4', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('15', '射击', '1', '2', '5', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('16', '马拉松', '1', '2', '5', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('17', '路跑', '1', '2', '5', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('18', '钓鱼', '1', '2', '4', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('19', '角斗士', '1', '2', '4', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('20', '滑雪', '1', '2', '4', '2015-03-26 22:02:09', '0');
-INSERT INTO `dz_sport` VALUES ('21', '徒步', '1', '2', '1', '2015-03-26 22:02:09', '0');
+INSERT INTO `dz_sport` VALUES ('1', '球类项目', '1', '1', '0', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('2', '户外运动', '1', '1', '0', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('3', '全民健身', '1', '1', '0', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('4', '其他运动', '1', '1', '0', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('5', '马拉松路跑', '1', '1', '0', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('6', '羽毛球', '1', '2', '2', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('7', '瑜伽', '1', '2', '3', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('8', '台球', '1', '2', '1', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('9', '网球', '1', '2', '1', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('10', '自行车', '1', '2', '2', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('11', '轮滑', '1', '2', '3', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('12', '门球', '1', '2', '1', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('13', '健美', '1', '2', '3', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('14', '游泳', '1', '2', '4', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('15', '射击', '1', '2', '5', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('16', '马拉松', '1', '2', '5', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('17', '路跑', '1', '2', '5', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('18', '钓鱼', '1', '2', '4', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('19', '角斗士', '1', '2', '4', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('20', '滑雪', '1', '2', '4', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('21', '徒步', '1', '2', '1', '2015-03-26 22:02:09', '0', '1');
+INSERT INTO `dz_sport` VALUES ('22', '羽毛球', '3', '1', '0', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('23', '台球', '3', '1', '0', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('24', '乒乓球', '3', '1', '0', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('25', '瑜伽', '3', '1', '0', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('26', '有游泳', '3', '1', '0', '2015-03-26 22:02:09', '0', null);
+INSERT INTO `dz_sport` VALUES ('27', '网球', '3', '2', '2', '2015-03-26 22:02:09', '0', '1');

@@ -86,5 +86,47 @@ function getGameTime($id, $state)
     }
     return $time;
 }
+/**
+ * @功能：赛事、活动状态
+ * @时间：20150402
+ */
+function getStatus($id,$type)
+{
+    $status = D('VGameActivity')->where('id='.$id.' and type = '."'".$type."'")->getField('status');
+
+    switch ($status) {
+        case 1:
+            $status  ='报名中';
+            break;
+        case 2:
+            $status  = '待开赛';
+            break;
+        case 3:
+            $status  = '比赛中';
+            break;
+        case 4:
+            $status  = '已结束';
+            break;
+    }
+
+    return $status;
+}
+/**
+ * @功能：返回赛事、活动类别
+ * @时间：20150402
+ */
+function getSportName($sportid)
+{
+    return D('DzSport')->where('id='.$sportid)->getField('name');
+}
+
+/**
+ * @功能：赛事、活动关注数
+ * @时间：20150407
+ */
+function getFocus($id,$type)
+{
+  return D('OpFocus')->where('`source_id`='.$id .' and `source_type` ='.$type)->count();
+}
 
 ?>

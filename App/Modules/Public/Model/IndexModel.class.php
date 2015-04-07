@@ -22,5 +22,13 @@ class IndexModel extends Model
             }
 		return $category;
     }
+    /*
+     * @功能：查询区域
+     * @时间：
+     */
+    public function area()
+    {
+       return  D('DbArea')->select();
+    }
 }
 ?>

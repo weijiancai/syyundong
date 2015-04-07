@@ -15,7 +15,7 @@ $Public_Config =  array(
 	'DEFAULT_THEME'	=> 'default',
 	'TMPL_L_DELIM'	=>'<{',
 	'TMPL_R_DELIM'	=>'}>',
-    //'URL_MODEL'=>0,
+    'URL_MODEL'=>0,
 	'URL_PATHINFO_DEPR'	=>'/',
 	'URL_ROUTER_ON'   => true,
 	'URL_ROUTE_RULES' => array(
@@ -23,6 +23,7 @@ $Public_Config =  array(
         '/^Game\/publish/' => 'Game/index/publish',
         '/^Game\/addgame/' => 'Game/index/addgame',
         '/^Game\/(\d+)$/' => 'Game/index/game_detail?id=:1',
+        '/^Activity\/publish/' => 'Activity/index/publish',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
@@ -36,7 +37,7 @@ $Public_Config =  array(
 
 	/*子域名服务*/
 	'APP_GROUP_MODE'	 => 1,
-	'APP_GROUP_LIST'     => 'Home,Public,Game,Activity,Syweblg2015',
+	'APP_GROUP_LIST'     => 'Home,Public,Game,Activity,Venue,Syweblg2015',
 	'DEFAULT_GROUP'      => 'Home',
 	'HTML_CACHE_ON'	=>true,
 	'HTML_CACHE_TIME'	=>true,

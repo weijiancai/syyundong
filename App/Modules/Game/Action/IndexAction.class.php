@@ -136,9 +136,12 @@ class IndexAction extends Action
     public function game_detail()
     {
         $id = $_GET['id'];
-        $model = D('VGameActivity');
-        $vo = $model->where('id='. $id)->find();
-        $this->assign('vo',$vo);
+        $detail = D('DbGame')->where('id='. $id)->find();
+        //赛事公告
+        $notice = D('OpGameNotice')->where('game_id='.$id)->select();
+        //
+        $this->assign('notice',$notice);
+        $this->assign('detail',$detail);
         $this->display();
     }
 }
