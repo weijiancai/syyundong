@@ -19,7 +19,8 @@ var loader_config = {
         'page_publish': 'pages/publish',
         'page_game': 'pages/game',
         'page_gameDetail': 'pages/game_detail',
-        'page_activity': 'pages/activity'
+        'page_activity': 'pages/activity',
+        'page_activityDetail': 'pages/activity_detail'
     },
     shim: {
         'bootstrap': {
@@ -65,6 +66,10 @@ var loader_config = {
         'page_activity': {
             deps: ['common'],
             exports: 'page_activity'
+        },
+        'page_activityDetail': {
+            deps: ['common'],
+            exports: 'page_activityDetail'
         }
     }
 };
