@@ -69,6 +69,8 @@ $(function () {
 
     // 时间
     $('#dateList').find('a').click(function() {
+        $(this).parent().find('a.current').removeClass('current');
+        $(this).addClass('current');
         submit('date', $(this).data('value'));
     });
 

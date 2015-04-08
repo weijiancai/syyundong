@@ -5,33 +5,56 @@
         <div class="row">
             <div class="span12">
                 <!-- 赛事筛选模块 开始 -->
-                <div data-action="/activitycommon/search" data-params="{'criteria':'1','statusIn':'0','statusOver':'0','statusReg':'0'}" data-for="activity" data-selector="searchEngines" class="main-block"><style>#NTGUID__1{      line-height: 22px;      margin-top: -10px;      margin-bottom: -10px;    }#NTGUID__1 table{      width: 100%;      margin: 0;    }#NTGUID__1 th{      width: 72px;      font-weight: normal;      text-align: left;      color: #313131;    }#NTGUID__1 th,#NTGUID__1 td{      padding-bottom: 15px;    }#NTGUID__1 .icon16{      margin-right: 6px;    }#NTGUID__1 a.radio-item,#NTGUID__1 a.taber-item{      display: inline-block;      line-height: 20px;      height: 20px;      overflow: hidden;      margin: 0 5px 5px 0;      padding: 0 8px;      border-radius: 3px;      -webkit-border-radius: 3px;      -moz-border-radius: 3px;      text-align: center;      color: #555;      word-break: break-all;      vertical-align: top;    }#NTGUID__1 a.radio-item.current{      background-color: #F5A623;      color: #fff;    }#NTGUID__1 a.taber-item{      border-radius: 3px 3px 0 0;      -webkit-border-radius: 3px 3px 0 0;      -moz-border-radius: 3px 3px 0 0;      position: relative;      z-index: 10;      padding: 0 10px;    }#NTGUID__1 a.taber-item.current{      border: 1px solid #F5A623;      border-bottom: 1px solid #fff;      color: #F5A623;      height: 22px;    }#NTGUID__1 .input-prepend .add-on{      background-color: #fff;      border-right: 0;      position: relative;      z-index: 10;      padding: 4px 2px 4px 6px;    }#NTGUID__1 .input-prepend .add-on .icon16{      margin: 0;    }#NTGUID__1 .input-prepend input{      border-left:0;      margin-left: -1px;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;    }#NTGUID__1 .input-prepend .span4{      margin: 0;    }#NTGUID__1 .input-prepend .btn{      padding-left: 25px;      padding-right: 25px;    }#NTGUID__1 .input-prepend input:focus{      border-color: #ebebeb;    }#NTGUID__1 .item-panel{      overflow: hidden;      margin-bottom: -5px;    }#NTGUID__1 .item-panel dd{      border-top: 1px solid #F5A623;      padding-top: 10px;      margin-top: -6px;    }#NTGUID__1 .item-panel dt{      font-weight: normal;    }  </style><div id="NTGUID__1">
-                    <form id="searchEnginesForm" method="get" action="/activitycommon/search">
+                <div class="main-block">
+                    <style>#NTGUID__1{      line-height: 22px;      margin-top: -10px;      margin-bottom: -10px;    }#NTGUID__1 table{      width: 100%;      margin: 0;    }#NTGUID__1 th{      width: 72px;      font-weight: normal;      text-align: left;      color: #313131;    }#NTGUID__1 th,#NTGUID__1 td{      padding-bottom: 15px;    }#NTGUID__1 .icon16{      margin-right: 6px;    }#NTGUID__1 a.radio-item,#NTGUID__1 a.taber-item{      display: inline-block;      line-height: 20px;      height: 20px;      overflow: hidden;      margin: 0 5px 5px 0;      padding: 0 8px;      border-radius: 3px;      -webkit-border-radius: 3px;      -moz-border-radius: 3px;      text-align: center;      color: #555;      word-break: break-all;      vertical-align: top;    }#NTGUID__1 a.radio-item.current{      background-color: #F5A623;      color: #fff;    }#NTGUID__1 a.taber-item{      border-radius: 3px 3px 0 0;      -webkit-border-radius: 3px 3px 0 0;      -moz-border-radius: 3px 3px 0 0;      position: relative;      z-index: 10;      padding: 0 10px;    }#NTGUID__1 a.taber-item.current{      border: 1px solid #F5A623;      border-bottom: 1px solid #fff;      color: #F5A623;      height: 22px;    }#NTGUID__1 .input-prepend .add-on{      background-color: #fff;      border-right: 0;      position: relative;      z-index: 10;      padding: 4px 2px 4px 6px;    }#NTGUID__1 .input-prepend .add-on .icon16{      margin: 0;    }#NTGUID__1 .input-prepend input{      border-left:0;      margin-left: -1px;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;    }#NTGUID__1 .input-prepend .span4{      margin: 0;    }#NTGUID__1 .input-prepend .btn{      padding-left: 25px;      padding-right: 25px;    }#NTGUID__1 .input-prepend input:focus{      border-color: #ebebeb;    }#NTGUID__1 .item-panel{      overflow: hidden;      margin-bottom: -5px;    }#NTGUID__1 .item-panel dd{      border-top: 1px solid #F5A623;      padding-top: 10px;      margin-top: -6px;    }#NTGUID__1 .item-panel dt{      font-weight: normal;    }  </style>
+                    <div id="NTGUID__1">
+                    <form id="searchEnginesForm" method="get">
                         <div data-selector="province">
                             <table>
                                 <tbody>
                                 <tr>
                                     <th><i class="icon16 icon16-search-city"></i>省市：</th>
                                     <td>
-                                        <select data-selector="tplProvince" class="span2" name="provinceId"><option value="all">全部省份</option><option value="2">北京市</option><option value="360">天津市</option><option value="691">河北省</option><option value="3352">山西省</option><option value="5021">内蒙古</option><option value="6373">辽宁省</option><option value="8144">吉林省</option><option value="9239">黑龙江</option><option value="11330">上海市</option><option value="11613">江苏省</option><option value="13539">浙江省</option><option value="15391">安徽省</option><option value="17266">福建省</option><option value="18634">江西省</option><option value="20799">山东省</option><option value="23139">河南省</option><option value="25898">湖北省</option><option value="27561">湖南省</option><option value="30374">广东省</option><option value="32864">广西</option><option value="34336">海南省</option><option value="34712">重庆市</option><option value="35869">四川省</option><option value="40206">贵州省</option><option value="41902">云南省</option><option value="43748">西藏</option><option value="44605">陕西省</option><option value="46517">甘肃省</option><option value="48081">青海省</option><option value="48579">宁夏</option><option value="48911">新疆</option></select>
+                                        <select id="tplProvince" class="span2" name="provinceId"><option value="all">全部省份</option><option value="2">北京市</option><option value="360">天津市</option><option value="691">河北省</option><option value="3352">山西省</option><option value="5021">内蒙古</option><option value="6373">辽宁省</option><option value="8144">吉林省</option><option value="9239">黑龙江</option><option value="11330">上海市</option><option value="11613">江苏省</option><option value="13539">浙江省</option><option value="15391">安徽省</option><option value="17266">福建省</option><option value="18634">江西省</option><option value="20799">山东省</option><option value="23139">河南省</option><option value="25898">湖北省</option><option value="27561">湖南省</option><option value="30374">广东省</option><option value="32864">广西</option><option value="34336">海南省</option><option value="34712">重庆市</option><option value="35869">四川省</option><option value="40206">贵州省</option><option value="41902">云南省</option><option value="43748">西藏</option><option value="44605">陕西省</option><option value="46517">甘肃省</option><option value="48081">青海省</option><option value="48579">宁夏</option><option value="48911">新疆</option></select>
 
-                                        <select data-selector="tplCity" style="margin-left:10px;" class="span2" name="cityId"><option value="all">全部城市</option></select>
+                                        <select id="tplCity" style="margin-left:10px;" class="span2" name="cityId"><option value="all">全部城市</option></select>
 
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <th valign="top"><i class="icon16 icon16-search-region"></i>区域：<input type="hidden" data-selector="regionValue" value="all" name="regionId"></th>
-                                    <td valign="top"><div data-selector="regionList" class="item-panel"><a href="javascript:;" class="radio-item current" data-value="all" data-selector="regionItem">全部</a></div></td>
+                                    <td valign="top">
+                                        <div id="regionList" class="item-panel">
+                                            <a href="javascript:;" class="radio-item current" data-value="all" data-selector="regionItem">全部</a>
+                                        </div>
+                                    </td>
                                 </tr>
-
 
                                 <tr>
                                     <th valign="top"><i class="icon16 icon16-search-items"></i>项目：<input type="hidden" data-selector="itemsValue" value="all" name="sportTypeId"></th>
                                     <td valign="top">
-                                        <div data-selector="itemsList" class="item-panel">
+                                        <div  id="sportTypePanel" class="item-panel">
                                             <dl>
-                                                <dt><a href="javascript:;" class="radio-item current" data-value="all" data-selector="itemsItem">全部</a><a href="javascript:;" class="radio-item" data-value="6" data-selector="itemsItem">马拉松</a><a href="javascript:;" class="radio-item" data-value="7" data-selector="itemsItem">路跑</a><a href="javascript:;" class="radio-item" data-value="8" data-selector="itemsItem">羽毛球</a><a href="javascript:;" class="radio-item" data-value="9" data-selector="itemsItem">乒乓球</a><a href="javascript:;" class="radio-item" data-value="10" data-selector="itemsItem">台球</a><a href="javascript:;" class="radio-item" data-value="11" data-selector="itemsItem">网球</a><a href="javascript:;" class="radio-item" data-value="12" data-selector="itemsItem">自行车</a><a href="javascript:;" class="radio-item" data-value="16" data-selector="itemsItem">山地户外活动</a><a href="javascript:;" class="radio-item" data-value="38" data-selector="itemsItem">瑜伽</a><a href="javascript:;" class="radio-item" data-value="40" data-selector="itemsItem">足球</a><a href="javascript:;" class="radio-item" data-value="41" data-selector="itemsItem">篮球</a><a href="javascript:;" class="radio-item" data-value="55" data-selector="itemsItem">游泳</a><a href="javascript:;" class="radio-item" data-value="64" data-selector="itemsItem">钓鱼</a><a href="javascript:;" class="radio-item" data-value="68" data-selector="itemsItem">脚斗士</a><a href="javascript:;" class="radio-item" data-value="69" data-selector="itemsItem">滑雪</a><a href="javascript:;" class="radio-item" data-value="70" data-selector="itemsItem">徒步</a></dt>
+                                                <dt>
+                                                    <a href="javascript:;" class="radio-item current" data-value="all" data-selector="itemsItem">全部</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="6" data-selector="itemsItem">马拉松</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="7" data-selector="itemsItem">路跑</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="8" data-selector="itemsItem">羽毛球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="9" data-selector="itemsItem">乒乓球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="10" data-selector="itemsItem">台球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="11" data-selector="itemsItem">网球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="12" data-selector="itemsItem">自行车</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="16" data-selector="itemsItem">山地户外活动</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="38" data-selector="itemsItem">瑜伽</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="40" data-selector="itemsItem">足球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="41" data-selector="itemsItem">篮球</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="55" data-selector="itemsItem">游泳</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="64" data-selector="itemsItem">钓鱼</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="68" data-selector="itemsItem">脚斗士</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="69" data-selector="itemsItem">滑雪</a>
+                                                    <a href="javascript:;" class="radio-item" data-value="70" data-selector="itemsItem">徒步</a>
+                                                </dt>
                                             </dl>
                                         </div>
                                     </td>
@@ -39,15 +62,24 @@
 
                                 <tr>
                                     <th valign="top"><i class="icon16 icon16-search-date"></i>时间：<input type="hidden" data-selector="dateValue" value="all" name="timeType"></th>
-                                    <td valign="top"><div data-selector="dateList" class="item-panel"><a data-selector="dateItem" class="radio-item current" data-value="all" href="javascript:;">全部</a><a data-selector="dateItem" class="radio-item" data-value="today" href="javascript:;">今天</a><a data-selector="dateItem" class="radio-item" data-value="tomorrow" href="javascript:;">明天</a><a data-selector="dateItem" class="radio-item" data-value="weekend" href="javascript:;">周末</a><a data-selector="dateItem" class="radio-item" data-value="week" href="javascript:;">未来一周</a><a data-selector="dateItem" class="radio-item" data-value="month" href="javascript:;">未来一个月</a></div></td>
+                                    <td valign="top">
+                                        <div id="dateList" class="item-panel">
+                                            <a data-selector="dateItem" class="radio-item current" data-value="all" href="javascript:;">全部</a>
+                                            <a data-selector="dateItem" class="radio-item" data-value="today" href="javascript:;">今天</a>
+                                            <a data-selector="dateItem" class="radio-item" data-value="tomorrow" href="javascript:;">明天</a>
+                                            <a data-selector="dateItem" class="radio-item" data-value="weekend" href="javascript:;">周末</a>
+                                            <a data-selector="dateItem" class="radio-item" data-value="week" href="javascript:;">未来一周</a>
+                                            <a data-selector="dateItem" class="radio-item" data-value="month" href="javascript:;">未来一个月</a>
+                                        </div>
+                                    </td>
                                 </tr>
 
                                 <tr>
                                     <td colspan="2">
                                         <div class="input-prepend input-append">
                                             <span class="add-on"><i class="icon16 icon16-search-search"></i></span>
-                                            <input type="text" value="" name="keyword" class="span4">
-                                            <button class="btn btn-warning" type="submit">搜本类</button>
+                                            <input type="text" value="" name="keyword" class="span4" id="inputKeyword">
+                                            <button class="btn btn-warning" type="button" id="btnSearchKeyword">搜本类</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -750,6 +782,19 @@
         </div>
     </div>
 </div>
+
+<!-- 表单提交 -->
+<form id="searchForm" action="__APP__/Activity?">
+    <input type="hidden" id="state_reg" name="statusReg" value="<{$_REQUEST['statusReg']}>"/>
+    <input type="hidden" id="state_in" name="statusIn" value="<{$_REQUEST['statusIn']}>"/>
+    <input type="hidden" id="state_over" name="statusOver" value="<{$_REQUEST['statusOver']}>"/>
+    <input type="hidden" id="orderByNew" name="orderByNew" value="<{$_REQUEST['orderByNew']}>"/>
+    <input type="hidden" id="order" name="order" value="<{$_REQUEST['order']}>"/>
+    <input type="hidden" id="province" name="province" value="<{$_REQUEST['province']}>"/>
+    <input type="hidden" id="sportType" name="sportType" value="<{$_REQUEST['sportType']}>"/>
+    <input type="hidden" id="date" name="date" value="<{$_REQUEST['date']}>"/>
+    <input type="hidden" id="keyword" name="keyword" value="<{$_REQUEST['keyword']}>"/>
+</form>
 
 <script type="text/javascript">Loader.load(['page.activity']);</script>
 <include file="Public@default:Public:bottom" />
