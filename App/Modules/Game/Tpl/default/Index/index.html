@@ -10,20 +10,20 @@
                         <div>
                             <table>
                                 <tbody>
-                                <tr>
+                               <!-- <tr>
                                     <th><i class="icon16 icon16-search-city"></i>省市：</th>
                                     <td>
                                         <select class="span2" style="margin-left: 0;margin-top:10px;" name="provinceId" id="provinceId">
                                             <option value="1">吉林省</option>
                                         </select>
                                     </td>
-                                </tr>
+                                </tr>-->
                                 <tr>
                                     <th valign="top"><i class="icon16 icon16-search-items"></i>项目：<input type="hidden" data-selector="itemsValue" value="all" name="sportTypeId"></th>
                                     <td valign="top">
                                         <div data-selector="itemsList" class="item-panel" id="sportTypePanel">
                                             <dl>
-                                                <?php $sport  = D('Public/Index')->event();?>
+                                                <?php $sport  = D('Public/Index')->sport_top();?>
                                                 <dt>
                                                     <a href="javascript:;" class="radio-item current" data-value="all" data-selector="itemsItem">全部</a>
                                                 <volist name="sport" id="vo">
@@ -46,12 +46,12 @@
                                     <th valign="top"><i class="icon16 icon16-search-date"></i>时间：<input type="hidden" data-selector="dateValue" value="all" name="timeType"></th>
                                     <td valign="top">
                                         <div id="dateList" class="item-panel">
-                                            <a data-selector="dateItem" class="radio-item current" data-value="all" href="javascript:;">全部</a>
-                                            <a data-selector="dateItem" class="radio-item" data-value="today" href="javascript:;">今天</a>
-                                            <a data-selector="dateItem" class="radio-item" data-value="tomorrow" href="javascript:;">明天</a>
-                                            <a data-selector="dateItem" class="radio-item" data-value="weekend" href="javascript:;">周末</a>
-                                            <a data-selector="dateItem" class="radio-item" data-value="week" href="javascript:;">未来一周</a>
-                                            <a data-selector="dateItem" class="radio-item" data-value="month" href="javascript:;">未来一个月</a>
+                                            <a data-selector="dateItem" class="radio-item <if condition="($_REQUEST['date'] eq all)or($_REQUEST['date'] eq '')">current</if>" data-value="all" href="javascript:;">全部</a>
+                                            <a data-selector="dateItem" class="radio-item <if condition="$_REQUEST['date'] eq today">current</if>" data-value="today" href="javascript:;">今天</a>
+                                            <a data-selector="dateItem" class="radio-item <if condition="$_REQUEST['date'] eq tomorrow">current</if>" data-value="tomorrow" href="javascript:;">明天</a>
+                                            <a data-selector="dateItem" class="radio-item <if condition="$_REQUEST['date'] eq weekend">current</if>" data-value="weekend" href="javascript:;">周末</a>
+                                            <a data-selector="dateItem" class="radio-item <if condition="$_REQUEST['date'] eq week">current</if>" data-value="week" href="javascript:;">未来一周</a>
+                                            <a data-selector="dateItem" class="radio-item <if condition="$_REQUEST['date'] eq month">current</if>" data-value="month" href="javascript:;">未来一个月</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -137,7 +137,7 @@
                                                     <span>时间：</span>
                                                     <!-- 不是同一天 -->
                                                     <!--<{$vo.id|getGameTime=$vo['status']}>-->
-                                                    <{$vo.start_date}>——<{$vo.end_date}>
+                                                    <{$vo.start_date}> — <{$vo.end_date}>
                                                 </p>
 
                                                 <p><span>地点：</span><{$vo.address}></p>
@@ -250,7 +250,7 @@
     <input type="hidden" id="state_over" name="statusOver" value="<{$_REQUEST['statusOver']}>"/>
     <input type="hidden" id="orderByNew" name="orderByNew" value="<{$_REQUEST['orderByNew']}>"/>
     <input type="hidden" id="order" name="order" value="<{$_REQUEST['order']}>"/>
-    <input type="hidden" id="province" name="province" value="<{$_REQUEST['province']}>"/>
+    <!--<input type="hidden" id="province" name="province" value="<{$_REQUEST['province']}>"/>-->
     <input type="hidden" id="sportType" name="sportType" value="<{$_REQUEST['sportType']}>"/>
     <input type="hidden" id="date" name="date" value="<{$_REQUEST['date']}>"/>
     <input type="hidden" id="keyword" name="keyword" value="<{$_REQUEST['keyword']}>"/>

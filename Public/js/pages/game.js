@@ -20,12 +20,12 @@ $(function () {
     });
 
     // 省
-    $('#provinceId').change(function () {
+    /*$('#provinceId').change(function () {
         var province = $(this).val();
         if (province != '') {
             submit('province', province);
         }
-    });
+    });*/
 
 
     // 排序

@@ -10,7 +10,7 @@ class IndexModel extends Model
      * @功能：网站顶部赛事
      * @时间：
      */
-    public function event()
+    public function sport_top()
     {
         $model = D('DzSport');
         $category = $model ->where('pid=0 and sport_type=1')->field('id,name')->order('id asc')->select();
