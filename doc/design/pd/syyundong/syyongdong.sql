@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2015/4/6 23:50:18                            */
+/* Created on:     2015/4/8 14:21:47                            */
 /*==============================================================*/
 
 
@@ -116,7 +116,12 @@ drop table if exists op_join_game_field;
 
 drop table if exists op_message;
 
+drop table if exists op_recommend;
+
 drop table if exists op_user_friend;
+
+drop table if exists db_region;
+
 
 /*==============================================================*/
 /* Table: db_activity                                           */
@@ -250,13 +255,26 @@ create table db_venue
    address              varchar(128) not null comment '地点',
    phone                varchar(32) comment '电话',
    person_cost          int not null comment '人均',
-   star_count           int comment '评分',
    input_date           datetime not null comment '录入时间',
    input_user           int not null comment '录入人',
    primary key (id)
 );
 
 alter table db_venue comment '场馆';
+
+/*==============================================================*/
+/* Table: db_region                                             */
+/*==============================================================*/
+create table db_region
+(
+  id                   int not null auto_increment comment 'ID',
+  name                 varchar(64) not null comment '区域名称 ',
+  pid                  int not null comment '父ID',
+  level                int comment '层级',
+  primary key (id)
+);
+
+alter table db_region comment '区域信息';
 
 /*==============================================================*/
 /* Table: dz_sport                                              */
@@ -318,6 +336,8 @@ create table op_comment
    reply_to             int not null comment '回复ID',
    source_id            int not null comment '来源ID',
    source_type          int(1) not null comment '来源类型（1 赛事，2 活动，3 场馆，4 话题）',
+   star_count           int comment '评分',
+   input_date           datetime not null comment '录入时间',
    primary key (id)
 );
 
@@ -332,6 +352,7 @@ create table op_focus
    user_id              int not null comment '用户ID',
    source_id            int not null comment '来源ID',
    source_type          int(1) not null comment '来源类型（1 赛事，2 活动，3 场馆， 4 话题）',
+   input_date           datetime not null comment '录入时间',
    primary key (id)
 );
 
@@ -477,10 +498,25 @@ create table op_message
    content              varchar(1024) comment '内容',
    source_id            int not null comment '来源ID',
    source_type          int(1) not null comment '来源类型（1 赛事，2 活动，3 场馆，4 话题）',
+   input_date           datetime not null comment '录入时间',
    primary key (id)
 );
 
 alter table op_message comment '消息';
+
+/*==============================================================*/
+/* Table: op_recommend                                          */
+/*==============================================================*/
+create table op_recommend
+(
+   id                   int not null auto_increment comment 'ID',
+   gc_id                int not null comment '赛事/活动id',
+   recommend_type       varchar(16) not null comment '推荐类型(game 赛事，activity 活动,venue 场馆)',
+   sort_num             int not null comment '排序',
+   primary key (id)
+);
+
+alter table op_recommend comment '推荐赛事、活动、场馆';
 
 /*==============================================================*/
 /* Table: op_user_friend                                        */
@@ -503,60 +539,35 @@ create VIEW  v_activity_join_count
 
     select activity_id, count(1) join_count from op_join_activity GROUP BY activity_id;
 
-/*==============================================================*/
-/* View: v_banner_images                                        */
-/*==============================================================*/
-create VIEW  v_banner_images
-
-    as
-
-    SELECT
-      v_game_activity.id,
-      type,
-      size1_url url,
-      banner_desc
-    FROM v_game_activity, db_images
-    WHERE v_game_activity.image = db_images.id AND status = 1 AND type = 'game'
-    ORDER BY focus_count DESC, join_count DESC
-    LIMIT 0, 6;
 
 /*==============================================================*/
-/* View: v_choice_game                                          */
+/* View: v_game_join_count                                      */
 /*==============================================================*/
-create VIEW  v_choice_game
+create VIEW  v_game_join_count
 
-    as
+as
 
-    select
-       id,
-       name,
-       sport_id,
-       image,
-       reg_begin_date,
-       reg_end_date,
-       start_date,
-       end_date,
-       limit_count,
-       cost,
-       province,
-       sponsor,
-       interest_count,
-       input_date,
-       type,
-       join_count,
-       focus_count,
-       topic_count,
-       status
-    from
-       v_game_activity
-    where
-       (status = 1
-       or status = 2
-       or status = 3)
-       and type = 'game'
-    order by
-       focus_count DESC,
-       join_count ASC;
+  select game_id, count(1) join_count from op_join_game GROUP BY game_id;
+
+
+/*==============================================================*/
+/* View: v_topic_comment_count                                  */
+/*==============================================================*/
+create VIEW  v_topic_comment_count
+
+as
+
+  select source_id topic_id, count(1) comment_count from op_comment where source_type=4 group by source_id;
+
+/*==============================================================*/
+/* View: v_user_topic_count                                     */
+/*==============================================================*/
+create VIEW  v_user_topic_count
+
+as
+
+  select user_id, count(1) topic_count from op_game_topic GROUP BY user_id;
+
 
 /*==============================================================*/
 /* View: v_doyen_user                                           */
@@ -599,7 +610,7 @@ create VIEW  v_game_activity
       input_date,
       'game' type,
       ifnull(join_count, 0) join_count,
-      (select count(1) from op_focus where op_focus.source_id=db_game.id and sport_type=1) focus_count,
+      (select count(1) from op_focus where op_focus.source_id=db_game.id and source_type=1) focus_count,
       (select count(1) from op_game_topic where op_game_topic.game_id=db_game.id) topic_count,
       (case when (now() < reg_end_date and ifnull(join_count, 0) < limit_count) then 1 when (now() > reg_end_date or ifnull(join_count, 0) = limit_count) then 2 when (now() >= start_date and now() < end_date) then 3 else 4 end) status
     FROM
@@ -624,20 +635,68 @@ create VIEW  v_game_activity
       input_date,
       'activity' type,
       ifnull(join_count, 0) join_count,
-      (select count(1) from op_focus where op_focus.source_id=db_activity.id and sport_type=2) focus_count,
+      (select count(1) from op_focus where op_focus.source_id=db_activity.id and source_type=2) focus_count,
       0 topic_count,
       (case when (now() < reg_end_date or ifnull(join_count, 0) < limit_count) then 1 when (now() > reg_end_date or ifnull(join_count, 0) = limit_count) then 2 when (now() >= start_date and now() < end_date) then 3 else 4 end) status
     FROM
       db_activity left join v_activity_join_count on (db_activity.id = v_activity_join_count.activity_id);
 
-/*==============================================================*/
-/* View: v_game_join_count                                      */
-/*==============================================================*/
-create VIEW  v_game_join_count
 
-    as
+/*==============================================================*/
+/* View: v_banner_images                                        */
+/*==============================================================*/
+create VIEW  v_banner_images
 
-    select game_id, count(1) join_count from op_join_game GROUP BY game_id;
+as
+
+  SELECT
+    v_game_activity.id,
+    type,
+    size1_url url,
+    banner_desc
+  FROM v_game_activity, db_images
+  WHERE v_game_activity.image = db_images.id AND status = 1 AND type = 'game'
+  ORDER BY focus_count DESC, join_count DESC
+  LIMIT 0, 6;
+
+/*==============================================================*/
+/* View: v_choice_game                                          */
+/*==============================================================*/
+create VIEW  v_choice_game
+
+as
+
+  select
+    id,
+    name,
+    sport_id,
+    image,
+    reg_begin_date,
+    reg_end_date,
+    start_date,
+    end_date,
+    limit_count,
+    cost,
+    province,
+    sponsor,
+    interest_count,
+    input_date,
+    type,
+    join_count,
+    focus_count,
+    topic_count,
+    status
+  from
+    v_game_activity
+  where
+    (status = 1
+     or status = 2
+     or status = 3)
+    and type = 'game'
+  order by
+    focus_count DESC,
+    join_count ASC;
+
 
 /*==============================================================*/
 /* View: v_hot_activity                                         */
@@ -647,37 +706,31 @@ create VIEW  v_hot_activity
     as
 
     select
-       id,
-       name,
-       sport_id,
-       image,
-       reg_begin_date,
-       reg_end_date,
-       start_date,
-       end_date,
-       limit_count,
-       cost,
-       province,
-       sponsor,
-       interest_count,
-       input_date,
-       type,
-       join_count,
-       focus_count,
-       topic_count,
-       status,
-       (select local_url from db_images where db_images.id = input_user) user_image
-    from
-       v_game_activity
-    where
-       (status = 1
-       or status = 2
-       or status = 3)
-       and type = 'activity'
-    order by
-       join_count DESC,
-       focus_count desc limit 0 ASC,
-       6 ASC;
+           id,
+           name,
+           sport_id,
+           image,
+           reg_begin_date,
+           reg_end_date,
+           start_date,
+           end_date,
+           limit_count,
+           cost,
+           province,
+           sponsor,
+           interest_count,
+           input_date,
+           type,
+           join_count,
+           focus_count,
+           topic_count,
+           status,
+           (select local_url from db_images where db_images.id = input_user) user_image
+        from
+           v_game_activity
+        WHERE (status = 1 OR status = 2 OR status = 3) AND type = 'activity'
+    ORDER BY join_count DESC, focus_count DESC
+    LIMIT 0, 6;
 
 /*==============================================================*/
 /* View: v_hot_game_ranking                                     */
@@ -686,16 +739,13 @@ create VIEW  v_hot_game_ranking
 
     as
 
-    select id, name from v_game_activity where type='game' ORDER BY focus_count desc, join_count LIMIT 0, 10;
-
-/*==============================================================*/
-/* View: v_recommend_venues                                     */
-/*==============================================================*/
-create VIEW  v_recommend_venues
-
-    as
-
-    select;
+    SELECT
+      id,
+      name
+    FROM v_game_activity
+    WHERE type = 'game'
+    ORDER BY focus_count DESC, join_count
+    LIMIT 0, 10;
 
 /*==============================================================*/
 /* View: v_topic                                                */
@@ -718,47 +768,46 @@ create VIEW  v_topic
       op_game_topic left join v_topic_comment_count on (op_game_topic.id = v_topic_comment_count.topic_id);
 
 /*==============================================================*/
-/* View: v_topic_comment_count                                  */
-/*==============================================================*/
-create VIEW  v_topic_comment_count
-
-    as
-
-    select source_id topic_id, count(1) comment_count from op_comment where source_type=4 group by source_id;
-
-/*==============================================================*/
-/* View: v_user_topic_count                                     */
-/*==============================================================*/
-create VIEW  v_user_topic_count
-
-    as
-
-    select user_id, count(1) topic_count from op_game_topic GROUP BY user_id;
-
-/*==============================================================*/
 /* View: v_venue                                                */
 /*==============================================================*/
 create VIEW  v_venue
 
-    as
+as
 
-    SELECT
-      id,
-      name,
-      image,
-      sport_id,
-      province,
-      city,
-      region,
-      address,
-      phone,
-      person_cost,
-      star_count,
-      input_date,
-      input_user,
-      (select count(1) from op_focus where source_id=id and source_type='3') followCount,
-      (select count(1) from op_comment where source_id=id and source_type='3') commentCount
-    FROM db_venue;
+  SELECT
+    id,
+    name,
+    image,
+    sport_id,
+    province,
+    city,
+    region,
+    address,
+    phone,
+    person_cost,
+    (SELECT local_url FROM db_images WHERE id = db_venue.image) url,
+    (select sum(star_count)/ count(1) from op_comment where source_id=id and source_type='3') star_count,
+    input_date,
+    input_user,
+    (select count(1) from op_focus where source_id=id and source_type='3') followCount,
+    (select count(1) from op_comment where source_id=id and source_type='3') commentCount
+  FROM db_venue;
+
+/*==============================================================*/
+/* View: v_recommend_venues                                     */
+/*==============================================================*/
+create VIEW  v_recommend_venues
+
+as
+
+  SELECT
+    url,
+    name,
+    person_cost
+  FROM v_venue, op_recommend
+  WHERE v_venue.id = op_recommend.gc_id AND op_recommend.recommend_type = 'venue'
+  ORDER BY op_recommend.sort_num;
+
 
 alter table db_activity add constraint FK_activity_sport_id foreign key (sport_id)
       references dz_sport (id) on delete restrict on update restrict;
