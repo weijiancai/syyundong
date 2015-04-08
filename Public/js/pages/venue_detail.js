@@ -3,21 +3,21 @@
  */
 $(function () {
     // 注册body id
-    $('body').attr('id', 'activity-details');
+    $('body').attr('id', 'venues-details');
 
-    // 活动详情、已报名
-    $('#relevantTabs').find('a').each(function (index) {
-        $(this).click(function () {
-            var $parent = $(this).parent();
-            $parent.find('a').removeClass('current');
-            $(this).addClass('current');
-            var $dd = $parent.parent().find('dd');
-            if(index == 0) {
-                $dd.eq(1).hide();
-            } else {
-                $dd.eq(0).hide();
+    // 评分
+    var $commentStar = $('#commentStar');
+    $commentStar.find('i').each(function(index) {
+        $(this).hover(function() {
+            var $i = $commentStar.find('i');
+            for(var i = 0; i <= index; i++) {
+                $i.eq(i).removeClass('icon16-starout').addClass('icon16-starin');
             }
-            $dd.eq(index).show();
+            for(i = index; i < 5; i++) {
+                $i.eq(i).removeClass('icon16-starin').addClass('icon16-starout');
+            }
+        }).click(function() {
+            $('#starTotal').val(index);
         });
     });
 
