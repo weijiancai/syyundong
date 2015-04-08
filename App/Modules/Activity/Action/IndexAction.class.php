@@ -38,4 +38,12 @@ class IndexAction extends Action
         $list = $model->query('select v.id,o.sort_num,v.name,v.province,v.image,v.join_count,v.interested from v_game_activity v,op_recommend o where v.id = o.gc_id and o.recommend_type = "activity" order by o.sort_num');
         $this->assign('recommend', $list);
     }
+    /*
+     * @时间:20150408
+     * @功能：活动详细页面
+     */
+    public function activity_detail()
+    {
+        $this->display();
+    }
 }

@@ -24,6 +24,7 @@ $Public_Config =  array(
         '/^Game\/addgame/' => 'Game/index/addgame',
         '/^Game\/(\d+)$/' => 'Game/index/game_detail?id=:1',
         '/^Activity\/publish/' => 'Activity/index/publish',
+        '/^Activity\/(\d+)$/' => 'Activity/index/activity_detail?id=:1',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
@@ -53,7 +54,7 @@ $Public_Config =  array(
 
 	/*模板替换*/
 	'TMPL_PARSE_STRING'  =>array(
-     //   '__APP__'=>'http://www.syyundong.com',
+        '__APP__'=>'http://www.syyundong.com',
 	),
 
 );
