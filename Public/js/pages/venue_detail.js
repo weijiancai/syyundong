@@ -11,10 +11,10 @@ $(function () {
         $(this).hover(function() {
             var $i = $commentStar.find('i');
             for(var i = 0; i <= index; i++) {
-                $i.eq(i).removeClass('icon16-starout').addClass('icon16-starin');
+                $i.eq(i + 1).removeClass('icon16-starout').addClass('icon16-starin');
             }
             for(i = index; i < 5; i++) {
-                $i.eq(i).removeClass('icon16-starin').addClass('icon16-starout');
+                $i.eq(i + 1).removeClass('icon16-starin').addClass('icon16-starout');
             }
         }).click(function() {
             $('#starTotal').val(index);

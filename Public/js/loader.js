@@ -22,7 +22,9 @@ var loader_config = {
         'page_activity': 'pages/activity',
         'page_activityDetail': 'pages/activity_detail',
         'page_venue': 'pages/venue',
-        'page_venueDetail': 'pages/venue_detail'
+        'page_venueDetail': 'pages/venue_detail',
+        'page_friends': 'pages/friends',
+        'page_topic': 'pages/topic'
     },
     shim: {
         'bootstrap': {
@@ -80,6 +82,14 @@ var loader_config = {
         'page_venueDetail': {
             deps: ['common'],
             exports: 'page_venueDetail'
+        },
+        'page_friends': {
+            deps: ['common'],
+            exports: 'page_friends'
+        },
+        'page_topic': {
+            deps: ['common'],
+            exports: 'page_topic'
         }
     }
 };
