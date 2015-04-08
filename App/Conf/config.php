@@ -25,6 +25,7 @@ $Public_Config =  array(
         '/^Game\/(\d+)$/' => 'Game/index/game_detail?id=:1',
         '/^Activity\/publish/' => 'Activity/index/publish',
         '/^Activity\/(\d+)$/' => 'Activity/index/activity_detail?id=:1',
+        '/^Venue\/(\d+)$/' => 'Venue/index/Venue_detail?id=:1',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',

@@ -37,4 +37,13 @@ class IndexAction extends Action {
     public function new_comment(){
 
     }
+    /*
+    * @时间:20150408
+    * @功能：场馆详细页面
+    */
+    public function venue_detail()
+    {
+
+        $this->display();
+    }
 }

@@ -153,4 +153,19 @@ class IndexAction extends Action
         $this->assign('detail', $detail);
         $this->display();
     }
+    /*
+  * @时间: 20150408
+  * @功能：赛事关注
+  */
+    public function game_remon()
+    {
+        $id = $_GET['id'];
+        $detail = D('DbGame')->where('id=' . $id)->find();
+        //赛事公告
+        $notice = D('OpGameNotice')->where('game_id=' . $id)->select();
+        //
+        $this->assign('notice', $notice);
+        $this->assign('detail', $detail);
+        $this->display();
+    }
 }
