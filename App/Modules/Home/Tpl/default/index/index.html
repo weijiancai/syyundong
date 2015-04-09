@@ -50,7 +50,7 @@
             <div class="search-panel">
                 <div class="tabs-panel">
                     <ul class="nav nav-tabs tabs-head">
-                        <li class="active"><a href="#findGame" data-toggle="tab">找赛事</a></li>
+                        <li class="active current"><a href="#findGame" data-toggle="tab">找赛事</a></li>
                         <li><a href="#findActivity" data-toggle="tab">找活动</a></li>
                         <li><a href="#findVenues" data-toggle="tab">找场馆</a></li>
                     </ul>
@@ -69,10 +69,147 @@
                                     <tr>
                                         <th>运动项目</th>
                                         <td>
-                                            <div data-selector="eventItem" class="datadropdown">
+                                            <div id="eventItem" class="datadropdown">
                                                 <div class="datadropdown-head">
                                                     <input type="hidden" value="all" name="sportTypeId">
                                                     <input type="text" placeholder="全部" readonly="readonly" class="span2 datadropdown-action">
+                                                </div>
+                                                <div class="datadropdown-content" style="padding: 10px; display: none;"><style>#NTGUID__c{min-width:400px; position: relative;}#NTGUID__c a.select-all{    display: inline-block;    text-align: center;    padding: 0 10px;    line-height: 20px;    height: 20px;    color: #fff;    background-color: #F5A623;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;  }#NTGUID__c a.select-all:hover{    text-decoration: none;    background-color: #E08C03;    transition: all .3s;    -webkit-transition: all .3s;    -moz-transition: all .3s;  }#NTGUID__c dt{    display: block;    border-bottom: 3px solid #ebebeb;    margin-bottom: 5px;    white-space: nowrap;  }#NTGUID__c dt a.tab-item{    display: inline-block;    margin-bottom: -3px;    position: relative;    z-index: 5;    text-align: center;    width: 80px;    line-height: 25px;    height: 25px;    border-bottom: 3px solid #ebebeb;    margin-right: -3px;  }#NTGUID__c dt a.tab-item:hover{    color: #F97D18;    text-decoration: none;  }#NTGUID__c dt a.tab-item.current{    border-bottom: 3px solid #F97D18;    color: #F97D18;  }#NTGUID__c dd ul{    display: block;  }#NTGUID__c dd li{    float: left;    width: 76px;    white-space: nowrap;    text-overflow:ellipsis;    overflow: hidden;    padding: 2px;  }#NTGUID__c dd li a{    display: inline-block;    float: left;    width: 76px;    text-align: center;    overflow: hidden;    line-height: 25px;    height: 25px;    white-space: nowrap;    text-overflow:ellipsis;    overflow: hidden;  }#NTGUID__c dd li a.current{    background-color: #F5A623;    color: #fff;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;  }#NTGUID__c dd li a:hover{    text-decoration: none;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;    background-color: #EBEBEB;    color:#555;    transition: all .3s;    -webkit-transition: all .3s;    -moz-transition: all .3s;  }#NTGUID__c dd.hide{    display: none;  }</style>
+                                                    <div style="width:405px" id="NTGUID__c">
+                                                        <a data-selector="datadropdownClose" class="datadropdown-close" href="javascript:;">×</a>
+                                                        <dl>
+                                                            <dt>
+                                                            <p><a data-value="" data-selector="selectAction" class="select-all" href="javascript:;">所有项目</a></p>
+
+                                                            <a class="tab-item current" data-index="0" data-value="1" href="javascript:;">球类项目</a>
+
+                                                            <a class="tab-item" data-index="1" data-value="2" href="javascript:;">户外运动</a>
+
+                                                            <a class="tab-item" data-index="2" data-value="4" href="javascript:;">全民健身</a>
+
+                                                            <a class="tab-item" data-index="3" data-value="5" href="javascript:;">其他运动</a>
+
+                                                            <a class="tab-item" data-index="4" data-value="37" href="javascript:;">马拉松路跑</a>
+
+                                                            </dt>
+
+                                                            <dd>
+                                                                <ul class="clearfix">
+
+                                                                    <li><a data-selector="selectAction" title="羽毛球" data-value="8" href="javascript:;">羽毛球</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="乒乓球" data-value="9" href="javascript:;">乒乓球</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="台球" data-value="10" href="javascript:;">台球</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="网球" data-value="11" href="javascript:;">网球</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="足球" data-value="40" href="javascript:;">足球</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="篮球" data-value="41" href="javascript:;">篮球</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="曲棍球" data-value="57" href="javascript:;">曲棍球</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="垒球" data-value="58" href="javascript:;">垒球</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="棒球" data-value="59" href="javascript:;">棒球</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="高尔夫" data-value="60" href="javascript:;">高尔夫</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="排球" data-value="61" href="javascript:;">排球</a></li>
+
+                                                                </ul>
+                                                            </dd>
+
+                                                            <dd class="hide">
+                                                                <ul class="clearfix">
+
+                                                                    <li><a data-selector="selectAction" title="自行车" data-value="12" href="javascript:;">自行车</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="轮滑" data-value="13" href="javascript:;">轮滑</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="定向" data-value="14" href="javascript:;">定向</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="攀岩" data-value="15" href="javascript:;">攀岩</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="山地户外活动" data-value="16" href="javascript:;">山地户外活动</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="航海模型" data-value="47" href="javascript:;">航海模型</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="铁人三项" data-value="63" href="javascript:;">铁人三项</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="钓鱼" data-value="64" href="javascript:;">钓鱼</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="滑雪" data-value="69" href="javascript:;">滑雪</a></li>
+
+                                                                </ul>
+                                                            </dd>
+
+                                                            <dd class="hide">
+                                                                <ul class="clearfix">
+
+                                                                    <li><a data-selector="selectAction" title="门球" data-value="27" href="javascript:;">门球</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="健美" data-value="28" href="javascript:;">健美</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="体育舞蹈" data-value="29" href="javascript:;">体育舞蹈</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="健美操" data-value="30" href="javascript:;">健美操</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="排舞" data-value="31" href="javascript:;">排舞</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="瑜伽" data-value="38" href="javascript:;">瑜伽</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="中国风健身舞" data-value="39" href="javascript:;">中国风健身舞</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="龙舟" data-value="46" href="javascript:;">龙舟</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="划船器" data-value="56" href="javascript:;">划船器</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="大力士" data-value="65" href="javascript:;">大力士</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="保龄球" data-value="66" href="javascript:;">保龄球</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="肚皮舞" data-value="67" href="javascript:;">肚皮舞</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="脚斗士" data-value="68" href="javascript:;">脚斗士</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="徒步" data-value="70" href="javascript:;">徒步</a></li>
+
+                                                                </ul>
+                                                            </dd>
+
+                                                            <dd class="hide">
+                                                                <ul class="clearfix">
+
+                                                                    <li><a data-selector="selectAction" title="跆拳道" data-value="32" href="javascript:;">跆拳道</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="风筝" data-value="36" href="javascript:;">风筝</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="举重" data-value="43" href="javascript:;">举重</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="射击" data-value="44" href="javascript:;">射击</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="射箭" data-value="45" href="javascript:;">射箭</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="游泳" data-value="55" href="javascript:;">游泳</a></li>
+
+                                                                </ul>
+                                                            </dd>
+
+                                                            <dd class="hide">
+                                                                <ul class="clearfix">
+
+                                                                    <li><a data-selector="selectAction" title="马拉松" data-value="6" href="javascript:;">马拉松</a></li>
+
+                                                                    <li><a data-selector="selectAction" title="路跑" data-value="7" href="javascript:;">路跑</a></li>
+
+                                                                </ul>
+                                                            </dd>
+
+                                                        </dl>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </td>
@@ -129,10 +266,59 @@
                                     <tr>
                                         <th>运动项目</th>
                                         <td>
-                                            <div data-selector="activityItem" class="datadropdown">
+                                            <div id="activityItem" class="datadropdown">
                                                 <div class="datadropdown-head">
                                                     <input type="hidden" value="all" name="sportTypeId">
                                                     <input type="text" placeholder="全部" readonly="readonly" class="span2 datadropdown-action">
+                                                </div>
+                                                <div class="datadropdown-content" style="padding: 10px; display: none;"><style>#NTGUID__g{min-width:400px; position: relative;}#NTGUID__g a.select-all{    display: inline-block;    text-align: center;    padding: 0 10px;    line-height: 20px;    height: 20px;    color: #fff;    background-color: #F5A623;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;  }#NTGUID__g a.select-all:hover{    text-decoration: none;    background-color: #E08C03;    transition: all .3s;    -webkit-transition: all .3s;    -moz-transition: all .3s;  }#NTGUID__g dt{    display: block;    border-bottom: 3px solid #ebebeb;    margin-bottom: 5px;    white-space: nowrap;  }#NTGUID__g dt a.tab-item{    display: inline-block;    margin-bottom: -3px;    position: relative;    z-index: 5;    text-align: center;    width: 80px;    line-height: 25px;    height: 25px;    border-bottom: 3px solid #ebebeb;    margin-right: -3px;  }#NTGUID__g dt a.tab-item:hover{    color: #F97D18;    text-decoration: none;  }#NTGUID__g dt a.tab-item.current{    border-bottom: 3px solid #F97D18;    color: #F97D18;  }#NTGUID__g dd ul{    display: block;  }#NTGUID__g dd li{    float: left;    width: 76px;    white-space: nowrap;    text-overflow:ellipsis;    overflow: hidden;    padding: 2px;  }#NTGUID__g dd li a{    display: inline-block;    float: left;    width: 76px;    text-align: center;    overflow: hidden;    line-height: 25px;    height: 25px;    white-space: nowrap;    text-overflow:ellipsis;    overflow: hidden;  }#NTGUID__g dd li a.current{    background-color: #F5A623;    color: #fff;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;  }#NTGUID__g dd li a:hover{    text-decoration: none;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;    background-color: #EBEBEB;    color:#555;    transition: all .3s;    -webkit-transition: all .3s;    -moz-transition: all .3s;  }#NTGUID__g dd.hide{    display: none;  }</style>
+                                                    <div style="width:400px" id="NTGUID__g">
+                                                        <a data-selector="datadropdownClose" class="datadropdown-close" href="javascript:;">×</a>
+                                                        <dl>
+                                                            <dt>
+                                                            <p><a data-value="" data-selector="selectAction" class="select-all" href="javascript:;">所有项目</a></p>
+
+                                                            </dt>
+
+                                                            <dd>
+
+                                                                <li><a data-selector="selectAction" title="马拉松" data-value="6" href="javascript:;" class="current">马拉松</a></li>
+
+                                                                <li><a data-selector="selectAction" title="路跑" data-value="7" href="javascript:;">路跑</a></li>
+
+                                                                <li><a data-selector="selectAction" title="羽毛球" data-value="8" href="javascript:;">羽毛球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="乒乓球" data-value="9" href="javascript:;">乒乓球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="台球" data-value="10" href="javascript:;">台球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="网球" data-value="11" href="javascript:;">网球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="自行车" data-value="12" href="javascript:;">自行车</a></li>
+
+                                                                <li><a data-selector="selectAction" title="山地户外活动" data-value="16" href="javascript:;">山地户外活动</a></li>
+
+                                                                <li><a data-selector="selectAction" title="瑜伽" data-value="38" href="javascript:;">瑜伽</a></li>
+
+                                                                <li><a data-selector="selectAction" title="足球" data-value="40" href="javascript:;">足球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="篮球" data-value="41" href="javascript:;">篮球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="游泳" data-value="55" href="javascript:;">游泳</a></li>
+
+                                                                <li><a data-selector="selectAction" title="钓鱼" data-value="64" href="javascript:;">钓鱼</a></li>
+
+                                                                <li><a data-selector="selectAction" title="脚斗士" data-value="68" href="javascript:;">脚斗士</a></li>
+
+                                                                <li><a data-selector="selectAction" title="滑雪" data-value="69" href="javascript:;">滑雪</a></li>
+
+                                                                <li><a data-selector="selectAction" title="徒步" data-value="70" href="javascript:;">徒步</a></li>
+
+                                                            </dd>
+
+                                                        </dl>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </td>
@@ -170,10 +356,47 @@
                                     <tr>
                                         <th>运动项目</th>
                                         <td>
-                                            <div data-selector="venuesItem" class="datadropdown">
+                                            <div id="venuesItem" class="datadropdown">
                                                 <div class="datadropdown-head">
                                                     <input type="hidden" value="all" name="sportTypeId">
                                                     <input type="text" placeholder="全部" readonly="readonly" class="span2 datadropdown-action">
+                                                </div>
+                                                <div class="datadropdown-content" style="padding: 10px; display: none;"><style>#NTGUID__b{min-width:400px; position: relative;}#NTGUID__b a.select-all{    display: inline-block;    text-align: center;    padding: 0 10px;    line-height: 20px;    height: 20px;    color: #fff;    background-color: #F5A623;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;  }#NTGUID__b a.select-all:hover{    text-decoration: none;    background-color: #E08C03;    transition: all .3s;    -webkit-transition: all .3s;    -moz-transition: all .3s;  }#NTGUID__b dt{    display: block;    border-bottom: 3px solid #ebebeb;    margin-bottom: 5px;    white-space: nowrap;  }#NTGUID__b dt a.tab-item{    display: inline-block;    margin-bottom: -3px;    position: relative;    z-index: 5;    text-align: center;    width: 80px;    line-height: 25px;    height: 25px;    border-bottom: 3px solid #ebebeb;    margin-right: -3px;  }#NTGUID__b dt a.tab-item:hover{    color: #F97D18;    text-decoration: none;  }#NTGUID__b dt a.tab-item.current{    border-bottom: 3px solid #F97D18;    color: #F97D18;  }#NTGUID__b dd ul{    display: block;  }#NTGUID__b dd li{    float: left;    width: 76px;    white-space: nowrap;    text-overflow:ellipsis;    overflow: hidden;    padding: 2px;  }#NTGUID__b dd li a{    display: inline-block;    float: left;    width: 76px;    text-align: center;    overflow: hidden;    line-height: 25px;    height: 25px;    white-space: nowrap;    text-overflow:ellipsis;    overflow: hidden;  }#NTGUID__b dd li a.current{    background-color: #F5A623;    color: #fff;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;  }#NTGUID__b dd li a:hover{    text-decoration: none;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;    background-color: #EBEBEB;    color:#555;    transition: all .3s;    -webkit-transition: all .3s;    -moz-transition: all .3s;  }#NTGUID__b dd.hide{    display: none;  }</style>
+                                                    <div style="width:400px" id="NTGUID__b">
+                                                        <a data-selector="datadropdownClose" class="datadropdown-close" href="javascript:;">×</a>
+                                                        <dl>
+                                                            <dt>
+                                                            <p><a data-value="" data-selector="selectAction" class="select-all" href="javascript:;">所有项目</a></p>
+
+                                                            </dt>
+
+                                                            <dd>
+
+                                                                <li><a data-selector="selectAction" title="羽毛球" data-value="1" href="javascript:;">羽毛球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="篮球" data-value="2" href="javascript:;">篮球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="足球" data-value="3" href="javascript:;">足球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="乒乓球" data-value="4" href="javascript:;">乒乓球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="瑜伽" data-value="5" href="javascript:;">瑜伽</a></li>
+
+                                                                <li><a data-selector="selectAction" title="游泳" data-value="6" href="javascript:;">游泳</a></li>
+
+                                                                <li><a data-selector="selectAction" title="网球" data-value="7" href="javascript:;">网球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="健身中心" data-value="8" href="javascript:;">健身中心</a></li>
+
+                                                                <li><a data-selector="selectAction" title="保龄球" data-value="9" href="javascript:;">保龄球</a></li>
+
+                                                                <li><a data-selector="selectAction" title="台球" data-value="11" href="javascript:;">台球</a></li>
+
+                                                            </dd>
+
+                                                        </dl>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </td>
