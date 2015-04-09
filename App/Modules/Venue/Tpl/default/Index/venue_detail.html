@@ -3,7 +3,14 @@
 <div class="container venues-details">
     <div class="row">
         <div class="span12">
-            <h2 class="venues-title">青浦游泳馆<span class="star-count"><i class="icon20 icon20-starin"></i><i class="icon20 icon20-starin"></i><i class="icon20 icon20-starin"></i><i class="icon20 icon20-starin"></i><i class="icon20 icon20-starout"></i></span> </h2>
+            <h2 class="venues-title"><{$detail.name}>
+                <span class="star-count">
+                    <i class="icon20 icon20-starin"></i>
+                    <i class="icon20 icon20-starin"></i>
+                    <i class="icon20 icon20-starin"></i>
+                    <i class="icon20 icon20-starin"></i>
+                    <i class="icon20 icon20-starout"></i>
+                </span> </h2>
             <div class="content-box venues-info">
                 <div class="clearfix">
                     <div class="venues-panel">
@@ -17,25 +24,25 @@
                     <div class="venues-owner">
                         <table class="venues-desc">
                             <thead>
-                            <tr><th colspan="2"><span class="text-tip">人均</span>￥20</th>
+                            <tr><th colspan="2"><span class="text-tip">人均</span>￥<{$detail.person_cost}></th>
                             </tr></thead>
                             <tbody>
                             <tr>
                                 <th>项目：</th>
-                                <td>游泳</td>
+                                <td><{$detail.sport_id|getSportName}></td>
                             </tr>
                             <tr>
                                 <th>地点：</th>
-                                <td>青浦区浦仓路535号</td>
+                                <td><{$detail.address}></td>
                             </tr>
                             <tr>
                                 <th>电话：</th>
-                                <td>021-69221360</td>
+                                <td><{$detail.phone}></td>
                             </tr>
                             </tbody>
                         </table>
                         <div class="venues-action">
-                            <a data-url="/venueuser/addFavoriteVenue" data-params="{'venueId':3567, 'followCount':6}" data-selector="collectButton" class="btn btn-collect" href="javascript:;"><i class="icon28 icon28-collect icon28-collected"></i>收藏(<em>6</em>)</a>
+                            <a data-url="/venueuser/addFavoriteVenue" data-params="{'venueId':3567, 'followCount':6}" data-selector="collectButton" class="btn btn-collect" href="javascript:;"><i class="icon28 icon28-collect icon28-collected"></i>收藏(<em><{$detail.followCount}></em>)</a>
                         </div>
                     </div>
                 </div>
@@ -44,10 +51,12 @@
             <div data-deleteurl="/userCenter/DeleteVenueReply?replyId=" data-url="/venue/getVenueReply" data-reply-action="/venueuser/publishReply" data-comment-action="/venueuser/publishReply" data-params="{'venueId':3567, 'pageNum':0, 'pageSize':5}" data-star="true" data-selector="commentList" class="content-box"><style>#NTGUID__4 h5{      margin: 0;      padding: 0;      font-size: 20px;      line-height: 20px;      display: block;    }#NTGUID__4 h5 span,#NTGUID__4 h5 em{      vertical-align: bottom;    }#NTGUID__4 h5 em{      color: #999;      margin-left: 5px;    }#NTGUID__4 h5 em,#NTGUID__4 h5 i{      font-size: 12px;      font-weight: normal;      font-style: normal;    }#NTGUID__4 h5 i{      color: #363636;      padding: 0 5px;    }#NTGUID__4 .comment-list dl{      border-bottom: 1px dotted #E0E0E0;      padding: 15px 0;      display: none;    }#NTGUID__4 .btn-block{      margin-top: 28px;    }#NTGUID__4 .comment-list dl dt{      float: left;      width: 50px;      overflow: hidden;    }#NTGUID__4 .comment-list dl dt img{      border-radius: 50%;      -webkit-border-radius: 50%;      -moz-border-radius: 50%;      width: 40px;      height: 40px;    }#NTGUID__4 .comment-list dl dd{      display: block;      margin-left: 60px;    }#NTGUID__4 .comment-list dl dd .user-header{      display: block;      font-size: 14px;      margin-bottom: 5px;    }#NTGUID__4 .comment-list dl dd .user-header table{      width: 100%;      margin: 0;    }#NTGUID__4 .comment-list dl dd .user-header th{      text-align: left;      font-weight: normal;    }#NTGUID__4 .comment-list dl dd .user-header td{      text-align: right;    }#NTGUID__4 .comment-list dl dd .user-header span{      color: #C3C3C3;      font-weight: normal;      font-size: 12px;      margin-left: 20px;    }#NTGUID__4 .comment-list dl dd .user-header a{      color: #555;    }#NTGUID__4 .comment-list dl dd .comment-content{      margin: 0;      padding: 0;      font-size: 14px;      line-height: 22px;      overflow: hidden;      width: 90%;      color: #333;      font-weight: normal;      text-shadow: none;      -webkit-text-shadow: none;      -moz-text-shadow: none;    }#NTGUID__4 .comment-textarea{      display: block;      width: 96%;      resize: none;    }#NTGUID__4 .btn-warning{      padding-left: 20px;      padding-right: 20px;      margin-top: 20px;    }#NTGUID__4 p{      margin: 0;      padding: 0;    }#NTGUID__4 .reply-panel p a{      font-size: 14px;      color: #999;    }#NTGUID__4 .comment-list .reply-panel .reply-form{      display: none;      position: relative;      border: 1px solid #F5A623;      margin-top: 5px;      padding: 5px 0;      border-radius: 4px;      -webkit-border-radius: 4px;      -moz-border-radius: 4px;    }#NTGUID__4 .comment-list .reply-panel .reply-form i.icon-up{      display: inline-block;      width:0;      height:0;      border-width:6px;      border-color:transparent transparent #fff transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 42px;      top: -13px;      z-index: 5;    }#NTGUID__4 .comment-list .reply-panel .reply-form .btn{      position: absolute;      right: 5px;      top: 5px;      margin: 0;    }#NTGUID__4 .comment-list .reply-panel .reply-form em.icon-down{      display: inline-block;      width:0;      height:0;      border-width:8px;      border-color:transparent transparent #F5A623 transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 40px;      top: -17px;      z-index: 1;    }#NTGUID__4 .comment-list .reply-panel .reply-form input{      background: #fff;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;      width: 670px;      resize:none;    }#NTGUID__4 .comment-list .reply-panel .reply-form input:focus{      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;    }#NTGUID__4 .icon16{      display: inline-block;      width: 14px;      height: 16px;      margin-right: 0px;    }#NTGUID__4 .comment-star{      font-size: 14px;      line-height: 20px;      padding-bottom: 5px;    }#NTGUID__4 .comment-star .icon16{      cursor: pointer;    }#NTGUID__4 .comment-form{      margin-top: 2px;    }#NTGUID__4 .comment-form .btn-warning{      margin-top: 0;    }  </style><div id="NTGUID__4">
                 <h5>
                     <span>评论</span>
-                    <em>(共<i data-selector="commentTotal">3</i>条评论)</em>
+                    <em>(共<i data-selector="commentTotal"><{$detail.commentCount}></i>条评论)</em>
                 </h5>
                 <div class="comment-list">
-                    <div data-selector="commentFormData"><div id="NTGUID__4NDTGUID__9">
+                    <?php if(I('session.mark')!= NULL){ ?>
+                    <div data-selector="commentFormData" >
+                        <div id="NTGUID__4NDTGUID__9">
 
                         <dl style="display: block;" class="clearfix">
                             <dt>
@@ -78,6 +87,7 @@
 
 
                     </div>
+                    <?php }?>
                     <div data-selector="commentData"><div id="NTGUID__4NDTGUID__a">
 
                         <dl class="clearfix" style="display: block;">
@@ -196,8 +206,8 @@
 
                     </div><div data-selector="commentData"></div><div data-selector="commentData"></div><div data-selector="commentData"></div>
                 </div>
-                <p>
-                    <button data-selector="seeMore" class="btn btn-block">没有更多</button>
+                <p id="more">
+                    <button data-selector="seeMore" class="btn btn-block">点击加载更多内容</button>
                 </p>
             </div>
 

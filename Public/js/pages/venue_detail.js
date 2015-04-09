@@ -20,7 +20,18 @@ $(function () {
             $('#starTotal').val(index);
         });
     });
-
+    //评论
+    $('.clearfix').validate({
+        rules: {
+            content: 'required'
+        },
+        messages:{
+            content:'评论内容不能为空'
+        },
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
     // 回复
     var $replyPanel = $('.reply-panel');
     $replyPanel.find('a').click(function() {

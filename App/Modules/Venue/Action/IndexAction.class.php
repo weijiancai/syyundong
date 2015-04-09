@@ -43,7 +43,16 @@ class IndexAction extends Action {
     */
     public function venue_detail()
     {
-
+        $id = $_GET['id'];
+        $detail = D('VVenue')->where('id=' . $id)->find();
+        $this->assign('detail', $detail);
         $this->display();
+    }
+    /*
+     * @时间: 20150409
+     * @功能：场馆评论
+     */
+    public function venue_comment(){
+
     }
 }

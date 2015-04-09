@@ -154,9 +154,9 @@ class IndexAction extends Action
         $this->display();
     }
     /*
-  * @时间: 20150408
-  * @功能：赛事关注
-  */
+     * @时间: 20150408
+     * @功能：赛事关注
+     */
     public function game_remon()
     {
         $id = $_GET['id'];
@@ -168,4 +168,5 @@ class IndexAction extends Action
         $this->assign('detail', $detail);
         $this->display();
     }
+
 }
