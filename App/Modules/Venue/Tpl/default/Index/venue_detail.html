@@ -88,12 +88,12 @@
                     </div>
                     <?php }?>
 
-                    <div data-selector="commentData" id="more">
-                        <div id="NTGUID__4NDTGUID__a">
+                    <div id="commentData">
+                        <!--<div id="NTGUID__4NDTGUID__a">
 
 
 
-                    </div>
+                    </div>-->
                     </div>
                    <!-- <div data-selector="commentData"></div>
                     <div data-selector="commentData"></div>
@@ -101,7 +101,7 @@
 
                 </div>
                 <p>
-                    <button data-selector="seeMore" class="get_more btn btn-block">点击加载更多内容</button>
+                    <button data-last="0" class="get_more btn btn-block" id="more">点击加载更多内容</button>
                 </p>
        <script id="list" type="text/html">
                         <dl class="clearfix" style="display: block;">
@@ -114,7 +114,7 @@
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <th><a target="_blank" href="/friend/passport_137569/timeline">han</a><span title="2015-03-19 14:56:39" data-timestamp="1426748199000">20天前</span></th>
+                                            <th><a target="_blank" href="/friend/passport_137569/timeline">{{user_id}}</a><span title="2015-03-19 14:56:39" data-timestamp="1426748199000">20天前</span></th>
                                             <td>
                                                 <i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i></td>
                                         </tr>
@@ -122,7 +122,7 @@
                                     </table>
                                 </div>
                                 <p class="comment-content"></p>
-                                <pre class="comment-content">{{$content}}</pre>
+                                <pre class="comment-content">{{content}}</pre>
                                 <div class="reply-panel">
                                     <p class="text-right">
 
@@ -155,55 +155,31 @@
                         <h4>其他热门场馆</h4>
                     </div>
                     <div class="pull-right">
-                        <a data-selector="changeDate" href="javascript:;"><i class="icon16 icon16-refresh"></i>换一组</a>
+                        <a data-selector="changeDate" href="javascript:;">
+                        <i class="icon16 icon16-refresh"></i><span id="change">换一组</span></a>
                     </div>
                     </dt>
-                    <dd data-selector="subRoot"><div id="NTGUID__2NDTGUID__8">
+                    <dd data-selector="subRoot">
+                        <div id="NTGUID__2NDTGUID__8">
 
-                        <ul class="clearfix">
-
-                            <li style="display: list-item;">
-                                <a href="3474"><img title="沈坚强游泳俱乐部（墨玉路店）" src="http://static.wisdom-china.cn//images/1/9146/2549/2084/9d8137059d1af3feaefa3f8177d31682_2_125x87.jpg?640x440"></a>
-                                <p><a title="沈坚强游泳俱乐部（墨玉路店）" href="3474">沈坚强游泳俱乐部（墨玉路店）</a></p>
-                                <div class="clearfix">
-                                    <span class="pull-left">嘉定区</span>
-                                    <span class="pull-right">人均<span class="text-error">30</span>元</span>
-                                </div>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <a href="3308"><img title="九亭奥林匹克花园游泳池" src="http://static.wisdom-china.cn//images/1/3783/1625/0738/c5101b828172308e111e60e77ccf9138_2_125x87.jpg?320x220"></a>
-                                <p><a title="九亭奥林匹克花园游泳池" href="3308">九亭奥林匹克花园游泳池</a></p>
-                                <div class="clearfix">
-                                    <span class="pull-left">松江区</span>
-                                    <span class="pull-right">人均<span class="text-error">30</span>元</span>
-                                </div>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <a href="3238"><img title="上海大学生体育中心游泳馆" src="http://static.wisdom-china.cn//images/1/5716/7479/4100/c674ac787236a254d4f2a9d96d196c30_2_125x87.jpg?640x440"></a>
-                                <p><a title="上海大学生体育中心游泳馆" href="3238">上海大学生体育中心游泳馆</a></p>
-                                <div class="clearfix">
-                                    <span class="pull-left">松江区</span>
-                                    <span class="pull-right">人均<span class="text-error">26</span>元</span>
-                                </div>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <a href="220"><img title="徐汇游泳馆" src="http://static.wisdom-china.cn//images/1/8365/7686/8976/008c5aef35da01c039b2512a23206d89_2_125x87.jpg?480x330"></a>
-                                <p><a title="徐汇游泳馆" href="220">徐汇游泳馆</a></p>
-                                <div class="clearfix">
-                                    <span class="pull-left">徐汇区</span>
-                                    <span class="pull-right">人均<span class="text-error">31</span>元</span>
-                                </div>
-                            </li>
+                        <ul class="clearfix" id="other">
 
                         </ul>
-
+<script id="detail_list" type="text/html">
+    <li style="display: list-item;">
+        <a href="220"><img title="{{name}}" src="http://static.wisdom-china.cn//images/1/8365/7686/8976/008c5aef35da01c039b2512a23206d89_2_125x87.jpg?480x330"></a>
+        <p><a title="{{name}}" href="220">{{name}}</a></p>
+        <div class="clearfix">
+            <span class="pull-left">{{region}}</span>
+            <span class="pull-right">人均<span class="text-error">{{person_cost}}</span>元</span>
+        </div>
+    </li>
+</script>
                     </div>
                     </dd>
                 </dl>
-
+<input type="hidden" value="<{$detail.id}>" id="id" name="id">
+<input type="hidden" id="s_id" value="<{$detail.id}>" name="s_id">
             </div>
 
 

@@ -28,6 +28,8 @@ $Public_Config =  array(
         '/^Venue\/(\d+)$/' => 'Venue/index/Venue_detail?id=:1',
         '/^Venue\/publishReply$/' => 'Venue/index/publishReply',
         '/^Venue\/VenueCommentLoad$/' => 'Venue/index/VenueCommentLoad',
+        '/^Venue\/OtherVenueChange/' => 'Venue/index/OtherVenueChange',
+        '/^Venue\/HotVenue/' => 'Venue/index/HotVenue',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',

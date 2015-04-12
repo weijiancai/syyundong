@@ -24,7 +24,6 @@
                 if(options){
                     $.extend(settings, options);
                 }
-				
                 templates = $(this).children(settings.templates).wrap('<div/>').parent();
                 templates.css('display','none')
                 $(this).append('<div class="more_loader_spinner">'+settings.spinner_code+'</div>')
@@ -64,19 +63,21 @@
             
             var root = target       
          //   alert(root.attr('id'))
+            console.log(root);
             var counter = 0;
             if(data){
 				var html='';
 				for(var i=0;i<data.length;i++){
-					html += t= template('list',data[i]);
+					html += template('list',data[i]);
 					root.children(settings.template+':last').attr('id', 'more_element_'+ ((variables.last++)+1)) 
 				}
-				if(settings.scroll == 'true'){
+                alert(html);
+                $(root).append(html);
+                if(settings.scroll == 'true'){
 					root.children('.more_loader_spinner').before(html)	
 				}else{
-					root.children('.link').before(html)  
+					root.children('.get_more').before(html)
 				}
-				 
             }            
             else  methods.remove()
             target.children('.more_loader_spinner').css('display','none');

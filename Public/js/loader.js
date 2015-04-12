@@ -7,6 +7,7 @@ var loader_config = {
     urlArgs: "bust=" +  (new Date()).getTime(),
     paths: {
         'jquery': 'lib/jquery-1.11.1',
+        'template':'template',
         'more':'jquery.more',
         'validate': 'lib/jquery.validate',
         'bootstrap': 'lib/bootstrap',
@@ -33,7 +34,7 @@ var loader_config = {
             exports: 'bootstrap'
         },
         'common': {
-            deps: ['jquery', 'bootstrap', 'validate','more'],
+            deps: ['jquery', 'bootstrap', 'validate','template','more'],
             exports: 'common'
         },
         'common_footer': {

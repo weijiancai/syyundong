@@ -172,51 +172,24 @@
                 <h4>热门场馆</h4>
             </div>
             <div class="pull-right">
-                <a data-selector="changeDate" href="javascript:;"><i class="icon16 icon16-refresh"></i>换一组</a>
+                <a data-selector="changeDate" href="javascript:;"><i class="icon16 icon16-refresh"></i><span id="change">换一组</span></a>
             </div>
             </dt>
             <dd data-selector="subRoot"><div id="NTGUID__5NDTGUID__9">
 
-                <ul class="clearfix">
-
-                    <li style="display: list-item;">
-                        <a href="6291"><img title="爱瑜伽生活馆" src="http://static.wisdom-china.cn//images/1/1741/6323/5279/cfc180c6d095c43943c90962d725845b_2_125x87.jpg?640x440"></a>
-                        <p><a title="爱瑜伽生活馆" href="6291">爱瑜伽生活馆</a></p>
-                        <div class="clearfix">
-                            <span class="pull-left">通州区</span>
-                            <span class="pull-right">人均<span class="text-error">1110</span>元</span>
-                        </div>
-                    </li>
-
-                    <li style="display: list-item;">
-                        <a href="7619"><img title="汇祥健身俱乐部" src="http://static.wisdom-china.cn//images/1/4801/2448/5976/5f0df136b9280fd354d166a17b864abf_2_125x87.jpg?480x331"></a>
-                        <p><a title="汇祥健身俱乐部" href="7619">汇祥健身俱乐部</a></p>
-                        <div class="clearfix">
-                            <span class="pull-left">番禺区</span>
-                            <span class="pull-right">人均<span class="text-error">1750</span>元</span>
-                        </div>
-                    </li>
-
-                    <li style="display: list-item;">
-                        <a href="10035"><img title="仙桐体育公园" src="http://static.wisdom-china.cn//images/1/0918/5402/2475/a8422081364e780caca2aacbfd41868d_2_125x87.png?1286x884"></a>
-                        <p><a title="仙桐体育公园" href="10035">仙桐体育公园</a></p>
-                        <div class="clearfix">
-                            <span class="pull-left"></span>
-                            <span class="pull-right">人均<span class="text-error">10</span>元</span>
-                        </div>
-                    </li>
-
-                    <li style="display: list-item;">
-                        <a href="3135"><img title="燃五足球俱乐部" src="http://static.wisdom-china.cn//images/1/2288/9222/0650/a6e26849a7ffb306cea23bd58f5debc2_2_125x87.jpg?480x330"></a>
-                        <p><a title="燃五足球俱乐部" href="3135">燃五足球俱乐部</a></p>
-                        <div class="clearfix">
-                            <span class="pull-left">宝山区</span>
-                            <span class="pull-right">人均<span class="text-error">25</span>元</span>
-                        </div>
-                    </li>
+                <ul class="clearfix" id="hot">
 
                 </ul>
-
+                <script id="list" type="text/html">
+                    <li style="display: list-item;">
+                        <a href="3135"><img title="{{name}}" src="http://static.wisdom-china.cn//images/1/2288/9222/0650/a6e26849a7ffb306cea23bd58f5debc2_2_125x87.jpg?480x330"></a>
+                        <p><a title="{{name}}" href="3135">{{name}}</a></p>
+                        <div class="clearfix">
+                            <span class="pull-left">{{region}}</span>
+                            <span class="pull-right">人均<span class="text-error">{{person_cost}}</span>元</span>
+                        </div>
+                    </li>
+                </script>
             </div>
             </dd>
         </dl>

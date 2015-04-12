@@ -37,7 +37,7 @@ class IndexAction extends Action {
      */
     public function new_comment(){
         $model = New Model();
-        return $model->query('select v.name,c.content,u.name,c.input_date from op_comment c,db_user u ,db_venue v where c.user_id= u.id and c.source_id = v.id and c.source_type=3');
+        return $model->query('select v.name,c.content,u.name,c.input_date from op_comment c,db_user u ,db_venue v where c.user_id= u.id and c.source_id = v.id and c.source_type=3 limit 5');
     }
     /*
     * @时间:20150408
@@ -77,10 +77,32 @@ class IndexAction extends Action {
         $where['source_id'] = $_POST['source_id'];
         $where['source_type'] = 3;
         $last = $_POST['last'];
-        $amount = $_POST['amount'];
+        $amount = $_POST['amount']+$_POST['last'];
         $order = 'input_date desc';
         $list = D('OpComment')->where($where)->order($order)->limit($last, $amount)->select();
-        dump(D('OpComment')->getLastSql());
+        echo json_encode($list);
+    }
+    /*
+     * @时间：20150412
+     * @功能：场馆详细页其他热门场馆
+     */
+    public function OtherVenueChange(){
+        $where['id'] = array('neq',$_POST['id']);
+        $ids = D('DbVenue')->where($where)->getField('id',true);
+        $limit =array_rand($ids,4);
+        $map['id'] =array('in',$limit);
+        $list = D('DbVenue')->where($map)->select();
+        echo json_encode($list);
+    }
+    /*
+     * @时间：20150412
+     * @功能：场馆首页其他热门场馆
+     */
+    public function HotVenue(){
+        $ids = D('DbVenue')->getField('id',true);
+        $limit =array_rand($ids,4);
+        $map['id'] =array('in',$limit);
+        $list = D('DbVenue')->where($map)->select();
         echo json_encode($list);
     }
 }

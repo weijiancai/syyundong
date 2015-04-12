@@ -24,11 +24,11 @@ class IndexModel extends Model
     }
     /*
      * @功能：查询区域
-     * @时间：
+     * @时间：20150412
      */
     public function area()
     {
-       return  D('DbArea')->select();
+       return  D('DbRegion')->where('level=3')->select();
     }
 }
 ?>
