@@ -7,34 +7,42 @@ $(function () {
 
     // 评分
     var $commentStar = $('#commentStar');
-    $commentStar.find('i').each(function(index) {
-        $(this).hover(function() {
+    $commentStar.find('i').each(function (index) {
+        $(this).hover(function () {
             var $i = $commentStar.find('i');
-            for(var i = 0; i <= index; i++) {
+            for (var i = 0; i <= index; i++) {
                 $i.eq(i + 1).removeClass('icon16-starout').addClass('icon16-starin');
             }
-            for(i = index; i < 5; i++) {
+            for (i = index; i < 5; i++) {
                 $i.eq(i + 1).removeClass('icon16-starin').addClass('icon16-starout');
             }
-        }).click(function() {
-            $('#starTotal').val(index);
+        }).click(function () {
+            $('#starTotal').val(index + 1);
         });
     });
     //评论
-    $('.clearfix').validate({
+    $('#commentform').validate({
         rules: {
             content: 'required'
         },
-        messages:{
-            content:'评论内容不能为空'
+        messages: {
+            content: '评论内容不能为空'
         },
         submitHandler: function (form) {
-            form.submit();
+            //    form.submit();
+            jQuery.ajax({
+                type: "post",
+                url: "publishReply",
+                data: $('#commentform').serialize(),
+                success: function (result) {
+                    alert(result);
+                }
+            });
         }
     });
     // 回复
     var $replyPanel = $('.reply-panel');
-    $replyPanel.find('a').click(function() {
+    $replyPanel.find('a').click(function () {
         var $panel = $(this).parent().parent();
         $panel.find('.reply-form').toggle();
     });
@@ -51,4 +59,7 @@ $(function () {
             $(form).parent().hide();
         }
     });
+
+    var source_id = $('#source_id').val();
+    $('#more').more({'address': 'VenueCommentLoad','source_id':source_id})
 });

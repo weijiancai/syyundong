@@ -52,7 +52,32 @@ class IndexAction extends Action {
      * @时间: 20150409
      * @功能：场馆评论
      */
-    public function venue_comment(){
-
+    public function publishReply(){
+        $model = D('OpComment');
+        $date['content'] = $_POST['content'];
+        $date['star_count'] = $_POST['starLevel'];
+        $date['user_id'] = deCode(I('session.mark_id'));
+        $date['source_id']  = $_POST['source_id'];
+        $date['source_type']  = 1;
+        $date['input_date']  = date('Y-m-d H:i:s');
+        $result  = $model->add($date);
+        if(false!==$result){
+            echo 1;
+        }else{
+           echo 0;
+        }
+    }
+    /*
+     * @时间：20150412
+     * @功能：场馆评论加载
+     */
+    public function VenueCommentLoad(){
+        $where['source_id'] = $_POST['source_id'];
+        $where['source_type'] = 3;
+        $last = $_POST['last'];
+        $amount = $_POST['amount'];
+        $order = 'input_date desc';
+        $list = D('OpComment')->where($where)->order($order)->limit($last, $amount)->select();
+        echo json_encode($list);
     }
 }

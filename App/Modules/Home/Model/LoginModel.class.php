@@ -19,7 +19,7 @@ class loginModel extends Model
             return 3;
         } else {
             $id = enCode($data['id']);
-            session('mark', "$id");
+            session('mark_id', "$id");
             return 1;
         }
     }

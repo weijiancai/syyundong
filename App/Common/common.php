@@ -128,5 +128,33 @@ function getFocus($id,$type)
 {
   return D('OpFocus')->where('`source_id`='.$id .' and `source_type` ='.$type)->count();
 }
+/**
+ *  @功能：格式化时间
+ *  @时间：20150412
+ */
+function m_date($time = NULL) {
+    $time  = strtotime($time);
+    $time = $time === NULL || $time > time() ? time() : intval($time);
+    $t = time() - $time; //时间差 （秒）
+    if ($t == 0)
+        $text = '刚刚';
+    elseif ($t < 60)
+        $text = $t . '秒前'; // 一分钟内
+    elseif ($t < 60 * 60)
+        $text = floor($t / 60) . '分钟前'; //一小时内
+    elseif ($t < 60 * 60 * 24)
+        $text = floor($t / (60 * 60)) . '小时前'; // 一天内
+    elseif ($t < 60 * 60 * 24 * 2)
+        $text = '昨天 ' . date('H:i', $time); //两天内
+    elseif ($t < 60 * 60 * 24 * 3)
+        $text = '前天 ' . date('H:i', $time); // 三天内
+    elseif ($t < 60 * 60 * 24 * 30)
+        $text = date('m月d日 H:i', $time); //一个月内
+    elseif ($t < 60 * 60 * 24 * 365)
+        $text = date('Y年m月d日', $time); //一年内
+    else
+        $text = date('Y年m月d日', $time); //一年以前
+    return $text;
+}
 
 ?>
