@@ -115,7 +115,12 @@ _script.async = true;
 _script.onload = function() {
     require.config(loader_config);
     // 加载模块
-    require(Loader.modules);
+    //require(Loader.modules);
+
+    var modules = Loader.modules;
+    for(var i = 0; i < modules.length; i++) {
+        $.getScript(loader_config.baseUrl + loader_config.paths[modules[i]] + '.js');
+    }
 };
 document.getElementsByTagName("head")[0].appendChild(_script);
 

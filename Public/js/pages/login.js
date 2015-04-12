@@ -13,6 +13,7 @@ $(function() {
         },
         submitHandler: function (form) {
             form.submit();
+            $.dialog.error('帐号或者密码错误');
         }
     });
 });
