@@ -12,9 +12,9 @@ $(function() {
             $navigation.find('> ul').removeClass('hover');
         });
 
-        /*$navigation.find('ul').mouseleave(function() {
-         $navigation.find('> ul').removeClass('hover');
-         });*/
+        $navigation.find('ul').mouseleave(function () {
+            $navigation.find('> ul').removeClass('hover');
+        });
     } else {
         $navigation.find('ul').mouseleave(function() {
             $navigation.find('div.navigation-item-content').hide();
