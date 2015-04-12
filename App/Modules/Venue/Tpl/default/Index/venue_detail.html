@@ -88,16 +88,63 @@
                     </div>
                     <?php }?>
 
-                    <div data-selector="commentData">
+                    <div data-selector="commentData" id="more">
                         <div id="NTGUID__4NDTGUID__a">
-                    </div>
 
-                    </div><div data-selector="commentData"></div><div data-selector="commentData"></div><div data-selector="commentData"></div>
+
+
+                    </div>
+                    </div>
+                   <!-- <div data-selector="commentData"></div>
+                    <div data-selector="commentData"></div>
+                    <div data-selector="commentData"></div>-->
+
                 </div>
-                <p id="more">
-                    <button data-selector="seeMore" class="btn btn-block">点击加载更多内容</button>
+                <p>
+                    <button data-selector="seeMore" class="get_more btn btn-block">点击加载更多内容</button>
                 </p>
+       <script id="list" type="text/html">
+                        <dl class="clearfix" style="display: block;">
+                            <dt>
+                                <a target="_blank" href="/friend/passport_137569/timeline">
+                                    <img title="han" src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/101156472/083977BA8333F75E72A8560898137E25/100/083977BA8333F75E72A8560898137E25_2_40x40.png"></a>
+                            </dt>
+                            <dd>
+                                <div class="user-header">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <th><a target="_blank" href="/friend/passport_137569/timeline">han</a><span title="2015-03-19 14:56:39" data-timestamp="1426748199000">20天前</span></th>
+                                            <td>
+                                                <i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p class="comment-content"></p>
+                                <pre class="comment-content">{{$content}}</pre>
+                                <div class="reply-panel">
+                                    <p class="text-right">
+
+                                        <a data-selector="replyLink" href="javascript:;">回复</a>
+                                    </p>
+                                    <div class="reply-form">
+                                        <i class="icon-up"></i>
+                                        <em class="icon-down"></em>
+                                        <form method="post" action="/venueuser/publishReply" iyuesai-plugins-valid="0.8687050607902173">
+                                            <input type="hidden" value="42" name="commentId">
+                                            <input type="hidden" value="passport_137569" name="replyToId">
+                                            <input type="text" validate-rules="[['required']]" placeholder="回复 han：" name="content">
+                                            <button class="btn btn-warning" type="submit">回复</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </dd>
+                        </dl>
+        </script>
             </div>
+
+
             </div>
         </div>
         <div class="span4">

@@ -21,6 +21,7 @@ class IndexAction extends Action {
         $this->assign('count', $count);
         $this->assign('area',D('Public/Index')->area());
         $this->assign('venue_sport',$this->venue_sport());
+        $this->assign('new_comment',$this->new_comment());
 		$this->display();
 	}
     /*
@@ -35,7 +36,8 @@ class IndexAction extends Action {
      * 时间：20150407
      */
     public function new_comment(){
-
+        $model = New Model();
+        return $model->query('select v.name,c.content,u.name,c.input_date from op_comment c,db_user u ,db_venue v where c.user_id= u.id and c.source_id = v.id and c.source_type=3');
     }
     /*
     * @时间:20150408
@@ -78,6 +80,7 @@ class IndexAction extends Action {
         $amount = $_POST['amount'];
         $order = 'input_date desc';
         $list = D('OpComment')->where($where)->order($order)->limit($last, $amount)->select();
+        dump(D('OpComment')->getLastSql());
         echo json_encode($list);
     }
 }

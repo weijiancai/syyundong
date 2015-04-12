@@ -228,61 +228,19 @@
     <div class="side-block">
         <h4 class="slider-title">最新评论</h4>
         <ul class="side-comment-col">
-
+        <volist name="new_comment" id="vo">
             <li>
                 <div class="side-comment-thumb pull-left">
                     <img alt="" src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/101156472/E6AF750772481C494E18A8799A3CF645/100/E6AF750772481C494E18A8799A3CF645_2_80x80.png">
                 </div>
                 <div class="side-comment-right">
-                    <p class="side-comment-name"><strong>刘立婷</strong><span class="side-lbs pull-right">青浦游泳馆</span></p>
-                    <p class="side-comment-detail">对对对</p>
-                    <p class="side-comment-time">1天前</p>
+                    <p class="side-comment-name"><strong><{$vo.name1}></strong><span class="side-lbs pull-right"><{$vo.name}></span></p>
+                    <p class="side-comment-detail"><{$vo.content}></p>
+                    <p class="side-comment-time"><{$vo.input_date|m_date}></p>
                 </div>
             </li>
 
-            <li>
-                <div class="side-comment-thumb pull-left">
-                    <img alt="" src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/101156472/083977BA8333F75E72A8560898137E25/100/083977BA8333F75E72A8560898137E25_2_80x80.png">
-                </div>
-                <div class="side-comment-right">
-                    <p class="side-comment-name"><strong>han</strong><span class="side-lbs pull-right">青浦游泳馆</span></p>
-                    <p class="side-comment-detail">eeeeee</p>
-                    <p class="side-comment-time">19天前</p>
-                </div>
-            </li>
-
-            <li>
-                <div class="side-comment-thumb pull-left">
-                    <img alt="" src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/101156472/083977BA8333F75E72A8560898137E25/100/083977BA8333F75E72A8560898137E25_2_80x80.png">
-                </div>
-                <div class="side-comment-right">
-                    <p class="side-comment-name"><strong>han</strong><span class="side-lbs pull-right">青浦游泳馆</span></p>
-                    <p class="side-comment-detail">wwwwwww</p>
-                    <p class="side-comment-time">19天前</p>
-                </div>
-            </li>
-
-            <li>
-                <div class="side-comment-thumb pull-left">
-                    <img alt="" src="http://static.wisdom-china.cn//images/1/5832/2293/8582/3d56978899e79873f3216069f74091d0_2_80x80.jpg">
-                </div>
-                <div class="side-comment-right">
-                    <p class="side-comment-name"><strong>刚刚好</strong><span class="side-lbs pull-right">四得公园篮球馆</span></p>
-                    <p class="side-comment-detail">看看咯默默默默默我现在我</p>
-                    <p class="side-comment-time">1个月前</p>
-                </div>
-            </li>
-
-            <li>
-                <div class="side-comment-thumb pull-left">
-                    <img alt="" src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/1103402448/DA058CD99F78CB369CF4825E45B9A134/100/DA058CD99F78CB369CF4825E45B9A134_2_80x80.png">
-                </div>
-                <div class="side-comment-right">
-                    <p class="side-comment-name"><strong>妹子卡</strong><span class="side-lbs pull-right">北工大游泳馆</span></p>
-                    <p class="side-comment-detail">Hjjjjjj</p>
-                    <p class="side-comment-time">2个月前</p>
-                </div>
-            </li>
+        </volist>
         </ul>
     </div>
 </div>

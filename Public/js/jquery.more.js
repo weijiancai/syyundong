@@ -10,8 +10,7 @@
         'address'     :   'comments.php',
         'format'      :   'json',
         'templates'   :   '.single_item',
-	//	'trigger'     :   '.get_more',
-        'trigger'     :   '.btn-block',
+		'trigger'     :   '.get_more',
         'scroll'      :   'false',
         'offset'      :   '100',
         'spinner_code':   '',
@@ -101,7 +100,7 @@
             }, function(data){  
 				if(!data){
 					$('#pageBar').html("<span>没有更多内容</span>")
-					$('.btn-block').html("没有更多内容");
+					$('.get_more').html("没有更多内容");
 				}
                 $(settings.trigger).css('display','block')
                 methods.add_elements(data)
