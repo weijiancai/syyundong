@@ -88,6 +88,20 @@ $(function () {
         })
     }
 
+    //收藏
+    $('.venues-action').find('a').click(function() {
+        jQuery.ajax({
+            type: "post",
+            url: "collection",
+            data: {id: $("#id").val()},
+            success: function ($result) {
+                if ($result) {
+
+                }
+            }
+        })
+    });
+
 
     //加载评论数据
     var s_id = $('#s_id').val();

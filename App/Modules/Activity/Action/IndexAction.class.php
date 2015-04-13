@@ -9,6 +9,7 @@ class IndexAction extends Action
     //首页内容
     public function index()
     {
+
         $this->display();
     }
 

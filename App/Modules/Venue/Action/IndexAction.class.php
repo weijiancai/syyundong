@@ -8,17 +8,51 @@ class IndexAction extends Action {
 	 * 首页内容
 	 */
 	public function index(){
+        //关键字
+        if (trim($_GET['keyword'])) {
+            $map['name'] = array('like', '%' .trim($_GET['keyword']). '%');
+        }
+        //场馆分类
+        if ($_GET['sportType']) {
+            $map['sport_id'] = array('eq', $_GET['sportType']);
+        }
+        //区域
+        if (trim($_GET['region'])) {
+            $map['region'] = array('eq', $_GET['region']);
+            $buss = D('DbRegion')->where('pid = '.$_GET['region'])->select();
+        }
+        //商圈
+        if ($_GET['business']) {
+            $map['business'] = array('eq', $_GET['business']);
+        }
+        //默认排序
+        if ($_GET['orderByNew'] == 'M') {
+            $order = 'input_date desc';
+        }
+        //评价
+        if ($_GET['orderByNew'] == 'S') {
+            $order = 'star_count desc';
+        }
+        //人气
+        if ($_GET['orderByNew'] == 'C') {
+            $order = 'commentCount desc';
+        }
+        //价格
+        if ($_GET['orderByNew'] == 'P') {
+            $order = 'person_cost desc';
+        }
         import('ORG.Util.Page');
         $model = D('VVenue');
-        $count = $model->count();
+        $count = $model->where($map)->order($order)->count();
         $Page = new Page($count, 3);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
         $Page->rollPage = 10;
-        $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->select();
+        $list = $model->where($map)->limit($Page->firstRow . ',' . $Page->listRows)->order($order)->select();
         $show = $Page->show();
         $this->assign('page', $show);
         $this->assign('venue', $list);
         $this->assign('count', $count);
+        $this->assign('buss', $buss);
         $this->assign('area',D('Public/Index')->area());
         $this->assign('venue_sport',$this->venue_sport());
         $this->assign('new_comment',$this->new_comment());
@@ -105,4 +139,18 @@ class IndexAction extends Action {
         $list = D('DbVenue')->where($map)->select();
         echo json_encode($list);
     }
+    /*
+     * @时间：20150413
+     * @功能：收藏场馆
+     */
+    public function collection(){
+        //首先判断用户是否登录
+        $mark = I('session.mark_id');
+        if ($mark) {
+           // $this->display();
+        } else {
+            $this->display('/login/login');
+        }
+    }
+
 }

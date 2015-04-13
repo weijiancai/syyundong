@@ -30,6 +30,7 @@ $Public_Config =  array(
         '/^Venue\/VenueCommentLoad$/' => 'Venue/index/VenueCommentLoad',
         '/^Venue\/OtherVenueChange/' => 'Venue/index/OtherVenueChange',
         '/^Venue\/HotVenue/' => 'Venue/index/HotVenue',
+        '/^Venue\/collection/' => 'Venue/index/collection',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',

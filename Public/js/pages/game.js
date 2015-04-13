@@ -31,7 +31,7 @@ $(function () {
     // 排序
     $('#order-group').find('li a').click(function() {
         var value = $(this).data('value');
-        console.log(value);
+     //   console.log(value);
         if(value == 'createDate') {
             $('#orderByNew').val('C');
         } else if(value == 'followCount') {

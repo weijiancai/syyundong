@@ -81,7 +81,7 @@ class IndexAction extends Action
         if ($mark) {
             $this->display();
         } else {
-            $this->redirect('/login/login');
+            $this->redirect();
         }
     }
 
