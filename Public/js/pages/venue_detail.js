@@ -95,8 +95,12 @@ $(function () {
             url: "collection",
             data: {id: $("#id").val()},
             success: function ($result) {
-                if ($result) {
-
+                if ($result==-1) {
+                    window.location.href='/login/login';
+                }else if($result==-2){
+                    $.dialog.success('收藏失败');
+                }else{
+                    $.dialog.success('收藏成功');
                 }
             }
         })

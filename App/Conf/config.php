@@ -31,6 +31,7 @@ $Public_Config =  array(
         '/^Venue\/OtherVenueChange/' => 'Venue/index/OtherVenueChange',
         '/^Venue\/HotVenue/' => 'Venue/index/HotVenue',
         '/^Venue\/collection/' => 'Venue/index/collection',
+        '/^Activity\/(\d+)$/' => 'Activity/index/activity_detail?id=:1',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',

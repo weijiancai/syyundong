@@ -77,11 +77,11 @@ class IndexAction extends Action
     public function publish()
     {
         //首先判断用户是否登录
-        $mark = I('session.mark_id');
+        $mark = I('session.mark');
         if ($mark) {
             $this->display();
         } else {
-            $this->redirect();
+            $this->redirect('/login/login');
         }
     }
 
@@ -133,7 +133,7 @@ class IndexAction extends Action
     public function hotrecommend()
     {
         $model = New Model();
-        $list = $model->query('select v.id,o.sort_num, v.name,v.province,v.image,v.join_count from v_game_activity v,op_recommend o
+        $list = $model->query('select v.id,o.sort_num, v.name,v.province,v.image,v.province,v.join_count from v_game_activity v,op_recommend o
                                 where v.id = o.gc_id and o.recommend_type = "game" and v.type="game" order by o.sort_num');
         $this->assign('recommend', $list);
     }

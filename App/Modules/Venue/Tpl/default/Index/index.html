@@ -16,7 +16,7 @@
                     <td valign="top"><div data-selector="regionList" class="item-panel" id="v_region">
 
                        <a href="javascript:;" class="radio-item <if condition="($_REQUEST['region'] eq all)or($_REQUEST['region'] eq '')">current</if>" data-value="all" data-selector="regionItem">全部</a>
-                        <volist name="area" id="vo">
+                        <volist name="region" id="vo">
                           <a href="javascript:;" class="radio-item <if condition="$_REQUEST['region'] eq $vo['id']">current</if>" data-value="<{$vo.id}>" data-selector="regionItem"><{$vo.name}></a>
                         </volist>
                     </div></td>

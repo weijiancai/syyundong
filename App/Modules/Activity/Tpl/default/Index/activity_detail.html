@@ -12,14 +12,14 @@
 
     <div class="row">
         <div class="span12">
-            <h2 class="activity-title"><span class="text-warning">[马拉松]</span>哈哈哈</h2>
+            <h2 class="activity-title"><span class="text-warning">[<{$detail.sport_id|getSportName}>]</span><{$detail.name}></h2>
             <div class="activity-desc clearfix">
                 <p class="pull-left">
-                    <span class="info-text"><i class="icon16 icon16-person"></i>1,129人感兴趣</span>
+                    <span class="info-text"><i class="icon16 icon16-person"></i><{$detail.interest_count}>人感兴趣</span>
                     <em class="info-slider"></em>
-                    <span class="info-text"><i class="icon16 icon16-joined"></i>已报名7人（剩余13人）</span>
+                    <span class="info-text"><i class="icon16 icon16-joined"></i>已报名<{$detail.join_count}>人（剩余13人）</span>
                     <em class="info-slider"></em>
-                    <span class="info-text">分享到：</span>
+                    <!--<span class="info-text">分享到：</span>-->
                 </p>
                 <p class="info-manage pull-right"></p>
             </div>
@@ -54,7 +54,7 @@
                                 </th>
                                 <td>
                                     <h4>
-                                        <a href="#">Luna1</a>
+                                        <a href="#"><{$detail.name}></a>
                                     </h4>
                                     <p>
                                         <span>参加活动</span><em>0</em><span class="slider"></span><span>成功发起活动</span><em>2</em>
@@ -68,22 +68,21 @@
                             <tr>
                                 <th>活动时间：</th>
                                 <!-- <td>11月10日 周日 18:00 - 23:00（报名剩余时间：67天12时15分）</td> -->
-                                <td>2016年12月18日 16:53 - 12月19日 00:00</td>
+                                <td><{$detail.start_date}> - <{$detail.end_date}></td>
                             </tr>
                             <tr><th>报名时间：</th>
                                 <td>
-                                    2010年12月18日 16:56
-                                    - 12月18日 16:23
+                                    <{$detail.reg_begin_date}> - <{$detail.reg_end_date}>
                                 </td>
                             </tr>
                             <tr>
                                 <th>地点：</th>
-                                <td>新疆|巴州|且末县|TT GG</td>
+                                <td><{$detail.address}></td>
                             </tr>
                             <tr>
                                 <th>费用：</th>
                                 <td>
-                                    10,000(元)
+                                    <{$detail.cost}>(元)
                                 </td>
                             </tr>
                             </tbody>

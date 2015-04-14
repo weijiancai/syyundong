@@ -53,7 +53,7 @@ class IndexAction extends Action {
         $this->assign('venue', $list);
         $this->assign('count', $count);
         $this->assign('buss', $buss);
-        $this->assign('area',D('Public/Index')->area());
+        $this->assign('region',D('Public/Index')->region());
         $this->assign('venue_sport',$this->venue_sport());
         $this->assign('new_comment',$this->new_comment());
 		$this->display();
@@ -147,9 +147,18 @@ class IndexAction extends Action {
         //首先判断用户是否登录
         $mark = I('session.mark_id');
         if ($mark) {
-           // $this->display();
+            $date['user_id'] = deCode($mark);
+            $date['source_id'] = $_POST['id'];
+            $date['source_type']=3;
+            $date['input_date'] = date('Y-m-d H:i:s');
+            $result = D('OpFocus')->add($date);
+            if(false!==$result){
+                echo $result;
+            }else{
+                echo -2;
+            }
         } else {
-            $this->display('/login/login');
+            echo -1;
         }
     }
 
