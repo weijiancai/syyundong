@@ -94,7 +94,7 @@ class IndexAction extends Action {
         $date['star_count'] = $_POST['starLevel'];
         $date['user_id'] = deCode(I('session.mark_id'));
         $date['source_id']  = $_POST['source_id'];
-        $date['source_type']  = 1;
+        $date['source_type']  = 3;
         $date['input_date']  = date('Y-m-d H:i:s');
         $result  = $model->add($date);
         if(false!==$result){

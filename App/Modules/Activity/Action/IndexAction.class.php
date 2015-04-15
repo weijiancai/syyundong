@@ -93,7 +93,7 @@ class IndexAction extends Action
     public function hotactivity()
     {
         $model = New Model();
-        $list = $model->query('select v.id,o.sort_num, v.name,v.province,v.image,v.join_count,v.interest_count,v.cost,(v.limit_count-v.join_count) remain from v_game_activity v,op_recommend o,dz_sport s
+        $list = $model->query('select v.id,o.sort_num, v.name,v.province,v.image,v.join_count,v.interest_count,v.cost,(v.limit_count-v.join_count) remain from v_game_activity v,op_recommend o
  where v.id = o.gc_id and o.recommend_type = "activity" and v.type="activity" order by o.sort_num');
         $this->assign('recommend', $list);
     }
@@ -119,8 +119,46 @@ class IndexAction extends Action
      * 功能:相似活动
      * 时间：20150407
      */
-    public function similar_activity(){
-        return D('DzSport')->where('sport_type=2')->select();
+    public function SimilarActivity(){
+        $where['id'] = array('neq',$_POST['id']);
+        $where['sport_id'] = array('eq',$_POST['sport_id']);
+        $ids = D('VGameActivity')->where($where)->getField('id',true);
+        $limit =array_rand($ids,4);
+        $map['id'] =array('in',$limit);
+        $list = D('VGameActivity')->where($map)->select();
+        echo json_encode($list);
+    }
+
+    /*
+     * @时间: 20150415
+     * @功能：活动评论
+     */
+    public function publishReply(){
+        $model = D('OpComment');
+        $date['content'] = $_POST['content'];
+        $date['user_id'] = deCode(I('session.mark_id'));
+        $date['source_id']  = $_POST['source_id'];
+        $date['source_type']  = 2;
+        $date['input_date']  = date('Y-m-d H:i:s');
+        $result  = $model->add($date);
+        if(false!==$result){
+            echo 1;
+        }else{
+            echo 0;
+        }
+    }
+    /*
+     * @时间：20150412
+     * @功能：活动评论加载
+     */
+    public function ActivityCommentLoad(){
+        $where['source_id'] = $_POST['source_id'];
+        $where['source_type'] = 2;
+        $last = $_POST['last'];
+        $amount = $_POST['amount']+$_POST['last'];
+        $order = 'input_date desc';
+        $list = D('OpComment')->where($where)->order($order)->limit($last, $amount)->select();
+        echo json_encode($list);
     }
 
 }

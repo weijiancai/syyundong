@@ -23,7 +23,8 @@
                                 </tr>-->
 
                                 <tr>
-                                    <th valign="top"><i class="icon16 icon16-search-region"></i>区域：<input type="hidden" data-selector="regionValue" value="all" name="regionId"></th>
+                                    <th valign="top"><i class="icon16 icon16-search-region"></i>区域：
+                                        <input type="hidden" data-selector="regionValue" value="all" name="regionId"></th>
                                     <td valign="top">
                                         <div id="regionList" class="item-panel">
                                             <a href="javascript:;" class="radio-item <if condition="($_REQUEST['region'] eq all)or($_REQUEST['region'] eq '')">current</if>" data-value="all" data-selector="regionItem">全部</a>
@@ -51,7 +52,9 @@
                                 </tr>
 
                                 <tr>
-                                    <th valign="top"><i class="icon16 icon16-search-date"></i>时间：<input type="hidden" data-selector="dateValue" value="all" name="timeType"></th>
+                                    <th valign="top">
+                                        <i class="icon16 icon16-search-date"></i>时间：
+                                        <input type="hidden" data-selector="dateValue" value="all" name="timeType"></th>
                                     <td valign="top">
                                         <div id="dateList" class="item-panel">
                                             <a data-selector="dateItem" class="radio-item <if condition="($_REQUEST['date'] eq all)or($_REQUEST['date'] eq '')">current</if>" data-value="all" href="javascript:;">全部</a>
@@ -68,7 +71,7 @@
                                     <td colspan="2">
                                         <div class="input-prepend input-append">
                                             <span class="add-on"><i class="icon16 icon16-search-search"></i></span>
-                                            <input type="text" value="" name="keyword" class="span4" id="inputKeyword">
+                                            <input type="text" value="<{$_REQUEST['keyword']}>" name="keyword" class="span4" id="inputKeyword">
                                             <button class="btn btn-warning" type="button" id="btnSearchKeyword">搜本类</button>
                                         </div>
                                     </td>
@@ -76,7 +79,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <input type="hidden" name="criteria" value="1"><input type="hidden" name="statusIn" value="0"><input type="hidden" name="statusOver" value="0"><input type="hidden" name="statusReg" value="0"></form>
+                    </form>
                 </div>
 
 
@@ -92,7 +95,9 @@
 
                     </ul>
                     <div class="item-statu-filter">
-                        <label><input type="checkbox" value="1" id="statusReg" name="statusReg" data-selector="resultStatus">召集中</label> <label><input type="checkbox" value="1" id="statusIn" name="statusIn" data-selector="resultStatus">进行中</label> <label><input type="checkbox" value="1" id="statusOver" name="statusOver" data-selector="resultStatus">已结束</label>
+                        <label><input type="checkbox" value="1" id="statusReg" name="statusReg" data-selector="resultStatus" <if condition="$_REQUEST['statusReg'] eq T">checked</if>>召集中</label>
+                        <label><input type="checkbox" value="3" id="statusIn" name="statusIn" data-selector="resultStatus" <if condition="$_REQUEST['statusIn'] eq T">checked</if>>进行中</label>
+                        <label><input type="checkbox" value="4" id="statusOver" name="statusOver" data-selector="resultStatus" <if condition="$_REQUEST['statusOver'] eq T">checked</if>>已结束</label>
                     </div>
 
                     <div class="filter-paging">
@@ -104,12 +109,7 @@
                             <i class="icon-match icon-next"></i>
                         </a>
                     </div>
-
-
                 </div>
-
-
-
                 <!--  赛事列表 开始 -->
                 <div class="main-block item-list">
                     <ul>
@@ -333,8 +333,9 @@
     <input type="hidden" id="state_in" name="statusIn" value="<{$_REQUEST['statusIn']}>"/>
     <input type="hidden" id="state_over" name="statusOver" value="<{$_REQUEST['statusOver']}>"/>
     <input type="hidden" id="orderByNew" name="orderByNew" value="<{$_REQUEST['orderByNew']}>"/>
-    <input type="hidden" id="order" name="order" value="<{$_REQUEST['order']}>"/>
-    <input type="hidden" id="province" name="province" value="<{$_REQUEST['province']}>"/>
+    <input type="text" id="region" name="region" value="<{$_REQUEST['region']}>"/>
+    <!--<input type="hidden" id="order" name="order" value="<{$_REQUEST['order']}>"/>-->
+    <!--<input type="hidden" id="province" name="province" value="<{$_REQUEST['province']}>"/>-->
     <input type="hidden" id="sportType" name="sportType" value="<{$_REQUEST['sportType']}>"/>
     <input type="hidden" id="date" name="date" value="<{$_REQUEST['date']}>"/>
     <input type="hidden" id="keyword" name="keyword" value="<{$_REQUEST['keyword']}>"/>

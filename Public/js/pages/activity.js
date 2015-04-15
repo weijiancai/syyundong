@@ -4,13 +4,18 @@
 $(function() {
     // 注册body id
     $('body').attr('id', 'activity');
-
     var $form = $('#searchForm');
-    // 报名中
+    // 区域
+    $('#regionList').find('a').click(function () {
+        $(this).parent().find('a.current').removeClass('current');
+        $(this).addClass('current');
+        submit('region', $(this).data('value'));
+    });
+    // 召集中
     $('#statusReg').change(function () {
         submit('state_reg', $(this).get(0).checked ? 'T' : 'F');
     });
-    // 比赛中
+    // 进行中
     $('#statusIn').change(function () {
         submit('state_in', $(this).get(0).checked ? 'T' : 'F');
     });
@@ -20,13 +25,12 @@ $(function() {
     });
 
     // 省
-    $('#provinceId').change(function () {
+/*    $('#provinceId').change(function () {
         var province = $(this).val();
         if (province != '') {
             submit('province', province);
         }
-    });
-
+    });*/
 
     // 排序
     $('#order-group').find('li a').click(function() {

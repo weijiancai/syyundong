@@ -1,0 +1,73 @@
+<include file="Public@default:Public:top"/>
+<div class="container">
+    <div class="row">
+        <div class="span16 public-page-top">
+            <h2 class="public-title"><span class="text-warning">[路跑]</span>四季轮转！记录你深圳站的笑脸</h2>
+            <div class="public-desc clearfix">
+                <p class="pull-left">
+                    <span class="info-text enrolling"> 比赛中 </span>
+                    <span class="info-text"><i class="icon16 icon16-person"></i>769人感兴趣</span>
+                    <em class="info-slider"></em>
+                    <span class="info-text">分享到：</span>
+                    <script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]四季轮转！记录你深圳站的笑脸','url':'/game/411','pic':'http://static.wisdom-china.cn//images/1/2644/7270/4860/cf6bc431237dd65b283ad9090add4927_2_140x140.jpg?640x442','summary':'    时间：2015年04月12日 13:00&amp;nbsp;-&amp;nbsp;2015年04月30日 18:30    地点：广东省深圳市    主办：智美集团'},'16');</script><a title="分享到qq空间" class="shareto16 shareto16-qzone" target="_blank" href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/411&amp;pic=http://static.wisdom-china.cn//images/1/2644/7270/4860/cf6bc431237dd65b283ad9090add4927_0_0.jpg&amp;title=[路跑]四季轮转！记录你深圳站的笑脸&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年04月12日 13:00&nbsp;-&nbsp;2015年04月30日 18:30    地点：广东省深圳市    主办：智美集团"></a><a title="分享到新浪微博" class="shareto16 shareto16-tsina" target="_blank" href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/411&amp;pic=http://static.wisdom-china.cn//images/1/2644/7270/4860/cf6bc431237dd65b283ad9090add4927_0_0.jpg&amp;title=[路跑]四季轮转！记录你深圳站的笑脸&amp;appkey=1868074881&amp;summary=    时间：2015年04月12日 13:00&nbsp;-&nbsp;2015年04月30日 18:30    地点：广东省深圳市    主办：智美集团"></a>
+                </p>
+            </div>
+        </div>        <div class="span16">
+        <div class="public-subnav clearfix">
+            <ul id="detailTabs">
+                <li><a href="__APP__/Game" class="current">赛事首页</a></li>
+                <li><a href="__APP__/Game/<{$id}>/content">赛事介绍</a></li>
+                <li><a href="__APP__/Game/<{$id}>/route">比赛路线</a></li>
+                <li><a href="__APP__/Game/<{$id}>/cost">关于费用</a></li>
+                <li><a href="__APP__/Game/<{$id}>/trip">行程安排</a></li>
+                <li><a href="__APP__/Game/<{$id}>/hotel">入住酒店</a></li>
+                <li><a href="__APP__/Game/<{$id}>/notice">赛事公告</a></li>
+                <li><a href="__APP__/Game/<{$id}>/news">赛事新闻</a></li>
+                <li><a href="javascript:void(0);">成绩查询</a></li>
+                <li><a href="javascript:void(0);">赛友圈</a></li>
+            </ul>
+        </div>
+    </div>
+        <div class="span16">
+            <div class="main-block clearfix">
+                <div class="article-block none-indent">
+                    <ul class="match-notice-list">
+                        <{$other}>
+                    </ul>
+                </div>
+            </div>
+            <div class="main-block pagging-block">
+                <form action="#" id="paging-form" iyuesai-plugins-valid="0.37341516297302424">
+                    <div class="paging-wrap">
+                        <!--end of pageBean?? && (pages.total > -1) -->
+                        <input type="hidden" value="" id="pageNum" name="pageNum">
+                        <input type="hidden" value="" id="pageSize" name="pageSize">
+                    </div>
+                </form>
+            </div>
+            <script type="text/javascript">
+                $(function(){
+                    define(['valid','simplevalidtips'],function(){
+                        $(function(){
+                            var pf = $('#paging-form');
+                            pf.valid({
+                                'success':function(){
+                                    jumpPage($('#pageNumText',pf).val(),$('#pageSize',pf).val());
+                                    return false;
+                                }
+                            });
+                            $("[validate-rules]",pf).SimpleValidTips();
+                        });
+                    });
+                });
+
+            </script>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">Loader.load(['page.gameDetail']);</script>
+
+<include file="Public@default:Public:bottom"/>

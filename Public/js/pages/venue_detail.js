@@ -35,7 +35,7 @@ $(function () {
                 url: "publishReply",
                 data: $('#commentform').serialize(),
                 success: function ($result) {
-                    if ($result) {
+                    if ($result==1) {
                         $.dialog.success('评论成功');
                     } else {
                         $.dialog.error('评论失败');

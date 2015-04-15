@@ -169,4 +169,46 @@ class IndexAction extends Action
         $this->display();
     }
 
+    /*
+     * @时间: 20150415
+     * @功能：赛事其他信息(公告、新闻)
+     */
+    public function game_other()
+    {
+        $id = $_GET['id'];
+        $info = $_GET['info'];
+        switch ($info){
+            case 'content':
+                 $info='content';
+                 break;
+            case 'route':
+                $info='aout_route';
+                break;
+            case 'cost':
+                $info='about_cost';
+                break;
+            case 'trip':
+                $info='about_trip';
+                break;
+            case 'hotel':
+                $info='about_hotal';
+                break;
+        }
+        if(($info =='content')||($info =='aout_route')||($info =='about_cost')||($info =='about_trip')||($info =='about_hotal')){
+            $other = D('DbGame')->where('id=' . $id)->getField($info);
+            dump(D('DbGame')->getLastSql());
+        }
+        if($info=='notice'){
+            $other = D('OpGameNotice')->where('game_id = '.$id)->select();
+        }
+        if($info=='news'){
+            $other = D('OpGameNews')->where('game_id = '.$id)->select();
+        }
+        $this->assign('other', $other);
+        dump($other);
+        $this->assign('id', $id);
+        $this->assign('info', $info);
+        $this->display();
+    }
+
 }
