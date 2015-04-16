@@ -6,224 +6,30 @@
             <div class="span2 socila-span2">
                 <div data-url="/game/typelist" data-selector="social-nav-box" class="side-nav"><div id="NTGUID__5">
                     <h6>赛友圈分类</h6>
-                    <div data-selector="socialNav"><div id="NTGUID__5NDTGUID__a">
-
+                    <div data-selector="socialNav">
+                        <div id="NTGUID__5NDTGUID__a">
+                       <volist name="sport" id="vo">
                         <dl>
-                            <dt data-id="1">球类项目</dt>
+                            <dt data-id="<{$vo.id}>"><{$vo.name}></dt>
                             <dd>
-
-                                <a data-id="8" href="/friends/branch?sportTypeId=8" class="normal">
-                                    羽毛球
+                             <volist name="vo.child" id="v">
+                                <a data-id="<{$v.id}>" href="/Friends/branch?sportTypeId=<{$v.id}>" class="normal">
+                                   <{$v.name}>
                                 </a>
-
-                                <a data-id="9" href="/friends/branch?sportTypeId=9" class="normal">
-                                    乒乓球
-                                </a>
-
-                                <a data-id="10" href="/friends/branch?sportTypeId=10" class="normal">
-                                    台球
-                                </a>
-
-                                <a data-id="11" href="/friends/branch?sportTypeId=11" class="normal">
-                                    网球
-                                </a>
-
-                                <a data-id="40" href="/friends/branch?sportTypeId=40" class="normal">
-                                    足球
-                                </a>
-
-                                <a data-id="41" href="/friends/branch?sportTypeId=41" class="normal">
-                                    篮球
-                                </a>
-
-                                <a data-id="57" href="/friends/branch?sportTypeId=57" class="normal">
-                                    曲棍球
-                                </a>
-
-                                <a data-id="58" href="/friends/branch?sportTypeId=58" class="normal">
-                                    垒球
-                                </a>
-
-                                <a data-id="59" href="/friends/branch?sportTypeId=59" class="normal">
-                                    棒球
-                                </a>
-
-                                <a data-id="60" href="/friends/branch?sportTypeId=60" class="normal">
-                                    高尔夫
-                                </a>
-
-                                <a data-id="61" href="/friends/branch?sportTypeId=61" class="normal">
-                                    排球
-                                </a>
-
+                                </volist>
                             </dd>
                         </dl>
-
-                        <dl>
-                            <dt data-id="2">户外运动</dt>
-                            <dd>
-
-                                <a data-id="12" href="/friends/branch?sportTypeId=12" class="normal">
-                                    自行车
-                                </a>
-
-                                <a data-id="13" href="/friends/branch?sportTypeId=13" class="normal">
-                                    轮滑
-                                </a>
-
-                                <a data-id="14" href="/friends/branch?sportTypeId=14" class="normal">
-                                    定向
-                                </a>
-
-                                <a data-id="15" href="/friends/branch?sportTypeId=15" class="normal">
-                                    攀岩
-                                </a>
-
-                                <a data-id="16" href="/friends/branch?sportTypeId=16" class="normal">
-                                    山地户外活动
-                                </a>
-
-                                <a data-id="47" href="/friends/branch?sportTypeId=47" class="normal">
-                                    航海模型
-                                </a>
-
-                                <a data-id="63" href="/friends/branch?sportTypeId=63" class="normal">
-                                    铁人三项
-                                </a>
-
-                                <a data-id="64" href="/friends/branch?sportTypeId=64" class="normal">
-                                    钓鱼
-                                </a>
-
-                                <a data-id="69" href="/friends/branch?sportTypeId=69" class="normal">
-                                    滑雪
-                                </a>
-
-                            </dd>
-                        </dl>
-
-                        <dl>
-                            <dt data-id="4">全民健身</dt>
-                            <dd>
-
-                                <a data-id="27" href="/friends/branch?sportTypeId=27" class="normal">
-                                    门球
-                                </a>
-
-                                <a data-id="28" href="/friends/branch?sportTypeId=28" class="normal">
-                                    健美
-                                </a>
-
-                                <a data-id="29" href="/friends/branch?sportTypeId=29" class="normal">
-                                    体育舞蹈
-                                </a>
-
-                                <a data-id="30" href="/friends/branch?sportTypeId=30" class="normal">
-                                    健美操
-                                </a>
-
-                                <a data-id="31" href="/friends/branch?sportTypeId=31" class="normal">
-                                    排舞
-                                </a>
-
-                                <a data-id="38" href="/friends/branch?sportTypeId=38" class="normal">
-                                    瑜伽
-                                </a>
-
-                                <a data-id="39" href="/friends/branch?sportTypeId=39" class="normal">
-                                    中国风健身舞
-                                </a>
-
-                                <a data-id="46" href="/friends/branch?sportTypeId=46" class="normal">
-                                    龙舟
-                                </a>
-
-                                <a data-id="56" href="/friends/branch?sportTypeId=56" class="normal">
-                                    划船器
-                                </a>
-
-                                <a data-id="65" href="/friends/branch?sportTypeId=65" class="normal">
-                                    大力士
-                                </a>
-
-                                <a data-id="66" href="/friends/branch?sportTypeId=66" class="normal">
-                                    保龄球
-                                </a>
-
-                                <a data-id="67" href="/friends/branch?sportTypeId=67" class="normal">
-                                    肚皮舞
-                                </a>
-
-                                <a data-id="68" href="/friends/branch?sportTypeId=68" class="normal">
-                                    脚斗士
-                                </a>
-
-                                <a data-id="70" href="/friends/branch?sportTypeId=70" class="normal">
-                                    徒步
-                                </a>
-
-                            </dd>
-                        </dl>
-
-                        <dl>
-                            <dt data-id="5">其他运动</dt>
-                            <dd>
-
-                                <a data-id="32" href="/friends/branch?sportTypeId=32" class="normal">
-                                    跆拳道
-                                </a>
-
-                                <a data-id="36" href="/friends/branch?sportTypeId=36" class="normal">
-                                    风筝
-                                </a>
-
-                                <a data-id="43" href="/friends/branch?sportTypeId=43" class="normal">
-                                    举重
-                                </a>
-
-                                <a data-id="44" href="/friends/branch?sportTypeId=44" class="normal">
-                                    射击
-                                </a>
-
-                                <a data-id="45" href="/friends/branch?sportTypeId=45" class="normal">
-                                    射箭
-                                </a>
-
-                                <a data-id="55" href="/friends/branch?sportTypeId=55" class="normal">
-                                    游泳
-                                </a>
-
-                            </dd>
-                        </dl>
-
-                        <dl>
-                            <dt data-id="37">马拉松路跑</dt>
-                            <dd>
-
-                                <a data-id="6" href="/friends/branch?sportTypeId=6" class="normal">
-                                    马拉松
-                                </a>
-
-                                <a data-id="7" href="/friends/branch?sportTypeId=7" class="normal">
-                                    路跑
-                                </a>
-
-                            </dd>
-                        </dl>
-
+                        </volist>
                     </div>
-
                     </div>
                 </div>
-
-
                 </div>
             </div>
             <div class="span10">
                 <div class="main-block">
                     <div id="relevantTabs" class="public-tab-wrap clearfix">
-                        <a class="tab current" href="/friends/index">热门话题</a>
-                        <a class="tab" href="/friends/index/selftopic">关注话题</a>
+                        <a class="tab current" href="/Friends/index">热门话题</a>
+                        <a class="tab" href="/Friends/index/selftopic">关注话题</a>
                     </div>
 
                     <!--热门帖子-->

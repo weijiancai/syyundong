@@ -1,0 +1,383 @@
+<include file="Public@default:Public:top" />
+
+<div class="search-engines">
+<div class="container">
+<div class="row">
+<div class="span2 socila-span2">
+<div data-url="/game/typelist" data-selector="social-nav-box" class="side-nav"><div id="NTGUID__3">
+<h6>赛友圈分类</h6>
+    <div data-selector="socialNav">
+        <div id="NTGUID__3NDTGUID__7">
+            <volist name="sport" id="vo">
+                <dl>
+                    <dt data-id="<{$vo.id}>"><{$vo.name}></dt>
+                    <dd>
+                        <volist name="vo.child" id="v">
+                            <a <if condition="$v['id'] eq $_REQUEST['sportTypeId']">class="current"</if>data-id="<{$v.id}>" href="/Friends/branch?sportTypeId=<{$v.id}>" class="normal">
+                                <{$v.name}>
+                            </a>
+                        </volist>
+                    </dd>
+                </dl>
+            </volist>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<div class="span10">
+    <div class="main-block">
+        <!-- 发布话题 start-->
+        <div data-action="/topic/topic-add" data-selector="pub-wrap" class="publish-box clearfix">
+            <p class="publish-box-ttl">发布话题</p>
+            <form data-selector="publish-form" method="post" action="" iyuesai-plugins-valid="0.8498122651783223">
+                <textarea validate-rules="[['required'],['reallength',{min:10}]]" validate-title="话题" id="content" name="content" style="height: 100px;"></textarea><pre style="position: absolute; z-index: -10; left: -9999px; top: auto; padding: 10px 0px; font-size: 14px; line-height: 20px; width: 669px; font-family: &quot;Microsoft yahei&quot;,&quot;Arial&quot;; white-space: pre-wrap; word-wrap: break-word; font-weight: 400;"></pre>
+                <input type="hidden" value="" id="imgMsg" name="img">
+                <input type="hidden" value="" id="tagId" name="tagId">
+                <select class="social-select" id="gameId" name="gameId" style="top: 170px;">
+                    <option value="226">2014-2015浙江省中小学生羽毛球积分排名赛（第一站）</option>
+                    <option value="227">2014-2015浙江省中小学生羽毛球积分赛（第二站）</option>
+                    <option value="249">“临港集团杯”上海职工羽毛球联赛</option>
+                    <option value="318">“宜信杯”第二届上海浦东金融青年羽毛球邀请赛</option>
+                    <option value="80">“智美杯”第六届北京市体育大会羽毛球赛</option>
+                    <option value="359">消息赛事</option>
+                    <option value="164">乒羽球讨论</option>
+                </select>
+                <button class="btn btn-warning send-btn" style="top: 170px;">发布话题</button>
+            </form>
+            <!--
+            <div class="publish-box-bottom clearfix">
+              <iframe id="activeFrame" src="upload_iframe.html?callback=uploadfinished" height="30" width="100%" frameborder="0" scrolling="no"></iframe>
+              <a id="imgUpBtn" class="img-up-btn" href="javascript:void(0);"><i class="icon20 icon20-img"></i>图片</a>
+
+            </div> -->
+            <div class="publish-box-bottom clearfix">
+                <iframe width="100%" height="30" frameborder="0" scrolling="no" src="/upload_iframe.html?callback=uploadfinished" id="activeFrame"></iframe>
+                <a href="javascript:void(0);" class="img-up-btn" id="imgUpBtn"><i class="icon20 icon20-img"></i>图片</a>
+            </div>
+            <div class="store-wrap clearfix" id="store-wrap"></div>
+        </div>
+        <!-- 发布话题 end-->
+        <div data-selector="relevantTabs" class="public-tab-wrap clearfix">
+            <a data-url="/friends/index/hottopic" data-params="{'sportTypeId':'8','pageSize':5,'pageNum':0}" data-selector="social-branch-tab" class="tab current" href="javascript:;">热门话题</a>
+            <a data-url="/friends/branch/alltopics" data-params="{'sportTypeId':'8','pageSize':5,'pageNum':0}" data-selector="social-branch-tab" class="tab" href="javascript:;">全部话题</a>
+        </div>
+        <!-- 话题 开始 -->
+        <div data-like-action="/topic/comment-like" data-reply-action="/topic/publishTopicComment" data-comment-action="/topic/publishTopicComment" data-star="true" data-selector="topic-box" class="tab-content-wrap"><style>#NTGUID__4 .comment-pop{      background: #f5f5f5;      padding: 0 10px 10px 10px;      border-radius: 5px;      -moz-border-radius: 5px;      -webkit-border-radius: 5px;      zoom:1;      margin-top: 10px;      position: relative;    }#NTGUID__4 .comment-pop:after{      content: "";      width: 0;      height: 0;      border: transparent solid 8px;      position: absolute;      border-bottom-color: #f5f5f5;      right: 95px;      top: -16px;    }#NTGUID__4 .topicli{      display: none;    }#NTGUID__4 .comment-list dl{      border-bottom: 1px dotted #E0E0E0;      padding: 15px 0;      display: none;    }#NTGUID__4 .comment-list dl dt{      float: left;      width: 50px;      overflow: hidden;    }#NTGUID__4 .comment-list dl dt img{      border-radius: 50%;      -webkit-border-radius: 50%;      -moz-border-radius: 50%;      width: 40px;      height: 40px;    }#NTGUID__4 .comment-list dl dd{      display: block;      margin-left: 60px;    }#NTGUID__4 .comment-list dl dd .user-header{      display: block;      font-size: 14px;      margin-bottom: 5px;    }#NTGUID__4 .comment-list dl dd .user-header table{      width: 100%;      margin: 0;    }#NTGUID__4 .comment-list dl dd .user-header th{      text-align: left;      font-weight: normal;    }#NTGUID__4 .comment-list dl dd .user-header td{      text-align: right;    }#NTGUID__4 .comment-list dl dd .user-header span{      color: #C3C3C3;      margin-left: 20px;      font-size: 12px;      font-weight: normal;    }#NTGUID__4 .comment-list dl dd .user-header a{      color: #555;    }#NTGUID__4 .comment-list dl dd .comment-content{      margin: 0;      padding: 0;      font-size: 14px;      line-height: 22px;      overflow: hidden;      width: 90%;      color: #333;      font-weight: normal;      text-shadow: none;      -webkit-text-shadow: none;      -moz-text-shadow: none;    }#NTGUID__4 .comment-list .comment-textarea{      display: block;      width: 96%;      resize: none;    }#NTGUID__4 .comment-list .btn-warning{      padding-left: 20px;      padding-right: 20px;    }#NTGUID__4 .comment-list p{      margin: 0;      padding: 0;    }#NTGUID__4 .comment-list .reply-panel p a{      font-size: 14px;      color: #999;    }#NTGUID__4 .comment-list .reply-panel .reply-form{      display: none;      position: relative;      border: 1px solid #F5A623;      margin-top: 5px;      padding: 5px 0;      background: #fff;      border-radius: 4px;      -webkit-border-radius: 4px;      -moz-border-radius: 4px;    }#NTGUID__4 .comment-list .reply-panel .reply-form i.icon-up{      display: inline-block;      width:0;      height:0;      border-width:6px;      border-color:transparent transparent #fff transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 42px;      top: -13px;      z-index: 5;    }#NTGUID__4 .comment-list .reply-panel .reply-form .btn{      position: absolute;      right: 5px;      top: 5px;    }#NTGUID__4 .comment-list .reply-panel .reply-form em.icon-down{      display: inline-block;      width:0;      height:0;      border-width:8px;      border-color:transparent transparent #F5A623 transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 40px;      top: -17px;      z-index: 1;    }#NTGUID__4 .comment-list .reply-panel .reply-form input{      background: #fff;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;      width: 450px;      resize:none;    }#NTGUID__4 .comment-list .reply-panel .reply-form input:focus{      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;    }  </style><div id="NTGUID__4">
+            <ul data-selector="topicData" class="social-topic-list clearfix"><div id="NTGUID__4NDTGUID__8">
+
+                <li class="topicli clearfix" style="display: list-item;">
+
+                    <div class="social-topic-thumb pull-left">
+                        <a target="_blank" href="/topic/2438">
+                            <img src="http://static.wisdom-china.cn//images/1/5991/9169/1128/797abfd2d8f50405693d530985e9149a_2_170x118.jpg">
+                        </a>
+                    </div>
+
+                    <div class="social-topic-content">
+                        <dl>
+                            <dt>
+                                <a target="_blank" href="/topic/2438">没赶上这比赛，那会儿在北理工看朋友打球，好巧也是羽毛球</a>
+                            </dt>
+                            <dd>
+                                <a target="_blank" href="/topic/2438">没赶上这比赛，那会儿在北理工看朋友打球，好巧也是羽毛球</a>
+                            </dd>
+                        </dl>
+                        <div class="social-topic-feature">
+                            <div class="social-topic-author">
+                                <a target="_blank" href="/friend/passport_70511/timeline">
+                                    <img title="二寨主学文化" src="http://static.wisdom-china.cn//images/1/6000/7477/8913/94b9dcb639ace68c534da99952e42e45_2_40x40.jpg">
+                                </a>
+                                <h6>
+                                    <a target="_blank" href="/friend/passport_70511/timeline">
+                                        二寨主学文化
+                                    </a>
+                                </h6>
+
+                                <p>
+                                    发表在<a target="_blank" href="/friends/tag/228" title="“智美杯”第六届北京市体育大会羽毛球赛">“智美杯”第六届北京市体育大会...</a>
+                                </p>
+
+
+                            </div>
+                            <div class="topic-bottom pull-right">
+                                <!--
+
+                                -->
+                                <a data-selector="comment-btn" href="javascript:void(0);">
+                                    <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">0</span>
+                                </a>
+                                <a data-params="{'id':2438}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">0</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论框 开始 -->
+                    <div class="comment-pop clearfix hide">
+                        <div class="comment-form">
+                            <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.36101764641698">
+                                <input type="hidden" value="2438" name="topicId">
+                                <input type="hidden" value="passport_70511" name="userId">
+                                <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
+                                <button class="btn btn-warning pull-right" type="submit">评论</button>
+                            </form>
+                        </div>
+                        <div data-params="{'topicId':2438, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list"></div>
+                        <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
+                            <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/2438">查看全部评论</a>
+                        </div>
+                    </div>
+                    <!-- 评论框 结束 -->
+                </li>
+
+                <li class="topicli clearfix" style="display: list-item;">
+
+                    <div class="social-topic-thumb pull-left">
+                        <a target="_blank" href="/topic/2372">
+                            <img src="http://static.wisdom-china.cn//images/1/3963/0786/5776/292525ccd51abc9962a292acbb079398_2_170x118.jpg">
+                        </a>
+                    </div>
+
+                    <div class="social-topic-content">
+                        <dl>
+                            <dt>
+                                <a target="_blank" href="/topic/2372">打羽毛球的，非专业偶尔玩玩的总是能看到美女。专业的就算了，看看国家队里，很难找出来一个漂亮的，所以，问题来了，哈哈。学挖掘机哪家强？</a>
+                            </dt>
+                            <dd>
+                                <a target="_blank" href="/topic/2372">打羽毛球的，非专业偶尔玩玩的总是能看到美女。专业的就算了，看看国家队里，很难找出来一个漂亮的，所以，问题来了，哈哈。学挖掘机哪家强？</a>
+                            </dd>
+                        </dl>
+                        <div class="social-topic-feature">
+                            <div class="social-topic-author">
+                                <a target="_blank" href="/friend/passport_70237/timeline">
+                                    <img title="帝丘船夫" src="http://static.wisdom-china.cn//images/1/8492/2241/2085/153cdbb88aeca90436705bdedb02a33c_2_40x40.jpg">
+                                </a>
+                                <h6>
+                                    <a target="_blank" href="/friend/passport_70237/timeline">
+                                        帝丘船夫
+                                    </a>
+                                </h6>
+
+                                <p>
+                                    发表在<a target="_blank" href="/friends/tag/38" title="乒羽球讨论">乒羽球讨论</a>
+                                </p>
+
+
+                            </div>
+                            <div class="topic-bottom pull-right">
+                                <!--
+
+                                -->
+                                <a data-selector="comment-btn" href="javascript:void(0);">
+                                    <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">0</span>
+                                </a>
+                                <a data-params="{'id':2372}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">1</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论框 开始 -->
+                    <div class="comment-pop clearfix hide">
+                        <div class="comment-form">
+                            <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.1982533395026942">
+                                <input type="hidden" value="2372" name="topicId">
+                                <input type="hidden" value="passport_70237" name="userId">
+                                <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
+                                <button class="btn btn-warning pull-right" type="submit">评论</button>
+                            </form>
+                        </div>
+                        <div data-params="{'topicId':2372, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list"></div>
+                        <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
+                            <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/2372">查看全部评论</a>
+                        </div>
+                    </div>
+                    <!-- 评论框 结束 -->
+                </li>
+
+            </div>
+
+
+            </ul>
+            <button data-selector="seeMore" class="btn btn-block" disabled="">没有更多</button>
+        </div>
+
+
+        </div>
+        <!-- 话题 结束 -->
+    </div>
+</div>
+<div class="span4">
+    <!-- 搜索 start -->
+    <div class="side-block">
+        <form action="/friends/search">
+            <input type="text" placeholder="搜索赛友圈" class="side-search-key" name="">
+            <button class="btn btn-warning">搜索</button>
+        </form>
+    </div>
+    <!-- 搜索 end -->
+    <!-- 赛友圈子集 start -->
+    <div class="side-block social-child-list">
+        <ul class="">
+            <li>
+
+                <a href="/friends/tag/261"></a>
+                <div class="social-child-thumb pull-left">
+                </div>
+                <div class="social-child-right">
+                    <h3>消息赛事</h3>
+                    <p>
+                        <span class="pull-left">关注：13</span>
+                        <span class="pull-right">话题：1</span>
+                    </p>
+                </div>
+            </li>
+
+            <li>
+
+                <a href="/friends/tag/208"></a>
+                <div class="social-child-thumb pull-left">
+                    <img src="http://static.wisdom-china.cn//images/1/9847/9476/0035/cb51fc40f813019ce8601f12e5fdd57d_0_0.png?640x442">
+                </div>
+                <div class="social-child-right">
+                    <h3>“宜信杯”第二届上海浦东金融青年羽毛球邀请赛</h3>
+                    <p>
+                        <span class="pull-left">关注：5</span>
+                        <span class="pull-right">话题：4</span>
+                    </p>
+                </div>
+            </li>
+
+            <li>
+
+                <a href="/friends/tag/163"></a>
+                <div class="social-child-thumb pull-left">
+                    <img src="http://static.wisdom-china.cn//images/1/1711/4567/8402/06aadea21bddc4936a4d518bb80b16e2_0_0.jpg?1600x1200">
+                </div>
+                <div class="social-child-right">
+                    <h3>“临港集团杯”上海职工羽毛球联赛</h3>
+                    <p>
+                        <span class="pull-left">关注：9</span>
+                        <span class="pull-right">话题：1</span>
+                    </p>
+                </div>
+            </li>
+
+            <li>
+
+                <a href="/friends/tag/151"></a>
+                <div class="social-child-thumb pull-left">
+                    <img src="http://static.wisdom-china.cn//images/1/0516/0439/8841/ffc2f0e432a95e63b77146a6975e1452_0_0.png?640x442">
+                </div>
+                <div class="social-child-right">
+                    <h3>2014-2015浙江省中小学生羽毛球积分赛（第二站）</h3>
+                    <p>
+                        <span class="pull-left">关注：10</span>
+                        <span class="pull-right">话题：9</span>
+                    </p>
+                </div>
+            </li>
+
+            <li>
+
+                <a href="/friends/tag/150"></a>
+                <div class="social-child-thumb pull-left">
+                    <img src="http://static.wisdom-china.cn//images/1/4790/5469/7245/d959aef83e8350cad6362832ec84b0fc_0_0.jpg?600x360">
+                </div>
+                <div class="social-child-right">
+                    <h3>2014-2015浙江省中小学生羽毛球积分排名赛（第一站）</h3>
+                    <p>
+                        <span class="pull-left">关注：1</span>
+                        <span class="pull-right">话题：5</span>
+                    </p>
+                </div>
+            </li>
+
+            <li>
+
+                <a href="/friends/tag/38"></a>
+                <div class="social-child-thumb pull-left">
+                    <img src="http://static.wisdom-china.cn//images/1/2658/4002/7719/7fc4f0134c1a9660ce72551159fd9a3d_0_0.jpg?691x354">
+                </div>
+                <div class="social-child-right">
+                    <h3>乒羽球讨论</h3>
+                    <p>
+                        <span class="pull-left">关注：8</span>
+                        <span class="pull-right">话题：10</span>
+                    </p>
+                </div>
+            </li>
+
+            <li>
+
+                <a href="/friends/tag/228"></a>
+                <div class="social-child-thumb pull-left">
+                    <img src="http://static.wisdom-china.cn//images/1/2526/4087/3907/43b53e604ddeea0c5b863efab2496062_0_0.jpg?635x367">
+                </div>
+                <div class="social-child-right">
+                    <h3>“智美杯”第六届北京市体育大会羽毛球赛</h3>
+                    <p>
+                        <span class="pull-left">关注：6</span>
+                        <span class="pull-right">话题：3</span>
+                    </p>
+                </div>
+            </li>
+
+
+        </ul>
+        <a class="more-child" href="/friends/search">更多赛友圈</a>
+    </div>
+    <!-- 赛友圈子集 end -->
+    <!-- 推荐赛友圈 start -->
+    <!--右侧栏，推荐赛友圈-->
+    <!-- 推荐赛友圈 start -->
+    <div class="side-block">
+        <h4 class="slider-title">推荐赛友圈</h4>
+        <ul class="social-tag-list clearfix">
+            <li class="tag1">
+                <a href="/friends/tag/295/topics">2015四季跑·深圳站</a>
+            </li>
+            <li class="tag2">
+                <a href="/friends/tag/305/topics">四季跑城市PK赛</a>
+            </li>
+            <li class="tag3">
+                <a href="/friends/tag/297/topics">2015四季跑·天津站</a>
+            </li>
+            <li class="tag4">
+                <a href="/friends/tag/292/topics">2015四季跑重庆站</a>
+            </li>
+            <li class="tag5">
+                <a href="/friends/tag/307/topics">2015重庆国际马拉松赛</a>
+            </li>
+            <li class="tag6">
+                <a href="/friends/tag/308/topics">跑进风城！芝加哥马拉松招募！</a>
+            </li>
+            <li class="tag7">
+                <a href="/friends/tag/286/topics">2015香港马拉松</a>
+            </li>
+            <li class="tag8">
+                <a href="/friends/tag/278/topics">SNOW RUN</a>
+            </li>
+            <li class="tag9">
+                <a href="/friends/tag/301/topics">奥森光猪跑！你敢比美女穿的少吗</a>
+            </li>
+        </ul>
+    </div>
+    <!-- 推荐赛友圈 end -->
+
+    <!-- 推荐赛友圈 end -->
+    <!-- 广告位 start --
+    <div class="side-ad">
+      <a href="#"><img src="http://static.wisdom-china.cn/iyuesai/images/pages/side-ad1.png" alt=""></a>
+    </div>
+
+    <div class="side-ad">
+      <a href="#"><img src="http://static.wisdom-china.cn/iyuesai/images/pages/side-ad2.png" alt=""></a>
+    </div>
+    -- 广告位 end -->
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">Loader.load(['page.topic']);</script>
+<include file="Public@default:Public:bottom" />

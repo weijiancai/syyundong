@@ -39,6 +39,8 @@ $Public_Config =  array(
         '/^Activity\/SimilarActivity$/' => 'Activity/index/SimilarActivity',
         '/^Activity\/publishReply$/' => 'Activity/index/publishReply',
         '/^Activity\/ActivityCommentLoad$/' => 'Activity/index/ActivityCommentLoad',
+
+        '/^Friends\/branch$/' => 'Friends/index/branch',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
