@@ -10,7 +10,13 @@
                         <span class="info-text"><i class="icon16 icon16-person"></i><{$detail.id|getFocus=1}>人感兴趣</span>
                         <em class="info-slider"></em>
                         <span class="info-text">分享到：</span>
-                          <div class="bshare-custom"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=3&amp;lang=zh"></script>
+                          <div class="bshare-custom">
+                    <a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+                    <a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a>
+                    <a title="分享到网易微博" class="bshare-neteasemb"></a>
+                    <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+                    <span class="BSHARE_COUNT bshare-share-count">0</span></div>
+                    <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=3&amp;lang=zh"></script>
                            <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
                     </p>
                 </div>
@@ -655,11 +661,23 @@
             <div class="span6">
                 <div class="side-block">
                     <h4 class="slider-title">公告</h4>
-                    <a href="../game/info/416/notice" class="public-reload-link">更多公告</a>
+                    <a class="public-reload-link" href="/game/info/411/notice">更多公告</a>
                     <div class="side-bull">
-                        <div class="nodata-module" style="height:100px"></div>
+                        <if condition="$notice neq null">
+                            <ul class="side-event-list">
+                                <volist name="notice" id="vo">
+                                    <li>
+                                        <p><a href="/Game/<{$detail.id}>/notice/<{$vo.id}>"><{$vo.title}></a></p>
+                                    </li>
+                                </volist>
+                            </ul>
+                            <else/>
+                            <div style="height:100px" class="nodata-module">
+                            </div>
+                         </if>
                     </div>
                 </div>
+
                 <div class="side-block">
                     <h4 class="slider-title">比赛成绩快速查询</h4>
                     <a href="../game/score/416" class="public-reload-link">高级查询</a>
@@ -673,7 +691,18 @@
                 <div class="side-block">
                     <h4 class="slider-title">赛事新闻</h4>
                     <a href="../game/info/416/news" class="public-reload-link">更多新闻</a>
-                    <div class="nodata-module" style="height:100px"></div>
+                    <if condition="$news neq null">
+                        <ul class="side-event-list">
+                            <volist name="news" id="vo">
+                                <li>
+                                    <p><a href="/Game/<{$detail.id}>/notice/<{$vo.id}>"><{$vo.title}></a></p>
+                                </li>
+                            </volist>
+                        </ul>
+                        <else/>
+                        <div style="height:100px" class="nodata-module">
+                        </div>
+                    </if>
                 </div>
             </div>
         </div>

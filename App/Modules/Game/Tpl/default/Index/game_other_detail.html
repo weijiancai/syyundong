@@ -37,34 +37,15 @@
     </div>
         <div class="span16">
             <div class="main-block clearfix">
-                <div class="article-block none-indent">
-                    <if condition="($info eq notice)or($info eq news)">
-                        <ul class="match-notice-list">
-                            <volist name="other" id="vo">
-                               <li>
-                                 <a href="/Game/<{$id}>/<{$info}>/<{$vo.id}>"><{$vo.title}></a>
-                                  <span><{$vo.input_date}></span>
-                                </li>
-                            </volist>
-                        </ul>
-                        <else/>
-                    <ul class="match-notice-list">
-                        <{$other}>
-                    </ul>
-                    </if>
+                <div class="article-block">
+                    <h3 class="article-title"><{$list.title}></h3>
+                    <h6 class="article-title-sub"><{$list.input_date}></h6>
+                    <pre class="news-detail">
+                        <p style="text-align: center;">
+                            <{$list.content}>
+                        </p>
                 </div>
             </div>
-            <if condition="($info eq notice)or($info eq news)">
-            <div class="main-block pagging-block">
-                <form action="#" id="paging-form" iyuesai-plugins-valid="0.37341516297302424">
-                    <div class="paging-wrap">
-                        <!--end of pageBean?? && (pages.total > -1) -->
-                        <!--<input type="hidden" value="" id="pageNum" name="pageNum">
-                        <input type="hidden" value="" id="pageSize" name="pageSize">-->
-                        <{$page}>
-                </form>
-            </div>
-            </if>
         </div>
     </div>
 </div>

@@ -6,7 +6,7 @@
 class IndexAction extends Action {
 
 	public function index(){
-        $this->assign('sport',D('Public/Index')->sport_top());
+        $this->assign('sport', D('Public/Index')->sport_top());
 		$this->display();
 	}
     /*

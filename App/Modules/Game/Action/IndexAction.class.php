@@ -147,9 +147,11 @@ class IndexAction extends Action
         $id = $_GET['id'];
         $detail = D('DbGame')->where('id=' . $id)->find();
         //赛事公告
-        $notice = D('OpGameNotice')->where('game_id=' . $id)->select();
-        //
+        $notice = D('OpGameNotice')->where('game_id=' . $id)->limit(2)->select();
+        //赛事新闻
+        $news = D('OpGameNews')->where('game_id=' . $id)->limit(2)->select();
         $this->assign('notice', $notice);
+        $this->assign('news', $news);
         $this->assign('detail', $detail);
         $this->display();
     }
@@ -175,6 +177,7 @@ class IndexAction extends Action
      */
     public function game_other()
     {
+        import('ORG.Util.Page');
         $id = $_GET['id'];
         $info = $_GET['info'];
         switch ($info){
@@ -194,21 +197,57 @@ class IndexAction extends Action
                 $info='about_hotal';
                 break;
         }
+        //赛事信息
+        $detail = D('DbGame')->field('id,sport_id,name')->where('id=' . $id)->find();
+
         if(($info =='content')||($info =='aout_route')||($info =='about_cost')||($info =='about_trip')||($info =='about_hotal')){
-            $other = D('DbGame')->where('id=' . $id)->getField($info);
-            dump(D('DbGame')->getLastSql());
+            $list = D('DbGame')->where('id=' . $id)->getField($info);
         }
         if($info=='notice'){
-            $other = D('OpGameNotice')->where('game_id = '.$id)->select();
+            $model = D('OpGameNotice');
+            $where['game_id'] = array('eq',$id);
+            $count = $model->where($where)->count();
+            $Page = new Page($count, 1);
+            $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+            $Page->rollPage = 10;
+            $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($where)->order('input_date desc')->select();
+            $show = $Page->show();
+            $this->assign('page', $show);
+            $this->assign('count', $count);
         }
         if($info=='news'){
-            $other = D('OpGameNews')->where('game_id = '.$id)->select();
+            $model = D('OpGameNews');
+            $where['game_id'] = array('eq',$id);
+            $count = $model->where($where)->count();
+            $Page = new Page($count, 1);
+            $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+            $Page->rollPage = 10;
+            $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($where)->order('input_date desc')->select();
+            $show = $Page->show();
+            $this->assign('page', $show);
+            $this->assign('count', $count);
         }
-        $this->assign('other', $other);
-        dump($other);
         $this->assign('id', $id);
         $this->assign('info', $info);
+        $this->assign('other', $list);
+        $this->assign('detail', $detail);
         $this->display();
     }
 
+    /*
+     * @时间: 20150415
+     * @功能：赛事其他信息(公告、新闻)详细
+     */
+    public function game_other_detail(){
+        $info  =$_GET['info'];
+        $where['game_id'] = $_GET['id'];
+        $where['id']  =$_GET['d_id'];
+        $list = D('op_game_'.$info)->where($where)->find();
+        $this->assign('list',$list);
+        $this->assign('id',$_GET['id']);
+        //赛事信息
+        $detail = D('DbGame')->field('id,sport_id,name')->where('id=' . $_GET['id'])->find();
+        $this->assign('detail', $detail);
+        $this->display();
+    }
 }
