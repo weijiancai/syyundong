@@ -4,7 +4,6 @@
 $(function () {
     // 注册body id
     $('body').attr('id', 'topic-detail');
-
     // 回复
     var $replyPanel = $('.reply-panel');
     $replyPanel.find('a').click(function() {
@@ -22,6 +21,18 @@ $(function () {
         submitHandler: function (form) {
             form.submit();
             $(form).parent().hide();
+        }
+    });
+    //赛友圈搜索
+    $('#branchform').validate({
+        rules: {
+            keyword: 'required'
+        },
+        messages: {
+            keyword: '搜索内容不能为空'
+        },
+        submitHandler: function (form) {
+           form.submit();
         }
     });
 });

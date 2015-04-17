@@ -26,7 +26,8 @@ var loader_config = {
         'page_venue': 'pages/venue',
         'page_venueDetail': 'pages/venue_detail',
         'page_friends': 'pages/friends',
-        'page_topic': 'pages/topic'
+        'page_topic': 'pages/topic',
+        'page_friendSearch': 'pages/friend_search'
     },
     shim: {
         'bootstrap': {
@@ -92,6 +93,10 @@ var loader_config = {
         'page_topic': {
             deps: ['common'],
             exports: 'page_topic'
+        },
+        'page_friendSearch': {
+            deps: ['common'],
+            exports: 'page_friendSearch'
         }
     }
 };

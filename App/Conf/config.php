@@ -42,6 +42,7 @@ $Public_Config =  array(
         '/^Activity\/ActivityCommentLoad$/' => 'Activity/index/ActivityCommentLoad',
 
         '/^Friends\/branch$/' => 'Friends/index/branch',
+        '/^Friends\/search$/' => 'Friends/index/search',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',

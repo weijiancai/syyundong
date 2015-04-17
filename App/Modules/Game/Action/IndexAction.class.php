@@ -134,7 +134,7 @@ class IndexAction extends Action
     {
         $model = New Model();
         $list = $model->query('select v.id,o.sort_num, v.name,v.province,v.image,v.province,v.join_count from v_game_activity v,op_recommend o
-                                where v.id = o.gc_id and o.recommend_type = "game" and v.type="game" order by o.sort_num');
+                                where v.id = o.gc_id and o.recommend_type = "game" and v.type="game" order by o.sort_num limit 4');
         $this->assign('recommend', $list);
     }
 
