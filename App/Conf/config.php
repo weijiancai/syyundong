@@ -43,6 +43,8 @@ $Public_Config =  array(
 
         '/^Friends\/branch$/' => 'Friends/index/branch',
         '/^Friends\/search$/' => 'Friends/index/search',
+        '/^Friends\/tag\/(\d+)$/' => 'Friends/index/tag?id=:1',
+        '/^Friends\/hotTopicLoad/' => 'Friends/index/hotTopicLoad',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
