@@ -51,4 +51,13 @@ $(function () {
         }
     });
 
+    var $fileUpload = $('#fileupload');
+    var $setHeadIcon = $('#btnSetHeadIcon');
+    $setHeadIcon.click(function() {
+        //alert('aa');
+        $fileUpload.trigger('click');
+    });
+    $fileUpload.change(function() {
+        alert($(this).val());
+    });
 });
