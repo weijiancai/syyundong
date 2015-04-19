@@ -1,0 +1,36 @@
+<div class="toggleCollapse"><h2>主菜单</h2>
+    <div>收缩</div>
+</div>
+<div class="accordion" fillSpace="sideBar">
+    <if condition="$userid neq 1">
+        <volist name="menulist" id="group">
+            <div class="accordionHeader">
+                <h2><span>Folder</span><{$group.title}></h2>
+            </div>
+            <div class="accordionContent">
+                <ul class="tree treeFolder">
+                    <volist id="item" name="menu[$group['id']]">
+                        <li><a href="__GROUP__/<{$item['name']}>" target="navTab" rel="<{$item['link']}>"><{$item['title']}></a>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </volist>
+        <else/>
+        <volist name="groups" id="group">
+            <div class="accordionHeader">
+                <h2><span>Folder</span><{$group.title}></h2>
+            </div>
+            <div class="accordionContent">
+                <ul class="tree treeFolder">
+                    <volist id="item" name="menu[$group['id']]">
+                        <li><a href="__GROUP__/<{$item['name']}>" target="navTab" rel="<{$item['link']}>"><{$item['title']}></a>
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        </volist>
+    </if>
+</div>
+
+

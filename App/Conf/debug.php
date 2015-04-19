@@ -5,7 +5,7 @@ return array(
 	'SHOW_DB_TIMES'=>false,					 // 显示数据库查询和写入次数
 	'SHOW_CACHE_TIMES'=>false,				 // 显示缓存操作次数
 	'SHOW_USE_MEM'=>false,					 // 显示内存开销
-	'SHOW_PAGE_TRACE'=>true,				//显示调试信息
+	'SHOW_PAGE_TRACE'=>false,				//显示调试信息
 	'LOG_RECORD'=>true,             		 // 进行日志记录
     'LOG_EXCEPTION_RECORD'  => true,    	 // 是否记录异常信息日志
     'LOG_LEVEL'       =>   'EMERG,ALERT,CRIT,ERR,WARN,INFO,DEBUG,SQL',  // 允许记录的日志级别

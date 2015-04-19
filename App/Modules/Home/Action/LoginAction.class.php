@@ -5,17 +5,22 @@
  */
 class LoginAction extends Action
 {
-
-    /**
-     *@功能：登录
-     */
     public function index()
+    {
+        $this->display();
+    }
+
+    /*
+     * @功能：用户登录
+     * @时间：20150419
+     */
+    public function load()
     {
         extract($_POST);
         extract($_GET);
         if (IS_POST) {
             if (empty($_POST['loginName']) && empty($_POST['loginPass'])) {
-                $this->error('账号密码都不能为空');
+                echo 5;
             } else {
                 $loginName = I('post.loginName');
                 $loginPass = I('post.loginPass');
@@ -23,47 +28,63 @@ class LoginAction extends Action
                 $data = D('Login')->login($loginName, $loginPass);
                 if ($data == 1) {
                     if ($wz == '') {
-                        $this->success('登录成功', '/Index/');
+                        //登录成功,跳转到首页
+                        echo 1;
+                        // $this->success('登录成功', '/Index/');
                     } else {
-                        $this->success('登录成功', $wz);
+                        //登录成功,跳转到浏览页
+                        echo 2;
+                        //  $this->success('登录成功', $wz);
                     }
                 } else {
-                    $this->error('登陆失败，账号或密码错误！');
+                    //登录失败,账号或密码错误
+                    echo 3;
+                    //   $this->error('登陆失败，账号或密码错误！');
                 }
             }
         } else {
-            $this->error('出错了');
+            echo 4;
+            //  $this->error('出错了');
         }
     }
 
+    /*
+     * @功能：登录页面跳转
+     * @时间：20150419
+     */
     public function login()
     {
         $this->display();
     }
 
-    public function loginyz()
+    /*
+     * @功能：校验登录用户是否存在
+     * @时间：20150419
+     */
+    public function IsExistUser()
     {
-        header("Content-Type:text/html; charset=utf-8");
         if (IS_POST) {
-            if (empty($_POST['name']) AND empty($_POST['param'])) {
-                echo '{"info":"数据验证失败！","status":"n"}';
+            $where['mobile'] = trim(I('post.loginName'));
+            $model = D('DbUser');
+            $date = $model->where($where)->count();
+            if ($date) {
+                echo 'true';
             } else {
-                $where['uid'] = getgb(I('post.param'));
-                $model = D('Users');
-                $date = $model->where($where)->count();
-                if ($date) {
-                    echo '{"info":"这个用户名已经被使用，请更换！","status":"n"}';
-                } else {
-                    echo '{"info":"恭喜您该账号名可以注册！","status":"y"}';
-                }
+                echo 'false';
             }
-        } else {
-            echo '{"info":"数据验证失败！","status":"n"}';
         }
     }
+    /*
+     * @功能：退出网站
+     * @时间：20150419
+     */
+    public function quit()
+    {
+        session('mark_id',null);
+        $this->redirect(U('@www.syyundong.com'));
+    }
 
-    public
-    function logintel()
+    public function logintel()
     {
         header("Content-Type:text/html; charset=utf-8");
         if (IS_POST) {
@@ -87,45 +108,6 @@ class LoginAction extends Action
             }
         } else {
             echo '{"info":"数据验证失败！","status":"n"}';
-        }
-    }
-
-    /**
-     *@验证是不是未审核会员
-     */
-    public
-    function yzuser()
-    {
-        header("Content-Type:text/html; charset=utf-8");
-        if (IS_POST) {
-            $where['name'] = I('post.param');
-            $date = D('Users')->where($where)->find();
-            if ($date) {
-                echo '{"info":"会员认证未通过，请等待审核","status":"n"}';
-            }
-        } else {
-            echo '{"info":"数据验证失败！","status":"n"}';
-        }
-    }
-
-
-    /**
-     *@验证手机号码是不是重复号码
-     */
-    public
-    function Repeattel($val)
-    {
-        $where['tel'] = $val;
-        $where['MOBILE2'] = $val;
-        $where['MOBILE3'] = $val;
-        $where['MOBILE4'] = $val;
-        $where['MOBILE5'] = $val;
-        $where['_logic'] = 'OR';
-        $tel = D('Users')->where($where)->find();
-        if ($tel) {
-            return 1;
-        } else {
-            return 0;
         }
     }
 

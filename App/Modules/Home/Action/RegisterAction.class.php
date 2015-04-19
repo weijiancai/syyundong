@@ -114,9 +114,9 @@ class RegisterAction extends Action
                     $date['input_date'] = date('Y-m-d H:i:s');
                     $result = D('DbUser')->data($date)->add();
                     if (false !== $result) {
-                      //  $this->display('profile');
-                        $_SESSION['SyPhone'] =trim(I('post.mobile'));
-                           echo  6;
+                        //  $this->display('profile');
+                        $_SESSION['SyPhone'] = trim(I('post.mobile'));
+                        echo 6;
                     }
                 } else {
                     $this->error('非法请求');
@@ -127,17 +127,27 @@ class RegisterAction extends Action
             echo 5;
         }
     }
+
     /*
      * @功能：校验昵称是否存在
      * @时间：20150419
      */
-    public function isExistNc(){
-        $date['nick_name'] = array('eq',trim($_GET['nickName']));
-        $result  = D('DbUser')->where($date)->getField('ID');
-        if(!empty($result)&&($result!=NULL)){
-            echo 'false';
-        }else{
-            echo 'true';
+    public function isExistNc()
+    {
+        if (IS_POST) {
+            if (empty($_POST['nickName'])) {
+                echo 'false';
+            } else {
+                $date['nick_name'] = array('eq', trim($_POST['nickName']));
+                $result = D('DbUser')->where($date)->count();
+                if ($result) {
+                    echo 'false';
+                } else {
+                    echo 'true';
+                }
+            }
+        } else {
+            echo false;
         }
     }
 }

@@ -29,7 +29,7 @@ class loginModel extends Model
      */
     public function getuser()
     {
-        $mark = I('session.mark');
+        $mark = I('session.mark_id');
         $id = deCode($mark);
         $user = D('DbUser')->where("id = '%d'", $id)->find();
         return $user;

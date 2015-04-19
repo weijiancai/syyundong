@@ -90,7 +90,7 @@ function getGameTime($id, $state)
  * @功能：赛事、活动状态
  * @时间：20150402
  */
-function getStatus($id,$type)
+function getState($id,$type)
 {
     $status = D('VGameActivity')->where('id='.$id.' and type = '."'".$type."'")->getField('status');
 
@@ -156,5 +156,66 @@ function m_date($time = NULL) {
         $text = date('Y年m月d日', $time); //一年以前
     return $text;
 }
+/**
+ *  @功能：返回登录用户
+ *  @时间：20150419
+ */
+function getLoginUser(){
+    $id = deCode(I('session.mark_id'));
+    $user = D('DbUser')->where("id = '%d'", $id)->field('nick_name,mobile')->find();
+    if($user['nick_name']){
+        return $user['nick_name'];
+    }else{
+        return $user['mobile'];
+    }
+}
+/****************************************************************后台方法****************************************************************/
+/*
+ * @功能：信息状态操作
+ * @时间:20150419
+ */
+function showStatus($status, $id, $callback="",$before,$after) {
+    switch ($status) {
+        case 0 :
+            $info = '<a href="__URL__/resume/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="'.$callback.'">'.$before.'</a>';
+            break;
+        case 2 :
+            $info = '<a href="__URL__/pass/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="'.$callback.'">'.$before.'</a>';
+            break;
+        case 1 :
+            $info = '<a href="__URL__/forbid/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="'.$callback.'">'.$after.'</a>';
+            break;
+        case - 1 :
+            $info = '<a href="__URL__/recycle/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="'.$callback.'">还原</a>';
+            break;
+    }
+    return $info;
+}
+/*
+ * @功能：返回信息状态
+ * @时间:20150419
+ */
+function getStatus($status, $imageShow = true) {
+    switch ($status) {
+        case 0 :
+            $showText = '禁用';
+            $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/locked.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="禁用">';
+            break;
+        case 3 :
+            $showText = '待审';
+            $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/prected.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="待审">';
+            break;
+        case 2 :
+            $showText = '删除';
+            $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/del.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="删除">';
+            break;
+        case 1 :
+        default :
+            $showText = '正常';
+            $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/ok.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="正常">';
 
+    }
+    return ($imageShow === true) ?  $showImg  : $showText;
+
+}
 ?>

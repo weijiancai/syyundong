@@ -15,7 +15,6 @@ $(function () {
                 mobile: {required: true,
                     isMobile: true
                 },
-                /*mobile:"required",*/
                 picCode: "required",
                 password: {required: true,
                     minlength: 6,
@@ -27,8 +26,8 @@ $(function () {
                     maxlength: 16,
                     equalTo: '#password'
                 },
-                signupAgr:{
-                    required:true
+                signupAgr: {
+                    required: true
                 }
             },
             messages: {
@@ -36,7 +35,6 @@ $(function () {
                     required: "手机号码不能为空",
                     isMobile: "请输入正确的手机号码"
                 },
-                /*mobile:"手机号码不能为空",*/
                 picCode: "验证码不能为空！",
                 password: {   required: '密码不能为空！',
                     minlength: " 密码长度不能小于6个字符",
@@ -48,8 +46,8 @@ $(function () {
                     maxlength: " 密码长度不能大于15个字符",
                     equalTo: '两次输入密码不一致！'
                 },
-                signupAgr:{
-                    required:"必须同意服务条款"
+                signupAgr: {
+                    required: "必须同意服务条款"
                 }
             },
             submitHandler: function (form) {
@@ -68,12 +66,12 @@ $(function () {
                             $.dialog.error('注册失败啦！');
                         } else if (result == 5) {
                             $.dialog.error('注册信息全部不能为空！');
-                        }else if(result ==6){
-                            window.location.href="/Register/profile";
+                        } else if (result == 6) {
+                            window.location.href = "/Register/profile";
                         }
                     }
                 });
-             //   $form.submit();
+                //   $form.submit();
             }
         });
 

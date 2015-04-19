@@ -25,7 +25,7 @@ $(function () {
                 byteRangeLength: [3, 15],
                 remote: {
                     url: "/Register/isExistNc",       //后台处理程序
-                    type: "get",                      //数据发送方式
+                    type: "post",                      //数据发送方式
                     dataType: "json",                 //接受数据格式
                     data: {                           //要传递的数据
                         nickName: function () {
