@@ -26,8 +26,8 @@ class RegisterAction extends Action
             $date['password'] = base64_encode(strtoupper(md5(I('post.password'))));;
             $result = D('DbUser')->data($date)->add();
             if (false !== $result) {
-                $this->assign('');
                 $this->display('profile');
+                //   echo  1;
             }
         } else {
             $this->error('非法请求');
@@ -82,15 +82,17 @@ class RegisterAction extends Action
             $this->error('校验码错误,请重新输入');
         }
     }
-    /*@功能：用户注册校验*/
-    /*手机找回密码:验证信息*/
+
+    /*@功能：用户注册校验
+     *@时间：20150324
+     */
     public function ValidateInfo()
     {
         $mobile = I('post.mobile');
         $picCode = I('post.picCode');
         $password = I('post.password');
         $confirmPass = I('post.confirmPass');
-        if ((!empty($mobile)) && (!empty($picCode))&& (!empty($password))&& (!empty($confirmPass))) {
+        if ((!empty($mobile)) && (!empty($picCode)) && (!empty($password)) && (!empty($confirmPass))) {
             if ($_SESSION['verify'] != md5($picCode)) {
                 //验证码错误
                 echo 1;
@@ -101,15 +103,41 @@ class RegisterAction extends Action
             if ($data) {
                 //手机号码已经注册过
                 echo 2;
+            } else if (!preg_match("/13\d{9}|14\d{9}|15[0123456789]\d{8}|18\d{9}/", $mobile)) {
+                //手机号码格式不正确
+                echo 3;
             } else {
-                if (!preg_match("/13\d{9}|14\d{9}|15[0123456789]\d{8}|18\d{9}/", $mobile)) {
-                    //手机号码格式不正确
-                    echo 3;
+                //注册用户
+                if ($this->isPost()) {
+                    $date['mobile'] = trim(I('post.mobile'));
+                    $date['password'] = base64_encode(strtoupper(md5(I('post.password'))));
+                    $date['input_date'] = date('Y-m-d H:i:s');
+                    $result = D('DbUser')->data($date)->add();
+                    if (false !== $result) {
+                      //  $this->display('profile');
+                        $_SESSION['SyPhone'] =trim(I('post.mobile'));
+                           echo  6;
+                    }
+                } else {
+                    $this->error('非法请求');
                 }
             }
         } else {
             //基本注册信息全部不能为空
             echo 5;
+        }
+    }
+    /*
+     * @功能：校验昵称是否存在
+     * @时间：20150419
+     */
+    public function isExistNc(){
+        $date['nick_name'] = array('eq',trim($_GET['nickName']));
+        $result  = D('DbUser')->where($date)->getField('ID');
+        if(!empty($result)&&($result!=NULL)){
+            echo 'false';
+        }else{
+            echo 'true';
         }
     }
 }

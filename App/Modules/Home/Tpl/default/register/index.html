@@ -13,7 +13,7 @@
                                 <li><i>3</i>注册成功</li>
                             </ul>
                         </div>
-                        <form id="registerForm" name="registerForm" action="" method="POST">
+                        <form id="registerForm" name="registerForm" action="/Register/adddata" method="POST">
                             <table class="table">
                                 <tbody>
                                 <tr>
@@ -41,6 +41,7 @@
                                     <td>
                                         <p>密码</p>
                                         <input class="span3" type="password" id="password" name="password"/>
+                                        <p class="text-tip">6~16个字符，区分大小写</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -71,8 +72,6 @@
         </div>
     </div>
 </div>
-<script language="JavaScript">
-    Loader.load(['page_register']);
-</script>
+<script language="JavaScript">Loader.load(['page_register']);</script>
 <include file="Public@default:Public:bottom"/>
 

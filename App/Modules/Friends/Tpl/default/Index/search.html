@@ -79,33 +79,12 @@
     <div class="side-block">
         <h4 class="slider-title">推荐赛友圈</h4>
         <ul class="social-tag-list clearfix">
-            <li class="tag1">
-                <a href="/friends/tag/295">2015四季跑·深圳站</a>
-            </li>
-            <li class="tag2">
-                <a href="/friends/tag/305">四季跑城市PK赛</a>
-            </li>
-            <li class="tag3">
-                <a href="/friends/tag/297">2015四季跑·天津站</a>
-            </li>
-            <li class="tag4">
-                <a href="/friends/tag/292">2015四季跑重庆站</a>
-            </li>
-            <li class="tag5">
-                <a href="/friends/tag/307">2015重庆国际马拉松赛</a>
-            </li>
-            <li class="tag6">
-                <a href="/friends/tag/308">跑进风城！芝加哥马拉松招募！</a>
-            </li>
-            <li class="tag7">
-                <a href="/friends/tag/286">2015香港马拉松</a>
-            </li>
-            <li class="tag8">
-                <a href="/friends/tag/278">SNOW RUN</a>
-            </li>
-            <li class="tag9">
-                <a href="/friends/tag/301">奥森光猪跑！你敢比美女穿的少吗</a>
-            </li>
+            <volist name="recommend" id="vo" key="k">
+                <li class="tag<{$k}>">
+                    <a href="/Friends/tag/<{$vo.id}>/topics"><{$vo.name}></a>
+                </li>
+            </volist>
+
         </ul>
     </div>
     <!-- 推荐赛友圈 end -->

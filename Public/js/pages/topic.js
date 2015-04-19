@@ -50,6 +50,7 @@ $(function () {
         if ($('#hotTopicTabs').find('a.current').data('value') != $('#source_type').val()) {
             var flag = 1;
             var last = 0;
+            $commentData.empty();
             $('#source_type').val($('#hotTopicTabs').find('a.current').data('value'));
         } else {
             var last = $more.data('last');

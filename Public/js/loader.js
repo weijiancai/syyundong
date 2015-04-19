@@ -14,10 +14,12 @@ var loader_config = {
         'jqueryUI': 'jquery-ui-1.10.3.custom.min',
         'common': 'common',
         'common_footer': 'common_footer',
+        'upload':'upload',
         'page_login': 'pages/login',
         'page_forgetPassword': 'pages/forgetPassword',
         'page_index': 'pages/index',
         'page_register': 'pages/register',
+        'page_profile': 'pages/profile',
         'page_publish': 'pages/publish',
         'page_game': 'pages/game',
         'page_gameDetail': 'pages/game_detail',
@@ -28,6 +30,7 @@ var loader_config = {
         'page_friends': 'pages/friends',
         'page_topic': 'pages/topic',
         'page_friendSearch': 'pages/friend_search'
+
     },
     shim: {
         'bootstrap': {
@@ -57,6 +60,10 @@ var loader_config = {
         'page_register': {
             deps: ['common'],
             exports: 'page_register'
+        },
+        'page_profile': {
+            deps: ['common','upload'],
+            exports: 'page_profile'
         },
         'page_publish': {
             deps: ['common'],
