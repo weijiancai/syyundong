@@ -1,0 +1,77 @@
+<script language="Javascript">
+    function navTabAjaxDone(json) {
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok) {
+            if (json.navTabId) { //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                setTimeout(function () {
+                    navTab.closeCurrentTab();
+                }, 100);
+            } else if ("forward" == json.callbackType) {
+                navTab.reload(json.forwardUrl);
+            }
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#classone").change(function () {
+            $("#title").attr("name", "Class2Name");
+            $("#sort").attr("name", "Class2Sort");
+        });
+    });
+    function second() {
+        $('#classone').removeAttr("disabled");
+    }
+</script>
+<div class="page">
+    <div class="pageContent">
+        <form enctype="multipart/form-data" method="post" action="__URL__/insert/navTabId/__MODULE__"
+              class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+            <div class="pageFormContent" layoutH="58">
+
+                <p>
+                    <label>标题：</label>
+                    <input name="Class1Name" class="required" value="" type="text" id="title">
+                </p>
+
+                <p>
+                    <label>排序：</label>
+                    <input name="Class1Sort" class="number required" type="text" value="" id="sort">
+                </p>
+
+                <p>
+                    <label>状态：</label>
+                    <select name="State" id="status">
+                        <option value="1">已审核</option>
+                        <option value="0">未审核</option>
+                    </select>
+                </p>
+            </div>
+            <div class="formBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">保存</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button">
+                            <div class="buttonContent">
+                                <button type="button" class="close">取消</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
+    </div>
+</div>

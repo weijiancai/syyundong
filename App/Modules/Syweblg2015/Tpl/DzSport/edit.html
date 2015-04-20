@@ -1,0 +1,85 @@
+<script language="Javascript">
+    function navTabAjaxDone(json) {
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok) {
+            if (json.navTabId) { //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                setTimeout(function () {
+                    navTab.closeCurrentTab();
+                }, 100);
+            } else if ("forward" == json.callbackType) {
+                navTab.reload(json.forwardUrl);
+            }
+        }
+    }
+</script>
+<input type="hidden" value="<{$vo.navpid}>" id="pid"></input>
+<script language="Javascript">
+
+    $(document).ready(function () {
+        $('#form1').submit(function () {
+            if ($('#pid').val() == 0) {
+                document.forms[0].action = "__URL__/iupdate/navTabId/__MODULE__";
+                document.forms[0].onsubmit = "return iframeCallback(this,dialogAjaxDone)";
+            } else {
+                document.forms[0].action = "__URL__/update/navTabId/__MODULE__";
+                document.forms[0].onsubmit = "return iframeCallback(this,dialogAjaxDone)";
+            }
+        });
+    });
+</script>
+<div class="page">
+    <div class="pageContent">
+        <form id="form1" method="post" enctype="multipart/form-data" action="__URL__/update/navTabId/__MODULE__"
+              class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+            <div class="pageFormContent" layoutH="58">
+                <input type="hidden" value="<{$vo.ID}>" name="ID">
+
+                <p>
+                    <label>标题：</label>
+                    <input name="Class1Name" class="required" value="<{$vo.Class1Name}>" type="text">
+                </p>
+
+                <p>
+                    <label>排序：</label>
+                    <input name="Class1Sort" class="number" type="text" value="<{$vo.Class1Sort}>">
+                </p>
+
+                <p>
+                    <label>状态：</label>
+                    <select name="State" id="State">
+                        <option
+                        <eq name="vo.State" value="1">selected</eq>
+                        value="1">已审核</option>
+                        <option
+                        <eq name="vo.State" value="0">selected</eq>
+                        value="0">未审核</option>
+                    </select>
+                </p>
+            </div>
+            <div class="formBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit" id="sub">保存</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button">
+                            <div class="buttonContent">
+                                <button type="button" class="close">取消</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
+    </div>
+</div>

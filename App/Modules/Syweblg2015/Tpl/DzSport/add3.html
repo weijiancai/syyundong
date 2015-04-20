@@ -1,0 +1,92 @@
+<script language="Javascript">
+    function navTabAjaxDone(json) {
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok) {
+            if (json.navTabId) { //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                setTimeout(function () {
+                    navTab.closeCurrentTab();
+                }, 100);
+            } else if ("forward" == json.callbackType) {
+                navTab.reload(json.forwardUrl);
+            }
+        }
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#sale1").change(function () {
+            if ($("#sale1").val() != 0) {
+                $('#name').attr("disabled", "disabled");
+            }
+            if ($("#sale1").val() == 0) {
+                $('#name').attr("disabled", false);
+            }
+            getSale2();
+        });
+        function getSale2() {
+//    $("#mclass2").empty();
+            $.getJSON("__URL__/getSale2", {id: $("#sale1").val()}, function (data) {
+                $("<option></option>").val("").text("请选择").appendTo($("#mclass2"));
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item['ID']).text(item['Class2Name']).appendTo($("#mclass2"));
+                });
+            });
+        }
+    });
+</script>
+<div class="page">
+    <div class="pageContent">
+        <form enctype="multipart/form-data" method="post" action="__URL__/insert2/navTabId/__MODULE__"
+              class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+            <div class="pageFormContent" layoutH="58">
+                <dl>
+                    <dt>一级分类：</dt>
+                    <dd><select name="Class1">
+                        <volist name="class1" id="s1">
+                            <option value="<{$s1.ID}>"><{$s1.Class1Name}></option>
+                        </volist>
+                    </select></dd>
+                </dl>
+                <dl>
+                    <dt>二级分类：</dt>
+                    <dd><input name="Class2Name" class="required" value="" type="text" id="Class2Name"></dd>
+                </dl>
+                <dl>
+                    <dt>排序：</dt>
+                    <dd><input name="Class2Sort" class="required" value="" type="text" id="Class2Sort"></dd>
+                </dl>
+                <dl>
+                    <dt>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：</dt>
+                    <dd><select name="State" id="status">
+                        <option value="1">已审核</option>
+                        <option value="0">未审核</option>
+                    </select></dd>
+                </dl>
+            </div>
+            <div class="formBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">保存</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button">
+                            <div class="buttonContent">
+                                <button type="button" class="close">取消</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
+    </div>
+</div>

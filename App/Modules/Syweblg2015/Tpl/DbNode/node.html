@@ -1,0 +1,81 @@
+<form id="pagerForm" action="__URL__/node" method="post">
+    <input type="hidden" name="pageNum" value="<{$_REQUEST['pageNum']|default=1}>"/>
+    <input type="hidden" name="medium" value="<{$_REQUEST.medium}>"/>
+    <input type="hidden" name="name" value="<{$_REQUEST['name']}>"/>
+    <input type="hidden" name="title" value="<{$_REQUEST['title']}>"/>
+    <input type="hidden" value="<{$groupid}>" name="group_id">
+</form>
+
+<div class="page">
+    <div class="pageHeader">
+        <form onsubmit="return navTabSearch(this);" action="__URL__/node" method="post">
+            <div class="searchBar">
+                <table>
+                    <tr>
+                        <td>名称：<input type="text" name="title" class="name" value="<{$_REQUEST['title']}>">&nbsp;&nbsp;
+                        </td>
+                        <td>
+                            <button type="submit">查询</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+
+    <div class="pageContent">
+        <div class="panelBar">
+            <ul class="toolBar">
+                <li><a class="add" href="__URL__/add/group_id/<{$groupid}>" target="dialog"
+                       mask="true"><span>新增模块</span></a></li>
+                <li><a class="add" href="__URL__/add/group_id/<{$groupid}>" target="dialog"
+                       mask="true"><span>新增节点</span></a></li>
+                <li><a class="delete" href="__URL__/foreverdelete/id/{sid_node}/navTabId/__MODULE__" target="ajaxTodo"
+                       calback="navTabAjaxMenu" title="你确定要删除吗？" warn="请选择节点"><span>删除</span></a></li>
+                <li><a class="edit" href="__URL__/edit/id/{sid_node}/groupid/<{$groupid}>" target="dialog" mask="true"
+                       warn="请选择节点"><span>修改</span></a></li>
+            </ul>
+        </div>
+
+
+        <table class="list" width="100%" layoutH="92">
+            <thead>
+            <tr>
+                <th width="60">编号</th>
+                <th width="150">链接</th>
+                <th width="100">返回链接</th>
+                <th width="100">名称</th>
+                <th width="80">等级</th>
+                <th width="50">序号</th>
+                <th width="100">状态</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist id="vo" name="list">
+                <tr target="sid_node" rel="<{$vo['id']}>">
+                    <td><{$vo['id']}></td>
+                    <td><{$vo['name']}></td>
+                    <td><{$vo['link']}></td>
+                    <td><a href="__URL__/edit/id/<{$vo['id']}>" target="dialog" mask="true"
+                           rel="child"><{$vo['title']}></a></td>
+                    <td><{$vo['level']}></td>
+                    <td><{$vo['sort']}></td>
+                    <td><{$vo['status']|getStatus}></td>
+                    <td><{$vo['status']|showStatus=$vo['id'],'navTabAjaxMenu'}> <a href="__URL__/edit/id/<{$vo['id']}>"
+                                                                                   target="dialog" mask="true">编辑</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+
+        <div class="panelBar">
+            <div class="pages">
+                <span>共<{$totalCount}>条</span>
+            </div>
+            <div class="pagination" targetType="navTab" totalCount="<{$totalCount}>" numPerPage="<{$numPerPage}>"
+                 pageNumShown="10" currentPage="<{$currentPage}>"></div>
+        </div>
+    </div>
+</div>

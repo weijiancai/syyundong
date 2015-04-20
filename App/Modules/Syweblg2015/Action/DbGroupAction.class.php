@@ -32,7 +32,6 @@ class DbGroupAction extends CommonAction
         return;
     }
 
-
     public function index()
     {
         /*         $groupClass=M("GroupClass")->where(array('status'=>1))->select();
