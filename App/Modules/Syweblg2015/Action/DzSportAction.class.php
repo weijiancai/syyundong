@@ -1,19 +1,49 @@
 <?php
-/*
- * 生活信息大类
- * @Author liuliting
- * */
+/**
+ * @时间:20150421
+ * @功能:赛事分类
+ * @VIEW:dz_sport
+ * @Author：liuliting
+ */
 import('ORG.Util.Page');
-
-/*
- *  生活信息类别管理
-*/
 
 class DzSportAction extends CommonAction
 {
     public function index()
     {
-        parent::index();
+        $map = $this->_search();
+        $this->assign('map', $map);
+        if (method_exists($this, '_filter')) {
+            $this->_filter($map);
+        }
+        $name = $this->getActionName();
+        $model = D($name);
+        if (!empty ($model)) {
+            $order = "id asc,";
+            $this->_list($model, $map, $order);
+        }
+        $this->display();
+        return;
+    }
+    /*
+     * @功能：返回查询条件
+     * @时间：20150421
+     */
+    protected function _search()
+    {
+        $name = $this->getActionName();
+        $model = D($name);
+        $map = array();
+        $temp = $model->getDbFields();
+        foreach ($temp as $key => $val) {
+            if (isset ($_REQUEST [$val]) && $_REQUEST [$val] != '') {
+                $_REQUEST [$val] = $_REQUEST[$val];
+                $map[$val] = array('like', "%{$_REQUEST[$val]}%");
+            }
+        }
+        $map['sport_type'] = array('eq', 1);
+        $map['pid'] = array('eq', 0);
+        return $map;
     }
 
     /*

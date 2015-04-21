@@ -218,4 +218,21 @@ function getStatus($status, $imageShow = true) {
     return ($imageShow === true) ?  $showImg  : $showText;
 
 }
+/*
+ * @功能：赛事详情
+ * @时间:20150419
+ */
+function getSecondSport($id){
+    $list =D('DzSport')->where('pid='.$id)->getField('name',true);
+    return implode(' | ',$list);
+}
+/*
+ * @功能：返回用户名称
+ * @时间:20150419
+ */
+function getUserName($id){
+    $list =D('DzSport')->where('pid='.$id)->getField('name',true);
+    return implode(' | ',$list);
+}
+
 ?>

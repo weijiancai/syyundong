@@ -12,31 +12,12 @@
     <div class="pageHeader">
         <form onsubmit="return navTabSearch(this);" action="__URL__" method="post">
             <div class="searchBar">
-                <ul class="searchContent">
-                    <li style="width:220px">
-                        <label style="width:30px">分类:</label>
-                        <input type="text" name="Class1Name" value="<{$_REQUEST['Class1Name']}>" class="medium">
-                    </li>
-                    <li style="width:150px">
-                        <label style="width:40px">状态：</label>
-                        <select name="State">
-                            <option value="">请选择</option>
-                            <option value="1"
-                            <eq name="_REQUEST.State" value="1">selected=selected</eq>
-                            >已审核</option>
-                            <option value="0"
-                            <eq name="_REQUEST.State" value="0">selected=selected</eq>
-                            >未审核</option>
-                        </select>
-                    </li>
-                    <li>
-                        <div class="buttonActive">
-                            <div class="buttonContent">
-                                <button type="submit">查询</button>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                <table>
+                    <tr>
+                        <td>名称：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium" size="10">&nbsp;&nbsp;</td>
+                    </tr>
+                </table>
+
             </div>
         </form>
     </div>
@@ -45,7 +26,7 @@
         <div class="panelBar">
             <ul class="toolBar">
                 <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="700" height="400"
-                       callback="NavTabAjax" rel="vadd"><span>新增一级分类</span></a></li>
+                       callback="NavTabAjax" rel="vadd"><span>增加赛事</span></a></li>
                 <li><a class="add" href="__URL__/add3" target="dialog" mask="true" width="700" height="400"
                        callback="NavTabAjax" rel="vadd"><span>新增二级分类</span></a></li>
                 <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
@@ -58,23 +39,21 @@
             <thead>
             <tr>
                 <th width="2%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
-                <th width="6%" align="center">一级分类</th>
-                <th width="85%" align="center">二级分类</th>
-                <th width="3%" align="center">状态</th>
-                <th width="5%" align="center">操作</th>
+                <th width="6%" align="center">赛事</th>
+                <th width="75%" align="center">赛事详细</th>
+                <th width="12%" align="center">录入时间</th>
+                <th width="5%" align="center">录入人</th>
             </tr>
             </thead>
             <tbody>
-
-
             <volist id="vo" name="list">
-                <tr target="sid_node" rel="<{$vo['ID']}>">
-                    <td height="30px"><input name="ids[]" value="<{$vo['ID']}>" type="checkbox"></td>
-                    <td><a href="__URL__/add2/cid/<{$vo.ID}>" target="dialog" mask="true" width="700" height="600"
-                           callback="NavTabAjax"><span style="color:blue"><{$vo['Class1Name']}></span></a></td>
-                    <td><span style="line-height:25px"><{$vo['ID']|getClass2ByClass1}></span></td>
-                    <td><{$vo['State']|getStatus}></td>
-                    <td><{$vo['State']|showState=$vo['ID'],'class1','navTabAjaxDone'}><a style="color:red">|</a></td>
+                <tr target="sid_node" rel="<{$vo['id']}>">
+                    <td height="30px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
+                    <td><a href="__URL__/second/sid/<{$vo.id}>" target="dialog" mask="true" width="700" height="600"
+                           callback="NavTabAjax"><span style="color:blue"><{$vo['name']}></span></a></td>
+                    <td><span style="line-height:25px"><{$vo['id']|getSecondSport}></span></td>
+                    <td><{$vo['input_date']}></td>
+                    <td><{$vo['input_user']}></td>
                 </tr>
             </volist>
 

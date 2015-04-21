@@ -128,23 +128,7 @@ class CommonAction extends Action {
         }
         return $map;
     }
-    /**
-    +----------------------------------------------------------
-     * 根据表单生成查询条件
-     * 进行列表过滤
-    +----------------------------------------------------------
-     * @access protected
-    +----------------------------------------------------------
-     * @param Model $model 数据对象
-     * @param HashMap $map 过滤条件
-     * @param string $sortBy 排序
-     * @param boolean $asc 是否正序
-    +----------------------------------------------------------
-     * @return void
-    +----------------------------------------------------------
-     * @throws ThinkExecption
-    +----------------------------------------------------------
-     */
+
     protected function _list($model, $map, $order, $sortBy = '', $asc = true) {
         $pk=$model->getPk ();
         $order.=$pk." desc";
