@@ -231,8 +231,7 @@ function getSecondSport($id){
  * @时间:20150419
  */
 function getUserName($id){
-    $list =D('DzSport')->where('pid='.$id)->getField('name',true);
-    return implode(' | ',$list);
+    return  D('DbUser')->where('id='.$id)->getField('name');
 }
 
 ?>

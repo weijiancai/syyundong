@@ -17,70 +17,46 @@
         }
     }
 </script>
-<script>
-    $(document).ready(function () {
-        $("#sale1").change(function () {
-            if ($("#sale1").val() != 0) {
-                $('#name').attr("disabled", "disabled");
-            }
-            if ($("#sale1").val() == 0) {
-                $('#name').attr("disabled", false);
-            }
-            getSale2();
-        });
-        function getSale2() {
-//    $("#mclass2").empty();
-            $.getJSON("__URL__/getSale2", {id: $("#sale1").val()}, function (data) {
-                $("<option></option>").val("").text("请选择").appendTo($("#mclass2"));
-                $.each(data, function (i, item) {
-                    $("<option></option>").val(item['ID']).text(item['Class2Name']).appendTo($("#mclass2"));
-                });
-            });
-        }
-    });
-</script>
 <div class="page">
     <div class="pageContent">
         <form enctype="multipart/form-data" method="post"
-              action="__URL__/insclass2/Class1/<{$Class1}>/navTabId/__MODULE__" class="pageForm required-validate"
+              action="__URL__/insert_second/sid/<{$sid}>/navTabId/__MODULE__" class="pageForm required-validate"
               onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
                 <dl class="nowrap">
-                    <dt>二级分类</dt>
+                    <dt>赛事详情(<b style="color:red"><{$max_id}></b>)</dt>
                     <dd style="width:500px">
                         <div class="tabsContent">
                             <div>
-                                <table class="list nowrap itemDetail" addButton="添加分类">
+                                <table class="list nowrap itemDetails" addButton="添加赛事">
                                     <thead>
                                     <tr>
-                                        <th type="text" class="required" name="Class2Name[]" defaultVal="" size="12"
-                                            fieldClass="">名称
+                                        <th type="text" class="required" name="id[]" defaultVal="" size="8"
+                                            fieldClass="">ID
                                         </th>
-                                        <th type="text" class="required number" name="Class2Sort[]" defaultVal=""
-                                            size="12" fieldClass="">顺序
+                                        <th type="text" class="required" name="name[]" defaultVal=""
+                                            size="12" fieldClass="">名称
                                         </th>
-                                        <th type="enum" name="state[]" enumUrl="__URL__/state" size="12">状态</th>
+                                        <th type="enum" name="sport_show[]" enumUrl="__URL__/state" size="12">显示</th>
                                         <th type="del" width="60">操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <volist name="list" id="vo">
                                         <tr>
-                                            <td><input type="text" class="required" name="Class2Name[]" size="12"
-                                                       value="<{$vo.Class2Name}>"></input></td>
-                                            <td><input type="text" class="required number" name="Class2Sort[]" size="12"
-                                                       value="<{$vo.Class2Sort}>"></input></td>
-                                            <td><select name="state[]" class="combox">
+                                            <td><input type="text" class="required" name="id[]" size="8"
+                                                       value="<{$vo.id}>"/></td>
+                                            <td><input type="text" class="required" name="name[]" size="12"
+                                                       value="<{$vo.name}>"/></td>
+                                            <td><select name="sport_show[]" class="combox">
                                                 <option
-                                                <eq name="vo.state" value="1">selected=selected</eq>
-                                                value="1" >可用</option>
+                                                <eq name="vo.sport_show" value="1">selected=selected</eq>
+                                                value="1" >显示</option>
                                                 <option
-                                                <eq name="vo.state" value="0">selected=selected</eq>
-                                                value="0" >禁用</option>
+                                                <eq name="vo.sport_show" value="0">selected=selected</eq>
+                                                value="0" >不显示</option>
                                             </select></td>
-                                            <td><a href="javascript:void(0)" class="btnDel">删除</a><input type="hidden"
-                                                                                                         value="<{$vo.ID}>"
-                                                                                                         name="ID[]">
+                                            <td><a href="javascript:void(0)" class="btnDel">删除</a>
                                             </td>
                                         </tr>
                                     </volist>

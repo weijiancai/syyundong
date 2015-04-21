@@ -37,28 +37,27 @@
         <form id="form1" method="post" enctype="multipart/form-data" action="__URL__/update/navTabId/__MODULE__"
               class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
-                <input type="hidden" value="<{$vo.ID}>" name="ID">
-
+                <input type="hidden" value="<{$vo.id}>" name="id">
                 <p>
-                    <label>标题：</label>
-                    <input name="Class1Name" class="required" value="<{$vo.Class1Name}>" type="text">
+                    <label>名称：</label>
+                    <input name="name" class="required" value="<{$vo.name}>" type="text">
                 </p>
-
                 <p>
-                    <label>排序：</label>
-                    <input name="Class1Sort" class="number" type="text" value="<{$vo.Class1Sort}>">
-                </p>
-
-                <p>
-                    <label>状态：</label>
-                    <select name="State" id="State">
+                    <label>显示：</label>
+                    <select name="sport_show" id="State">
+                        <option value="">请选择</option>
                         <option
-                        <eq name="vo.State" value="1">selected</eq>
-                        value="1">已审核</option>
+                        <eq name="vo.sport_show" value="1">selected</eq>
+                        value="1">显示</option>
                         <option
-                        <eq name="vo.State" value="0">selected</eq>
-                        value="0">未审核</option>
+                        <eq name="vo.sport_show" value="0">selected</eq>
+                        value="0">不显示</option>
                     </select>
+                </p>
+                <p>
+                    <label>修改人：</label>
+                    <input name="" class="required" value="<{$vo.input_user|getUserName}>" type="text" disabled>
+                    <input name="input_user"  value="<{$vo.input_user}>" type="hidden">
                 </p>
             </div>
             <div class="formBar">

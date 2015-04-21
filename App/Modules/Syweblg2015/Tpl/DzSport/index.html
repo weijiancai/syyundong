@@ -25,12 +25,10 @@
     <div class="pageContent">
         <div class="panelBar">
             <ul class="toolBar">
-                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="700" height="400"
+                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="500" height="350"
                        callback="NavTabAjax" rel="vadd"><span>增加赛事</span></a></li>
-                <li><a class="add" href="__URL__/add3" target="dialog" mask="true" width="700" height="400"
-                       callback="NavTabAjax" rel="vadd"><span>新增二级分类</span></a></li>
                 <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
-                       width="700" height="400" rel="vedit"><span>修改</span></a></li>
+                       width="500" height="300" rel="vedit"><span>修改</span></a></li>
                 <li><a title="确实要删除吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
                        class="delete"><span>删除</span></a></li>
             </ul>
@@ -53,7 +51,7 @@
                            callback="NavTabAjax"><span style="color:blue"><{$vo['name']}></span></a></td>
                     <td><span style="line-height:25px"><{$vo['id']|getSecondSport}></span></td>
                     <td><{$vo['input_date']}></td>
-                    <td><{$vo['input_user']}></td>
+                    <td><{$vo['input_user']|getUserName}></td>
                 </tr>
             </volist>
 
