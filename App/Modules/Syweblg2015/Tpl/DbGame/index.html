@@ -20,7 +20,7 @@
 </script>
 <script>
     $(document).ready(function () {
-           getSportAjax();
+        getSportAjax();
         $("#sport_id").change(function () {
             getSportAjax();
         });
@@ -52,7 +52,9 @@
                         <td>类别：<select name="sport_id" id="sport_id">
                             <option value="">请选择</option>
                             <volist name="dzSport" id="vo">
-                                <option value="<{$vo.id}>" <eq name="_REQUEST.sport_id" value="$vo.id">selected=selected</eq> ><{$vo.name}></option>
+                                <option value="<{$vo.id}>"
+                                <eq name="_REQUEST.sport_id" value="$vo.id">selected=selected</eq>
+                                ><{$vo.name}></option>
                             </volist>
                         </select>&nbsp;<select name="sport_sid" id="sport_sid">
                             <option value="">请选择</option>
@@ -71,35 +73,25 @@
             <ul class="toolBar">
                 <li><a class="add" href="__URL__/add" target="navTab" mask="true" width="700" height="400"
                        callback="NavTabAjax" rel="vadd"><span>新增</span></a></li>
-                <li><a class="delete" href="__URL__/deleteimg/ID/{sid_node}/navTabId/__MODULE__" target="ajaxTodo"
-                       title="你确定要删除吗？" warn="请选择节点"><span>删除</span></a></li>
                 <li><a class="edit" href="__URL__/edit/ID/{sid_node}" target="navTab" mask="true" warn="请选择节点"
                        width="700" height="400" rel="vedit"><span>修改</span></a></li>
                 <li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
-                       class="delete"><span>批量删除</span></a></li>
-                <li><a class="delete" href="__URL__/replay/ID/{sid_node}" target="navTab" mask="true" warn="请选择节点"
-                       width="700" height="400" rel="replay"><span>查看回复</span></a></li>
-                <li><a class="delete" href="__URL__/pullinfo/" target="dialog" rel="ids[]" mask="true" warn="请选择节点"
-                       width="750" height="300"><span>推送</span></a></li>
+                       class="delete"><span>删除</span></a></li>
             </ul>
         </div>
         <table class="table" width="100%" layoutH="113">
             <thead>
             <tr>
                 <th width="2%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
-                <th width="12%" align="center">推送位置</th>
-                <th width="8%" align="center">发帖时间</th>
-                <th width="10%" align="center">主题</th>
-                <th width="6%" align="center">发帖人</th>
-                <th width="2%" align="center">精髓</th>
-                <th width="2%" align="center">置顶</th>
-                <th width="2%" align="center">热门</th>
-                <th width="2%" align="center">浏览</th>
-                <th width="2%" align="center">排序</th>
-                <th width="4%" align="center">分类</th>
-                <th width="5%" align="center">审核人</th>
-                <th width="8%" align="center">审核时间</th>
-                <th width="2%" align="center">推否</th>
+                <th width="8%" align="center">名称</th>
+                <th width="8%" align="center">类别</th>
+                <th width="8%" align="center">赛事发起</th>
+                <th width="4%" align="center">人数</th>
+                <th width="4%" align="center">报名费</th>
+                <th width="4%" align="center">联系方式</th>
+                <th width="5%" align="center">申请人</th>
+                <th width="8%" align="center">申请电话</th>
+                <th width="3%" align="center">审核</th>
                 <th width="4%" align="center">操作</th>
             </tr>
             </thead>
@@ -107,35 +99,23 @@
 
 
             <volist id="vo" name="list">
-                <tr target="sid_node" rel="<{$vo['ID']}>">
-                    <td height="25px"><input name="ids[]" value="<{$vo['ID']}>" type="checkbox"><{$vo.ID}></td>
-                    <td><{$vo['staid']}>
-                        <!-- <if condition="$vo.staid eq NULL or $vo.staid eq ' '">暂无<else/><{$vo['staid']|getStation}></if> --></td>
-                    <td><{$vo['ltime']|date="Y-m-d H:m:s",###}></td>
-                    <td><a href="__ROOT__/liao/<{$vo.ID}>.html" target="blank" style="text-decoration:none"><span
-                            style="color:red"><{$vo['lname']}></span></a></td>
-                    <td><{$vo['luser']}></td>
-                    <td><{$vo['lisfine']}></td>
-                    <td><{$vo['listop']}></td>
-                    <td><{$vo['liposts']}></td>
-                    <td><{$vo['lviews']}></td>
-                    <td><{$vo['px']}></td>
-                    <td><{$vo['staname']}></td>
-                    <td><{$vo['uname']}></td>
-                    <td><{$vo['utime']}></td>
-                    <td><{$vo['pstate']}></td>
+                <tr target="sid_node" rel="<{$vo['id']}>">
+                    <td height="25px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
+                    <td><{$vo.name}></td>
+                    <td><{$vo['sport_id']|getSportName}>
+                        <if condition="$vo.sport_sid neq null">
+                        -><{$vo['sport_sid']|getSportName}></if></td>
+                    <td><{$vo['sponsor']}></td>
+                    <td><{$vo['limit_count']}></td>
+                    <td><{$vo['cost']}></td>
+                    <td><{$vo['phone']}></td>
+                    <td><{$vo['apply_name']}></td>
+                    <td><{$vo['apply_phone']}></td>
+                    <td><{$vo['is_verify']}></td>
                     <td><a href="__URL__/stay/ID/<{$vo['ID']}>" target="ajaxTodo">全撤</a><span style="color:red">|</span>
                         <a href="__URL__/single/ID/<{$vo['ID']}>" target="dialog" mask="true" width="450" height="250">单撤</a>
                     </td>
                 </tr>
-                <notempty name="vo.lcontent">
-                    <tr>
-                        <td style="text-align:left;background-color:#e3e9e9" colspan="15"><span
-                                style="line-height:200%">帖子：
-                            <?php echo str_replace(array('<p>','</p>'), '',strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($vo['lcontent']))),"<img>,<embed>
-                                "))?></span></td>
-                    </tr>
-                </notempty>
             </volist>
 
             </tbody>

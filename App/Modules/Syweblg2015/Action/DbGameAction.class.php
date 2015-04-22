@@ -16,23 +16,22 @@ class DbGameAction extends CommonAction
         if (method_exists($this, '_filter')) {
             $this->_filter($map);
         }
-        $name = $this->getActionName();
-        $model = D($name);
+        $model = D('DbGame');
         if (!empty ($model)) {
             $order = "";
             $order .= "input_date desc,";
             $this->_list($model, $map, $order);
         }
         $this->assign('dzSport',$this->DzSport());
-        $this->ltype();
-        $this->tsta();
         $this->display();
     }
-
+    /*
+     * @功能：查询条件返回
+     * @时间：20150422
+     */
     protected function _search()
     {
-        $name = $this->getActionName();
-        $model = D($name);
+        $model = D('DbGame');
         $map = array();
         $temp = $model->getDbFields();
         foreach ($temp as $key => $val) {
