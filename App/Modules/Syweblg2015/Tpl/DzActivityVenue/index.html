@@ -14,8 +14,20 @@
             <div class="searchBar">
                 <table>
                     <tr>
-                        <td>名称：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium" size="10">&nbsp;&nbsp;</td>
-                        <td><button type="submit">查询</button></td>
+                        <td>名称：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium" size="10">&nbsp;&nbsp;&nbsp;
+                        </td>
+                        <td>类别：<select name="sport_type">
+                            <option value="">请选择</option>
+                            <option value="2"
+                            <eq name="_REQUEST.sport_type" value="2">selected=selected</eq>
+                            >活动</option>
+                            <option value="3"
+                            <eq name="_REQUEST.sport_type" value="3">selected=selected</eq>
+                            >场馆</option>
+                        </select>&nbsp;&nbsp;&nbsp;</td>
+                        <td>
+                            <button type="submit">查询</button>
+                        </td>
                     </tr>
                 </table>
 
@@ -27,35 +39,32 @@
         <div class="panelBar">
             <ul class="toolBar">
                 <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="500" height="350"
-                       callback="NavTabAjax" rel="vadd"><span>增加赛事</span></a></li>
-                <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
-                       width="500" height="300" rel="vedit"><span>修改</span></a></li>
-                <li><a title="确实要删除吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
-                       class="delete"><span>删除</span></a></li>
+                       callback="NavTabAjax" rel="vadd"><span>增加分类</span></a></li>
+                <!-- <li><a title="确实要删除吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
+                        class="delete"><span>删除</span></a></li>-->
             </ul>
         </div>
         <table class="table" width="100%" layoutH="113">
             <thead>
             <tr>
                 <th width="2%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
-                <th width="6%" align="center">赛事</th>
-                <th width="75%" align="center">详细赛事</th>
-                <th width="12%" align="center">录入时间</th>
-                <th width="5%" align="center">录入人</th>
+                <th width="8%" align="center">赛事</th>
+                <th width="85%" align="center">类别</th>
             </tr>
             </thead>
             <tbody>
-            <volist id="vo" name="list">
-                <tr target="sid_node" rel="<{$vo['id']}>">
-                    <td height="30px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
-                    <td><a href="__URL__/second/sid/<{$vo.id}>" target="dialog" mask="true" width="700" height="600"
-                           callback="NavTabAjax"><span style="color:blue"><{$vo['name']}></span></a></td>
-                    <td><span style="line-height:25px"><{$vo['id']|getSecondSport}></span></td>
-                    <td><{$vo['input_date']}></td>
-                    <td><{$vo['input_user']|getUserName}></td>
-                </tr>
-            </volist>
-
+            <tr target="sid_node" rel="<{$vo['id']}>">
+                <td height="30px"><input name="ids[]" value="2" type="checkbox"></td>
+                <td><a href="__URL__/second/st_id/2" target="dialog" mask="true" width="700" height="600"
+                       callback="NavTabAjax"><span style="color:blue">活动</span></a></td>
+                <td><?php echo D('Syweblg2015/DzActivityVenue')->getSportName(2);?></td>
+            </tr>
+            <tr target="sid_node" rel="<{$vo['id']}>">
+                <td height="30px"><input name="ids[]" value="3" type="checkbox"></td>
+                <td><a href="__URL__/second/st_id/3" target="dialog" mask="true" width="700" height="600"
+                       callback="NavTabAjax"><span style="color:blue">场馆</span></a></td>
+                <td><?php echo D('Syweblg2015/DzActivityVenue')->getSportName(3);?></td>
+            </tr>
             </tbody>
         </table>
         <div class="panelBar">

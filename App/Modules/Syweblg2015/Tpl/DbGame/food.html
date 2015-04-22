@@ -1,0 +1,58 @@
+<script language="Javascript">
+	function navTabAjaxDone(json){
+      DWZ.ajaxDone(json);
+      if (json.statusCode == DWZ.statusCode.ok){
+            if (json.navTabId){ //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                  navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                  navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                  setTimeout(function(){navTab.closeCurrentTab();}, 100);
+            } else if ("forward" == json.callbackType) {
+                 navTab.reload(json.forwardUrl);
+            }
+      }
+}	
+</script>
+<script src="__PUBLIC__/js/show.js" type="text/javascript"></script>
+<script src="__PUBLIC__/ueditor/ueditor.config.js" type="text/javascript"></script>
+<script src="__PUBLIC__/ueditor/ueditor.all.js" type="text/javascript"></script>
+<div class="page">
+	<div class="pageContent">
+	<form enctype="multipart/form-data" method ="post" action="__URL__/update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+		<input type="hidden" value="<{$vo.ID}>" name="ID">
+	
+			<dl >
+				<dt>推送位置：</dt>
+				<dd><select name="lisfood" id="lisfood">
+					<option <eq name="vo.lisfood" value="0">selected</eq> value="0">不推送</option>
+					<option <eq name="vo.lisfood" value="1">selected</eq> value="1">A区</option>
+					<option <eq name="vo.lisfood" value="2">selected</eq> value="2">B区</option>
+					<option <eq name="vo.lisfood" value="3">selected</eq> value="3">C区</option>
+					</select>
+				</dd>
+			</dl>			
+			<dl>
+				<dt>图片:</dt>
+				<dd><input type="file" name="lrimg" onchange="readURL(this);"/>
+					<input type="hidden" value="<{$vo.lrimg}>" name="default">
+				<dd>
+			</dl>	
+<dl>
+	<dt>图片预览:</dt>
+	<dd><div id="localImag"><img id="img_prev" src="__PUBLIC__/upload/<{$vo.lrimg}>" alt="" width="200px" height="200px"/></div>
+	<dd>
+</dl>	
+</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+	</div>
+</div>

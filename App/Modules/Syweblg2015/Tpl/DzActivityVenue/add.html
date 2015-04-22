@@ -19,31 +19,50 @@
 </script>
 <div class="page">
     <div class="pageContent">
-        <form id="form1" method="post" enctype="multipart/form-data" action="__URL__/update/navTabId/__MODULE__"
+        <form enctype="multipart/form-data" method="post" action="__URL__/insert/navTabId/__MODULE__"
               class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
-                <input type="hidden" value="<{$vo.id}>" name="id">
                 <p>
-                    <label>名称：</label>
-                    <input name="name" class="required" value="<{$vo.name}>" type="text">
-                </p>
-                <p>
-                    <label>修改人：</label>
-                    <input name="" class="required" value="<{$vo.input_user|getUserName}>" type="text" disabled>
-                    <input name="input_user"  value="<{$vo.input_user}>" type="hidden">
-                </p>
-                <p>
-                    <label>修改时间：</label>
-                    <input name="input_date" class="required" type="text" value="<?php echo date('Y-m-d H:i:s')?>" readonly>
+                    <label>ID：</label>
+                    <input name="id" class="required" value="<{$max_id}>" type="text" readonly>
                 </p>
 
+                <p>
+                    <label>名称：</label>
+                    <input name="name" class="required" value="" type="text">
+                </p>
+
+                <p>
+                    <label>类型：</label>
+                    <select name="sport_type">
+                        <option value="">请选择</option>
+                        <option value="2" >活动</option>
+                        <option value="3" >场馆</option>
+                    </select>
+                </p>
+                <p>
+                    <label>等级：</label>
+                    <label>一级</label>
+                    <input name="level" class="required" value="1" type="hidden">
+                </p>
+
+                <p>
+                    <label>录入时间：</label>
+                    <input name="input_date" class="required" type="text" value="<?php echo date('Y-m-d H:i:s')?>">
+                </p>
+
+                <p>
+                    <label>录入人：</label>
+                    <input name="" class="required" type="text" value="<{$_SESSION[C('USER_AUTH_KEY')]|getUserName}>">
+                    <input name="input_user" value="<{$_SESSION[C('USER_AUTH_KEY')]}>" type="hidden">
+                </p>
             </div>
             <div class="formBar">
                 <ul>
                     <li>
                         <div class="buttonActive">
                             <div class="buttonContent">
-                                <button type="submit" id="sub">保存</button>
+                                <button type="submit">保存</button>
                             </div>
                         </div>
                     </li>

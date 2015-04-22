@@ -14,7 +14,6 @@
             if($date=='today'){
                 $timeType =  array('like',date('Y-m-d').'%');
             }
-            dump($timeType);
             return $timeType;
         }
 	

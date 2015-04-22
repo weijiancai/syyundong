@@ -233,5 +233,23 @@ function getSecondSport($id){
 function getUserName($id){
     return  D('DbUser')->where('id='.$id)->getField('name');
 }
+/*
+ * @功能：返回赛事、场馆、活动类别
+ * @时间:20150419
+ */
+function getSportType($type){
+    switch ($type) {
+        case 1 :
+            $result = '赛事';
+            break;
+        case 2 :
+            $result = '活动';
+            break;
+        case 3 :
+            $result = '场馆';
+            break;
+    }
+    return  $result;
+}
 
 ?>

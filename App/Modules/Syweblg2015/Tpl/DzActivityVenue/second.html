@@ -20,7 +20,7 @@
 <div class="page">
     <div class="pageContent">
         <form enctype="multipart/form-data" method="post"
-              action="__URL__/insert_second/sid/<{$sid}>/navTabId/__MODULE__" class="pageForm required-validate"
+              action="__URL__/insert_second/st_id/<{$st_id}>/navTabId/__MODULE__" class="pageForm required-validate"
               onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
                 <dl class="nowrap">
@@ -37,7 +37,6 @@
                                         <th type="text" class="required" name="name[]" defaultVal=""
                                             size="12" fieldClass="">名称
                                         </th>
-                                        <th type="enum" name="sport_show[]" enumUrl="__URL__/state" size="12">显示</th>
                                         <th type="del" width="60">操作</th>
                                     </tr>
                                     </thead>
@@ -48,14 +47,6 @@
                                                        value="<{$vo.id}>" readonly/></td>
                                             <td><input type="text" class="required" name="name[]" size="12"
                                                        value="<{$vo.name}>"/></td>
-                                            <td><select name="sport_show[]" class="combox">
-                                                <option
-                                                <eq name="vo.sport_show" value="1">selected=selected</eq>
-                                                value="1" >显示</option>
-                                                <option
-                                                <eq name="vo.sport_show" value="0">selected=selected</eq>
-                                                value="0" >不显示</option>
-                                            </select></td>
                                             <td><a href="javascript:void(0)" class="btnDel">删除</a>
                                             </td>
                                         </tr>
