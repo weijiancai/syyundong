@@ -43,6 +43,18 @@ class DbGameAction extends CommonAction
         return $map;
     }
     /*
+     * @功能：赛事编辑
+     * @时间：20150422
+     */
+    public function edit()
+    {
+        $model = D('DbGame');
+        $vo = $model->where('id='.$_GET['id'])->find();
+        $this->assign('vo', $vo);
+        $this->assign('dzSport',$this->DzSport());
+        $this->display();
+    }
+    /*
      * @功能：赛事分类
      * @时间：20150422
      */
@@ -69,44 +81,7 @@ class DbGameAction extends CommonAction
         $this->display();
     }
 
-    /*
-     *	增加回复信息
-     */
-    function r_add()
-    {
-        $this->ltype();
-        $RID = $_GET['ID'];
-        $this->assign('RID', $RID);
-        $this->display();
-    }
 
-    /*
-     *	查询单条回复
-     */
-    function r_edit()
-    {
-        $name = $this->getActionName();
-        $model = D($name);
-        $id = $_REQUEST [$model->getPk()];
-        $vo = $model->find($id);
-        $this->assign('vo', $vo);
-        $this->ltype();
-        $this->display();
-    }
-
-    /*
-     *	查询单条数据
-     */
-    function edit()
-    {
-        $name = $this->getActionName();
-        $model = D($name);
-        $id = $_REQUEST [$model->getPk()];
-        $vo = $model->find($id);
-        $this->assign('vo', $vo);
-        $this->ltype();
-        $this->display();
-    }
 
     /*
      *	新增信息

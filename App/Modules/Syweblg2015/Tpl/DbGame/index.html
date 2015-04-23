@@ -8,6 +8,7 @@
         <input type="hidden" name="<{$key}>" value="<{$_REQUEST[$key]}>"/>
     </volist>
 </form>
+<script src="__PUBLIC__/js/pages/sy_game.js" type="text/javascript"></script>
 <script>
     $(function () {
         $("img").attr({ width: "15px", height: "15px", onclick: 'show(this.src)'});
@@ -18,34 +19,14 @@
         $.pdialog.open("__URL__/show?img=" + $temp, "show", "预览", {height: "600", width: "600", mask: "true"});　
     }
 </script>
-<script>
-    $(document).ready(function () {
-        getSportAjax();
-        $("#sport_id").change(function () {
-            getSportAjax();
-        });
-        function getSportAjax() {
-            $("#sport_sid").empty();
-            $.getJSON("__URL__/getSportAjax", {id: $("#sport_id").val()}, function (data) {
-                $("<option></option>").val("").text("请选择").appendTo($("#sport_sid"));
-                if (data != null) {
-                    $.each(data, function (i, item) {
-                        $("<option></option>").val(item['id']).text(item['name']).appendTo($("#sport_sid"));
-                    });
-                }
-            });
-        }
-    });
-</script>
+
 <div class="page">
     <div class="pageHeader">
         <form onsubmit="return navTabSearch(this);" action="__URL__" method="post">
-            <input type="hidden" value="<?php echo iconv('gbk','utf-8',$_REQUEST['LRID'])?>" name="LRID">
-
             <div class="searchBar">
                 <table>
                     <tr>
-                        <td>名称：<input type="text" name="name" value="<{$_REQUEST['lname']}>" class="medium" size="10">&nbsp;&nbsp;
+                        <td>名称：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium" size="10">&nbsp;&nbsp;
                         </td>
                         <td>申请电话：<input type="text" name="apply_phone" value="<{$_REQUEST['apply_phone']}>"
                                         class="medium" size="10">&nbsp;&nbsp;</td>
@@ -73,8 +54,8 @@
             <ul class="toolBar">
                 <li><a class="add" href="__URL__/add" target="navTab" mask="true" width="700" height="400"
                        callback="NavTabAjax" rel="vadd"><span>新增</span></a></li>
-                <li><a class="edit" href="__URL__/edit/ID/{sid_node}" target="navTab" mask="true" warn="请选择节点"
-                       width="700" height="400" rel="vedit"><span>修改</span></a></li>
+                <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
+                       width="1200" height="800" rel="vedit"><span>修改</span></a></li>
                 <li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
                        class="delete"><span>删除</span></a></li>
             </ul>
