@@ -22,9 +22,10 @@ class DbGameAction extends CommonAction
             $order .= "input_date desc,";
             $this->_list($model, $map, $order);
         }
-        $this->assign('dzSport',$this->DzSport());
+        $this->assign('dzSport', $this->DzSport());
         $this->display();
     }
+
     /*
      * @功能：查询条件返回
      * @时间：20150422
@@ -37,11 +38,12 @@ class DbGameAction extends CommonAction
         foreach ($temp as $key => $val) {
             if (isset ($_REQUEST [$val]) && $_REQUEST [$val] != '') {
                 $_REQUEST [$val] = $_REQUEST[$val];
-                $map[$val] = array('like',"%{$_REQUEST[$val]}%");
+                $map[$val] = array('like', "%{$_REQUEST[$val]}%");
             }
         }
         return $map;
     }
+
     /*
      * @功能：赛事编辑
      * @时间：20150422
@@ -49,27 +51,101 @@ class DbGameAction extends CommonAction
     public function edit()
     {
         $model = D('DbGame');
-        $vo = $model->where('id='.$_GET['id'])->find();
+        $vo = $model->where('id=' . $_GET['id'])->find();
         $this->assign('vo', $vo);
-        $this->assign('dzSport',$this->DzSport());
+        $this->assign('dzSport', $this->DzSport());
         $this->display();
     }
+
+    /*
+     * @功能：赛事更新
+     * @时间：20150422
+     */
+    function update()
+    {
+        $model = D('DbGame');
+        if (false === $model->create()) {
+            $this->error($model->getError());
+        }
+        $list = $model->save();
+        if ($list !== false) {
+            echo $this->ajax('1', "更新成功", $name, "", "closeCurrent");
+        } else {
+            echo $this->ajax('0', "更新失败", $name, "", "closeCurrent");
+        }
+    }
+
     /*
      * @功能：赛事分类
      * @时间：20150422
      */
-    public function DzSport(){
-        return  D('DzSport')->field('id,name')->where('pid=0 and sport_type=1')->select();
+    public function DzSport()
+    {
+        return D('DzSport')->field('id,name')->where('pid=0 and sport_type=1')->select();
     }
+
     /*
      * @功能：赛事详情
      * @时间：20150422
      */
-    public function getSportAjax(){
+    public function getSportAjax()
+    {
         $pid = $_GET['id'];
         $where['pid'] = $pid;
+        $where['sport_type'] = 1;
         $data = D('DzSport')->field('id,name')->where($where)->select();
         echo json_encode($data);
+    }
+
+    /*
+     * @功能：ajax上传图片
+     * @时间：20150422
+     */
+    public function upimg()
+    {
+        import('ORG.Util.Image');
+        import('ORG.Net.UploadFile');
+        $path = $_POST['path'];
+        $upload = new UploadFile(); // 实例化上传类
+        $upload->maxSize = 6291456; // 设置附件上传大小
+        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
+        $upload->savePath = './Public/upload/' . $path . '/'; // 设置附件上传目录
+        $upload->thumb = true;
+        $upload->thumbPrefix = '';
+        $upload->thumbMaxWidth = '600';
+        $upload->thumbMaxHeight = '400';
+        $upload->thumbType = 0;
+        $upload->zipImages = true;
+        $upload->autoSub = true;
+        $upload->subType = date;
+        if (!$upload->upload()) { // 上传错误提示错误信息
+            if ($upload->getErrorMsg() != "没有选择上传文件") { //不上传文件通过
+                $e = $this->error($upload->getErrorMsg());
+                echo $e;
+            }
+        } else { // 上传成功 获取上传文件信息
+            $info = $upload->getUploadFileInfo();
+
+            //存储图片
+            $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
+            $result = D('DbImages')->add($date);
+            //打水印
+            /* $Image = new Image();
+             foreach ($info as $value) {
+                 $$value['key'] = $value['savename'];
+                 $Image->water('./Public/Upload/game/' . $value['savename'], './Public/images/common/logo1.png'); //打水印
+             }*/
+            $arr = array(
+                'name' => $info[0]['savename'],
+                'pic' => $info[0]['savename'],
+                'size' => $info[0]['size'],
+                'ext' => $info[0]['extension'],
+                'size' => $info[0],
+                'path' => $path,
+                'label' => $result
+            );
+            echo json_encode($arr);
+        }
     }
 
     /*
@@ -80,7 +156,6 @@ class DbGameAction extends CommonAction
         $this->ltype();
         $this->display();
     }
-
 
 
     /*
@@ -103,45 +178,18 @@ class DbGameAction extends CommonAction
         $model->uname = $_SESSION['account'];
         $list = $model->add();
         if ($list !== false) {
-            echo $this->ajax('1', "新增成功！！！", $name, "", "closeCurrent");
+            echo $this->ajax('1', "新增成功", $name, "", "closeCurrent");
         } else {
-            echo $this->ajax('0', "新增失败！！！", $name, "", "closeCurrent");
+            echo $this->ajax('0', "新增失败", $name, "", "closeCurrent");
         }
     }
 
-    /*
-     *	修改信息
-     */
-    function update()
-    {
-        $name = $this->getActionName();
-        $model = D($name);
-        $up = $this->upload();
-        if (false === $model->create()) {
-            $this->error($model->getError());
-        }
-        if ($up[0]) {
-            $model->lrimg = $up[1];
-        } else {
-            $model->lrimg = $_POST['default'];
-        }
-        $model->uip = $_SESSION['ip'];
-        $model->uname = $_SESSION['account'];
-        $model->utime = date('Y-m-d H:i:s');
-        $model->ltime = strtotime($_POST['ltime']);
-        //	$model->lcontent = remove_xss($_POST['lcontent']);
-        $list = $model->save();
-        if ($list !== false) {
-            echo $this->ajax('1', "编辑成功！！！", $name, "", "closeCurrent");
-        } else {
-            echo $this->ajax('0', "编辑失败！！！", $name, "", "closeCurrent");
-        }
-    }
 
     /*
      *	查看回复
      */
-    public function replay()
+    public
+    function replay()
     {
         /* 		$id = $_GET['ID'];
                 $model = M('MLiao');
@@ -173,7 +221,8 @@ class DbGameAction extends CommonAction
         $this->display();
     }
 
-    protected function _rsearch($name, $LID)
+    protected
+    function _rsearch($name, $LID)
     {
         $model = D($name);
         $map = array();
@@ -216,13 +265,15 @@ class DbGameAction extends CommonAction
     /*
      *	推送信息
      */
-    public function pullinfo()
+    public
+    function pullinfo()
     {
         $this->tsta();
         $this->display();
     }
 
-    public function getPull2()
+    public
+    function getPull2()
     {
         $id = $_GET['id'];
         $sta = M("MSta");
@@ -231,7 +282,8 @@ class DbGameAction extends CommonAction
         echo json_encode($data);
     }
 
-    public function pinsert()
+    public
+    function pinsert()
     {
         $name = "MLiao";
         $model = M('MPush');
@@ -301,7 +353,8 @@ class DbGameAction extends CommonAction
     }
 
     /*查找带回*/
-    public function searchback()
+    public
+    function searchback()
     {
         $name = 'MLiao';
         $model = D($name);
@@ -320,7 +373,8 @@ class DbGameAction extends CommonAction
     }
 
     /*查找带回search方法*/
-    protected function _bsearch($name)
+    protected
+    function _bsearch($name)
     {
         $this->ltype();
         $model = D($name);
@@ -342,7 +396,8 @@ class DbGameAction extends CommonAction
     }
 
     /*查找带回list*/
-    protected function _blist($model, $map, $order, $sortBy = '', $asc = true)
+    protected
+    function _blist($model, $map, $order, $sortBy = '', $asc = true)
     {
         $pk = $model->getPk();
         $order .= $pk . " desc";
@@ -392,7 +447,8 @@ class DbGameAction extends CommonAction
     /*
      *	不推送信息,表示把显示的此条信息全部拿掉
      */
-    public function  stay()
+    public
+    function  stay()
     {
         $name = $this->getActionName();
         $model = M($name);
@@ -424,15 +480,18 @@ class DbGameAction extends CommonAction
 
     /*把信息单独撤掉*/
 
-    public function single()
+    public
+    function single()
     {
         $this->tsta();
         $this->assign('ID', $_GET['ID']);
         $this->display();
     }
-    //staname----pname,staid
-    //module---staid1
-    public function siinsert()
+
+//staname----pname,staid
+//module---staid1
+    public
+    function siinsert()
     {
         $name = $this->getActionName();
         $model = M($name);
@@ -492,7 +551,8 @@ class DbGameAction extends CommonAction
     /*
      *	推送信息
      */
-    public function  pull()
+    public
+    function  pull()
     {
         $name = $this->getActionName();
         $model = M($name);
@@ -504,7 +564,8 @@ class DbGameAction extends CommonAction
         }
     }
 
-    public function  push()
+    public
+    function  push()
     {
         $name = $this->getActionName();
         $model = M($name);
@@ -519,7 +580,8 @@ class DbGameAction extends CommonAction
     /*
      *	状态禁用
      */
-    public function forbid()
+    public
+    function forbid()
     {
         $name = "MLiao";
         $model = D('MLiao');
@@ -539,7 +601,8 @@ class DbGameAction extends CommonAction
     /*
      *	状态恢复
      */
-    public function resume()
+    public
+    function resume()
     {
         $name = "MLiao";
         $model = D('MLiao');
@@ -557,7 +620,8 @@ class DbGameAction extends CommonAction
     }
 
     /*删除广告后图片删除*/
-    public function deleteimg()
+    public
+    function deleteimg()
     {
         $name = $this->getActionName();
         $model = D($name);
@@ -582,7 +646,8 @@ class DbGameAction extends CommonAction
     /*
      *	聊吧类别
      */
-    public function ltype()
+    public
+    function ltype()
     {
         $model = M('MSta');
         $type = $model->where('pid = 0')->select();
@@ -593,13 +658,15 @@ class DbGameAction extends CommonAction
     /*
      *	图片预览
      */
-    public function show()
+    public
+    function show()
     {
         $this->assign('img', $_GET['img']);
         $this->display();
     }
 
-    public function tsta()
+    public
+    function tsta()
     {
         $model = M('MSta');
         $where['pid'] = 0;
@@ -659,7 +726,8 @@ class DbGameAction extends CommonAction
             echo $this->ajax('1',"删除成功",$name,"","");
         //	echo $this->ajax('1',$_POST['ids'],$rel,"","");
         } */
-    public function delAll()
+    public
+    function delAll()
     {
         $name = 'MLiao';
         $rel = 'MLiao';
@@ -762,7 +830,8 @@ class DbGameAction extends CommonAction
         帖子uid：$luser
         减少的分数：$temp
     */
-    public function plusscore($luser, $temp)
+    public
+    function plusscore($luser, $temp)
     {
         $user = D('Users');
         $SCORE = $user->where('ID=' . deCode($luser))->getField('SCORE');
@@ -777,7 +846,8 @@ class DbGameAction extends CommonAction
         帖子uid：$luser
         减少的分数：$score
     */
-    public function record($luser, $score)
+    public
+    function record($luser, $score)
     {
         $model = D('Score');
         $log['num'] = $score;

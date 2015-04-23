@@ -201,7 +201,8 @@ function getStatus($status, $imageShow = true) {
             $showText = '禁用';
             $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/locked.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="禁用">';
             break;
-        case 3 :
+        case '3':
+        case 'F':
             $showText = '待审';
             $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/prected.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="待审">';
             break;
@@ -251,5 +252,11 @@ function getSportType($type){
     }
     return  $result;
 }
-
+/*
+ * @功能：返回图片路径
+ * @时间:20150419
+ */
+function getImageUrl($id){
+    return  D('DbImages')->where('id='.$id)->getField('local_url');
+}
 ?>
