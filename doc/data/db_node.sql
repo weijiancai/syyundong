@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50051
 File Encoding         : 65001
 
-Date: 2015-04-20 23:26:45
+Date: 2015-04-23 23:55:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,7 +32,7 @@ CREATE TABLE `db_node` (
   `group_id` int(11) default NULL,
   `show` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=451 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=452 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of db_node
@@ -55,29 +55,14 @@ INSERT INTO `db_node` VALUES ('44', 'DbGroup', 'DbGroup', '分组管理', '1', '
 INSERT INTO `db_node` VALUES ('45', 'add', 'add', '增加分组', '1', '动作', '16', '44', '3', '0', '0');
 INSERT INTO `db_node` VALUES ('46', 'edit', 'edit', '修改分组', '1', '动作', '17', '44', '3', '0', '0');
 INSERT INTO `db_node` VALUES ('47', 'del', 'dl', '删除分组', '1', '动作', '18', '44', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('65', 'DzSport?TYPE=1', 'DzSport', '赛事分类', '1', '模块', '40', '1', '2', '9', '0');
+INSERT INTO `db_node` VALUES ('65', 'DzSport', 'DzSport', '赛事分类', '1', '模块', '40', '1', '2', '9', '0');
 INSERT INTO `db_node` VALUES ('86', 'ZjTypes?types=house', 'ZjTypes', '房屋相关', '1', '控制器', '60', '1', '2', '9', '0');
-INSERT INTO `db_node` VALUES ('93', 'ZjboeeDatatict?TYPE=info_status', 'ZjboeeDatatict', '信息状态', '1', '模块', '50', '1', '2', '9', '0');
-INSERT INTO `db_node` VALUES ('94', 'ZjboeeDatatict?TYPE=info_back', 'ZjboeeDatatict', '打回状态', '1', null, '55', '1', '2', '9', '0');
+INSERT INTO `db_node` VALUES ('93', 'DzActivityVenue', 'DzActivityVenue', '活动|场馆分类', '1', '模块', '50', '1', '2', '9', '0');
 INSERT INTO `db_node` VALUES ('95', 'LUser', 'LUser', '管理员', '1', '模块', '1', '1', '2', '3', '0');
 INSERT INTO `db_node` VALUES ('127', 'DbNode', 'DbNode', '权限管理', '1', '模块', '20', '1', '2', '3', '0');
-INSERT INTO `db_node` VALUES ('128', 'add', 'add', '新增信息分类', '1', '操作', '41', '65', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('129', 'edit', 'edit', '编辑信息分类', '1', '操作', '42', '65', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('130', 'delAll', 'delAll', '删除信息分类', '1', '操作', '43', '65', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('131', 'add', 'add', '新增验证状态', '1', '操作', '46', '92', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('132', 'edit', 'edit', '编辑验证状态', '1', '操作', '47', '92', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('133', 'delAll', 'delAll', '删除验证状态', '1', '操作', '48', '92', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('134', 'add', 'add', '新增信息状态', '1', '操作', '51', '93', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('135', 'edit', 'edit', '编辑信息状态', '1', '操作', '52', '93', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('136', 'delAll', 'delAll', '删除信息状态', '1', null, '53', '93', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('137', 'add', 'add', '新增打回状态', '1', '操作', '56', '94', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('138', 'edit', 'edit', '编辑打回状态', '1', '操作', '57', '94', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('139', 'delAll', 'delAll', '删除打回状态', '1', '操作', '58', '94', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('140', 'add', 'add', '新增房屋相关', '1', '操作', '61', '86', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('141', 'edit', 'edit', '编辑房屋相关', '1', '操作', '62', '86', '3', '0', '0');
+INSERT INTO `db_node` VALUES ('132', 'second', 'second', '赛事详情页面', '1', '操作', '41', '0', '3', '0', '0');
+INSERT INTO `db_node` VALUES ('451', 'DbGame', 'DbGame', '赛事管理', '1', '模块', '60', '1', '2', '4', '1');
 INSERT INTO `db_node` VALUES ('188', 'ZjTypes', 'ZjTypes', '相关', '1', '模块', '59', '1', '2', '0', '0');
-INSERT INTO `db_node` VALUES ('189', 'insclass2', 'insclass2', '信息二级修改', '1', '操作', '43', '65', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('190', 'add3', 'add3', '信息单个二级', '1', '操作', '43', '65', '3', '0', '0');
-INSERT INTO `db_node` VALUES ('191', 'add2', 'add2', '信息全部二级', '1', '操作', '43', '65', '3', '0', '0');
+INSERT INTO `db_node` VALUES ('189', 'insert_second', 'insert_second', '赛事详情更新', '1', '操作', '42', '65', '3', '0', '0');
 INSERT INTO `db_node` VALUES ('200', 'foreverdelete', 'foreverdelete', '彻底删除', '1', '操作', '369', '32', '3', '0', '0');
 INSERT INTO `db_node` VALUES ('258', 'node', 'node', '分组节点', '1', '操作', '21', '127', '3', '0', '0');

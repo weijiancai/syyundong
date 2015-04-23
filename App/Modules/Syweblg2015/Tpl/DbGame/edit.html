@@ -37,12 +37,16 @@
                     <dd><select name="sport_id" id="game_edit_id">
                         <volist name="dzSport" id="so">
                             <option
-                            <eq name="so.id" value="$vo.name">selected=selected</eq>
+                            <eq name="so.id" value="$vo.sport_id">selected=selected</eq>
                             value="<{$so.id}>"><{$so.name}></option>
                         </volist>
                     </select>
                         <select name="sport_sid" id="game_edit_sid">
-
+                            <volist name="sport" id="po">
+                                <option
+                                <eq name="po.id" value="$vo.sport_sid">selected=selected</eq>
+                                value="<{$po.id}>"><{$po.name}></option>
+                            </volist>
                         </select>
                     </dd>
                 </dl>
@@ -125,11 +129,6 @@
                         value="F">未审核</option>
                     </select></dd>
                 </dl>
-
-                <dl>
-                    <dt>申请人邮箱：</dt>
-                    <dd><input name="apply_email" class="required" type="text" value="<{$vo.apply_email}>"/></dd>
-                </dl>
                 <dl>
                     <dt>操作人：</dt>
                     <dd><input name="" readonly class="required" type="text"
@@ -148,10 +147,10 @@
                 </dl>
                 <dl class="nowrap">
                     <dt>图片:</dt>
-                    <dd><input type="file" name="image" id="fileupload" class="required"/>
+                    <dd><input type="file" name="image" id="fileupload" />
                         <span id="show_mes" style="color:Red"></span>
                         <div id="showimg" style="height:40px"><img src="<{$vo['image']|getImageUrl}>" width="100px" height="100px"/></div>
-                        <input type="hidden" value="" name="image" id="image">
+                        <input type="hidden" value="<{$vo.image}>" name="image" id="image">
                     </dd>
                 </dl>
                 <input type="hidden" value="game" id="path">

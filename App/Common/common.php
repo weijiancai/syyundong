@@ -176,13 +176,15 @@ function getLoginUser(){
  */
 function showStatus($status, $id, $callback="",$before,$after) {
     switch ($status) {
-        case 0 :
+        case '0':
+        case"F":
             $info = '<a href="__URL__/resume/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="'.$callback.'">'.$before.'</a>';
             break;
         case 2 :
             $info = '<a href="__URL__/pass/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="'.$callback.'">'.$before.'</a>';
             break;
-        case 1 :
+        case '1' :
+        case "T" :
             $info = '<a href="__URL__/forbid/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="'.$callback.'">'.$after.'</a>';
             break;
         case - 1 :
@@ -197,7 +199,7 @@ function showStatus($status, $id, $callback="",$before,$after) {
  */
 function getStatus($status, $imageShow = true) {
     switch ($status) {
-        case 0 :
+        case '0' :
             $showText = '禁用';
             $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/locked.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="禁用">';
             break;
@@ -206,11 +208,12 @@ function getStatus($status, $imageShow = true) {
             $showText = '待审';
             $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/prected.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="待审">';
             break;
-        case 2 :
+        case '2' :
             $showText = '删除';
             $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/del.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="删除">';
             break;
-        case 1 :
+        case '1' :
+        case "T" :
         default :
             $showText = '正常';
             $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/ok.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="正常">';
