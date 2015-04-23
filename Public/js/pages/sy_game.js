@@ -18,4 +18,23 @@ $(document).ready(function () {
         });
     }
 });
+$(document).ready(function () {
+    getSportAjax("sport_id","sport_sid");
+    $("#sport_id").change(function () {
+        alert('55');
+        getSportAjax("sport_id","sport_sid");
+    });
+    function getSportAjax(id,sid) {
+        alert(id);
+        $("#sport_sid").empty();
+        $.getJSON("/Syweblg2015/DbGame/getSportAjax", {id: $("'"+id+"'").val()}, function (data) {
+            $("<option></option>").val("").text("请选择").appendTo($("'"+sid+"'"));
+            if (data != null) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item['id']).text(item['name']).appendTo($("'"+sid+"'"));
+                });
+            }
+        });
+    }
+});
 
