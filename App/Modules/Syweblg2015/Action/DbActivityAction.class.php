@@ -141,8 +141,7 @@ class DbActivityAction extends CommonAction
     {
         $pid = $_GET['id'];
         $where['pid'] = $pid;
-        $where['sport_type'] = 1;
-        $data = D('DzSport')->field('id,name')->where($where)->select();
+        $data = D('DbRegion')->field('id,name')->where($where)->select();
         echo json_encode($data);
     }
     /*
