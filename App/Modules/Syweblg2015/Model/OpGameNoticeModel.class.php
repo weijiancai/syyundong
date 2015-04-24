@@ -1,6 +1,6 @@
 <?php
 
-class OpGameNewsModel extends CommonModel
+class OpGameNoticeModel extends CommonModel
 {
     protected $fields = array(
         'id', 'game_id', 'title', 'content', 'input_date', 'input_user',

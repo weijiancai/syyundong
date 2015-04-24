@@ -2,11 +2,11 @@
 
 /**
  * @时间:20150422
- * @功能:赛事新闻
+ * @功能:赛事公告
  * @VIEW:db_game
  * @Author：liuliting
  */
-class OpGameNewsAction extends CommonAction
+class OpGameNoticeAction extends CommonAction
 {
 
     public function index()
@@ -16,7 +16,7 @@ class OpGameNewsAction extends CommonAction
         if (method_exists($this, '_filter')) {
             $this->_filter($map);
         }
-        $model = D('OpGameNews');
+        $model = D('OpGameNotice');
         if (!empty ($model)) {
             $order = "input_date desc,";
             $this->_list($model, $map, $order);
@@ -30,7 +30,7 @@ class OpGameNewsAction extends CommonAction
      */
     protected function _search()
     {
-        $model = D('OpGameNews');
+        $model = D('OpGameNotice');
         $map = array();
         $temp = $model->getDbFields();
         foreach ($temp as $key => $val) {
@@ -72,7 +72,7 @@ class OpGameNewsAction extends CommonAction
      */
     function insert()
     {
-        $model = D('OpGameNews');
+        $model = D('OpGameNotice');
         if (false === $model->create()) {
             $this->error($model->getError());
         }
@@ -90,7 +90,7 @@ class OpGameNewsAction extends CommonAction
      */
     public function edit()
     {
-        $model = D('OpGameNews');
+        $model = D('OpGameNotice');
         $vo = $model->where('id=' . $_GET['id'])->find();
         $this->assign('vo', $vo);
         $this->display();
@@ -102,8 +102,8 @@ class OpGameNewsAction extends CommonAction
      */
     function update()
     {
-        $name = 'OpGameNews';
-        $model = D('OpGameNews');
+        $name = 'OpGameNotice';
+        $model = D('OpGameNotice');
         if (false === $model->create()) {
             $this->error($model->getError());
         }
@@ -121,7 +121,7 @@ class OpGameNewsAction extends CommonAction
      */
     public function delAll()
     {
-        $model = D('OpGameNews');
+        $model = D('OpGameNotice');
         $pk = $model->getPk();
         $data[$pk] = array('in', $_POST['ids']);
         $model->where($data)->delete();

@@ -77,13 +77,12 @@ class IndexAction extends Action
     public function publish()
     {
         //首先判断用户是否登录
-        /*$mark = I('session.mark');
+        $mark = I('session.mark_id');
         if ($mark) {
             $this->display();
         } else {
-            $this->redirect('/login/login');
-        }*/
-        $this->display();
+            $this->success('进军活动……',U('@www.syyundong.com/login/login'));
+        }
     }
 
     /*

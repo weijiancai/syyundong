@@ -6,7 +6,7 @@
  * @VIEW:db_game
  * @Author：liuliting
  */
-class DbGameAction extends CommonAction
+class DbActivityAction extends CommonAction
 {
 
     public function index()
@@ -16,7 +16,7 @@ class DbGameAction extends CommonAction
         if (method_exists($this, '_filter')) {
             $this->_filter($map);
         }
-        $model = D('DbGame');
+        $model = D('DbActivity');
         if (!empty ($model)) {
             $order = "";
             $order .= "input_date desc,";
@@ -32,7 +32,7 @@ class DbGameAction extends CommonAction
      */
     protected function _search()
     {
-        $model = D('DbGame');
+        $model = D('DbActivity');
         $map = array();
         $temp = $model->getDbFields();
         foreach ($temp as $key => $val) {
@@ -45,22 +45,22 @@ class DbGameAction extends CommonAction
     }
 
     /*
-     * @功能：赛事新增页面
+     * @功能：活动页面
      * @时间：20150422
      */
     function add()
     {
-        $this->assign('dzSport', $this->DzSport());
+        $this->assign('province', $this->getProvince());
         $this->display();
     }
 
     /*
-     * @功能：赛事新增方法
+     * @功能：活动新增方法
      * @时间：20150422
      */
     function insert()
     {
-        $model = D('DbGame');
+        $model = D('DbActivity');
         if (false === $model->create()) {
             $this->error($model->getError());
         }
@@ -73,12 +73,12 @@ class DbGameAction extends CommonAction
     }
 
     /*
-     * @功能：赛事编辑页面
+     * @功能：活动编辑页面
      * @时间：20150422
      */
     public function edit()
     {
-        $model = D('DbGame');
+        $model = D('DbActivity');
         $vo = $model->where('id=' . $_GET['id'])->find();
         $this->assign('vo', $vo);
         //赛事详情
@@ -124,14 +124,20 @@ class DbGameAction extends CommonAction
      */
     public function DzSport()
     {
-        return D('DzSport')->field('id,name')->where('pid=0 and sport_type=1')->select();
+        return D('DzSport')->field('id,name')->where('pid=0 and sport_type=2')->select();
     }
-
+    /*
+     * @功能：活动区域
+     * @时间：20150422
+     */
+    public function getProvince(){
+        return D('DbRegion')->field('id,name')->where('pid=0 and level=1')->select();
+    }
     /*
      * @功能：赛事详情
      * @时间：20150422
      */
-    public function getSportAjax()
+    public function getActivityCity()
     {
         $pid = $_GET['id'];
         $where['pid'] = $pid;
@@ -189,6 +195,7 @@ class DbGameAction extends CommonAction
         $date['id'] = array('eq', $_GET['id']);
         $date['is_verify'] = 'F';
         $date['verify_date'] = date("Y-m-d H:i:s");
+        $date['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
         $list = $model->save($date);
         if (false !== $list) {
             echo $this->ajax('1', "赛事禁止成功", $name, "", "");
@@ -208,6 +215,7 @@ class DbGameAction extends CommonAction
         $date['id'] = array('eq', $_GET['id']);
         $date['is_verify'] = 'T';
         $date['verify_date'] = date("Y-m-d H:i:s");
+        $date['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
         $list = $model->save($date);
         if (false !== $list) {
             echo $this->ajax('1', "赛事恢复成功", $name, "", "");
