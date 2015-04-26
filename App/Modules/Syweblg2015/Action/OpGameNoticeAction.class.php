@@ -3,7 +3,7 @@
 /**
  * @时间:20150422
  * @功能:赛事公告
- * @VIEW:db_game
+ * @VIEW:op_game_notice
  * @Author：liuliting
  */
 class OpGameNoticeAction extends CommonAction

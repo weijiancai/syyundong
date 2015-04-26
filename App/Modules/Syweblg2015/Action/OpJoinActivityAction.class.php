@@ -2,11 +2,11 @@
 
 /**
  * @时间:20150422
- * @功能:赛事管理
- * @VIEW:db_activity
+ * @功能:活动报名
+ * @VIEW:op_join_activity
  * @Author：liuliting
  */
-class DbActivityAction extends CommonAction
+class OpJoinActivityAction extends CommonAction
 {
 
     public function index()
@@ -16,7 +16,7 @@ class DbActivityAction extends CommonAction
         if (method_exists($this, '_filter')) {
             $this->_filter($map);
         }
-        $model = D('DbActivity');
+        $model = D('OpJoinActivity');
         if (!empty ($model)) {
             $order = "";
             $order .= "input_date desc,";
@@ -32,7 +32,7 @@ class DbActivityAction extends CommonAction
      */
     protected function _search()
     {
-        $model = D('DbActivity');
+        $model = D('OpJoinActivity');
         $map = array();
         $temp = $model->getDbFields();
         foreach ($temp as $key => $val) {
@@ -61,17 +61,10 @@ class DbActivityAction extends CommonAction
      */
     function insert()
     {
-        $model = D('DbActivity');
+        $model = D('OpJoinActivity');
         if (false === $model->create()) {
             $this->error($model->getError());
         }
-        $arr = $_POST['join_need_info'];
-        $str="";
-        for($i=0;$i<count($arr);$i++) {
-            $str.=$arr[$i].',';
-        }
-        $str = ",".$str;
-        $model->join_need_info = $str;
         $list = $model->add();
         if ($list !== false) {
             echo $this->ajax('1', "新增成功", $name, "", "closeCurrent");
@@ -86,7 +79,7 @@ class DbActivityAction extends CommonAction
      */
     public function edit()
     {
-        $model = D('DbActivity');
+        $model = D('OpJoinActivity');
         $vo = $model->where('id=' . $_GET['id'])->find();
         $this->assign('vo', $vo);
         //活动城市
@@ -108,18 +101,11 @@ class DbActivityAction extends CommonAction
      */
     function update()
     {
-        $name = 'DbActivity';
-        $model = D('DbActivity');
+        $name = 'OpJoinActivity';
+        $model = D('OpJoinActivity');
         if (false === $model->create()) {
             $this->error($model->getError());
         }
-        $arr = $_POST['join_need_info'];
-        $str="";
-        for($i=0;$i<count($arr);$i++) {
-            $str.=$arr[$i].',';
-        }
-        $str = ",".$str;
-        $model->join_need_info = $str;
         $list = $model->save();
         if ($list !== false) {
             echo $this->ajax('1', "更新成功", $name, "", "closeCurrent");

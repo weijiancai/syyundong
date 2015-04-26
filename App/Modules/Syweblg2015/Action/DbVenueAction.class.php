@@ -101,8 +101,8 @@ class DbVenueAction extends CommonAction
      */
     function update()
     {
-        $name = 'DbActivity';
-        $model = D('DbActivity');
+        $name = 'DbVenue';
+        $model = D('DbVenue');
         if (false === $model->create()) {
             $this->error($model->getError());
         }
@@ -114,11 +114,11 @@ class DbVenueAction extends CommonAction
         }
     }
     /*
-     * @功能：活动删除
+     * @功能：场馆删除
      * @时间：20150422
      */
     public function delAll(){
-        $model = D('DbActivity');
+        $model = D('DbVenue');
         $pk=$model->getPk ();
         $data[$pk]=array('in', $_POST['ids']);
         $model->where($data)->delete();
@@ -148,17 +148,6 @@ class DbVenueAction extends CommonAction
         $where['pid'] = $_GET['id'];
         $data = D('DbRegion')->field('id,name')->where($where)->select();
         echo json_encode($data);
-    }
-    /*
-     * @功能：活动报名填写信息
-     * @时间：20150422
-     */
-    public function getCheck(){
-        $model = D('DbActivity');
-        $where['id'] =$_GET['id'];
-        $vo = $model->where($where)->find();
-        $code = explode(",",$vo['join_need_info']);
-        echo json_encode($code);
     }
 
     /*
