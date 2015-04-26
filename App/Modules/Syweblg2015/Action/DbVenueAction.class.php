@@ -2,11 +2,11 @@
 
 /**
  * @时间:20150422
- * @功能:赛事管理
+ * @功能:场馆管理
  * @VIEW:db_game
  * @Author：liuliting
  */
-class DbActivityAction extends CommonAction
+class DbVenueAction extends CommonAction
 {
 
     public function index()
@@ -16,7 +16,7 @@ class DbActivityAction extends CommonAction
         if (method_exists($this, '_filter')) {
             $this->_filter($map);
         }
-        $model = D('DbActivity');
+        $model = D('DbVenue');
         if (!empty ($model)) {
             $order = "";
             $order .= "input_date desc,";
@@ -32,7 +32,7 @@ class DbActivityAction extends CommonAction
      */
     protected function _search()
     {
-        $model = D('DbActivity');
+        $model = D('DbVenue');
         $map = array();
         $temp = $model->getDbFields();
         foreach ($temp as $key => $val) {
@@ -45,7 +45,7 @@ class DbActivityAction extends CommonAction
     }
 
     /*
-     * @功能：活动页面
+     * @功能：场馆新增页面
      * @时间：20150422
      */
     function add()
@@ -56,22 +56,15 @@ class DbActivityAction extends CommonAction
     }
 
     /*
-     * @功能：活动新增方法
+     * @功能：场馆新增方法
      * @时间：20150422
      */
     function insert()
     {
-        $model = D('DbActivity');
+        $model = D('DbVenue');
         if (false === $model->create()) {
             $this->error($model->getError());
         }
-        $arr = $_POST['join_need_info'];
-        $str="";
-        for($i=0;$i<count($arr);$i++) {
-            $str.=$arr[$i].',';
-        }
-        $str = ",".$str;
-        $model->join_need_info = $str;
         $list = $model->add();
         if ($list !== false) {
             echo $this->ajax('1', "新增成功", $name, "", "closeCurrent");
@@ -81,12 +74,12 @@ class DbActivityAction extends CommonAction
     }
 
     /*
-     * @功能：活动编辑页面
+     * @功能：场馆编辑页面
      * @时间：20150422
      */
     public function edit()
     {
-        $model = D('DbActivity');
+        $model = D('DbVenue');
         $vo = $model->where('id=' . $_GET['id'])->find();
         $this->assign('vo', $vo);
         //活动城市
@@ -113,13 +106,6 @@ class DbActivityAction extends CommonAction
         if (false === $model->create()) {
             $this->error($model->getError());
         }
-        $arr = $_POST['join_need_info'];
-        $str="";
-        for($i=0;$i<count($arr);$i++) {
-            $str.=$arr[$i].',';
-        }
-        $str = ",".$str;
-        $model->join_need_info = $str;
         $list = $model->save();
         if ($list !== false) {
             echo $this->ajax('1', "更新成功", $name, "", "closeCurrent");
@@ -139,22 +125,22 @@ class DbActivityAction extends CommonAction
         echo $this->ajax('1',"删除成功",$name,"","");
     }
     /*
-     * @功能：活动分类
+     * @功能：场馆分类
      * @时间：20150422
      */
     public function DzSport()
     {
-        return D('DzSport')->field('id,name')->where('pid=0 and sport_type=2')->select();
+        return D('DzSport')->field('id,name')->where('pid=0 and sport_type=3')->select();
     }
     /*
-     * @功能：活动省份
+     * @功能：场馆省份
      * @时间：20150422
      */
     public function getProvince(){
         return D('DbRegion')->field('id,name')->where('pid=0 and level=1')->select();
     }
     /*
-     * @功能：活动城市
+     * @功能：场馆城市
      * @时间：20150422
      */
     public function getActivityCity()

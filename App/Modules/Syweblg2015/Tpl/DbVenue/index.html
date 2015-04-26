@@ -47,9 +47,9 @@
     <div class="pageContent">
         <div class="panelBar">
             <ul class="toolBar">
-                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="700" height="600" rel="vadd"><span>新增</span></a></li>
+                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="700" height="400" rel="vadd"><span>新增</span></a></li>
                 <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
-                       width="700" height="600" rel="vedit"><span>修改</span></a></li>
+                       width="700" height="400" rel="vedit"><span>修改</span></a></li>
                 <li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
                        class="delete"><span>删除</span></a></li>
             </ul>
@@ -61,10 +61,8 @@
                 <th width="8%" align="center">名称</th>
                 <th width="8%" align="center">项目</th>
                 <th width="10%" align="center">地点</th>
-                <th width="4%" align="center">活动人数</th>
-                <th width="4%" align="center">费用类型</th>
-                <th width="4%" align="center">费用</th>
-                <th width="5%" align="center">感兴趣人数</th>
+                <th width="4%" align="center">联系方式</th>
+                <th width="4%" align="center">人均费用</th>
                 <th width="4%" align="center">录入人</th>
                 <th width="8%" align="center">录入时间</th>
                 <th width="4%" align="center">操作</th>
@@ -78,14 +76,12 @@
                     <td height="25px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
                     <td><{$vo.name}></td>
                     <td><{$vo['sport_id']|getSportName}></td>
-                    <td><{$vo.region}><{$vo['address']}></td>
-                    <td><{$vo['limit_count']}></td>
-                    <td><{$vo['cost_type']}></td>
-                    <td><{$vo['cost']}></td>
-                    <td><{$vo['interest_count']}></td>
+                    <td><{$vo.city}><{$vo.region}><{$vo['address']}></td>
+                    <td><{$vo['phone']}></td>
+                    <td><{$vo['person_cost']}></td>
                     <td><{$vo['input_user']|getUserName}></td>
                     <td><{$vo['input_date']}></td>
-                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600" rel="detail">编辑</a></td>
+                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="400" rel="detail">编辑</a></td>
                 </tr>
             </volist>
 

@@ -26,7 +26,7 @@
     <div class="pageContent">
         <form method="post" action="__URL__/update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
-                <input type="hidden" value="<{$vo.id}>" name="id">
+                <input type="hidden" value="<{$vo.id}>" name="id" id="id">
                 <dl>
                     <dt>名称：</dt>
                     <dd><input name="name" class="required" type="text" value="<{$vo.name}>"/>
@@ -37,15 +37,13 @@
                     <dd><select name="sport_id" id="game_edit_id">
                         <volist name="dzSport" id="so">
                             <option
-                            <eq name="so.id" value="$vo.sport_id">selected=selected</eq>
-                            value="<{$so.id}>"><{$so.name}></option>
+                            <eq name="so.id" value="$vo.sport_id">selected=selected</eq>  value="<{$so.id}>"><{$so.name}></option>
                         </volist>
                     </select>
                         <select name="sport_sid" id="game_edit_sid">
                             <volist name="sport" id="po">
                                 <option
-                                <eq name="po.id" value="$vo.sport_sid">selected=selected</eq>
-                                value="<{$po.id}>"><{$po.name}></option>
+                                <eq name="po.id" value="$vo.sport_sid">selected=selected</eq>  value="<{$po.id}>"><{$po.name}></option>
                             </volist>
                         </select>
                     </dd>
