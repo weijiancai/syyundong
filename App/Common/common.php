@@ -299,4 +299,29 @@ function getGameField($field){
 function getGameName($id){
     return  D('DbGame')->where('id='.$id)->getField('name');
 }
+/*
+ * @功能：返回活动名称
+ * @时间:20150419
+ */
+function getActivityName($id){
+    return  D('DbActivity')->where('id='.$id)->getField('name');
+}
+/*
+ * @功能：返回活动报名审核状态
+ * @时间:20150419
+ */
+function getJoinActivityVerify($verify){
+    switch ($verify) {
+        case 0 :
+            $result = '待审核';
+            break;
+        case 1 :
+            $result = '通过';
+            break;
+        case 2 :
+            $result = '不通过';
+            break;
+    }
+    return  $result;
+}
 ?>

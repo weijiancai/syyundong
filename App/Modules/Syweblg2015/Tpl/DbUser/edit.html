@@ -1,0 +1,173 @@
+<script language="Javascript">
+    function navTabAjaxDone(json) {
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok) {
+            if (json.navTabId) { //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                setTimeout(function () {
+                    navTab.closeCurrentTab();
+                }, 100);
+            } else if ("forward" == json.callbackType) {
+                navTab.reload(json.forwardUrl);
+            }
+        }
+    }
+</script>
+<div class="page">
+    <div class="pageContent">
+        <form method="post" action="__URL__/update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+            <div class="pageFormContent" layoutH="58">
+                <input type="hidden" value="<{$vo.id}>" name="id" id="id">
+                <div style="height:150;margin-left:180px">
+                    <if condition="($vo.PHOTO neq NULL)and($vo.PHOTO neq ' ')">
+                        <div ID="prev1"><img src="__PUBLIC__/Upload/member/<{$vo.ID}>/<{$vo.PHOTO}>" width="100px" height="100px"></div>
+                        <else/>
+                        <img src="__PUBLIC__/images/default/web_pic.jpg">
+                    </if>
+                    <input type="hidden" name="PHOTO" value="<{$vo.PHOTO}>" id="PHOTO">
+                    <a href="#" onclick="clear1()"><span style="margin-right:30px">清除</span></a>
+                </div>
+                <div class="divider"></div>
+                <dl>
+                    <dt>姓名：</dt>
+                    <dd><input name="name" class="required" type="text" value="<{$vo.name}>"/>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>昵称：</dt>
+                    <dd><input name="limit_count" class="required" type="text" value="<{$vo.limit_count}>"/></dd>
+                </dl>
+                <dl>
+                    <dt>性别：</dt>
+                    <dd><select  name="gender" class="required">
+                        <option value="">请选择</option>
+                        <option <eq name="vo.gender" value ="F">selected=selected</eq> value="F">女</option>
+                        <option <eq name="vo.gender" value ="T">selected=selected</eq> value="T">男</option>
+                    </select></dd>
+                </dl>
+                <dl>
+                    <dt>血型：</dt>
+                    <dd><select  name="blood_type" class="required">
+                        <option value="">请选择</option>
+                        <option <eq name="vo.blood_type" value ="A">selected=selected</eq> value="F">A</option>
+                        <option <eq name="vo.blood_type" value ="B">selected=selected</eq> value="T">B</option>
+                        <option <eq name="vo.blood_type" value ="AB">selected=selected</eq> value="F">AB</option>
+                        <option <eq name="vo.blood_type" value ="O">selected=selected</eq> value="T">O</option>
+                        <option <eq name="vo.blood_type" value ="RH">selected=selected</eq> value="F">RH</option>
+                        <option <eq name="vo.blood_type" value ="MN">selected=selected</eq> value="T">MN</option>
+                        <option <eq name="vo.blood_type" value ="其他">selected=selected</eq> value="F">其他</option>
+                    </select>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>生日：</dt>
+                    <dd>
+                        <input type="text" readonly="true" class="date textInput readonly valid" name="birthday">
+                        <a href="javascript:;" class="inputDateButton">选择</a>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>公司：</dt>
+                    <dd><input name="company" class="required" type="text" value="<{$vo.company}>"/>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>证件类型：</dt>
+                    <dd><select  name="certificate_type" class="required">
+                        <option value="">请选择</option>
+                        <option <eq name="vo.certificate_type" value ="身份证">selected=selected</eq> value="身份证">身份证</option>
+                        <option <eq name="vo.certificate_type" value ="军官证">selected=selected</eq> value="军官证">军官证</option>
+                        <option <eq name="vo.certificate_type" value ="学生证">selected=selected</eq> value="学生证">学生证</option>
+                        <option <eq name="vo.certificate_type" value ="护照">selected=selected</eq> value="护照">护照</option>
+
+                    </select>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>地点：</dt>
+                    <dd><input name="address" class="required" type="text" value="<{$vo.address}>"/></dd>
+                </dl>
+                <dl>
+                    <dt>赛事发起方：</dt>
+                    <dd><input name="sponsor" class="required" type="text" value="<{$vo.sponsor}>"/></dd>
+                </dl>
+
+                <dl>
+                    <dt>联系方式：</dt>
+                    <dd><input name="phone" class="required" type="text" value="<{$vo.phone}>"/></dd>
+                </dl>
+                <dl>
+                    <dt>申请人姓名：</dt>
+                    <dd><input name="apply_name" class="required" type="text" value="<{$vo.apply_name}>"/></dd>
+                </dl>
+                <dl>
+                    <dt>申请人电话：</dt>
+                    <dd><input name="apply_phone" class="required" type="text" value="<{$vo.apply_phone}>"/></dd>
+                </dl>
+
+                <dl>
+                    <dt>申请人邮箱：</dt>
+                    <dd><input name="apply_email" class="required" type="text" value="<{$vo.apply_email}>"/></dd>
+                </dl>
+                <dl>
+                    <dt>审核：</dt>
+                    <dd><select name="is_verify">
+                        <option
+                        <eq name="vo.is_verify" value="T">selected=selected</eq>
+                        value="T">已审核</option>
+                        <option
+                        <eq name="vo.is_verify" value="F">selected=selected</eq>
+                        value="F">未审核</option>
+                    </select></dd>
+                </dl>
+                <dl>
+                    <dt>录入人：</dt>
+                    <dd><input name="input_user" readonly class="required" type="text"
+                               value="<{$vo['input_user']|getUserName}>"></dd>
+                </dl>
+                <dl>
+                    <dt>录入时间：</dt>
+                    <dd><input type="text" name="input_date" class="" readonly  value="<{$vo.input_date}>"/></dd>
+                </dl>
+
+                <dl class="nowrap">
+                    <dt>推荐语</dt>
+                    <dd><textarea name="description" cols="80" rows="5" class="required"><{$vo.description}></textarea></dd>
+                </dl>
+                <dl class="nowrap">
+                    <dt>图片:</dt>
+                    <dd><input type="file" name="image" id="fileupload" />
+                        <span id="show_mes" style="color:Red"></span>
+                        <div id="showimg" style="height:40px"><img src="<{$vo['image']|getImageUrl}>" width="100px" height="100px"/></div>
+                        <input type="hidden" value="<{$vo.image}>" name="image" id="image">
+                    </dd>
+                </dl>
+                <input type="hidden" value="game" id="path">
+            </div>
+            <div class="formBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">保存</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button">
+                            <div class="buttonContent">
+                                <button type="button" class="close">取消</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
+    </div>
+</div>

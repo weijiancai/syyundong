@@ -1,0 +1,121 @@
+<form id="pagerForm" action="__URL__" method="post">
+    <input type="hidden" name="pageNum" value="<{$_REQUEST['pageNum']|default=1}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numPerPage}>"/>
+    <input type="hidden" name="_order" value="<{$_REQUEST['_order']}>"/>
+    <input type="hidden" name="_sort" value="<{$_REQUEST['_sort']|default='1'}>"/>
+    <input type="hidden" name="listRows" value="<{$_REQUEST['listRows']}>"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="<{$key}>" value="<{$_REQUEST[$key]}>"/>
+    </volist>
+</form>
+
+<script>
+    $(function () {
+        $("img").attr({ width: "15px", height: "15px", onclick: 'show(this.src)'});
+        $("img").attr('style', '');
+        $("embed").attr({ width: "15px", height: "15px"});
+    });
+    function show($temp) {
+        $.pdialog.open("__URL__/show?img=" + $temp, "show", "预览", {height: "600", width: "600", mask: "true"});　
+    }
+</script>
+
+<div class="page">
+    <div class="pageHeader">
+        <form onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+            <div class="searchBar">
+                <table>
+                    <tr>
+                        <td>名称：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium" size="10">&nbsp;&nbsp;
+                        </td>
+                        <td>申请电话：<input type="text" name="apply_phone" value="<{$_REQUEST['apply_phone']}>"
+                                        class="medium" size="10">&nbsp;&nbsp;</td>
+                        <td>类别：<select name="sport_id" id="sport_id">
+                            <option value="">请选择</option>
+                            <volist name="dzSport" id="vo">
+                                <option value="<{$vo.id}>"
+                                <eq name="_REQUEST.sport_id" value="$vo.id">selected=selected</eq>
+                                ><{$vo.name}></option>
+                            </volist>
+                        </select>&nbsp;<select name="sport_sid" id="sport_sid">
+                            <option value="">请选择</option>
+                        </select></td>
+                        <td>
+                            <button type="submit">查询</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+
+    <div class="pageContent">
+        <div class="panelBar">
+            <ul class="toolBar">
+                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="700" height="600" rel="vadd"><span>新增</span></a></li>
+                <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
+                       width="700" height="600" rel="vedit"><span>修改</span></a></li>
+                <li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
+                       class="delete"><span>删除</span></a></li>
+            </ul>
+        </div>
+        <table class="table" width="100%" layoutH="113">
+            <thead>
+            <tr>
+                <th width="2%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
+                <th width="8%" align="center">姓名</th>
+                <th width="8%" align="center">昵称</th>
+                <th width="4%" align="center">性别</th>
+                <th width="8%" align="center">手机号码</th>
+                <th width="8%" align="center">邮箱</th>
+                <th width="8%" align="center">录入时间</th>
+                <th width="4%" align="center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist id="vo" name="list">
+                <tr target="sid_node" rel="<{$vo['id']}>">
+                    <td height="25px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
+                    <td><{$vo.name}></td>
+                    <td><{$vo['nick_name']}></td>
+                    <td><if condition="$vo.gender eq F">女<else/>男</if></td>
+                    <td><{$vo['mobile']}></td>
+                    <td><{$vo['email']}></td>
+                    <td><{$vo['input_date']}></td>
+                    <td><a href="__URL__/detail/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600" rel="detail">编辑</a></td>
+                </tr>
+            </volist>
+
+            </tbody>
+        </table>
+        <div class="panelBar">
+            <div class="pages">
+                <span>显示</span>
+                <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                    <option value="10"
+                    <eq name="numPerPage" value="10">selected=selected</eq>
+                    >10</option>
+                    <option value="15"
+                    <eq name="numPerPage" value="15">selected=selected</eq>
+                    >15</option>
+                    <option value="20"
+                    <eq name="numPerPage" value="20">selected=selected</eq>
+                    >20</option>
+                    <option value="50"
+                    <eq name="numPerPage" value="50">selected=selected</eq>
+                    >50</option>
+                    <option value="100"
+                    <eq name="numPerPage" value="100">selected=selected</eq>
+                    >100</option>
+                    <option value="200"
+                    <eq name="numPerPage" value="200">selected=selected</eq>
+                    >200</option>
+                </select>
+                <span>共<{$totalCount}>条</span>
+
+            </div>
+            <div class="pagination" targetType="navTab" totalCount="<{$totalCount}>" numPerPage="<{$numPerPage}>"
+                 pageNumShown="10" currentPage="<{$currentPage}>"></div>
+        </div>
+    </div>
+</div>
