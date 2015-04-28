@@ -24,22 +24,23 @@
                 <input type="hidden" value="<{$vo.id}>" name="id" id="id">
                 <div style="height:150;margin-left:180px">
                     <if condition="($vo.PHOTO neq NULL)and($vo.PHOTO neq ' ')">
-                        <div ID="prev1"><img src="__PUBLIC__/Upload/member/<{$vo.ID}>/<{$vo.PHOTO}>" width="100px" height="100px"></div>
+                        <div ID="prev1"><img src="__PUBLIC__/Upload/member/<{$vo.ID}>/<{$vo.PHOTO}>" width="100px" height="100px">
+                            <a href="#" onclick="clear1()"><span style="margin-right:30px">清除</span></a></div>
                         <else/>
                         <img src="__PUBLIC__/images/default/web_pic.jpg">
                     </if>
-                    <input type="hidden" name="PHOTO" value="<{$vo.PHOTO}>" id="PHOTO">
-                    <a href="#" onclick="clear1()"><span style="margin-right:30px">清除</span></a>
+                    <input type="hidden" name="user_head" value="<{$vo.user_head}>" id="user_head">
+
                 </div>
                 <div class="divider"></div>
                 <dl>
                     <dt>姓名：</dt>
-                    <dd><input name="name" class="required" type="text" value="<{$vo.name}>"/>
+                    <dd><input name="name" class="" type="text" value="<{$vo.name}>"/>
                     </dd>
                 </dl>
                 <dl>
                     <dt>昵称：</dt>
-                    <dd><input name="limit_count" class="required" type="text" value="<{$vo.limit_count}>"/></dd>
+                    <dd><input name="nick_name" class="" type="text" value="<{$vo.nick_name}>"/></dd>
                 </dl>
                 <dl>
                     <dt>性别：</dt>
@@ -50,35 +51,34 @@
                     </select></dd>
                 </dl>
                 <dl>
+                    <dt>生日：</dt>
+                    <dd>
+                        <input type="text"  class="date textInput readonly valid" name="birthday" value="<{$vo.birthday}>">
+                        <a href="javascript:;" class="inputDateButton">选择</a>
+                    </dd>
+                </dl>
+                <dl>
                     <dt>血型：</dt>
                     <dd><select  name="blood_type" class="required">
                         <option value="">请选择</option>
-                        <option <eq name="vo.blood_type" value ="A">selected=selected</eq> value="F">A</option>
-                        <option <eq name="vo.blood_type" value ="B">selected=selected</eq> value="T">B</option>
-                        <option <eq name="vo.blood_type" value ="AB">selected=selected</eq> value="F">AB</option>
-                        <option <eq name="vo.blood_type" value ="O">selected=selected</eq> value="T">O</option>
-                        <option <eq name="vo.blood_type" value ="RH">selected=selected</eq> value="F">RH</option>
-                        <option <eq name="vo.blood_type" value ="MN">selected=selected</eq> value="T">MN</option>
-                        <option <eq name="vo.blood_type" value ="其他">selected=selected</eq> value="F">其他</option>
+                        <option <eq name="vo.blood_type" value ="A">selected=selected</eq> value="A">A</option>
+                        <option <eq name="vo.blood_type" value ="B">selected=selected</eq> value="B">B</option>
+                        <option <eq name="vo.blood_type" value ="AB">selected=selected</eq> value=AB">AB</option>
+                        <option <eq name="vo.blood_type" value ="O">selected=selected</eq> value="O">O</option>
+                        <option <eq name="vo.blood_type" value ="RH">selected=selected</eq> value="RH">RH</option>
+                        <option <eq name="vo.blood_type" value ="MN">selected=selected</eq> value="MN">MN</option>
+                        <option <eq name="vo.blood_type" value ="其他">selected=selected</eq> value="其他">其他</option>
                     </select>
                     </dd>
                 </dl>
                 <dl>
-                    <dt>生日：</dt>
-                    <dd>
-                        <input type="text" readonly="true" class="date textInput readonly valid" name="birthday">
-                        <a href="javascript:;" class="inputDateButton">选择</a>
-                    </dd>
-                </dl>
-
-                <dl>
                     <dt>公司：</dt>
-                    <dd><input name="company" class="required" type="text" value="<{$vo.company}>"/>
+                    <dd><input name="company" class="" type="text" value="<{$vo.company}>"/>
                     </dd>
                 </dl>
                 <dl>
                     <dt>证件类型：</dt>
-                    <dd><select  name="certificate_type" class="required">
+                    <dd><select  name="certificate_type" class="">
                         <option value="">请选择</option>
                         <option <eq name="vo.certificate_type" value ="身份证">selected=selected</eq> value="身份证">身份证</option>
                         <option <eq name="vo.certificate_type" value ="军官证">selected=selected</eq> value="军官证">军官证</option>
@@ -89,65 +89,49 @@
                     </dd>
                 </dl>
                 <dl>
-                    <dt>地点：</dt>
-                    <dd><input name="address" class="required" type="text" value="<{$vo.address}>"/></dd>
+                    <dt>证件号码：</dt>
+                    <dd><input name="certificate_num" class="" type="text" value="<{$vo.certificate_num}>"/></dd>
                 </dl>
                 <dl>
-                    <dt>赛事发起方：</dt>
-                    <dd><input name="sponsor" class="required" type="text" value="<{$vo.sponsor}>"/></dd>
+                    <dt>身高：</dt>
+                    <dd><input name="high" class="" type="text" value="<{$vo.high}>" size="15"/>cm</dd>
                 </dl>
 
                 <dl>
-                    <dt>联系方式：</dt>
-                    <dd><input name="phone" class="required" type="text" value="<{$vo.phone}>"/></dd>
+                    <dt>体重：</dt>
+                    <dd><input name="weight" class="" type="text" value="<{$vo.weight}>" size="15"/>kg</dd>
                 </dl>
                 <dl>
-                    <dt>申请人姓名：</dt>
-                    <dd><input name="apply_name" class="required" type="text" value="<{$vo.apply_name}>"/></dd>
+                    <dt>手机号码：</dt>
+                    <dd><input name="mobile" class="" type="text" value="<{$vo.mobile}>"/></dd>
                 </dl>
                 <dl>
-                    <dt>申请人电话：</dt>
-                    <dd><input name="apply_phone" class="required" type="text" value="<{$vo.apply_phone}>"/></dd>
+                    <dt>邮箱：</dt>
+                    <dd><input name="email" class="" type="text" value="<{$vo.email}>"/></dd>
                 </dl>
 
                 <dl>
-                    <dt>申请人邮箱：</dt>
-                    <dd><input name="apply_email" class="required" type="text" value="<{$vo.apply_email}>"/></dd>
+                    <dt>邮编：</dt>
+                    <dd><input name="postal_code" class="" type="text" value="<{$vo.postal_code}>"/></dd>
                 </dl>
                 <dl>
-                    <dt>审核：</dt>
-                    <dd><select name="is_verify">
-                        <option
-                        <eq name="vo.is_verify" value="T">selected=selected</eq>
-                        value="T">已审核</option>
-                        <option
-                        <eq name="vo.is_verify" value="F">selected=selected</eq>
-                        value="F">未审核</option>
-                    </select></dd>
+                    <dt>通讯地址：</dt>
+                    <dd><input name="address" class="" type="text" value="<{$vo.address}>"/></dd>
                 </dl>
                 <dl>
-                    <dt>录入人：</dt>
-                    <dd><input name="input_user" readonly class="required" type="text"
-                               value="<{$vo['input_user']|getUserName}>"></dd>
+                    <dt>个性签名：</dt>
+                    <dd><input name="signature" class="" type="text" value="<{$vo.signature}>"/></dd>
                 </dl>
+                <dl>
+                    <dt>运动喜好：</dt>
+                    <dd><input type="text" name="interest" class=""   value="<{$vo.interest}>"/></dd>
+                </dl>
+
                 <dl>
                     <dt>录入时间：</dt>
-                    <dd><input type="text" name="input_date" class="" readonly  value="<{$vo.input_date}>"/></dd>
+                    <dd><input type="text" name="input_date" class="" readonly value="<{$vo['input_date']}>"/></dd>
                 </dl>
 
-                <dl class="nowrap">
-                    <dt>推荐语</dt>
-                    <dd><textarea name="description" cols="80" rows="5" class="required"><{$vo.description}></textarea></dd>
-                </dl>
-                <dl class="nowrap">
-                    <dt>图片:</dt>
-                    <dd><input type="file" name="image" id="fileupload" />
-                        <span id="show_mes" style="color:Red"></span>
-                        <div id="showimg" style="height:40px"><img src="<{$vo['image']|getImageUrl}>" width="100px" height="100px"/></div>
-                        <input type="hidden" value="<{$vo.image}>" name="image" id="image">
-                    </dd>
-                </dl>
-                <input type="hidden" value="game" id="path">
             </div>
             <div class="formBar">
                 <ul>

@@ -22,7 +22,6 @@ class DbUserAction extends CommonAction
             $order .= "input_date desc,";
             $this->_list($model, $map, $order);
         }
-        $this->assign('dzSport', $this->DzSport());
         $this->display();
     }
 
@@ -45,58 +44,26 @@ class DbUserAction extends CommonAction
     }
 
     /*
-     * @功能：赛事新增页面
-     * @时间：20150422
-     */
-    function add()
-    {
-        $this->assign('dzSport', $this->DzSport());
-        $this->display();
-    }
-
-    /*
-     * @功能：赛事新增方法
-     * @时间：20150422
-     */
-    function insert()
-    {
-        $model = D('DbGame');
-        if (false === $model->create()) {
-            $this->error($model->getError());
-        }
-        $list = $model->add();
-        if ($list !== false) {
-            echo $this->ajax('1', "新增成功", $name, "", "closeCurrent");
-        } else {
-            echo $this->ajax('0', "新增失败", $name, "", "closeCurrent");
-        }
-    }
-
-    /*
-     * @功能：赛事编辑页面
+     * @功能：用户信息编辑页面
      * @时间：20150422
      */
     public function edit()
     {
-        $model = D('DbGame');
+        $model = D('DbUser');
         $vo = $model->where('id=' . $_GET['id'])->find();
         $this->assign('vo', $vo);
-        //赛事详情
-        $where['pid'] = $vo['sport_id'];
-        $sport = D('DzSport')->where($where)->select();
-        $this->assign('sport', $sport);
-        $this->assign('dzSport', $this->DzSport());
+    //    $this->assign('dzSport', $this->DzSport());
         $this->display();
     }
 
     /*
-     * @功能：赛事更新
+     * @功能：用户信息更新
      * @时间：20150422
      */
     function update()
     {
-        $name = 'DbGame';
-        $model = D('DbGame');
+        $name = 'DbUser';
+        $model = D('DbUser');
         if (false === $model->create()) {
             $this->error($model->getError());
         }
@@ -108,7 +75,7 @@ class DbUserAction extends CommonAction
         }
     }
     /*
-     * @功能：赛事删除
+     * @功能：用户删除
      * @时间：20150422
      */
     public function delAll(){
@@ -117,27 +84,6 @@ class DbUserAction extends CommonAction
         $data[$pk]=array('in', $_POST['ids']);
         $model->where($data)->delete();
         echo $this->ajax('1',"删除成功",$name,"","");
-    }
-    /*
-     * @功能：赛事分类
-     * @时间：20150422
-     */
-    public function DzSport()
-    {
-        return D('DzSport')->field('id,name')->where('pid=0 and sport_type=1')->select();
-    }
-
-    /*
-     * @功能：赛事详情
-     * @时间：20150422
-     */
-    public function getSportAjax()
-    {
-        $pid = $_GET['id'];
-        $where['pid'] = $pid;
-        $where['sport_type'] = 1;
-        $data = D('DzSport')->field('id,name')->where($where)->select();
-        echo json_encode($data);
     }
     /*
     * @功能：赛事其他详细信息

@@ -98,6 +98,42 @@ class OpJoinActivityAction extends CommonAction
         $model->where($data)->delete();
         echo $this->ajax('1',"删除成功",$name,"","");
     }
+    /*
+     * @功能：活动报名通过
+     * @时间：20150422
+     */
+    public function audit(){
+        $name = "OpJoinActivity";
+        $model = D($name);
+        $date['id'] =$_GET['id'];
+        $date['verify_date'] = date('Y-m-d H:i:s');
+        $date['verify_state'] = 1;
+        $result = $model->save($date);
+        if(false!== $result){
+            echo $this->ajax('1',"审核成功",$name,"","");
+        }else{
+            echo $this->ajax('0',"审核失败",$name,"","");
+        }
+
+    }
+    /*
+ * @功能：活动报名不通过
+ * @时间：20150422
+ */
+    public function Notaudit(){
+        $name = "OpJoinActivity";
+        $model = D($name);
+        $date['id'] =$_GET['id'];
+        $date['verify_date'] = date('Y-m-d H:i:s');
+        $date['verify_state'] = 2;
+        $result = $model->save($date);
+        if(false!== $result){
+            echo $this->ajax('1',"滞留成功",$name,"","");
+        }else{
+            echo $this->ajax('0',"滞留失败",$name,"","");
+        }
+
+    }
 }
 
 ?>
