@@ -72,4 +72,33 @@ $(function () {
     });
 //精选赛事ajax查询
 
+    // 精选赛事tab切换
+    var $recommendEvents = $('#recommendEvents');
+    $recommendEvents.find('dt a').each(function(index) {
+        $(this).click(function() {
+            $recommendEvents.find('dt a').removeClass('current');
+            $(this).addClass('current');
+            $recommendEvents.find('dd').hide().eq(index).show();
+        });
+    });
+
+    // 精选话题tab切换
+    var $hotTopics = $('#hotTopics');
+    $hotTopics.find('dt a').each(function(index) {
+        $(this).click(function() {
+            $hotTopics.find('dt a').removeClass('current');
+            $(this).addClass('current');
+            $hotTopics.find('dd').hide().eq(index).show();
+        });
+    });
+
+    // 推荐场馆tab切换
+    var $recommendVenues= $('#recommendVenues');
+    $recommendVenues.find('dt a').each(function(index) {
+        $(this).click(function() {
+            $recommendVenues.find('dt a').removeClass('current');
+            $(this).addClass('current');
+            $recommendVenues.find('dd').hide().eq(index).show();
+        });
+    });
 });
