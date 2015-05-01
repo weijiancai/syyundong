@@ -10,7 +10,11 @@ class IndexAction extends Action
     {
         $this->hotgame();
         $this->hot_activity();
-        $this->assign('city',$this->getCity());
+        $this->assign('city', $this->getCity());
+        $this->assign('hot_activity', $this->getHotActivity());
+        $this->assign('doyen', $this->getDoyenUser());
+        $this->assign('game_sport',$this->getGameSport());
+        $this->firend_rcommend();
         $this->display();
     }
 
@@ -51,9 +55,46 @@ class IndexAction extends Action
     */
     Public function getCity()
     {
-       return D('DbRegion')->where('pid =2 and level =3')->select();
+        return D('DbRegion')->where('pid =2 and level =3')->select();
 
     }
 
+    /*
+    * @功能：热门活动
+    * @时间：20150501
+    */
+    Public function getHotActivity()
+    {
+        return D('VHotActivity')->select();
+    }
+
+    /*
+    * @功能：赛友达人堂
+    * @时间：20150501
+    */
+    Public function getDoyenUser()
+    {
+        return D('v_doyen_user')->select();
+    }
+
+    /*
+    * @功能：赛友达人堂
+    * @时间：20150501
+    */
+    Public function getGameSport()
+    {
+        return D('DzSport')->where('pid=0 and level =1 and sport_type=1')->select();
+    }
+
+    /*
+     * @功能：热门赛友圈
+     * @时间:20150418
+     */
+    public function firend_rcommend(){
+        $model = New Model();
+        $list = $model->query('select v.id,o.sort_num, v.name,v.province,v.image,v.province,v.join_count from v_game_activity v,op_recommend o
+                                where v.id = o.gc_id and o.recommend_type = "game" and v.type="game" order by o.sort_num limit 9');
+        $this->assign('recommend', $list);
+    }
 
 }

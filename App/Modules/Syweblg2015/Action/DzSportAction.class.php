@@ -106,6 +106,7 @@ class DzSportAction extends CommonAction
             $dataNode['id'] = $val;
             $dataNode['name'] = $_POST['name'][$key];
             $dataNode['sport_show'] = $_POST['sport_show'][$key];
+            $dataNode['image'] = $_POST['image'][$key];
             $dataNode['sport_type'] = 1;
             $dataNode['input_date'] = date('Y-m-d H:i:s');
             $dataNode['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
@@ -149,7 +150,64 @@ class DzSportAction extends CommonAction
         $this->assign('vo', $vo);
         $this->display();
     }
+    /*
+     * @功能：赛事图片
+     * @时间：20150421
+     */
+    function lookup(){
+        $this->display();
+    }
+    /*
+     * @功能：ajax上传图片
+     * @时间：20150422
+     */
+    public function upimg()
+    {
+        import('ORG.Util.Image');
+        import('ORG.Net.UploadFile');
+        $path = 'sport';
+        $upload = new UploadFile(); // 实例化上传类
+        $upload->maxSize = 6291456; // 设置附件上传大小
+        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
+        $upload->savePath = './Public/upload/'.$path.'/'; // 设置附件上传目录
+        $upload->thumb = true;
+        $upload->thumbPrefix = '';
+        $upload->thumbMaxWidth = '600';
+        $upload->thumbMaxHeight = '400';
+        $upload->thumbType = 0;
+        $upload->zipImages = true;
+        $upload->autoSub = true;
+        $upload->subType = date;
+        if (!$upload->upload()) { // 上传错误提示错误信息
+            if ($upload->getErrorMsg() != "没有选择上传文件") { //不上传文件通过
+                $e = $this->error($upload->getErrorMsg());
+                echo $e;
+            }
+        } else { // 上传成功 获取上传文件信息
+            $info = $upload->getUploadFileInfo();
 
+            //存储图片
+            $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
+            $result = D('DbImages')->add($date);
+            //打水印
+            /* $Image = new Image();
+             foreach ($info as $value) {
+                 $$value['key'] = $value['savename'];
+                 $Image->water('./Public/Upload/game/' . $value['savename'], './Public/images/common/logo1.png'); //打水印
+             }*/
+            $arr = array(
+                'savename' => $info[0]['savename'],
+                'image[]' => $result,
+                'pic' => $info[0]['savepath'],
+                'size' => $info[0]['size'],
+                'ext' => $info[0]['extension'],
+                'path' => $path,
+            );
+         //   dump(array(true,$arr));
+         //  return $arr;
+            echo json_encode($arr);
+        }
+    }
 }
 
 ?>

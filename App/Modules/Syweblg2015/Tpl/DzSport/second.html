@@ -38,12 +38,16 @@
                                             size="12" fieldClass="">名称
                                         </th>
                                         <th type="enum" name="sport_show[]" enumUrl="__URL__/state" size="12">显示</th>
+                                        <th type="attach" name="image[]" lookupGroup=""
+                                            lookupUrl="Syweblg2015/DzSport/lookup.html" mask="true" target="dialog"
+                                            title="传图" size="12">图片
+                                        </th>
                                         <th type="del" width="60">操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <volist name="list" id="vo">
-                                        <tr>
+                                        <tr class="unitBox">
                                             <td><input type="text" class="required" name="id[]" size="8"
                                                        value="<{$vo.id}>" readonly/></td>
                                             <td><input type="text" class="required" name="name[]" size="12"
@@ -56,6 +60,12 @@
                                                 <eq name="vo.sport_show" value="0">selected=selected</eq>
                                                 value="0" >不显示</option>
                                             </select></td>
+                                            <td>
+                                                <input type="text" name="image[]" size="12" readonly="readonly"
+                                                       class="textInput readonly valid" value="<{$vo.image}>">
+                                                <a class="btnAttach" href="Syweblg2015/DzSport/lookup.html"
+                                                   lookupgroup="" undefined="" lookuppk="id" width="560" height="300"
+                                                   title="查找带回">查找带回</a></td>
                                             <td><a href="javascript:void(0)" class="btnDel">删除</a>
                                             </td>
                                         </tr>

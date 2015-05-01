@@ -255,7 +255,8 @@ class DbGameAction extends CommonAction
                  $Image->water('./Public/Upload/game/' . $value['savename'], './Public/images/common/logo1.png'); //打水印
              }*/
             $arr = array(
-                'name' => $info[0]['savename'],
+                'savename' => $info[0]['savename'],
+                'name' => $info[0]['name'],
                 'pic' => $info[0]['savename'],
                 'size' => $info[0]['size'],
                 'ext' => $info[0]['extension'],

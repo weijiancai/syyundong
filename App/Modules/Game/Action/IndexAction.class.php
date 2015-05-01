@@ -81,7 +81,11 @@ class IndexAction extends Action
         if ($mark) {
             $this->display();
         } else {
-            $this->success('进军赛事……',U('@www.syyundong.com/login/login'));
+            $str =' <script> window.location.href="/login/login"</script>';
+            //$this->display($str);
+            echo $str;
+          //  $this->success('进军赛事……',U('@www.syyundong.com/login/login'));
+           // $this->redirect(U('@www.syyundong.comlogin/login'));
         }
     }
 

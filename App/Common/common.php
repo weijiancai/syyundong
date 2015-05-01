@@ -235,7 +235,12 @@ function getSecondSport($id){
  * @时间:20150419
  */
 function getUserName($id){
-    return  D('DbUser')->where('id='.$id)->getField('name');
+    $user = D('DbUser')->where("id = '%d'", $id)->field('nick_name,mobile')->find();
+    if($user['nick_name']){
+        return $user['nick_name'];
+    }else{
+        return $user['mobile'];
+    }
 }
 /*
  * @功能：返回赛事、场馆、活动类别
@@ -323,5 +328,26 @@ function getJoinActivityVerify($verify){
             break;
     }
     return  $result;
+}
+/*
+ * @功能：返回登录用户头像
+ * @时间:20150419
+ */
+function getUserImage($id){
+    $user_head = D('DbUser')->where('id='.deCode($id))->getField('user_head');
+    return  D('DbImages')->where('id='.$user_head)->getField('local_url');
+}
+/*
+ * @功能：返回用户头像
+ * @时间:20150419
+ */
+function getUsersImage($id){
+    $user_head = D('DbUser')->where('id='.$id)->getField('user_head');
+    $local_url  = D('DbImages')->where('id='.$user_head)->getField('local_url');
+    if($local_url){
+        return $local_url;
+    }else{
+        return '/Public/images/default/web_pic.jpg';
+    }
 }
 ?>

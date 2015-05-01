@@ -48,7 +48,7 @@
             <volist id="vo" name="list">
                 <tr target="sid_node" rel="<{$vo['id']}>">
                     <td height="30px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
-                    <td><a href="__URL__/second/sid/<{$vo.id}>" target="dialog" mask="true" width="700" height="600"
+                    <td><a href="__URL__/second/sid/<{$vo.id}>" target="dialog" mask="true" rel="sescond" width="700" height="600"
                            callback="NavTabAjax"><span style="color:blue"><{$vo['name']}></span></a></td>
                     <td><span style="line-height:25px"><{$vo['id']|getSecondSport}></span></td>
                     <td><{$vo['input_date']}></td>

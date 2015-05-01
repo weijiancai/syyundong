@@ -25,12 +25,41 @@ class RegisterAction extends Action
             $date['mobile'] = trim(I('post.mobile'));
             $date['password'] = base64_encode(strtoupper(md5(I('post.password'))));;
             $result = D('DbUser')->data($date)->add();
-            if (false !== $result) {
+            dump($result);
+
+            $id = enCode($result);
+            session('mark_id', "$id");
+            dump(session('mark_id'));
+            /*if (false !== $result) {
                 $this->display('profile');
                 //   echo  1;
-            }
+            }*/
         } else {
             $this->error('非法请求');
+        }
+    }
+
+    /*
+    * @ 注册用户详细信息
+    */
+    public function  AddProfile()
+    {
+        $data['user_head'] = $_POST['user_head'];
+        $data['nick_name'] = $_POST['nick_name'];
+        $data['gender'] = $_POST['gender'];
+        $data['address'] = $_POST['address'];
+        $data['interest'] = $_POST['interest'];
+        $data['signature'] = $_POST['signature'];
+        $data['id'] = array('eq', deCode(session('mark_id')));
+        if (session('mark_id')) {
+            $result = M('DbUser')->save($data);
+            if (false !== $result) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+        } else {
+            echo 0;
         }
     }
 
@@ -113,6 +142,8 @@ class RegisterAction extends Action
                     $date['password'] = base64_encode(strtoupper(md5(I('post.password'))));
                     $date['input_date'] = date('Y-m-d H:i:s');
                     $result = D('DbUser')->data($date)->add();
+                    $id = enCode($result);
+                    session('mark_id', "$id");
                     if (false !== $result) {
                         //  $this->display('profile');
                         $_SESSION['SyPhone'] = trim(I('post.mobile'));

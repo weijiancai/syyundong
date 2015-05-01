@@ -17,6 +17,7 @@ $(function () {
                 if ($result) {
                     var obj = eval($result);
                     $('#similar').empty();
+                    console.log(obj);
                     for (var i = 0; i < obj.length; i++) {
                         var $li = $(template('detail_list', obj[i]));
                         $('#similar').append($li);

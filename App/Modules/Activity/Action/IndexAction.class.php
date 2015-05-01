@@ -122,9 +122,12 @@ class IndexAction extends Action
         $where['id'] = array('neq',$_POST['id']);
         $where['sport_id'] = array('eq',$_POST['sport_id']);
         $ids = D('VGameActivity')->where($where)->getField('id',true);
-        $limit =array_rand($ids,4);
-        $map['id'] =array('in',$limit);
-        $list = D('VGameActivity')->where($map)->select();
+        $len = count($ids);
+        $result = rand(0,($len-4));
+        if($len<4){
+            $result = 0;
+        }
+        $list = D('VGameActivity')->where($where)->limit($result,4)->select();
         echo json_encode($list);
     }
 

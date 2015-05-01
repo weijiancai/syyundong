@@ -52,9 +52,15 @@
                 <table>
                     <tbody>
                     <tr>
-                        <th><a href="/userCenter/timeline"><img
-                                src="__PUBLIC__/images/default/default_user.png"
-                                name="user-head"></a></th>
+                        <th>
+                            <?php if(getUserImage(session('mark_id'))){ ?>
+                            <a href="/userCenter/timeline"><img src="<{$_SESSION['mark_id']|getUserImage}>"
+                                                                name="user-head"></a>
+                            <?php }else{ ?>
+                            <a href="/userCenter/timeline"><img src="__PUBLIC__/images/default/web_pic.jpg"
+                                                                name="user-head"></a>
+                            <?php } ?>
+                        </th>
                         <td><a href="/userCenter/game"> <span>2</span><br> <em>赛事</em>
                         </a> <i></i> <a href="/userCenter/activity"> <span>2</span><br> <em>活动</em>
                         </a> <i></i> <a href="/userCenter/topic"> <span name="user-topic">0</span><br> <em>话题</em>
