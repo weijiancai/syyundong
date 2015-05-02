@@ -6,7 +6,7 @@
             <div class="span16 public-page-top">
                 <h2 class="public-title"><span class="text-warning">[<{$detail.sport_id|getSportName}>]</span><{$detail.name}></h2>
                 <div class="public-desc clearfix">
-                    <p class="pull-left"> <span class="info-text enrolling"><{$detail.id|getStatus=game}></span>
+                    <p class="pull-left"> <span class="info-text enrolling"><{$detail.id|getState}></span>
                         <span class="info-text"><i class="icon16 icon16-person"></i><{$detail.id|getFocus=1}>人感兴趣</span>
                         <em class="info-slider"></em>
                         <span class="info-text">分享到：</span>
@@ -42,14 +42,14 @@
                     <div class="public-banner">
                         <div class="banner" data-selector="banner">
                             <ul>
-                                <li> <a href="javascript:;"><img src="http://static.wisdom-china.cn//images/1/5812/9608/7979/2d635d606ec5362d4b2c228b9d568422_1_435x.jpg?640x442" alt="" /></a> </li>
+                                <li> <a href="javascript:;"><img src="<{$detail.image}>" alt="" /></a> </li>
                             </ul>
                         </div>
                         <div class="banner-controller" data-selector="banner-controller"></div>
                     </div>
                     <div class="match-page-summary pull-right">
                         <blockquote class="stemp-recommend">
-                            <{$detail.game_declare}>
+                            <{$detail.description}>
                             <i class="quote quote-left"></i>
                             <i class="quote quote-right"></i>
                         </blockquote>
@@ -58,7 +58,16 @@
                         <p><span>地点：</span><{$detail.address}></p>
                         <p><span>费用：</span><{$detail.cost}>元（报名费）</p>
                         <p><span>主办：</span> <{$detail.sponsor}> </p>
-                        <p class="text-right"><br /> <button id="i_game_apply" data-gameid="416" class="btn btn-warning">我要报名</button> <button data-selector="gameFollow" data-gameid="416" class="btn btn-danger">关注</button> </p>
+                        <p class="text-right"><br />
+                            <input type="hidden" id="game_declare" value="<{$detail.game_declare}>">
+                            <input type="hidden" id="game_id" value="<{$detail.id}>">
+                        <?php if(getState($detail['id'])=='报名中'){ ?>
+                           <button id="i_game_apply" data-gameid="<{$detail.id}>" class="btn btn-warning">我要报名</button>
+                         <?php }else{ ?>
+                            <button  data-gameid="<{$detail.id}>" class="btn " disabled="disabled">我要报名</button>
+                        <?php }?>
+
+                       <button id="game_focus" data-selector="gameFollow" data-gameid="<{$detail.id}>" class="btn btn-danger"><{$detail['id']|getGameFocus=$_SESSION['mark_id'],1}></button> </p>
                     </div>
                 </div>
 
@@ -122,143 +131,57 @@
         <div class="row" id="detail_bottom">
             <div class="span10">
                 <div class="main-block">
-                    <h4 class="main-title"> <{$detail.game_declare}> <span>（<em><{$detail.id|getFocus=1}></em>）人已关注赛事</span> </h4>
+                    <h4 class="main-title"> <{$detail.name}> <span>（<em><{$detail.focus_count}></em>）人已关注赛事</span> </h4>
                     <div class="friends-list clearfix" style="min-height:210px;">
                         <div id="NTGUID__1">
-                            <button data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i>换一组</button>
+                            <button data-selector="moreData" class="btn public-reload-link" id="change"><i class="icon-match icon-reload"></i>换一组</button>
                             <ul data-selector="friendsData" class="clearfix"><div id="NTGUID__1NDTGUID__7">
+                                <volist name="user" id="vo">
+                                    <li style="display: list-item;">
+                                        <div class="friends-thumb">
+                                            <a target="_blank" href="/friend/passport_90896/timeline">
+                                                <img title="<if condition="$vo.nick_name neq null"><{$vo.nick_name}><elseif condition="$vo.name neq null"/><{$vo.name}><else/><{$vo.mobile}></if>" src="<{$vo['image']}>">
+                                            </a>
+                                        </div>
+                                        <p class="friends-nickname">
+                                            <if condition="$vo.gender eq F">
+                                            <i title="女" class="icon16 icon16-girl"></i>
+                                                <else/>
+                                                <i title="男" class="icon16 icon16-boy"></i>
+                                            </if>
+                                            <if condition="$vo.nick_name neq null"><{$vo.nick_name}><elseif condition="$vo.name neq null"/><{$vo.name}><else/><{$vo.mobile}></if>
+                                        </p>
+                                        <p>
 
-                                <li style="display: list-item;">
-                                    <div class="friends-thumb">
-                                        <a target="_blank" href="/friend/passport_90896/timeline">
-                                            <img title="心静" src="http://static.wisdom-china.cn//images/1/3163/2612/5536/768c28fac48cf135a0daf7bf5f062795_2_60x60.jpg">
-                                        </a>
-                                    </div>
-                                    <p class="friends-nickname">
-
-                                        <i title="女" class="icon16 icon16-girl"></i>
-
-                                        心静
-                                    </p>
-                                    <p>
-
-                                        <button data-fid="passport_90896" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                    </p>
-                                </li>
-
-                                <li style="display: list-item;">
-                                    <div class="friends-thumb">
-                                        <a target="_blank" href="/friend/passport_90662/timeline">
-                                            <img title="依赖天空的风筝" src="http://static.wisdom-china.cn//images/1/4259/8637/1618/3ce58faafe59fb3ef2cb14b6874d41c4_2_60x60.jpg">
-                                        </a>
-                                    </div>
-                                    <p class="friends-nickname">
-
-                                        <i title="男" class="icon16 icon16-boy"></i>
-
-                                        依赖天空的风筝
-                                    </p>
-                                    <p>
-
-                                        <button data-fid="passport_90662" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                    </p>
-                                </li>
-
-                                <li style="display: list-item;">
-                                    <div class="friends-thumb">
-                                        <a target="_blank" href="/friend/passport_90420/timeline">
-                                            <img title="知足" src="http://static.wisdom-china.cn//images/1/0262/7515/0305/a4ecb8bf90493958f7da2c2343c12097_2_60x60.jpg">
-                                        </a>
-                                    </div>
-                                    <p class="friends-nickname">
-
-                                        <i title="男" class="icon16 icon16-boy"></i>
-
-                                        知足
-                                    </p>
-                                    <p>
-
-                                        <button data-fid="passport_90420" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                    </p>
-                                </li>
-
-                                <li style="display: list-item;">
-                                    <div class="friends-thumb">
-                                        <a target="_blank" href="/friend/passport_130799/timeline">
-                                            <img title="18617076311" src="http://static.wisdom-china.cn//images/1/7692/1543/1219/c2805d78554b8a0d23c3e3a1a0916cc9_2_60x60.png?140x140">
-                                        </a>
-                                    </div>
-                                    <p class="friends-nickname">
-
-                                        <span title="性别未知" class="icon16 icon16-unknow">? </span>
-
-                                        18617076311
-                                    </p>
-                                    <p>
-
-                                        <button data-fid="passport_130799" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                    </p>
-                                </li>
-
-                                <li style="display: list-item;">
-                                    <div class="friends-thumb">
-                                        <a target="_blank" href="/friend/passport_90813/timeline">
-                                            <img title="费德勒2.0" src="http://static.wisdom-china.cn//images/1/4515/7159/8846/444fe8af21a41fb7ce727b92cdfc4449_2_60x60.jpg">
-                                        </a>
-                                    </div>
-                                    <p class="friends-nickname">
-
-                                        <i title="男" class="icon16 icon16-boy"></i>
-
-                                        费德勒2.0
-                                    </p>
-                                    <p>
-
-                                        <button data-fid="passport_90813" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                    </p>
-                                </li>
-
-                                <li style="display: list-item;">
-                                    <div class="friends-thumb">
-                                        <a target="_blank" href="/friend/passport_90918/timeline">
-                                            <img title="看 石头在跑步" src="http://static.wisdom-china.cn//images/1/3161/8531/4500/904f9a457061f0fa717182e68bd3616e_2_60x60.jpg">
-                                        </a>
-                                    </div>
-                                    <p class="friends-nickname">
-
-                                        <i title="男" class="icon16 icon16-boy"></i>
-
-                                        看 石头在跑步
-                                    </p>
-                                    <p>
-
-                                        <button data-fid="passport_90918" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                    </p>
-                                </li>
-
+                                            <?php if(session('mark_id')){ ?>
+                                            <button  data-fid="passport_90896" data-selector="add-follow" data-value ="<{$vo.id}>" class="btn btn-warning add_friend">加赛友</button>
+                                            <?php }else { ?>
+                                            <button data-fid="passport_90896" data-selector="add-follow" class="btn" disabled="disabled">加赛友</button>
+                                            <?php }?>
+                                        </p>
+                                    </li>
+                                </volist>
                             </div>
                             </ul>
                         </div>
                     </div>
+
                     <!-- 发布话题 start-->
                     <div class="publish-box clearfix" data-selector="pub-wrap" data-action="/topic/topic-add">
                         <p class="publish-box-ttl">发布新鲜事</p>
-                        <form action="" method="post" data-selector="publish-form">
-                            <textarea name="content" validate-title="话题" validate-rules="[['required'],['reallength',{min:10}]]"></textarea>
-                            <input type="hidden" name="gameId" value="416" />
-                            <input type="hidden" name="tagId" value="300" />
+                        <form action="" method="post" data-selector="publish-form" id="TopicForm">
+                            <textarea id="content" name="content" validate-title="话题" validate-rules="[['required'],['reallength',{min:10}]]"></textarea>
+                            <input type="hidden" name="game_id" value="<{$detail.id}>" />
+
                             <input type="hidden" name="photos" id="imgMsg" value="" />
-                            <button class="btn btn-warning send-btn">发布</button>
+                            <button id="btn-topic" class="btn btn-warning send-btn">发布</button>
                         </form>
                         <div class="publish-box-bottom clearfix">
                             <iframe id="activeFrame" src="../upload_iframe.html?callback=uploadfinished" height="30" width="100%" frameborder="0" scrolling="no"></iframe>
                             <a id="imgUpBtn" class="img-up-btn" href="javascript:void(0);"><i class="icon20 icon20-img"></i>图片</a>
+                            <span id="show_mes" style="color:Red"></span>
+                            <input type="hidden" value="<{$vo.image}>" name="user_head" id="user_head">
+                            <input type="hidden" value="user" id="path">
                         </div>
                         <div id="store-wrap" class="store-wrap clearfix"></div>
                     </div>
@@ -365,7 +288,7 @@
                                             <form method="post" action="/topic/comment-add" iyuesai-plugins-valid="0.9216297655887579">
                                                 <input type="hidden" value="10331" name="topicId">
                                                 <input type="hidden" value="passport_90924" name="userId">
-                                                <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
+                                                <input type="text" title="评论内容" name="content" class="comment-txt">
                                                 <button class="btn btn-warning pull-right" type="submit">评论</button>
                                             </form>
                                         </div>
@@ -538,10 +461,10 @@
                                     <!-- 评论框 开始 -->
                                     <div class="comment-pop clearfix hide">
                                         <div class="comment-form">
-                                            <form method="post" action="/topic/comment-add" iyuesai-plugins-valid="0.02817130561899117">
+                                            <form method="post" action="/Topic/comment-add" >
                                                 <input type="hidden" value="10316" name="topicId">
                                                 <input type="hidden" value="passport_70511" name="userId">
-                                                <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
+                                                <input type="text"  name="content" class="comment-txt">
                                                 <button class="btn btn-warning pull-right" type="submit">评论</button>
                                             </form>
                                         </div>
@@ -709,7 +632,8 @@
     </div>
 </div>
 
-<!--<script type="text/javascript">Loader.load(['page.gameDetail']);</script>-->
 <script type="text/javascript" src="/Public/js/pages/game_detail.js"></script>
+<script type="text/javascript" src="/Public/js/syweb/jquery.form.js.js"></script>
+<script type="text/javascript" src="/Public/js/pages/ajaxupload.js.js"></script>
 
 <include file="Public@default:Public:bottom"/>

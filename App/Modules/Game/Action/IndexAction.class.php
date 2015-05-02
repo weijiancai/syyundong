@@ -149,11 +149,16 @@ class IndexAction extends Action
     public function game_detail()
     {
         $id = $_GET['id'];
-        $detail = D('DbGame')->where('id=' . $id)->find();
+        $detail = D('VGameActivity')->where('id=' . $id)->find();
         //赛事公告
         $notice = D('OpGameNotice')->where('game_id=' . $id)->limit(2)->select();
         //赛事新闻
         $news = D('OpGameNews')->where('game_id=' . $id)->limit(2)->select();
+        //赛事关注人物
+        $user_id = D('OpFocus')->where('source_id='.$id.' and source_type=1 and user_id !='.$id)->getField('user_id',true);
+        $model = new Model();
+        $user= $model->query('select u.id id,u.nick_name nick_name,u.mobile mobile,u.name name,u.gender gender,i.local_url image from db_user u LEFT JOIN db_images i  on (u.user_head = i.id) where u.id in('.ArrayToStr($user_id).')');
+        $this->assign('user', $user);
         $this->assign('notice', $notice);
         $this->assign('news', $news);
         $this->assign('detail', $detail);
@@ -254,4 +259,106 @@ class IndexAction extends Action
         $this->assign('detail', $detail);
         $this->display();
     }
+    /*
+     * @时间: 20150415
+     * @功能：报名赛事
+     */
+    public function apply(){
+        //首先判断用户是否登录
+        $mark = I('session.mark_id');
+        if ($mark) {
+            $id=$_GET['id'];
+            $this->assign('game_group',D('OpGameGroup')->where('game_id='.$id)->select());
+
+            $this->display();
+        } else {
+            echo ' <script> window.location.href="/login/login"</script>';
+        }
+        $this->display();
+    }
+    /*
+     * @时间: 20150415
+     * @功能：赛事报名
+     */
+    public function GameGroupAdd(){
+        $date['game_id'] = $_POST['game_id'];
+        $date['group_id'] = $_POST['group_id'];
+        $date['true_name'] = $_POST['true_name'];
+        $date['user_id'] = deCode(session('mark_id'));
+        $date['verify_state'] = 0;
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $date['gender'] = $_POST['gender'];
+        $date['mobile'] = $_POST['mobile'];
+        $date['certificate_num'] = $_POST['certificate_num'];
+        $date['em_contact'] = $_POST['em_contact'];
+        $date['em_tel'] = $_POST['em_tel'];
+        $result  = D('OpJoinGame')->add($date);
+        if(false!==$result){
+           echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    /*
+     * @时间: 20150415
+     * @功能：赛事关注
+     */
+    public function GameFocus(){
+        $date['user_id'] = deCode(session('mark_id'));
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] =1;
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $result  = D('OpFocus')->add($date);
+        if(false!==$result){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    /*
+    * @时间: 20150415
+    * @功能：取消赛事关注
+    */
+    public function GameFocusCancel(){
+        $date['user_id'] = deCode(session('mark_id'));
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] =1;
+        $result  = D('OpFocus')->where($date)->delete();
+        if(false!==$result){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    /*
+    * @时间: 20150415
+    * @功能：取消赛事关注
+    */
+    public function GameAddFriend(){
+        $date['user_id'] = deCode(session('mark_id'));
+        $date['friend_id'] = $_POST['friend_id'];
+        $result  = D('OpUserFriend')->add($date);
+       if(false!==$result){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    /*
+ * @时间：20150412
+ * @功能：关注赛友换一换
+ */
+    public function UserFriend(){
+        $id = $_POST['game_id'];
+        $ids = D('OpFocus')->where('source_id='.$id.' and source_type=1 and user_id !='.$id)->getField('user_id',true);
+        $len = count($ids);
+        $result = rand(0,($len-6));
+        if($len<6){
+            $result = 0;
+        }
+        $model = new Model();
+        $user= $model->query('select u.id id,u.nick_name nick_name,u.mobile mobile,u.name name,u.gender gender,i.local_url image from db_user u LEFT JOIN db_images i  on (u.user_head = i.id) where u.id in('.ArrayToStr($ids).')limit '.$result.',6');
+        echo json_encode($user);
+    }
+
 }

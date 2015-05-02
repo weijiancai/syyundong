@@ -857,7 +857,7 @@
                             <dl>
                                 <dt>
                                     <a href="/Game/<{$ao.id}>"><{$ao.name}></a>
-                                    <i><{$ao['status']|getState=game}></i>
+                                    <i><{$ao['status']|getState}></i>
                                 </dt>
                                 <dd style="display: none;">
                                     <p><{$ao.address}>&nbsp;&nbsp;<{$ao.start_date}></p>
@@ -868,11 +868,11 @@
                         </div>
                     </div>
                     </li>
-                </volist>>
+                </volist>
             </ul>
         </dd>
         <volist name="city" id="vo" key ="k">
-            <dd class="root-content hide" style="display: block;">
+            <dd class="root-content hide" style="display: none;">
                 <ul class="events-list">
                     <?php $cgame  = D('VChoiceGame')->where('region='.$vo['id'])->limit(5)->order('input_date desc')->select();?>
                     <volist name="cgame" id="co" key="k">
@@ -884,7 +884,7 @@
                                 <dl>
                                     <dt>
                                         <a href="/Game/<{$ao.id}>"><{$ao.name}></a>
-                                        <i><{$ao['status']|getState=game}></i>
+                                        <i><{$ao['status']|getState}></i>
                                     </dt>
                                     <dd style="display: none;">
                                         <p><{$ao.address}>&nbsp;&nbsp;<{$ao.start_date}></p>
@@ -895,7 +895,7 @@
                             </div>
                         </div>
                         </li>
-                    </volist>>
+                    </volist>
                 </ul>
             </dd>
         </volist>
@@ -942,8 +942,8 @@
                                 <a class="topic-typer" data-index="4" href="javascript:;">马拉松<br>路跑</a>
                                 <a class="topic-typer" data-index="5" href="javascript:;">综合<br>其他</a>
                             </dt>
-                            <volist name="game_sport" id="vo">
-                                <dd class="topic-rankings">
+                            <volist name="game_sport" id="vo" key="k">
+                                <dd class="topic-rankings "<if condition="$k neq 1">style="display:none"</if> >
                                     <ul>
                                         <?php $hottopic  = D('VTopic')->where('sport_id='.$vo['id'])->limit(2)->order('comment_count desc')->select();?>
                                         <volist name="hottopic" id="to">
@@ -1046,7 +1046,7 @@
                                             <p>费用：<{$ho.cost}></p>
                                             <p>
                                                 <span class="info-text"><i class="icon16 icon16-person"></i><{$ho.focus_count}>人感兴趣</span>
-                                                <span class="info-text"><i class="icon16 icon16-joined"></i>已报名<{ho.join_count}>人</span>
+                                                <span class="info-text"><i class="icon16 icon16-joined"></i>已报名<{$ho.join_count}>人</span>
                                             </p>
                                         </dd>
                                         <dt>
@@ -1100,13 +1100,13 @@
 <dl>
 <dt class="root-title">
 <h4>推荐场馆</h4>
-<volist name="city" id="vo">
-    <a data-selector="tabChanger" data-value="<{$vo.id}>" href="javascript:;"><{$vo.name}></a>
+<volist name="city" id="vo" key="k">
+    <a data-selector="tabChanger" <if condition="$k eq 1">class="current"</if>data-value="<{$vo.id}>" href="javascript:;"><{$vo.name}></a>
 </volist>
 
 </dt>
 <volist name="city" id="vo" key ="k">
-    <dd class="root-content hide" style="display: block;">
+    <dd class="root-content" <if condition="$k neq 1">style="display:none"</if>>
         <ul class="clearfix">
             <?php $venue  = D('VRecommendVenues')->where('region='.$vo['id'])->select();?>
             <volist name="venue" id="uo" key="k">

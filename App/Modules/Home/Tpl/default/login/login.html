@@ -8,6 +8,7 @@
                         <h3>登录</h3>
 
                         <form id="loginForm" action="__APP__/login" method="post">
+                            <input type="hidden" name="jump_url" id="jump_url" value="<{$_SERVER['HTTP_REFERER']}>">
                             <table class="table">
                                 <tbody>
                                 <tr>

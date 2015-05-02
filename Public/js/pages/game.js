@@ -89,4 +89,18 @@ $(function () {
         $form.submit();
     }
 
+    //我要报名
+    $('#game_apply').click(function(){
+        dialog({
+            id: 'id-demo',
+            content: $('#game_declare').val(),
+            okValue: '已阅读,我同意',
+            ok: function () {
+                window.location.href='/Game/apply/'+$('#game_id').val();
+            }
+        })
+         .width(820)
+         .show();
+        dialog.get('id-demo').title('参赛声明');
+    });
 });

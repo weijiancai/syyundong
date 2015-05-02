@@ -90,10 +90,8 @@ function getGameTime($id, $state)
  * @功能：赛事、活动状态
  * @时间：20150402
  */
-function getState($id,$type)
+function getState($status)
 {
-    $status = D('VGameActivity')->where('id='.$id.' and type = '."'".$type."'")->getField('status');
-
     switch ($status) {
         case 1:
             $status  ='报名中';
@@ -349,5 +347,65 @@ function getUsersImage($id){
     }else{
         return '/Public/images/default/web_pic.jpg';
     }
+}
+/*
+ * @功能：返回区域名称
+ * @时间:20150419
+ */
+function getRegionName($id){
+   return D('DbRegion')->where('id='.$id)->getField('name');
+}
+/*
+ * @功能：赛事分组报名信息
+ * @时间:20150419
+ */
+function getGameGroup($group_id,$game_id){
+    $result = D('OpJoinGame')->where('game_id='.$game_id.' and group_id='.$group_id)->select();
+    if($result){
+        return 'radio-disabled';
+    }
+}
+/*
+ * @功能：赛事关注信息
+ * @时间:20150419
+ */
+function getGameFocus($source_id,$user_id,$source_type){
+    $result = D('OpFocus')->where('user_id='.deCode($user_id).' and source_id='.$source_id.' and source_type ='.$source_type)->select();
+    if($result){
+        return '取消关注';
+    }else{
+        return '关注';
+    }
+}
+/*
+ * @功能：赛事、活动状态
+ * @时间:20150419
+ */
+function getStates($id){
+    $result = D('VGameActivity')->where('id='.$id)->getField('status');
+    switch ($result) {
+        case 1 :
+            $result = '报名中';
+            break;
+        case 2 :
+            $result = '待开赛';
+            break;
+        case 3 :
+            $result = '比赛中';
+            break;
+        case 4 :
+            $result = '已结束';
+            break;
+    }
+    return  $result;
+}
+/*
+ * @功能：数组转为字符串
+ * @时间:20150419
+ */
+function ArrayToStr($arr){
+    $str = join(",",$arr);
+    $result = "'".str_replace(",","','",$str)."'";
+    return $result;
 }
 ?>

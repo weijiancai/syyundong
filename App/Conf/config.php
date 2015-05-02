@@ -22,7 +22,13 @@ $Public_Config =  array(
         '/^verify$/'=>'home/index/verify',
 
         '/^Game\/publish$/' => 'Game/index/publish',
+        '/^Game\/apply\/(\d+)$/' => 'Game/index/apply?id=:1',
         '/^Game\/addgame$/' => 'Game/index/addgame',
+        '/^Game\/GameGroupAdd$/' => 'Game/index/GameGroupAdd',
+        '/^Game\/GameAddFriend/' => 'Game/index/GameAddFriend',
+        '/^Game\/apply_success$/' => 'Game/index/apply_success',
+        '/^Game\/GameFocus$/' => 'Game/index/GameFocus',
+        '/^Game\/GameFocusCancel$/' => 'Game/index/GameFocusCancel',
         '/^Game\/(\d+)$/' => 'Game/index/game_detail?id=:1',
         '/^Game\/(\d+)\/(\w+)$/' => 'Game/index/game_other?id=:1&info=:2',
         '/^Game\/(\d+)\/(\w+)\/(\d+)$/' => 'Game/index/game_other_detail?id=:1&info=:2&d_id=:3',
@@ -71,6 +77,7 @@ $Public_Config =  array(
 
     /*SESSION开启*/
     'SESSION_AUTO_START' =>true,
+    'SESSION_EXPIRE'=>'10',
 
 	/*模板替换*/
 	'TMPL_PARSE_STRING'  =>array(

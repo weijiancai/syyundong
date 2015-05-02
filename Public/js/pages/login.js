@@ -36,7 +36,7 @@ $(function () {
                         window.location.href = 'http://www.syyundong.com';
                     } else if (result == 2) {
                         //跳转到浏览页面
-                        $.dialog.error('手机号码注册过啦！');
+                        window.location.href = $('#jump_url').val();
                     } else if (result == 3) {
                         $.dialog.error('登录失败,账号或密码错误');
                     } else if (result == 4) {

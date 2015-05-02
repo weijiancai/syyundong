@@ -3,6 +3,7 @@
 /**
  * @功能：用户登录
  */
+
 class LoginAction extends Action
 {
     public function index()
@@ -24,7 +25,7 @@ class LoginAction extends Action
             } else {
                 $loginName = I('post.loginName');
                 $loginPass = I('post.loginPass');
-                $wz = I('post.wz');
+                $wz = I('post.jump_url');
                 $data = D('Login')->login($loginName, $loginPass);
                 if ($data == 1) {
                     if ($wz == '') {

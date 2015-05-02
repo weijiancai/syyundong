@@ -23,6 +23,13 @@
 
 			</thead>
 			<tbody>
+            <tr>
+                <td style="width:10%;height:25px">参赛声明</td>
+                <td text-align="left"><span style="line-height:200%">
+                        <?php echo str_replace(array('<p>','</p>'), '',strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($vo['game_declare']))),"<img>,<embed>
+                    "))?></span></td>
+                <td><a href="__URL__/other_edit/field/game_declare/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
+            </tr>
 				<tr>
 					<td style="width:10%;height:25px">赛事介绍</td>
 					<td text-align="left"><span style="line-height:200%">

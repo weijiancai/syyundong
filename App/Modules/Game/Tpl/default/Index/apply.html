@@ -1,0 +1,104 @@
+<include file="Public@default:Public:top"/>
+<div class="container container-margin">
+    <div class="activity-publish">
+        <h4 class="form-title"><{$_GET['id']|getGameName}></h4>
+    </div>
+
+    <div data-action="/game/do-apply" data-url="/game/apply-form/427?code=" data-params="{'gameId':'427'}" data-selector="dynamicForm" class="activity-publish"><style>#NTGUID__3 input.span12,#NTGUID__3 input.span4{    margin-top: 0px;  }#NTGUID__3 .form-content{    margin: 0;    margin-top:20px;  }#NTGUID__3 .radio-block{    display: inline-block;    width: 210px;    height: 70px;    border: #EBEBEB solid 2px;    margin: 10px 0 0 8px;    overflow: hidden;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;  }#NTGUID__3 .radio-block p.title-cell{    margin: 0;    padding: 0;    height: 70px;    width: 210px;    display: table-cell;    vertical-align: middle;  }#NTGUID__3 .radio-block.radio-disabled{    background-color: #FAFAFA;    cursor: default;  }#NTGUID__3 .radio-block:hover{    background-color: #FAFAFA;  }#NTGUID__3 .radio-block.current{    border-color: #F5A623;    background:url("/Public/images/game/radio-bg.png") right top no-repeat;    box-shadow: 0 0 5px rgba(245,166,35,0.2);    -webkit-box-shadow: 0 0 5px rgba(245,166,35,0.2);    -moz-box-shadow: 0 0 5px rgba(245,166,35,0.2);  }#NTGUID__3 .radio-block.current:hover{    background-color: #FFF;  }#NTGUID__3 .radio-block strong{    display: block;    color: #555;    font-size: 16px;    padding: 0 7px;    line-height: 20px;  }#NTGUID__3 .radio-block p{    padding: 0 7px;    color: #999;  }#NTGUID__3 .radio-block input{    display: none;  }#NTGUID__3 .radio-block.radio-disabled strong,#NTGUID__3 .radio-block.radio-disabled p{    color: #999;  }#NTGUID__3 .lable-group{    margin-left: -20px;  }#NTGUID__3 .radio-block.current strong,#NTGUID__3 .radio-block.current p{    color: #F5A623;  }#NTGUID__3 .form-content-foot{    margin-top: 20px;    margin-bottom: 10px;  }#NTGUID__3 .form-content-table{    margin: 15px auto;    width: auto;    max-width: auto;    display: table;  }#NTGUID__3 .form-content-table th{    text-align: right;    padding:10px 0;    line-height: 28px;    padding-right: 10px;    vertical-align: top;  }#NTGUID__3 .form-content-table td{    padding: 0;    padding: 10px 0;  }#NTGUID__3 .form-content-table .radio{    margin-left: 20px;  }#NTGUID__3 .form-content-table textarea{    width: 450px;    margin: 0;  }#NTGUID__3 .table-module{    max-width:1150px;    min-width: 100%;    border: 1px solid #ccc;  }#NTGUID__3 .table-module caption{    text-align: left;    line-height: 30px;    font-size: 14px;    font-weight: bold;    padding-bottom: 5px;  }#NTGUID__3 .table-module thead{    background-color: #eee;    border-bottom: 1px solid #ccc;  }#NTGUID__3 .table-module thead th{    text-align: center;    font-weight: normal;    font-size: 14px;    line-height: 20px;    padding: 5px 0;    border-right: 1px solid #ccc;    overflow: hidden;    white-space: nowrap;    text-overflow : ellipsis;  }#NTGUID__3 .table-module tbody tr{    border-bottom: 1px solid #ccc;  }#NTGUID__3 .table-module tbody td{    padding: 5px 5px;    border-right: 1px solid #ccc;    overflow: hidden;    line-height: 30px;    color: #666;  }#NTGUID__3 .table-module tbody td input{    margin-left: auto;    margin-right: auto;    float: left;    width: 93%;  }#NTGUID__3 .table-module tfoot{    border-top: 1px solid #ccc;    background-color: #eee;  }#NTGUID__3 .table-module tfoot td{    padding: 5px 10px;  }#NTGUID__3 .table-module .table-button{    margin: 0 3px;  }#NTGUID__3 .ui-tooltip{    background-color: red;    padding: 5px 10px;    color: white;    border-radius: 5px;    -webkit-border-radius: 5px;    -moz-border-radius: 5px;    font-size:20px;    text-transform: uppercase;    box-shadow: 0 0 5px rgba(0,0,0,0.3);    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.3);    border: 1px solid #666;  }  </style><div id="NTGUID__3">
+        <form autocomplete="off" method="post" action="" id="GameGroupForm">
+            <input type="hidden" value="<{$_GET['id']}>" name="game_id" id="game_id">
+            <input type="hidden" value="1" name="group_id" id="group_id">
+            <!--取hidden列表-->
+
+            <!--end-->
+            <!--取组别列表-->
+
+            <div class="form-content">
+                <table class="form-table">
+                    <tbody>
+                    <tr>
+                        <th><span class="help-required">*</span>选择赛事组别:</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="lable-group">
+                                 <volist name="game_group" id="vo" key="k">
+                                     <label class="<{$vo['id']|getGameGroup=$_GET['id']}> radio-block " title="<{$vo.group_name}>"  data-name="<{$vo.group_name}>" data-id="<{$vo.id}>" data-selector="matchGroup" <{$vo['id']|getGameGroup=$_GET['id']}> >
+                                         <input type="radio" value="<{$vo.id}>"  id="">
+                                         <p class="title-cell"><strong><{$vo.group_name}></strong></p>
+                                         <!--<p>报名截止：2015-08-19 00:00</p>-->
+                                     </label>
+                                  </volist>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--end-->
+            <div class="form-content clearfix">
+                <h4 class="form-title clearfix">报名人基本信息
+                    <!--<label style="float:right;" class="checkbox inline">
+                    <input type="checkbox" data-selector="copyUserInfo">复制会员信息</label>--></h4>
+                <div data-selector="tplFormContent"><div id="NTGUID__3NDTGUID__7">
+
+                    <table class="form-table form-content-table">
+                        <tbody>
+
+                        <tr>
+                            <th valign="middle"><span class="help-required">*</span>真实姓名：</th>
+                            <td><input type="text" name="true_name" class="span4"></td>
+                        </tr>
+
+                        <tr>
+                            <th valign="middle"><span class="help-required">*</span>身份证号：</th>
+                            <td><input type="text" name="certificate_num" class="span4"></td>
+                        </tr>
+                        <tr>
+                            <th valign="middle"><span class="help-required">*</span>移动电话：</th>
+                            <td><input type="text" name="mobile" class="span4"></td>
+                        </tr>
+
+                        <tr>
+                            <th valign="middle"><span class="help-required">*</span>性别：</th>
+                            <td><select name="gender" class="span4">
+                                <option selected="selected" value="M">男</option>
+                                <option value="F">女</option></select></td>
+                        </tr>
+                        <tr>
+                            <th valign="middle"><span class="help-required">*</span>紧急联系人：</th>
+                            <td><input type="text" name="em_contact" class="span4"></td>
+                        </tr>
+
+
+
+                        <tr>
+                            <th valign="middle"><span class="help-required">*</span>紧急联系人电话：</th>
+                            <td><input type="text" name="em_tel"class="span4"></td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+                </div>
+            </div>
+
+            <div class="form-content-foot form-content-nopt clearfix">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-warning">提交报名</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    </div>
+</div>
+<script type="text/javascript" src="/Public/js/pages/game_apply.js"></script>
+<include file="Public@default:Public:bottom"/>

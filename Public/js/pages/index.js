@@ -74,11 +74,11 @@ $(function () {
 
     // 精选赛事tab切换
     var $recommendEvents = $('#recommendEvents');
-    $recommendEvents.find('dt a').each(function(index) {
+    $recommendEvents.find('> div > dl > dt a').each(function(index) {
         $(this).click(function() {
-            $recommendEvents.find('dt a').removeClass('current');
+            $recommendEvents.find('> div > dl > dt a').removeClass('current');
             $(this).addClass('current');
-            $recommendEvents.find('dd').hide().eq(index).show();
+            $recommendEvents.find('> div > dl > dd').hide().eq(index).show();
         });
     });
 
@@ -94,11 +94,11 @@ $(function () {
 
     // 推荐场馆tab切换
     var $recommendVenues= $('#recommendVenues');
-    $recommendVenues.find('dt a').each(function(index) {
+    $recommendVenues.find('> div > dl > dt a').each(function(index) {
         $(this).click(function() {
-            $recommendVenues.find('dt a').removeClass('current');
+            $recommendVenues.find('> div > dl > dt a').removeClass('current');
             $(this).addClass('current');
-            $recommendVenues.find('dd').hide().eq(index).show();
+            $recommendVenues.find('> div > dl > dd').hide().eq(index).show();
         });
     });
 });

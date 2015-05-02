@@ -120,15 +120,15 @@
                                 <div class="item-list-content">
                                     <div class="item-list-wrap clearfix">
                                         <div class="thumbnail-wrap">
-                                            <span class="icon-match icon-match-label"></span>
+                                            <span class="icon-match icon-match-label"></span><input type="hidden" value="<{$vo.id}>" id="game_id">
                                             <a href="/Game/<{$vo.id}>"><img
-                                                    src="http://static.wisdom-china.cn//images/1/9879/9370/1227/722e53beb8dbbd36d8d8a5c739e2a64c_2_220x140.jpg?640x442"
-                                                    alt="四季跑城市PK赛" title="四季跑城市PK赛"></a>
+                                                    src="<{$vo.image}>"
+                                                    alt="<{$vo.name}>" title="<{$vo.name}>"></a>
                                         </div>
-                                        <div class="item-list-right" onclick="window.location.href='/game/421'">
+                                        <div class="item-list-right" onclick="window.location.href='/Game/<{$vo.id}>'">
                                             <p class="item-list-ttl">
-                                                <span class="icon-55 match-enroll"></span>
-                                                <strong><span>[路跑]</span><a
+                                                <span class="icon-55 <if condition='$vo.status eq 1'>match-enroll<elseif condition='$vo.status eq 2'/>match-ready <elseif condition='$vo.status eq 3'/>match-going<elseif condition='$vo.status eq 4'/>match-end</if>"></span>
+                                                <strong><span>[<{$vo['sport_id']|getSportName}>]</span><a
                                                         href="/Game/<{$vo.id}>"><{$vo.name}></a></strong>
                                             </p>
 
@@ -147,18 +147,21 @@
                                                 <p><span>主办：</span>
                                                     爱约赛
                                                 </p>
-
+                                                 <input type="hidden" id="game_declare" value="<{$vo.game_declare}>">
                                                 <p class="item-list-bottom">
                                                     <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（<{$vo.focus_count}>）</a>
                                                     <a href="javascript:void(0);"><i
-                                                            class="icon-match icon-comment"></i>0人评论</a>
+                                                            class="icon-match icon-comment"></i><{$vo.topic_count}>人评论</a>
                                                     <!--<a href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名928人（剩余2,072人）</a>
                                                       -->
                                                 </p>
                                             </div>
                                         </div>
-                                        <a href="javascript:;" class="btn btn-warning item-list-reg" data-gameid=421
-                                           data-action="/game/apply/421" data-selector="joinMatch">我要报名</a>
+                                         <if condition="$vo.status eq 1">
+                                        <a href="javascript:;" class="btn btn-warning item-list-reg"
+                                           data-gameid="<{$vo.id}>"
+                                           data-action="/Game/apply/<{$vo.id}>" data-selector="joinMatch" id="game_apply">我要报名</a>
+                                          </if>
                                     </div>
                                 </div>
                                 <!--注释分享功能
@@ -211,14 +214,14 @@
                     <ul class="side-item-col clearfix">
                         <volist name="recommend" id="vo">
                             <li>
-                                <div class="side-item-thumb"><a href="/game/421"><img
-                                        src="http://static.wisdom-china.cn//images/1/9879/9370/1227/722e53beb8dbbd36d8d8a5c739e2a64c_2_220x140.jpg?640x442"
+                                <div class="side-item-thumb"><a href="/Game/<{$vo.id}>"><img
+                                        src="<{$vo.image}>"
                                         alt=""></a></div>
-                                <h5><a href="/game/421"><{$vo.name}></a></h5>
+                                <h5><a href="/Game/<{$vo.id}>"><{$vo.name}></a></h5>
 
                                 <p>
-                                    <span class="pull-left"><{$vo.province}></span>
-                                    <span class="pull-right"><em> 928</em>人参加</span>
+                                    <span class="pull-left"><{$vo['province']|getRegionName}></span>
+                                    <span class="pull-right"><em> <{$vo.join_count}></em>人参加</span>
                                 </p>
                             </li>
                         </volist>
@@ -256,7 +259,6 @@
     <input type="hidden" id="keyword" name="keyword" value="<{$_REQUEST['keyword']}>"/>
 </form>
 
-<!--<script type="text/javascript">Loader.load(['page.game']);</script>-->
 <script type="text/javascript" src="/Public/js/pages/game.js"></script>
 
 <include file="Public@default:Public:bottom"/>
