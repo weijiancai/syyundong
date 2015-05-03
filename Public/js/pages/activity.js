@@ -82,16 +82,46 @@ $(function() {
     }
 
     //我要参加
-    $('#activity_apply').click(function(){
-        dialog({
-            id: '我要参加',
-            content: $('#game_declare').val(),
-            okValue: '已阅读,我同意',
+    $('.btnJoin').on('click', function() {
+        var $dialog = $('#joinActivityDialog');
+        var validate, $form;
+        var activityId = $(this).data('value');
+
+        var d = dialog({
+            title: '我要参加',
+            content: $dialog.html(),
+            okValue: '提交',
             ok: function () {
-                window.location.href='/Game/apply/'+$('#game_id').val();
+                validate.form();
+                return false;
+            },
+            onshow: function() {
+                var $content = this._$('content');
+                $form = $content.find('#joinActivityForm');
+                validate = $form.validate({
+                    rules: {
+                        true_name: 'required',
+                        mobile: 'required',
+                        certificate_num: 'required'
+                    },
+                    messages: {
+                        true_name: '报名人姓名不能为空！',
+                        mobile: '报名人手机不能为空！',
+                        certificate_num: '身份证号码不能为空！'
+                    },
+                    submitHandler: function (form) {
+                        //    form.submit();
+                        jQuery.ajax({
+                            type: "post",
+                            url: "publishReply",
+                            data: $form.serializeJson(),
+                            success: function ($result) {
+                                d.close();
+                            }
+                        });
+                    }
+                });
             }
-        })
-            .width(520)
-            .show();
+        }).width(480).show();
     });
 });
