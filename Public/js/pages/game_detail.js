@@ -171,4 +171,11 @@ $(function () {
         }
     };
     $commentBtn.find('.topic-right form').validate(replyPanelValidateOption);
+
+    $(".topic-img-wrap").yoxview({
+        lang: "zh-cn",
+        backgroundColor: 'Blue',
+        playDelay: 5000,
+        autoPlay: true
+    });
 });
