@@ -57,7 +57,10 @@ $(function () {
                 data: $('#commentform').serialize(),
                 success: function ($result) {
                     if ($result==1) {
-                        $.dialog.success('评论成功');
+                        //$.dialog.success('评论成功');
+                        $commentData.empty();
+                        $more.data('last', 0);
+                        more();
                     } else {
                         $.dialog.error('评论失败');
                     }
@@ -112,8 +115,14 @@ $(function () {
                 $more.text('没有更多内容').data('last', -1);
                 return;
             }
-            $more.text('点击加载更多内容').data('last', ++last);
             data = eval(data);
+
+            if(data.length < 10) {
+                $more.text('没有更多内容').data('last', -1);
+            } else {
+                $more.text('点击加载更多内容').data('last', ++last);
+            }
+
             for (var i = 0; i < data.length; i++) {
                 var $dl = $(template('list', data[i]));
                 $commentData.append($dl);

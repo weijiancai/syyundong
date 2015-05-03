@@ -148,4 +148,27 @@ $(function () {
             });
         }
     });
+
+    // 回复
+    function onCommentClick() {
+        var $panel = $(this).parent().parent();
+        $panel.find('.comment-pop').toggle();
+    }
+
+    var $commentBtn = $('.comment-btn');
+    $commentBtn.click(onCommentClick);
+    // 验证，提交回复
+    var replyPanelValidateOption = {
+        rules: {
+            content: 'required'
+        },
+        messages: {
+            content: '回复内容不能为空！'
+        },
+        submitHandler: function (form) {
+            form.submit();
+            $(form).parent().hide();
+        }
+    };
+    $commentBtn.find('.topic-right form').validate(replyPanelValidateOption);
 });
