@@ -33,14 +33,14 @@ $(function() {
     });*/
 
     // 排序
-    $('#order-group').find('li a').click(function() {
+    $('.order-group').find('li a').click(function() {
         var value = $(this).data('value');
-        console.log(value);
-        if(value == 'createDate') {
+
+        if(value == '2') {
             $('#orderByNew').val('C');
-        } else if(value == 'followCount') {
+        } else if(value == '3') {
             $('#orderByNew').val('F');
-        }else if(value == 'startDate') {
+        }else if(value == '1') {
             $('#orderByNew').val('S');
         }
         if($(this).find('i.icon-down')) {
@@ -80,4 +80,18 @@ $(function() {
         $('#' + id).val(value);
         $form.submit();
     }
+
+    //我要参加
+    $('#activity_apply').click(function(){
+        dialog({
+            id: '我要参加',
+            content: $('#game_declare').val(),
+            okValue: '已阅读,我同意',
+            ok: function () {
+                window.location.href='/Game/apply/'+$('#game_id').val();
+            }
+        })
+            .width(520)
+            .show();
+    });
 });

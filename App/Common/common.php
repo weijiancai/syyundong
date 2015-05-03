@@ -400,6 +400,20 @@ function getStates($id){
     return  $result;
 }
 /*
+ * @功能：发起的活动
+ * @时间:20150419
+ */
+function  initiate_activity($id){
+    return D('DbActivity')->where('input_user='.$id)->count();
+}
+/*
+ * @功能：参加的活动
+ * @时间:20150419
+ */
+function  join_activity($id){
+    return D('OpJoinActivity')->where('user_id='.$id)->count();
+}
+/*
  * @功能：数组转为字符串
  * @时间:20150419
  */
@@ -408,4 +422,18 @@ function ArrayToStr($arr){
     $result = "'".str_replace(",","','",$str)."'";
     return $result;
 }
+/*
+ * @功能：字符串转为数组
+ * @时间:20150419
+ */
+function  strtoarr($strs){
+    $result = array();
+    $array = array();
+    $strs = str_replace("n", ',', $strs);
+    $strs = str_replace("rn", ',', $strs);
+    $strs = str_replace(' ', ',', $strs);
+    $array = explode(',', $strs);
+    return $array;
+}
+
 ?>

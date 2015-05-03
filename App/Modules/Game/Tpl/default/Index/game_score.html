@@ -1,0 +1,153 @@
+<include file="Public@default:Public:top"/>
+<div class="">
+    <div class="container">
+        <div class="row">
+            <div class="span16 public-page-top">
+                <h2 class="public-title"><span class="text-warning">[<{$detail.sport_id|getSportName}>]</span><{$detail.name}></h2>
+                <div class="public-desc clearfix">
+                    <p class="pull-left"> <span class="info-text enrolling"><{$detail.id|getState}></span>
+                        <span class="info-text"><i class="icon16 icon16-person"></i><{$detail.id|getFocus=1}>人感兴趣</span>
+                        <em class="info-slider"></em>
+                        <span class="info-text">分享到：</span>
+                        <script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]2015四季跑·南京站报名开启！','url':'/game/427','pic':'http://static.wisdom-china.cn//images/1/3750/3142/3004/135fdde85dc39615631ad9bdb85e9b35_2_140x140.jpg?640x442','summary':'    时间：2015年11月14日 08:00&amp;nbsp;-&amp;nbsp;2015年11月15日 17:00    地点：江苏省南京市    主办：智美集团'},'16');</script><a title="分享到qq空间" class="shareto16 shareto16-qzone" target="_blank" href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/427&amp;pic=http://static.wisdom-china.cn//images/1/3750/3142/3004/135fdde85dc39615631ad9bdb85e9b35_0_0.jpg&amp;title=[路跑]2015四季跑·南京站报名开启！&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年11月14日 08:00&nbsp;-&nbsp;2015年11月15日 17:00    地点：江苏省南京市    主办：智美集团"></a><a title="分享到新浪微博" class="shareto16 shareto16-tsina" target="_blank" href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/427&amp;pic=http://static.wisdom-china.cn//images/1/3750/3142/3004/135fdde85dc39615631ad9bdb85e9b35_0_0.jpg&amp;title=[路跑]2015四季跑·南京站报名开启！&amp;appkey=1868074881&amp;summary=    时间：2015年11月14日 08:00&nbsp;-&nbsp;2015年11月15日 17:00    地点：江苏省南京市    主办：智美集团"></a>
+                    </p>
+                </div>
+            </div>        <div class="span16">
+            <div class="public-subnav clearfix">
+                <ul>
+                    <li><a href="__APP__/Game/<{$detail.id}>">赛事首页</a></li>
+                    <li><a href="__APP__/Game/<{$detail.id}>/content">赛事介绍</a></li>
+                    <li><a href="__APP__/Game/<{$detail.id}>/route">比赛路线</a></li>
+                    <li><a href="__APP__/Game/<{$detail.id}>/cost">关于费用</a></li>
+                    <li><a href="__APP__/Game/<{$detail.id}>/trip" >行程安排</a></li>
+                    <li><a href="__APP__/Game/<{$detail.id}>/hotel">入住酒店</a></li>
+                    <li><a href="__APP__/Game/<{$detail.id}>/notice">赛事公告</a></li>
+                    <li><a href="__APP__/Game/<{$detail.id}>/news">赛事新闻</a></li>
+                    <li><a href="__APP__/Game/score/<{$detail.id}>" <if condition="$info eq score"> class="current"</if>">成绩查询</a></li>
+                    <li><a href="javascript:void(0);">赛友圈</a></li>
+                </ul>
+            </div>
+        </div>
+            <div class="span16">
+                <div class="main-block clearfix">
+                    <div class="article-block">
+                        <h4 class="main-title">比赛成绩查询</h4>
+                        <div class="query-block">
+                            <form method="GET" action="/Game/score/<{$detail.id}>" id="scoreForm">
+                                <div class="pull-left margin-r15">
+                                    <span style="line-height:30px;" class="pull-left">组别选择：</span>
+                                    <select name="groupId" id="i_score_gamegroup">
+                                        <option value="">选手比赛组别</option>
+                                        <volist name="group" id="go">
+                                            <option value="<{$go.id}>"><{$go.group_name}></option>
+                                        </volist>
+                                    </select>
+                                </div>
+                                <div>
+                                    <input type="text" vplaceholder="请输入选手参赛号码" value="" class="input-large" name="playerId" id="playerId">
+                                    <input type="submit" class="btn btn-warning" value="查询"/>
+                                    <!--<button class="btn btn-warning" data-gameid="427" id="i_score_search">查询</button>-->
+                                </div>
+                            </form>
+                        </div>
+                        <div id="searchResult">
+                            <volist name="group" id="ao">
+                                <h5 class="table-title"><{$ao.group_name}></h5>
+                                <table class="table query-table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>名次</th>
+                                        <th>姓名</th>
+                                        <th>参赛号码</th>
+                                        <th>国家</th>
+                                        <th>成绩</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list" id="vo">
+                                        <eq name="ao.id" value="$vo.group_id">
+                                    <tr><td><{$k}></td><td><{$vo.}></td><td></td><td></td><td></td></tr>
+                                        </eq>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            </volist>
+                            <h5 class="table-title">个人报名</h5>
+                            <table class="table query-table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>名次</th>
+                                    <th>姓名</th>
+                                    <th>参赛号码</th>
+                                    <th>国家</th>
+                                    <th>成绩</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <h5 class="table-title">家庭组别(1成人+1儿童)</h5>
+                            <table class="table query-table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>名次</th>
+                                    <th>姓名</th>
+                                    <th>参赛号码</th>
+                                    <th>国家</th>
+                                    <th>成绩</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <h5 class="table-title">家庭组别(1成人+2儿童)</h5>
+                            <table class="table query-table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>名次</th>
+                                    <th>姓名</th>
+                                    <th>参赛号码</th>
+                                    <th>国家</th>
+                                    <th>成绩</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <h5 class="table-title">家庭组别(2成人+1儿童)</h5>
+                            <table class="table query-table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>名次</th>
+                                    <th>姓名</th>
+                                    <th>参赛号码</th>
+                                    <th>国家</th>
+                                    <th>成绩</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <h5 class="table-title">家庭组别(2成人+2儿童)</h5>
+                            <table class="table query-table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>名次</th>
+                                    <th>姓名</th>
+                                    <th>参赛号码</th>
+                                    <th>国家</th>
+                                    <th>成绩</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/Public/js/pages/game_score.js"></script>
+<include file="Public@default:Public:bottom"/>

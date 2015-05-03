@@ -1,5 +1,7 @@
 <include file="Public@default:Public:top" />
-
+<script type="text/javascript">
+    var hash = "<?php echo deCode(session('mark_id'));?>";
+</script>
 <div class="container activity-details">
         <input type="hidden" value="<{$detail.id}>" name="activityId" id="activityId">
         <input type="hidden" value="<{$detail.sport_id}>" name="sport_id" id="sport_id">
@@ -11,7 +13,7 @@
                 <p class="pull-left">
                     <span class="info-text"><i class="icon16 icon16-person"></i><{$detail.interest_count}>人感兴趣</span>
                     <em class="info-slider"></em>
-                    <span class="info-text"><i class="icon16 icon16-joined"></i>已报名<{$detail.join_count}>人（剩余13人）</span>
+                    <span class="info-text"><i class="icon16 icon16-joined"></i>已报名<{$detail.join_count}>人（剩余<{$detail.remaining}>人）</span>
                     <em class="info-slider"></em>
                     <!--<span class="info-text">分享到：</span>-->
                 </p>
@@ -20,8 +22,6 @@
             <div class="content-box activity-info">
 
                 <div class="clearfix">
-
-
                     <div data-selector="activityBanner" class="activity-banner">
                         <ul style="width: 0%;">
 
@@ -38,9 +38,10 @@
                                 <th>
                                     <div class="owner-head">
 
-                                        <a href="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_80x80.png?140x140"><img src="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_80x80.png?140x140"></a>
+                                        <a href="">
+                                            <img src="<{$detail['input_user']|getUsersImage}>"></a>
 
-                                        <i class="icon16 icon16-boy"></i>
+                                       <!-- <i class="icon16 icon16-boy"></i>-->
 
                                     </div>
                                 </th>
@@ -49,7 +50,7 @@
                                         <a href="#"><{$detail.name}></a>
                                     </h4>
                                     <p>
-                                        <span>参加活动</span><em>0</em><span class="slider"></span><span>成功发起活动</span><em>2</em>
+                                        <span>参加活动</span><em><{$detail['input_user']|join_activity}></em><span class="slider"></span><span>成功发起活动</span><em><{$detail['input_user']|initiate_activity}></em>
                                     </p>
                                 </td>
                             </tr>
@@ -101,9 +102,10 @@
                         </div>
                     </dd>
                     <dd class="relevant-content" style="display: none;">
-                        <h4 class="joined-title">已通过报名（7）</h4>
+                        <h4 class="joined-title">已通过报名（<{$through_count}>）</h4>
                         <div class="joined-list">
                             <ul class="clearfix">
+
                                 <li>
                                     <a href="/friend/passport_152138/timeline"> <img title="九年" src="http://static.wisdom-china.cn//images/1/7692/1543/1219/c2805d78554b8a0d23c3e3a1a0916cc9_2_80x80.png?140x140"></a>
                                     <h5><a href="/friend/passport_152138/timeline">九年</a></h5>
@@ -152,7 +154,7 @@
             <div data-deleteurl="/userCenter/DeleteActivityReply?replyId=" data-url="/activitycommon/getcommentreply" data-reply-action="/activity/publishreply" data-comment-action="/activity/publishreply" data-params="{'activityId':344,'pageNum':0,'pageSize':10}" data-star="false" data-selector="commentList" class="content-box"><style>#NTGUID__4 h5{      margin: 0;      padding: 0;      font-size: 20px;      line-height: 20px;      display: block;    }#NTGUID__4 h5 span,#NTGUID__4 h5 em{      vertical-align: bottom;    }#NTGUID__4 h5 em{      color: #999;      margin-left: 5px;    }#NTGUID__4 h5 em,#NTGUID__4 h5 i{      font-size: 12px;      font-weight: normal;      font-style: normal;    }#NTGUID__4 h5 i{      color: #363636;      padding: 0 5px;    }#NTGUID__4 .comment-list dl{      border-bottom: 1px dotted #E0E0E0;      padding: 15px 0;      display: none;    }#NTGUID__4 .btn-block{      margin-top: 28px;    }#NTGUID__4 .comment-list dl dt{      float: left;      width: 50px;      overflow: hidden;    }#NTGUID__4 .comment-list dl dt img{      border-radius: 50%;      -webkit-border-radius: 50%;      -moz-border-radius: 50%;      width: 40px;      height: 40px;    }#NTGUID__4 .comment-list dl dd{      display: block;      margin-left: 60px;    }#NTGUID__4 .comment-list dl dd .user-header{      display: block;      font-size: 14px;      margin-bottom: 5px;    }#NTGUID__4 .comment-list dl dd .user-header table{      width: 100%;      margin: 0;    }#NTGUID__4 .comment-list dl dd .user-header th{      text-align: left;      font-weight: normal;    }#NTGUID__4 .comment-list dl dd .user-header td{      text-align: right;    }#NTGUID__4 .comment-list dl dd .user-header span{      color: #C3C3C3;      font-weight: normal;      font-size: 12px;      margin-left: 20px;    }#NTGUID__4 .comment-list dl dd .user-header a{      color: #555;    }#NTGUID__4 .comment-list dl dd .comment-content{      margin: 0;      padding: 0;      font-size: 14px;      line-height: 22px;      overflow: hidden;      width: 90%;      color: #333;      font-weight: normal;      text-shadow: none;      -webkit-text-shadow: none;      -moz-text-shadow: none;    }#NTGUID__4 .comment-textarea{      display: block;      width: 96%;      resize: none;    }#NTGUID__4 .btn-warning{      padding-left: 20px;      padding-right: 20px;      margin-top: 20px;    }#NTGUID__4 p{      margin: 0;      padding: 0;    }#NTGUID__4 .reply-panel p a{      font-size: 14px;      color: #999;    }#NTGUID__4 .comment-list .reply-panel .reply-form{      display: none;      position: relative;      border: 1px solid #F5A623;      margin-top: 5px;      padding: 5px 0;      border-radius: 4px;      -webkit-border-radius: 4px;      -moz-border-radius: 4px;    }#NTGUID__4 .comment-list .reply-panel .reply-form i.icon-up{      display: inline-block;      width:0;      height:0;      border-width:6px;      border-color:transparent transparent #fff transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 42px;      top: -13px;      z-index: 5;    }#NTGUID__4 .comment-list .reply-panel .reply-form .btn{      position: absolute;      right: 5px;      top: 5px;      margin: 0;    }#NTGUID__4 .comment-list .reply-panel .reply-form em.icon-down{      display: inline-block;      width:0;      height:0;      border-width:8px;      border-color:transparent transparent #F5A623 transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 40px;      top: -17px;      z-index: 1;    }#NTGUID__4 .comment-list .reply-panel .reply-form input{      background: #fff;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;      width: 670px;      resize:none;    }#NTGUID__4 .comment-list .reply-panel .reply-form input:focus{      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;    }#NTGUID__4 .icon16{      display: inline-block;      width: 14px;      height: 16px;      margin-right: 0px;    }#NTGUID__4 .comment-star{      font-size: 14px;      line-height: 20px;      padding-bottom: 5px;    }#NTGUID__4 .comment-star .icon16{      cursor: pointer;    }#NTGUID__4 .comment-form{      margin-top: 2px;    }#NTGUID__4 .comment-form .btn-warning{      margin-top: 0;    }  </style><div id="NTGUID__4">
                 <h5>
                     <span>评论</span>
-                    <em>(共<i data-selector="commentTotal"><{$detail.}></i>条评论)</em>
+                    <em>(共<i data-selector="commentTotal"><{$detail.topic_count}></i>条评论)</em>
                 </h5>
                 <div class="comment-list">
                     <div data-selector="commentFormData">
@@ -183,34 +185,36 @@
                     <script id="list" type="text/html">
                     <dl class="clearfix" style="display: block;">
                         <dt>
-                            <a target="_blank" href="/friend/passport_79472/timeline"><img title="^_^喝水的鱼" src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/1103402448/9C031F2467A60C1FF47F3A293CAD40E2/100/9C031F2467A60C1FF47F3A293CAD40E2_2_40x40.png"></a>
+                            <a target="_blank" href="/friend/passport_79472/timeline"><img title="{{nick_name}}" src="{{image}}"></a>
                         </dt>
                         <dd>
                             <div class="user-header">
                                 <table>
                                     <tbody>
                                     <tr>
-                                        <th><a target="_blank" href="/friend/passport_79472/timeline">^_^喝水的鱼</a><span title="2014-12-22 22:59:00" data-timestamp="1419260340000">2014-12-22 22:59:00</span></th>
+                                        <th><a target="_blank" href="/friend/passport_79472/timeline">{{nick_name}}</a><span title="{{input_date}}" data-timestamp="1419260340000">{{input_date}}</span></th>
                                         <td>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
+                            <p class="comment-content">回复<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline">@{{replyUserName}}</a>：</p>
                             <p class="comment-content"></p>
                             <pre class="comment-content">{{content}}</pre>
                             <div class="reply-panel">
                                 <p class="text-right">
-
-                                    <a data-selector="replyLink" href="javascript:;">回复</a>
+                                    {{if nowuser}}
+                                    <a id="replaydel" data-replyid="308" data-selector="deleteComment" href="javascript:;">删除</a>
+                                    {{/if}}
+                                    <a id="replyLink" data-selector="replyLink" href="javascript:;">回复</a>
                                 </p>
                                 <div class="reply-form">
                                     <i class="icon-up"></i>
                                     <em class="icon-down"></em>
-                                    <form method="post" action="/activity/publishreply" iyuesai-plugins-valid="0.6614082489608284">
-                                        <input type="hidden" value="220" name="commentId">
-                                        <input type="hidden" value="passport_79472" name="replyToId">
-                                        <input type="text" validate-rules="[['required']]" placeholder="回复 ^_^喝水的鱼：" name="content">
+                                    <form method="post" action="/activity/index/CommentReply"  id="CommentReplyForm">
+                                        <input type="hidden" value="{{id}}" name="reply_to">
+                                        <input type="text" placeholder="回复 {{nick_name}}" name="content">
                                         <button class="btn btn-warning" type="submit">回复</button>
                                     </form>
                                 </div>
@@ -261,7 +265,7 @@
                         <h4><a title="{{name}}" href="/Activity/{{id}}">{{name}}</a></h4>
                         <p class="clearfix">
                             <span class="pull-left"><i class="icon16 icon16-person"></i>{{interest_count}}人感兴趣</span>
-                            <span class="pull-right"><span class="text-warning">{{join_count}}</span>人已报名/<span class="muted">剩余5人</span></span>
+                            <span class="pull-right"><span class="text-warning">{{join_count}}</span>人已报名/<span class="muted">剩余{{remaining}}人</span></span>
                         </p>
                         <p>费用：{{cost}}</p>
                         <p>地区：{{address}}</p>

@@ -31,7 +31,7 @@ class IndexAction extends Action
         }
         //关键字
         if (trim($_GET['keyword'])) {
-            $map['name'] = array('like', '%' .trim($_GET['keyword']). '%');
+            $map['name'] = array('like', '%' . trim($_GET['keyword']) . '%');
         }
         //赛事分类
         if ($_GET['sportType']) {
@@ -49,10 +49,10 @@ class IndexAction extends Action
         if ($_GET['orderByNew'] == 'F') {
             $order = 'focus_count desc';
         }
-        if($_GET['date']=='today'){
-            $map['start_date'] =  array('like',date('Y-m-d').'%');
-        }else if($_GET['date']=='tomorrow'){
-            $map['start_date'] =  array('like',date("Y-m-d",strtotime("+1 day")).'%');
+        if ($_GET['date'] == 'today') {
+            $map['start_date'] = array('like', date('Y-m-d') . '%');
+        } else if ($_GET['date'] == 'tomorrow') {
+            $map['start_date'] = array('like', date("Y-m-d", strtotime("+1 day")) . '%');
         }
 
         $map['type'] = array('eq', 'game');
@@ -81,11 +81,11 @@ class IndexAction extends Action
         if ($mark) {
             $this->display();
         } else {
-            $str =' <script> window.location.href="/login/login"</script>';
+            $str = ' <script> window.location.href="/login/login"</script>';
             //$this->display($str);
             echo $str;
-          //  $this->success('进军赛事……',U('@www.syyundong.com/login/login'));
-           // $this->redirect(U('@www.syyundong.comlogin/login'));
+            //  $this->success('进军赛事……',U('@www.syyundong.com/login/login'));
+            // $this->redirect(U('@www.syyundong.comlogin/login'));
         }
     }
 
@@ -155,15 +155,16 @@ class IndexAction extends Action
         //赛事新闻
         $news = D('OpGameNews')->where('game_id=' . $id)->limit(2)->select();
         //赛事关注人物
-        $user_id = D('OpFocus')->where('source_id='.$id.' and source_type=1 and user_id !='.$id)->getField('user_id',true);
+        $user_id = D('OpFocus')->where('source_id=' . $id . ' and source_type=1 and user_id !=' . $id)->getField('user_id', true);
         $model = new Model();
-        $user= $model->query('select u.id id,u.nick_name nick_name,u.mobile mobile,u.name name,u.gender gender,i.local_url image from db_user u LEFT JOIN db_images i  on (u.user_head = i.id) where u.id in('.ArrayToStr($user_id).')');
+        $user = $model->query('select u.id id,u.nick_name nick_name,u.mobile mobile,u.name name,u.gender gender,i.local_url image from db_user u LEFT JOIN db_images i  on (u.user_head = i.id) where u.id in(' . ArrayToStr($user_id) . ')');
         $this->assign('user', $user);
         $this->assign('notice', $notice);
         $this->assign('news', $news);
         $this->assign('detail', $detail);
         $this->display();
     }
+
     /*
      * @时间: 20150408
      * @功能：赛事关注
@@ -189,32 +190,32 @@ class IndexAction extends Action
         import('ORG.Util.Page');
         $id = $_GET['id'];
         $info = $_GET['info'];
-        switch ($info){
+        switch ($info) {
             case 'content':
-                 $info='content';
-                 break;
+                $info = 'content';
+                break;
             case 'route':
-                $info='aout_route';
+                $info = 'aout_route';
                 break;
             case 'cost':
-                $info='about_cost';
+                $info = 'about_cost';
                 break;
             case 'trip':
-                $info='about_trip';
+                $info = 'about_trip';
                 break;
             case 'hotel':
-                $info='about_hotal';
+                $info = 'about_hotal';
                 break;
         }
         //赛事信息
         $detail = D('DbGame')->field('id,sport_id,name')->where('id=' . $id)->find();
 
-        if(($info =='content')||($info =='aout_route')||($info =='about_cost')||($info =='about_trip')||($info =='about_hotal')){
+        if (($info == 'content') || ($info == 'aout_route') || ($info == 'about_cost') || ($info == 'about_trip') || ($info == 'about_hotal')) {
             $list = D('DbGame')->where('id=' . $id)->getField($info);
         }
-        if($info=='notice'){
+        if ($info == 'notice') {
             $model = D('OpGameNotice');
-            $where['game_id'] = array('eq',$id);
+            $where['game_id'] = array('eq', $id);
             $count = $model->where($where)->count();
             $Page = new Page($count, 1);
             $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
@@ -224,9 +225,9 @@ class IndexAction extends Action
             $this->assign('page', $show);
             $this->assign('count', $count);
         }
-        if($info=='news'){
+        if ($info == 'news') {
             $model = D('OpGameNews');
-            $where['game_id'] = array('eq',$id);
+            $where['game_id'] = array('eq', $id);
             $count = $model->where($where)->count();
             $Page = new Page($count, 1);
             $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
@@ -236,39 +237,63 @@ class IndexAction extends Action
             $this->assign('page', $show);
             $this->assign('count', $count);
         }
+
         $this->assign('id', $id);
         $this->assign('info', $info);
         $this->assign('other', $list);
         $this->assign('detail', $detail);
         $this->display();
     }
+    /*
+     * @时间: 20150415
+     * @功能：赛事成绩查询
+     */
+    public function score()
+    {
+        $id = $_GET['id'];
+        //赛事信息
+        $detail = D('VGameActivity')->where('id=' . $id)->find();
+        //赛事组别
+        $this->assign('group', D('OpGameGroup')->where('game_id=' . $id)->select());
+
+        $where['game_id'] = array('eq', $id);
+        $where['group_id'] = array('eq', $_GET['groupId']);
+        $where['game_number'] = array('eq', $_GET['playerId']);
+        $list =  D('OpGameScore')->where($where)->order('score desc')->select();
+        $this->assign('detail', $detail);
+        $this->assign('list', $list);
+        $this->display('game_score');
+    }
 
     /*
      * @时间: 20150415
      * @功能：赛事其他信息(公告、新闻)详细
      */
-    public function game_other_detail(){
-        $info  =$_GET['info'];
+    public function game_other_detail()
+    {
+        $info = $_GET['info'];
         $where['game_id'] = $_GET['id'];
-        $where['id']  =$_GET['d_id'];
-        $list = D('op_game_'.$info)->where($where)->find();
-        $this->assign('list',$list);
-        $this->assign('id',$_GET['id']);
+        $where['id'] = $_GET['d_id'];
+        $list = D('op_game_' . $info)->where($where)->find();
+        $this->assign('list', $list);
+        $this->assign('id', $_GET['id']);
         //赛事信息
         $detail = D('DbGame')->field('id,sport_id,name')->where('id=' . $_GET['id'])->find();
         $this->assign('detail', $detail);
         $this->display();
     }
+
     /*
      * @时间: 20150415
      * @功能：报名赛事
      */
-    public function apply(){
+    public function apply()
+    {
         //首先判断用户是否登录
         $mark = I('session.mark_id');
         if ($mark) {
-            $id=$_GET['id'];
-            $this->assign('game_group',D('OpGameGroup')->where('game_id='.$id)->select());
+            $id = $_GET['id'];
+            $this->assign('game_group', D('OpGameGroup')->where('game_id=' . $id)->select());
 
             $this->display();
         } else {
@@ -276,11 +301,13 @@ class IndexAction extends Action
         }
         $this->display();
     }
+
     /*
      * @时间: 20150415
      * @功能：赛事报名
      */
-    public function GameGroupAdd(){
+    public function GameGroupAdd()
+    {
         $date['game_id'] = $_POST['game_id'];
         $date['group_id'] = $_POST['group_id'];
         $date['true_name'] = $_POST['true_name'];
@@ -292,73 +319,165 @@ class IndexAction extends Action
         $date['certificate_num'] = $_POST['certificate_num'];
         $date['em_contact'] = $_POST['em_contact'];
         $date['em_tel'] = $_POST['em_tel'];
-        $result  = D('OpJoinGame')->add($date);
-        if(false!==$result){
-           echo 1;
-        }else{
+        $result = D('OpJoinGame')->add($date);
+        if (false !== $result) {
+            echo 1;
+        } else {
             echo 2;
         }
     }
+
     /*
      * @时间: 20150415
      * @功能：赛事关注
      */
-    public function GameFocus(){
+    public function GameFocus()
+    {
         $date['user_id'] = deCode(session('mark_id'));
         $date['source_id'] = $_POST['source_id'];
-        $date['source_type'] =1;
+        $date['source_type'] = 1;
         $date['input_date'] = date('Y-m-d H:i:s');
-        $result  = D('OpFocus')->add($date);
-        if(false!==$result){
+        $result = D('OpFocus')->add($date);
+        if (false !== $result) {
             echo 1;
-        }else{
+        } else {
             echo 2;
         }
     }
+
     /*
     * @时间: 20150415
     * @功能：取消赛事关注
     */
-    public function GameFocusCancel(){
+    public function GameFocusCancel()
+    {
         $date['user_id'] = deCode(session('mark_id'));
         $date['source_id'] = $_POST['source_id'];
-        $date['source_type'] =1;
-        $result  = D('OpFocus')->where($date)->delete();
-        if(false!==$result){
+        $date['source_type'] = 1;
+        $result = D('OpFocus')->where($date)->delete();
+        if (false !== $result) {
             echo 1;
-        }else{
+        } else {
             echo 2;
         }
     }
+
     /*
     * @时间: 20150415
     * @功能：取消赛事关注
     */
-    public function GameAddFriend(){
+    public function GameAddFriend()
+    {
         $date['user_id'] = deCode(session('mark_id'));
         $date['friend_id'] = $_POST['friend_id'];
-        $result  = D('OpUserFriend')->add($date);
-       if(false!==$result){
+        $result = D('OpUserFriend')->add($date);
+        if (false !== $result) {
             echo 1;
-        }else{
+        } else {
             echo 2;
         }
     }
+
     /*
  * @时间：20150412
  * @功能：关注赛友换一换
  */
-    public function UserFriend(){
+    public function UserFriend()
+    {
         $id = $_POST['game_id'];
-        $ids = D('OpFocus')->where('source_id='.$id.' and source_type=1 and user_id !='.$id)->getField('user_id',true);
+        $ids = D('OpFocus')->where('source_id=' . $id . ' and source_type=1 and user_id !=' . $id)->getField('user_id', true);
         $len = count($ids);
-        $result = rand(0,($len-6));
-        if($len<6){
+        $result = rand(0, ($len - 6));
+        if ($len < 6) {
             $result = 0;
         }
         $model = new Model();
-        $user= $model->query('select u.id id,u.nick_name nick_name,u.mobile mobile,u.name name,u.gender gender,i.local_url image from db_user u LEFT JOIN db_images i  on (u.user_head = i.id) where u.id in('.ArrayToStr($ids).')limit '.$result.',6');
+        $user = $model->query('select u.id id,u.nick_name nick_name,u.mobile mobile,u.name name,u.gender gender,i.local_url image from db_user u LEFT JOIN db_images i  on (u.user_head = i.id) where u.id in(' . ArrayToStr($ids) . ')limit ' . $result . ',6');
         echo json_encode($user);
     }
 
+    /*
+    * @时间: 20150415
+    * @功能：赛事话题发布
+    */
+    public function GameTopic()
+    {
+        $date['content'] = $_POST['content'];
+        $date['user_id'] = deCode(I('session.mark_id'));
+        $date['game_id'] = $_POST['game_id'];
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $date['game_id'] = $_POST['game_id'];
+        $result = D('OpGameTopic')->add($date);
+        //图片存储
+        $img = strtoarr($_POST['imgMsg']);
+        foreach ($img as $key => $val) {
+            if (!empty($val) && $val !== '') {
+                $map['image_id'] = $val;
+                $map['topic_id'] = $result;
+                D('OpGameTopicImages')->add($map);
+            }
+        }
+        if (false !== $result) {
+            echo 1;
+        } else {
+            echo 2;
+        }
+    }
+
+    /*
+    * @时间: 20150415
+    * @功能：赛事话题加载
+    */
+    public function GameCommentLoad()
+    {
+        $last = $_POST['last'];
+        $amount = $_POST['amount'] + $_POST['last'];
+        $order = 'input_date desc';
+        $list = D('VTopic')->where('game_id=' . $_POST['game_id'])->order($order)->limit($last, $amount)->select();
+        foreach ($list as $key => $val) {
+            $topic_image = D('VTopicImages')->where('topic_id=' . $val['id'])->select();
+            $val['topic_images'] = $topic_image;
+            $list[$key] = $val;
+        }
+        echo json_encode($list);
+    }
+
+    /*
+    * @时间: 20150415
+    * @功能：赛事话题加载
+    */
+    public function GameImageLoad()
+    {
+        $last = $_POST['last'];
+        $amount = $_POST['amount'] + $_POST['last'];
+        $order = 'input_date desc';
+        $list = D('VTopic')->where('game_id=' . $_POST['game_id'] . ' and topic_image is not null')->order($order)->limit($last, $amount)->select();
+        foreach ($list as $key => $val) {
+            $topic_image = D('VTopicImages')->where('topic_id=' . $val['id'])->select();
+            $val['topic_images'] = $topic_image;
+            $list[$key] = $val;
+        }
+        echo json_encode($list);
+    }
+
+    /*
+    * @时间: 20150415
+    * @功能:评论回复
+    */
+    public function CommentReply()
+    {
+        $model = D('OpComment');
+        $date['content'] = $_POST['content'];
+        $date['reply_to'] = $_POST['reply_to'];
+        $date['user_id'] = deCode(I('session.mark_id'));
+        $date['source_id'] = $_POST['game_id'];
+        $date['source_type'] = 1;
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $result = $model->add($date);
+        if (false !== $result) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
 }

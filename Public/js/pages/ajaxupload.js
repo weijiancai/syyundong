@@ -22,7 +22,6 @@ $(function () {
             var str = '请上传 jpg/jpeg/png格式的图片！';
             $("#show_mes").html(str);
         } else {
-            alert('66');
             console.log($("#myupload"))
             $("#myupload").ajaxSubmit({
                 dataType: 'json',

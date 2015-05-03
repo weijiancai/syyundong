@@ -76,7 +76,7 @@ class IndexAction extends Action {
     public function hotTopicLoad(){
         $order  = 'comment_count desc';
         if(!empty($_POST['source_type'])){
-             $where['source_type'] = $_POST['source_type'];
+             $where['sport_id'] = $_POST['source_type'];
         }
         $last = $_POST['last'];
         $amount = $_POST['amount']+$_POST['last'];

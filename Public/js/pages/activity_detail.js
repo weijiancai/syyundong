@@ -88,7 +88,22 @@ $(function () {
             content: '回复内容不能为空！'
         },
         submitHandler: function (form) {
-            form.submit();
+            var data = $(form).serializeJson();
+            data['source_id'] = $('#source_id').val();
+            jQuery.ajax({
+                type: "post",
+                url: "/Activity/index/CommentReply",
+                data: data,
+                success: function ($result) {
+                    if ($result==1) {
+                        $commentData.empty();
+                        $more.data('last', 0);
+                        more();
+                    } else {
+                        $.dialog.error('回复失败');
+                    }
+                }
+            });
             $(form).parent().hide();
         }
     };

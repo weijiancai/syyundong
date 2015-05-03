@@ -2799,7 +2799,7 @@ form p .star{
   display: block;
   text-align: center;
 }
-.publish-box .store-wrap:after{
+/*.publish-box .store-wrap:after{
   content: "";
   width: 0;
   height: 0;
@@ -2809,7 +2809,7 @@ form p .star{
   top: -20px;
   left: 10px;
   border-bottom-color: #EEE;
-}
+}*/
 .publish-box-bottom a{
   display: inline-block;
   margin-right: 5px;

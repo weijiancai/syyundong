@@ -75,11 +75,14 @@
                 <!-- 赛事筛选模块 结束 -->
                 <div class="main-block order-block">
                     <ul class="order-group" id="order-group">
-                        <li <if condition="($_REQUEST['orderByNew'] eq S) or($_REQUEST['orderByNew'] eq '')"> class="current" </if>><a href="javascript:;" data-selector="orderBy" data-name="criteria"
+                        <li <if condition="($_REQUEST['orderByNew'] eq S) or($_REQUEST['orderByNew'] eq '')"> class="current" </if>>
+                        <a href="javascript:;" data-selector="orderBy" data-name="criteria"
                                                data-value="startDate">默认排序 <i class="icon-match icon-down"></i></a></li>
-                        <li <if condition="$_REQUEST['orderByNew'] eq C"> class="current" </if>><a href="javascript:;" data-selector="orderBy" data-name="criteria" data-value="createDate">最新赛事
+                        <li <if condition="$_REQUEST['orderByNew'] eq C"> class="current" </if>>
+                        <a href="javascript:;" data-selector="orderBy" data-name="criteria" data-value="createDate">最新赛事
                             <i class="icon-match icon-down"></i></a></li>
-                        <li <if condition="$_REQUEST['orderByNew'] eq F"> class="current" </if>><a href="javascript:;" data-selector="orderBy" data-name="criteria"
+                        <li <if condition="$_REQUEST['orderByNew'] eq F"> class="current" </if>>
+                        <a href="javascript:;" data-selector="orderBy" data-name="criteria"
                                data-value="followCount">最热赛事 <i class="icon-match icon-down"></i></a></li>
                     </ul>
                     <div class="item-statu-filter">

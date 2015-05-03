@@ -30,7 +30,7 @@ class IndexAction extends Action
         }
         //关键字
         if (trim($_GET['keyword'])) {
-            $map['name'] = array('like', '%' .trim($_GET['keyword']). '%');
+            $map['name'] = array('like', '%' . trim($_GET['keyword']) . '%');
         }
         //赛事分类
         if ($_GET['sportType']) {
@@ -38,20 +38,20 @@ class IndexAction extends Action
         }
         //默认排序
         if ($_GET['orderByNew'] == 'S') {
-            $order = 'reg_begin_date desc';
+            $order = 'input_date desc';
         }
-        //最新赛事
+        //最新活动
         if ($_GET['orderByNew'] == 'C') {
             $order = 'start_date desc';
         }
-        //最热赛事
+        //最热活动
         if ($_GET['orderByNew'] == 'F') {
             $order = 'focus_count desc';
         }
-        if($_GET['date']=='today'){
-            $map['start_date'] =  array('like',date('Y-m-d').'%');
-        }else if($_GET['date']=='tomorrow'){
-            $map['start_date'] =  array('like',date("Y-m-d",strtotime("+1 day")).'%');
+        if ($_GET['date'] == 'today') {
+            $map['start_date'] = array('like', date('Y-m-d') . '%');
+        } else if ($_GET['date'] == 'tomorrow') {
+            $map['start_date'] = array('like', date("Y-m-d", strtotime("+1 day")) . '%');
         }
 
         $map['type'] = array('eq', 'activity');
@@ -64,8 +64,8 @@ class IndexAction extends Action
         $this->assign('page', $show);
         $this->assign('activity', $list);
         $this->assign('count', $count);
-        $this->assign('region',D('Public/Index')->region());
-        $this->assign('venue_sport',$this->venue_sport());
+        $this->assign('region', D('Public/Index')->region());
+        $this->assign('venue_sport', $this->venue_sport());
         $this->hotactivity();
         $this->display();
     }
@@ -81,7 +81,7 @@ class IndexAction extends Action
         if ($mark) {
             $this->display();
         } else {
-            $this->success('进军活动……',U('@www.syyundong.com/login/login'));
+            $this->success('进军活动……', U('@www.syyundong.com/login/login'));
         }
     }
 
@@ -96,6 +96,7 @@ class IndexAction extends Action
  where v.id = o.gc_id and o.recommend_type = "activity" and v.type="activity" order by o.sort_num');
         $this->assign('recommend', $list);
     }
+
     /*
      * @时间:20150408
      * @功能：活动详细页面
@@ -103,31 +104,44 @@ class IndexAction extends Action
     public function activity_detail()
     {
         $id = $_GET['id'];
-        $detail = D('DbActivity')->where('id=' . $id)->find();
+        $detail = D('VGameActivity')->where('id=' . $id.' and type=\'activity\'')->find();
         $this->assign('detail', $detail);
+        //已通过报名
+        $this->assign('through',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=1')->select());
+        $this->assign('through_count',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=1')->count());
+        //未通过报名
+        $this->assign('not_through',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=2')->select());
+        $this->assign('not_through_count',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=2')->count());
+        //审核中
+        $this->assign('wait',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=0')->select());
+        $this->assign('wait_count',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=0')->count());
         $this->display();
     }
+
     /*
      * 功能：活动项目
      * 时间：20150407
      */
-    public function venue_sport(){
+    public function venue_sport()
+    {
         return D('DzSport')->where('sport_type=2')->select();
     }
+
     /*
      * 功能:相似活动
      * 时间：20150407
      */
-    public function SimilarActivity(){
-        $where['id'] = array('neq',$_POST['id']);
-        $where['sport_id'] = array('eq',$_POST['sport_id']);
-        $ids = D('VGameActivity')->where($where)->getField('id',true);
+    public function SimilarActivity()
+    {
+        $where['id'] = array('neq', $_POST['id']);
+        $where['sport_id'] = array('eq', $_POST['sport_id']);
+        $ids = D('VGameActivity')->where($where)->getField('id', true);
         $len = count($ids);
-        $result = rand(0,($len-4));
-        if($len<4){
+        $result = rand(0, ($len - 4));
+        if ($len < 4) {
             $result = 0;
         }
-        $list = D('VGameActivity')->where($where)->limit($result,4)->select();
+        $list = D('VGameActivity')->where($where)->limit($result, 4)->select();
         echo json_encode($list);
     }
 
@@ -135,31 +149,64 @@ class IndexAction extends Action
      * @时间: 20150415
      * @功能：活动评论
      */
-    public function publishReply(){
+    public function publishReply()
+    {
         $model = D('OpComment');
         $date['content'] = $_POST['content'];
         $date['user_id'] = deCode(I('session.mark_id'));
-        $date['source_id']  = $_POST['source_id'];
-        $date['source_type']  = 2;
-        $date['input_date']  = date('Y-m-d H:i:s');
-        $result  = $model->add($date);
-        if(false!==$result){
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] = 2;
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $result = $model->add($date);
+        if (false !== $result) {
             echo 1;
-        }else{
+        } else {
             echo 0;
         }
     }
     /*
+ * @时间: 20150415
+ * @功能:评论回复
+ */
+    public function CommentReply()
+    {
+        $model = D('OpComment');
+        $date['content'] = $_POST['content'];
+        $date['reply_to'] = $_POST['reply_to'];
+        $date['user_id'] = deCode(I('session.mark_id'));
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] = 2;
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $result = $model->add($date);
+        if (false !== $result) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
+
+    /*
      * @时间：20150412
      * @功能：活动评论加载
      */
-    public function ActivityCommentLoad(){
+    public function ActivityCommentLoad()
+    {
+        $markId = deCode(I('session.mark_id'));
         $where['source_id'] = $_POST['source_id'];
         $where['source_type'] = 2;
         $last = $_POST['last'];
-        $amount = $_POST['amount']+$_POST['last'];
+        $amount = $_POST['amount'] + $_POST['last'];
         $order = 'input_date desc';
-        $list = D('OpComment')->where($where)->order($order)->limit($last, $amount)->select();
+        $list = D('v_comment')->where($where)->order($order)->limit($last, $amount)->select();
+        foreach ($list as $key => $val) {
+            $userId = $val['user_id'];
+            if ($markId == $userId) {
+                $val['nowuser'] = 1;
+            } else {
+                $val['nowuser'] = 0;
+            }
+            $list[$key] = $val;
+        }
         echo json_encode($list);
     }
 

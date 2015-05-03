@@ -31,6 +31,7 @@ $Public_Config =  array(
         '/^Game\/GameFocusCancel$/' => 'Game/index/GameFocusCancel',
         '/^Game\/(\d+)$/' => 'Game/index/game_detail?id=:1',
         '/^Game\/(\d+)\/(\w+)$/' => 'Game/index/game_other?id=:1&info=:2',
+        '/^Game\/score\/(\d+)$/' => 'Game/index/score?id=:1',
         '/^Game\/(\d+)\/(\w+)\/(\d+)$/' => 'Game/index/game_other_detail?id=:1&info=:2&d_id=:3',
 
         '/^Venue\/(\d+)$/' => 'Venue/index/Venue_detail?id=:1',

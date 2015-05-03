@@ -89,9 +89,12 @@
 
                 <div class="main-block order-block">
                     <ul class="order-group">
-                        <li class="current"><a data-value="1" data-name="criteria" data-selector="orderBy" href="javascript:;">默认排序 <i class="icon-match icon-down"></i></a></li>
-                        <li><a data-value="2" data-name="criteria" data-selector="orderBy" href="javascript:;">最新活动 <i class="icon-match icon-down"></i></a></li>
-                        <li><a data-value="3" data-name="criteria" data-selector="orderBy" href="javascript:;">最热活动 <i class="icon-match icon-down"></i></a></li>
+                        <li <if condition="($_REQUEST['orderByNew'] eq S) or($_REQUEST['orderByNew'] eq '')"> class="current" </if>>
+                        <a data-value="1" data-name="criteria" data-selector="orderBy" href="javascript:;">默认排序 <i class="icon-match icon-down"></i></a></li>
+                        <li <if condition="$_REQUEST['orderByNew'] eq C">class="current" </if>>
+                        <a data-value="2" data-name="criteria" data-selector="orderBy" href="javascript:;">最新活动 <i class="icon-match icon-down"></i></a></li>
+                        <li <if condition="$_REQUEST['orderByNew'] eq F"> class="current" </if>>
+                        <a data-value="3" data-name="criteria" data-selector="orderBy" href="javascript:;">最热活动 <i class="icon-match icon-down"></i></a></li>
 
                     </ul>
                     <div class="item-statu-filter">
@@ -122,9 +125,9 @@
                             <div class="item-list-wrap clearfix">
                                 <div class="activity-list-thumb">
                                     <a href="/friend/passport_88918/timeline"> <span class="avator-56">
-                                        <img title="" alt="" src="http://static.wisdom-china.cn//images/1/1315/8665/7863/60dd9c3a7f0a5e41c03ce3b43e3e4b4c_2_80x80.jpg">
+                                        <img title="" alt="" src="<{$vo['input_user']|getUsersImage}>">
                         </span>
-                                        <p>瓶中的风信子</p>
+                                        <p><{$vo['input_user']|getUserName}></p>
                                     </a>
                                 </div>
                                 <div class="item-list-right">
@@ -152,13 +155,15 @@
 
                                     <i class="icon-match icon-like"></i><{$vo.interest_count}>人感兴趣
                                     <!-- <a href="javascripd:void(0);"><i class="icon-match icon-fav"></i>收藏（0）</a>-->
-                                    <i class="icon-match icon-comment"></i>人评论 <i class="icon-match icon-enroll"></i>已报名<{$vo.join_count}>人（剩余<{$vo.limit_count-$vo.join_count}>人） </a>
+                                    <i class="icon-match icon-comment"></i><{$vo.topic_count}>人评论 <i class="icon-match icon-enroll"></i>已报名<{$vo.join_count}>人（剩余<{$vo.remaining}>人） </a>
                                 </p>
                                 </div>
                                 </div>
-
-                                <button disabled="" class="btn item-list-reg btn-show">报名已结束</button>
-
+                                <if condition="$vo.status eq 1">
+                                    <button id="activity_apply" class="btn btn-warning item-list-reg" data-selector="joinBtn" data-value="<{$vo.id}>">我要参加</button>
+                                  <else/>
+                                    <button disabled="" class="btn item-list-reg btn-show">报名已结束</button>
+                                </if >
                             </div>
                         </div>
                         <!--注释分享功能
@@ -176,25 +181,7 @@
                   <form action="#" id="paging-form" iyuesai-plugins-valid="0.8516564773382357">
                         <div class="paging-wrap">
                             <{$page}>
-                            <!--                            <span class="text">共 44页, 432条记录</span>
-                                                      <span class="disabled">首页</span>
-                                                      <span class="disabled">上一页</span>
-                                                      <span class="current"> 1</span>
-                                                      <a onclick="jumpPage(2, 10);" href="javascript:;">2</a>
-                                                      <a onclick="jumpPage(3, 10);" href="javascript:;">3</a>
-                                                      <a onclick="jumpPage(4, 10);" href="javascript:;">4</a>
-                                                      <a onclick="jumpPage(5, 10);" href="javascript:;">5</a>
-                                                      <a class="next" onclick="jumpPage(2,10 );" href="javascript:;">下一页</a>
-                                                      <a onclick="jumpPage(44,10 );" href="javascript:;">末页</a>
-                                                      <label class="page-stage">
 
-                                                          到第 <input type="text" validate-rules="[['required'],['number',{'max':44,'min':1}]]" validate-title="页码" name="pageNumText" id="pageNumText"> 页
-                                                          <input type="submit" value="确定" class="btn">
-                                                      </label>
-
-                                                      &lt;!&ndash;end of pageBean?? && (pages.total > -1) &ndash;&gt;
-                            <input type="hidden" value="1" id="pageNum" name="pageNum">
-                            <input type="hidden" value="10" id="pageSize" name="pageSize">-->
                         </div>
                     </form>
 
