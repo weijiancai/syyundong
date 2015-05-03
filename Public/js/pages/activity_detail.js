@@ -17,7 +17,6 @@ $(function () {
                 if ($result) {
                     var obj = eval($result);
                     $('#similar').empty();
-                    console.log(obj);
                     for (var i = 0; i < obj.length; i++) {
                         var $li = $(template('detail_list', obj[i]));
                         $('#similar').append($li);
@@ -151,4 +150,47 @@ $(function () {
     $more.click(more);
     // 第一次加载
     more();
+
+    // 我要参加
+    $('#joinBtn').on('click', function() {
+        var $dialog = $('#joinActivityDialog');
+        var validate, $form;
+
+        var d = dialog({
+            title: '我要参加',
+            content: $dialog.html(),
+            okValue: '提交',
+            ok: function () {
+                validate.form();
+                return false;
+            },
+            onshow: function() {
+                var $content = this._$('content');
+                $form = $content.find('#joinActivityForm');
+                validate = $form.validate({
+                    rules: {
+                        true_name: 'required',
+                        mobile: 'required',
+                        certificate_num: 'required'
+                    },
+                    messages: {
+                        true_name: '报名人姓名不能为空！',
+                        mobile: '报名人手机不能为空！',
+                        certificate_num: '身份证号码不能为空！'
+                    },
+                    submitHandler: function (form) {
+                        //    form.submit();
+                        jQuery.ajax({
+                            type: "post",
+                            url: "publishReply",
+                            data: $form.serializeJson(),
+                            success: function ($result) {
+                                d.close();
+                            }
+                        });
+                    }
+                });
+            }
+        }).width(480).show();
+    });
 });

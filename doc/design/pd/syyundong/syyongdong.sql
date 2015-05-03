@@ -530,6 +530,42 @@ create table op_user_friend
 
 alter table op_user_friend comment '赛友';
 
+drop table if exists db_sport_association;
+
+/*==============================================================*/
+/* Table: db_sport_association                                  */
+/*==============================================================*/
+create table db_sport_association
+(
+  id                   int not null comment 'ID',
+  name                 varchar(64) not null comment '协会名称',
+  image                int not null comment '图片',
+  description          varchar(512) comment '简介',
+  input_date           datetime not null comment '录入时间',
+  input_user           int not null comment '录入人'
+);
+
+alter table db_sport_association comment '体育协会';
+
+drop table if exists db_doyen_hall;
+
+/*==============================================================*/
+/* Table: db_doyen_hall                                         */
+/*==============================================================*/
+create table db_doyen_hall
+(
+  id                   int not null comment 'ID',
+  name                 varchar(64) not null comment '达人名称',
+  image                int not null comment '图片',
+  description          varchar(512) comment '简介',
+  input_date           datetime not null comment '录入时间',
+  input_user           int not null comment '录入人'
+);
+
+alter table db_doyen_hall comment '达人堂';
+
+
+
 /*==============================================================*/
 /* View: v_activity_join_count                                  */
 /*==============================================================*/

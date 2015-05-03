@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 <div class="activity-action">
-                    <a data-activityid="344" data-selector="joinBtn" class="btn btn-warning" href="javascript:;"><i class="icon28 icon28-join"></i>我要参加</a>
+                    <a id="joinBtn" class="btn btn-warning" href="javascript:;"><i class="icon28 icon28-join"></i>我要参加</a>
                     <!--
                     <a href="javascript:;" class="btn btn-invite"><i class="icon28 icon28-add"></i>邀请</a> -->
                     <!-- <a href="javascript:;" class="btn btn-collect"><i class="icon28 icon28-collect"></i>收藏(0)</a> -->
@@ -280,5 +280,87 @@
 <input type="hidden" id="s_id" value="<{$detail.id}>" name="s_id">
 <!--<script type="text/javascript">Loader.load(['page.activityDetail']);</script>-->
 <script type="text/javascript" src="/Public/js/pages/activity_detail.js"></script>
+
+<!-- 我要参加 -->
+<div id="joinActivityDialog" style="display: none;">
+    <style type="text/css">
+        #joinActivityForm table th {
+            font-weight: normal;
+            padding: 6px 0;
+            padding-right: 10px;
+            line-height: 28px;
+            vertical-align: top;
+            text-align: right;
+        }
+
+        #joinActivityForm table td {
+            padding: 6px;
+        }
+
+        #joinActivityForm table td label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        #joinActivityForm table td label input {
+            display: inline-block;
+            vertical-align: text-bottom;
+            margin-right: 5px;
+        }
+
+        #joinActivityForm table .btn {
+            min-width: 80px;
+        }
+
+        #joinActivityForm textarea {
+            width: 320px;
+            height: 60px;
+            resize: none;
+        }
+
+        #joinActivityForm .span1 {
+            margin: 0;
+        }
+    </style>
+    <div>
+        <form id="joinActivityForm" method="post" action="/activity/signup/">
+            <input type="hidden" value="692" name="activityId">
+            <input type="hidden" value="485" name="formId">
+            <table>
+                <tbody>
+
+                <tr>
+                    <td valign="top">真实姓名</td>
+                    <td><input type="text" validate-rules="[['required']]" validate-title="报名人姓名" name="true_name"></td>
+                </tr>
+
+                <tr>
+                    <td valign="top">性别</td>
+                    <td><label><input type="radio" checked="" value="男" name="gender"><span>男</span></label>
+                        <label><input type="radio" value="女" name="gender"><span>女</span></label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td valign="top">手机号码</td>
+                    <td><input type="text" validate-rules="[['required']]" validate-title="报名人手机" name="mobile"></td>
+                </tr>
+
+                <tr>
+                    <td valign="top">身份证号码</td>
+                    <td><input type="text" validate-rules="[]" validate-title="数字输入框" name="certificate_num"></td>
+                </tr>
+
+                <tr>
+                    <td valign="top">留言</td>
+                    <td><textarea name="field4" id="field4"></textarea></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
 
 <include file="Public@default:Public:bottom" />
