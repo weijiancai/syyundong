@@ -158,6 +158,7 @@ class IndexAction extends Action
         $user_id = D('OpFocus')->where('source_id=' . $id . ' and source_type=1 and user_id !=' . $id)->getField('user_id', true);
         $model = new Model();
         $user = $model->query('select u.id id,u.nick_name nick_name,u.mobile mobile,u.name name,u.gender gender,i.local_url image from db_user u LEFT JOIN db_images i  on (u.user_head = i.id) where u.id in(' . ArrayToStr($user_id) . ')');
+
         $this->assign('user', $user);
         $this->assign('notice', $notice);
         $this->assign('news', $news);
@@ -257,7 +258,9 @@ class IndexAction extends Action
         $this->assign('group', D('OpGameGroup')->where('game_id=' . $id)->select());
 
         $where['game_id'] = array('eq', $id);
-        $where['group_id'] = array('eq', $_GET['groupId']);
+        if($_GET['groupId']){
+            $where['group_id'] = array('eq', $_GET['groupId']);
+        }
         $where['game_number'] = array('eq', $_GET['playerId']);
         $list =  D('OpGameScore')->where($where)->order('score desc')->select();
         $this->assign('detail', $detail);

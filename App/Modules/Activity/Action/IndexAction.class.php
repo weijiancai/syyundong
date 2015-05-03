@@ -107,14 +107,14 @@ class IndexAction extends Action
         $detail = D('VGameActivity')->where('id=' . $id.' and type=\'activity\'')->find();
         $this->assign('detail', $detail);
         //已通过报名
-        $this->assign('through',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=1')->select());
-        $this->assign('through_count',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=1')->count());
+        $this->assign('through',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=1')->select());
+        $this->assign('through_count',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=1')->count());
         //未通过报名
-        $this->assign('not_through',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=2')->select());
-        $this->assign('not_through_count',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=2')->count());
+        $this->assign('not_through',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=2')->select());
+        $this->assign('not_through_count',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=2')->count());
         //审核中
-        $this->assign('wait',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=0')->select());
-        $this->assign('wait_count',D('OpJoinActivity')->where('activity_id='.$id.' and verify_state=0')->count());
+        $this->assign('wait',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=0')->select());
+        $this->assign('wait_count',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=0')->count());
         $this->display();
     }
 

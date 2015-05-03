@@ -7,15 +7,16 @@
                 <div class="social-club-top clearfix">
                     <div class="social-club-des clearfix">
                         <div class="club-thumb pull-left">
-                            <img alt="" src="http://static.wisdom-china.cn//images/1/8065/8288/0059/b2082ebe709bb75cb0c502a1ea47e7cc_0_0.jpg?640x442">
+                            <img alt="" src="<{$game.image}>">
                         </div>
+                        <input type="hidden" value="<{$game.id}>" id="topic_id">
                         <div class="right-content">
-                            <h1><a href="/friends/tag/282">2015日本高尔夫博览会</a><a class="btn" href="/game/379">赛事主页</a></h1>
-                            <button class="btn btn-danger" data-followed="0" data-url="/friends/followtag" data-tagid="282" data-selector="follow-btn">关注</button>
+                            <h1><a href="/friends/tag/282"><{$game.name}></a><a class="btn" href="/Game/<{$game.id}>">赛事主页</a></h1>
+                            <button id="topic_focus" class="btn btn-danger"data-value="<{$game.id}>" data-selector="follow-btn">关注</button>
                             <div class="pull-right clearfix">
-                                <p>关注：32</p>
-                                <p>帖子：31</p>
-                                <p>分类：<a class="btn btn-warning" href="/friends/branch?sportTypeId=60">高尔夫</a></p>
+                                <p>关注：<{$game.focus_count}></p>
+                                <p>帖子：</p>
+                                <p>分类：<a class="btn btn-warning" href="/Friends/branch?sportTypeId=60"><{$game.sport_name}></a></p>
                             </div>
                         </div>
                     </div>
@@ -24,24 +25,21 @@
                 <div class="main-block">
                     <div class="topic-detail topic-list clearfix">
                         <div class="topic-host-thumb pull-left">
-                            <a href="/friend/passport_83718/timeline"><img title="猫熊妮妮" alt="猫熊妮妮" src="http://static.wisdom-china.cn//images/1/2553/4645/7894/170f8036f69470a147f946c5f27d7dc6_2_80x80.jpg"></a>
+                            <a href="/friend/passport_83718/timeline"><img title="<{$topic.user_name}>" alt="<{$topic.user_name}>" src="<{$topic.user_image}>"></a>
                         </div>
                         <div class="topic-right">
-                            <p class="topic-info"><a href="/friend/passport_83718/timeline">猫熊妮妮</a><span data-timestamp="2015/01/21 18:10:02" title="2015-01-21 18:10:02" class="topic-time"><script type="text/javascript">document.write(iyuesai.util.getEscapeTime('2015/01/21 18:10:02'));</script></span></p>
+                            <p class="topic-info"><a href="/friend/passport_83718/timeline"><{$topic.user_name}></a>
+                                <span data-timestamp="2015/01/21 18:10:02" title="2015-01-21 18:10:02" class="topic-time"></span>
+                                   </p>
                             <p class="topic-des">
-                            </p><pre>我曾经的梦想是：和乔丹一起打篮球；与伍滋一起高尔夫；跟齐达内踢足球；与盖次讨论慈善；与洛佩兹共进烛光晚餐。。。。。。而现在我只想好好织织围脖！所以你们去吧，我这又穷又腐女就算了吧</pre>
+                            </p><pre><{$topic.content}></pre>
                             <p></p>
                             <p class="topic-img-wrap">
-
-
-                                <a data-large="/images/1/3069/7203/4322/d78581e3690e0882fccf87c46ec0a541_0_0.jpg" data-userurl="/friend/passport_83718/timeline" data-nickname="猫熊妮妮" data-url="/topic/5149" data-selector="zoom" data-index="0" data-photo="/images/1/2553/4645/7894/170f8036f69470a147f946c5f27d7dc6_2_80x80.jpg" href="javascript:void(0)">
-                                    <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/3069/7203/4322/d78581e3690e0882fccf87c46ec0a541_2_100x100.jpg">
-                                </a>
-
-
-                                <a data-large="/images/1/0890/8216/5079/46265a375372b4cba0584efd012d3e62_0_0.jpg" data-userurl="/friend/passport_83718/timeline" data-nickname="猫熊妮妮" data-url="/topic/5149" data-selector="zoom" data-index="1" data-photo="/images/1/2553/4645/7894/170f8036f69470a147f946c5f27d7dc6_2_80x80.jpg" href="javascript:void(0)">
-                                    <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/0890/8216/5079/46265a375372b4cba0584efd012d3e62_2_100x100.jpg">
-                                </a>
+                                <volist name="topic_images" id="io">
+                                    <a data-large="<{$io.image}>" data-userurl="/friend/passport_83718/timeline" data-nickname="猫熊妮妮" data-url="/topic/5149" href="javascript:void(0)">
+                                        <img title="点击放大" alt="" src="<{$io.image}>">
+                                    </a>
+                                </volist>
 
                             </p>
 
@@ -62,17 +60,20 @@
                             <em>(共<i data-selector="commentTotal">6</i>条评论)</em>
                         </h5>
                         <div class="comment-list">
-                            <div data-selector="commentFormData"><div id="NTGUID__8NDTGUID__e">
+                            <div data-selector="commentFormData">
+                                <div id="NTGUID__8NDTGUID__e">
 
                                 <dl style="display: block;" class="clearfix">
                                     <dt>
-                                        <a target="_blank" href="/friend/passport_90941/timeline"><img title="wei-jc" src="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_40x40.png?140x140"></a>
+                                        <a target="_blank" href="/friend/passport_90941/timeline">
+                                            <img title="wei-jc" src="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_40x40.png?140x140"></a>
                                     </dt>
                                     <dd>
-                                        <form method="post" action="/topic/publishTopicComment" class="clearfix" iyuesai-plugins-valid="0.19573852466980668">
-
+                                        <form method="post" action="/topic/publishTopicComment" class="clearfix" id="topiccommentform">
+                                            <input type="hidden" value="<{$topic.id}>" name="reply_to">
+                                            <input type="hidden" value="<{$game.id}>" name="game_id" id="game_id">
                                             <div class="comment-form">
-                                                <input type="text" validate-rules="[['required'],['reallength',{'min':6,'max':140}]]" validate-title="评论内容" name="content" class="comment-txt">
+                                                <input type="text"  name="content" class="comment-txt">
                                                 <button class="btn btn-warning pull-right" type="submit">评论</button>
                                             </div>
                                         </form>
@@ -83,200 +84,14 @@
 
 
                             </div>
-                            <div data-selector="commentData"><div id="NTGUID__8NDTGUID__f">
+                            <div id="topiccomment">
 
-                                <dl class="clearfix" style="display: block;">
-                                    <dt>
-                                        <a target="_blank" href="/friend/passport_83527/timeline"><img title="呆呆的萌货" src="http://static.wisdom-china.cn//images/1/9469/0780/6374/ae2418b46a6013644d3e74ae0e324c8a_2_40x40.jpg"></a>
-                                    </dt>
-                                    <dd>
-                                        <div class="user-header">
-                                            <table>
-                                                <tbody>
-                                                <tr>
-                                                    <th><a target="_blank" href="/friend/passport_83527/timeline">呆呆的萌货</a><span title="2015-01-22 16:56:26" data-timestamp="1421916986000">2015-01-22 16:56:26</span></th>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <p class="comment-content"></p>
-                                        <pre class="comment-content">LZ你麻麻都喊你吃早餐了，还撅着屁股傻睡呢</pre>
-                                        <div class="reply-panel">
-                                            <p class="text-right">
-
-                                                <a data-selector="replyLink" href="javascript:;">回复</a>
-                                            </p>
-                                            <div class="reply-form" style="display: block;">
-                                                <i class="icon-up"></i>
-                                                <em class="icon-down"></em>
-                                                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.8922465113650243">
-                                                    <input type="hidden" value="12177" name="commentId">
-                                                    <input type="hidden" value="passport_83527" name="replyToId">
-                                                    <input type="text" validate-rules="[['required']]" placeholder="回复 呆呆的萌货：" name="content" data-valid="false">
-                                                    <button class="btn btn-warning" type="submit">回复</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </dd>
-                                </dl>
-
-                                <dl class="clearfix" style="display: block;">
-                                    <dt>
-                                        <a target="_blank" href="/friend/passport_83533/timeline"><img title="好球员败给狗裁判" src="http://static.wisdom-china.cn//images/1/5090/3934/0168/2f2854def560905c906232731e79175c_2_40x40.png"></a>
-                                    </dt>
-                                    <dd>
-                                        <div class="user-header">
-                                            <table>
-                                                <tbody>
-                                                <tr>
-                                                    <th><a target="_blank" href="/friend/passport_83533/timeline">好球员败给狗裁判</a><span title="2015-01-22 16:40:40" data-timestamp="1421916040000">2015-01-22 16:40:40</span></th>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <p class="comment-content"></p>
-                                        <pre class="comment-content">楼主起床啦，太阳都晒到屁股啦</pre>
-                                        <div class="reply-panel">
-                                            <p class="text-right">
-
-                                                <a data-selector="replyLink" href="javascript:;">回复</a>
-                                            </p>
-                                            <div class="reply-form">
-                                                <i class="icon-up"></i>
-                                                <em class="icon-down"></em>
-                                                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.2791608376721729">
-                                                    <input type="hidden" value="12129" name="commentId">
-                                                    <input type="hidden" value="passport_83533" name="replyToId">
-                                                    <input type="text" validate-rules="[['required']]" placeholder="回复 好球员败给狗裁判：" name="content">
-                                                    <button class="btn btn-warning" type="submit">回复</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </dd>
-                                </dl>
-
-                                <dl class="clearfix" style="display: block;">
-                                    <dt>
-                                        <a target="_blank" href="/friend/passport_83717/timeline"><img title="来不及寻遗憾" src="http://static.wisdom-china.cn//images/1/6450/8082/7197/845c59b02a1356260253b636cffc9658_2_40x40.jpg"></a>
-                                    </dt>
-                                    <dd>
-                                        <div class="user-header">
-                                            <table>
-                                                <tbody>
-                                                <tr>
-                                                    <th><a target="_blank" href="/friend/passport_83717/timeline">来不及寻遗憾</a><span title="2015-01-22 10:05:48" data-timestamp="1421892348000">2015-01-22 10:05:48</span></th>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <p class="comment-content">回复<a class="text-warning" target="_blank" href="/friend/passport_81326/timeline">@地狱中的奥菲欧</a>：</p>
-                                        <pre class="comment-content">那是理想 其实我练GOLF杆都没碰过，只不过感觉很高大上罢了。</pre>
-                                        <div class="reply-panel">
-                                            <p class="text-right">
-
-                                                <a data-selector="replyLink" href="javascript:;">回复</a>
-                                            </p>
-                                            <div class="reply-form">
-                                                <i class="icon-up"></i>
-                                                <em class="icon-down"></em>
-                                                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.8707917813920003">
-                                                    <input type="hidden" value="11932" name="commentId">
-                                                    <input type="hidden" value="passport_83717" name="replyToId">
-                                                    <input type="text" validate-rules="[['required']]" placeholder="回复 来不及寻遗憾：" name="content">
-                                                    <button class="btn btn-warning" type="submit">回复</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </dd>
-                                </dl>
-
-                                <dl class="clearfix" style="display: block;">
-                                    <dt>
-                                        <a target="_blank" href="/friend/passport_81326/timeline"><img title="地狱中的奥菲欧" src="http://static.wisdom-china.cn//images/1/7746/9249/8460/cd5a3fb16e2de6ae2be767ed4e1fa68a_2_40x40.jpg"></a>
-                                    </dt>
-                                    <dd>
-                                        <div class="user-header">
-                                            <table>
-                                                <tbody>
-                                                <tr>
-                                                    <th><a target="_blank" href="/friend/passport_81326/timeline">地狱中的奥菲欧</a><span title="2015-01-22 10:01:19" data-timestamp="1421892079000">2015-01-22 10:01:19</span></th>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <p class="comment-content"></p>
-                                        <pre class="comment-content">反正你时不时还会打个高尔夫，不也挺好的么</pre>
-                                        <div class="reply-panel">
-                                            <p class="text-right">
-
-                                                <a data-selector="replyLink" href="javascript:;">回复</a>
-                                            </p>
-                                            <div class="reply-form">
-                                                <i class="icon-up"></i>
-                                                <em class="icon-down"></em>
-                                                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.5184402399988195">
-                                                    <input type="hidden" value="11921" name="commentId">
-                                                    <input type="hidden" value="passport_81326" name="replyToId">
-                                                    <input type="text" validate-rules="[['required']]" placeholder="回复 地狱中的奥菲欧：" name="content">
-                                                    <button class="btn btn-warning" type="submit">回复</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </dd>
-                                </dl>
-
-                                <dl class="clearfix" style="display: block;">
-                                    <dt>
-                                        <a target="_blank" href="/friend/passport_83718/timeline"><img title="猫熊妮妮" src="http://static.wisdom-china.cn//images/1/2553/4645/7894/170f8036f69470a147f946c5f27d7dc6_2_40x40.jpg"></a>
-                                    </dt>
-                                    <dd>
-                                        <div class="user-header">
-                                            <table>
-                                                <tbody>
-                                                <tr>
-                                                    <th><a target="_blank" href="/friend/passport_83718/timeline">猫熊妮妮</a><span title="2015-01-22 09:15:39" data-timestamp="1421889339000">2015-01-22 09:15:39</span></th>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <p class="comment-content">回复<a class="text-warning" target="_blank" href="/friend/passport_83706/timeline">@幸运的丸子</a>：</p>
-                                        <pre class="comment-content">  织一条围脖我还是能做到的。</pre>
-                                        <div class="reply-panel">
-                                            <p class="text-right">
-
-                                                <a data-selector="replyLink" href="javascript:;">回复</a>
-                                            </p>
-                                            <div class="reply-form">
-                                                <i class="icon-up"></i>
-                                                <em class="icon-down"></em>
-                                                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.5190780561972067">
-                                                    <input type="hidden" value="11894" name="commentId">
-                                                    <input type="hidden" value="passport_83718" name="replyToId">
-                                                    <input type="text" validate-rules="[['required']]" placeholder="回复 猫熊妮妮：" name="content">
-                                                    <button class="btn btn-warning" type="submit">回复</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </dd>
-                                </dl>
 
                             </div>
 
-
-                            </div><div data-selector="commentData"></div><div data-selector="commentData"></div><div data-selector="commentData"></div><div data-selector="commentData"></div><div data-selector="commentData"></div>
                         </div>
                         <p>
-                            <button data-selector="seeMore" class="btn btn-block">查看更多</button>
+                            <button  id="topic_more" data-last="0" data-selector="seeMore" class="btn btn-block">查看更多</button>
                         </p>
                     </div>
 
@@ -557,6 +372,43 @@
         </div>
     </div>
 </div>
+<script type="text/template" id="topic">
+    <dl class="clearfix" style="display: block;">
+        <dt>
+            <a target="_blank" href="/friend/passport_83527/timeline">
+                <img title="{{nick_name}}" src="{{if user_name}}{{user_image}}{{else}}/Public/images/default/web_pic.jpg{{/if}}"></a>
+        </dt>
+        <dd>
+            <div class="user-header">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th><a target="_blank" href="/friend/passport_83527/timeline">{{nick_name}}</a><span title="{{input_date}}">{{input_date}}</span></th>
+                        <td>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="comment-content"></p>
+            <pre class="comment-content">{{content}}</pre>
+            <div class="reply-panel">
+                <p class="text-right">
+                    <a data-selector="replyLink" href="javascript:;">回复</a>
+                </p>
+                <div class="reply-form" style="display: none;">
+                    <i class="icon-up"></i>
+                    <em class="icon-down"></em>
+                    <form method="post" action="/topic/publishTopicComment" >
+                        <input type="hidden" value="{{id}}" name="reply_to" >
 
-<script type="text/javascript">Loader.load(['page.friends']);</script>
+                        <input type="text" validate-rules="[['required']]" placeholder="回复 {{nick_name}}：" name="content" data-valid="false">
+                        <button class="btn btn-warning" type="submit">回复</button>
+                    </form>
+                </div>
+            </div>
+        </dd>
+    </dl>
+</script>
+<script type="text/javascript" src="/Public/js/pages/topic.js"></script>
 <include file="Public@default:Public:bottom" />

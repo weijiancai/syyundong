@@ -219,7 +219,7 @@ $(function () {
                 data: data,
                 success: function ($result) {
                     if ($result==1) {
-                        $.dialog.error('回复成功');
+                        $.dialog.success('回复成功');
                     } else {
                         $.dialog.error('回复失败');
                     }
@@ -299,7 +299,7 @@ $(function () {
             }
             data = eval(data);
 
-            if (data.length < 2) {
+            if (data.length < 10) {
                 $semore.text('没有更多内容').data('last', -1);
             } else {
                 $semore.text('点击加载更多内容').data('last', ++last);

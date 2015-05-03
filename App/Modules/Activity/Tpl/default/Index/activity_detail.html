@@ -105,46 +105,38 @@
                         <h4 class="joined-title">已通过报名（<{$through_count}>）</h4>
                         <div class="joined-list">
                             <ul class="clearfix">
+                            <volist name="through" id="vo">
+                                <li>
+                                    <a href=""> <img title="<{$vo.nick_name}>" src="<{$vo.user_head}>"></a>
+                                    <h5><{$vo.nick_name}></h5>
+                                </li>
+                                </volist>
 
-                                <li>
-                                    <a href="/friend/passport_152138/timeline"> <img title="九年" src="http://static.wisdom-china.cn//images/1/7692/1543/1219/c2805d78554b8a0d23c3e3a1a0916cc9_2_80x80.png?140x140"></a>
-                                    <h5><a href="/friend/passport_152138/timeline">九年</a></h5>
-                                </li>
-                                <li>
-                                    <a href="/friend/passport_86004/timeline"> <img title="生如、夏花" src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/101156472/8517C34DB0EA88496CDC4F156A0DA36B/100/8517C34DB0EA88496CDC4F156A0DA36B_2_80x80.png"></a>
-                                    <h5><a href="/friend/passport_86004/timeline">生如、夏花</a></h5>
-                                </li>
-                                <li>
-                                    <a href="/friend/passport_90995/timeline"> <img title="夕颜" src="http://static.wisdom-china.cn//images/1/8195/1927/2841/a57ff3ed379e7b0b934ba8998c983899_2_120x120.jpg"></a>
-                                    <h5><a href="/friend/passport_90995/timeline">夕颜</a></h5>
-                                </li>
-                                <li>
-                                    <a href="/friend/passport_83726/timeline"> <img title="分开旅行" src="http://static.wisdom-china.cn//images/1/6419/4091/7961/2b5a927dddf3a6dc66fa1151918ad6a2_2_120x120.jpg"></a>
-                                    <h5><a href="/friend/passport_83726/timeline">分开旅行</a></h5>
-                                </li>
-                                <li>
-                                    <a href="/friend/passport_83728/timeline"> <img title="匹诺曹" src="http://static.wisdom-china.cn//images/1/4928/8865/3762/a950891ddb028d1727832023d3fb570e_2_120x120.jpg"></a>
-                                    <h5><a href="/friend/passport_83728/timeline">匹诺曹</a></h5>
-                                </li>
-                                <li>
-                                    <a href="/friend/passport_79472/timeline"> <img title="^_^喝水的鱼" src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/1103402448/9C031F2467A60C1FF47F3A293CAD40E2/100/9C031F2467A60C1FF47F3A293CAD40E2_2_80x80.png"></a>
-                                    <h5><a href="/friend/passport_79472/timeline">^_^喝水的鱼</a></h5>
-                                </li>
-                                <li>
-                                    <a href="/friend/passport_79006/timeline"> <img title="  翔、" src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/1103402448/0814DEB320CEE592E37FDA744FB2E6C3/100/0814DEB320CEE592E37FDA744FB2E6C3_2_80x80.png"></a>
-                                    <h5><a href="/friend/passport_79006/timeline">  翔、</a></h5>
-                                </li>
                             </ul>
                         </div>
-                        <h4 class="joined-title">未通过报名（0）</h4>
+                        <h4 class="joined-title">未通过报名（<{$not_through_count}>）</h4>
                         <div class="joined-list">
                             <ul class="clearfix">
+                                <volist name="not_through" id="vo">
+                                    <li>
+                                        <a href=""> <img title="<{$vo.nick_name}>" src="<{$vo.user_head}>"></a>
+                                        <h5><{$vo.nick_name}></h5>
+                                    </li>
+                                </volist>
+
+                            </ul>
                             </ul>
                         </div>
 
-                        <h4 class="joined-title">待审核报名（0）</h4>
+                        <h4 class="joined-title">待审核报名（<{$wait_count}>）</h4>
                         <div class="joined-list">
                             <ul class="clearfix">
+                                <volist name="wait" id="vo">
+                                    <li>
+                                        <a href=""> <img title="<{$vo.nick_name}>" src="<{$vo.user_head}>"></a>
+                                        <h5><{$vo.nick_name}></h5>
+                                    </li>
+                                </volist>
                             </ul>
                         </div>
 

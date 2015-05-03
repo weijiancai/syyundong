@@ -14,12 +14,17 @@ class IndexAction extends Action {
         }
         //场馆分类
         if ($_GET['sportType']) {
-            $map['sport_id'] = array('eq', $_GET['sportType']);
+            if($_GET['region']!='all'){
+                $map['sport_id'] = array('eq', $_GET['sportType']);
+            }
         }
         //区域
         if (trim($_GET['region'])) {
-            $map['region'] = array('eq', $_GET['region']);
-            $buss = D('DbRegion')->where('pid = '.$_GET['region'])->select();
+            if($_GET['region']!='all'){
+                $map['region'] = array('eq', $_GET['region']);
+                $buss = D('DbRegion')->where('pid = '.$_GET['region'])->select();
+            }
+
         }
         //商圈
         if ($_GET['business']) {
@@ -71,7 +76,7 @@ class IndexAction extends Action {
      */
     public function new_comment(){
         $model = New Model();
-        return $model->query('select v.name,c.content,u.name,c.input_date from op_comment c,db_user u ,db_venue v where c.user_id= u.id and c.source_id = v.id and c.source_type=3 limit 5');
+        return $model->query('select * from v_venue,v_comment where v_venue.id=v_comment.source_id and v_comment.source_type=3 order by v_comment.input_date desc limit 0,5');
     }
     /*
     * @时间:20150408
@@ -113,7 +118,7 @@ class IndexAction extends Action {
         $last = $_POST['last'];
         $amount = $_POST['amount']+$_POST['last'];
         $order = 'input_date desc';
-        $list = D('OpComment')->where($where)->order($order)->limit($last, $amount)->select();
+        $list = D('VComment')->where($where)->order($order)->limit($last, $amount)->select();
         echo json_encode($list);
     }
     /*
@@ -148,18 +153,37 @@ class IndexAction extends Action {
         $mark = I('session.mark_id');
         if ($mark) {
             $date['user_id'] = deCode($mark);
-            $date['source_id'] = $_POST['id'];
+            $date['source_id'] = $_POST['source_id'];
             $date['source_type']=3;
             $date['input_date'] = date('Y-m-d H:i:s');
             $result = D('OpFocus')->add($date);
             if(false!==$result){
                 echo $result;
             }else{
-                echo -2;
+                echo 2;
             }
         } else {
-            echo -1;
+            echo 0;
         }
     }
-
+    /*
+    * @时间: 20150415
+    * @功能:评论回复
+    */
+    public function CommentReply()
+    {
+        $model = D('OpComment');
+        $date['content'] = $_POST['content'];
+        $date['reply_to'] = $_POST['reply_to'];
+        $date['user_id'] = deCode(I('session.mark_id'));
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] = 3;
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $result = $model->add($date);
+        if (false !== $result) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
 }

@@ -94,4 +94,99 @@ class IndexAction extends Action {
         $sport = D('DzSport')->where($where)->select();
         $this->assign('f_sport',$sport);
     }
+    /*
+     * @功能：赛友圈话题
+    * @时间: 20150418
+    */
+    public function Topic(){
+        $id = $_GET['id'];
+        $topic = D('VTopic')->where('id='.$id)->find();
+        $this->assign('topic_images',D('VTopicImages')->where('topic_id=' . $topic['id'])->select());
+        $this->assign('game',D('VGameActivity')->where('id='.$topic['game_id'])->find());
+        //返回话题
+        $this->assign('topic',$topic);
+        $this->display();
+    }
+    /*
+ * @时间: 20150415
+ * @功能：赛友圈关注
+ */
+    public function topicFocus()
+    {
+        $date['user_id'] = deCode(session('mark_id'));
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] = 1;
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $result = D('OpFocus')->add($date);
+        if (false !== $result) {
+            echo 1;
+        } else {
+            echo 2;
+        }
+    }
+
+    /*
+     * @时间：20150412
+     * @功能：赛友圈评论加载
+     */
+    public function TopicCommentLoad()
+    {
+        $markId = deCode(I('session.mark_id'));
+        $where['source_id'] = $_POST['source_id'];
+        $where['source_type'] = 1;
+        $last = $_POST['last'];
+        $amount = $_POST['amount'] + $_POST['last'];
+        $order = 'input_date desc';
+        $list = D('v_comment')->where($where)->order($order)->limit($last, $amount)->select();
+        foreach ($list as $key => $val) {
+            $userId = $val['user_id'];
+            if ($markId == $userId) {
+                $val['nowuser'] = 1;
+            } else {
+                $val['nowuser'] = 0;
+            }
+            $list[$key] = $val;
+        }
+        echo json_encode($list);
+    }
+    /*
+    * @时间: 20150415
+    * @功能:评论回复
+    */
+    public function CommentReply()
+    {
+        $model = D('OpComment');
+        $date['content'] = $_POST['content'];
+        $date['reply_to'] = $_POST['reply_to'];
+        $date['user_id'] = deCode(I('session.mark_id'));
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] = 1;
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $result = $model->add($date);
+        if (false !== $result) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
+    /*
+    * @时间: 20150415
+    * @功能:评论赛友圈
+    */
+    public function publishReply()
+    {
+        $model = D('OpComment');
+        $date['content'] = $_POST['content'];
+        $date['reply_to'] = $_POST['reply_to'];
+        $date['user_id'] = deCode(I('session.mark_id'));
+        $date['source_id'] = $_POST['game_id'];
+        $date['source_type'] = 1;
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $result = $model->add($date);
+        if (false !== $result) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
 }

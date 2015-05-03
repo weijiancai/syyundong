@@ -8,8 +8,7 @@
                     <p class="pull-left"> <span class="info-text enrolling"><{$detail.id|getState}></span>
                         <span class="info-text"><i class="icon16 icon16-person"></i><{$detail.id|getFocus=1}>人感兴趣</span>
                         <em class="info-slider"></em>
-                        <span class="info-text">分享到：</span>
-                        <script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]2015四季跑·南京站报名开启！','url':'/game/427','pic':'http://static.wisdom-china.cn//images/1/3750/3142/3004/135fdde85dc39615631ad9bdb85e9b35_2_140x140.jpg?640x442','summary':'    时间：2015年11月14日 08:00&amp;nbsp;-&amp;nbsp;2015年11月15日 17:00    地点：江苏省南京市    主办：智美集团'},'16');</script><a title="分享到qq空间" class="shareto16 shareto16-qzone" target="_blank" href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/427&amp;pic=http://static.wisdom-china.cn//images/1/3750/3142/3004/135fdde85dc39615631ad9bdb85e9b35_0_0.jpg&amp;title=[路跑]2015四季跑·南京站报名开启！&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年11月14日 08:00&nbsp;-&nbsp;2015年11月15日 17:00    地点：江苏省南京市    主办：智美集团"></a><a title="分享到新浪微博" class="shareto16 shareto16-tsina" target="_blank" href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/427&amp;pic=http://static.wisdom-china.cn//images/1/3750/3142/3004/135fdde85dc39615631ad9bdb85e9b35_0_0.jpg&amp;title=[路跑]2015四季跑·南京站报名开启！&amp;appkey=1868074881&amp;summary=    时间：2015年11月14日 08:00&nbsp;-&nbsp;2015年11月15日 17:00    地点：江苏省南京市    主办：智美集团"></a>
+
                     </p>
                 </div>
             </div>        <div class="span16">
@@ -59,89 +58,19 @@
                                         <th>名次</th>
                                         <th>姓名</th>
                                         <th>参赛号码</th>
-                                        <th>国家</th>
                                         <th>成绩</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <volist name="list" id="vo">
+                                    <volist name="list" id="vo" key="k">
                                         <eq name="ao.id" value="$vo.group_id">
-                                    <tr><td><{$k}></td><td><{$vo.}></td><td></td><td></td><td></td></tr>
+                                    <tr><td><{$k}></td><td><{$vo['user_id']|getUserName}></td><td><{$vo.game_number}></td><td><{$vo.score}></td></tr>
                                         </eq>
                                     </volist>
                                     </tbody>
                                 </table>
                             </volist>
-                            <h5 class="table-title">个人报名</h5>
-                            <table class="table query-table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>名次</th>
-                                    <th>姓名</th>
-                                    <th>参赛号码</th>
-                                    <th>国家</th>
-                                    <th>成绩</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            <h5 class="table-title">家庭组别(1成人+1儿童)</h5>
-                            <table class="table query-table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>名次</th>
-                                    <th>姓名</th>
-                                    <th>参赛号码</th>
-                                    <th>国家</th>
-                                    <th>成绩</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            <h5 class="table-title">家庭组别(1成人+2儿童)</h5>
-                            <table class="table query-table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>名次</th>
-                                    <th>姓名</th>
-                                    <th>参赛号码</th>
-                                    <th>国家</th>
-                                    <th>成绩</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            <h5 class="table-title">家庭组别(2成人+1儿童)</h5>
-                            <table class="table query-table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>名次</th>
-                                    <th>姓名</th>
-                                    <th>参赛号码</th>
-                                    <th>国家</th>
-                                    <th>成绩</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            <h5 class="table-title">家庭组别(2成人+2儿童)</h5>
-                            <table class="table query-table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>名次</th>
-                                    <th>姓名</th>
-                                    <th>参赛号码</th>
-                                    <th>国家</th>
-                                    <th>成绩</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
+
                         </div>
                     </div>
                 </div>

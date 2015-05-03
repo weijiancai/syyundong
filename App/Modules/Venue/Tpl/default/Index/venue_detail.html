@@ -16,7 +16,7 @@
                     <div class="venues-panel">
                         <div data-selector="venuesBanner" class="venues-banner">
                             <ul style="width: 100%;">
-                                <li style="width: 100%;"><img src="http://static.wisdom-china.cn//images/1/1240/0951/8574/3b3e51529d26838eba0bc45cbef38b5a_2_290x200.jpg?480x330"></li>
+                                <li style="width: 100%;"><img src="<{$detail.image}>"></li>
                             </ul>
                             <div class="venues-banner-controller"></div>
                         </div>
@@ -78,7 +78,7 @@
                                     </div>
 
                                     <div class="comment-form">
-                                        <input type="text" validate-rules="[['required'],['reallength',{'min':6,'max':140}]]" validate-title="评论内容" name="content" class="comment-txt" data-valid="false">
+                                        <input type="text"  name="content" id="content" class="comment-txt" data-valid="false">
                                         <button class="btn btn-warning pull-right" type="submit">评论</button>
                                     </div>
                                 </form>
@@ -100,20 +100,21 @@
                         <dl class="clearfix" style="display: block;">
                             <dt>
                                 <a target="_blank" href="/friend/passport_137569/timeline">
-                                    <img title="han" src="http://static.wisdom-china.cn//images/1/proxy/qzapp!qlogo!cn/qzapp/101156472/083977BA8333F75E72A8560898137E25/100/083977BA8333F75E72A8560898137E25_2_40x40.png"></a>
+                                    <img title="han" src="{{image}}"></a>
                             </dt>
                             <dd>
                                 <div class="user-header">
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <th><a target="_blank" href="/friend/passport_137569/timeline">{{user_id}}</a><span title="2015-03-19 14:56:39" data-timestamp="1426748199000">20天前</span></th>
+                                            <th><a target="_blank" href="/friend/passport_137569/timeline">{{nick_name}}</a><span title="{{input_date}}" data-timestamp="1426748199000">{{input_date}}</span></th>
                                             <td>
                                                 <i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i></td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
+                                <p class="comment-content">回复<a href="/friend/passport_86004/timeline" target="_blank" class="text-warning">@{{nick_name}}</a>：</p>
                                 <p class="comment-content"></p>
                                 <pre class="comment-content">{{content}}</pre>
                                 <div class="reply-panel">
@@ -125,9 +126,9 @@
                                         <i class="icon-up"></i>
                                         <em class="icon-down"></em>
                                         <form method="post" action="/venueuser/publishReply" iyuesai-plugins-valid="0.8687050607902173">
-                                            <input type="hidden" value="42" name="commentId">
-                                            <input type="hidden" value="passport_137569" name="replyToId">
-                                            <input type="text" validate-rules="[['required']]" placeholder="回复 han：" name="content">
+                                            <input type="hidden" value="{{id}}" name="reply_to">
+
+                                            <input type="text" validate-rules="[['required']]" placeholder="回复 {{nick_name}}：" name="content">
                                             <button class="btn btn-warning" type="submit">回复</button>
                                         </form>
                                     </div>
@@ -173,12 +174,10 @@
                 </dl>
 <input type="hidden" id="s_id" value="<{$detail.id}>" name="s_id">
             </div>
-
-
             </div>
         </div>
     </div>
 </div>
 
-<script type="text/javascript">Loader.load(['page.venueDetail']);</script>
+<script type="text/javascript" src="/Public/js/pages/venue_detail.js"></script>
 <include file="Public@default:Public:bottom" />

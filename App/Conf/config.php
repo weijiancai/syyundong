@@ -51,7 +51,11 @@ $Public_Config =  array(
         '/^Friends\/branch$/' => 'Friends/index/branch',
         '/^Friends\/search$/' => 'Friends/index/search',
         '/^Friends\/tag\/(\d+)$/' => 'Friends/index/tag?id=:1',
+        '/^Friends\/topic\/(\d+)$/' => 'Friends/index/topic?id=:1',
         '/^Friends\/hotTopicLoad/' => 'Friends/index/hotTopicLoad',
+
+        '/^Association\/(\d+)$/' => 'Association/index/ass_detail?id=:1',
+        '/^DoyenHall\/(\d+)$/' => 'DoyenHall/index/hall_detail?id=:1',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
@@ -65,7 +69,7 @@ $Public_Config =  array(
 
 	/*子域名服务*/
 	'APP_GROUP_MODE'	 => 1,
-	'APP_GROUP_LIST'     => 'Home,Public,Game,Activity,Friends,Users,Venue,Syweblg2015',
+	'APP_GROUP_LIST'     => 'Home,Public,Game,Activity,Friends,Users,Venue,Association,DoyenHall,Syweblg2015',
 	'DEFAULT_GROUP'      => 'Home',
 	'HTML_CACHE_ON'	=>true,
 	'HTML_CACHE_TIME'	=>true,

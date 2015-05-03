@@ -140,7 +140,7 @@
                                     <li style="display: list-item;">
                                         <div class="friends-thumb">
                                             <a target="_blank" href="/friend/passport_90896/timeline">
-                                                <img title="<if condition="$vo.nick_name neq null"><{$vo.nick_name}><elseif condition="$vo.name neq null"/><{$vo.name}><else/><{$vo.mobile}></if>" src="<{$vo['image']}>">
+                                                <img title="<if condition="$vo.nick_name neq null"><{$vo.nick_name}><elseif condition="$vo.name neq null"/><{$vo.name}><else/><{$vo.mobile}></if>" src="<if condition="$vo.image neq null"><{$vo['image']}><else/>__PUBLIC__/images/default/web_pic.jpg</if>">
                                             </a>
                                         </div>
                                         <p class="friends-nickname">

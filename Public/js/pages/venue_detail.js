@@ -36,7 +36,10 @@ $(function () {
                 data: $('#commentform').serialize(),
                 success: function ($result) {
                     if ($result==1) {
-                        $.dialog.success('评论成功');
+                        $commentData.empty();
+                        $('#content').val('');
+                        $more.data('last', 0);
+                        more();
                     } else {
                         $.dialog.error('评论失败');
                     }
@@ -50,22 +53,7 @@ $(function () {
         $panel.find('.reply-form').toggle();
     }
 
-    var $replyPanel = $('.reply-panel');
-    $replyPanel.find('a').click(onReplyClick);
-    // 验证，提交回复
-    var replyPanelValidateOption = {
-        rules: {
-            content: 'required'
-        },
-        messages: {
-            content: '回复内容不能为空！'
-        },
-        submitHandler: function (form) {
-            form.submit();
-            $(form).parent().hide();
-        }
-    };
-    $replyPanel.find('.reply-form form').validate(replyPanelValidateOption);
+
 
     //详细页换一换
     detail_change();
@@ -74,7 +62,7 @@ $(function () {
         jQuery.ajax({
             type: "post",
             url: "OtherVenueChange",
-            data: {id: $("#id").val()},
+            data: {id: $("#s_id").val()},
             success: function ($result) {
                 if ($result) {
                     var obj = eval($result);
@@ -93,19 +81,51 @@ $(function () {
         jQuery.ajax({
             type: "post",
             url: "collection",
-            data: {id: $("#id").val()},
+            data: {source_id: $("#s_id").val()},
             success: function ($result) {
-                if ($result==-1) {
+                if ($result==0) {
                     window.location.href='/login/login';
-                }else if($result==-2){
-                    $.dialog.success('收藏失败');
+                }else if($result==2){
+                    $.dialog.error('收藏失败');
                 }else{
                     $.dialog.success('收藏成功');
+                    window.location.href='';
                 }
             }
         })
     });
 
+    var $replyPanel = $('.reply-panel');
+    $replyPanel.find('a').click(onReplyClick);
+    // 验证，提交回复
+    var replyPanelValidateOption = {
+        rules: {
+            content: 'required'
+        },
+        messages: {
+            content: '回复内容不能为空！'
+        },
+        submitHandler: function (form) {
+            var data = $(form).serializeJson();
+            data['source_id'] = $('#source_id').val();
+            jQuery.ajax({
+                type: "post",
+                url: "/Venue/index/CommentReply",
+                data: data,
+                success: function ($result) {
+                    if ($result==1) {
+                        $commentData.empty();
+                        $more.data('last', 0);
+                        more();
+                    } else {
+                        $.dialog.error('回复失败');
+                    }
+                }
+            });
+            $(form).parent().hide();
+        }
+    };
+    $replyPanel.find('.reply-form form').validate(replyPanelValidateOption);
 
     //加载评论数据
     var s_id = $('#s_id').val();

@@ -136,7 +136,6 @@ $(function () {
             } else {
                 $more.text('点击加载更多内容').data('last', ++last);
             }
-
             for (var i = 0; i < data.length; i++) {
                 var $dl = $(template('list', data[i]));
                 $commentData.append($dl);
