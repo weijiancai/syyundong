@@ -1,0 +1,167 @@
+<include file="Public@default:Public:top"/>
+<div class="ucenter-page account-bg clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="span16">
+                <div class="account-top">
+                    <div class="account-thumb">
+                        <img name="user-head" src="<{$user['id']|getUsersImage}>">
+                        <div class="alpha-bg"></div>
+                    </div>
+                    <div class="account-right">
+                        <p class="account-right-name">
+                            <strong><{$user.nick_name}></strong>
+                        </p>
+                        <p class="account-tip"><{$user.signature}></p>
+                        <p><span class="account-tip">运动喜好：路跑  肚皮舞</span></p>
+                        <div class="alpha-bg"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="span16">
+                <div class="public-subnav clearfix">
+                    <ul>
+                        <!--<li><a href="/userCenter/timeline">我的足迹</a></li>-->
+                        <li><a href="/userCenter/Profile">个人资料</a></li>
+                        <li><a href="/userCenter/game">我的赛事</a></li>
+                        <li><a href="/userCenter/activity">我的活动</a></li>
+                        <li><a href="/userCenter/topic">我的话题</a></li>
+                        <li><a href="/userCenter/friend">我的赛友</a></li>
+                        <li><a href="/userCenter/message/msg-game">我的消息</a><i class="msg-tip" data-selector="unreadMsgCount" style="display: inline;">3</i></li>
+                        <!--
+                        <li><a href="/userCenter/orders">我的订单</a></li>
+                        <li><a href="/userCenter/venues">我的场馆</a></li>
+                        -->
+                        <li><a href="/userCenter/account">账号设置</a></li>
+                    </ul>
+                </div>
+            </div>        <div class="span16">
+            <div class="container ucenter-container">
+                <div class="main-block clearfix">
+                    <form action="/userCenter/profileEditSubmit" method="post" id="profileForm">
+                        <h4 class="main-title">个人资料
+                            <button  type="submit" class="btn btn-warning pull-right">保存</button>
+                        </h4>
+                        <div class="profile-wrap clearfix">
+                            <input type="hidden" value="<{$user.id}>" name="id">
+                            <table class="pull-left">
+                                <tbody>
+                                <tr>
+                                    <th>姓名：</th>
+                                    <td><input type="text" name="name" value="<{$user.name}>" placeholder="姓名" class="span3" validate-title="姓名">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>性别：</th>
+                                    <td>
+                                        <label class="radio inline"><input type="radio" name="gender" <if condition="$user.gender eq M">checked</if> value="男">男</label>
+                                        <label class="radio inline"><input type="radio" name="gender" <if condition="$user.gender eq F">checked</if> value="女">女</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>血型：</th>
+                                    <td>
+                                        <select name="blood_type" id="" class="span3" validate-title="血型">
+                                            <option value="">血型</option>
+                                            <option <eq name="user.blood_type" value="A">selected=selected</eq> value="A">A型</option>
+                                            <option <eq name="user.blood_type" value="B">selected=selected</eq> value="B">B型</option>
+                                            <option <eq name="user.blood_type" value="AB">selected=selected</eq> value="AB">AB型</option>
+                                            <option <eq name="user.blood_type" value="O">selected=selected</eq> value="O">O型</option>
+                                            <option <eq name="user.blood_type" value="Rh">selected=selected</eq> value="Rh">Rh型</option>
+                                            <option <eq name="user.blood_type" value="MN">selected=selected</eq> value="MN">MN型</option>
+                                            <option <eq name="user.blood_type" value="其他">selected=selected</eq>value="其他">其他</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>生日：</th>
+                                    <td>
+                                        <div class="input-prepend input-append">
+                                            <input type="text" name="birthDay" value="<{$user.birthday}>" class="span3 hasDatepicker" data-selector="udob" readonly="readonly" validate-title="生日" id="dp1430660638601">
+                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>公司：</th>
+                                    <td>
+                                        <input type="text" name="company" value="<{$user.company}>" placceholder="公司" class="span3" validate-title="公司">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>证件类型：</th>
+                                    <td>
+                                        <select name="certificateType" data-selector="certificateType" class="span3">
+                                            <option value="">选择证件类型</option>
+                                            <option <eq name="user.certificate_type" value="身份证">selected=selected</eq>value="身份证">身份证</option>
+                                            <option <eq name="user.certificate_type" value="军官证">selected=selected</eq>value="军官证">军官证</option>
+                                            <option <eq name="user.certificate_type" value="学生证">selected=selected</eq>value="学生证">学生证</option>
+                                            <option <eq name="user.certificate_type" value="护照">selected=selected</eq>value="护照">护照</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>证件号码：</th>
+                                    <td>
+                                        <input type="text" value="<{$user.certificate_num}>" name="certificate_num" value="" placceholder="证件号码" class="span3" validate-title="证件号码" >
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table class="pull-right">
+                                <tbody>
+                                <tr>
+                                    <th>身高：</th>
+                                    <td>
+                                        <div class="input-prepend input-append">
+                                            <input type="text" name="height" value="<{$user.high}>" validate-title="身高"  class="span3">
+                                            <span class="add-on">cm</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>体重：</th>
+                                    <td>
+                                        <div class="input-prepend input-append">
+                                            <input type="text" name="weight" value="<{$user.weight}>" validate-title="体重"  class="span3">
+                                            <span class="add-on">kg</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>手机：</th>
+                                    <td>
+                                        <input type="text" name="mobile" value="<{$user.mobile}>" class="span3" validate-title="手机" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>邮箱：</th>
+                                    <td>
+                                        <input type="text" name="email" value="<{$user.email}>" class="span3" validate-title="电子邮件" validate-rules="[['email','$格式不正确']]">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>邮编：</th>
+                                    <td>
+                                        <input type="text" name="postal_code" value="<{$user.postal_code}>" class="span1">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>通讯地址：</th>
+                                    <td>
+                                        <input type="text" name="address" value="<{$user.address}>" class="span3">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/Public/js/pages/profile_edit.js"></script>
+
+<include file="Public@default:Public:bottom"/>
