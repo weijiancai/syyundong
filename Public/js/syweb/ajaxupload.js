@@ -1,8 +1,8 @@
 $(function () {
     var files = $(".files");
     var btn = $(".btn span");
-    var show = '';
-    $("#fileupload").wrap("<form id='myupload' action='Syweblg2015/DbGame/upimg' method='post' class='pageForm required-validate' enctype='multipart/form-data'></form>");
+    var path_action = $('#path_action').val();
+    $("#fileupload").wrap("<form id='myupload' action="+$('#path_action').val()+" method='post' class='pageForm required-validate' enctype='multipart/form-data'></form>");
     $("#fileupload").change(function (event) {
         var size = event.target.files[0].size;
         var name = event.target.files[0].name;

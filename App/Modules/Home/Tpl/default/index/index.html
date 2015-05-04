@@ -17,6 +17,16 @@
     <!-- && start banner轮播图片： dz_sort -->
     <!-- Wrapper for slides -->
     <ul class="carousel-inner" role="listbox">
+        <volist name="banner" id="vo">
+            <li class="item active">
+                <img src="<{$vo.local_url}>"
+                     alt="<{$vo.banner_desc}>">
+
+                <div class="carousel-caption desc">
+                    <a href="Game/<{$vo.id}>" class="banner-title" target="_blank"><{$vo.banner_desc}></a>
+                </div>
+            </li>
+            </volist>
         <li class="item active">
             <img src="http://static.wisdom-china.cn//images/1/8096/7486/9557/10ce4fdd265ae1cb6edec3de43fa9cd7_2_505x355.jpg?640x442"
                  alt="夜跑马拉松！狮城跑者狂欢之夜">

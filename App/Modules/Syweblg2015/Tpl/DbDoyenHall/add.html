@@ -25,7 +25,7 @@
     <div class="pageContent">
         <form method="post" action="__URL__/insert/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
-                <input type="hidden" value="<{$vo.id}>" name="id">
+
                 <dl>
                     <dt>达人：</dt>
                     <dd><input type="text" class="required" value="" name="name"></dd>
@@ -44,7 +44,7 @@
 
                 <dl class="nowrap">
                     <dt>内容:</dt>
-                    <dd><textarea name="content" id="myEditor"><{$vo['content']}></textarea>
+                    <dd><textarea name="description" id="myEditor"><{$vo['description']}></textarea>
                         <script type="text/javascript">
                             UE.getEditor('myEditor');
                         </script>
@@ -58,7 +58,9 @@
                         <input type="hidden" value="<{$vo.image}>" name="image" id="image">
                     </dd>
                 </dl>
+                <input type="hidden" id="path_action" value="Syweblg2015/DbDoyenHall/upimg">
                 <input type="hidden" value="doyen" id="path">
+
             </div>
             <div class="formBar">
                 <ul>

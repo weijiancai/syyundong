@@ -14,7 +14,8 @@ class IndexAction extends Action
         $this->assign('hot_activity', $this->getHotActivity());
         $this->assign('doyen', $this->getDoyenUser());
         $this->assign('game_sport',$this->getGameSport());
-        $this->firend_rcommend();
+        $this->friend_recommend();
+        $this->BannerImage();
         $this->display();
     }
 
@@ -90,11 +91,19 @@ class IndexAction extends Action
      * @功能：热门赛友圈
      * @时间:20150418
      */
-    public function firend_rcommend(){
+    public function friend_recommend(){
         $model = New Model();
         $list = $model->query('select v.id,o.sort_num, v.name,v.province,v.image,v.province,v.join_count from v_game_activity v,op_recommend o
                                 where v.id = o.gc_id and o.recommend_type = "game" and v.type="game" order by o.sort_num limit 9');
         $this->assign('recommend', $list);
+    }
+
+    /*
+     * @功能：首页轮播图
+     * @时间:20150418
+     */
+    public function BannerImage(){
+        $this->assign('banner', D('VBannerImages')->select());
     }
 
 }

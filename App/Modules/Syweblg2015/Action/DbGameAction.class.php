@@ -230,9 +230,9 @@ class DbGameAction extends CommonAction
         $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
         $upload->savePath = './Public/upload/' . $path . '/'; // 设置附件上传目录
         $upload->thumb = true;
-        $upload->thumbPrefix = '';
-        $upload->thumbMaxWidth = '600';
-        $upload->thumbMaxHeight = '400';
+        $upload->thumbPrefix = 's_';
+        $upload->thumbMaxWidth = '150';
+        $upload->thumbMaxHeight = '150';
         $upload->thumbType = 0;
         $upload->zipImages = true;
         $upload->autoSub = true;
@@ -247,6 +247,7 @@ class DbGameAction extends CommonAction
 
             //存储图片
             $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
+            $date['size2_url'] = '/Public/upload/' . $path . '/s_' . $info[0]['savename'];
             $result = D('DbImages')->add($date);
             //打水印
             /* $Image = new Image();
