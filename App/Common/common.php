@@ -262,4 +262,41 @@ function getSportType($type){
 function getImageUrl($id){
     return  D('DbImages')->where('id='.$id)->getField('local_url');
 }
+/*
+ * @功能：返回赛事字段信息
+ * @时间:20150419
+ */
+function getGameField($field){
+    switch ($field) {
+        case "game_declare" :
+            $result = '参赛声明';
+            break;
+        case "content" :
+            $result = '赛事介绍';
+            break;
+        case "member_right" :
+            $result = '会员权益';
+            break;
+        case "aout_route" :
+            $result = '比赛路线';
+            break;
+        case "about_cost" :
+            $result = '关于费用';
+            break;
+        case "about_trip" :
+            $result = '行程安排';
+            break;
+        case "about_hotal" :
+            $result = '入住酒店';
+            break;
+    }
+    return  $result;
+}
+/*
+ * @功能：返回赛事名称
+ * @时间:20150419
+ */
+function getGameName($id){
+    return  D('DbGame')->where('id='.$id)->getField('name');
+}
 ?>

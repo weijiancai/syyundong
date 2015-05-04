@@ -1,0 +1,395 @@
+<include file="Public@default:Public:top" />
+<link href="__PUBLIC__/css/other.css" rel="stylesheet" type="text/css" />
+<!---- 主体内容 str ---->
+<div id="main" class="divauto">
+	<!---- 1002_60广告 str ---->
+    <!---- 1002_60广告 end ---->
+    
+	<div class="section1_left">
+    	<!---- 焦点图 str ---->
+    	<div id="focusBox" class="focusBox">
+            <div class="bd">
+                <ul>
+					<volist name="one" id="v1">	
+                        <li>
+                            <div class="pic"><a target="_blank" href="/liao/<{$v1['ID']}>" style="text-decoration:none"><img src="<{$v1['lcontent']|getimgurl}>" /></a></div>
+                            <div class="con"><span><a href="/liao/<{$v1['ID']}>" target="_blank" style="text-decoration:none"><{$v1['lname']}></a></span></div>
+                        </li>						
+					</volist>
+                </ul>
+            </div>
+            <div class="hd">
+                <ul>
+					<volist name="one" id="vo"  key="k">
+					<li><{$k}></li>
+					</volist>
+				</ul>
+            </div>
+        </div>
+        <script type="text/javascript">jQuery(".focusBox").slide( { mainCell:".bd ul",autoPlay:true, delayTime:0, trigger:"click"} );</script>
+        <!---- 焦点图 end ---->
+    </div>
+    
+    <div class="section1_mid" style="margin-left:0px;">
+    	<!---- 新闻中心 str ---->
+		<style>
+			.index_new{
+				height:379px;
+				padding:0 0px;
+			}
+			.index_new_hot{
+				
+			}
+		</style>
+    	<div class="index_new">
+			<volist name="two21" id="v21">	
+	        	<dl class="index_new_hot">
+					<dt><a href="/liao/<{$v21['ID']}>" target="_blank" style="text-decoration:none"><{$v21.lname}></a></dt>
+					<dd><{$v21['lcontent']|htmlspecialchars_decode|strip_tags|msubstr=0,300,'utf-8'}> </dd>
+				</dl>			
+			</volist>
+        	<ul class="index_new_list">
+				<volist name="two22" id="v22">	
+					<li><span class="index_new_l">[<a href="/liao/<{$v22['ID']}>" target="_blank" style="text-decoration:none" ><{$v22.ltype|getliaoclass}></a>]<a href="/liao/<{$v22['ID']}>" target="_blank" style="text-decoration:none"><{$v22.lname|msubstr=0,50,'utf-8',false}></a></span>
+						<span class="index_new_r"><{$v22['luser']|deCode|getUserID}></span>
+					</li>		
+			</volist>
+            	
+            </ul>
+        </div>
+        <!---- 新闻中心 end ---->
+    </div>
+    
+    <div class="section1_right">
+    	<!---- 最新活动 str ---->
+    	<div class="active">
+        	<div class="tit"><span>最新活动</span></div>
+            <ul class="active_list" style="padding:0px 0px;height:364px;">
+				<volist name="three" id="v3">
+	            	<li>
+                    <dl>
+                    <dt><a href="/liao/<{$v3['ID']}>" target="_blank" style="text-decoration:none"><img src="<{$v3['lcontent']|getimgurl}>" /></a></dt>
+                    <dd style="margin-left:2px"><strong><a target="_blank" href="/liao/<{$v3['ID']}>" style="text-decoration:none"><{$v3.lname|trans|msubstr=0,50,'utf-8',false}></a></strong>
+                    <{$v3['lcontent']|stripslashes|stripslashes|htmlspecialchars_decode|strip_tags|DeleteHtml|msubstr=0,200,'utf-8',false}></dd>
+                    </dl>
+                </li>				
+				</volist>
+
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <!---- 最新活动 end ---->
+    </div>
+    <div class="clear"></div>
+	<div class="hj_lc">
+		<div class="lc-con">
+			<a href="" target="_blank"><div class="bz-info"><b>选婚期</b></div></a>
+			<div class="bz-go"></div>
+			<a href="" target="_blank"><div class="bz-info"><b>订婚</b></div></a>
+			<div class="bz-go"></div>
+			<a href="" target="_blank"><div class="bz-info"><b>登记结婚</b></div></a>
+			<div class="bz-go"></div>
+			<a href="" target="_blank"><div class="bz-info"><b>订酒店</b></div></a>
+			<div class="bz-go"></div>
+			<a href="" target="_blank"><div class="bz-info"><b>婚纱照</b></div></a>
+			<div class="bz-go"></div>
+			<a href="" target="_blank"><div class="bz-info"><b>订婚庆</b></div></a>	
+		</div>
+	</div>
+    <div class="clear"></div>
+    <div class="show">
+
+<div class="hq_gbnr">
+
+<div class="hq_hdsjleft">
+<div class="hq_leftgtit"><img src="__PUBLIC__/images/bbs/ppsjtit.jpg"></div>
+<div class="hq_leftconn">
+<div class="hq_leftconnph"><img src="__PUBLIC__/images/bbs/hdsjdh.jpg"></div>
+<div class="hq_lctxt">
+   	  <p>商家之间可以直接交流,谈判,签合同,消费者也可以把自己的反馈建议反映给商家,而商家可以根据消费者的反馈及时调研产品及服务品质,做到良性互动.</p>
+</div>
+<div class="hq_lcimg">
+<a target="_blank" href="http://www.ytbbs.com/plugin.php?id=dzapp_shop&amp;mod=attend">
+<img src="http://www.ytbbs.com/supemod/resources/marry/images/hdsjrz.jpg"></a></div>
+</div>
+</div>
+<div class="hq_hdsjright">
+<!-- 自动获取 elaine -->
+	<volist name="four" id="v4">
+	<div class="hq_hdsjlb">
+	<div class="hq_hdsjimg"><a target="_blank" href="/liao/<{$v4['ID']}>">
+	<img width="163" height="125" src="<{$v4.lcontent|getimgurl}>"></a>
+	</div>
+	<div class="hq_hdsjtxt"><a target="_blank" href="/liao/<{$v4['ID']}>"><{$v4.lname|msubstr=0,50,'utf-8',false}></a></div>
+	</div>
+	</volist>
+</div>
+</div>
+        <!-- <div class="con">
+        	<ul class="bander">
+				<volist name="four" id="v4">
+            	<li><a href="/weba/<{$v4.WEB}>" target="_blank" style="text-decoration:none"><img src="__PUBLIC__/Upload/store/<{$v4.WEB}>/<{$v4.LOGO}>" /></a></li>
+				</volist>
+            </ul>
+        </div> -->
+<!--         <div class="con">
+        	<ul class="view">
+					<volist name="four" id="v4">
+            	<li>
+                  <div class="view_box">
+                      <div class="view_img"><a href="/liao/<{$v4['ID']}>" target="_blank"><img src="<{$v4.lcontent|getimgurl}>" /></a></div>
+                      <div class="view_text"><a href="/liao/<{$v4['ID']}>" target="_blank" style="text-decoration:none"><{$v4.lname|msubstr=0,50,'utf-8',false}></a></div>
+                  </div>
+                </li>
+				</volist>
+            </ul>
+        </div> -->
+		<div class="ad_330_60"><ul><?php echo ads(210);?></ul></div>
+    </div>
+    <div class="clear"></div>
+    <div class="show">
+
+        <div class="con">
+<!--         	<ul class="view">
+					<volist name="five" id="v5">
+            	<li>
+                  <div class="view_box">
+                      <div class="view_img"><a href="/liao/<{$v5['ID']}>" target="_blank"><img src="<{$v5.lcontent|getimgurl}>" /></a></div>
+                      <div class="view_text"><a href="/liao/<{$v5['ID']}>" target="_blank" style="text-decoration:none"><{$v5.lname|msubstr=0,50,'utf-8',false}></a></div>
+                  </div>
+                </li>
+				</volist>
+            </ul> -->
+<div class="img_con1">
+<div class="nav_top"><div class="nav1"></div><div class="nav2">拍婚纱</div><div class="nav3"><div class="nav3-1"><a target="_blank" href="http://www.0574bbs.com/thread-htm-fid-304-type-261.html">更多 &gt;&gt;</a></div></div></div>
+<div class="imgleft">
+<ul>
+	<li style=""><a target="_blank" href="http://www.0574bbs.com/read-htm-tid-1610386.html"><img src="upload_imgs/diaryimg-1/1414634925.jpg"><div class="titletext">短发新娘Style</div></a></li>
+</ul><div class="shadet"></div></div>
+<div class="imgtop">
+<div class="imgtopleft2">
+<ul>
+	<li style=""><a target="_blank" href="http://www.0574bbs.com/read-htm-tid-1620493-fpage-3.html"><img src="upload_imgs/diaryimg-2/1409289785.jpg"><div class="titletext">摇滚音乐风</div></a></li>
+	<li style="display: none;"><a target="_blank" href="http://www.0574bbs.com/read-htm-tid-1572721-fpage-6.html"><img src="upload_imgs/diaryimg-2/1409289814.jpg"><div class="titletext">越简单越幸福</div></a></li>
+</ul><div class="shadet"></div></div>
+<div class="imgtopleft3">
+<ul>
+	<li style=""><a target="_blank" href="http://www.0574bbs.com/read-htm-tid-1620902-fpage-3.html"><img src="upload_imgs/diaryimg-3/1414634719.jpg"><div class="titletext">我们的幸福日记</div></a></li>
+	<li style="display: none;"><a target="_blank" href="http://www.0574bbs.com/read-htm-tid-1597908.html"><img src="upload_imgs/diaryimg-3/1409289319.jpg"><div class="titletext">灰太狼和小清新</div></a></li>
+</ul><div class="shadet"></div></div></div>
+<div class="imgbottom"><div class="imgbottomleft1">
+<ul>
+	<li style=""><a target="_blank" href="http://www.0574bbs.com/read-htm-tid-1573365-fpage-7.html"><img src="upload_imgs/diaryimg-4/1414635030.jpg"><div class="titletext">纯正韩风</div></a></li>
+	<li style="display: none;"><a target="_blank" href="http://www.0574bbs.com/read-htm-tid-1573922-fpage-7.html"><img src="upload_imgs/diaryimg-4/1414635346.jpg"><div class="titletext">超美自然风</div></a></li>
+
+</ul><div class="shadet"></div></div>
+<div class="imgbottomleft2">
+<ul>
+	<li style=""><a target="_blank" href="http://www.0574bbs.com/read-htm-tid-1623055.html"><img src="upload_imgs/diaryimg-5/1414634498.jpg"><div class="titletext">【幸福】其实很简单</div></a></li>
+	<li style="display: none;"><a target="_blank" href="http://www.0574bbs.com/thread-1608654-1-1.html"><img src="upload_imgs/diaryimg-5/1409122793.jpg"><div class="titletext">太土豪受不了</div></a></li>
+</ul>
+<div class="shadet"></div></div></div>
+</div>
+        </div>
+    </div>
+	 <div class="clear"></div>
+    <div class="show">
+    	<div class="tit"><span>找婚庆</span></div>
+        <div class="con">
+<div class="hlch">
+<div class="nav_top"><div class="nav1"></div><div class="nav2">婚礼策划</div><div class="nav3"><div class="nav3-1"><a target="_blank" href="http://marry.eyuyao.com/hlchsj.php">更多商家 &gt;&gt;</a></div></div></div>
+<div class="hlchtop">
+    <div class="hlchimgcon1">
+	<ul>
+		<li style=""><a target="_blank" href="http://marry.eyuyao.com/hlch/sj-161.html"><img src="%E4%BD%99%E5%A7%9A%E5%A9%9A%E5%AB%81%E7%BD%91_%E5%A9%9A%E7%BA%B1%E6%91%84%E5%BD%B1_%E5%A9%9A%E7%A4%BC%E7%AD%96%E5%88%92_%E5%9B%9B%E5%A4%A7%E9%87%91%E5%88%9A_%E5%A9%9A%E5%AE%B4%E9%85%92%E5%BA%97_%E7%8F%A0%E5%AE%9D%E9%A6%96%E9%A5%B0_%E4%BD%99%E5%A7%9A%E7%94%9F%E6%B4%BB%E7%BD%91_files/1427866912.jpg"><div class="titletext">牵手婚礼</div><div class="shadet"></div></a></li>
+		</ul>
+	</div>
+	<div class="hlchimgcon2">
+	<div class="hlchimg1">
+	<ul>
+		<li style=""><a href="http://marry.eyuyao.com/hlch/sj-99.html" target="_blank"><img src="%E4%BD%99%E5%A7%9A%E5%A9%9A%E5%AB%81%E7%BD%91_%E5%A9%9A%E7%BA%B1%E6%91%84%E5%BD%B1_%E5%A9%9A%E7%A4%BC%E7%AD%96%E5%88%92_%E5%9B%9B%E5%A4%A7%E9%87%91%E5%88%9A_%E5%A9%9A%E5%AE%B4%E9%85%92%E5%BA%97_%E7%8F%A0%E5%AE%9D%E9%A6%96%E9%A5%B0_%E4%BD%99%E5%A7%9A%E7%94%9F%E6%B4%BB%E7%BD%91_files/1408774500.jpg"><div class="titletext">红双喜婚庆</div><div class="shadet"></div></a></li>
+		</ul></div></div>
+	<div class="hlchimgcon6">
+		<div class="hlchimg2"><ul>
+				<li style=""><a href="http://marry.eyuyao.com/hlch/sj-182.html" target="_blank"><img src="%E4%BD%99%E5%A7%9A%E5%A9%9A%E5%AB%81%E7%BD%91_%E5%A9%9A%E7%BA%B1%E6%91%84%E5%BD%B1_%E5%A9%9A%E7%A4%BC%E7%AD%96%E5%88%92_%E5%9B%9B%E5%A4%A7%E9%87%91%E5%88%9A_%E5%A9%9A%E5%AE%B4%E9%85%92%E5%BA%97_%E7%8F%A0%E5%AE%9D%E9%A6%96%E9%A5%B0_%E4%BD%99%E5%A7%9A%E7%94%9F%E6%B4%BB%E7%BD%91_files/1416469220.jpg"><div class="titletext">艾妮婚庆礼仪</div><div class="shadet"></div></a></li>
+				</ul></div>
+	</div>
+</div>
+<div class="hlchbottom">
+<div class="hlchimgcon3">
+<ul id="imghl1">
+	<li style=""><a target="_blank" href="http://marry.eyuyao.com/hlch/sj-94.html"><img src="%E4%BD%99%E5%A7%9A%E5%A9%9A%E5%AB%81%E7%BD%91_%E5%A9%9A%E7%BA%B1%E6%91%84%E5%BD%B1_%E5%A9%9A%E7%A4%BC%E7%AD%96%E5%88%92_%E5%9B%9B%E5%A4%A7%E9%87%91%E5%88%9A_%E5%A9%9A%E5%AE%B4%E9%85%92%E5%BA%97_%E7%8F%A0%E5%AE%9D%E9%A6%96%E9%A5%B0_%E4%BD%99%E5%A7%9A%E7%94%9F%E6%B4%BB%E7%BD%91_files/1416966907.jpg"><div class="titletext">符号传媒明尚婚庆</div><div class="shadet"></div></a></li>
+	</ul>
+</div>
+<div class="hlchimgcon3 hlchimgconcen">
+<ul id="imghl2">
+	<li style=""><a target="_blank" href="http://marry.eyuyao.com/hlch/sj-101.html"><img src="%E4%BD%99%E5%A7%9A%E5%A9%9A%E5%AB%81%E7%BD%91_%E5%A9%9A%E7%BA%B1%E6%91%84%E5%BD%B1_%E5%A9%9A%E7%A4%BC%E7%AD%96%E5%88%92_%E5%9B%9B%E5%A4%A7%E9%87%91%E5%88%9A_%E5%A9%9A%E5%AE%B4%E9%85%92%E5%BA%97_%E7%8F%A0%E5%AE%9D%E9%A6%96%E9%A5%B0_%E4%BD%99%E5%A7%9A%E7%94%9F%E6%B4%BB%E7%BD%91_files/1427866835.jpg"><div class="titletext">爱都婚礼策划</div><div class="shadet"></div></a></li>
+	</ul>
+</div>
+<div class="hlchimgcon3">
+<ul id="imghl3">
+	<li style=""><a target="_blank" href="http://marry.eyuyao.com/hlch/sj-129.html"><img src="%E4%BD%99%E5%A7%9A%E5%A9%9A%E5%AB%81%E7%BD%91_%E5%A9%9A%E7%BA%B1%E6%91%84%E5%BD%B1_%E5%A9%9A%E7%A4%BC%E7%AD%96%E5%88%92_%E5%9B%9B%E5%A4%A7%E9%87%91%E5%88%9A_%E5%A9%9A%E5%AE%B4%E9%85%92%E5%BA%97_%E7%8F%A0%E5%AE%9D%E9%A6%96%E9%A5%B0_%E4%BD%99%E5%A7%9A%E7%94%9F%E6%B4%BB%E7%BD%91_files/1410508613.jpg"><div class="titletext">罗马嫁日</div><div class="shadet"></div></a></li>
+	</ul>
+</div></div>
+</div>
+<!--         	<ul class="view">
+					<volist name="six" id="v6">
+            	<li>
+                  <div class="view_box">
+                      <div class="view_img"><a href="/liao/<{$v6['ID']}>" target="_blank"><img src="<{$v6.lcontent|getimgurl}>" /></a></div>
+                      <div class="view_text"><a href="/liao/<{$v6['ID']}>" target="_blank" style="text-decoration:none"><{$v6.lname|msubstr=0,50,'utf-8',false}></a></div>
+                  </div>
+                </li>
+				</volist>
+            </ul> -->
+        </div>
+    </div>
+	 <div class="clear"></div>
+    <div class="show">
+    	<div class="tit"><span>定钻饰</span></div>
+        <div class="con">
+        	<ul class="wedding">
+				<volist name="seven" id="v7">
+            	<li><a href="/liao/<{$v7['ID']}>" target="_blank" style="text-decoration:none"><img src="<{$v7.lcontent|getimgurl}>" /></a></li>
+				</volist>
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>   
+    <div class="show">
+    	<div class="tit"><span>婚恋故事</span></div>
+<!--         <div class="con">
+        	<ul class="gold">
+				<volist name="seven" id="v7">
+            	<li><a target="_blank" href="/weba/<{$v7.WEB}>" style="text-decoration:none"><img src="__PUBLIC__/Upload/store/<{$v7.WEB}>/<{$v7.LOGO}>" /></a></li>
+				</volist>
+            </ul>
+        </div> -->
+        <div class="con">
+        	<ul class="view">
+					<volist name="eight" id="v8">
+            	<li>
+                  <div class="view_box">
+                      <div class="view_img"><a href="/liao/<{$v8['ID']}>" target="_blank"><img src="<{$v8.lcontent|getimgurl}>" /></a></div>
+                      <div class="view_text"><a href="/liao/<{$v8['ID']}>" target="_blank" style="text-decoration:none"><{$v8.lname|msubstr=0,50,'utf-8',false}></a></div>
+                  </div>
+                </li>
+				</volist>
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="show">
+    	<div class="tit"><span>小利探店</span></div>
+<!--         <div class="con">
+        	<ul class="gold">
+				<volist name="eight" id="v8">
+            	<li><a target="_blank" href="/weba/<{$v8.WEB}>" style="text-decoration:none"><img src="__PUBLIC__/Upload/store/<{$v8.WEB}>/<{$v8.LOGO}>" /></a></li>
+				</volist>
+            </ul>
+        </div> -->
+        <div class="con">
+        	<ul class="view">
+					<volist name="nine" id="v9">
+            	<li>
+                  <div class="view_box">
+                      <div class="view_img"><a href="/liao/<{$v9['ID']}>" target="_blank"><img src="<{$v9.lcontent|getimgurl}>" /></a></div>
+                      <div class="view_text"><a href="/liao/<{$v9['ID']}>" target="_blank" style="text-decoration:none"><{$v9.lname|msubstr=0,50,'utf-8',false}></a></div>
+                  </div>
+                </li>
+				</volist>
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+	    <div class="show">
+    	<div class="tit"><span>新娘相册</span></div>
+<!--         <div class="con">
+        	<ul class="gold">
+				<volist name="eight" id="v8">
+            	<li><a target="_blank" href="/weba/<{$v8.WEB}>" style="text-decoration:none"><img src="__PUBLIC__/Upload/store/<{$v8.WEB}>/<{$v8.LOGO}>" /></a></li>
+				</volist>
+            </ul>
+        </div> -->
+        <div class="con">
+        	<ul class="view">
+					<volist name="ten" id="v10">
+            	<li>
+                  <div class="view_box">
+                      <div class="view_img"><a href="/liao/<{$v10['ID']}>" target="_blank"><img src="<{$v10.lcontent|getimgurl}>" /></a></div>
+                      <div class="view_text"><a href="/liao/<{$v10['ID']}>" target="_blank" style="text-decoration:none"><{$v10.lname|msubstr=0,50,'utf-8',false}></a></div>
+                  </div>
+                </li>
+				</volist>
+            </ul>
+        </div>
+    </div>
+<!--     <div class="show">
+    	<div class="tit"><span>婚嫁交流</span></div>
+        <div class="bbs_con">
+                 <ul class="bbs_list">
+			<volist name="nine1" id="v91">
+            	<li>
+                	<div class="bbs_num"><{$v91.LID|tiezinum}></div>
+                    <dl class="bbs_titles">
+                    	<dt><a target="_blank" href="/liao/<{$v91['ID']}>" style="text-decoration:none" class="bbs_a"><{$v91.lname}></a><span><img src="images/bbs/zd.png" /></span><span><img src="images/bbs/jh.png" /></span><span><img src="images/bbs/tp.png" /></span></dt>
+                        <dd style="width:750px"><{$v91.lcontent|htmlspecialchars_decode|strip_tags|msubstr=0,300,'utf-8',true}></dd>
+                    </dl>
+                    <dl class="bbs_name">
+                    	<dt>
+			<?php	$uid=M('users')->where('ID ='.deCode($v91['luser']))->field('ID,uid,nicheng')->find();
+					if(trim($uid['nicheng'])==''){echo $uid['uid'];}else{echo $uid['nicheng'];}?>
+						</dt>
+                        <dd><span><a href="#"><?php $liaoendReplys=liaoendReply($v91['LID']);echo(getusername(deCode($liaoendReplys['luser'])));?></a></span><?php $liaoendReplys=liaoendReply($v91['LID']);echo(date("H:i",$liaoendReplys['ltime']));?></dd>
+                    </dl>
+                </li>				
+			</volist>
+					<div id='test'>
+					<volist name="list" id="v6">
+                    <li>
+                        <dl class="bbs_titles">
+                            <dt><div class="bbs_num"><{$v6.lviews}>/<{$v6.LID|tiezinum}></div>
+							<a href="/liao/<{$v6['ID']}>" target="_blank" class="bbs_a"><{$v6.lname}></a><ins>[<{$v6.ltype|getbantype}>]</ins></dt>
+                            <dd>						
+
+						<{$v6['lcontent']|stripslashes|stripslashes|htmlspecialchars_decode|strip_tags|DeleteHtml|msubstr=0,60,'utf-8',true}>
+						</dd>
+                        </dl>
+                    <dl class="bbs_name">
+                    	<dt>
+			<?php	$uid=M('users')->where('ID ='.deCode($v6['luser']))->field('ID,uid,nicheng')->find();
+					if(trim($uid['nicheng'])==''){echo $uid['uid'];}else{echo $uid['nicheng'];}?>
+						</dt>
+                        <dd><span><a href="#"><?php $liaoendReplys=liaoendReply($v6['LID']);echo(getusername(deCode($liaoendReplys['luser'])));?></a></span><?php $liaoendReplys=liaoendReply($v6['LID']);echo(date("H:i",$liaoendReplys['ltime']));?></dd>
+                    </dl>
+                    </li>
+					</volist>
+					</div>
+                </ul>       
+        	<div class="clear"></div>
+            <div class="pageCss1 mt30">
+                 <span class="current">1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <span>...</span>
+                <a href="#">下一页</a>
+                <span>共 190 页 跳转到：</span>
+                <input type="text" class="pageipt" />
+                <input type="button" value="GO" class="pagebtn" /> 
+				<{$page}>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div> -->
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>
+<!---- 主体内容 end ---->
+
+<!---- 尾部公用 str ---->
+<include file="Public@default:Public:bottom" />
+<!---- 尾部公用 end ---->
+</body>
+</html>

@@ -95,6 +95,7 @@ class DbGameAction extends CommonAction
      */
     function update()
     {
+        $name = 'DbGame';
         $model = D('DbGame');
         if (false === $model->create()) {
             $this->error($model->getError());
@@ -138,7 +139,45 @@ class DbGameAction extends CommonAction
         $data = D('DzSport')->field('id,name')->where($where)->select();
         echo json_encode($data);
     }
-
+    /*
+    * @功能：赛事其他详细信息
+    * @时间：20150422
+    */
+    public function detail(){
+        $id =$_GET['id'];
+        $list =  D('DbGame')->where('id='.$id)->find();
+        $this->assign('vo',$list);
+        $this->display();
+    }
+    /*
+    * @功能：赛事其他详细信息编辑页面
+    * @时间：20150422
+    */
+    public function other_edit(){
+        $id =$_GET['id'];
+        $field =$_GET['field'];
+        $list =  D('DbGame')->where('id='.$id)->find();
+        $this->assign('vo',$list);
+        $this->assign('field',$field);
+        $this->display();
+    }
+    /*
+    * @功能：赛事其他详细信息编辑页面
+    * @时间：20150422
+    */
+    public function other_update(){
+        $name="detail";
+        $model = D('DbGame');
+        if (false === $model->create()) {
+            $this->error($model->getError());
+        }
+        $list = $model->save();
+        if ($list !== false) {
+            echo $this->ajax('1', "更新成功", $name, "", "closeCurrent");
+        } else {
+            echo $this->ajax('0', "更新失败", $name, "", "closeCurrent");
+        }
+    }
     /*
      * @功能：禁用赛事
      * @时间：20150422
