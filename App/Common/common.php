@@ -435,5 +435,12 @@ function  strtoarr($strs){
     $array = explode(',', $strs);
     return $array;
 }
+/*
+ * @功能：字符串格式去除
+ * @时间:20150419
+ */
+function  RemoveFormat ($str){
+    return str_replace(array('<p>','</p>'), '',strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($str))),"<img>"));
+}
 
 ?>
