@@ -90,25 +90,10 @@
                                     <span class="p-ttl">密码：</span>
                                     <span>******</span>
                                     <!-- 需要在data-url中传输登录的url -->
-                                    <button class="btn" data-selector="change-password" data-action="/userCenter/account/changePassword" data-url="/auth/login" name="change-password">修改密码</button>
+                                    <button class="btn" id="changePassword">修改密码</button>
                                     <br>
                                     <span class="text-tip">建议您启动全部安全设置，以保障账户及资金安全</span>
                                 </p>
-                                <!--
-                                                <p class="lvl-danger">
-                                -->
-                                <!-- 提示： class=lvl-danger=很危险; class=lvl-low=危险; class=lvl-safe=安全; class=lvl-high=很安全 -->
-                                <!--
-                                                  <span class="p-ttl">密码：</span>
-                                                  <span class="lvl-tip tip-danger">很危险</span>
-                                                  <span class="lvl-tip tip-low">危险</span>
-                                                  <span class="lvl-tip tip-safe">安全</span>
-                                                  <span class="lvl-tip tip-high">很安全</span>
-                                                  <span class="lvl-bar"><i></i></span>
-                                                  <button class="btn" name="change-password">修改密码</button>
-                                                </p>
-                                -->
-
 
                                 <p data-selector="perfer-show">
                                     <span class="p-ttl">个人签名：</span>
@@ -148,4 +133,24 @@
     </div>
 </div>
 
+<div id="modifyPasswordDialog" style="display: none;">
+    <form id="validatePassForm" method="post" action="/userCenter/account/changePassword">
+        <p>
+            <span class="span1">原始密码</span>
+            <input type="password" name="oldPassword" validate-title="原始密码" validate-rules="[['required']]">
+        </p>
+
+        <p>
+            <span class="span1">新密码</span>
+            <input type="password" name="newPassword" validate-title="新密码" validate-rules="[['required']]">
+        </p>
+
+        <p>
+            <span class="span1">确认密码</span>
+            <input type="password" name="newPassword1" validate-title="确认密码" validate-rules="[['required'],['equalto',{'name':'newPassword'}]]">
+        </p>
+    </form>
+</div>
+
+<script type="text/javascript" src="/Public/js/pages/profile_edit.js"></script>
 <include file="Public@default:Public:bottom" />

@@ -103,7 +103,9 @@ class IndexAction extends Action
      * @时间:20150418
      */
     public function BannerImage(){
-        $this->assign('banner', D('VBannerImages')->select());
+        $model= new Model();
+        $banner = $model->query('SELECT id,name,image FROM v_recommend_game ORDER BY focus_count DESC, join_count DESC  LIMIT 0, 6');
+        $this->assign('banner',$banner);
     }
 
 }

@@ -55,7 +55,7 @@ $(function () {
                     success: function (result) {
                         if (result == 1) {
                             $.dialog.success('修改成功！');
-                            window.location.href="";
+                        //    window.location.href="";
                         } else if (result == 2) {
                             $.dialog.error('修改失败！');
                         }
@@ -63,4 +63,64 @@ $(function () {
                 });
             }
         });
+
+    //我要参加
+    $('#changePassword').on('click', function() {
+        var $dialog = $('#modifyPasswordDialog');
+        var validate, $form;
+
+        var d = dialog({
+            title: '修改密码',
+            content: $dialog.html(),
+            okValue: '提交',
+            ok: function () {
+                validate.form();
+                return false;
+            },
+            onshow: function() {
+                var $content = this._$('content');
+                $form = $content.find('#validatePassForm');
+                validate = $form.validate({
+                    rules: {
+                        oldPassword: 'required',
+                        newPassword: {
+                            required: true,
+                            minlength: 6,
+                            maxlength: 16
+                        },
+                        newPassword1: {
+                            required: true,
+                            minlength: 6,
+                            maxlength: 16,
+                            equalTo: '#newPassword1'
+                        }
+                    },
+                    messages: {
+                        oldPassword: '原始密码不能为空！',
+                        newPassword: {   required: '密码不能为空！',
+                            minlength: " 密码长度不能小于6个字符",
+                            maxlength: " 密码长度不能大于15个字符"
+                        },
+                        newPassword1: {
+                            required: '确认密码不能为空！',
+                            minlength: " 密码长度不能小于6个字符",
+                            maxlength: " 密码长度不能大于15个字符",
+                            equalTo: '两次输入密码不一致！'
+                        }
+                    },
+                    submitHandler: function (form) {
+                        //    form.submit();
+                        jQuery.ajax({
+                            type: "post",
+                            url: "/ResetPwd",
+                            data: $form.serializeJson(),
+                            success: function ($result) {
+                                d.close();
+                            }
+                        });
+                    }
+                });
+            }
+        }).width(350).showModal();
+    });
 });

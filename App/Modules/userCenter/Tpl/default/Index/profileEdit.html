@@ -54,8 +54,8 @@
                                 <tr>
                                     <th>性别：</th>
                                     <td>
-                                        <label class="radio inline"><input type="radio" name="gender" <if condition="$user.gender eq M">checked</if> value="男">男</label>
-                                        <label class="radio inline"><input type="radio" name="gender" <if condition="$user.gender eq F">checked</if> value="女">女</label>
+                                        <label class="radio inline"><input type="radio" name="gender" <if condition="$user.gender eq M">checked</if> value="M">男</label>
+                                        <label class="radio inline"><input type="radio" name="gender" <if condition="$user.gender eq F">checked</if> value="F">女</label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -77,8 +77,8 @@
                                     <th>生日：</th>
                                     <td>
                                         <div class="input-prepend input-append">
-                                            <input type="text" name="birthDay" value="<{$user.birthday}>" class="span3 hasDatepicker" data-selector="udob" readonly="readonly" validate-title="生日" id="dp1430660638601">
-                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                            <input type="date"id="webjx_date" name="birthday" value="<{$user.birthday}>" class="span3 hasDatepicker"  validate-title="生日" >
+                                            <!--<span class="add-on"><i class="icon-calendar"></i></span>-->
                                         </div>
                                     </td>
                                 </tr>
@@ -114,7 +114,7 @@
                                     <th>身高：</th>
                                     <td>
                                         <div class="input-prepend input-append">
-                                            <input type="text" name="height" value="<{$user.high}>" validate-title="身高"  class="span3">
+                                            <input type="text" name="height" value="<{$user.height}>" validate-title="身高"  class="span3">
                                             <span class="add-on">cm</span>
                                         </div>
                                     </td>
