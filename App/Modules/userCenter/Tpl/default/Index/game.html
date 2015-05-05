@@ -60,18 +60,124 @@
                         <li><a href="/userCenter/account">账号设置</a></li>
                     </ul>
                 </div>
-            </div>        <div class="span16">
-            <div class="container ucenter-container">
-                <div class="main-block clearfix">
-                    <div class="public-tab-wrap clearfix" data-selector="relevantTabs">
-                        <a href="/userCenter/game" class="tab current">已报名</a>
-                        <a href="/userCenter/game/follow" class="tab">已关注</a>
-                        <a href="/userCenter/game/team" class="tab">团体报名</a>
+            </div>
+
+            <div class="span16">
+                <div class="container ucenter-container">
+                    <div class="main-block clearfix">
+                        <div class="public-tab-wrap clearfix" data-selector="relevantTabs">
+                            <a href="/userCenter/game" class="tab current">已报名</a>
+                            <a href="/userCenter/game/follow" class="tab">已关注</a>
+                            <a href="/userCenter/game/team" class="tab">团体报名</a>
+                        </div>
+                        <!-- 已报名赛事 开始 -->
+                        <div class="tab-content-wrap">
+                            <div class="item-list">
+                                <ul class="clearfix">
+                                    <!-- 循环 开始 -->
+                                    <volist name="game" id="vo">
+                                    <li class="match-chosen">
+                                        <div class="item-list-content">
+                                            <div class="item-list-wrap clearfix">
+                                                <div class="thumbnail-wrap">
+                                                    <a href="/Game/<{$vo.id}>" target="_blank"> <img src="<{$vo.image}>" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="item-list-right">
+                                                    <p class="item-list-ttl">
+                                                        <span class="icon-55 match-enroll"></span>
+                                                        <strong><span>[路跑]</span><a href="Game/<{$vo.id}>" target="_blank"><{$vo.name}>
+
+                                                        </a></strong>
+                                                    </p>
+                                                    <div class="item-list-detail">
+                                                        <p>
+                                                            <span>时间：</span>
+                                                            <!-- 不是同一天 -->
+                                                            <{$vo.start_date}>&nbsp;-&nbsp;<{$vo.end_date}>
+
+                                                        </p>
+                                                        <p>
+                                                            <span>地点：</span><{$vo.address}>
+                                                        </p>
+                                                        <p>
+                                                            <span>组别：</span><{$vo['id']|GameGroup=$vo['input_user']}>
+                                                        </p>
+                                                        <p><span>主办：</span>
+                                                            <{$vo.sponsor}>
+                                                        </p>
+                                                        <p class="item-list-bottom">
+                                                            <!--
+                                                      <a href="javascript:void(0);"><i class="icon-match icon-like"></i>523人感兴趣</a>
+                                                      -->
+                                                            <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（<{$vo.focus_count}>）</a>
+                                                            <a href="javascript:void(0);"><i class="icon-match icon-comment"></i><{$vo.topic_count}>人评论</a>
+                                                            <!--  <a
+                                                             href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名9人（剩余4,991人）</a> -->
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+                                                <!--<a href="/userCenter/pay/427/28670/3F3A2CCFBC364890F56EA044B53BE5A4DDC6F255" class="btn btn-warning item-btn">立即支付</a>-->
+
+                                                <a href="/userCenter/gamedel/427/28670/3F3A2CCFBC364890F56EA044B53BE5A4DDC6F255" style="position:absolute;top:80px;right:220px;font-size:14px">取消报名</a>
+                                                <a href="/userCenter/gamedetail/427/28670/3F3A2CCFBC364890F56EA044B53BE5A4DDC6F255" class="apply-info">报名详情</a>
+                                            </div>
+                                        </div>
+                                        <div class="item-share" style="top: 62px;">
+                                           <!-- <script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]2015四季跑·南京站报名开启！','url':'/game/427','pic':'http://static.wisdom-china.cn//images/1/3750/3142/3004/135fdde85dc39615631ad9bdb85e9b35_2_220x140.jpg?640x442','summary':'    时间：2015年11月14日 08:00&nbsp;-&nbsp;2015年11月15日 17:00    地点：江苏省南京市    主办：智美集团'});</script><a href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/427&amp;pic=http://static.wisdom-china.cn//images/1/3750/3142/3004/135fdde85dc39615631ad9bdb85e9b35_0_0.jpg&amp;title=[路跑]2015四季跑·南京站报名开启！&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年11月14日 08:00 - 2015年11月15日 17:00    地点：江苏省南京市    主办：智美集团" target="_blank" class="shareto shareto-qzone" title="分享到qq空间"></a><a href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/427&amp;pic=http://static.wisdom-china.cn//images/1/3750/3142/3004/135fdde85dc39615631ad9bdb85e9b35_0_0.jpg&amp;title=[路跑]2015四季跑·南京站报名开启！&amp;appkey=1868074881&amp;summary=    时间：2015年11月14日 08:00 - 2015年11月15日 17:00    地点：江苏省南京市    主办：智美集团" target="_blank" class="shareto shareto-tsina" title="分享到新浪微博"></a>--></div>
+                                    </li>
+                                    </volist>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 已报名赛事 结束 -->
+                        <!-- 分页 开始 -->
+                        <div class="main-block pagging-block">
+                            <form id="paging-form" action="#" iyuesai-plugins-valid="0.07622040319256485">
+                                <div class="paging-wrap">
+                                    <span class="text">共 1页, 2条记录</span>
+                                    <span class="disabled">首页</span>
+                                    <span class="disabled">上一页</span>
+                                    <span class="current"> 1</span>
+                                    <span class="disabled">下一页</span>
+                                    <span class="disabled">末页</span>
+                                    <label class="page-stage">
+
+                                        到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':1,'min':1}]]"> 页
+                                        <input type="submit" class="btn" value="确定">
+                                    </label>
+
+                                    <!--end of pageBean?? && (pages.total > -1) -->
+                                    <input type="hidden" name="pageNum" id="pageNum" value="1">
+                                    <input type="hidden" name="pageSize" id="pageSize" value="10">
+                                </div>
+                            </form>
+                        </div>
+                        <script type="text/javascript">
+                            $(function(){
+                                define(['valid','simplevalidtips'],function(){
+                                    $(function(){
+                                        var pf = $('#paging-form');
+                                        pf.valid({
+                                            'success':function(){
+                                                jumpPage($('#pageNumText',pf).val(),$('#pageSize',pf).val());
+                                                return false;
+                                            }
+                                        });
+                                        $("[validate-rules]",pf).SimpleValidTips();
+                                    });
+                                });
+                            });
+
+                        </script>
+
+
+                        <!-- 分页 结束 -->
                     </div>
-                    <div class="nodata-module"></div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </div>

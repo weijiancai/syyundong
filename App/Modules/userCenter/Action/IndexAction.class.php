@@ -55,4 +55,25 @@ class IndexAction extends Action {
             echo 2;
         }
     }
+    /*
+    * @时间:20150408
+    * @功能：我的赛事
+    */
+    public function Game(){
+        import('ORG.Util.Page');
+        $model=D('VGameActivity');
+        $map['input_user'] = deCode(I('session.mark_id'));
+        $map['type'] = array('eq', 'game');
+        $order='input_date desc';
+        $count = $model->where($map)->count();
+        $Page = new Page($count, 3);
+        $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+        $Page->rollPage = 10;
+        $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
+        $show = $Page->show();
+        $this->assign('page', $show);
+        $this->assign('game', $list);
+        $this->assign('count', $count);
+        $this->display();
+    }
 }

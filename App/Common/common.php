@@ -86,6 +86,7 @@ function getGameTime($id, $state)
     }
     return $time;
 }
+
 /**
  * @功能：赛事、活动状态
  * @时间：20150402
@@ -94,44 +95,47 @@ function getState($status)
 {
     switch ($status) {
         case 1:
-            $status  ='报名中';
+            $status = '报名中';
             break;
         case 2:
-            $status  = '待开赛';
+            $status = '待开赛';
             break;
         case 3:
-            $status  = '比赛中';
+            $status = '比赛中';
             break;
         case 4:
-            $status  = '已结束';
+            $status = '已结束';
             break;
     }
 
     return $status;
 }
+
 /**
  * @功能：返回赛事、活动类别
  * @时间：20150402
  */
 function getSportName($sportid)
 {
-    return D('DzSport')->where('id='.$sportid)->getField('name');
+    return D('DzSport')->where('id=' . $sportid)->getField('name');
 }
 
 /**
  * @功能：赛事、活动关注数
  * @时间：20150407
  */
-function getFocus($id,$type)
+function getFocus($id, $type)
 {
-  return D('OpFocus')->where('`source_id`='.$id .' and `source_type` ='.$type)->count();
+    return D('OpFocus')->where('`source_id`=' . $id . ' and `source_type` =' . $type)->count();
 }
+
 /**
  *  @功能：格式化时间
  *  @时间：20150412
  */
-function m_date($time = NULL) {
-    $time  = strtotime($time);
+function m_date($time = NULL)
+{
+    $time = strtotime($time);
     $time = $time === NULL || $time > time() ? time() : intval($time);
     $t = time() - $time; //时间差 （秒）
     if ($t == 0)
@@ -154,48 +158,54 @@ function m_date($time = NULL) {
         $text = date('Y年m月d日', $time); //一年以前
     return $text;
 }
+
 /**
  *  @功能：返回登录用户
  *  @时间：20150419
  */
-function getLoginUser(){
+function getLoginUser()
+{
     $id = deCode(I('session.mark_id'));
     $user = D('DbUser')->where("id = '%d'", $id)->field('nick_name,mobile')->find();
-    if($user['nick_name']){
+    if ($user['nick_name']) {
         return $user['nick_name'];
-    }else{
+    } else {
         return $user['mobile'];
     }
 }
+
 /****************************************************************后台方法****************************************************************/
 /*
  * @功能：信息状态操作
  * @时间:20150419
  */
-function showStatus($status, $id, $callback="",$before,$after) {
+function showStatus($status, $id, $callback = "", $before, $after)
+{
     switch ($status) {
         case '0':
         case"F":
-            $info = '<a href="__URL__/resume/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="'.$callback.'">'.$before.'</a>';
+            $info = '<a href="__URL__/resume/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="' . $callback . '">' . $before . '</a>';
             break;
         case 2 :
-            $info = '<a href="__URL__/pass/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="'.$callback.'">'.$before.'</a>';
+            $info = '<a href="__URL__/pass/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="' . $callback . '">' . $before . '</a>';
             break;
         case '1' :
         case "T" :
-            $info = '<a href="__URL__/forbid/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="'.$callback.'">'.$after.'</a>';
+            $info = '<a href="__URL__/forbid/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="' . $callback . '">' . $after . '</a>';
             break;
-        case - 1 :
-            $info = '<a href="__URL__/recycle/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="'.$callback.'">还原</a>';
+        case -1 :
+            $info = '<a href="__URL__/recycle/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="' . $callback . '">还原</a>';
             break;
     }
     return $info;
 }
+
 /*
  * @功能：返回信息状态
  * @时间:20150419
  */
-function getStatus($status, $imageShow = true) {
+function getStatus($status, $imageShow = true)
+{
     switch ($status) {
         case '0' :
             $showText = '禁用';
@@ -217,34 +227,40 @@ function getStatus($status, $imageShow = true) {
             $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/ok.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="正常">';
 
     }
-    return ($imageShow === true) ?  $showImg  : $showText;
+    return ($imageShow === true) ? $showImg : $showText;
 
 }
+
 /*
  * @功能：赛事详情
  * @时间:20150419
  */
-function getSecondSport($id){
-    $list =D('DzSport')->where('pid='.$id)->getField('name',true);
-    return implode(' | ',$list);
+function getSecondSport($id)
+{
+    $list = D('DzSport')->where('pid=' . $id)->getField('name', true);
+    return implode(' | ', $list);
 }
+
 /*
  * @功能：返回用户名称
  * @时间:20150419
  */
-function getUserName($id){
+function getUserName($id)
+{
     $user = D('DbUser')->where("id = '%d'", $id)->field('nick_name,mobile')->find();
-    if($user['nick_name']){
+    if ($user['nick_name']) {
         return $user['nick_name'];
-    }else{
+    } else {
         return $user['mobile'];
     }
 }
+
 /*
  * @功能：返回赛事、场馆、活动类别
  * @时间:20150419
  */
-function getSportType($type){
+function getSportType($type)
+{
     switch ($type) {
         case 1 :
             $result = '赛事';
@@ -256,20 +272,24 @@ function getSportType($type){
             $result = '场馆';
             break;
     }
-    return  $result;
+    return $result;
 }
+
 /*
  * @功能：返回图片路径
  * @时间:20150419
  */
-function getImageUrl($id){
-    return  D('DbImages')->where('id='.$id)->getField('local_url');
+function getImageUrl($id)
+{
+    return D('DbImages')->where('id=' . $id)->getField('local_url');
 }
+
 /*
  * @功能：返回赛事字段信息
  * @时间:20150419
  */
-function getGameField($field){
+function getGameField($field)
+{
     switch ($field) {
         case "game_declare" :
             $result = '参赛声明';
@@ -293,27 +313,33 @@ function getGameField($field){
             $result = '入住酒店';
             break;
     }
-    return  $result;
+    return $result;
 }
+
 /*
  * @功能：返回赛事名称
  * @时间:20150419
  */
-function getGameName($id){
-    return  D('DbGame')->where('id='.$id)->getField('name');
+function getGameName($id)
+{
+    return D('DbGame')->where('id=' . $id)->getField('name');
 }
+
 /*
  * @功能：返回活动名称
  * @时间:20150419
  */
-function getActivityName($id){
-    return  D('DbActivity')->where('id='.$id)->getField('name');
+function getActivityName($id)
+{
+    return D('DbActivity')->where('id=' . $id)->getField('name');
 }
+
 /*
  * @功能：返回活动报名审核状态
  * @时间:20150419
  */
-function getJoinActivityVerify($verify){
+function getJoinActivityVerify($verify)
+{
     switch ($verify) {
         case 0 :
             $result = '待审核';
@@ -325,64 +351,76 @@ function getJoinActivityVerify($verify){
             $result = '不通过';
             break;
     }
-    return  $result;
+    return $result;
 }
+
 /*
  * @功能：返回登录用户头像
  * @时间:20150419
  */
-function getUserImage($id){
-    $user_head = D('DbUser')->where('id='.deCode($id))->getField('user_head');
-    return  D('DbImages')->where('id='.$user_head)->getField('local_url');
+function getUserImage($id)
+{
+    $user_head = D('DbUser')->where('id=' . deCode($id))->getField('user_head');
+    return D('DbImages')->where('id=' . $user_head)->getField('local_url');
 }
+
 /*
  * @功能：返回用户头像
  * @时间:20150419
  */
-function getUsersImage($id){
-    $user_head = D('DbUser')->where('id='.$id)->getField('user_head');
-    $local_url  = D('DbImages')->where('id='.$user_head)->getField('local_url');
-    if($local_url){
+function getUsersImage($id)
+{
+    $user_head = D('DbUser')->where('id=' . $id)->getField('user_head');
+    $local_url = D('DbImages')->where('id=' . $user_head)->getField('local_url');
+    if ($local_url) {
         return $local_url;
-    }else{
+    } else {
         return '/Public/images/default/web_pic.jpg';
     }
 }
+
 /*
  * @功能：返回区域名称
  * @时间:20150419
  */
-function getRegionName($id){
-   return D('DbRegion')->where('id='.$id)->getField('name');
+function getRegionName($id)
+{
+    return D('DbRegion')->where('id=' . $id)->getField('name');
 }
+
 /*
  * @功能：赛事分组报名信息
  * @时间:20150419
  */
-function getGameGroup($group_id,$game_id){
-    $result = D('OpJoinGame')->where('game_id='.$game_id.' and group_id='.$group_id)->select();
-    if($result){
+function getGameGroup($group_id, $game_id)
+{
+    $result = D('OpJoinGame')->where('game_id=' . $game_id . ' and group_id=' . $group_id)->select();
+    if ($result) {
         return 'radio-disabled';
     }
 }
+
 /*
  * @功能：赛事关注信息
  * @时间:20150419
  */
-function getGameFocus($source_id,$user_id,$source_type){
-    $result = D('OpFocus')->where('user_id='.deCode($user_id).' and source_id='.$source_id.' and source_type ='.$source_type)->select();
-    if($result){
+function getGameFocus($source_id, $user_id, $source_type)
+{
+    $result = D('OpFocus')->where('user_id=' . deCode($user_id) . ' and source_id=' . $source_id . ' and source_type =' . $source_type)->select();
+    if ($result) {
         return '取消关注';
-    }else{
+    } else {
         return '关注';
     }
 }
+
 /*
  * @功能：赛事、活动状态
  * @时间:20150419
  */
-function getStates($id){
-    $result = D('VGameActivity')->where('id='.$id)->getField('status');
+function getStates($id)
+{
+    $result = D('VGameActivity')->where('id=' . $id)->getField('status');
     switch ($result) {
         case 1 :
             $result = '报名中';
@@ -397,36 +435,56 @@ function getStates($id){
             $result = '已结束';
             break;
     }
-    return  $result;
+    return $result;
 }
+
 /*
  * @功能：发起的活动
  * @时间:20150419
  */
-function  initiate_activity($id){
-    return D('DbActivity')->where('input_user='.$id)->count();
+function  initiate_activity($id)
+{
+    return D('DbActivity')->where('input_user=' . $id)->count();
 }
+
 /*
  * @功能：参加的活动
  * @时间:20150419
  */
-function  join_activity($id){
-    return D('OpJoinActivity')->where('user_id='.$id)->count();
+function  join_activity($id)
+{
+    return D('OpJoinActivity')->where('user_id=' . $id)->count();
 }
+
+/*赛事组别
+ * @功能：
+ * @时间:20150419
+ */
+function  GameGroup($game_id,$user_id)
+{
+    $group_id = D('OpJoinGame')->field('group_id')->where('game_id='.$game_id.' and user_id='.$user_id)->select();
+    $group_name = D('OpGameGroup')->where('id='.$group_id[0]['group_id'])->getField('group_name');
+    return $group_name;
+
+}
+
 /*
  * @功能：数组转为字符串
  * @时间:20150419
  */
-function ArrayToStr($arr){
-    $str = join(",",$arr);
-    $result = "'".str_replace(",","','",$str)."'";
+function ArrayToStr($arr)
+{
+    $str = join(",", $arr);
+    $result = "'" . str_replace(",", "','", $str) . "'";
     return $result;
 }
+
 /*
  * @功能：字符串转为数组
  * @时间:20150419
  */
-function  strtoarr($strs){
+function  strtoarr($strs)
+{
     $result = array();
     $array = array();
     $strs = str_replace("n", ',', $strs);
@@ -435,12 +493,14 @@ function  strtoarr($strs){
     $array = explode(',', $strs);
     return $array;
 }
+
 /*
  * @功能：字符串格式去除
  * @时间:20150419
  */
-function  RemoveFormat ($str){
-    return str_replace(array('<p>','</p>'), '',strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($str))),"<img>"));
+function  RemoveFormat($str)
+{
+    return str_replace(array('<p>', '</p>'), '', strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($str))), "<img>"));
 }
 
 ?>

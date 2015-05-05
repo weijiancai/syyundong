@@ -60,6 +60,7 @@ $Public_Config =  array(
         '/^userCenter\/Profile$/' => 'userCenter/index/Profile',
         '/^userCenter\/ProfileEdit\/(\d+)$/' => 'userCenter/index/ProfileEdit?id=:1',
         '/^userCenter\/account$/' => 'userCenter/index/account',
+        '/^userCenter\/game/' => 'userCenter/index/game',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',

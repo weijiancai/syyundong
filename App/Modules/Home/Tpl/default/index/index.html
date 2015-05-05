@@ -20,11 +20,9 @@
     <!-- && start banner轮播图片： dz_sort -->
     <!-- Wrapper for slides -->
     <ul class="carousel-inner" role="listbox">
-        <volist name="banner" id="vo">
-            <li class="item active">
-                <img src="<{$vo.image}>"
-                     alt="<{$vo.name}>">
-
+        <volist name="banner" id="vo" key="k">
+            <li <if condition="$k eq 1">class="item active"<else/>class="item"</if>>
+                <img src="<{$vo.image}>" alt="<{$vo.name}>">
                 <div class="carousel-caption desc">
                     <a href="Game/<{$vo.id}>" class="banner-title" target="_blank"><{$vo.name}></a>
                 </div>
