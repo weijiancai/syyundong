@@ -61,9 +61,24 @@ class IndexAction extends Action {
     */
     public function Game(){
         import('ORG.Util.Page');
-        $model=D('VGameActivity');
-        $map['input_user'] = deCode(I('session.mark_id'));
-        $map['type'] = array('eq', 'game');
+        $model=D('VJoinGame');
+        $map['user_id'] = deCode(I('session.mark_id'));
+        $order='input_date desc';
+        $count = $model->where($map)->count();
+        $Page = new Page($count, 3);
+        $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+        $Page->rollPage = 10;
+        $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
+        $show = $Page->show();
+        $this->assign('page', $show);
+        $this->assign('game', $list);
+        $this->assign('count', $count);
+        $this->display();
+    }
+    public function follow(){
+        import('ORG.Util.Page');
+        $model=D('VFocusGame');
+        $map['user_id'] = deCode(I('session.mark_id'));
         $order='input_date desc';
         $count = $model->where($map)->count();
         $Page = new Page($count, 3);
