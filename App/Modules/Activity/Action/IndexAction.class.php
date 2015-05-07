@@ -79,7 +79,7 @@ class IndexAction extends Action
         //首先判断用户是否登录
         $mark = I('session.mark_id');
         if ($mark) {
-
+            $this->assign('region', D('Public/Index')->region());
             $this->display();
         } else {
             $str = '<script> window.location.href="/login/login"</script>';

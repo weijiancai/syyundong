@@ -5,6 +5,16 @@ $(function () {
     // 注册body id
     $('body').attr('id', 'match-post');
 
+    //费用
+    var chkObjs = document.getElementsByName("radio");
+    for (var i = 0; i < chkObjs.length; i++) {
+        if (chkObjs[i].checked) {
+            alert(this);
+            chk = i;
+            break;
+        }
+    }
+
     $('#fmPublish').validate({
         rules: {
             sportTypeId: "required",

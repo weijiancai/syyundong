@@ -178,12 +178,17 @@
                 </tr>
                 <tr>
                   <td>
-                    <p>
+                    <!--<p>
                       <select class="span2" data-selector="provinceSelect" data-value="" name="provinceId"><option value="2">北京市</option><option value="360">天津市</option><option value="691">河北省</option><option value="3352">山西省</option><option value="5021">内蒙古</option><option value="6373">辽宁省</option><option value="8144">吉林省</option><option value="9239">黑龙江</option><option value="11330">上海市</option><option value="11613">江苏省</option><option value="13539">浙江省</option><option value="15391">安徽省</option><option value="17266">福建省</option><option value="18634">江西省</option><option value="20799">山东省</option><option value="23139">河南省</option><option value="25898">湖北省</option><option value="27561">湖南省</option><option value="30374">广东省</option><option value="32864">广西</option><option value="34336">海南省</option><option value="34712">重庆市</option><option value="35869">四川省</option><option value="40206">贵州省</option><option value="41902">云南省</option><option value="43748">西藏</option><option value="44605">陕西省</option><option value="46517">甘肃省</option><option value="48081">青海省</option><option value="48579">宁夏</option><option value="48911">新疆</option></select>&nbsp;&nbsp;
                       <select class="span2" data-selector="citySelect" name="cityId" data-value=""><option value="3">市区</option><option value="318">县</option></select>
-                    </p>
+                    </p>-->
                     <p>
-                      <select class="span2" data-selector="regionSelect" name="regionId" data-value=""><option value="4">东城区</option><option value="15">西城区</option><option value="23">崇文区</option><option value="31">宣武区</option><option value="40">朝阳区</option><option value="84">海淀区</option><option value="114">丰台区</option><option value="136">石景山区</option><option value="147">门头沟区</option><option value="162">房山区</option><option value="193">通州区</option><option value="211">顺义区</option><option value="239">昌平区</option><option value="258">大兴区</option><option value="278">怀柔区</option><option value="297">平谷区</option></select>&nbsp;&nbsp;
+                      <select class="span2" data-selector="regionSelect" name="regionId" data-value="">
+                          <volist name="region" id="vo">
+                              <option value="<{$vo.id}>"><{$vo.name}></option>
+                              </volist>
+
+                          </select>&nbsp;&nbsp;
                       <!-- <select class="span2" data-selector="businessSelect" name="businessId" data-value=""></select> -->
                     </p>
                                        
