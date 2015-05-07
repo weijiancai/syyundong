@@ -30,6 +30,7 @@ $(function() {
     $('.date').datetimepicker({
         autoclose: true,
         todayBtn: true,
-        pickerPosition: "bottom-left"
+        pickerPosition: "bottom-left",
+        language: 'zh-CN'
     });
 });
