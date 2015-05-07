@@ -30,5 +30,6 @@ class IndexModel extends Model
     {
        return  D('DbRegion')->where('level=3')->select();
     }
+
 }
 ?>

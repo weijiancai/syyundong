@@ -903,17 +903,9 @@
         <img src="/Public/images/icon/index-icon1.png"> <span>热门赛事排行</span>
     </h4>
     <ul data-selector="eventsRankings">
-
-        <li><i class="top0">1</i><a href="/game/413">2015四季跑·天津站报名开通！</a></li>
-        <li><i class="top1">2</i><a href="/game/411">四季轮转！记录你深圳站的笑脸</a></li>
-        <li><i class="top2">3</i><a href="/game/429">2015武汉后官湖半程马拉松</a></li>
-        <li><i>4</i><a href="/game/440">3v3篮球对抗赛</a></li>
-        <li><i>5</i><a href="/game/408">2015四季跑·重庆站报名开启！</a></li>
-        <li><i>6</i><a href="/game/437">挑战“奥8马”海量图片下载！</a></li>
-        <li><i>7</i><a href="/game/376">伦敦马拉松火爆上演</a></li>
-        <li><i>8</i><a href="/game/435">2015穿越大湘西（湘西站）徒步</a></li>
-        <li><i>9</i><a href="/game/430">2015城市徒步大会</a></li>
-        <li><i>10</i><a href="/game/426">2015四季跑·北京站报名开通！</a></li>
+        <volist name="hot" id="vo" key="k">
+            <li><i class="top<{$k}>"><{$k}></i><a href="/Game/<{$vo.id}>"><{$vo.name}></a></li>
+        </volist>
     </ul>
 </div>
 </div>

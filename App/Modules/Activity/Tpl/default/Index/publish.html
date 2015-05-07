@@ -3,9 +3,9 @@
     <div class="activity-publish">
       <h4 class="form-title">创建活动</h4>
 
-      <form action="" method="post">
+      <form action="" method="post" id="acPublish">
        	 <input type="hidden" id="editable" name="editable" value="false">
-       	 <input type="hidden" id="id" name="id" value="">
+       	 <input type="hidden" id="id" name="id" value=""> 
         <div class="form-content clearfix">
           <div class="pull-left">
             <table class="form-table">
@@ -82,11 +82,11 @@
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" class="span5" id="name" name="name" value="" validate-title="活动名称" validate-rules="[[&#39;required&#39;],[&#39;length&#39;,{&#39;max&#39;:40}]]">
+                    <input type="text" class="span5" id="name" name="name" value="">
                   </td>
                 </tr>
-
-
+                
+                     
                  <tr>
                   <th>
                     <span class="help-required">*</span>报名时间:
@@ -115,9 +115,9 @@
                     </div>
                   </td>
                 </tr>
-
-
-
+                  
+                          
+         
                 <tr>
                   <th>
                     <span class="help-required">*</span>活动人数:
@@ -128,17 +128,17 @@
                     <input type="text" class="span5" validate-title="活动人数"  id="limitCount" name="limitCount" value="">
                   </td>
                 </tr>
-                <tr>
+<!--                <tr>
                   <th>
                     <span class="help-required">*</span>参加活动所需填写资料:
                   </th>
                 </tr>
                 <tr>
                   <td>
-                    <label class="checkbox inline"><input type="checkbox" id="field_trueName" name="field_trueName" value="1"><span>真实姓名</span></label>
-                    <label class="checkbox inline"><input type="checkbox" id="field_gender" name="field_gender" value="1"><span>性别</span></label>
-                    <label class="checkbox inline"><input type="checkbox" id="field_mobile" name="field_mobile" value="1"><span>手机</span></label>
-                    <label class="checkbox inline"><input type="checkbox" id="field_certificateNum" value="1" name="field_certificateNum"><span>身份证号</span></label>
+                    <label class="checkbox inline"><input type="checkbox" id="field_trueName" name="join_need_info[]" value="1"><span>真实姓名</span></label>
+                    <label class="checkbox inline"><input type="checkbox" id="field_gender" name="join_need_info[]" value="2"><span>性别</span></label>
+                    <label class="checkbox inline"><input type="checkbox" id="field_mobile" name="join_need_info[]" value="3"><span>手机</span></label>
+                    <label class="checkbox inline"><input type="checkbox" id="field_certificateNum" value="4" name="join_need_info[]"><span>身份证号</span></label>
                   </td>
                 </tr>
                 <tr>
@@ -153,7 +153,7 @@
                        <input type="checkbox" checked="checked" id="needCheck" name="needCheck" value="1">
                     <span>是</span></label>
                   </td>
-                </tr>
+                </tr>-->
               </tbody>
             </table>
           </div>
@@ -167,7 +167,7 @@
                   <td>
                     <label class="radio inline"><input data-selector="money" type="radio" name="money" checked="checked" value="1"><span>免费</span></label>
                     <label class="radio inline"><input data-selector="money" type="radio" name="money" value="2"><span>收费</span></label>
-
+                   
                    每人活动费用(元)&nbsp;&nbsp;<input data-selector="price" type="text" id="price" name="price" class="span1" validate-title="活动费用" validate-rules="[[&#39;dynrule&#39;,&#39;payment&#39;]]" disabled="">
                   </td>
                 </tr>
@@ -186,7 +186,7 @@
                       <select class="span2" data-selector="regionSelect" name="regionId" data-value=""><option value="4">东城区</option><option value="15">西城区</option><option value="23">崇文区</option><option value="31">宣武区</option><option value="40">朝阳区</option><option value="84">海淀区</option><option value="114">丰台区</option><option value="136">石景山区</option><option value="147">门头沟区</option><option value="162">房山区</option><option value="193">通州区</option><option value="211">顺义区</option><option value="239">昌平区</option><option value="258">大兴区</option><option value="278">怀柔区</option><option value="297">平谷区</option></select>&nbsp;&nbsp;
                       <!-- <select class="span2" data-selector="businessSelect" name="businessId" data-value=""></select> -->
                     </p>
-
+                                       
                     <p>
                       <input type="text" class="span5" placeholder="详细地址" id="place" name="place" validate-title="详细地址" validate-rules="[[&#39;required&#39;]]" value="">
                     </p>
@@ -195,7 +195,7 @@
               </tbody>
             </table>
           </div>
-
+          
         </div>
         <div class="form-content form-content-nopt">
           <table class="form-table">
@@ -204,10 +204,10 @@
                 <th><span class="help-required">*</span>活动描述:</th>
               </tr>
               <tr>
-                <td>
-
+                <td>        
+          
                 <textarea rows="10" id="description" name="description" validate-title="活动描述" validate-rules="[[&#39;required&#39;]]" style="height: 200px;"></textarea><pre style="position: absolute; z-index: -10; left: -9999px; top: auto; padding: 10px 0px; font-size: 14px; line-height: 20px; width: 860px; font-family: &#39;Microsoft yahei&#39;, Arial; white-space: pre-wrap; word-wrap: break-word; font-weight: 400;"></pre>
-
+                
                </td>
               </tr>
             </tbody>
@@ -223,6 +223,6 @@
   </div>
   <!--<script type="text/javascript">Loader.load(['page.publish'])</script>-->
 
-  <script type="text/javascript" src="/Public/js/pages/publish.js"></script>
+  <script type="text/javascript" src="/Public/js/pages/activity_publish.js"></script>
 
 <include file="Public@default:Public:bottom"/>
