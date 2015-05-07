@@ -5,7 +5,7 @@
 
       <form action="" method="post">
        	 <input type="hidden" id="editable" name="editable" value="false">
-       	 <input type="hidden" id="id" name="id" value=""> 
+       	 <input type="hidden" id="id" name="id" value="">
         <div class="form-content clearfix">
           <div class="pull-left">
             <table class="form-table">
@@ -17,11 +17,61 @@
                 </tr>
                 <tr>
                   <td>
-                    <div class="datadropdown" data-selector="eventItem">
+                    <div class="datadropdown" id="activityItem">
                       <div class="datadropdown-head">
                         <input type="hidden" id="sportTypeId" name="sportTypeId" value="">
-                        <input type="text" class="span4 datadropdown-action" validate-title="活动分类" validate-rules="[[&#39;required&#39;]]" readonly="" placeholder="选择活动分类" id="sportTypeName" name="sportTypeName" value="">
+                        <input type="text" class="span4 datadropdown-action" validate-title="活动分类" readonly="" placeholder="选择活动分类" id="sportTypeName" name="sportTypeName" value="">
                       </div>
+
+                        <div class="datadropdown-content" style="padding: 10px; display: block;"><style>#NTGUID__5{min-width:400px; position: relative;}#NTGUID__5 a.select-all{    display: inline-block;    text-align: center;    padding: 0 10px;    line-height: 20px;    height: 20px;    color: #fff;    background-color: #F5A623;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;  }#NTGUID__5 a.select-all:hover{    text-decoration: none;    background-color: #E08C03;    transition: all .3s;    -webkit-transition: all .3s;    -moz-transition: all .3s;  }#NTGUID__5 dt{    display: block;    border-bottom: 3px solid #ebebeb;    margin-bottom: 5px;    white-space: nowrap;  }#NTGUID__5 dt a.tab-item{    display: inline-block;    margin-bottom: -3px;    position: relative;    z-index: 5;    text-align: center;    width: 80px;    line-height: 25px;    height: 25px;    border-bottom: 3px solid #ebebeb;    margin-right: -3px;  }#NTGUID__5 dt a.tab-item:hover{    color: #F97D18;    text-decoration: none;  }#NTGUID__5 dt a.tab-item.current{    border-bottom: 3px solid #F97D18;    color: #F97D18;  }#NTGUID__5 dd ul{    display: block;  }#NTGUID__5 dd li{    float: left;    width: 76px;    white-space: nowrap;    text-overflow:ellipsis;    overflow: hidden;    padding: 2px;  }#NTGUID__5 dd li a{    display: inline-block;    float: left;    width: 76px;    text-align: center;    overflow: hidden;    line-height: 25px;    height: 25px;    white-space: nowrap;    text-overflow:ellipsis;    overflow: hidden;  }#NTGUID__5 dd li a.current{    background-color: #F5A623;    color: #fff;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;  }#NTGUID__5 dd li a:hover{    text-decoration: none;    border-radius: 3px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;    background-color: #EBEBEB;    color:#555;    transition: all .3s;    -webkit-transition: all .3s;    -moz-transition: all .3s;  }#NTGUID__5 dd.hide{    display: none;  }</style>
+                            <div style="width:400px" id="NTGUID__5">
+                                <a data-selector="datadropdownClose" class="datadropdown-close" href="javascript:;">×</a>
+                                <dl>
+                                    <dt>
+                                    <p><a data-value="" data-selector="selectAction" class="select-all" href="javascript:;">所有项目</a></p>
+
+                                    </dt>
+
+                                    <dd>
+
+                                        <li><a data-selector="selectAction" title="马拉松" data-value="6" href="javascript:;">马拉松</a></li>
+
+                                        <li><a data-selector="selectAction" title="路跑" data-value="7" href="javascript:;">路跑</a></li>
+
+                                        <li><a data-selector="selectAction" title="羽毛球" data-value="8" href="javascript:;">羽毛球</a></li>
+
+                                        <li><a data-selector="selectAction" title="乒乓球" data-value="9" href="javascript:;">乒乓球</a></li>
+
+                                        <li><a data-selector="selectAction" title="台球" data-value="10" href="javascript:;">台球</a></li>
+
+                                        <li><a data-selector="selectAction" title="网球" data-value="11" href="javascript:;">网球</a></li>
+
+                                        <li><a data-selector="selectAction" title="自行车" data-value="12" href="javascript:;">自行车</a></li>
+
+                                        <li><a data-selector="selectAction" title="山地户外活动" data-value="16" href="javascript:;">山地户外活动</a></li>
+
+                                        <li><a data-selector="selectAction" title="瑜伽" data-value="38" href="javascript:;">瑜伽</a></li>
+
+                                        <li><a data-selector="selectAction" title="足球" data-value="40" href="javascript:;">足球</a></li>
+
+                                        <li><a data-selector="selectAction" title="篮球" data-value="41" href="javascript:;">篮球</a></li>
+
+                                        <li><a data-selector="selectAction" title="游泳" data-value="55" href="javascript:;">游泳</a></li>
+
+                                        <li><a data-selector="selectAction" title="钓鱼" data-value="64" href="javascript:;">钓鱼</a></li>
+
+                                        <li><a data-selector="selectAction" title="脚斗士" data-value="68" href="javascript:;">脚斗士</a></li>
+
+                                        <li><a data-selector="selectAction" title="滑雪" data-value="69" href="javascript:;">滑雪</a></li>
+
+                                        <li><a data-selector="selectAction" title="徒步" data-value="70" href="javascript:;">徒步</a></li>
+
+                                    </dd>
+
+                                </dl>
+                            </div>
+
+                        </div>
                     </div>
                   </td>
                 </tr>
@@ -35,8 +85,8 @@
                     <input type="text" class="span5" id="name" name="name" value="" validate-title="活动名称" validate-rules="[[&#39;required&#39;],[&#39;length&#39;,{&#39;max&#39;:40}]]">
                   </td>
                 </tr>
-                
-                     
+
+
                  <tr>
                   <th>
                     <span class="help-required">*</span>报名时间:
@@ -45,9 +95,9 @@
                 <tr>
                   <td>
                     <div class="datepicker-panel">
-                      <input type="text" class="span-date hasDatepicker" data-selector="startDate" placeholder="开始时间" readonly="readonly" validate-title="报名开始时间" validate-rules="[[&#39;required&#39;]]" id="regBeginDate" name="regBeginDate" value="2015-04-06 16:04:52">
+                      <input type="text" class="span-date hasDatepicker date" data-date-format="yyyy-mm-dd hh:ii" placeholder="开始时间" readonly="readonly" validate-title="报名开始时间"  id="regBeginDate" name="regBeginDate" value="2015-04-06 16:04:52">
                       &nbsp;至&nbsp;
-                      <input type="text" class="span-date hasDatepicker" data-selector="endDate" placeholder="截止时间" readonly="readonly" validate-title="报名截止时间" validate-rules="[[&#39;required&#39;],[&#39;dyncheck&#39;,&#39;checkEndDate&#39;]]" id="regEndDate" name="regEndDate">
+                      <input type="text" class="span-date hasDatepicker date" data-date-format="yyyy-mm-dd hh:ii" placeholder="截止时间" readonly="readonly" validate-title="报名截止时间" id="regEndDate" name="regEndDate">
                     </div>
                   </td>
                 </tr>
@@ -59,15 +109,15 @@
                 <tr>
                   <td>
                     <div class="datepicker-panel">
-                      <input type="text" class="span-date hasDatepicker" data-selector="activityStartDate" placeholder="开始时间" readonly="readonly" validate-title="活动开始时间" validate-rules="[[&#39;required&#39;],[&#39;dyncheck&#39;,&#39;checkActivityStartDate&#39;]]" id="startDate" name="startDate">
+                      <input type="text" class="span-date hasDatepicker date" data-date-format="yyyy-mm-dd hh:ii" placeholder="开始时间" readonly="readonly" validate-title="活动开始时间" id="startDate" name="startDate">
                       &nbsp;至&nbsp;
-                      <input type="text" class="span-date hasDatepicker" data-selector="activityEndDate" placeholder="截止时间" readonly="readonly" validate-title="活动截止时间" validate-rules="[[&#39;required&#39;],[&#39;dyncheck&#39;,&#39;checkActivityEndDate&#39;]]" id="endDate" name="endDate">
+                      <input type="text" class="span-date hasDatepicker date" data-date-format="yyyy-mm-dd hh:ii" placeholder="截止时间" readonly="readonly" validate-title="活动截止时间" id="endDate" name="endDate">
                     </div>
                   </td>
                 </tr>
-                  
-                          
-         
+
+
+
                 <tr>
                   <th>
                     <span class="help-required">*</span>活动人数:
@@ -99,8 +149,8 @@
                 <tr>
                   <td>
                     <label class="checkbox inline">
-                    
-                       <input type="checkbox" checked="checked" id="needCheck" name="needCheck" value="1">                    
+
+                       <input type="checkbox" checked="checked" id="needCheck" name="needCheck" value="1">
                     <span>是</span></label>
                   </td>
                 </tr>
@@ -117,7 +167,7 @@
                   <td>
                     <label class="radio inline"><input data-selector="money" type="radio" name="money" checked="checked" value="1"><span>免费</span></label>
                     <label class="radio inline"><input data-selector="money" type="radio" name="money" value="2"><span>收费</span></label>
-                   
+
                    每人活动费用(元)&nbsp;&nbsp;<input data-selector="price" type="text" id="price" name="price" class="span1" validate-title="活动费用" validate-rules="[[&#39;dynrule&#39;,&#39;payment&#39;]]" disabled="">
                   </td>
                 </tr>
@@ -136,7 +186,7 @@
                       <select class="span2" data-selector="regionSelect" name="regionId" data-value=""><option value="4">东城区</option><option value="15">西城区</option><option value="23">崇文区</option><option value="31">宣武区</option><option value="40">朝阳区</option><option value="84">海淀区</option><option value="114">丰台区</option><option value="136">石景山区</option><option value="147">门头沟区</option><option value="162">房山区</option><option value="193">通州区</option><option value="211">顺义区</option><option value="239">昌平区</option><option value="258">大兴区</option><option value="278">怀柔区</option><option value="297">平谷区</option></select>&nbsp;&nbsp;
                       <!-- <select class="span2" data-selector="businessSelect" name="businessId" data-value=""></select> -->
                     </p>
-                                       
+
                     <p>
                       <input type="text" class="span5" placeholder="详细地址" id="place" name="place" validate-title="详细地址" validate-rules="[[&#39;required&#39;]]" value="">
                     </p>
@@ -145,7 +195,7 @@
               </tbody>
             </table>
           </div>
-          
+
         </div>
         <div class="form-content form-content-nopt">
           <table class="form-table">
@@ -154,10 +204,10 @@
                 <th><span class="help-required">*</span>活动描述:</th>
               </tr>
               <tr>
-                <td>        
-          
+                <td>
+
                 <textarea rows="10" id="description" name="description" validate-title="活动描述" validate-rules="[[&#39;required&#39;]]" style="height: 200px;"></textarea><pre style="position: absolute; z-index: -10; left: -9999px; top: auto; padding: 10px 0px; font-size: 14px; line-height: 20px; width: 860px; font-family: &#39;Microsoft yahei&#39;, Arial; white-space: pre-wrap; word-wrap: break-word; font-weight: 400;"></pre>
-                
+
                </td>
               </tr>
             </tbody>

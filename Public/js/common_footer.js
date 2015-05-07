@@ -25,4 +25,11 @@ $(function() {
         $navigation.find('div.navigation-item-content').hide();
         $(this).parent().find('div.navigation-item-content').show();
     });
+
+    // 日期控件
+    $('.date').datetimepicker({
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left"
+    });
 });

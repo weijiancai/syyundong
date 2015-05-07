@@ -34,4 +34,21 @@ $(function () {
             form.submit();
         }
     });
+
+    // 活动 - 运动项目
+    var $activityItem = $('#activityItem');
+    var $activityContent = $activityItem.find('div.datadropdown-content');
+    $activityItem.find('input[type="text"]').focus(function () {
+        $activityContent.show();
+    });
+    $activityItem.find('.datadropdown-close').click(function () {
+        $activityContent.hide();
+    });
+    $activityContent.find('dd a').click(function () {
+        $activityContent.find('dd a').removeClass('current');
+        $(this).addClass('current');
+        $activityContent.hide();
+        $activityItem.find('input[name="sportTypeId"]').val($(this).data('value'));
+        $activityItem.find('input[type="text"]').val($(this).text());
+    });
 });
