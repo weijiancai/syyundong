@@ -132,7 +132,7 @@
             <{$page}>
             <label class="page-stage">
 
-                到第 <input type="text" validate-rules="[['required'],['number',{'max':101,'min':1}]]" validate-title="页码" name="pageNumText" id="pageNumText"> 页
+                到第 <input type="text" name="pageNumText" id="pageNumText"> 页
                 <input type="submit" value="确定" class="btn">
             </label>
 
@@ -225,13 +225,6 @@
 </div>
 </div>
 <!-- 表单提交 -->
-<form id="searchForm" action="__APP__/Venue?">
-    <input type="hidden" id="region" name="region" value="<{$_REQUEST['region']}>"/>
-    <input type="hidden" id="business" name="business" value="<{$_REQUEST['business']}>"/>
-    <input type="hidden" id="sportType" name="sportType" value="<{$_REQUEST['sportType']}>"/>
-    <input type="hidden" id="keyword" name="keyword" value="<{$_REQUEST['keyword']}>"/>
-    <input type="hidden" id="orderByNew" name="orderByNew" value="<{$_REQUEST['orderByNew']}>"/>
-</form>
 <script type="text/javascript" src="/Public/js/pages/venue.js"></script>
 
 <include file="Public@default:Public:bottom" />

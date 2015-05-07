@@ -62,6 +62,8 @@ $Public_Config =  array(
         '/^userCenter\/account$/' => 'userCenter/index/account',
         '/^userCenter\/game$/' => 'userCenter/index/game',
         '/^userCenter\/game\/follow$/' => 'userCenter/index/follow',
+        '/^userCenter\/activity$/' => 'userCenter/index/activity',
+        '/^userCenter\/activity\/create$/' => 'userCenter/index/activity/create$',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
