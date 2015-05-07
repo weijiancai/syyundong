@@ -456,8 +456,8 @@ function  join_activity($id)
     return D('OpJoinActivity')->where('user_id=' . $id)->count();
 }
 
-/*赛事组别
- * @功能：
+/*
+ * @功能：赛事组别
  * @时间:20150419
  */
 function  GameGroup($game_id,$user_id)
@@ -465,7 +465,6 @@ function  GameGroup($game_id,$user_id)
     $group_id = D('OpJoinGame')->field('group_id')->where('game_id='.$game_id.' and user_id='.$user_id)->select();
     $group_name = D('OpGameGroup')->where('id='.$group_id[0]['group_id'])->getField('group_name');
     return $group_name;
-
 }
 
 /*

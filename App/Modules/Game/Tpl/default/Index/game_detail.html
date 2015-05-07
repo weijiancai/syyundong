@@ -42,7 +42,7 @@
                     <div class="public-banner">
                         <div class="banner" data-selector="banner">
                             <ul>
-                                <li> <a href="javascript:;"><img src="<{$detail.image}>" alt="" /></a> </li>
+                                <li> <a href="javascript:;"><img src="<{$detail.image}>" alt="" style="width:435px;height:300px"/></a> </li>
                             </ul>
                         </div>
                         <div class="banner-controller" data-selector="banner-controller"></div>
@@ -59,7 +59,7 @@
                         <p><span>费用：</span><{$detail.cost}>元（报名费）</p>
                         <p><span>主办：</span> <{$detail.sponsor}> </p>
                         <p class="text-right"><br />
-                            <input type="hidden" id="game_declare" value="<{$detail.game_declare}>">
+
                             <input type="hidden" id="game_id" value="<{$detail.id}>">
                         <?php if(getState($detail['id'])=='报名中'){ ?>
                            <button id="i_game_apply" data-gameid="<{$detail.id}>" class="btn btn-warning">我要报名</button>
@@ -67,10 +67,11 @@
                             <button  data-gameid="<{$detail.id}>" class="btn " disabled="disabled">我要报名</button>
                         <?php }?>
 
-                       <button id="game_focus" data-selector="gameFollow" data-gameid="<{$detail.id}>" class="btn btn-danger"><{$detail['id']|getGameFocus=$_SESSION['mark_id'],1}></button> </p>
+                       <button id="game_focus" data-selector="gameFollow" data-gameid="<{$detail.id}>" class="btn btn-danger"><{$detail['id']|getGameFocus=$_SESSION['mark_id'],1}></button>
+                        </p>
                     </div>
                 </div>
-
+                <div id="game_declare" style="display: none"><{$detail.game_declare}></div>
                 <div class="main-block clearfix tab" style="display: none;">
                     <div class="article-block none-indent">
                         <h3 class="article-title">赛事介绍</h3>
@@ -189,7 +190,7 @@
                     <!-- 发布话题 end-->
                     <!-- tab start-->
                     <div class="public-tab-wrap clearfix" id="relevantTabs">
-                        <a href="javascript:void(0);" class="tab current" data-ref="gameTopic">话题<span>(共6话题)</span></a>
+                        <a href="javascript:void(0);" class="tab current" data-ref="gameTopic">话题<span>(共<{$detail.topic_count}>话题)</span></a>
                         <a href="javascript:void(0);" class="tab" data-ref="gameFlow">图片墙<span>(共2张)</span></a>
                         <!-- <a href="/friends/game/416" class="btn btn-warning">发布话题</a> -->
                     </div>
@@ -259,7 +260,7 @@
                         <ul class="side-event-list">
                             <volist name="news" id="vo">
                                 <li>
-                                    <p><a href="/Game/<{$detail.id}>/notice/<{$vo.id}>"><{$vo.title}></a></p>
+                                    <p><a href="/Game/<{$detail.id}>/news/<{$vo.id}>"><{$vo.title}></a></p>
                                 </li>
                             </volist>
                         </ul>
@@ -284,7 +285,7 @@
             <p class="topic-info">
             <a target="_blank" href="/friend/passport_81330/timeline">{{user_name}}
             </a>
-    <span title="2015-03-02 10:24:51" data-timestamp="1425263091000" class="topic-time">2015-03-02 10:24:51</span>
+    <span title="2015-03-02 10:24:51" class="topic-time">2015-03-02 10:24:51</span>
     </p>
     <pre class="topic-des"><a target="_blank" href="/Topic/{{id}}">{{content}}</a></pre>
 

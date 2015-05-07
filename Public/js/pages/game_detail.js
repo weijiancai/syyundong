@@ -42,7 +42,7 @@ $(function () {
     $('#i_game_apply').click(function () {
         dialog({
             id: 'id-demo',
-            content: $('#game_declare').val(),
+            content: $('#game_declare').html(),
             okValue: '已阅读,我同意',
             ok: function () {
                 window.location.href = '/Game/apply/' + $('#game_id').val();
