@@ -79,9 +79,11 @@ class IndexAction extends Action
         //首先判断用户是否登录
         $mark = I('session.mark_id');
         if ($mark) {
+
             $this->display();
         } else {
-            $this->success('进军活动……', U('@www.syyundong.com/login/login'));
+            $str = '<script> window.location.href="/login/login"</script>';
+            echo $str;
         }
     }
 

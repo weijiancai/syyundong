@@ -3,7 +3,7 @@
     <div class="activity-publish">
       <h4 class="form-title">创建活动</h4>
 
-      <form action="" method="post">
+      <form action="" method="post" id="acPublish">
        	 <input type="hidden" id="editable" name="editable" value="false">
        	 <input type="hidden" id="id" name="id" value=""> 
         <div class="form-content clearfix">
@@ -20,7 +20,7 @@
                     <div class="datadropdown" data-selector="eventItem">
                       <div class="datadropdown-head">
                         <input type="hidden" id="sportTypeId" name="sportTypeId" value="">
-                        <input type="text" class="span4 datadropdown-action" validate-title="活动分类" validate-rules="[[&#39;required&#39;]]" readonly="" placeholder="选择活动分类" id="sportTypeName" name="sportTypeName" value="">
+                        <input type="text" class="span4 datadropdown-action" placeholder="选择活动分类" id="sportTypeName" name="sportTypeName" value="">
                       </div>
                     </div>
                   </td>
@@ -32,10 +32,9 @@
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" class="span5" id="name" name="name" value="" validate-title="活动名称" validate-rules="[[&#39;required&#39;],[&#39;length&#39;,{&#39;max&#39;:40}]]">
+                    <input type="text" class="span5" id="name" name="name" value="">
                   </td>
                 </tr>
-                
                      
                  <tr>
                   <th>
@@ -45,9 +44,9 @@
                 <tr>
                   <td>
                     <div class="datepicker-panel">
-                      <input type="text" class="span-date hasDatepicker" data-selector="startDate" placeholder="开始时间" readonly="readonly" validate-title="报名开始时间" validate-rules="[[&#39;required&#39;]]" id="regBeginDate" name="regBeginDate" value="2015-04-06 16:04:52">
+                      <input type="date" class="span-date hasDatepicker" placeholder="开始时间"  id="reg_begin_date" name="reg_begin_date" value="2015-04-06 16:04:52">
                       &nbsp;至&nbsp;
-                      <input type="text" class="span-date hasDatepicker" data-selector="endDate" placeholder="截止时间" readonly="readonly" validate-title="报名截止时间" validate-rules="[[&#39;required&#39;],[&#39;dyncheck&#39;,&#39;checkEndDate&#39;]]" id="regEndDate" name="regEndDate">
+                      <input type="date" class="span-date hasDatepicker"  placeholder="截止时间" readonly="readonly" id="reg_end_date" name="reg_end_date">
                     </div>
                   </td>
                 </tr>
@@ -75,20 +74,20 @@
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" class="span5" validate-title="活动人数"  id="limitCount" name="limitCount" value="">
+                    <input type="text" class="span5" validate-title="活动人数"  id="limit_count" name="limit_count" value="">
                   </td>
                 </tr>
-                <tr>
+<!--                <tr>
                   <th>
                     <span class="help-required">*</span>参加活动所需填写资料:
                   </th>
                 </tr>
                 <tr>
                   <td>
-                    <label class="checkbox inline"><input type="checkbox" id="field_trueName" name="field_trueName" value="1"><span>真实姓名</span></label>
-                    <label class="checkbox inline"><input type="checkbox" id="field_gender" name="field_gender" value="1"><span>性别</span></label>
-                    <label class="checkbox inline"><input type="checkbox" id="field_mobile" name="field_mobile" value="1"><span>手机</span></label>
-                    <label class="checkbox inline"><input type="checkbox" id="field_certificateNum" value="1" name="field_certificateNum"><span>身份证号</span></label>
+                    <label class="checkbox inline"><input type="checkbox" id="field_trueName" name="join_need_info[]" value="1"><span>真实姓名</span></label>
+                    <label class="checkbox inline"><input type="checkbox" id="field_gender" name="join_need_info[]" value="2"><span>性别</span></label>
+                    <label class="checkbox inline"><input type="checkbox" id="field_mobile" name="join_need_info[]" value="3"><span>手机</span></label>
+                    <label class="checkbox inline"><input type="checkbox" id="field_certificateNum" value="4" name="join_need_info[]"><span>身份证号</span></label>
                   </td>
                 </tr>
                 <tr>
@@ -103,7 +102,7 @@
                        <input type="checkbox" checked="checked" id="needCheck" name="needCheck" value="1">                    
                     <span>是</span></label>
                   </td>
-                </tr>
+                </tr>-->
               </tbody>
             </table>
           </div>
@@ -173,6 +172,6 @@
   </div>
   <!--<script type="text/javascript">Loader.load(['page.publish'])</script>-->
 
-  <script type="text/javascript" src="/Public/js/pages/publish.js"></script>
+  <script type="text/javascript" src="/Public/js/pages/activity_publish.js"></script>
 
 <include file="Public@default:Public:bottom"/>

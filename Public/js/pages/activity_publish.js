@@ -5,7 +5,7 @@ $(function () {
     // 注册body id
     $('body').attr('id', 'match-post');
 
-    $('#fmPublish').validate({
+    $('#acPublish').validate({
         rules: {
             sportTypeId: "required",
             name: 'required',
@@ -20,7 +20,7 @@ $(function () {
         },
         messages: {
             sportTypeId: "比赛项目不能为空！",
-            name: '比赛名称不能为空！',
+            name: '活动名称不能为空！',
             provinceId: "举办城市不能为空！",
             sponor: '赛事发起方不能为空！',
             phone: "联系方式不能为空！",
