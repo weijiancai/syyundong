@@ -7,38 +7,17 @@
             <div class="span16">
                 <div class="account-top">
                     <div class="account-thumb">
-                        <img name="user-head" src="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_110x110.jpg">
-                        <!-- <img src="http://static.wisdom-china.cn/iyuesai/images/pages/user-head.jpg">-->
+
+                        <img name="user-head" src="<{$user['id']|getUsersImage}>">
                         <div class="alpha-bg"></div>
                     </div>
                     <div class="account-right">
                         <p class="account-right-name">
-                            <strong>wei-jc</strong>
-                            <!--
-                            <span class="pull-right">高级达人 <em class="account-tip">积分</em>：3346.0</span>
-                            -->
+                            <strong><{$user.nick_name}></strong>
                         </p>
-                        <!--
-                        <p class="account-tip">一句话介绍一下自己吧，让别人更了解你</p>
-                        <p><span class="account-tip">运动喜好：</span>足球 自行车 攀岩 飞盘</p>
-                        -->
 
-                        <p class="account-tip">一句话介绍一下自己吧，让别人更了解你</p>
-                        <p><span class="account-tip">运动喜好：路跑  肚皮舞</span></p>
-                        <!--
-                         <p>
-                        <span class="account-tip">参加赛事： </span>0个
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="account-tip">关注赛事： </span>2个
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="account-tip">参加活动： </span>2个
-                        </p>
-                        <p>
-                        <span class="account-tip">创建活动： </span>0个
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="account-tip">发表话题：</span> 0个
-                        </p>
-                               -->
+                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
+                        <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
                         <div class="alpha-bg"></div>
                     </div>
                 </div>
@@ -46,8 +25,8 @@
             <div class="span16">
                 <div class="public-subnav clearfix">
                     <ul>
-                        <li><a href="/userCenter/timeline">我的足迹</a></li>
-                        <li><a href="/userCenter/profile">个人资料</a></li>
+                        <!--<li><a href="/userCenter/timeline">我的足迹</a></li>-->
+                        <li><a href="/userCenter/Profile">个人资料</a></li>
                         <li><a href="/userCenter/game" class="current">我的赛事</a></li>
                         <li><a href="/userCenter/activity">我的活动</a></li>
                         <li><a href="/userCenter/topic">我的话题</a></li>
@@ -68,384 +47,70 @@
             <div class="public-tab-wrap clearfix" data-selector="relevantTabs">
                 <a href="/userCenter/game" class="tab">已报名</a>
                 <a href="/userCenter/game/follow" class="tab current">已关注</a>
-                <a href="/userCenter/game/team" class="tab">团体报名</a>
+               <!-- <a href="/userCenter/game/team" class="tab">团体报名</a>-->
             </div>
             <!-- 已关注赛事 开始 -->
             <div class="tab-content-wrap">
             <div class="item-list">
             <ul class="clearfix">
             <!-- 循环 开始 -->
+            <volist name="follow" id="vo">
             <li class="match-chosen">
                 <div class="item-list-content">
                     <div class="item-list-wrap clearfix">
                         <div class="thumbnail-wrap">
-                            <a href="/game/423" target="_blank"> <img src="http://static.wisdom-china.cn//images/1/9567/7664/4472/2c10a1e78a7a1c56f1e5382d252e7c7f_2_220x140.jpg?640x442" alt="">
+                            <a href="/Game/<{$vo.id}>" target="_blank"> <img src="<{$vo.image}>" alt="">
                             </a>
                         </div>
                         <div class="item-list-right">
                             <p class="item-list-ttl">
-                                <span class="icon-55 match-end"></span>
-                                <strong><span>[马拉松]</span><a href="/game/423" target="_blank">重马照片发布！看看有没有你！
+                                <span class="icon-55 <if condition='$vo.status eq 1'>match-enroll<elseif condition='$vo.status eq 2'/>match-ready <elseif condition='$vo.status eq 3'/>match-going<elseif condition='$vo.status eq 4'/>match-end</if>"></span>
+                                <strong><span>[<{$vo.sport_name}>]</span><a href="/Game/<{$vo.id}>" target="_blank"><{$vo.game_name}>
 
                                 </a></strong>
                             </p>
                             <div class="item-list-detail">
                                 <p>
-                                    <span>时间：</span>                                  <!-- 同一天 -->
-                                    2015年03月22日
-                                    08:30-14:00
+                                    <span>时间：</span><!-- 同一天 -->
+                                    <{$vo.start_date}>
 
                                 </p>
                                 <p>
-                                    <span>地点：</span>重庆市
+                                    <span>地点：</span><{$vo.address}>
                                 </p>
                                 <p>
-                                    <span>项目：</span>马拉松
+                                    <span>项目：</span><{$vo.sport_name}>
                                 </p>
                                 <p><span>主办：</span>
-                                    中国田径协会  重庆市体育局
+                                    <{$vo.sponsor}>
                                 </p>
                                 <p class="item-list-bottom">
                                     <!--
                               <a href="javascript:void(0);"><i class="icon-match icon-like"></i>523人感兴趣</a>
                               -->
-                                    <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（23）</a>
-                                    <a href="javascript:void(0);"><i class="icon-match icon-comment"></i>0人评论</a>
+                                    <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（<{$vo.focus_count}>）</a>
+                                    <a href="javascript:void(0);"><i class="icon-match icon-comment"></i><{$vo.topic_count}>人评论</a>
                                     <!--  <a
                                      href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名50人（剩余0人）</a> -->
                                 </p>
                             </div>
                         </div>
                         <!-- 已结束  -->
-                        <button class="btn btn-show item-list-reg" disabled="">已结束</button>
+
+                        <if condition="$vo.status eq 1">
+                            <a href="/Game/apply/<{$vo.id}>" target="_blank" class="btn btn-show item-list-reg btn-warning">我要报名</a>
+                       <elseif condition="$vo.status eq 4"/>
+                           <button class="btn btn-show item-list-reg" disabled="">已结束</button>
+                       <elseif condition="$vo.status eq 2"/>
+                            <button class="btn btn-show item-list-reg btn-warning" disabled="">进行中</button>
+                    </if>
+
                     </div>
                 </div>
-                <div class="item-share" style="top: 62px;"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[马拉松]重马照片发布！看看有没有你！','url':'/game/423','pic':'http://static.wisdom-china.cn//images/1/9567/7664/4472/2c10a1e78a7a1c56f1e5382d252e7c7f_2_220x140.jpg?640x442','summary':'    时间：2015年03月22日 08:30-14:00    地点：重庆市    主办：中国田径协会  重庆市体育局'});</script><a href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/423&amp;pic=http://static.wisdom-china.cn//images/1/9567/7664/4472/2c10a1e78a7a1c56f1e5382d252e7c7f_0_0.jpg&amp;title=[马拉松]重马照片发布！看看有没有你！&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年03月22日 08:30-14:00    地点：重庆市    主办：中国田径协会  重庆市体育局" target="_blank" class="shareto shareto-qzone" title="分享到qq空间"></a><a href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/423&amp;pic=http://static.wisdom-china.cn//images/1/9567/7664/4472/2c10a1e78a7a1c56f1e5382d252e7c7f_0_0.jpg&amp;title=[马拉松]重马照片发布！看看有没有你！&amp;appkey=1868074881&amp;summary=    时间：2015年03月22日 08:30-14:00    地点：重庆市    主办：中国田径协会  重庆市体育局" target="_blank" class="shareto shareto-tsina" title="分享到新浪微博"></a></div>
-            </li>                     <li class="match-chosen">
-                <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                        <div class="thumbnail-wrap">
-                            <a href="/game/421" target="_blank"> <img src="http://static.wisdom-china.cn//images/1/1574/2421/9523/99e6930b4d2f5928c7d07f51aa84d7be_2_220x140.jpg?640x442" alt="">
-                            </a>
-                        </div>
-                        <div class="item-list-right">
-                            <p class="item-list-ttl">
-                                <span class="icon-55 match-end"></span>
-                                <strong><span>[路跑]</span><a href="/game/421" target="_blank">四季跑城市PK赛
-
-                                </a></strong>
-                            </p>
-                            <div class="item-list-detail">
-                                <p>
-                                    <span>时间：</span>
-                                    <!-- 不是同一天 -->
-                                    2015年03月23日
-                                    00:00&nbsp;-&nbsp;2015年04月12日 00:00
-
-                                </p>
-                                <p>
-                                    <span>地点：</span>全国范围
-                                </p>
-                                <p>
-                                    <span>项目：</span>路跑
-                                </p>
-                                <p><span>主办：</span>
-                                    爱约赛
-                                </p>
-                                <p class="item-list-bottom">
-                                    <!--
-                              <a href="javascript:void(0);"><i class="icon-match icon-like"></i>523人感兴趣</a>
-                              -->
-                                    <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（207）</a>
-                                    <a href="javascript:void(0);"><i class="icon-match icon-comment"></i>4人评论</a>
-                                    <!--  <a
-                                     href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名3,000人（剩余0人）</a> -->
-                                </p>
-                            </div>
-                        </div>
-                        <!-- 已结束  -->
-                        <button class="btn btn-show item-list-reg" disabled="">已结束</button>
-                    </div>
-                </div>
-                <div class="item-share" style="top: 62px;"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]四季跑城市PK赛','url':'/game/421','pic':'http://static.wisdom-china.cn//images/1/1574/2421/9523/99e6930b4d2f5928c7d07f51aa84d7be_2_220x140.jpg?640x442','summary':'    时间：2015年03月23日 00:00&nbsp;-&nbsp;2015年04月12日 00:00    地点：全国范围    主办：爱约赛'});</script><a href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/421&amp;pic=http://static.wisdom-china.cn//images/1/1574/2421/9523/99e6930b4d2f5928c7d07f51aa84d7be_0_0.jpg&amp;title=[路跑]四季跑城市PK赛&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年03月23日 00:00 - 2015年04月12日 00:00    地点：全国范围    主办：爱约赛" target="_blank" class="shareto shareto-qzone" title="分享到qq空间"></a><a href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/421&amp;pic=http://static.wisdom-china.cn//images/1/1574/2421/9523/99e6930b4d2f5928c7d07f51aa84d7be_0_0.jpg&amp;title=[路跑]四季跑城市PK赛&amp;appkey=1868074881&amp;summary=    时间：2015年03月23日 00:00 - 2015年04月12日 00:00    地点：全国范围    主办：爱约赛" target="_blank" class="shareto shareto-tsina" title="分享到新浪微博"></a></div>
-            </li>                     <li class="match-chosen">
-                <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                        <div class="thumbnail-wrap">
-                            <a href="/game/418" target="_blank"> <img src="http://static.wisdom-china.cn//images/1/9912/5515/1154/269151546d8a62d89807fc8de3e52427_2_220x140.jpg?640x442" alt="">
-                            </a>
-                        </div>
-                        <div class="item-list-right">
-                            <p class="item-list-ttl">
-                                <span class="icon-55 match-enroll"></span>
-                                <strong><span>[马拉松]</span><a href="/game/418" target="_blank">新加坡Sundown国际马拉松之旅
-
-                                </a></strong>
-                            </p>
-                            <div class="item-list-detail">
-                                <p>
-                                    <span>时间：</span>
-                                    <!-- 不是同一天 -->
-                                    2015年07月02日
-                                    16:00&nbsp;-&nbsp;2015年07月07日 10:00
-
-                                </p>
-                                <p>
-                                    <span>地点：</span>新加坡
-                                </p>
-                                <p>
-                                    <span>项目：</span>马拉松
-                                </p>
-                                <p><span>主办：</span>
-                                    约赛网
-                                </p>
-                                <p class="item-list-bottom">
-                                    <!--
-                              <a href="javascript:void(0);"><i class="icon-match icon-like"></i>523人感兴趣</a>
-                              -->
-                                    <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（47）</a>
-                                    <a href="javascript:void(0);"><i class="icon-match icon-comment"></i>0人评论</a>
-                                    <!--  <a
-                                     href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名10人（剩余10人）</a> -->
-                                </p>
-                            </div>
-                        </div>
-                        <!-- 报名中 -->
-                        <a href="/game/apply/418" class="btn btn-show item-list-reg btn-warning">我要报名</a>
-                    </div>
-                </div>
-                <div class="item-share" style="top: 62px;"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[马拉松]新加坡Sundown国际马拉松之旅','url':'/game/418','pic':'http://static.wisdom-china.cn//images/1/9912/5515/1154/269151546d8a62d89807fc8de3e52427_2_220x140.jpg?640x442','summary':'    时间：2015年07月02日 16:00&nbsp;-&nbsp;2015年07月07日 10:00    地点：新加坡    主办：约赛网'});</script><a href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/418&amp;pic=http://static.wisdom-china.cn//images/1/9912/5515/1154/269151546d8a62d89807fc8de3e52427_0_0.jpg&amp;title=[马拉松]新加坡Sundown国际马拉松之旅&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年07月02日 16:00 - 2015年07月07日 10:00    地点：新加坡    主办：约赛网" target="_blank" class="shareto shareto-qzone" title="分享到qq空间"></a><a href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/418&amp;pic=http://static.wisdom-china.cn//images/1/9912/5515/1154/269151546d8a62d89807fc8de3e52427_0_0.jpg&amp;title=[马拉松]新加坡Sundown国际马拉松之旅&amp;appkey=1868074881&amp;summary=    时间：2015年07月02日 16:00 - 2015年07月07日 10:00    地点：新加坡    主办：约赛网" target="_blank" class="shareto shareto-tsina" title="分享到新浪微博"></a></div>
-            </li>                     <li class="match-chosen">
-                <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                        <div class="thumbnail-wrap">
-                            <a href="/game/416" target="_blank"> <img src="http://static.wisdom-china.cn//images/1/5812/9608/7979/2d635d606ec5362d4b2c228b9d568422_2_220x140.jpg?640x442" alt="">
-                            </a>
-                        </div>
-                        <div class="item-list-right">
-                            <p class="item-list-ttl">
-                                <span class="icon-55 match-ready"></span>
-                                <strong><span>[马拉松]</span><a href="/game/416" target="_blank">免抽签！进军纽约马拉松
-
-                                </a></strong>
-                            </p>
-                            <div class="item-list-detail">
-                                <p>
-                                    <span>时间：</span>                                  <!-- 同一天 -->
-                                    2015年11月01日
-                                    08:00-14:30
-
-                                </p>
-                                <p>
-                                    <span>地点：</span>美国纽约
-                                </p>
-                                <p>
-                                    <span>项目：</span>马拉松
-                                </p>
-                                <p><span>主办：</span>
-                                    仕春体育
-                                </p>
-                                <p class="item-list-bottom">
-                                    <!--
-                              <a href="javascript:void(0);"><i class="icon-match icon-like"></i>523人感兴趣</a>
-                              -->
-                                    <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（17）</a>
-                                    <a href="javascript:void(0);"><i class="icon-match icon-comment"></i>0人评论</a>
-                                    <!--  <a
-                                     href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名11人（剩余39人）</a> -->
-                                </p>
-                            </div>
-                        </div>
-                        <button class="btn btn-show item-list-reg btn-warning" disabled="">进行中</button>
-                    </div>
-                </div>
-                <div class="item-share" style="top: 62px;"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[马拉松]免抽签！进军纽约马拉松','url':'/game/416','pic':'http://static.wisdom-china.cn//images/1/5812/9608/7979/2d635d606ec5362d4b2c228b9d568422_2_220x140.jpg?640x442','summary':'    时间：2015年11月01日 08:00-14:30    地点：美国纽约    主办：仕春体育'});</script><a href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/416&amp;pic=http://static.wisdom-china.cn//images/1/5812/9608/7979/2d635d606ec5362d4b2c228b9d568422_0_0.jpg&amp;title=[马拉松]免抽签！进军纽约马拉松&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年11月01日 08:00-14:30    地点：美国纽约    主办：仕春体育" target="_blank" class="shareto shareto-qzone" title="分享到qq空间"></a><a href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/416&amp;pic=http://static.wisdom-china.cn//images/1/5812/9608/7979/2d635d606ec5362d4b2c228b9d568422_0_0.jpg&amp;title=[马拉松]免抽签！进军纽约马拉松&amp;appkey=1868074881&amp;summary=    时间：2015年11月01日 08:00-14:30    地点：美国纽约    主办：仕春体育" target="_blank" class="shareto shareto-tsina" title="分享到新浪微博"></a></div>
-            </li>                     <li class="match-chosen">
-                <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                        <div class="thumbnail-wrap">
-                            <a href="/game/411" target="_blank"> <img src="http://static.wisdom-china.cn//images/1/2644/7270/4860/cf6bc431237dd65b283ad9090add4927_2_220x140.jpg?640x442" alt="">
-                            </a>
-                        </div>
-                        <div class="item-list-right">
-                            <p class="item-list-ttl">
-                                <span class="icon-55 match-end"></span>
-                                <strong><span>[路跑]</span><a href="/game/411" target="_blank">四季轮转！记录你深圳站的笑脸
-                                    <i class="icon20 icon20-code"></i>
-                                </a></strong>
-                            </p>
-                            <div class="item-list-detail">
-                                <p>
-                                    <span>时间：</span>
-                                    <!-- 不是同一天 -->
-                                    2015年04月12日
-                                    13:00&nbsp;-&nbsp;2015年04月26日 18:30
-
-                                </p>
-                                <p>
-                                    <span>地点：</span>广东省深圳市
-                                </p>
-                                <p>
-                                    <span>项目：</span>路跑
-                                </p>
-                                <p><span>主办：</span>
-                                    智美集团
-                                </p>
-                                <p class="item-list-bottom">
-                                    <!--
-                              <a href="javascript:void(0);"><i class="icon-match icon-like"></i>523人感兴趣</a>
-                              -->
-                                    <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（772）</a>
-                                    <a href="javascript:void(0);"><i class="icon-match icon-comment"></i>4人评论</a>
-                                    <!--  <a
-                                     href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名4,807人（剩余193人）</a> -->
-                                </p>
-                            </div>
-                        </div>
-                        <!-- 已结束  -->
-                        <button class="btn btn-show item-list-reg" disabled="">已结束</button>
-                    </div>
-                </div>
-                <div class="item-share" style="top: 62px;"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[路跑]四季轮转！记录你深圳站的笑脸','url':'/game/411','pic':'http://static.wisdom-china.cn//images/1/2644/7270/4860/cf6bc431237dd65b283ad9090add4927_2_220x140.jpg?640x442','summary':'    时间：2015年04月12日 13:00&nbsp;-&nbsp;2015年04月26日 18:30    地点：广东省深圳市    主办：智美集团'});</script><a href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/411&amp;pic=http://static.wisdom-china.cn//images/1/2644/7270/4860/cf6bc431237dd65b283ad9090add4927_0_0.jpg&amp;title=[路跑]四季轮转！记录你深圳站的笑脸&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年04月12日 13:00 - 2015年04月26日 18:30    地点：广东省深圳市    主办：智美集团" target="_blank" class="shareto shareto-qzone" title="分享到qq空间"></a><a href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/411&amp;pic=http://static.wisdom-china.cn//images/1/2644/7270/4860/cf6bc431237dd65b283ad9090add4927_0_0.jpg&amp;title=[路跑]四季轮转！记录你深圳站的笑脸&amp;appkey=1868074881&amp;summary=    时间：2015年04月12日 13:00 - 2015年04月26日 18:30    地点：广东省深圳市    主办：智美集团" target="_blank" class="shareto shareto-tsina" title="分享到新浪微博"></a></div>
-            </li>                     <li class="match-chosen">
-                <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                        <div class="thumbnail-wrap">
-                            <a href="/game/375" target="_blank"> <img src="http://static.wisdom-china.cn//images/1/7219/0126/2153/35efa4c88a2cc6be5b15e66304a1dfb9_2_220x140.jpg?640x442" alt="">
-                            </a>
-                        </div>
-                        <div class="item-list-right">
-                            <p class="item-list-ttl">
-                                <span class="icon-55 match-end"></span>
-                                <strong><span>[马拉松]</span><a href="/game/375" target="_blank">SNOW RUN 野雪跑！高清写真免费下！
-
-                                </a></strong>
-                            </p>
-                            <div class="item-list-detail">
-                                <p>
-                                    <span>时间：</span>
-                                    <!-- 不是同一天 -->
-                                    2015年03月07日
-                                    12:00&nbsp;-&nbsp;2015年03月15日 18:00
-
-                                </p>
-                                <p>
-                                    <span>地点：</span>河北崇礼万龙滑雪场
-                                </p>
-                                <p>
-                                    <span>项目：</span>马拉松
-                                </p>
-                                <p><span>主办：</span>
-                                    河北崇礼万龙滑雪场
-                                </p>
-                                <p class="item-list-bottom">
-                                    <!--
-                              <a href="javascript:void(0);"><i class="icon-match icon-like"></i>523人感兴趣</a>
-                              -->
-                                    <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（159）</a>
-                                    <a href="javascript:void(0);"><i class="icon-match icon-comment"></i>0人评论</a>
-                                    <!--  <a
-                                     href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名5,000人（剩余0人）</a> -->
-                                </p>
-                            </div>
-                        </div>
-                        <!-- 已结束  -->
-                        <button class="btn btn-show item-list-reg" disabled="">已结束</button>
-                    </div>
-                </div>
-                <div class="item-share" style="top: 62px;"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[马拉松]SNOW RUN 野雪跑！高清写真免费下！','url':'/game/375','pic':'http://static.wisdom-china.cn//images/1/7219/0126/2153/35efa4c88a2cc6be5b15e66304a1dfb9_2_220x140.jpg?640x442','summary':'    时间：2015年03月07日 12:00&nbsp;-&nbsp;2015年03月15日 18:00    地点：河北崇礼万龙滑雪场    主办：河北崇礼万龙滑雪场'});</script><a href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/375&amp;pic=http://static.wisdom-china.cn//images/1/7219/0126/2153/35efa4c88a2cc6be5b15e66304a1dfb9_0_0.jpg&amp;title=[马拉松]SNOW RUN 野雪跑！高清写真免费下！&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年03月07日 12:00 - 2015年03月15日 18:00    地点：河北崇礼万龙滑雪场    主办：河北崇礼万龙滑雪场" target="_blank" class="shareto shareto-qzone" title="分享到qq空间"></a><a href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/375&amp;pic=http://static.wisdom-china.cn//images/1/7219/0126/2153/35efa4c88a2cc6be5b15e66304a1dfb9_0_0.jpg&amp;title=[马拉松]SNOW RUN 野雪跑！高清写真免费下！&amp;appkey=1868074881&amp;summary=    时间：2015年03月07日 12:00 - 2015年03月15日 18:00    地点：河北崇礼万龙滑雪场    主办：河北崇礼万龙滑雪场" target="_blank" class="shareto shareto-tsina" title="分享到新浪微博"></a></div>
-            </li>                     <li class="match-chosen">
-                <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                        <div class="thumbnail-wrap">
-                            <a href="/game/371" target="_blank"> <img src="http://static.wisdom-china.cn//images/1/4469/0859/2878/6f2ffd8dac269066f96576ecbcdc73d0_2_220x140.png?640x442" alt="">
-                            </a>
-                        </div>
-                        <div class="item-list-right">
-                            <p class="item-list-ttl">
-                                <span class="icon-55 match-end"></span>
-                                <strong><span>[自行车]</span><a href="/game/371" target="_blank">2015“为爱骑行”环上海公益骑行嘉年华
-
-                                </a></strong>
-                            </p>
-                            <div class="item-list-detail">
-                                <p>
-                                    <span>时间：</span>                                  <!-- 同一天 -->
-                                    2015年04月12日
-                                    08:30-16:00
-
-                                </p>
-                                <p>
-                                    <span>地点：</span>上海
-                                </p>
-                                <p>
-                                    <span>项目：</span>自行车
-                                </p>
-                                <p><span>主办：</span>
-                                    上海市体育发展基金会 上海市自行车行业协会
-                                </p>
-                                <p class="item-list-bottom">
-                                    <!--
-                              <a href="javascript:void(0);"><i class="icon-match icon-like"></i>523人感兴趣</a>
-                              -->
-                                    <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（23）</a>
-                                    <a href="javascript:void(0);"><i class="icon-match icon-comment"></i>0人评论</a>
-                                    <!--  <a
-                                     href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名61人（剩余-11人）</a> -->
-                                </p>
-                            </div>
-                        </div>
-                        <!-- 已结束  -->
-                        <button class="btn btn-show item-list-reg" disabled="">已结束</button>
-                    </div>
-                </div>
-                <div class="item-share" style="top: 62px;"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[自行车]2015“为爱骑行”环上海公益骑行嘉年华','url':'/game/371','pic':'http://static.wisdom-china.cn//images/1/4469/0859/2878/6f2ffd8dac269066f96576ecbcdc73d0_2_220x140.png?640x442','summary':'    时间：2015年04月12日 08:30-16:00    地点：上海    主办：上海市体育发展基金会 上海市自行车行业协会'});</script><a href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/371&amp;pic=http://static.wisdom-china.cn//images/1/4469/0859/2878/6f2ffd8dac269066f96576ecbcdc73d0_0_0.png&amp;title=[自行车]2015“为爱骑行”环上海公益骑行嘉年华&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年04月12日 08:30-16:00    地点：上海    主办：上海市体育发展基金会 上海市自行车行业协会" target="_blank" class="shareto shareto-qzone" title="分享到qq空间"></a><a href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/371&amp;pic=http://static.wisdom-china.cn//images/1/4469/0859/2878/6f2ffd8dac269066f96576ecbcdc73d0_0_0.png&amp;title=[自行车]2015“为爱骑行”环上海公益骑行嘉年华&amp;appkey=1868074881&amp;summary=    时间：2015年04月12日 08:30-16:00    地点：上海    主办：上海市体育发展基金会 上海市自行车行业协会" target="_blank" class="shareto shareto-tsina" title="分享到新浪微博"></a></div>
-            </li>                     <li class="match-chosen">
-                <div class="item-list-content">
-                    <div class="item-list-wrap clearfix">
-                        <div class="thumbnail-wrap">
-                            <a href="/game/348" target="_blank"> <img src="http://static.wisdom-china.cn//images/1/0840/3351/7851/a8902fdcf44c7a40cc06a838b7dc0666_2_220x140.jpg?640x442" alt="">
-                            </a>
-                        </div>
-                        <div class="item-list-right">
-                            <p class="item-list-ttl">
-                                <span class="icon-55 match-ready"></span>
-                                <strong><span>[马拉松]</span><a href="/game/348" target="_blank">Let's go！柏林马拉松！
-
-                                </a></strong>
-                            </p>
-                            <div class="item-list-detail">
-                                <p>
-                                    <span>时间：</span>                                  <!-- 同一天 -->
-                                    2015年09月27日
-                                    08:00-14:00
-
-                                </p>
-                                <p>
-                                    <span>地点：</span>德国柏林
-                                </p>
-                                <p>
-                                    <span>项目：</span>马拉松
-                                </p>
-                                <p><span>主办：</span>
-                                    仕春体育
-                                </p>
-                                <p class="item-list-bottom">
-                                    <!--
-                              <a href="javascript:void(0);"><i class="icon-match icon-like"></i>523人感兴趣</a>
-                              -->
-                                    <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（89）</a>
-                                    <a href="javascript:void(0);"><i class="icon-match icon-comment"></i>7人评论</a>
-                                    <!--  <a
-                                     href="javascript:void(0);"><i class="icon-match icon-enroll"></i>已报名104人（剩余26人）</a> -->
-                                </p>
-                            </div>
-                        </div>
-                        <button class="btn btn-show item-list-reg btn-warning" disabled="">进行中</button>
-                    </div>
-                </div>
-                <div class="item-share" style="top: 91px;"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[马拉松]Let's go！柏林马拉松！','url':'/game/348','pic':'http://static.wisdom-china.cn//images/1/0840/3351/7851/a8902fdcf44c7a40cc06a838b7dc0666_2_220x140.jpg?640x442','summary':'    时间：2015年09月27日 08:00-14:00    地点：德国柏林    主办：仕春体育'});</script></div>
+                <!--<div class="item-share" style="top: 62px;"><script type="text/javascript">iyuesai.api.writeShareModule({'title':'[马拉松]重马照片发布！看看有没有你！','url':'/game/423','pic':'http://static.wisdom-china.cn//images/1/9567/7664/4472/2c10a1e78a7a1c56f1e5382d252e7c7f_2_220x140.jpg?640x442','summary':'    时间：2015年03月22日 08:30-14:00    地点：重庆市    主办：中国田径协会  重庆市体育局'});</script><a href="http://www.jiathis.com/send/?webid=qzone&amp;url=http://www.iyuesai.com/game/423&amp;pic=http://static.wisdom-china.cn//images/1/9567/7664/4472/2c10a1e78a7a1c56f1e5382d252e7c7f_0_0.jpg&amp;title=[马拉松]重马照片发布！看看有没有你！&amp;appkey=zDey5D5hxEaececk&amp;summary=    时间：2015年03月22日 08:30-14:00    地点：重庆市    主办：中国田径协会  重庆市体育局" target="_blank" class="shareto shareto-qzone" title="分享到qq空间"></a><a href="http://www.jiathis.com/send/?webid=tsina&amp;url=http://www.iyuesai.com/game/423&amp;pic=http://static.wisdom-china.cn//images/1/9567/7664/4472/2c10a1e78a7a1c56f1e5382d252e7c7f_0_0.jpg&amp;title=[马拉松]重马照片发布！看看有没有你！&amp;appkey=1868074881&amp;summary=    时间：2015年03月22日 08:30-14:00    地点：重庆市    主办：中国田径协会  重庆市体育局" target="_blank" class="shareto shareto-tsina" title="分享到新浪微博"></a></div>-->
             </li>
+            </volist>
+
             </ul>
             </div>
             </div>
@@ -453,23 +118,9 @@
             <!-- 赛事列表 结束 -->
             <!-- 分页 开始 -->
             <div class="main-block pagging-block">
-                <form id="paging-form" action="#" iyuesai-plugins-valid="0.4267217838205397">
+                <form id="paging-form" action="#" >
                     <div class="paging-wrap">
-                        <span class="text">共 1页, 8条记录</span>
-                        <span class="disabled">首页</span>
-                        <span class="disabled">上一页</span>
-                        <span class="current"> 1</span>
-                        <span class="disabled">下一页</span>
-                        <span class="disabled">末页</span>
-                        <label class="page-stage">
-
-                            到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':1,'min':1}]]"> 页
-                            <input type="submit" class="btn" value="确定">
-                        </label>
-
-                        <!--end of pageBean?? && (pages.total > -1) -->
-                        <input type="hidden" name="pageNum" id="pageNum" value="1">
-                        <input type="hidden" name="pageSize" id="pageSize" value="10">
+                        <{$page}>
                     </div>
                 </form>
             </div>

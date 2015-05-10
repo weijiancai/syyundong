@@ -21,8 +21,8 @@
     <input type="file" class="file" id="fileupload" name="file" value="设置头像" style="position: static;display: none;">
 
     <span id="show_mes" style="color:Red"></span>
-    <input type="hidden" value="<{$vo.image}>" name="user_head" id="user_head">
-    <input type="hidden" value="user" id="path">
+    <input type="text" value="<{$vo.image}>" name="user_head" id="user_head">
+    <input type="text" value="user" id="path">
 </div>
 <table class="table">
 <tbody><tr>
@@ -37,8 +37,8 @@
         <p>性别</p>
         <select validate-rules="[['required']]" validate-title="性别" class="span2" id="gender" name="gender">
             <option value="">选择性别</option>
-            <option value="0">女</option>
-            <option value="1">男</option>
+            <option value="F">女</option>
+            <option value="M">男</option>
         </select>
     </td>
 </tr>
@@ -64,104 +64,18 @@
 <input type="hidden" id="interest" name="interest" data-selector="interest-arr" value="">
 <ul data-selector="interestData" class="interest-list clearfix">
 <div id="NTGUID__3NDTGUID__6">
-
-<li class="" data-name="路跑" data-id="1">
-
-    <img src="http://static.wisdom-china.cn/iyuesai/images/interest/1.jpg">
-    <!-- <img src="http://static.wisdom-china.cn//images/interest/1.jpg" /> -->
-    <!-- <h4>路跑</h4> -->
-    <p><em></em>人喜欢</p>
-    <i class="interest-border"></i><i class="iconplus"></i><i class="icontick"></i>
-</li>
-
-<li class="" data-name="骑行" data-id="2">
-
-    <img src="http://static.wisdom-china.cn/iyuesai/images/interest/2.jpg">
-    <!-- <img src="http://static.wisdom-china.cn//images/interest/2.jpg" /> -->
-    <!-- <h4>骑行</h4> -->
-    <p><em></em>人喜欢</p>
-    <i class="interest-border"></i><i class="iconplus"></i><i class="icontick"></i>
-</li>
-
-<li class="" data-name="篮球" data-id="3">
-
-    <img src="http://static.wisdom-china.cn/iyuesai/images/interest/3.jpg">
-    <!-- <img src="http://static.wisdom-china.cn//images/interest/3.jpg" /> -->
-    <!-- <h4>篮球</h4> -->
-    <p><em></em>人喜欢</p>
-    <i class="interest-border"></i><i class="iconplus"></i><i class="icontick"></i>
-</li>
-
-<li class="" data-name="足球" data-id="4">
-
-    <img src="http://static.wisdom-china.cn/iyuesai/images/interest/4.jpg">
-    <!-- <img src="http://static.wisdom-china.cn//images/interest/4.jpg" /> -->
-    <!-- <h4>足球</h4> -->
-    <p><em></em>人喜欢</p>
-    <i class="interest-border"></i><i class="iconplus"></i><i class="icontick"></i>
-</li>
-
-<li class="" data-name="羽毛球" data-id="5">
-
-    <img src="http://static.wisdom-china.cn/iyuesai/images/interest/5.jpg">
-    <!-- <img src="http://static.wisdom-china.cn//images/interest/5.jpg" /> -->
-    <!-- <h4>羽毛球</h4> -->
-    <p><em></em>人喜欢</p>
-    <i class="interest-border"></i><i class="iconplus"></i><i class="icontick"></i>
-</li>
-
-<li class="" data-name="台球" data-id="6">
-
-    <img src="http://static.wisdom-china.cn/iyuesai/images/interest/6.jpg">
-    <!-- <img src="http://static.wisdom-china.cn//images/interest/6.jpg" /> -->
-    <!-- <h4>台球</h4> -->
-    <p><em></em>人喜欢</p>
-    <i class="interest-border"></i><i class="iconplus"></i><i class="icontick"></i>
-</li>
-
-<li class="" data-name="体育舞蹈" data-id="7">
-
-    <img src="http://static.wisdom-china.cn/iyuesai/images/interest/7.jpg">
-    <!-- <img src="http://static.wisdom-china.cn//images/interest/7.jpg" /> -->
-    <!-- <h4>体育舞蹈</h4> -->
-    <p><em></em>人喜欢</p>
-    <i class="interest-border"></i><i class="iconplus"></i><i class="icontick"></i>
-</li>
-
-<li class="" data-name="健美操" data-id="8">
-
-    <img src="http://static.wisdom-china.cn/iyuesai/images/interest/8.jpg">
-    <!-- <img src="http://static.wisdom-china.cn//images/interest/8.jpg" /> -->
-    <!-- <h4>健美操</h4> -->
-    <p><em></em>人喜欢</p>
-    <i class="interest-border"></i><i class="iconplus"></i><i class="icontick"></i>
-</li>
-
-<li class="" data-name="徒步户外" data-id="9">
-
-    <img src="http://static.wisdom-china.cn/iyuesai/images/interest/9.jpg">
-    <!-- <img src="http://static.wisdom-china.cn//images/interest/9.jpg" /> -->
-    <!-- <h4>徒步户外</h4> -->
-    <p><em></em>人喜欢</p>
-    <i class="interest-border"></i><i class="iconplus"></i><i class="icontick"></i>
-</li>
-
-<li class="" data-name="游泳" data-id="10">
-
-    <img src="http://static.wisdom-china.cn/iyuesai/images/interest/10.jpg">
-    <!-- <img src="http://static.wisdom-china.cn//images/interest/10.jpg" /> -->
-    <!-- <h4>游泳</h4> -->
-    <p><em></em>人喜欢</p>
-    <i class="interest-border"></i><i class="iconplus"></i><i class="icontick"></i>
-</li>
-
+<volist name="fav" id="vo">
+    <li class="" data-name="<{$vo.name}>" data-id="<{$vo.id}>">
+        <img src="<{$vo.image}>">
+        <!-- <img src="http://static.wisdom-china.cn//images/interest/1.jpg" /> -->
+        <!-- <h4>路跑</h4> -->
+       <!-- <p><em></em>人喜欢</p>-->
+        <i class="interest-border"></i><i class="iconplus"></i><i class="icontick"></i>
+    </li>
+</volist>
 </div>
-
-
 </ul>
 </div>
-
-
 </div>
 </td>
 </tr>

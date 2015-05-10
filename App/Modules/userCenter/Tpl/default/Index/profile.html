@@ -6,7 +6,7 @@
             <div class="span16">
                 <div class="account-top">
                     <div class="account-thumb">
-                        <{$user['id']}>
+
                         <img name="user-head" src="<{$user['id']|getUsersImage}>">
                         <div class="alpha-bg"></div>
                     </div>
@@ -15,8 +15,8 @@
                             <strong><{$user.nick_name}></strong>
                         </p>
 
-                        <p class="account-tip"><{$user.signature}></p>
-                        <p><span class="account-tip">运动喜好：路跑  肚皮舞</span></p>
+                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
+                        <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
                         <div class="alpha-bg"></div>
                     </div>
                 </div>
@@ -24,17 +24,12 @@
             <div class="span16">
                 <div class="public-subnav clearfix">
                     <ul>
-                        <!--<li><a href="/userCenter/timeline">我的足迹</a></li>-->
                         <li><a href="/userCenter/Profile" class="current">个人资料</a></li>
                         <li><a href="/userCenter/game">我的赛事</a></li>
                         <li><a href="/userCenter/activity">我的活动</a></li>
                         <li><a href="/userCenter/topic">我的话题</a></li>
                         <li><a href="/userCenter/friend">我的赛友</a></li>
                         <li><a href="/userCenter/message/msg-game">我的消息</a><i class="msg-tip" data-selector="unreadMsgCount">0</i></li>
-                        <!--
-                        <li><a href="/userCenter/orders">我的订单</a></li>
-                        <li><a href="/userCenter/venues">我的场馆</a></li>
-                        -->
                         <li><a href="/userCenter/account">账号设置</a></li>
                     </ul>
                 </div>

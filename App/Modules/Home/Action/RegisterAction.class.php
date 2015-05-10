@@ -16,43 +16,30 @@ class RegisterAction extends Action
     }
 
     /*
-    *@注册用户
+    *@注册用户详细页面
     */
-    public function adddata()
+    public function profile()
     {
-        //验证验证码是否错误
-        if ($this->isPost()) {
-            $date['mobile'] = trim(I('post.mobile'));
-            $date['password'] = base64_encode(strtoupper(md5(I('post.password'))));;
-            $result = D('DbUser')->data($date)->add();
-            dump($result);
-
-            $id = enCode($result);
-            session('mark_id', "$id");
-            dump(session('mark_id'));
-            /*if (false !== $result) {
-                $this->display('profile');
-                //   echo  1;
-            }*/
-        } else {
-            $this->error('非法请求');
-        }
+        $model = New Model();
+        $list  = $model->query('select dz_sport.id ,name ,(select local_url from db_images where db_images.id = image) image from dz_sport where sport_type=1 and level =2 ');
+        $this->assign('fav',$list);
+        $this->display();
     }
 
     /*
-    * @ 注册用户详细信息
-    */
+     * @功能：注册用户详细信息
+     * @时间：20150501
+     */
     public function  AddProfile()
     {
         $data['user_head'] = $_POST['user_head'];
         $data['nick_name'] = $_POST['nick_name'];
         $data['gender'] = $_POST['gender'];
         $data['address'] = $_POST['address'];
-        $data['interest'] = $_POST['interest'];
+        $data['interest'] = substr($_POST['interest'], 0, -1);
         $data['signature'] = $_POST['signature'];
-        $data['id'] = array('eq', deCode(session('mark_id')));
         if (session('mark_id')) {
-            $result = M('DbUser')->save($data);
+            $result = M('DbUser')->where('id ='.deCode(session('mark_id')))->save($data);
             if (false !== $result) {
                 echo 1;
             } else {
@@ -60,55 +47,6 @@ class RegisterAction extends Action
             }
         } else {
             echo 0;
-        }
-    }
-
-    /*
-     *   重新发送验证码
-     */
-    function mobileCode()
-    {
-        $code = randnum(6, 0, 9);
-        $where['uid'] = trim(I('post.uid'));
-        $uid = trim(I('post.uid'));
-        M('Users')->where($where)->setField('checkcode', $code);
-        $tel = M('Users')->where("uid='" . getgb(trim(I('post.uid'))) . "'")->getField('tel');
-        $this->assign('uid', trim(I('post.uid')));
-        if ((empty($uid)) || ($uid == '')) {
-            $str = '-12';
-        } else {
-            $yz = M('Users')->where("uid='" . getgb(trim(I('post.uid'))) . "'")->getField('yz');
-            if ($yz == 1) {
-                //已经验证过.直接返回成功，不发送短信码
-                $str = '-13';
-            } else {
-                $result = sendcode($tel, $code);
-                $str = substr($result, 0, 1);
-            }
-        }
-        echo $str;
-
-    }
-
-    /*
-     *	短信码校验比对
-    */
-    function checkcode()
-    {
-        $where['uid'] = iconv('utf-8', 'gbk', trim(I('post.uid')));
-        $checkcode = M('Users')->where($where)->getField('checkcode');
-        $send = I('post.validate');
-        if ($send == $checkcode) {
-            //修改会员注册状态
-            $state = M('Users')->where("uid='" . trim(I('post.uid')) . "'")->setField('yz', 1);
-            M('Users')->where("uid='" . trim(I('post.uid')) . "'")->setField('checkstate', 1);
-            if ($state) {
-                $this->success("注册成功,请使用注册账号、密码登录", 'http://www.songyuan163.com');
-            } else {
-                $this->success("注册失败,请在工作时间主动拨打客服电话开通", 'http://www.songyuan163.com');
-            }
-        } else {
-            $this->error('校验码错误,请重新输入');
         }
     }
 
@@ -170,6 +108,7 @@ class RegisterAction extends Action
                 echo 'false';
             } else {
                 $date['nick_name'] = array('eq', trim($_POST['nickName']));
+                $date['id'] = array('neq', deCode(session('mark_id')));
                 $result = D('DbUser')->where($date)->count();
                 if ($result) {
                     echo 'false';
@@ -180,5 +119,14 @@ class RegisterAction extends Action
         } else {
             echo false;
         }
+    }
+    /*
+     * @功能：用户喜好
+     * @时间：20150501
+     */
+    public function FavouriteGame(){
+       $model = New Model();
+       $list  = $model->query('select dz_sport.id ,name ,(select local_url from db_images where id = image) image from dz_sport,db_images');
+       $this->assign('fav',$list);
     }
 }

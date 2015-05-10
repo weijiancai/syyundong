@@ -93,7 +93,8 @@ $(function () {
                     $('#showimg').html("<img width:52px height=52px src='/Public/images/default/upimg_loading.gif'>");
                 },
                 success: function (data) {
-                    var img = "/Public/Upload/" + data.path + "/" + data.savename;
+                    var arr = data['savename'].split('/');
+                    var img = "/Public/Upload/" + data.path + "/" + arr[0]+"/s_"+arr[1];
                     $("#nickthumb").html("<span class='delimg' rel='" + data.savename + "'></span><img width:52px height=52px src='" + img + "'>");
                     $('#user_head').val(data.label);
                 },
@@ -108,8 +109,14 @@ $(function () {
     //兴趣爱好取值
     $("li").click(function () {
         var name = $(this).data('name');
-        $(this).addClass('current');
-        $('#interest').val($('#interest').val()+ $(this).data('id') + ',');
+        if($(this).hasClass('current')){
+            $(this).removeClass('current');
+            var str  = $('#interest').val()
+            $('#interest').val(str.replace($(this).data('id')+',',""));
+        }else{
+            $(this).addClass('current');
+            $('#interest').val($('#interest').val()+ $(this).data('id') + ',');
+        }
         $('#cked-num').html($('.interest-list .current').length);
     });
 

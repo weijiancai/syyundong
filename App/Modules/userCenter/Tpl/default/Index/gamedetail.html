@@ -1,0 +1,131 @@
+<include file="Public@default:Public:top" />
+<div class="ucenter-page account-bg clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="span16">
+                <div class="account-top">
+                    <div class="account-thumb">
+
+                        <img name="user-head" src="<{$user['id']|getUsersImage}>">
+                        <div class="alpha-bg"></div>
+                    </div>
+                    <div class="account-right">
+                        <p class="account-right-name">
+                            <strong><{$user.nick_name}></strong>
+                        </p>
+
+                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
+                        <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
+                        <div class="alpha-bg"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="span16">
+                <div class="public-subnav clearfix">
+                    <ul>
+                        <!--<li><a href="/userCenter/timeline">我的足迹</a></li>-->
+                        <li><a href="/userCenter/Profile">个人资料</a></li>
+                        <li><a href="/userCenter/game" class="current">我的赛事</a></li>
+                        <li><a href="/userCenter/activity">我的活动</a></li>
+                        <li><a href="/userCenter/topic">我的话题</a></li>
+                        <li><a href="/userCenter/friend">我的赛友</a></li>
+                        <li><a href="/userCenter/message/msg-game">我的消息</a><i class="msg-tip" data-selector="unreadMsgCount">0</i></li>
+                        <!--
+                        <li><a href="/userCenter/orders">我的订单</a></li>
+                        <li><a href="/userCenter/venues">我的场馆</a></li>
+                        -->
+                        <li><a href="/userCenter/account">账号设置</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span16">
+            <div class="container ucenter-container">
+                <div class="main-block clearfix">
+                    <div class="apply-info-block">
+                        <div class="item-list-right">
+                            <p class="item-list-ttl">
+
+                                <span class="icon-55 <if condition='$join_list.status eq 1'>match-enroll<elseif condition='$join_list.status eq 2'/>match-ready <elseif condition='$join_list.status eq 3'/>match-going<elseif condition='$join_list.status eq 4'/>match-end</if>"></span>
+                                <strong><span>[<{$join_list.sport_name}>]</span><a target="_blank" href="/game/<{$join_list.game_id}>"><{$join_list.game_name}>
+                                </a></strong>
+                            </p>
+                            <div class="item-list-detail">
+                                <p>
+                                    <span>时间：</span>
+                                    <!-- 不是同一天 -->
+                                    2015年11月14日<{$join_list.start_date}>
+                                    08:00&nbsp;-&nbsp;2015年11月15日 17:00
+                                </p>
+                                <p>
+                                    <span>地点：</span>江苏省南京市
+                                </p>
+                                <p>
+                                    <span>组别：</span>家庭组别(1成人+1儿童)
+                                </p>
+                                <p>
+                                    <span>主办：</span>  智美集团
+                                </p>
+                            </div>
+                        </div>
+                        <div class="apply-statu-wrap">
+                            <h4>状态</h4>
+                            <a data-selector="payNow" data-action="#" class="btn btn-warning pull-right" href="/userCenter/pay/427/28671/53B6C576F0DF146699EC0E3EB020049D0E17E1E4">立即支付</a>
+                            <p class="apply-statu-dis">
+                                <span>等待付款</span>
+                            </p>
+                        </div>
+                        <div class="infomation-block">
+                            <h4>报名信息</h4>
+                            <dl>
+                                <dt>姓名</dt>
+                                <dd>你好</dd>
+                            </dl>
+                            <dl>
+                                <dt>证件类型</dt>
+                                <dd>身份证</dd>
+                            </dl>
+                            <dl>
+                                <dt>证件号码</dt>
+                                <dd>229809212343211321</dd>
+                            </dl>
+                            <dl>
+                                <dt>常住城市</dt>
+                                <dd>11</dd>
+                            </dl>
+                            <dl>
+                                <dt>服装尺码</dt>
+                                <dd>L:170</dd>
+                            </dl>
+                            <dl>
+                                <dt>移动电话</dt>
+                                <dd>18899881223</dd>
+                            </dl>
+                            <dl>
+                                <dt>邮箱</dt>
+                                <dd>www.30303@qq.com</dd>
+                            </dl>
+                            <dl>
+                                <dt>性别</dt>
+                                <dd>男</dd>
+                            </dl>
+                            <dl>
+                                <dt>紧急联系人</dt>
+                                <dd>1</dd>
+                            </dl>
+                            <dl>
+                                <dt>紧急联系人电话</dt>
+                                <dd>1</dd>
+                            </dl>
+                            <dl>
+                                <dt>家属信息</dt>
+                                <dd>[["对对对","身份中","1111","170","女"]]</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<include file="Public@default:Public:bottom" />

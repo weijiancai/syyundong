@@ -7,38 +7,17 @@
             <div class="span16">
                 <div class="account-top">
                     <div class="account-thumb">
-                        <img name="user-head" src="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_110x110.jpg">
-                        <!-- <img src="http://static.wisdom-china.cn/iyuesai/images/pages/user-head.jpg">-->
+
+                        <img name="user-head" src="<{$user['id']|getUsersImage}>">
                         <div class="alpha-bg"></div>
                     </div>
                     <div class="account-right">
                         <p class="account-right-name">
-                            <strong>wei-jc</strong>
-                            <!--
-                            <span class="pull-right">高级达人 <em class="account-tip">积分</em>：3346.0</span>
-                            -->
+                            <strong><{$user.nick_name}></strong>
                         </p>
-                        <!--
-                        <p class="account-tip">一句话介绍一下自己吧，让别人更了解你</p>
-                        <p><span class="account-tip">运动喜好：</span>足球 自行车 攀岩 飞盘</p>
-                        -->
 
-                        <p class="account-tip">一句话介绍一下自己吧，让别人更了解你</p>
-                        <p><span class="account-tip">运动喜好：路跑  肚皮舞</span></p>
-                        <!--
-                         <p>
-                        <span class="account-tip">参加赛事： </span>0个
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="account-tip">关注赛事： </span>2个
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="account-tip">参加活动： </span>2个
-                        </p>
-                        <p>
-                        <span class="account-tip">创建活动： </span>0个
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="account-tip">发表话题：</span> 0个
-                        </p>
-                               -->
+                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
+                        <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
                         <div class="alpha-bg"></div>
                     </div>
                 </div>
@@ -46,8 +25,8 @@
             <div class="span16">
                 <div class="public-subnav clearfix">
                     <ul>
-                        <li><a href="/userCenter/timeline">我的足迹</a></li>
-                        <li><a href="/userCenter/profile">个人资料</a></li>
+                        <!--<li><a href="/userCenter/timeline">我的足迹</a></li>-->
+                        <li><a href="/userCenter/Profile">个人资料</a></li>
                         <li><a href="/userCenter/game" class="current">我的赛事</a></li>
                         <li><a href="/userCenter/activity">我的活动</a></li>
                         <li><a href="/userCenter/topic">我的话题</a></li>
@@ -68,7 +47,7 @@
                         <div class="public-tab-wrap clearfix" data-selector="relevantTabs">
                             <a href="/userCenter/game" class="tab current">已报名</a>
                             <a href="/userCenter/game/follow" class="tab">已关注</a>
-                            <a href="/userCenter/game/team" class="tab">团体报名</a>
+                            <!--<a href="/userCenter/game/team" class="tab">团体报名</a>-->
                         </div>
                         <!-- 已报名赛事 开始 -->
                         <div class="tab-content-wrap">
@@ -86,7 +65,7 @@
                                                 <div class="item-list-right">
                                                     <p class="item-list-ttl">
                                                         <span class="icon-55 match-enroll"></span>
-                                                        <strong><span>[路跑]</span><a href="Game/<{$vo.id}>" target="_blank"><{$vo.name}>
+                                                        <strong><span>[<{$vo.sport_name}>]</span><a href="Game/<{$vo.game_id}>" target="_blank"><{$vo.game_name}>
 
                                                         </a></strong>
                                                     </p>
@@ -120,8 +99,8 @@
                                                 </div>
                                                 <!--<a href="/userCenter/pay/427/28670/3F3A2CCFBC364890F56EA044B53BE5A4DDC6F255" class="btn btn-warning item-btn">立即支付</a>-->
 
-                                                <a href="/userCenter/gamedel/427/28670/3F3A2CCFBC364890F56EA044B53BE5A4DDC6F255" style="position:absolute;top:80px;right:220px;font-size:14px">取消报名</a>
-                                                <a href="/userCenter/gamedetail/427/28670/3F3A2CCFBC364890F56EA044B53BE5A4DDC6F255" class="apply-info">报名详情</a>
+                                                <a href="/userCenter/gamedel/<{$vo.game_id}>/<{$vo.group_id}>" style="position:absolute;top:80px;right:220px;font-size:14px">取消报名</a>
+                                                <a href="/userCenter/gamedetail/<{$vo.game_id}>/<{$vo.group_id}>" class="apply-info">报名详情</a>
                                             </div>
                                         </div>
                                         <div class="item-share" style="top: 62px;">
@@ -137,21 +116,8 @@
                         <div class="main-block pagging-block">
                             <form id="paging-form" action="#" iyuesai-plugins-valid="0.07622040319256485">
                                 <div class="paging-wrap">
-                                    <span class="text">共 1页, 2条记录</span>
-                                    <span class="disabled">首页</span>
-                                    <span class="disabled">上一页</span>
-                                    <span class="current"> 1</span>
-                                    <span class="disabled">下一页</span>
-                                    <span class="disabled">末页</span>
-                                    <label class="page-stage">
 
-                                        到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':1,'min':1}]]"> 页
-                                        <input type="submit" class="btn" value="确定">
-                                    </label>
-
-                                    <!--end of pageBean?? && (pages.total > -1) -->
-                                    <input type="hidden" name="pageNum" id="pageNum" value="1">
-                                    <input type="hidden" name="pageSize" id="pageSize" value="10">
+                                    <{$page}>
                                 </div>
                             </form>
                         </div>

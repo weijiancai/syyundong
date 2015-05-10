@@ -9,7 +9,7 @@
 /* phpinfo();
 require_once('abc.php'); */
 
-echo "今天:".date("Y-m-d")."<br>";       
+/* echo "今天:".date("Y-m-d")."<br>";       
 echo "昨天:".date("Y-m-d",strtotime("-1 day")), "<br>";       
 echo "明天:".date("Y-m-d",strtotime("+1 day")). "<br>";    
 echo "一周后:".date("Y-m-d",strtotime("+1 week")). "<br>";       
@@ -18,6 +18,11 @@ echo "下个星期四:".date("Y-m-d",strtotime("next Thursday")). "<br>";
 echo "上个周一:".date("Y-m-d",strtotime("last Monday"))."<br>";       
 echo "一个月前:".date("Y-m-d",strtotime("last month"))."<br>";       
 echo "一个月后:".date("Y-m-d",strtotime("+1 month"))."<br>";       
-echo "十年后:".date("Y-m-d",strtotime("+10 year"))."<br>";      
+echo "十年后:".date("Y-m-d",strtotime("+10 year"))."<br>";    */   
+
+// 分隔符可以是斜线，点，或横线
+$date = "20150510/554eef8d9fe18.jpg";
+list($day,$name) = split ('[/]', $date);
+echo "day: $day; name: $name<br />\n";
 ?>  
 

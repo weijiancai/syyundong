@@ -123,7 +123,8 @@
                                 <div class="item-list-content">
                                     <div class="item-list-wrap clearfix">
                                         <div class="thumbnail-wrap">
-                                            <span class="icon-match icon-match-label"></span><input type="hidden" value="<{$vo.id}>" id="game_id">
+                                            <span class="icon-match icon-match-label"></span>
+                                            <input type="hidden" value="<{$vo.id}>" id="game_id">
                                             <a href="/Game/<{$vo.id}>"><img
                                                     src="<{$vo.image}>"
                                                     alt="<{$vo.name}>" title="<{$vo.name}>"></a>
@@ -181,10 +182,10 @@
                     <form action="">
                         <div class="paging-wrap">
                             <{$page}>
-                            <label class="page-stage">到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':30,'min':1}]]">
+                            <!--<label class="page-stage">到第 <input type="text" id="pageNumText" name="pageNumText" validate-title="页码" validate-rules="[['required'],['number',{'max':30,'min':1}]]">
                                 页
                                 <input type="submit" class="btn" value="确定"/>
-                            </label>
+                            </label>-->
 
                         </div>
                     </form>

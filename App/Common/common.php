@@ -371,7 +371,7 @@ function getUserImage($id)
 function getUsersImage($id)
 {
     $user_head = D('DbUser')->where('id=' . $id)->getField('user_head');
-    $local_url = D('DbImages')->where('id=' . $user_head)->getField('local_url');
+    $local_url = D('DbImages')->where('id=' . $user_head)->getField('size2_url');
     if ($local_url) {
         return $local_url;
     } else {
@@ -466,7 +466,23 @@ function  GameGroup($game_id,$user_id)
     $group_name = D('OpGameGroup')->where('id='.$group_id[0]['group_id'])->getField('group_name');
     return $group_name;
 }
-
+/*
+ * @功能：个人运动喜好
+ * @时间:20150419
+ */
+function  UserFavGame($interest)
+{
+    $array = strtoarr($interest);
+    foreach ($array as $key => $value) {
+        if ('' != ($value = trim($value))) {
+            $model = M('DzSport');
+            $where['id'] = $value;
+            $list = $model->where($where)->getField('name');
+            $str.= $list . "  ";
+        }
+    }
+    return $str;
+}
 /*
  * @功能：数组转为字符串
  * @时间:20150419
@@ -501,5 +517,6 @@ function  RemoveFormat($str)
 {
     return str_replace(array('<p>', '</p>'), '', strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($str))), "<img>"));
 }
+
 
 ?>

@@ -16,7 +16,7 @@ class IndexAction extends Action {
      */
     public function Profile(){
         $id = deCode(I('session.mark_id'));
-        $this->assign('user',D('DbUser')->where('id='.$id)->find());
+        $this->assign('user',D('DbUser')->field('id,nick_name,signature,interest')->where('id='.$id)->find());
         $this->display();
     }
     /*
@@ -56,9 +56,9 @@ class IndexAction extends Action {
         }
     }
     /*
-    * @时间:20150408
-    * @功能：我的赛事
-    */
+     * @功能：我的赛事：已报名
+     * @时间:20150408
+     */
     public function Game(){
         import('ORG.Util.Page');
         $model=D('VJoinGame');
@@ -73,8 +73,13 @@ class IndexAction extends Action {
         $this->assign('page', $show);
         $this->assign('game', $list);
         $this->assign('count', $count);
+        $this->assign('user',D('DbUser')->field('id,nick_name,signature,interest')->where('id='.deCode(I('session.mark_id')))->find());
         $this->display();
     }
+    /*
+     * @功能：我的赛事：已关注
+     * @时间:20150408
+     */
     public function follow(){
         import('ORG.Util.Page');
         $model=D('VFocusGame');
@@ -87,8 +92,61 @@ class IndexAction extends Action {
         $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
         $show = $Page->show();
         $this->assign('page', $show);
-        $this->assign('game', $list);
+        $this->assign('follow', $list);
         $this->assign('count', $count);
+        $this->assign('user',D('DbUser')->field('id,nick_name,signature,interest')->where('id='.deCode(I('session.mark_id')))->find());
         $this->display();
+    }
+    /*
+    * @功能：我的赛事：取消报名
+    * @时间:20150408
+    */
+    public function gamedel(){
+        $date['game_id'] = $_GET['id'];
+        $date['group_id'] = $_GET['group_id'];
+        D('OpJoinGame')->where($date)->delete();
+        echo ' <script> window.location.href="/userCenter/game"</script>';
+    }
+
+    /*
+    * @功能：我的赛事：报名详情
+    * @时间:20150408
+    */
+    public function gamedetail(){
+        $date['game_id'] = $_GET['id'];
+        $date['group_id'] = $_GET['group_id'];
+        $this->assign('group_list',D('OpJoinGame')->where($date)->find());
+        $this->assign('join_list',D('VJoinGame')->where($date)->find());
+        $this->assign('user',D('DbUser')->field('id,nick_name,signature,interest')->where('id='.deCode(I('session.mark_id')))->find());
+        $this->display();
+    }
+
+    /*
+    * @功能：我的活动：参加的
+    * @时间:20150408
+    */
+    public function activity(){
+        import('ORG.Util.Page');
+        $model=D('VJoinActivity');
+        $map['user_id'] = deCode(I('session.mark_id'));
+        $order='input_date desc';
+        $count = $model->where($map)->count();
+        $Page = new Page($count, 3);
+        $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+        $Page->rollPage = 10;
+        $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
+        $show = $Page->show();
+        $this->assign('page', $show);
+        $this->assign('activity', $list);
+        $this->assign('count', $count);
+        $this->assign('user',D('DbUser')->field('id,nick_name,signature,interest')->where('id='.deCode(I('session.mark_id')))->find());
+        $this->display();
+    }
+    /*
+     * @功能：用户基本信息
+     * @时间:20150408
+     */
+    public function userinfo(){
+
     }
 }

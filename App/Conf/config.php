@@ -62,6 +62,8 @@ $Public_Config =  array(
         '/^userCenter\/account$/' => 'userCenter/index/account',
         '/^userCenter\/game$/' => 'userCenter/index/game',
         '/^userCenter\/game\/follow$/' => 'userCenter/index/follow',
+        '/^userCenter\/gamedel\/(\d+)\/(\d+)$/' => 'userCenter/index/gamedel?id=:1&group_id=:2',
+        '/^userCenter\/gamedetail\/(\d+)\/(\d+)$/' => 'userCenter/index/gamedetail?id=:1&group_id=:2',
         '/^userCenter\/activity$/' => 'userCenter/index/activity',
         '/^userCenter\/activity\/create$/' => 'userCenter/index/activity/create$',
 	),
