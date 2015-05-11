@@ -53,72 +53,47 @@
                                 <p>
                                     <span>时间：</span>
                                     <!-- 不是同一天 -->
-                                    2015年11月14日<{$join_list.start_date}>
-                                    08:00&nbsp;-&nbsp;2015年11月15日 17:00
+                                    <{$join_list.start_date}>
+                                    08:00&nbsp;-&nbsp;<{$join_list.end_date}>
                                 </p>
                                 <p>
-                                    <span>地点：</span>江苏省南京市
+                                    <span>地点：</span><{$join_list.address}>
                                 </p>
                                 <p>
-                                    <span>组别：</span>家庭组别(1成人+1儿童)
+                                    <span>组别：</span><{$join_list.group_name}>
                                 </p>
                                 <p>
-                                    <span>主办：</span>  智美集团
+                                    <span>主办：</span>  <{$join_list.sponsor}>
                                 </p>
                             </div>
                         </div>
-                        <div class="apply-statu-wrap">
-                            <h4>状态</h4>
-                            <a data-selector="payNow" data-action="#" class="btn btn-warning pull-right" href="/userCenter/pay/427/28671/53B6C576F0DF146699EC0E3EB020049D0E17E1E4">立即支付</a>
-                            <p class="apply-statu-dis">
-                                <span>等待付款</span>
-                            </p>
-                        </div>
+
                         <div class="infomation-block">
                             <h4>报名信息</h4>
                             <dl>
                                 <dt>姓名</dt>
-                                <dd>你好</dd>
-                            </dl>
-                            <dl>
-                                <dt>证件类型</dt>
-                                <dd>身份证</dd>
-                            </dl>
-                            <dl>
-                                <dt>证件号码</dt>
-                                <dd>229809212343211321</dd>
-                            </dl>
-                            <dl>
-                                <dt>常住城市</dt>
-                                <dd>11</dd>
-                            </dl>
-                            <dl>
-                                <dt>服装尺码</dt>
-                                <dd>L:170</dd>
-                            </dl>
-                            <dl>
-                                <dt>移动电话</dt>
-                                <dd>18899881223</dd>
-                            </dl>
-                            <dl>
-                                <dt>邮箱</dt>
-                                <dd>www.30303@qq.com</dd>
+                                <dd><{$group_list.true_name}></dd>
                             </dl>
                             <dl>
                                 <dt>性别</dt>
-                                <dd>男</dd>
+                                <dd><if condition="$group_list['gender'] eq F">女<else/>男</if></dd>
+                            </dl>
+                            <dl>
+                                <dt>身份证号</dt>
+                                <dd><{$group_list.certificate_num}></dd>
+                            </dl>
+
+                            <dl>
+                                <dt>移动电话</dt>
+                                <dd><{$group_list.mobile}></dd>
                             </dl>
                             <dl>
                                 <dt>紧急联系人</dt>
-                                <dd>1</dd>
+                                <dd><{$group_list.em_contact}></dd>
                             </dl>
                             <dl>
-                                <dt>紧急联系人电话</dt>
-                                <dd>1</dd>
-                            </dl>
-                            <dl>
-                                <dt>家属信息</dt>
-                                <dd>[["对对对","身份中","1111","170","女"]]</dd>
+                                <dt>紧急联系电话</dt>
+                                <dd><{$group_list.em_tel}></dd>
                             </dl>
                         </div>
                     </div>

@@ -189,9 +189,9 @@ class DbActivityAction extends CommonAction
         $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
         $upload->savePath = './Public/upload/' . $path . '/'; // 设置附件上传目录
         $upload->thumb = true;
-        $upload->thumbPrefix = '';
-        $upload->thumbMaxWidth = '600';
-        $upload->thumbMaxHeight = '400';
+        $upload->thumbPrefix = 's_';
+        $upload->thumbMaxWidth = '150';
+        $upload->thumbMaxHeight = '150';
         $upload->thumbType = 0;
         $upload->zipImages = true;
         $upload->autoSub = true;
@@ -206,6 +206,8 @@ class DbActivityAction extends CommonAction
 
             //存储图片
             $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
+            list($day,$name) = split ('[/]', $info[0]['savename']);
+            $date['size2_url'] = '/Public/upload/' . $path . '/s_' . $name;
             $result = D('DbImages')->add($date);
             //打水印
             /* $Image = new Image();
@@ -214,14 +216,16 @@ class DbActivityAction extends CommonAction
                  $Image->water('./Public/Upload/game/' . $value['savename'], './Public/images/common/logo1.png'); //打水印
              }*/
             $arr = array(
-                'name' => $info[0]['savename'],
-                'pic' => $info[0]['savename'],
+                'savename' => $info[0]['savename'],
+                'name' => $info[0]['name'],
+                'pic' => $info[0]['savepath'],
                 'size' => $info[0]['size'],
                 'ext' => $info[0]['extension'],
                 'size' => $info[0],
                 'path' => $path,
                 'label' => $result
             );
+
             echo json_encode($arr);
         }
     }

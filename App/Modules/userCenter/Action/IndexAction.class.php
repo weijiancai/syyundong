@@ -16,7 +16,7 @@ class IndexAction extends Action {
      */
     public function Profile(){
         $id = deCode(I('session.mark_id'));
-        $this->assign('user',D('DbUser')->field('id,nick_name,signature,interest')->where('id='.$id)->find());
+        $this->assign('user',D('DbUser')->where('id='.$id)->find());
         $this->display();
     }
     /*
@@ -143,10 +143,25 @@ class IndexAction extends Action {
         $this->display();
     }
     /*
-     * @功能：用户基本信息
+     * @功能：我的活动：我发起的
      * @时间:20150408
      */
-    public function userinfo(){
-
+    public function create(){
+        import('ORG.Util.Page');
+        $model = D('VGameActivity');
+        $map['type'] = array('eq', 'activity');
+        $map['input_user'] = array('eq',deCode(I('session.mark_id')));
+        $order = 'input_date desc';
+        $count = $model->where($map)->count();
+        $Page = new Page($count, 3);
+        $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+        $Page->rollPage = 10;
+        $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
+        $show = $Page->show();
+        $this->assign('page', $show);
+        $this->assign('list', $list);
+        $this->assign('count', $count);
+        $this->assign('user',D('DbUser')->field('id,nick_name,signature,interest')->where('id='.deCode(I('session.mark_id')))->find());
+        $this->display();
     }
 }
