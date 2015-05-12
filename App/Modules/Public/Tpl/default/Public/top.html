@@ -67,8 +67,8 @@
                                                                 name="user-head"></a>
                             <?php } ?>
                         </th>
-                        <td><a href="/userCenter/game"> <span>2</span><br> <em>赛事</em>
-                        </a> <i></i> <a href="/userCenter/activity"> <span>2</span><br> <em>活动</em>
+                        <td><a href="/userCenter/game"> <span><{$_SESSION['mark_id']|UserGameCount}></span><br> <em>赛事</em>
+                        </a> <i></i> <a href="/userCenter/activity"> <span><{$_SESSION['mark_id']|UserActivityCount}></span><br> <em>活动</em>
                         </a> <i></i> <a href="/userCenter/topic"> <span name="user-topic">0</span><br> <em>话题</em>
                         </a></td>
                     </tr>

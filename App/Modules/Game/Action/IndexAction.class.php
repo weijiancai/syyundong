@@ -99,7 +99,7 @@ class IndexAction extends Action
         $date['sport_id'] = I('post.sportTypeId');
         $date['name'] = I('post.name');
         $date['province'] = I('post.provinceId');
-        $date['sponor'] = I('post.sponor');
+        $date['sponsor'] = I('post.sponsor');
         $date['phone'] = I('post.phone');
         $date['limit_count'] = I('post.limitCount');
         $date['content'] = I('post.description');
@@ -109,7 +109,7 @@ class IndexAction extends Action
         $result = $model->add($date);
         if (false !== $result) {
             //申请人ID
-            $this->assign('applyID', date(Ymd) . $result);
+            $this->assign('applyID', date('Ymd') . $result);
             $this->assign('name', I('post.name'));
             $this->assign('applyPhone', I('post.applyPhone'));
             $this->assign('applyEmail', I('post.applyEmail'));

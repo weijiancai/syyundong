@@ -33,39 +33,9 @@
                                     </dt>
 
                                     <dd>
-
-                                        <li><a data-selector="selectAction" title="马拉松" data-value="6" href="javascript:;">马拉松</a></li>
-
-                                        <li><a data-selector="selectAction" title="路跑" data-value="7" href="javascript:;">路跑</a></li>
-
-                                        <li><a data-selector="selectAction" title="羽毛球" data-value="8" href="javascript:;">羽毛球</a></li>
-
-                                        <li><a data-selector="selectAction" title="乒乓球" data-value="9" href="javascript:;">乒乓球</a></li>
-
-                                        <li><a data-selector="selectAction" title="台球" data-value="10" href="javascript:;">台球</a></li>
-
-                                        <li><a data-selector="selectAction" title="网球" data-value="11" href="javascript:;">网球</a></li>
-
-                                        <li><a data-selector="selectAction" title="自行车" data-value="12" href="javascript:;">自行车</a></li>
-
-                                        <li><a data-selector="selectAction" title="山地户外活动" data-value="16" href="javascript:;">山地户外活动</a></li>
-
-                                        <li><a data-selector="selectAction" title="瑜伽" data-value="38" href="javascript:;">瑜伽</a></li>
-
-                                        <li><a data-selector="selectAction" title="足球" data-value="40" href="javascript:;">足球</a></li>
-
-                                        <li><a data-selector="selectAction" title="篮球" data-value="41" href="javascript:;">篮球</a></li>
-
-                                        <li><a data-selector="selectAction" title="游泳" data-value="55" href="javascript:;">游泳</a></li>
-
-                                        <li><a data-selector="selectAction" title="钓鱼" data-value="64" href="javascript:;">钓鱼</a></li>
-
-                                        <li><a data-selector="selectAction" title="脚斗士" data-value="68" href="javascript:;">脚斗士</a></li>
-
-                                        <li><a data-selector="selectAction" title="滑雪" data-value="69" href="javascript:;">滑雪</a></li>
-
-                                        <li><a data-selector="selectAction" title="徒步" data-value="70" href="javascript:;">徒步</a></li>
-
+                                        <volist name="venue_sport" id="vo">
+                                            <li><a data-selector="selectAction" title="<{$vo.name}>" data-value="<{$vo.id}>" href="javascript:;"><{$vo.name}></a></li>
+                                        </volist>
                                     </dd>
 
                                 </dl>
@@ -168,7 +138,7 @@
                     <label class="radio inline"><input data-selector="money" type="radio" name="money" checked="checked" value="1"><span>免费</span></label>
                     <label class="radio inline"><input data-selector="money" type="radio" name="money" value="2"><span>收费</span></label>
                    
-                   每人活动费用(元)&nbsp;&nbsp;<input data-selector="price" type="text" id="price" name="price" class="span1" validate-title="活动费用" validate-rules="[[&#39;dynrule&#39;,&#39;payment&#39;]]" disabled="">
+                   每人活动费用(元)&nbsp;&nbsp;<input type="text" id="cost" name="cost" class="span1"  disabled="">
                   </td>
                 </tr>
                 <tr>
@@ -178,13 +148,11 @@
                 </tr>
                 <tr>
                   <td>
-                    <!--<p>
-                      <select class="span2" data-selector="provinceSelect" data-value="" name="provinceId"><option value="2">北京市</option><option value="360">天津市</option><option value="691">河北省</option><option value="3352">山西省</option><option value="5021">内蒙古</option><option value="6373">辽宁省</option><option value="8144">吉林省</option><option value="9239">黑龙江</option><option value="11330">上海市</option><option value="11613">江苏省</option><option value="13539">浙江省</option><option value="15391">安徽省</option><option value="17266">福建省</option><option value="18634">江西省</option><option value="20799">山东省</option><option value="23139">河南省</option><option value="25898">湖北省</option><option value="27561">湖南省</option><option value="30374">广东省</option><option value="32864">广西</option><option value="34336">海南省</option><option value="34712">重庆市</option><option value="35869">四川省</option><option value="40206">贵州省</option><option value="41902">云南省</option><option value="43748">西藏</option><option value="44605">陕西省</option><option value="46517">甘肃省</option><option value="48081">青海省</option><option value="48579">宁夏</option><option value="48911">新疆</option></select>&nbsp;&nbsp;
-                      <select class="span2" data-selector="citySelect" name="cityId" data-value=""><option value="3">市区</option><option value="318">县</option></select>
-                    </p>-->
                     <p>
-                      <select class="span2" data-selector="regionSelect" name="regionId" data-value="">
+                      <select class="span2" data-selector="regionSelect" name="regionId" id="regionId" data-value="">
+                          <option value="">请选择</option>
                           <volist name="region" id="vo">
+
                               <option value="<{$vo.id}>"><{$vo.name}></option>
                               </volist>
 
@@ -193,7 +161,7 @@
                     </p>
                                        
                     <p>
-                      <input type="text" class="span5" placeholder="详细地址" id="place" name="place" validate-title="详细地址" validate-rules="[[&#39;required&#39;]]" value="">
+                      <input type="text" class="span5" placeholder="详细地址" id="address" name="address" value="">
                     </p>
                   </td>
                 </tr>
@@ -211,7 +179,7 @@
               <tr>
                 <td>        
           
-                <textarea rows="10" id="description" name="description" validate-title="活动描述" validate-rules="[[&#39;required&#39;]]" style="height: 200px;"></textarea><pre style="position: absolute; z-index: -10; left: -9999px; top: auto; padding: 10px 0px; font-size: 14px; line-height: 20px; width: 860px; font-family: &#39;Microsoft yahei&#39;, Arial; white-space: pre-wrap; word-wrap: break-word; font-weight: 400;"></pre>
+                <textarea rows="10" id="content" name="content" style="height: 200px;"></textarea><pre style="position: absolute; z-index: -10; left: -9999px; top: auto; padding: 10px 0px; font-size: 14px; line-height: 20px; width: 860px; font-family: &#39;Microsoft yahei&#39;, Arial; white-space: pre-wrap; word-wrap: break-word; font-weight: 400;"></pre>
                 
                </td>
               </tr>

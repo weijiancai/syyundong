@@ -484,6 +484,26 @@ function  UserFavGame($interest)
     return $str;
 }
 /*
+ * @功能：用户总赛事数量
+ * @时间: 20150512
+ */
+function  UserGameCount($mark_id)
+{
+    $map['user_id'] = deCode($mark_id);
+    $count = D('VJoinGame')->where($map)->count();
+    return $count;
+}
+/*
+ * @功能：用户总活动数量
+ * @时间: 20150512
+ */
+function  UserActivityCount($mark_id)
+{
+    $map['user_id'] = deCode($mark_id);
+    $count = D('VJoinActivity')->where($map)->count();
+    return $count;
+}
+/*
  * @功能：数组转为字符串
  * @时间:20150419
  */
@@ -517,6 +537,5 @@ function  RemoveFormat($str)
 {
     return str_replace(array('<p>', '</p>'), '', strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($str))), "<img>"));
 }
-
 
 ?>

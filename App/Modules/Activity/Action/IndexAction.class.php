@@ -79,6 +79,7 @@ class IndexAction extends Action
         //首先判断用户是否登录
         $mark = I('session.mark_id');
         if ($mark) {
+            $this->assign('venue_sport', $this->venue_sport());
             $this->assign('region', D('Public/Index')->region());
             $this->display();
         } else {
@@ -210,6 +211,30 @@ class IndexAction extends Action
             $list[$key] = $val;
         }
         echo json_encode($list);
+    }
+    /*
+     * @时间：20150512
+     * @功能：发起活动
+     */
+    public function AddActivity(){
+        $date['name'] = $_POST['name'];
+        $date['sport_id'] = $_POST['sportTypeId'];
+        $date['reg_begion_date'] = $_POST['regBeginDate'];
+        $date['reg_end_date'] = $_POST['regEndDate'];
+        $date['start_date'] = $_POST['startDate'];
+        $date['end_date'] = $_POST['EndDate'];
+        $date['limit_count'] = $_POST['limitCount'];
+        $date['join_need_info'] = '1,2,3,4';
+        $date['is_need_verify'] = 0;
+        $date['cost_type'] = $_POST['money'];
+        $date['cost'] = $_POST['cost'];
+        $date['province'] = 1;
+        $date['city'] = 2;
+        $date['region'] = $_POST['region'];
+        $date['address'] = $_POST['address'];
+        $date['content'] = $_POST['content'];
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $date['input_user'] =;
     }
 
 }

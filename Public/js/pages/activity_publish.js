@@ -7,34 +7,59 @@ $(function () {
 
     $('#acPublish').validate({
         rules: {
-            sportTypeId: "required",
+            sportTypeName: "required",
             name: 'required',
-            provinceId: "required",
-            sponor: 'required',
-            phone: "required",
-            limitCount: 'required',
-            description: "required",
-            applyName: 'required',
-            applyPhone: 'required',
-            applyEmail: 'required'
+            regBeginDate:'required',
+            regEndDate:'required',
+            regionId: "required",
+            address: 'required',
+            limitCount:
+            {required:"true",
+            digits:"true"},
+            content: "required",
+            cost:{required:"true",number:"true"}
         },
         messages: {
-            sportTypeId: "比赛项目不能为空！",
+            sportTypeName: "比赛项目不能为空！",
             name: '活动名称不能为空！',
-            provinceId: "举办城市不能为空！",
-            sponor: '赛事发起方不能为空！',
-            phone: "联系方式不能为空！",
-            limitCount: "人数限制不能为空！",
-            description: "赛事介绍不能为空！",
-            applyName: "申请人姓名不能为空！",
-            applyPhone: "申请人电话不能为空！",
-            applyEmail: "申请人邮箱不能为空！"
+            regBeginDate:'报名开始时间不能为空',
+            regEndDate:'报名结束时间不能为空',
+            regionId: "请选择活动地点!",
+            address: '请填写详细地址',
+            limitCount: {
+                required:"人数限制不能为空！",
+                digits:"只能输入整数"
+            },
+            content: "请填写活动简介",
+            cost:{
+                required:"金额不能为空",
+                number:"请输入正确的金额,只能为数字"
+            }
         },
         submitHandler: function (form) {
-            form.submit();
+            jQuery.ajax({
+                type: "post",
+                url: "/Activity/index/AddActivity",
+                data: $('#ProfileForm').serialize(),
+                success: function (result) {
+                    if (result == 1) {
+                        window.location.href = '/register/done';
+                    } else if (result == 2) {
+                        $.dialog.error('用户信息添加失败');
+                    } else if (result == 0) {
+                        window.location.href = '/register';
+                    }
+                }
+            });
+        //    form.submit();
         }
     });
-
+    //活动免费-付费
+    $(':radio').click(function(){
+        if(this.value==2){
+            $('#cost').removeAttr('disabled');
+        }
+    });
     // 活动 - 运动项目
     var $activityItem = $('#activityItem');
     var $activityContent = $activityItem.find('div.datadropdown-content');
