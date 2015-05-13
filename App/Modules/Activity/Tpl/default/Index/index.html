@@ -376,9 +376,9 @@
         }
     </style>
     <div>
-        <form id="joinActivityForm" method="post" action="/activity/signup/">
-            <input type="hidden" value="692" name="activityId">
-            <input type="hidden" value="485" name="formId">
+        <input type="text" value="<{$_SESSION['mark_id']}>" id="mark_id">
+        <form id="joinActivityForm" method="post" action="" name="joinActivityForm">
+            <input type="hidden" value="" name="activityId" id="activityId">
             <table>
                 <tbody>
 
@@ -406,7 +406,7 @@
 
                 <tr>
                     <td valign="top">留言</td>
-                    <td><textarea name="field4" id="field4"></textarea></td>
+                    <td><textarea name="message" id="message"></textarea></td>
                 </tr>
 
                 </tbody>

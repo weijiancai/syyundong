@@ -154,13 +154,16 @@
                         <div id="NTGUID__4NDTGUID__9">
                         <dl style="display: block;" class="clearfix">
                             <dt>
-                                <a target="_blank" href="/friend/passport_90941/timeline"><img title="wei-jc" src=""></a>
+                                <!--<a target="_blank" href="/friend/passport_90941/timeline"></a>-->
+                                    <img title="<{$detail['input_user']|getUserName}>" src="<{$detail['input_user']|getUsersImage}>">
+
+
                             </dt>
                             <dd>
                                 <form method="post" action="/activity/publishreply" class="clearfix"  id="commentform">
 
                                     <div class="comment-form">
-                                        <input type="text" name="content" class="comment-txt" data-valid="false">
+                                        <input type="text" id="content" name="content" class="comment-txt" data-valid="false">
                                         <input type="hidden" id="source_id" value="<{$detail.id}>" name="source_id">
                                         <button class="btn btn-warning pull-right" type="submit">评论</button>
                                     </div>
@@ -177,7 +180,8 @@
                     <script id="list" type="text/html">
                     <dl class="clearfix" style="display: block;">
                         <dt>
-                            <a target="_blank" href="/friend/passport_79472/timeline"><img title="{{nick_name}}" src="{{image}}"></a>
+                            <!--<a target="_blank" href="/friend/passport_79472/timeline"></a>-->
+                                <img title="{{nick_name}}" src="{{image}}">
                         </dt>
                         <dd>
                             <div class="user-header">
@@ -191,7 +195,11 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <p class="comment-content">回复<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline">@{{replyUserName}}</a>：</p>
+                            {{if replyUserName}}
+                            <p class="comment-content">回复
+                                <!--<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline"></a>-->
+                                @{{replyUserName}}：</p>
+                            {{/if}}
                             <p class="comment-content"></p>
                             <pre class="comment-content">{{content}}</pre>
                             <div class="reply-panel">
@@ -205,7 +213,7 @@
                                     <i class="icon-up"></i>
                                     <em class="icon-down"></em>
                                     <form method="post" action="/activity/index/CommentReply"  id="CommentReplyForm">
-                                        <input type="hidden" value="{{id}}" name="reply_to">
+                                        <input type="hidden" value="{{id}}" name="replay_to">
                                         <input type="text" placeholder="回复 {{nick_name}}" name="content">
                                         <button class="btn btn-warning" type="submit">回复</button>
                                     </form>

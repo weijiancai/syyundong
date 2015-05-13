@@ -83,21 +83,40 @@ $(function() {
 
     //我要参加
     $('.btnJoin').on('click', function() {
+        var mark =$('#mark_id').val();
+       if(!mark){
+            alert('3');
+        }
         var $dialog = $('#joinActivityDialog');
         var validate, $form;
         var activityId = $(this).data('value');
-
         var d = dialog({
             title: '我要参加',
             content: $dialog.html(),
             okValue: '提交',
             ok: function () {
-                validate.form();
+                if(validate.form()) {
+                    jQuery.ajax({
+                        type: "post",
+                        url: "Activity/index/joinActivity",
+                        data: $form.serializeJson(),
+                        success: function ($result) {
+                            if($result){
+                                dialog.success('报名成功');
+                                d.close();
+                            }else{
+                                dialog.error('报名失败');
+                            }
+
+                        }
+                    });
+                }
                 return false;
             },
             onshow: function() {
                 var $content = this._$('content');
                 $form = $content.find('#joinActivityForm');
+                $form.find('#activityId').val(activityId);
                 validate = $form.validate({
                     rules: {
                         true_name: 'required',
@@ -108,17 +127,6 @@ $(function() {
                         true_name: '报名人姓名不能为空！',
                         mobile: '报名人手机不能为空！',
                         certificate_num: '身份证号码不能为空！'
-                    },
-                    submitHandler: function (form) {
-                        //    form.submit();
-                        jQuery.ajax({
-                            type: "post",
-                            url: "publishReply",
-                            data: $form.serializeJson(),
-                            success: function ($result) {
-                                d.close();
-                            }
-                        });
                     }
                 });
             }

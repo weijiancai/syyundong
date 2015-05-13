@@ -57,6 +57,7 @@ $(function () {
                 success: function ($result) {
                     if ($result==1) {
                         //$.dialog.success('评论成功');
+                        $('#content').val('');
                         $commentData.empty();
                         $more.data('last', 0);
                         more();

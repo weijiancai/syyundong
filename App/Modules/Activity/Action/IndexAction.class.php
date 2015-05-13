@@ -37,7 +37,7 @@ class IndexAction extends Action
             $map['sport_id'] = array('eq', $_GET['sportType']);
         }
         //默认排序
-        if ($_GET['orderByNew'] == 'S') {
+        if (($_GET['orderByNew'] == 'S') or (empty($_GET['orderByNew']))){
             $order = 'input_date desc';
         }
         //最新活动
@@ -53,10 +53,9 @@ class IndexAction extends Action
         } else if ($_GET['date'] == 'tomorrow') {
             $map['start_date'] = array('like', date("Y-m-d", strtotime("+1 day")) . '%');
         }
-
         $map['type'] = array('eq', 'activity');
         $count = $model->where($map)->count();
-        $Page = new Page($count, 3);
+        $Page = new Page($count, 10);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
         $Page->rollPage = 10;
         $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
@@ -175,7 +174,7 @@ class IndexAction extends Action
     {
         $model = D('OpComment');
         $date['content'] = $_POST['content'];
-        $date['reply_to'] = $_POST['reply_to'];
+        $date['replay_to'] = $_POST['replay_to'];
         $date['user_id'] = deCode(I('session.mark_id'));
         $date['source_id'] = $_POST['source_id'];
         $date['source_type'] = 2;
@@ -219,10 +218,10 @@ class IndexAction extends Action
     public function AddActivity(){
         $date['name'] = $_POST['name'];
         $date['sport_id'] = $_POST['sportTypeId'];
-        $date['reg_begion_date'] = $_POST['regBeginDate'];
+        $date['reg_begin_date'] = $_POST['regBeginDate'];
         $date['reg_end_date'] = $_POST['regEndDate'];
         $date['start_date'] = $_POST['startDate'];
-        $date['end_date'] = $_POST['EndDate'];
+        $date['end_date'] = $_POST['endDate'];
         $date['limit_count'] = $_POST['limitCount'];
         $date['join_need_info'] = '1,2,3,4';
         $date['is_need_verify'] = 0;
@@ -234,7 +233,31 @@ class IndexAction extends Action
         $date['address'] = $_POST['address'];
         $date['content'] = $_POST['content'];
         $date['input_date'] = date('Y-m-d H:i:s');
-        $date['input_user'] =;
+        $date['input_user'] = deCode(I('session.mark_id'));
+        $result = M('DbActivity')->add($date);
+        if(false!==$result){
+            echo $result;
+        }else{
+            echo 'false';
+        }
     }
+    /*
+     * @时间：20150512
+     * @功能：参加活动
+     */
+    public  function joinActivity(){
+        $date['true_name'] = $_POST['true_name'];
+        $date['gender'] = $_POST['gender'];
+        $date['mobile'] = $_POST['mobile'];
+        $date['certificate_num'] = $_POST['certificate_num'];
+        $date['message'] = $_POST['message'];
+        $date['activity_id'] = $_POST['activityId'];
+        $result = D('OpJoinActivity')->add($date);
+        if(false!==$result){
+            echo 'true';
+        }else{
+            echo 'false';
+        }
+}
 
 }

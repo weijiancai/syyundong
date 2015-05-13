@@ -3,7 +3,7 @@
     <div class="activity-publish">
       <h4 class="form-title">创建活动</h4>
 
-      <form action="" method="post" id="acPublish">
+      <form action="/Activity/index/AddActivity" method="post" id="acPublish" name="acPublish">
        	 <input type="hidden" id="editable" name="editable" value="false">
        	 <input type="hidden" id="id" name="id" value=""> 
         <div class="form-content clearfix">
@@ -65,7 +65,7 @@
                 <tr>
                   <td>
                     <div class="datepicker-panel">
-                      <input type="text" class="span-date hasDatepicker date" data-date-format="yyyy-mm-dd hh:ii" placeholder="开始时间" readonly="readonly" validate-title="报名开始时间"  id="regBeginDate" name="regBeginDate" value="2015-04-06 16:04:52">
+                      <input type="text" class="span-date hasDatepicker date" data-date-format="yyyy-mm-dd hh:ii" placeholder="开始时间" readonly="readonly" validate-title="报名开始时间"  id="regBeginDate" name="regBeginDate" value="<?php echo date('Y-m-d H:i:s')?>">
                       &nbsp;至&nbsp;
                       <input type="text" class="span-date hasDatepicker date" data-date-format="yyyy-mm-dd hh:ii" placeholder="截止时间" readonly="readonly" validate-title="报名截止时间" id="regEndDate" name="regEndDate">
                     </div>
@@ -149,7 +149,7 @@
                 <tr>
                   <td>
                     <p>
-                      <select class="span2" data-selector="regionSelect" name="regionId" id="regionId" data-value="">
+                      <select class="span2" data-selector="regionSelect" name="region" id="region" data-value="">
                           <option value="">请选择</option>
                           <volist name="region" id="vo">
 

@@ -40,14 +40,18 @@ $(function () {
             jQuery.ajax({
                 type: "post",
                 url: "/Activity/index/AddActivity",
-                data: $('#ProfileForm').serialize(),
+                data: $('#acPublish').serialize(),
                 success: function (result) {
-                    if (result == 1) {
-                        window.location.href = '/register/done';
-                    } else if (result == 2) {
-                        $.dialog.error('用户信息添加失败');
-                    } else if (result == 0) {
-                        window.location.href = '/register';
+                    if (result) {
+                        dialog({
+                            content: '发布活动成功',
+                            okValue: '确定',
+                            ok: function () {
+                                window.location.href = '/Activity/'+result;
+                            }
+                        }).show();
+                    } else {
+                        $.dialog.error('发布活动失败');
                     }
                 }
             });
