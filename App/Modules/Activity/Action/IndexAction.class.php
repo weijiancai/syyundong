@@ -66,6 +66,7 @@ class IndexAction extends Action
         $this->assign('region', D('Public/Index')->region());
         $this->assign('venue_sport', $this->venue_sport());
         $this->hotactivity();
+        $this->sport_doyen();
         $this->display();
     }
 
@@ -258,6 +259,13 @@ class IndexAction extends Action
         }else{
             echo 'false';
         }
-}
-
+    }
+    /*
+     * @功能：运动达人
+     * @时间:20150418
+     */
+    public function sport_doyen(){
+        $doyen = M('VDoyenHall')->order('input_date desc')->limit(5)->select();
+        $this->assign('doyen',$doyen);
+    }
 }

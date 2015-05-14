@@ -14,6 +14,8 @@ class IndexAction extends Action
         $this->assign('hot_activity', $this->getHotActivity());
         $this->assign('doyen', $this->getDoyenUser());
         $this->assign('game_sport',$this->getGameSport());
+        $this->doyen();
+        $this->association();
         $this->friend_recommend();
         $this->BannerImage();
         $this->display();
@@ -107,5 +109,20 @@ class IndexAction extends Action
         $banner = $model->query('SELECT id,name,image FROM v_recommend_game ORDER BY focus_count DESC, join_count DESC  LIMIT 0, 6');
         $this->assign('banner',$banner);
     }
-
+    /*
+     * @功能：达仁堂
+     * @时间:20150418
+     */
+    public function doyen(){
+        $doyen = M('VDoyenHall')->order('input_date desc')->limit(2)->select();
+        $this->assign('doyen',$doyen);
+    }
+    /*
+     * @功能：体育协会
+     * @时间:20150418
+     */
+    public function association(){
+        $association = M('VSportAssociation')->order('input_date desc')->limit(2)->select();
+        $this->assign('association',$association);
+    }
 }

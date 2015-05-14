@@ -1054,19 +1054,19 @@
         </div>
         <div class="span4 xiaomei-club">
             <h4 class="slider-title">
-                <span>体育协会</span>
+                <span>名人堂</span>
             </h4>
             <div>
-
-                <dl>
-                    <dd>
-                        <a target="_blank" href=""><img src=""></a>
-                    </dd>
-                    <dt>
-                        <a target="_blank" href="">马拉松破4跑团招募！</a>
-                    </dt>
-                </dl>
-
+                <volist name="doyen" id="vo">
+                    <dl>
+                        <dd>
+                            <a target="_blank" href=""><img src="<{$image}>"></a>
+                        </dd>
+                        <dt>
+                            <a target="_blank" href=""><{$vo.name}></a>
+                        </dt>
+                    </dl>
+                </volist>
             </div>
         </div>
     </div>
@@ -1113,15 +1113,14 @@
 </div>
 <div class="span4 smart-info">
     <h4 class="slider-title">
-        <span>名人堂</span>
+        <span>体育协会</span>
     </h4>
     <ul class="adv-list">
-
-        <li>
-            <a target="_blank" href=""><img src=""></a>
-        </li>
-
-
+        <volist name="association" id="vo">
+            <li>
+                <a target="_blank" href=""><img src="<{$vo.image}>"></a>
+            </li>
+        </volist>
     </ul></div>
 </div>
 </div>
