@@ -103,7 +103,7 @@
                         <label><input type="checkbox" value="4" id="statusOver" name="statusOver" data-selector="resultStatus" <if condition="$_REQUEST['statusOver'] eq T">checked</if>>已结束</label>
                     </div>
 
-                    <div class="filter-paging">
+                    <!--<div class="filter-paging">
                         <a class="page-prev" href="javascript:void(0);">
                             <i class="icon-match icon-prev"></i>
                         </a>
@@ -111,7 +111,7 @@
                         <a onclick="jumpPage(2,10 );" class="page-next" href="javascript:void(0);">
                             <i class="icon-match icon-next"></i>
                         </a>
-                    </div>
+                    </div>-->
                 </div>
                 <!--  赛事列表 开始 -->
                 <div class="main-block item-list">
@@ -324,7 +324,7 @@
         }
     </style>
     <div>
-        <input type="text" value="<{$_SESSION['mark_id']}>" id="mark_id">
+        <input type="hidden" value="<{$_SESSION['mark_id']}>" id="mark_id">
         <form id="joinActivityForm" method="post" action="" name="joinActivityForm">
             <input type="hidden" value="" name="activityId" id="activityId">
             <table>

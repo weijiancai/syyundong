@@ -85,8 +85,8 @@ $(function() {
     $('.btnJoin').on('click', function() {
         var mark =$('#mark_id').val();
        if(!mark){
-            alert('3');
-        }
+            window.location.href='/login/login';
+        }else{
         var $dialog = $('#joinActivityDialog');
         var validate, $form;
         var activityId = $(this).data('value');
@@ -131,5 +131,6 @@ $(function() {
                 });
             }
         }).width(480).show();
+       };
     });
 });

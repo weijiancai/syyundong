@@ -18,6 +18,7 @@ class IndexAction extends Action
         $this->association();
         $this->friend_recommend();
         $this->BannerImage();
+        $this->assign('sport_game',D('Public/Index')->sport_top());
         $this->display();
     }
 
@@ -106,7 +107,7 @@ class IndexAction extends Action
      */
     public function BannerImage(){
         $model= new Model();
-        $banner = $model->query('SELECT id,name,image FROM v_recommend_game ORDER BY focus_count DESC, join_count DESC  LIMIT 0, 6');
+        $banner = $model->query('SELECT id,name,image FROM v_recommend_game ORDER BY input_date DESC, join_count DESC  LIMIT 0, 6');
         $this->assign('banner',$banner);
     }
     /*

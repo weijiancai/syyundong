@@ -38,7 +38,7 @@ class IndexAction extends Action
             $map['sport_id'] = array('eq', $_GET['sportType']);
         }
         //默认排序
-        if ($_GET['orderByNew'] == 'S') {
+        if (($_GET['orderByNew'] == 'S')or($_GET['orderByNew'] == '')) {
             $order = 'reg_begin_date desc';
         }
         //最新赛事
@@ -53,11 +53,15 @@ class IndexAction extends Action
             $map['start_date'] = array('like', date('Y-m-d') . '%');
         } else if ($_GET['date'] == 'tomorrow') {
             $map['start_date'] = array('like', date("Y-m-d", strtotime("+1 day")) . '%');
+        }else if ($_GET['date'] == 'week') {
+            $map['start_date'] = array('like', date("Y-m-d", strtotime("+7 day")) . '%');
+        }else if ($_GET['date'] == 'month') {
+            $map['start_date'] = array('like', date("Y-m-d", strtotime("+30 day")) . '%');
         }
 
         $map['type'] = array('eq', 'game');
         $count = $model->where($map)->count();
-        $Page = new Page($count, 3);
+        $Page = new Page($count, 10);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
         $Page->rollPage = 10;
         $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
@@ -79,13 +83,11 @@ class IndexAction extends Action
         //首先判断用户是否登录
         $mark = I('session.mark_id');
         if ($mark) {
+            $this->assign('region',D('Public/Index')->region());
             $this->display();
         } else {
             $str = ' <script> window.location.href="/login/login"</script>';
-            //$this->display($str);
             echo $str;
-            //  $this->success('进军赛事……',U('@www.syyundong.com/login/login'));
-            // $this->redirect(U('@www.syyundong.comlogin/login'));
         }
     }
 
@@ -98,7 +100,9 @@ class IndexAction extends Action
         $model = D('DbGame');
         $date['sport_id'] = I('post.sportTypeId');
         $date['name'] = I('post.name');
-        $date['province'] = I('post.provinceId');
+        $date['province'] = 1;
+        $date['city'] = 2;
+        $date['region'] = I('post.regionId');
         $date['sponsor'] = I('post.sponsor');
         $date['phone'] = I('post.phone');
         $date['limit_count'] = I('post.limitCount');
@@ -106,6 +110,9 @@ class IndexAction extends Action
         $date['apply_name'] = I('post.applyName');
         $date['apply_phone'] = I('post.applyPhone');
         $date['apply_email'] = I('post.applyEmail');
+        $date['is_verify'] = F;
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $date['input_user'] = deCode(I('session.mark_id'));
         $result = $model->add($date);
         if (false !== $result) {
             //申请人ID
@@ -113,6 +120,7 @@ class IndexAction extends Action
             $this->assign('name', I('post.name'));
             $this->assign('applyPhone', I('post.applyPhone'));
             $this->assign('applyEmail', I('post.applyEmail'));
+            $this->assign('apply_name', I('post.applyName'));
             $this->display('applyresult');
         } else {
             $this->error('发布失败');
@@ -483,4 +491,5 @@ class IndexAction extends Action
             echo 0;
         }
     }
+
 }

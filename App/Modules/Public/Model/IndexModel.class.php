@@ -20,6 +20,7 @@ class IndexModel extends Model
                     $category [$key]['child'] = $model->where(array('pid' => $id))->select();
                 }
             }
+
 		return $category;
     }
     /*

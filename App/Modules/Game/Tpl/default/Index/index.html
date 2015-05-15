@@ -217,10 +217,10 @@
                     <ul class="side-item-col clearfix">
                         <volist name="recommend" id="vo">
                             <li>
-                                <div class="side-item-thumb"><a href="/Game/<{$vo.id}>"><img
+                                <div class="side-item-thumb"><a href="/Game/<{$vo.id}>" target="_blank"><img
                                         src="<{$vo.image}>"
                                         alt=""></a></div>
-                                <h5><a href="/Game/<{$vo.id}>"><{$vo.name}></a></h5>
+                                <h5><a href="/Game/<{$vo.id}>" target="_blank"><{$vo.name}></a></h5>
 
                                 <p>
                                     <span class="pull-left"><{$vo['province']|getRegionName}></span>
@@ -239,7 +239,7 @@
                         </h4>
                         <ul data-selector="eventsRankings">
                             <volist name="hot" id="vo" key="k">
-                                <li><i class="top<{$k}>"><{$k}></i><a href="/game/<{$vo.id}>"><{$vo.name}></a></li>
+                                <li><i class="top<{$k}>"><{$k}></i><a href="/Game/<{$vo.id}>" target="_blank"><{$vo.name}></a></li>
                             </volist>
                         </ul>
                     </div>

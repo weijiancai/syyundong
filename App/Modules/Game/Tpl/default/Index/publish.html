@@ -1,7 +1,7 @@
 <include file="Public@default:Public:top"/>
   <div class="container container-margin">
     <div class="activity-publish">
-      <form name="fmPublish" id="fmPublish" action="<{:U('/Game/addgame@www.syyundong.com')}>" method="post">
+      <form name="fmPublish" id="fmPublish" action="/Game/addgame" method="post">
         <div class="form-content clearfix">
           <div class="pull-left">
             <h4 class="form-title">基本信息</h4>
@@ -29,39 +29,15 @@
                   <td><input type="text" name="name" class="input-xxlarge" >
                 </td></tr>
                 <tr>
-                  <th><span class="help-required">*</span>举办城市：</th>
+                  <th><span class="help-required">*</span>举办地点：</th>
                 </tr>
                 <tr>
                   <td>
-					<select name="provinceId">
-                      <option value="2">北京市</option>
-                      <option value="40206">贵州省</option>
-                      <option value="3352">山西省</option>
-                      <option value="35869">四川省</option>
-                      <option value="15391">安徽省</option>
-                      <option value="34336">海南省</option>
-                      <option value="25898">湖北省</option>
-                      <option value="44605">陕西省</option>
-                      <option value="20799">山东省</option>
-                      <option value="11330">上海市</option>
-                      <option value="11613">江苏省</option>
-                      <option value="32864">广西省</option>
-                      <option value="23139">河南省</option>
-                      <option value="360">天津市</option>
-                      <option value="17266">福建省</option>
-                      <option value="34712">重庆市</option>
-                      <option value="5021">内蒙古</option>
-                      <option value="30374">广东省</option>
-                      <option value="27561">湖南省</option>
-                      <option value="41902">云南省</option>
-                      <option value="691">河北省</option>
-                      <option value="46517">甘肃省</option>
-                      <option value="50871">香港</option>
-                      <option value="18634">江西省</option>
-                      <option value="8144">吉林省</option>
-                      <option value="13539">浙江省</option>
-                      <option value="43748">西藏</option>
-                      <option value="6373">辽宁省</option>
+					<select name="regionId">
+                        <volist name="region" id="vo">
+                            <option value="<{$vo.id}>"><{$vo.name}></option>
+                        </volist>
+
                     </select>
                     <input name="hostLocation" type="hidden" value="">
                   </td>
