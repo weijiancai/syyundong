@@ -3,7 +3,7 @@
 *@时间:20150316
 *@功能:显示首页
 */
-class IndexAction extends Action {
+class IndexAction extends BaseAction {
 	/*
 	 * 首页内容
 	 */
@@ -63,13 +63,7 @@ class IndexAction extends Action {
         $this->assign('new_comment',$this->new_comment());
 		$this->display();
 	}
-    /*
-     * 功能：场馆信息
-     * 时间：20150407
-     */
-    public function venue_sport(){
-        return D('DzSport')->where('sport_type=3')->select();
-    }
+
     /*
      * 功能：最新评论
      * 时间：20150407
@@ -127,7 +121,10 @@ class IndexAction extends Action {
      */
     public function OtherVenueChange(){
         $where['id'] = array('neq',$_POST['id']);
-        $ids = D('DbVenue')->where($where)->getField('id',true);
+        $id = D('DbVenue')->where($where)->getField('id',true);
+        foreach($id as $key=>$value){
+            $ids[$value]= $value;
+        }
         $limit =array_rand($ids,4);
         $map['id'] =array('in',$limit);
         $list = D('DbVenue')->where($map)->select();

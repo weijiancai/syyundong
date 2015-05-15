@@ -224,19 +224,14 @@
                 </td>
             </tr>
             <tr>
-                <th>城市</th>
+                <th>区域</th>
                 <td class="clearfix">
                     <select data-selector="hotCity">
-                        <option value="所有城市">所有城市</option>
-                        <option value="北京">北京</option>
-                        <option value="上海">上海</option>
-                        <option value="广东">广东</option>
-                        <option value="天津">天津</option>
-                        <option value="湖南">湖南</option>
-                        <option value="浙江">浙江</option>
-                        <option value="河北">河北</option>
+                        <option value="">所有区域</option>
+                        <volist name="region" id="vo">
+                            <option value="<{$vo.id}>"><{$vo.name}></option>
+                        </volist>
                     </select>
-
                     <div class="pull-right">
                         <button class="btn btn-warning" type="submit">搜索</button>
                     </div>
@@ -381,54 +376,10 @@
                                     </dt>
 
                                     <dd>
-
-                                        <li><a data-selector="selectAction" title="马拉松" data-value="6"
-                                               href="javascript:;" class="current">马拉松</a></li>
-
-                                        <li><a data-selector="selectAction" title="路跑" data-value="7"
-                                               href="javascript:;">路跑</a></li>
-
-                                        <li><a data-selector="selectAction" title="羽毛球" data-value="8"
-                                               href="javascript:;">羽毛球</a></li>
-
-                                        <li><a data-selector="selectAction" title="乒乓球" data-value="9"
-                                               href="javascript:;">乒乓球</a></li>
-
-                                        <li><a data-selector="selectAction" title="台球" data-value="10"
-                                               href="javascript:;">台球</a></li>
-
-                                        <li><a data-selector="selectAction" title="网球" data-value="11"
-                                               href="javascript:;">网球</a></li>
-
-                                        <li><a data-selector="selectAction" title="自行车" data-value="12"
-                                               href="javascript:;">自行车</a></li>
-
-                                        <li><a data-selector="selectAction" title="山地户外活动" data-value="16"
-                                               href="javascript:;">山地户外活动</a></li>
-
-                                        <li><a data-selector="selectAction" title="瑜伽" data-value="38"
-                                               href="javascript:;">瑜伽</a></li>
-
-                                        <li><a data-selector="selectAction" title="足球" data-value="40"
-                                               href="javascript:;">足球</a></li>
-
-                                        <li><a data-selector="selectAction" title="篮球" data-value="41"
-                                               href="javascript:;">篮球</a></li>
-
-                                        <li><a data-selector="selectAction" title="游泳" data-value="55"
-                                               href="javascript:;">游泳</a></li>
-
-                                        <li><a data-selector="selectAction" title="钓鱼" data-value="64"
-                                               href="javascript:;">钓鱼</a></li>
-
-                                        <li><a data-selector="selectAction" title="脚斗士" data-value="68"
-                                               href="javascript:;">脚斗士</a></li>
-
-                                        <li><a data-selector="selectAction" title="滑雪" data-value="69"
-                                               href="javascript:;">滑雪</a></li>
-
-                                        <li><a data-selector="selectAction" title="徒步" data-value="70"
-                                               href="javascript:;">徒步</a></li>
+                                        <volist name="activity_sport" id="vo">
+                                            <li><a data-selector="selectAction" title="<{$vo.name}>" data-value="<{$vo.id}>"
+                                                   href="javascript:;" ><{$vo.name}></a></li>
+                                        </volist>
 
                                     </dd>
 
@@ -597,55 +548,27 @@
                                     </dt>
 
                                     <dd>
-
-                                        <li><a data-selector="selectAction" title="羽毛球" data-value="1"
-                                               href="javascript:;">羽毛球</a></li>
-
-                                        <li><a data-selector="selectAction" title="篮球" data-value="2"
-                                               href="javascript:;">篮球</a></li>
-
-                                        <li><a data-selector="selectAction" title="足球" data-value="3"
-                                               href="javascript:;">足球</a></li>
-
-                                        <li><a data-selector="selectAction" title="乒乓球" data-value="4"
-                                               href="javascript:;">乒乓球</a></li>
-
-                                        <li><a data-selector="selectAction" title="瑜伽" data-value="5"
-                                               href="javascript:;">瑜伽</a></li>
-
-                                        <li><a data-selector="selectAction" title="游泳" data-value="6"
-                                               href="javascript:;">游泳</a></li>
-
-                                        <li><a data-selector="selectAction" title="网球" data-value="7"
-                                               href="javascript:;">网球</a></li>
-
-                                        <li><a data-selector="selectAction" title="健身中心" data-value="8"
-                                               href="javascript:;">健身中心</a></li>
-
-                                        <li><a data-selector="selectAction" title="保龄球" data-value="9"
-                                               href="javascript:;">保龄球</a></li>
-
-                                        <li><a data-selector="selectAction" title="台球" data-value="11"
-                                               href="javascript:;">台球</a></li>
+                                     <volist name="venue_sport" id="vo">
+                                         <li><a data-selector="selectAction" title="<{$vo.nme}>" data-value="<{$vo.id}>"
+                                                href="javascript:;"><{$vo.name}></a></li>
+                                     </volist>
 
                                     </dd>
 
                                 </dl>
                             </div>
-
                         </div>
                     </div>
                 </td>
             </tr>
             <tr>
-                <th>城市</th>
+                <th>区域</th>
                 <td>
                     <select data-selector="hotCity">
-                        <option value="所有城市">所有城市</option>
-                        <option value="北京">北京</option>
-                        <option value="上海">上海</option>
-                        <option value="广州">广州</option>
-                        <option value="深圳">深圳</option>
+                        <option value="">所有区域</option>
+                        <volist name="region" id="vo">
+                            <option value="<{$vo.id}>"><{$vo.name}></option>
+                        </volist>
                     </select>
                 </td>
             </tr>

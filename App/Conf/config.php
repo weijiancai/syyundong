@@ -66,6 +66,7 @@ $Public_Config =  array(
         '/^userCenter\/gamedetail\/(\d+)\/(\d+)$/' => 'userCenter/index/gamedetail?id=:1&group_id=:2',
         '/^userCenter\/activity$/' => 'userCenter/index/activity',
         '/^userCenter\/activity\/create$/' => 'userCenter/index/create',
+        '/^userCenter\/friend/' => 'userCenter/index/friend',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',

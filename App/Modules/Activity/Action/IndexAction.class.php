@@ -4,7 +4,7 @@
  *@时间:20150316
  *@功能:显示首页
  */
-class IndexAction extends Action
+class IndexAction extends BaseAction
 {
     //首页内容
     public function index()
@@ -64,7 +64,7 @@ class IndexAction extends Action
         $this->assign('activity', $list);
         $this->assign('count', $count);
         $this->assign('region', D('Public/Index')->region());
-        $this->assign('venue_sport', $this->venue_sport());
+        $this->assign('venue_sport', $this->activity_sport());
         $this->hotactivity();
         $this->sport_doyen();
         $this->display();
@@ -79,7 +79,7 @@ class IndexAction extends Action
         //首先判断用户是否登录
         $mark = I('session.mark_id');
         if ($mark) {
-            $this->assign('venue_sport', $this->venue_sport());
+            $this->assign('venue_sport', $this->activity_sport());
             $this->assign('region', D('Public/Index')->region());
             $this->display();
         } else {
@@ -125,10 +125,10 @@ class IndexAction extends Action
      * 功能：活动项目
      * 时间：20150407
      */
-    public function venue_sport()
+    /*public function venue_sport()
     {
         return D('DzSport')->where('sport_type=2')->select();
-    }
+    }*/
 
     /*
      * 功能:相似活动

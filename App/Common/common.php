@@ -504,6 +504,16 @@ function  UserActivityCount($mark_id)
     return $count;
 }
 /*
+ * @功能：用户话题数量
+ * @时间: 20150512
+ */
+function  UserTopicCount($mark_id)
+{
+    $map['user_id'] = deCode($mark_id);
+    $count = D('OpGameTopic')->where($map)->count();
+    return $count;
+}
+/*
  * @功能：数组转为字符串
  * @时间:20150419
  */

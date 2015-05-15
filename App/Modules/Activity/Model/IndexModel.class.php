@@ -6,9 +6,6 @@
 	*/
 	
 	class IndexModel extends Model{
-		
-		
-	
 	}
 
 ?>

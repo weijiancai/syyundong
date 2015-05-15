@@ -23,6 +23,21 @@ Class BaseAction extends Action{
         $date['input_user'] =deCode(I('session.mark_id'));
         D('DBTimeLine')->save($date);
     }
+    /*
+    * 功能：活动项目
+    * 时间：20150407
+    */
+    public function activity_sport()
+    {
+        return D('DzSport')->where('sport_type=2')->select();
+    }
+    /*
+     * 功能：场馆信息
+     * 时间：20150407
+     */
+    public function venue_sport(){
+        return D('DzSport')->where('sport_type=3')->select();
+    }
 }
 
 

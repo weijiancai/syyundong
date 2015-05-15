@@ -4,7 +4,7 @@
  *@时间:20150325
  *@功能:显示首页
  */
-class IndexAction extends Action
+class IndexAction extends BaseAction
 {
     public function index()
     {
@@ -19,6 +19,9 @@ class IndexAction extends Action
         $this->friend_recommend();
         $this->BannerImage();
         $this->assign('sport_game',D('Public/Index')->sport_top());
+        $this->assign('activity_sport', $this->activity_sport());
+        $this->assign('venue_sport', $this->venue_sport());
+        $this->assign('region', D('Public/Index')->region());
         $this->display();
     }
 
@@ -126,4 +129,5 @@ class IndexAction extends Action
         $association = M('VSportAssociation')->order('input_date desc')->limit(2)->select();
         $this->assign('association',$association);
     }
+
 }
