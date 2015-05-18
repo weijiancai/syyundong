@@ -12,7 +12,7 @@ class IndexAction extends BaseAction
         $this->hot_activity();
         $this->assign('city', $this->getCity());
         $this->assign('hot_activity', $this->getHotActivity());
-        $this->assign('doyen', $this->getDoyenUser());
+        $this->assign('doyen_user', $this->getDoyenUser());
         $this->assign('game_sport',$this->getGameSport());
         $this->doyen();
         $this->association();

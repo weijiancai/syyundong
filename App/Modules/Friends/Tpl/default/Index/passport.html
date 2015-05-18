@@ -1,0 +1,45 @@
+<include file="Public@default:Public:top" />
+<div class="ucenter-page account-bg clearfix">
+<div class="container">
+<div class="row">
+<div class="span16">
+    <div class="account-top">
+        <div class="account-thumb">
+
+            <img name="user-head" src="<{$user['id']|getUsersImage}>">
+            <div class="alpha-bg"></div>
+        </div>
+        <div class="account-right">
+            <p class="account-right-name">
+                <strong><{$user.nick_name}></strong>
+            </p>
+
+            <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
+            <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
+            <div class="alpha-bg"></div>
+        </div>
+    </div>
+</div>
+<div class="span16">
+<div class="growth-wrap clearfix">
+<div class="growth-content">
+<p class="growth-ttl"><{$user.nick_name}>的足迹</p>
+<ul>
+<div class="line-bg"></div>
+
+<volist name="timeline" id="vo" key="k">
+    <li class="<if condition="($k % 2) eq 0">event-right <else /> event-left</if>"</li>
+    <i class="icon44 icon44-follow"></i>
+    <p class="growth-event-date"><{$vo.input_date}></p>
+    <p class="growth-event-dex"><{$vo.source_des}><a href="/<{$vo.source_type}>/<{$vo.source_id}>" target="_blank"><span class="text-error"><{$vo.source_name}></span></a></p>
+    </li>
+</volist>
+
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<include file="Public@default:Public:bottom" />

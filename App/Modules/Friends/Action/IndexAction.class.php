@@ -189,4 +189,27 @@ class IndexAction extends Action {
             echo 0;
         }
     }
+    /*
+    * @时间: 20150415
+    * @功能:评论赛友圈
+    */
+    public function Passport(){
+        $id = $_GET['id'];
+        $this->assign('user',D('DbUser')->where('id='.$id)->find());
+        $timeline = D('DbTimeLine')->where('input_user='.$id)->order('input_date desc')->select();
+        $this->assign('timeline',$timeline);
+        $this->display();
+    }
+    /*
+     * @时间:20150415
+     * @功能:新加入赛友
+     */
+    public function Passport(){
+        $id = $_GET['id'];
+        $this->assign('user',D('DbUser')->where('id='.$id)->find());
+        $timeline = D('DbTimeLine')->where('input_user='.$id)->order('input_date desc')->select();
+        $this->assign('timeline',$timeline);
+        $this->display();
+    }
+
 }

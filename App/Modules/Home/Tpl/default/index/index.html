@@ -719,9 +719,9 @@
                                                             <p class="ranking-desc"><{$to.content}></p>
                                                             <div class="user-information clearfix">
                                                                 <div class="pull-left">
-                                                                    <a href="/friend/passport_204119/timeline"><img title="<{$to.user_name}>" src="<{$to.user_image}>"></a>
+                                                                    <a href="/Friends/passport/<{$to.user_id}>" target="_blank"><img title="<{$to.user_name}>" src="<{$to.user_image}>"></a>
                                                                     <p>
-                                                                        <a href="/friend/passport_204119/timeline"><{$to.user_name}></a><br>
+                                                                        <a href="/Friends/passport/<{$to.user_id}>" target="_blank"><{$to.user_name}></a><br>
                                                                         发表在&nbsp;<a href="/friends/tag/297" title="<{$to.game_name}>" class="game-name"><{$to.game_name}></a>
                                                                     </p>
                                                                 </div>
@@ -766,8 +766,8 @@
                 </dl>
                 <dd>
                     <ul class="clearfix">
-                        <volist name="doyen" id="do">
-                            <li><a href="/Friend/passport_78650/timeline"><img src="<{$do['id']|getUsersImage}>"></a></li>
+                        <volist name="doyen_user" id="do">
+                            <li><a href="/Friends/passport/<{$do.id}>"><img src="<{$do['id']|getUsersImage}>"></a></li>
                         </volist>
 
                     </ul>
@@ -807,7 +807,7 @@
                                             </p>
                                         </dd>
                                         <dt>
-                                            <a href="/friend/passport_204180/timeline">
+                                            <a href="/Friends/passport/<{$ho.input_user}>" target="_blank">
                                                 <img title="<{$ho['input_user']|getUserName}>" src="<{$ho['user_image']}>"><br><{$ho['input_user']|getUserName}></a></dt>
                                     </dl>
                                 </div>
@@ -830,7 +830,7 @@
                 <volist name="doyen" id="vo">
                     <dl>
                         <dd>
-                            <a target="_blank" href=""><img src="<{$image}>"></a>
+                            <a target="_blank" href="/DoyenHall/<{$vo.id}>"><img src="<{$image}>"></a>
                         </dd>
                         <dt>
                             <a target="_blank" href=""><{$vo.name}></a>
@@ -888,7 +888,7 @@
     <ul class="adv-list">
         <volist name="association" id="vo">
             <li>
-                <a target="_blank" href=""><img src="<{$vo.image}>"></a>
+                <a target="_blank" href="Association/<{$vo.id}>"><img src="<{$vo.image}>"></a>
             </li>
         </volist>
     </ul></div>

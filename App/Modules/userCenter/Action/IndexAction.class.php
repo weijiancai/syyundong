@@ -11,6 +11,17 @@ class IndexAction extends Action {
 		$this->display();
 	}
     /*
+     * @时间：20150408
+     * @功能：我的足迹
+     */
+    public function timeline(){
+        $id = deCode(I('session.mark_id'));
+        $timeline = D('DbTimeLine')->where('input_user='.$id)->order('input_date desc')->select();
+        $this->assign('timeline',$timeline);
+        $this->assign('user',D('DbUser')->where('id='.$id)->find());
+        $this->display();
+    }
+    /*
      * @时间:20150408
      * @功能：个人资料
      */

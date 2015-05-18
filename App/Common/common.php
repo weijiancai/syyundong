@@ -503,6 +503,7 @@ function  UserActivityCount($mark_id)
     $count = D('VJoinActivity')->where($map)->count();
     return $count;
 }
+
 /*
  * @功能：用户话题数量
  * @时间: 20150512

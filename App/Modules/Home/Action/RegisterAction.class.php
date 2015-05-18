@@ -3,7 +3,7 @@
 /**
  *@功能:注册
  */
-class RegisterAction extends Action
+class RegisterAction extends BaseAction
 {
 
     /**
@@ -11,6 +11,7 @@ class RegisterAction extends Action
      */
     public function index()
     {
+
         $this->display();
 
     }
@@ -85,6 +86,7 @@ class RegisterAction extends Action
                     if (false !== $result) {
                         //  $this->display('profile');
                         $_SESSION['SyPhone'] = trim(I('post.mobile'));
+                        $this->TimeLine('','','加入松原运动网','');
                         echo 6;
                     }
                 } else {

@@ -15,13 +15,13 @@ Class BaseAction extends Action{
      */
     function  TimeLine($line_id,$name,$des,$type)
     {
-        $date['line_id'] =$line_id;
-        $date['name'] =$name;
-        $date['description'] =$des;
-        $date['type'] =$type;
+        $date['source_id'] =$line_id;
+        $date['source_name'] =$name;
+        $date['source_type'] =$type;
+        $date['source_des'] =$des;
         $date['input_date'] =date('Y-m-d H:i:s');
         $date['input_user'] =deCode(I('session.mark_id'));
-        D('DBTimeLine')->save($date);
+        D('DbTimeLine')->add($date);
     }
     /*
     * 功能：活动项目
@@ -39,6 +39,5 @@ Class BaseAction extends Action{
         return D('DzSport')->where('sport_type=3')->select();
     }
 }
-
 
 ?>
