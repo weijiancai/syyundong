@@ -191,7 +191,7 @@ class IndexAction extends Action {
     }
     /*
     * @时间: 20150415
-    * @功能:评论赛友圈
+    * @功能: 用户时间轴
     */
     public function Passport(){
         $id = $_GET['id'];
@@ -201,15 +201,21 @@ class IndexAction extends Action {
         $this->display();
     }
     /*
-     * @时间:20150415
-     * @功能:新加入赛友
-     */
-    public function Passport(){
-        $id = $_GET['id'];
-        $this->assign('user',D('DbUser')->where('id='.$id)->find());
-        $timeline = D('DbTimeLine')->where('input_user='.$id)->order('input_date desc')->select();
-        $this->assign('timeline',$timeline);
-        $this->display();
+    * @时间: 20150415
+    * @功能: 关注话题
+    */
+    public function selftopic(){
+        //首先判断用户是否登录
+        $mark = I('session.mark_id');
+        if ($mark) {
+          //  $this->assign('region',D('Public/Index')->region());
+            $this->assign('sport', D('Public/Index')->sport_top());
+            $this->firend_rcommend();
+            $this->FriendSport();
+            $this->display();
+        } else {
+            $str = ' <script> window.location.href="/login/login"</script>';
+            echo $str;
+        }
     }
-
 }
