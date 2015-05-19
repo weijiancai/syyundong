@@ -335,7 +335,7 @@ function getActivityName($id)
 }
 
 /*
- * @功能：返回活动报名审核状态
+ * @功能：返回活动/赛事报名审核状态
  * @时间:20150419
  */
 function getJoinActivityVerify($verify)

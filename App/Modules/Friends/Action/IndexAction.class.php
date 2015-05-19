@@ -218,4 +218,34 @@ class IndexAction extends Action {
             echo $str;
         }
     }
+    /*
+     * @时间: 20150415
+     * @功能: 推荐赛友
+     */
+    public function recommendFriend(){
+        $where['id'] = array('neq',$_POST['id']);
+        $id = D('DbVenue')->where($where)->getField('id',true);
+        foreach($id as $key=>$value){
+            $ids[$value]= $value;
+        }
+        $limit =array_rand($ids,4);
+        $map['id'] =array('in',$limit);
+        $list = D('DbVenue')->where($map)->select();
+        echo json_encode($list);
+    }
+    /*
+     * @时间: 20150415
+     * @功能: 新加入赛友
+     */
+    public function NewFriend(){
+        $date =
+        $id = D('DbUser')->where($where)->getField('id',true);
+        foreach($id as $key=>$value){
+            $ids[$value]= $value;
+        }
+        $limit =array_rand($ids,4);
+        $map['id'] =array('in',$limit);
+        $list = D('DbVenue')->where($map)->select();
+        echo json_encode($list);
+    }
 }

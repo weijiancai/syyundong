@@ -201,6 +201,7 @@ $(function () {
                 success: function (result) {
                     if (result == 1) {
                         $("#topic_focus").html('取消关注');
+                        $('#topic_focus').removeClass('btn-danger');
                     } else {
                         $.dialog.error('关注失败,请刷新页面重新尝试');
                     }
@@ -214,6 +215,7 @@ $(function () {
                 success: function (result) {
                     if (result == 1) {
                         $("#topic_focus").html('关注');
+                        $('#topic_focus').addClass('btn-danger');
                     } else {
                         $.dialog.error('取消关注失败,请刷新页面重新尝试');
                     }

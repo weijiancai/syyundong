@@ -1,0 +1,110 @@
+<script language="Javascript">
+    function navTabAjaxDone(json) {
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok) {
+            if (json.navTabId) { //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                setTimeout(function () {
+                    navTab.closeCurrentTab();
+                }, 100);
+            } else if ("forward" == json.callbackType) {
+                navTab.reload(json.forwardUrl);
+            }
+        }
+    }
+</script>
+
+<div class="page">
+    <div class="pageContent">
+        <form method="post" action="__URL__/update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+            <div class="pageFormContent" layoutH="58">
+                <input type="hidden" value="<{$vo.id}>" id="id" name="id">
+                <dl>
+                    <dt>赛事名称：</dt>
+                    <dd><input name="" class="required" type="text" readonly value="<{$vo['game_id']|getGameName}>"/>
+                        <input name="activity_id"  type="hidden"  value="<{$vo['game_id']}>"/>
+                    <dd>
+                </dl>
+                <dl>
+                    <dt>用户：</dt>
+                    <dd><input name="" class="required" type="text" readonly value="<{$vo['user_id']|getUserName}>"/>
+                        <input name="user_id"  type="hidden"  value="<{$vo['user_id']}>"/>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>真实姓名：</dt>
+                    <dd><input name="true_name" class="required" type="text" value="<{$vo.true_name}>"/></dd>
+                </dl>
+                <dl>
+                    <dt>联系方式：</dt>
+                    <dd><input name="mobile" class="required" type="text" value="<{$vo.mobile}>"/></dd>
+                </dl>
+                <dl>
+                    <dt>性别：</dt>
+                    <dd><select  name="gender" class="required">
+                        <option value="">请选择</option>
+                        <option <eq name="vo.gender" value ="F">selected=selected</eq> value="F">女</option>
+                        <option <eq name="vo.gender" value ="T">selected=selected</eq> value="T">男</option>
+                    </select></dd>
+                </dl>
+
+                <dl>
+                    <dt>审核状态：</dt>
+                    <dd><select  name="verify_state" class="required">
+                        <option value="">请选择</option>
+                        <option <eq name="vo.verify_state" value ="0">selected=selected</eq> value="0">待审核</option>
+                        <option <eq name="vo.verify_state" value ="1">selected=selected</eq> value="1">已通过</option>
+                        <option <eq name="vo.verify_state" value ="2">selected=selected</eq> value="2">未通过</option>
+                    </select></dd>
+                </dl>
+
+                <dl>
+                    <dt>身份证号：</dt>
+                    <dd><input name="certificate_num" class="" type="text" value="<{$vo.certificate_num}>"/></dd>
+                </dl>
+                <dl>
+                    <dt>审核时间：</dt>
+                    <dd><input type="text" name="input_date" class="" readonly
+                               value="<{$vo['input_date']}>"/></dd>
+                </dl>
+                <dl>
+                    <dt>紧急联系人：</dt>
+                    <dd><input name="em_contact" class="required" type="text" value="<{$vo.em_contact}>"/></dd>
+                </dl>
+                <dl>
+                    <dt>紧急联系人号码：</dt>
+                    <dd><input name="em_tel" class="required" type="text" value="<{$vo.em_tel}>"/></dd>
+                </dl>
+                <dl>
+                    <dt>录入时间：</dt>
+                    <dd><input type="text" name="input_date" class="" readonly
+                               value="<{$vo['input_date']}>"/></dd>
+                </dl>
+
+            </div>
+            <div class="formBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">保存</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button">
+                            <div class="buttonContent">
+                                <button type="button" class="close">取消</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
+    </div>
+</div>

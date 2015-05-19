@@ -136,6 +136,9 @@ class IndexAction extends BaseAction {
      */
     public function HotVenue(){
         $ids = D('DbVenue')->getField('id',true);
+        foreach($ids as $key=>$value){
+            $ids[$value]= $value;
+        }
         $limit =array_rand($ids,4);
         $map['id'] =array('in',$limit);
         $list = D('DbVenue')->where($map)->select();
