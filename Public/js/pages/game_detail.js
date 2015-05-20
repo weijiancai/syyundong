@@ -202,6 +202,33 @@ $(function () {
     function onCommentClick() {
         var $panel = $(this).parent().parent();
         $panel.find('.comment-pop').toggle();
+        var $commentList = $panel.find('.comment-list');
+        var topicId = '';
+        getTopicComment($commentList, topicId);
+    }
+
+    // 检索当前话题的评论
+    function getTopicComment($commentList, topicId) {
+        jQuery.ajax({
+            type: "post",
+            url: "/Game/index/CommentReply",
+            data: {topicId: topicId},
+            success: function (data) {
+                if (!data || data == 'null') {
+                    return;
+                }
+
+                for (var i = 0; i < data.length; i++) {
+                    var $dl = $(template('tpl_topic_comment', data[i]));
+                    $commentList.append($dl);
+                    // 注册事件
+                    $dl.find('.replyLink').click(function() {
+                        $(this).parent().parent().find('.reply-form').toggle();
+                    });
+                    $dl.find('.reply-form form').validate(replyPanelValidateOption);
+                }
+            }
+        });
     }
 
     var $commentBtn = $('.comment-btn');

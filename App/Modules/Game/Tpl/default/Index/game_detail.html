@@ -320,7 +320,8 @@
                     <button class="btn btn-warning pull-right" type="submit">评论</button>
                 </form>
             </div>
-            <div data-params="{'topicId':10836, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list">
+            <div class="comment-list">
+
             </div>
             <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
                 <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10836">查看全部评论</a>
@@ -332,6 +333,50 @@
         <!-- 话题内容 结束 -->
     </li>
 </script>
+
+
+<!-- 回复话题模板 -->
+<script type="text/template" id="tpl_topic_comment">
+    <dl class="clearfix" style="display: block;">
+        <dt>
+            <a target="_blank" href="/friend/passport_86004/timeline"><img title="生如、夏花" src="http://static.wisdom-china.cn//images/1/9971/9272/2866/00d3fa3557ada5d8a7dce6149029c21b_2_40x40.jpg"></a>
+        </dt>
+        <dd>
+            <div class="user-header">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th>
+                            <a target="_blank" href="/friend/passport_86004/timeline">生如、夏花</a>
+                            <span title="2015-05-03 17:26:53" data-timestamp="1430645213000">17天前</span>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="comment-content">回复<a class="text-warning" target="_blank" href="/friend/passport_86004/timeline">@生如、夏花</a>：</p>
+            <pre class="comment-content">你好</pre>
+            <div class="reply-panel">
+                <p class="text-right">
+                    <a class="replyLink" href="javascript:;">回复</a>
+                </p>
+                <div class="reply-form" style="display: none;">
+                    <i class="icon-up"></i>
+                    <em class="icon-down"></em>
+                    <form method="post" action="/topic/publishTopicComment">
+                        <input type="hidden" value="11428" name="topicId">
+                        <input type="hidden" value="16485" name="commentId">
+                        <input type="hidden" value="passport_86004" name="replyToId">
+                        <input type="text" validate-rules="[['required']]" placeholder="回复 生如、夏花：" name="content" data-valid="false">
+                        <button class="btn btn-warning" type="submit">回复</button>
+                    </form>
+                </div>
+            </div>
+        </dd>
+    </dl>
+</script>
+
+
 <!--图片墙-->
 <script type="text/template" id="seemore">
     <div class="box" style="margin-right: 10px;">
