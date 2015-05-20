@@ -60,14 +60,19 @@
                         <p><span>主办：</span> <{$detail.sponsor}> </p>
                         <p class="text-right"><br />
 
-                            <input type="hidden" id="game_id" value="<{$detail.id}>">
+                        <input type="hidden" id="game_id" value="<{$detail.id}>">
                         <?php if(getState($detail['id'])=='报名中'){ ?>
                            <button id="i_game_apply" data-gameid="<{$detail.id}>" class="btn btn-warning">我要报名</button>
                          <?php }else{ ?>
                             <button  data-gameid="<{$detail.id}>" class="btn " disabled="disabled">我要报名</button>
                         <?php }?>
-
-                       <button id="game_focus" data-selector="gameFollow" data-gameid="<{$detail.id}>" class="btn btn-danger"><{$detail['id']|getGameFocus=$_SESSION['mark_id'],1}></button>
+                        <?php $result = getGameFocus($detail['id'],$_SESSION['mark_id'],1);
+                            if($result ==1){
+                         ?>
+ <button id="game_focus" data-selector="gameFollow" data-gameid="<{$detail.id}>" class="btn btn-danger">关注</button>
+                          <?php }else{ ?>
+<button id="game_focus" data-selector="gameFollow" data-gameid="<{$detail.id}>" class="btn">取消关注</button>
+                           <?php }?>
                         </p>
                     </div>
                 </div>
@@ -153,12 +158,15 @@
                                             <if condition="$vo.nick_name neq null"><{$vo.nick_name}><elseif condition="$vo.name neq null"/><{$vo.name}><else/><{$vo.mobile}></if>
                                         </p>
                                         <p>
-
-                                            <?php if(session('mark_id')){ ?>
+                                            <?php if(session('mark_id')){
+                                            $results = getFriends(session('mark_id'),$vo['id']);
+                                             if($results){ ?>
+                                            <button data-fid="passport_90896" data-selector="add-follow" class="btn" disabled="disabled">已添加</button>
+                                            <?php }else{ ?>
                                             <button  data-fid="passport_90896" data-selector="add-follow" data-value ="<{$vo.id}>" class="btn btn-warning add_friend">加赛友</button>
-                                            <?php }else { ?>
+                                            <?php } }else { ?>
                                             <button data-fid="passport_90896" data-selector="add-follow" class="btn" disabled="disabled">加赛友</button>
-                                            <?php }?>
+                                            <?php } ?>
                                         </p>
                                     </li>
                                 </volist>
@@ -304,7 +312,7 @@
     </p>
 
 
-    <a class="comment-btn" href="javascript:void(0);">
+    <a class="comment-btn" href="javascript:void(0);" data-id="{{id}}">
             <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{}}</span>
     </a>
     <a data-params="{'id':10318}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;">
@@ -314,9 +322,9 @@
         <div class="comment-pop clearfix hide">
             <div class="comment-form">
                 <form method="post" action="/topic/comment-add" id="GameTopicComment">
-                    <input type="hidden" value="{{id}}" name="reply_to">
+                    <input type="hidden" value="{{id}}" name="source_id" id="source_id">
                     <input type="hidden" value="passport_86004" name="userId">
-                    <input type="text" validate-title="评论内容" name="content" class="comment-txt">
+                    <input type="text" validate-title="评论内容" name="content" class="comment-txt" id="content">
                     <button class="btn btn-warning pull-right" type="submit">评论</button>
                 </form>
             </div>
@@ -339,35 +347,42 @@
 <script type="text/template" id="tpl_topic_comment">
     <dl class="clearfix" style="display: block;">
         <dt>
-            <a target="_blank" href="/friend/passport_86004/timeline"><img title="生如、夏花" src="http://static.wisdom-china.cn//images/1/9971/9272/2866/00d3fa3557ada5d8a7dce6149029c21b_2_40x40.jpg"></a>
+            <!--<a target="_blank" href="/friend/passport_79472/timeline"></a>-->
+            <img title="{{nick_name}}" src="{{image}}">
         </dt>
         <dd>
             <div class="user-header">
                 <table>
                     <tbody>
                     <tr>
-                        <th>
-                            <a target="_blank" href="/friend/passport_86004/timeline">生如、夏花</a>
-                            <span title="2015-05-03 17:26:53" data-timestamp="1430645213000">17天前</span>
-                        </th>
+                        <th><a target="_blank" href="/friend/passport_79472/timeline">{{nick_name}}</a><span title="{{input_date}}" data-timestamp="1419260340000">{{input_date}}</span></th>
+                        <td>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <p class="comment-content">回复<a class="text-warning" target="_blank" href="/friend/passport_86004/timeline">@生如、夏花</a>：</p>
-            <pre class="comment-content">你好</pre>
+            {{if replyUserName}}
+            <p class="comment-content">回复
+                <!--<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline"></a>-->
+                @{{replyUserName}}：</p>
+            {{/if}}
+            <p class="comment-content"></p>
+            <pre class="comment-content">{{content}}</pre>
             <div class="reply-panel">
                 <p class="text-right">
-                    <a class="replyLink" href="javascript:;">回复</a>
+                    {{if nowuser}}
+                    <a id="replaydel" data-replyid="308" data-selector="deleteComment" href="javascript:;">删除</a>
+                    {{/if}}
+                    <a id="replyLink" data-selector="replyLink" href="javascript:;">回复</a>
                 </p>
-                <div class="reply-form" style="display: none;">
+                <div class="reply-form">
                     <i class="icon-up"></i>
                     <em class="icon-down"></em>
-                    <form method="post" action="/topic/publishTopicComment">
-                        <input type="hidden" value="11428" name="topicId">
-                        <input type="hidden" value="16485" name="commentId">
-                        <input type="hidden" value="passport_86004" name="replyToId">
-                        <input type="text" validate-rules="[['required']]" placeholder="回复 生如、夏花：" name="content" data-valid="false">
+                    <form method="post" action="/activity/index/CommentReply"  id="CommentReplyForm">
+                        <input type="hidden" value="{{id}}" name="replay_to">
+                        <input type="hidden" value="" name="source_id">
+                        <input type="text" placeholder="回复 {{nick_name}}" name="content">
                         <button class="btn btn-warning" type="submit">回复</button>
                     </form>
                 </div>

@@ -361,7 +361,7 @@ function getJoinActivityVerify($verify)
 function getUserImage($id)
 {
     $user_head = D('DbUser')->where('id=' . deCode($id))->getField('user_head');
-    return D('DbImages')->where('id=' . $user_head)->getField('local_url');
+    return D('DbImages')->where('id=' . $user_head)->getField('size2_url');
 }
 
 /*
@@ -408,12 +408,28 @@ function getGameFocus($source_id, $user_id, $source_type)
 {
     $result = D('OpFocus')->where('user_id=' . deCode($user_id) . ' and source_id=' . $source_id . ' and source_type =' . $source_type)->select();
     if ($result) {
-        return '取消关注';
+        //关注
+        return 0;
     } else {
-        return '关注';
+        //取消关注
+        return 1;
     }
 }
-
+/*
+ * @功能：加赛友判断
+ * @时间:20150419
+ */
+function getFriends($user_id, $friend_id)
+{
+    $result = D('OpUserFriend')->where('user_id=' . deCode($user_id) . ' and friend_id=' . $friend_id)->select();
+    if ($result) {
+        //已添加
+        return 1;
+    } else {
+        //未添加
+        return 0;
+    }
+}
 /*
  * @功能：赛事、活动状态
  * @时间:20150419

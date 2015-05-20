@@ -223,14 +223,17 @@ class IndexAction extends Action {
      * @功能: 推荐赛友
      */
     public function recommendFriend(){
-        $where['id'] = array('neq',$_POST['id']);
-        $id = D('DbVenue')->where($where)->getField('id',true);
+        $id = D('VDoyenUser')->getField('id',true);
         foreach($id as $key=>$value){
             $ids[$value]= $value;
         }
-        $limit =array_rand($ids,4);
+        if(count($ids)>1){
+            $limit =array_rand($ids,6);
+        }else{
+            $limit=$ids;
+        }
         $map['id'] =array('in',$limit);
-        $list = D('DbVenue')->where($map)->select();
+        $list = D('VDoyenUser')->where($map)->select();
         echo json_encode($list);
     }
     /*

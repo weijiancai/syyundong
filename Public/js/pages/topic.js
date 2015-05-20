@@ -223,4 +223,23 @@ $(function () {
             });
         }
     });
+    //推荐赛友
+    change();
+    $('#change').click(change);
+    function change() {
+        jQuery.ajax({
+            type: "post",
+            url: "Friends/index/recommendFriend",
+            success: function ($result) {
+                if ($result) {
+                    var obj = eval($result);
+                    $('#recommend').empty();
+                    for (var i = 0; i < obj.length; i++) {
+                        var $li = $(template('lists', obj[i]));
+                        $('#recommend').append($li);
+                    }
+                }
+            }
+        })
+    }
 });

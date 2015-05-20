@@ -166,7 +166,6 @@ class IndexAction extends Action
         $user_id = D('OpFocus')->where('source_id=' . $id . ' and source_type=1 and user_id !=' . $id)->getField('user_id', true);
         $model = new Model();
         $user = $model->query('select u.id id,u.nick_name nick_name,u.mobile mobile,u.name name,u.gender gender,i.local_url image from db_user u LEFT JOIN db_images i  on (u.user_head = i.id) where u.id in(' . ArrayToStr($user_id) . ')');
-
         $this->assign('user', $user);
         $this->assign('notice', $notice);
         $this->assign('news', $news);
@@ -484,10 +483,10 @@ class IndexAction extends Action
     {
         $model = D('OpComment');
         $date['content'] = $_POST['content'];
-        $date['reply_to'] = $_POST['reply_to'];
+        $date['replay_to'] = $_POST['replay_to'];
         $date['user_id'] = deCode(I('session.mark_id'));
-        $date['source_id'] = $_POST['game_id'];
-        $date['source_type'] = 1;
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] = 4;
         $date['input_date'] = date('Y-m-d H:i:s');
         $result = $model->add($date);
         if (false !== $result) {
@@ -496,5 +495,15 @@ class IndexAction extends Action
             echo 0;
         }
     }
-
+    /*
+    * @时间: 20150415
+    * @功能: 加载评论回复
+    */
+    public function LoadReply()
+    {
+        $id = $_POST['topicId'];
+        $model = D('v_comment');
+        $list = $model->where('source_id='.$id.' and source_type = 4')->limit(5)->order('input_date desc')->select();
+        echo json_encode($list);
+    }
 }

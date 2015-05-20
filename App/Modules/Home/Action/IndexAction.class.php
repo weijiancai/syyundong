@@ -81,7 +81,7 @@ class IndexAction extends BaseAction
     */
     Public function getDoyenUser()
     {
-        return D('v_doyen_user')->limit(0)->select();
+        return D('v_doyen_user')->limit(8)->select();
     }
 
     /*

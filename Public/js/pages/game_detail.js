@@ -62,6 +62,7 @@ $(function () {
                 success: function (result) {
                     if (result == 1) {
                         $("#game_focus").html('取消关注');
+                        $('#game_focus').removeClass('btn-danger');
                     } else {
                         $.dialog.error('关注失败,请刷新页面重新尝试');
                     }
@@ -75,6 +76,7 @@ $(function () {
                 success: function (result) {
                     if (result == 1) {
                         $("#game_focus").html('关注');
+                        $('#game_focus').addClass('btn-danger');
                     } else {
                         $.dialog.error('取消关注失败,请刷新页面重新尝试');
                     }
@@ -90,7 +92,8 @@ $(function () {
             data: {friend_id: $(this).data('value')},
             success: function (result) {
                 if (result == 1) {
-                    $.dialog.success('已添加');
+                    $.dialog.success('添加成功');
+
                 } else {
                     $.dialog.error('添加赛友失败,请稍后重试');
                 }
@@ -201,31 +204,61 @@ $(function () {
     // 回复
     function onCommentClick() {
         var $panel = $(this).parent().parent();
-        $panel.find('.comment-pop').toggle();
+        var $pop = $panel.find('.comment-pop');
+        $pop.toggle();
         var $commentList = $panel.find('.comment-list');
-        var topicId = '';
-        getTopicComment($commentList, topicId);
+        var topicId = $(this).data('id');
+        if(!$pop.is(':hidden')) {
+            getTopicComment($commentList, topicId);
+        }
     }
 
     // 检索当前话题的评论
     function getTopicComment($commentList, topicId) {
         jQuery.ajax({
             type: "post",
-            url: "/Game/index/CommentReply",
+            url: "/Game/index/LoadReply",
             data: {topicId: topicId},
             success: function (data) {
                 if (!data || data == 'null') {
                     return;
                 }
+                data = eval(data);
+                $commentList.empty();
 
                 for (var i = 0; i < data.length; i++) {
                     var $dl = $(template('tpl_topic_comment', data[i]));
+                    $dl.find('input[name="source_id"]').val(topicId);
                     $commentList.append($dl);
                     // 注册事件
-                    $dl.find('.replyLink').click(function() {
+                    $dl.find('#replyLink').click(function() {
                         $(this).parent().parent().find('.reply-form').toggle();
                     });
-                    $dl.find('.reply-form form').validate(replyPanelValidateOption);
+                    $dl.find('.reply-form form').validate({
+                        rules: {
+                            content: 'required'
+                        },
+                        messages: {
+                            content: '回复内容不能为空！'
+                        },
+                        submitHandler: function (form) {
+                            var data = $(form).serializeJson();
+                            jQuery.ajax({
+                                type: "post",
+                                url: "/Game/index/CommentReply",
+                                data: data,
+                                success: function ($result) {
+                                    if ($result==1) {
+                                        $commentList.parent().find('#content').val('');
+                                        getTopicComment($commentList, topicId);
+                                    } else {
+                                        $.dialog.error('回复失败');
+                                    }
+                                }
+                            });
+                            //   $(form).parent().hide();
+                        }
+                    });
                 }
             }
         });
@@ -243,14 +276,15 @@ $(function () {
         },
         submitHandler: function (form) {
             var data = $(form).serializeJson();
-            data['game_id'] = $('#game_id').val();
             jQuery.ajax({
                 type: "post",
                 url: "/Game/index/CommentReply",
                 data: data,
                 success: function ($result) {
                     if ($result==1) {
-                        $.dialog.success('回复成功');
+                        var $commentList = $(form).parent().parent().find('.comment-list');
+                        $commentList.parent().find('#content').val('');
+                        getTopicComment($commentList, data['source_id'])
                     } else {
                         $.dialog.error('回复失败');
                     }
@@ -266,7 +300,6 @@ $(function () {
     // 加载更多
     var $topicData = $('#topicData');
     var $more = $('#more');
-
     function more() {
         var last = $more.data('last');
         if (last == -1) {
@@ -338,15 +371,15 @@ $(function () {
             for (var i = 0; i < data.length; i++) {
                 var $dl = $(template('seemore', data[i]));
                 $imagewall.append($dl);
-                /*$dl.find(".topic-img-wrap").yoxview({
+                $dl.find(".topic-img-wrap").yoxview({
                     lang: "zh-cn",
                     backgroundColor: 'Blue',
                     playDelay: 5000,
                     autoPlay: true
-                });*/
+                });
                 // 注册事件
-               // $dl.find('.comment-btn').click(onCommentClick);
-              //  $dl.find('.comment-pop form').validate(replyPanelValidateOption);
+               $dl.find('.comment-btn').click(onCommentClick);
+               $dl.find('.comment-pop form').validate(replyPanelValidateOption);
             }
         });
     }
