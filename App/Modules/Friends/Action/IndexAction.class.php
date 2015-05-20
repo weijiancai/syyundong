@@ -238,8 +238,8 @@ class IndexAction extends Action {
      * @功能: 新加入赛友
      */
     public function NewFriend(){
-        $date =
-        $id = D('DbUser')->where($where)->getField('id',true);
+        $where['id'] = array('neq',$_POST['id']);
+        $id = D('DbVenue')->where($where)->getField('id',true);
         foreach($id as $key=>$value){
             $ids[$value]= $value;
         }

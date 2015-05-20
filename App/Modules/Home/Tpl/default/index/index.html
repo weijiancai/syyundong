@@ -22,7 +22,7 @@
     <ul class="carousel-inner" role="listbox">
         <volist name="banner" id="vo" key="k">
             <li <if condition="$k eq 1">class="item active"<else/>class="item"</if>>
-                <img src="<{$vo.image}>" alt="<{$vo.name}>">
+            <a href="Game/<{$vo.id}>" class="banner-title" target="_blank"><img src="<{$vo.image}>" alt="<{$vo.name}>"></a>
                 <div class="carousel-caption desc">
                     <a href="Game/<{$vo.id}>" class="banner-title" target="_blank"><{$vo.name}></a>
                 </div>
@@ -615,7 +615,7 @@
                 <?php $all  = D('VChoiceGame')->limit(5)->order('input_date desc')->select();?>
                 <volist name="all" id="ao" key="k">
                     <li <if condition="$k eq 1">class="first"</if>>
-                    <a href="/Game/<{$ao.id}>"><img src="<{$ao.image}>"></a>
+                    <a href="/Game/<{$ao.id}>" target="_blank"><img src="<{$ao.image}>"></a>
                     <div class="description">
                         <div class="desc-bg"></div>
                         <div class="desc-content">
@@ -797,7 +797,7 @@
                                 <div class="li-content clearfix">
                                     <dl>
                                         <dd>
-                                            <h4><a href="/Activity/<{$ho.id}>"><{$ho.name}></a></h4>
+                                            <h4><a href="/Activity/<{$ho.id}>"target="_blank"><{$ho.name}></a></h4>
                                             <p>时间：<{$ho.start_date}></p>
                                             <p>地点：<{$ho.province}><{$ho.city}><{$ho.region}><{$ho.address}></p>
                                             <p>费用：<{$ho.cost}></p>

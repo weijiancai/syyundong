@@ -188,40 +188,7 @@ class CommonAction extends Action {
             echo $this->ajax('0', "新增失败！！！",$name,"","closeCurrent");
         }
     }
-    /*带图片新增*/
-    public function sinsert($path) {
-        $name=$this->getActionName();
-        $model = D($name);
-        $up=$this->upload($path);
-        $con = $model->create();
-        if (false === $con) {
-            $this->error($model->getError ());
-        }
-        $model->ico = $up[1];
-        $list = $model->add();
-        if ($list!==false) {
-            echo $this->ajax("1","新增成功",$name,"","closeCurrent");
-        } else {
-            echo $this->ajax("0","新增失败",$name,"","closeCurrent");
-        }
-    }
-    /*记录ip新增*/
-    function iinsert() {
-        $name=$this->getActionName();
-        $model = D($name);
-        if (false === $model->create()) {
-            $this->error ( $model->getError () );
-        }
-        $model->uip = $_SESSION['ip'];
-        $model->uname = $_SESSION['account'];
 
-        $list=$model->add ();
-        if ($list!==false) {
-            echo $this->ajax('1', "新增成功！！！",$name,"","closeCurrent");
-        } else {
-            echo $this->ajax('0', "新增失败！！！",$name,"","closeCurrent");
-        }
-    }
     public function add() {
         $this->display ();
     }
@@ -252,52 +219,11 @@ class CommonAction extends Action {
             echo $this->ajax('0', "编辑失败",$name,"","closeCurrent");
         }
     }
-    /*记录ip修改*/
-    function iupdate() {
-        $name=$this->getActionName();
-        $model = D($name);
-        if (false === $model->create()) {
-            $this->error ( $model->getError() );
-        }
-        $model->uip = $_SESSION['ip'];
-        $model->uname = $_SESSION['account'];
-        $list=$model->save ();
-        if ($list!==false) {
-            echo $this->ajax('1', "编辑成功！！！",$name,"","closeCurrent");
-        } else {
-            echo $this->ajax('0', "编辑失败！！！",$name,"","closeCurrent");
-        }
-    }
-    /*图片修改*/
-    public function supdate($path) {
-        $name=$this->getActionName();
-        $model = D($name);
-        $up=$this->upload($path);
-        if (false === $model->create()) {
-            $this->error ( $model->getError () );
-        }
-        if($up[0]){
-            $model->ico = $up[1];
-        }else{
-            $model->ico = $_POST['default'];
-        }
-        $list=$model->save();
-        if (false!==$list) {
-            echo $this->ajax("1","编辑成功",$name,"","closeCurrent");
-        } else {
-            echo $this->ajax("0","编辑失败",$name,"","closeCurrent");
-        }
-    }
     /**
     +----------------------------------------------------------
      * 默认删除操作
     +----------------------------------------------------------
-     * @access public
-    +----------------------------------------------------------
-     * @return string
-    +----------------------------------------------------------
-     * @throws ThinkExecption
-    +----------------------------------------------------------
+
      * 删除记录同时删除图片
     +----------------------------------------------------------
      */
@@ -318,26 +244,6 @@ class CommonAction extends Action {
                 }
             } else {
                 $this->error ('非法操作' );
-            }
-        }
-    }
-    public function foreverdelete() {
-        //删除指定记录
-        $name=$this->getActionName();
-        $model = D($name);
-        if (! empty ( $model )) {
-
-            $pk = $model->getPk ();
-            $id = $_REQUEST [$pk];
-            if (isset ( $id )) {
-                $condition = array ($pk => array ('in', explode ( ',', $id ) ) );
-                if (false !== $model->where ( $condition )->delete ()) {
-                    echo $this->ajax('1', "删除成功！！！",$name,"","");
-                } else {
-                    echo $this->ajax('0', "删除失败！！！",$name,"","");
-                }
-            } else {
-                $this->error ( '非法操作' );
             }
         }
     }
@@ -487,12 +393,6 @@ class CommonAction extends Action {
      * 默认恢复操作
      *
     +----------------------------------------------------------
-     * @access public
-    +----------------------------------------------------------
-     * @return string
-    +----------------------------------------------------------
-     * @throws FcsException
-    +----------------------------------------------------------
      */
 
     function resume() {
@@ -537,77 +437,7 @@ class CommonAction extends Action {
             }
         }
     }
-    /*类型返回*/
-    function backtype($key){
-        $model = D('ZjTypes');
-        $where['lx'] =$key;
-        $list=$model ->where($where)->select();
-        return $list;
-    }
-    /*状态返回*/
-    function backstate($key){
-        $model = D('ZjboeeDatatict');
-        $where['TYPE'] =$key;
-        $list=$model ->where($where)->select();
-        return $list;
-    }
-    /*
-     *@生活信息跳转页面
-     */
-    function jump($Class1) {
-        switch ($Class1) {
-            case 117 :
-                $info = 'hedit';
-                break;
-            case 109 :
-                $info = 'cedit';
-                break;
-            case 101 :
-            case 102 :
-            case 111 :
-                $info = 'qedit';
-                break;
-            case 126 :
-            case 107 :
-            case 108 :
-            case 110 :
-            case 118 :
-                $info = 'wedit';
-                break;
-            case 104 :
-                $info = 'zedit';
-                break;
-            case 116 :
-                $info = 'medit';
-                break;
-        }
-        return $info;
-    }
-    function jumpt($Class1) {
-        switch ($Class1) {
-            case 117 :
-                $info = 'hedit';
-                break;
-            case 109 :
-                $info = 'cedit';
-                break;
-            case 126 :
-            case 101 :
-            case 102 :
-            case 107 :
-            case 108 :
-            case 110 :
-            case 111 :
-            case 118 :
-            case 116 :
-                $info = 'qedit';
-                break;
-            case 104 :
-                $info = 'zedit';
-                break;
-        }
-        return $info;
-    }
+
     /*dwz返回提示信息*/
     public function ajax($status="",$message="",&$name,$rel="",$type="",$forwardUrl=""){
         $arr=array(
@@ -620,67 +450,62 @@ class CommonAction extends Action {
         );
         return json_encode($arr);
     }
-    /*单图片上传文件*/
-    public function upload($path){
-        $upload = new UploadFile();// 实例化上传类
-        $upload->maxSize  = 3145728 ;// 设置附件上传大小
-        $upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg','doc');// 设置附件上传类型
-        $upload->savePath =  './Public/Upload/'.$path.'/';// 设置附件上传目录
-        $upload->thumb = true;
-        /* 		$upload->thumbMaxWidth = '160';
-                $upload->thumbMaxHeight = '160';  */
-        $upload->autoSub=true;
-        $upload->subType=date;
-        if(!$upload->upload()) {// 上传错误提示错误信息
-            if($upload->getErrorMsg() !="没有选择上传文件") {//不上传文件通过
-                $e=$this->error($upload->getErrorMsg());
-                return array(false,$e);}
-        }else{// 上传成功 获取上传文件信息
-            $info =  $upload->getUploadFileInfo();
-            return array(true,$info[0]['savename']);
+
+    /*
+     * @时间: 20150415
+     * @功能: 图片上传
+     */
+    public function upimg()
+    {
+        import('ORG.Util.Image');
+        import('ORG.Net.UploadFile');
+        $path = $_POST['path'];
+        $upload = new UploadFile(); // 实例化上传类
+        $upload->maxSize = 6291456; // 设置附件上传大小
+        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
+        $upload->savePath = './Public/upload/' . $path . '/'; // 设置附件上传目录
+        $upload->thumb = false;
+        $upload->thumbPrefix = 's_';
+        $upload->thumbMaxWidth = '150';
+        $upload->thumbMaxHeight = '150';
+        $upload->thumbType = 0;
+        $upload->zipImages = true;
+        $upload->autoSub = true;
+        $upload->subType = date;
+        if (!$upload->upload()) { // 上传错误提示错误信息
+            if ($upload->getErrorMsg() != "没有选择上传文件") { //不上传文件通过
+                $e = $this->error($upload->getErrorMsg());
+                echo $e;
+            }
+        } else { // 上传成功 获取上传文件信息
+            $info = $upload->getUploadFileInfo();
+
+            //存储图片
+            $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
+            //缩略图存储
+            /*list($day,$name) = split ('[/]', $info[0]['savename']);
+            $date['size2_url'] = '/Public/upload/' . $path . '/s_' . $name;*/
+            $result = D('DbImages')->add($date);
+            //打水印
+            /* $Image = new Image();
+             foreach ($info as $value) {
+                 $$value['key'] = $value['savename'];
+                 $Image->water('./Public/Upload/game/' . $value['savename'], './Public/images/common/logo1.png'); //打水印
+             }*/
+            $arr = array(
+                'savename' => $info[0]['savename'],
+                'name' => $info[0]['name'],
+                'pic' => $info[0]['savepath'],
+                'size' => $info[0]['size'],
+                'ext' => $info[0]['extension'],
+                'size' => $info[0],
+                'path' => $path,
+                'label' => $result
+            );
+
+            echo json_encode($arr);
         }
     }
-    /*多图片上传文件*/
-    public function uploads($path){
-        $upload = new UploadFile();// 实例化上传类
-        //	$upload->maxSize  = 1.5*1000*1000 ;// 设置附件上传大小
-        $upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg','doc','swf');// 设置附件上传类型
-        $upload->savePath =  './public/upload/'.$path.'/';;// 设置附件上传目录
-        $upload->thumb = true;
-        /* 		$upload->thumbMaxWidth = '60';
-                $upload->thumbMaxHeight = '60';  */
-        $upload->autoSub=true;
-        $upload->subType=date;
-        if(!$upload->upload()) {// 上传错误提示错误信息
-            if($upload->getErrorMsg() !="没有选择上传文件") {//不上传文件通过
-                $e=$this->error($upload->getErrorMsg());
-                return array(false,$e);}
-        }else{// 上传成功 获取上传文件信息
-            $info =  $upload->getUploadFileInfo();
-            return array(true,$info);
-        }
-    }
-    /*删除图片*/
-    function delpic($picname,$val){
-        $path='Public/Upload/'.$val.'/';
-        unlink($path.$picname);
-        //删除原图
-        //	@unlink($path.'icon_'.$picname);				//删除图标
-        //	@unlink($path.'thumb_'.$picname);				//删除水印图片
-    }
-
-    /*会员操作记录*/
-    public function recordLog($opera,$uid){
-        $log = M('ZjBmsLog');
-        $data['id'] = $this->guid();
-        $data['LOGINNAME'] = $_SESSION['account'];
-        $data['CREATETM'] = date('Y-m-d H:i:s');
-        $data['LOGINIP'] =  get_client_ip();
-        $data['REMARK'] =  $opera;					//操作
-        $data['REMARK2'] =  $uid;					//被操作用户
-        $log->data($data)->add();
-    }
-
     public  function guid(){
         if (function_exists('com_create_guid')){
             return com_create_guid();

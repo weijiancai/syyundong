@@ -188,6 +188,10 @@ $(function () {
                         $('#imgMsg').val('');
                         $.dialog.success('发布成功');
                         window.location.href = "";
+                    }else if(result ==3){
+                        window.location.href="/login/login"
+                    }else{
+                        $.dialog.error('发布失败');
                     }
                 }
             });

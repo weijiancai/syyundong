@@ -21,8 +21,8 @@ $(function () {
                     $('#showimg').html("<img width:52px height=52px src='/Public/images/default/upimg_loading.gif'>");
                 },
                 success: function (data) {
-                    var img = "/Public/Upload/" + data.path + "/" + data.pic;
-                    $("#showimg").html("<span class='delimg' rel='" + data.pic + "'></span><img width:52px height=52px src='" + img + "'>");
+                    var img = "/Public/Upload/" + data.path + "/" + data.savename;
+                    $("#showimg").html("<span class='delimg' rel='" + data.savename + "'></span><img width:52px height=52px src='" + img + "'>");
                     $('#image').val(data.label);
                 },
                 error: function (xhr) {

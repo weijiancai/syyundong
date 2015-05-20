@@ -413,25 +413,30 @@ class IndexAction extends Action
     */
     public function GameTopic()
     {
-        $date['content'] = $_POST['content'];
-        $date['user_id'] = deCode(I('session.mark_id'));
-        $date['game_id'] = $_POST['game_id'];
-        $date['input_date'] = date('Y-m-d H:i:s');
-        $date['game_id'] = $_POST['game_id'];
-        $result = D('OpGameTopic')->add($date);
-        //图片存储
-        $img = strtoarr($_POST['imgMsg']);
-        foreach ($img as $key => $val) {
-            if (!empty($val) && $val !== '') {
-                $map['image_id'] = $val;
-                $map['topic_id'] = $result;
-                D('OpGameTopicImages')->add($map);
+        $mark = I('session.mark_id');
+        if ($mark) {
+            $date['content'] = $_POST['content'];
+            $date['user_id'] = deCode(I('session.mark_id'));
+            $date['game_id'] = $_POST['game_id'];
+            $date['input_date'] = date('Y-m-d H:i:s');
+            $date['game_id'] = $_POST['game_id'];
+            $result = D('OpGameTopic')->add($date);
+            //图片存储
+            $img = strtoarr($_POST['imgMsg']);
+            foreach ($img as $key => $val) {
+                if (!empty($val) && $val !== '') {
+                    $map['image_id'] = $val;
+                    $map['topic_id'] = $result;
+                    D('OpGameTopicImages')->add($map);
+                }
             }
-        }
-        if (false !== $result) {
-            echo 1;
+            if (false !== $result) {
+                echo 1;
+            } else {
+                echo 2;
+            }
         } else {
-            echo 2;
+            echo 3;
         }
     }
 

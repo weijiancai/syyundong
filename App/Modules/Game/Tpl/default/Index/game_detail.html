@@ -6,8 +6,8 @@
             <div class="span16 public-page-top">
                 <h2 class="public-title"><span class="text-warning">[<{$detail.sport_id|getSportName}>]</span><{$detail.name}></h2>
                 <div class="public-desc clearfix">
-                    <p class="pull-left"> <span class="info-text enrolling"><{$detail.id|getState}></span>
-                        <span class="info-text"><i class="icon16 icon16-person"></i><{$detail.status|getFocus=1}>人感兴趣</span>
+                    <p class="pull-left"> <span class="info-text enrolling"><{$detail.status|getState}></span>
+                        <span class="info-text"><i class="icon16 icon16-person"></i><{$detail.id|getFocus=1}>人感兴趣</span>
                         <em class="info-slider"></em>
                         <span class="info-text">分享到：</span>
                           <div class="bshare-custom">
@@ -191,7 +191,7 @@
                     <!-- tab start-->
                     <div class="public-tab-wrap clearfix" id="relevantTabs">
                         <a href="javascript:void(0);" class="tab current" data-ref="gameTopic">话题<span>(共<{$detail.topic_count}>话题)</span></a>
-                        <a href="javascript:void(0);" class="tab" data-ref="gameFlow">图片墙<span>(共2张)</span></a>
+                        <a href="javascript:void(0);" class="tab" data-ref="gameFlow">图片墙<span></span></a>
                         <!-- <a href="/friends/game/416" class="btn btn-warning">发布话题</a> -->
                     </div>
                     <!-- tab end -->
@@ -277,13 +277,13 @@
     <li class="topicli clearfix" style="display: list-item;">
         <!-- 作者头像 开始 -->
             <div class="topic-host-thumb pull-left">
-            <a target="_blank" href="/friend/passport_81330/timeline"><img title="{{user_name}}" src="{{user_image}}"></a>
+            <a target="_blank" href="/Friends/passport/{{id}}" ><img title="{{user_name}}" src="{{user_image}}"></a>
     </div>
         <!-- 作者头像 结束 -->
         <!-- 话题内容 开始 -->
     <div class="topic-right">
             <p class="topic-info">
-            <a target="_blank" href="/friend/passport_81330/timeline">{{user_name}}
+            <a target="_blank" href="/Friends/passport/{{id}}">{{user_name}}
             </a>
     <span title="2015-03-02 10:24:51" class="topic-time">2015-03-02 10:24:51</span>
     </p>
