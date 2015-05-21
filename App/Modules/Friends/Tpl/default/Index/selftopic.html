@@ -366,122 +366,9 @@
         <h4 class="slider-title">推荐赛友</h4>
 
         <div data-add-action="/friends/game-friend-add" data-url="/friends/recommenttaguser" data-reply-action="#" data-params="{'pageSize':6,'pageNum':0}" data-selector="recommend-friend-box" style="min-height:500px;" class="friend-recommend-list clearfix"><style>#NTGUID__4 li{    display: none;  }  </style><div id="NTGUID__4">
-            <button data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i>换一组</button>
-            <ul data-selector="friendsData" class="clearfix"><div id="NTGUID__4NDTGUID__9">
+            <button data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i><span id="change">换一组</span></button>
+            <ul data-selector="friendsData" class="clearfix" id="recommend"><div id="NTGUID__4NDTGUID__9">
 
-                <li style="display: list-item;">
-                    <div class="friends-thumb">
-                        <a target="_blank" href="/friend/passport_90885/timeline">
-                            <img title="Tank" src="http://static.wisdom-china.cn//images/1/5708/0263/0137/3c1b83226cb23cd58c343c042d303dec_2_60x60.jpg">
-                        </a>
-                    </div>
-                    <p class="friends-nickname">
-
-                        <i title="男" class="icon16 icon16-boy"></i>
-
-                        Tank
-                    </p>
-                    <p>
-
-                        <button data-fid="passport_90885" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                    </p>
-                </li>
-
-                <li style="display: list-item;">
-                    <div class="friends-thumb">
-                        <a target="_blank" href="/friend/passport_90481/timeline">
-                            <img title="怀瑾握瑜" src="http://static.wisdom-china.cn//images/1/6653/6290/3496/8b2c07beffb19f6c05d2201cfedae4a2_2_60x60.jpg">
-                        </a>
-                    </div>
-                    <p class="friends-nickname">
-
-                        <i title="男" class="icon16 icon16-boy"></i>
-
-                        怀瑾握瑜
-                    </p>
-                    <p>
-
-                        <button data-fid="passport_90481" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                    </p>
-                </li>
-
-                <li style="display: list-item;">
-                    <div class="friends-thumb">
-                        <a target="_blank" href="/friend/passport_90398/timeline">
-                            <img title="北溟打渔" src="http://static.wisdom-china.cn//images/1/8657/4103/4427/88b4ed5fa11fde016902ef25b4a35ce5_2_60x60.jpg">
-                        </a>
-                    </div>
-                    <p class="friends-nickname">
-
-                        <i title="男" class="icon16 icon16-boy"></i>
-
-                        北溟打渔
-                    </p>
-                    <p>
-
-                        <button data-fid="passport_90398" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                    </p>
-                </li>
-
-                <li style="display: list-item;">
-                    <div class="friends-thumb">
-                        <a target="_blank" href="/friend/passport_70511/timeline">
-                            <img title="二寨主学文化" src="http://static.wisdom-china.cn//images/1/6000/7477/8913/94b9dcb639ace68c534da99952e42e45_2_60x60.jpg">
-                        </a>
-                    </div>
-                    <p class="friends-nickname">
-
-                        <i title="男" class="icon16 icon16-boy"></i>
-
-                        二寨主学文化
-                    </p>
-                    <p>
-
-                        <button data-fid="passport_70511" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                    </p>
-                </li>
-
-                <li style="display: list-item;">
-                    <div class="friends-thumb">
-                        <a target="_blank" href="/friend/passport_90514/timeline">
-                            <img title="一个笔画一个字" src="http://static.wisdom-china.cn//images/1/6859/3645/3017/0250d8876d033c8c71c3069686ccd269_2_60x60.jpg">
-                        </a>
-                    </div>
-                    <p class="friends-nickname">
-
-                        <i title="男" class="icon16 icon16-boy"></i>
-
-                        一个笔画一个字
-                    </p>
-                    <p>
-
-                        <button data-fid="passport_90514" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                    </p>
-                </li>
-
-                <li style="display: list-item;">
-                    <div class="friends-thumb">
-                        <a target="_blank" href="/friend/passport_90725/timeline">
-                            <img title="西西西瓜皮" src="http://static.wisdom-china.cn//images/1/3486/8366/0928/eeb605691f9af668b2e4115b443dd9d4_2_60x60.jpg">
-                        </a>
-                    </div>
-                    <p class="friends-nickname">
-
-                        <i title="男" class="icon16 icon16-boy"></i>
-
-                        西西西瓜皮
-                    </p>
-                    <p>
-
-                        <button data-fid="passport_90725" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                    </p>
-                </li>
 
             </div>
             </ul>
@@ -491,7 +378,29 @@
         </div>
 
 
+        <script id="lists" type="text/html">
+            <li style="display: list-item;">
+                <div class="friends-thumb">
+                    <a target="_blank" href="/Friends/passport/{{id}}">
+                        <img title="{{nick_name}}" src="{{image}}">
+                    </a>
+                </div>
+                <p class="friends-nickname">
+                    {{if gender=='M'}}
+                    <i title="男" class="icon16 icon16-boy"></i>
+                    {{/if}}
+                    {{if gender=='F'}}
+                    <i title="女" class="icon16 icon16-girl"></i>
+                    {{/if}}
+                    {{nick_name}}
+                </p>
+                <p>
 
+                    <button data-fid="passport_90514" data-selector="add-follow" class="btn btn-warning">加赛友</button>
+
+                </p>
+            </li>
+        </script>
     </div>
 
     <!-- 推荐赛友 end -->
@@ -513,4 +422,6 @@
 </div>
 </div>
 </div>
+<script type="text/javascript" src="/Public/js/pages/topic.js"></script>
+
 <include file="Public@default:Public:bottom"/>

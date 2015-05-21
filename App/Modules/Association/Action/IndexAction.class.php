@@ -12,7 +12,7 @@ class IndexAction extends Action {
         $model = D('VSportAssociation');
         $order = ('input_date desc');
         $count = $model->order($order)->count();
-        $Page = new Page($count, 3);
+        $Page = new Page($count, 10);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
         $Page->rollPage = 10;
         $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->order($order)->select();

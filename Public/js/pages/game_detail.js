@@ -243,6 +243,7 @@ $(function () {
                         },
                         submitHandler: function (form) {
                             var data = $(form).serializeJson();
+                            if($('#free').val()){
                             jQuery.ajax({
                                 type: "post",
                                 url: "/Game/index/CommentReply",
@@ -256,6 +257,9 @@ $(function () {
                                     }
                                 }
                             });
+                        }else{
+                                window.location.href='/login/login';
+                            }
                             //   $(form).parent().hide();
                         }
                     });
@@ -276,6 +280,7 @@ $(function () {
         },
         submitHandler: function (form) {
             var data = $(form).serializeJson();
+            if($('#free').val()){
             jQuery.ajax({
                 type: "post",
                 url: "/Game/index/CommentReply",
@@ -290,6 +295,9 @@ $(function () {
                     }
                 }
             });
+            }else{
+                window.location.href='/login/login';
+            }
         //   $(form).parent().hide();
         }
     };

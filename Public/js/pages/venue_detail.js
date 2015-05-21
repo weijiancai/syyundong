@@ -53,8 +53,6 @@ $(function () {
         $panel.find('.reply-form').toggle();
     }
 
-
-
     //详细页换一换
     detail_change();
     $('#change').click(detail_change);

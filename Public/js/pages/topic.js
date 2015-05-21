@@ -229,7 +229,7 @@ $(function () {
     function change() {
         jQuery.ajax({
             type: "post",
-            url: "Friends/index/recommendFriend",
+            url: "/Friends/index/recommendFriend",
             success: function ($result) {
                 if ($result) {
                     var obj = eval($result);
@@ -242,4 +242,6 @@ $(function () {
             }
         })
     }
+    //关注话题
+
 });

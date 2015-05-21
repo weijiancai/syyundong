@@ -30,7 +30,7 @@ class IndexAction extends Action {
         $map['name'] = array('like','%'.trim($_GET['keyword']).'%');
         $map['type'] = array('eq','game');
         $count = $model->where($map)->count();
-        $Page = new Page($count, 3);
+        $Page = new Page($count, 10);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
         $Page->rollPage = 10;
         $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
@@ -108,9 +108,9 @@ class IndexAction extends Action {
         $this->display();
     }
     /*
- * @时间: 20150415
- * @功能：赛友圈关注
- */
+     * @时间: 20150415
+     * @功能：赛友圈关注
+     */
     public function topicFocus()
     {
         $date['user_id'] = deCode(session('mark_id'));
@@ -133,7 +133,7 @@ class IndexAction extends Action {
     {
         $markId = deCode(I('session.mark_id'));
         $where['source_id'] = $_POST['source_id'];
-        $where['source_type'] = 1;
+        $where['source_type'] = 4;
         $last = $_POST['last'];
         $amount = $_POST['amount'] + $_POST['last'];
         $order = 'input_date desc';
@@ -202,16 +202,12 @@ class IndexAction extends Action {
     }
     /*
     * @时间: 20150415
-    * @功能: 关注话题
+    * @功能: 关注话题页面跳转
     */
     public function selftopic(){
         //首先判断用户是否登录
-        $mark = I('session.mark_id');
+        $mark = deCode(I('session.mark_id'));
         if ($mark) {
-          //  $this->assign('region',D('Public/Index')->region());
-            $this->assign('sport', D('Public/Index')->sport_top());
-            $this->firend_rcommend();
-            $this->FriendSport();
             $this->display();
         } else {
             $str = ' <script> window.location.href="/login/login"</script>';
@@ -219,15 +215,29 @@ class IndexAction extends Action {
         }
     }
     /*
+    * @时间: 20150415
+    * @功能: 关注话题页面跳转
+    */
+    public function LoadSelfTopic(){
+        $mark = deCode(I('session.mark_id'));
+        $topic_id=M('OpFocus')->where('user_id='.$mark)->getField('source_id',true);
+        $map['game_id'] =array('in',$topic_id);
+        $map['user_id'] = array('eq',$mark);
+        $list = M('OpGameTopic')->where($map)->select();
+        echo json_encode($list);
+    }
+    /*
      * @时间: 20150415
      * @功能: 推荐赛友
      */
     public function recommendFriend(){
         $id = D('VDoyenUser')->getField('id',true);
+        $my = deCode(I('session.mark_id'));
+        unset($id[array_search($my,$id)]);
         foreach($id as $key=>$value){
             $ids[$value]= $value;
         }
-        if(count($ids)>1){
+        if(count($ids)>6){
             $limit =array_rand($ids,6);
         }else{
             $limit=$ids;
