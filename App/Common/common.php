@@ -415,6 +415,7 @@ function getGameFocus($source_id, $user_id, $source_type)
         return 1;
     }
 }
+
 /*
  * @功能：加赛友判断
  * @时间:20150419
@@ -430,6 +431,7 @@ function getFriends($user_id, $friend_id)
         return 0;
     }
 }
+
 /*
  * @功能：赛事、活动状态
  * @时间:20150419
@@ -476,12 +478,13 @@ function  join_activity($id)
  * @功能：赛事组别
  * @时间:20150419
  */
-function  GameGroup($game_id,$user_id)
+function  GameGroup($game_id, $user_id)
 {
-    $group_id = D('OpJoinGame')->field('group_id')->where('game_id='.$game_id.' and user_id='.$user_id)->select();
-    $group_name = D('OpGameGroup')->where('id='.$group_id[0]['group_id'])->getField('group_name');
+    $group_id = D('OpJoinGame')->field('group_id')->where('game_id=' . $game_id . ' and user_id=' . $user_id)->select();
+    $group_name = D('OpGameGroup')->where('id=' . $group_id[0]['group_id'])->getField('group_name');
     return $group_name;
 }
+
 /*
  * @功能：个人运动喜好
  * @时间:20150419
@@ -494,11 +497,12 @@ function  UserFavGame($interest)
             $model = M('DzSport');
             $where['id'] = $value;
             $list = $model->where($where)->getField('name');
-            $str.= $list . "  ";
+            $str .= $list . "  ";
         }
     }
     return $str;
 }
+
 /*
  * @功能：用户总赛事数量
  * @时间: 20150512
@@ -509,6 +513,7 @@ function  UserGameCount($mark_id)
     $count = D('VJoinGame')->where($map)->count();
     return $count;
 }
+
 /*
  * @功能：用户总活动数量
  * @时间: 20150512
@@ -530,6 +535,38 @@ function  UserTopicCount($mark_id)
     $count = D('OpGameTopic')->where($map)->count();
     return $count;
 }
+
+/*
+ * @功能：赛事、活动、场馆是否推荐
+ * @时间: 20150512
+ */
+function  isGameRecommend($id, $type)
+{
+    $list = M('OpRecommend')->where('recommend_type = "' . $type . '" and gc_id=' . $id)->find();
+    if ($list) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/*
+ * @功能：返回推荐信息名称
+ * @时间: 20150512
+ */
+function  getRecommendName($id,$type)
+{
+    if ($type == 'game') {
+        return D('DbGame')->where('id=' . $id)->getField('name');
+    }
+    if($type =='activity') {
+        return D('DbActivity')->where('id=' . $id)->getField('name');
+    }
+    if($type=='venue'){
+        return D('DbVenue')->where('id=' . $id)->getField('name');
+    }
+}
+
 /*
  * @功能：数组转为字符串
  * @时间:20150419

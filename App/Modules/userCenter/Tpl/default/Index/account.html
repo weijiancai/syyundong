@@ -6,38 +6,16 @@
             <div class="span16">
                 <div class="account-top">
                     <div class="account-thumb">
-                        <img name="user-head" src="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_110x110.jpg">
-                        <!-- <img src="http://static.wisdom-china.cn/iyuesai/images/pages/user-head.jpg">-->
+                        <img name="user-head" src="<{$user['id']|getUsersImage}>">
                         <div class="alpha-bg"></div>
                     </div>
                     <div class="account-right">
                         <p class="account-right-name">
-                            <strong>wei-jc</strong>
-                            <!--
-                            <span class="pull-right">高级达人 <em class="account-tip">积分</em>：3346.0</span>
-                            -->
+                            <strong><{$user.nick_name}></strong>
                         </p>
-                        <!--
-                        <p class="account-tip">一句话介绍一下自己吧，让别人更了解你</p>
-                        <p><span class="account-tip">运动喜好：</span>足球 自行车 攀岩 飞盘</p>
-                        -->
 
-                        <p class="account-tip">一句话介绍一下自己吧，让别人更了解你</p>
-                        <p><span class="account-tip">运动喜好：路跑  肚皮舞</span></p>
-                        <!--
-                         <p>
-                        <span class="account-tip">参加赛事： </span>0个
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="account-tip">关注赛事： </span>2个
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="account-tip">参加活动： </span>2个
-                        </p>
-                        <p>
-                        <span class="account-tip">创建活动： </span>0个
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="account-tip">发表话题：</span> 0个
-                        </p>
-                               -->
+                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
+                        <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
                         <div class="alpha-bg"></div>
                     </div>
                 </div>
@@ -46,16 +24,11 @@
                 <div class="public-subnav clearfix">
                     <ul>
                         <li><a href="/userCenter/timeline">我的足迹</a></li>
-                        <li><a href="/userCenter/profile">个人资料</a></li>
+                        <li><a href="/userCenter/Profile">个人资料</a></li>
                         <li><a href="/userCenter/game">我的赛事</a></li>
                         <li><a href="/userCenter/activity">我的活动</a></li>
                         <li><a href="/userCenter/topic">我的话题</a></li>
                         <li><a href="/userCenter/friend">我的赛友</a></li>
-                        <li><a href="/userCenter/message/msg-game">我的消息</a><i class="msg-tip" data-selector="unreadMsgCount">0</i></li>
-                        <!--
-                        <li><a href="/userCenter/orders">我的订单</a></li>
-                        <li><a href="/userCenter/venues">我的场馆</a></li>
-                        -->
                         <li><a href="/userCenter/account" class="current">账号设置</a></li>
                     </ul>
                 </div>
@@ -67,16 +40,33 @@
                         <div class="account-set-wrap clearfix">
                             <div class="account-thumb-wrap pull-left">
                   <span id="" class="avator-120">
-                    <img name="user-head" src="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_120x120.jpg" alt="">
-                    </span>
-                                <button class="btn" data-selector="edit-avator" data-action="/userCenter/account/changeProfile" data-type="up">修改头像</button>
+                      <div id="nickthumb" class="nickthumb">
+                          <if condition="$list['image'] eq null">
+                              <img name="user-head" src="/Public/images/default/web_pic.jpg" alt="">
+                              <else/>
+                              <img src="<{$list['image']|getUserImage}>"/>
+                          </if>
+
+                  </div>
+                  </span>
+                                <div class="nickthubm-wrap">
+
+                                    <button type="button" class="btn" id="btnSetHeadIcon">设置头像</button>
+
+                                    <input type="file" class="file" id="fileupload" name="file" value="设置头像" style="position: static;display: none;">
+
+                                    <span id="show_mes" style="color:Red"></span>
+                                    <input type="hidden" value="<{$vo.image}>" name="user_head" id="user_head">
+                                    <input type="hidden" value="user" id="path">
+                                </div>
+
                             </div>
                             <div class="account-content">
                                 <p>
                                     <span class="p-ttl">昵称：</span>
-                                    <span>wei-jc</span>
+                                    <span><{$list.nick_name}></span>
                                 </p>
-                                <p>
+                                <!--<p>
                                     <span class="p-ttl">邮箱：</span>
                                     <button class="btn btn-success" disabled>请在个人资料中编辑邮箱</button>
                                 </p>
@@ -84,7 +74,7 @@
                                     <span class="p-ttl">手机：</span>
                                     <span>13521979127</span>
                                     <button class="btn btn-success" disabled>已绑定</button>
-                                </p>
+                                </p>-->
 
                                 <p>
                                     <span class="p-ttl">密码：</span>
@@ -152,5 +142,6 @@
     </form>
 </div>
 
-<script type="text/javascript" src="/Public/js/pages/profile_edit.js"></script>
+<script type="text/javascript" src="/Public/js/pages/account.js"></script>
+<script src="__PUBLIC__/js/syweb/jquery.form.js" type="text/javascript"></script>
 <include file="Public@default:Public:bottom" />

@@ -61,7 +61,7 @@
                         <p class="text-right"><br />
 
                         <input type="hidden" id="game_id" value="<{$detail.id}>">
-                        <?php if(getState($detail['id'])=='报名中'){ ?>
+                        <?php  if($detail['status']=='1'){?>
                            <button id="i_game_apply" data-gameid="<{$detail.id}>" class="btn btn-warning">我要报名</button>
                          <?php }else{ ?>
                             <button  data-gameid="<{$detail.id}>" class="btn " disabled="disabled">我要报名</button>

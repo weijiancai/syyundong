@@ -224,6 +224,7 @@ class IndexAction extends Action {
         $map['game_id'] =array('in',$topic_id);
         $map['user_id'] = array('eq',$mark);
         $list = M('OpGameTopic')->where($map)->select();
+        dump($list);
         echo json_encode($list);
     }
     /*

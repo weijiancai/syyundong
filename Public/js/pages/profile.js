@@ -71,7 +71,6 @@ $(function () {
     });
     $fileUpload.change(function () {
      //   alert($(this).val());
-
     });
     $("#fileupload").wrap("<form id='myupload' action='/Public/Public/upimg' method='post' enctype='multipart/form-data'></form>");
     $("#fileupload").change(function (event) {

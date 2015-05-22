@@ -149,57 +149,6 @@ class DbVenueAction extends CommonAction
         $data = D('DbRegion')->field('id,name')->where($where)->select();
         echo json_encode($data);
     }
-
-    /*
-     * @功能：ajax上传图片
-     * @时间：20150422
-     */
-    public function upimg()
-    {
-        import('ORG.Util.Image');
-        import('ORG.Net.UploadFile');
-        $path = $_POST['path'];
-        $upload = new UploadFile(); // 实例化上传类
-        $upload->maxSize = 6291456; // 设置附件上传大小
-        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
-        $upload->savePath = './Public/upload/' . $path . '/'; // 设置附件上传目录
-        $upload->thumb = true;
-        $upload->thumbPrefix = '';
-        $upload->thumbMaxWidth = '600';
-        $upload->thumbMaxHeight = '400';
-        $upload->thumbType = 0;
-        $upload->zipImages = true;
-        $upload->autoSub = true;
-        $upload->subType = date;
-        if (!$upload->upload()) { // 上传错误提示错误信息
-            if ($upload->getErrorMsg() != "没有选择上传文件") { //不上传文件通过
-                $e = $this->error($upload->getErrorMsg());
-                echo $e;
-            }
-        } else { // 上传成功 获取上传文件信息
-            $info = $upload->getUploadFileInfo();
-
-            //存储图片
-            $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
-            $result = D('DbImages')->add($date);
-            //打水印
-            /* $Image = new Image();
-             foreach ($info as $value) {
-                 $$value['key'] = $value['savename'];
-                 $Image->water('./Public/Upload/game/' . $value['savename'], './Public/images/common/logo1.png'); //打水印
-             }*/
-            $arr = array(
-                'name' => $info[0]['savename'],
-                'pic' => $info[0]['savename'],
-                'size' => $info[0]['size'],
-                'ext' => $info[0]['extension'],
-                'size' => $info[0],
-                'path' => $path,
-                'label' => $result
-            );
-            echo json_encode($arr);
-        }
-    }
 }
 
 ?>

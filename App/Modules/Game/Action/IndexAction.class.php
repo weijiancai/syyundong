@@ -34,8 +34,12 @@ class IndexAction extends Action
             $map['name'] = array('like', '%' . trim($_GET['keyword']) . '%');
         }
         //赛事分类
-        if ($_GET['sportType']) {
-            $map['sport_id'] = array('eq', $_GET['sportType']);
+        if (($_GET['sportTypeId'])and($_GET['sportTypeId']!=='all')) {
+            $map['sport_sid'] =  $_GET['sportTypeId'];
+        }
+        //赛事区域
+        if ($_GET['region']) {
+            $map['region'] =  $_GET['region'];
         }
         //默认排序
         if (($_GET['orderByNew'] == 'S')or($_GET['orderByNew'] == '')) {
@@ -58,7 +62,6 @@ class IndexAction extends Action
         }else if ($_GET['date'] == 'month') {
             $map['start_date'] = array('like', date("Y-m-d", strtotime("+30 day")) . '%');
         }
-
         $map['type'] = array('eq', 'game');
         $count = $model->where($map)->count();
         $Page = new Page($count, 10);

@@ -16,7 +16,7 @@ class IndexAction extends Action {
      */
     public function timeline(){
         $id = deCode(I('session.mark_id'));
-        $timeline = D('DbTimeLine')->where('input_user='.$id)->order('input_date desc')->select();
+        $timeline = D('DbTimeline')->where('input_user='.$id)->order('input_date desc')->select();
         $this->assign('timeline',$timeline);
         $this->assign('user',D('DbUser')->where('id='.$id)->find());
         $this->display();
@@ -53,7 +53,7 @@ class IndexAction extends Action {
         $date['company'] = $_POST['company'];
         $date['certificate_type'] = $_POST['certificate_type'];
         $date['certificate_num'] = $_POST['certificate_num'];
-        $date['higt'] = $_POST['higt'];
+        $date['height'] = $_POST['height'];
         $date['weight'] = $_POST['weight'];
         $date['mobile'] = $_POST['mobile'];
         $date['email'] = $_POST['email'];
@@ -173,6 +173,15 @@ class IndexAction extends Action {
         $this->assign('list', $list);
         $this->assign('count', $count);
         $this->assign('user',D('DbUser')->field('id,nick_name,signature,interest')->where('id='.deCode(I('session.mark_id')))->find());
+        $this->display();
+    }
+    /*
+     * @功能：账号设置
+     * @时间:20150408
+     */
+    public function account(){
+        $list  = M('DbUser')->where('id='.deCode(session('mark_id')))->find();
+        $this->assign('list',$list);
         $this->display();
     }
 }

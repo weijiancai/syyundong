@@ -117,8 +117,12 @@ class DbGameAction extends CommonAction
         $model = D('DbGame');
         $pk = $model->getPk();
         $data[$pk] = array('in', $_POST['ids']);
-        $model->where($data)->delete();
-        echo $this->ajax('1', "删除成功", $name, "", "");
+        $result = $model->where($data)->delete();
+        if (false !== $result) {
+            echo $this->ajax('1', "删除成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "删除失败", $name, "", "");
+        }
     }
 
     /*
@@ -187,7 +191,24 @@ class DbGameAction extends CommonAction
             echo $this->ajax('0', "更新失败", $name, "", "closeCurrent");
         }
     }
-
+    /*
+     * @功能：推荐赛事
+     * @时间：20150422
+     */
+    public function recommend()
+    {
+        $model = D('OpRecommend');
+        $date['gc_id'] = $_GET['id'];
+        $date['recommend_type'] = 'game';
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $date['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
+        $list = $model->add($date);
+        if (false !== $list) {
+            echo $this->ajax('1', "推荐成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "推荐失败", $name, "", "");
+        }
+    }
     /*
      * @功能：禁用赛事
      * @时间：20150422
@@ -271,21 +292,25 @@ class DbGameAction extends CommonAction
         Cookie::set('_currentUrl_', __SELF__);
         $this->display();
     }
+
     /*
      * @功能：添加分组页面
      * @时间：20150422
      */
-    public function group_add(){
-        $this->assign('game_id',$_GET['game_id']);
+    public function group_add()
+    {
+        $this->assign('game_id', $_GET['game_id']);
         $this->display();
     }
+
     /*
      * @功能：添加赛事分组
      * @时间：20150422
      */
-    public function group_insert(){
+    public function group_insert()
+    {
         $model = D('OpGameGroup');
-        $name="group";
+        $name = "group";
         if (false === $model->create()) {
             $this->error($model->getError());
         }
@@ -296,16 +321,55 @@ class DbGameAction extends CommonAction
             echo $this->ajax('0', "添加失败", $name, "", "closeCurrent");
         }
     }
+
     /*
-     * @功能：添加分组页面
+     * @功能：编辑分组页面
      * @时间：20150422
      */
-    public function group_edit(){
-        M('OpGameGroup')->where('id='.$_GET['id'])->find();
-
-        $this->assign('game_id',$_GET['game_id']);
+    public function group_edit()
+    {
+        $vo = M('OpGameGroup')->where('id=' . $_GET['id'])->find();
+        $this->assign('vo', $vo);
         $this->display();
     }
+
+    /*
+     * @功能：赛事分组更新
+     * @时间：20150422
+     */
+    function group_update()
+    {
+        $name = 'group';
+        $model = D('OpGameGroup');
+        if (false === $model->create()) {
+            $this->error($model->getError());
+        }
+        $list = $model->save();
+        if ($list !== false) {
+            echo $this->ajax('1', "更新成功", $name, "", "closeCurrent");
+        } else {
+            echo $this->ajax('0', "更新失败", $name, "", "closeCurrent");
+        }
+    }
+
+    /*
+     * @功能：赛事分组删除
+     * @时间：20150422
+     */
+    public function group_del()
+    {
+        $name = 'group';
+        $model = D('OpGameGroup');
+        $pk = $model->getPk();
+        $data[$pk] = array('in', $_POST['ids']);
+        $result = $model->where($data)->delete();
+        if (false !== $result) {
+            echo $this->ajax('1', "删除成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "删除失败", $name, "", "");
+        }
+    }
+
     /*
      * @功能：推荐赛事
      * @时间：20150422

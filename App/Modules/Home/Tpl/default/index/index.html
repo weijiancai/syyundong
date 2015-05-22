@@ -57,8 +57,8 @@
 <div class="tab-content tabs-body">
 <div class="tab-pane active" id="findGame">
     <form method="get" action="__APP__/Game">
-        <input type="hidden" value="all" name="provinceId">
-        <input type="hidden" value="all" name="cityId">
+        <!--<input type="hidden" value="all" name="provinceId">
+        <input type="hidden" value="all" name="cityId">-->
         <table>
             <tbody>
             <tr>
@@ -215,11 +215,11 @@
             <tr>
                 <th>比赛日期</th>
                 <td>
-                    <label class="radio inline"><input type="radio" value="all" checked="checked" name="timeType"
+                    <label class="radio inline"><input type="radio" value="all" checked="checked" name="date"
                                                        data-selector="eventDate"><span>全部</span></label>
-                    <label class="radio inline"><input type="radio" value="week" name="timeType"
+                    <label class="radio inline"><input type="radio" value="week" name="date"
                                                        data-selector="eventDate"><span>未来一周</span></label>
-                    <label class="radio inline"><input type="radio" value="month" name="timeType"
+                    <label class="radio inline"><input type="radio" value="month" name="date"
                                                        data-selector="eventDate"><span>未来一月</span></label>
                 </td>
             </tr>
@@ -242,9 +242,9 @@
     </form>
 </div>
 <div class="tab-pane" id="findActivity">
-    <form method="get" action="/activitycommon/search">
-        <input type="hidden" value="all" name="provinceId">
-        <input type="hidden" value="all" name="cityId">
+    <form method="get" action="__APP__/Activity">
+        <!--<input type="hidden" value="all" name="provinceId">
+        <input type="hidden" value="all" name="cityId">-->
         <table>
             <tbody>
             <tr>
@@ -393,11 +393,11 @@
             <tr>
                 <th>活动日期</th>
                 <td style="position: relative;z-index: 200;">
-                    <label class="radio inline"><input type="radio" value="all" checked="checked" name="timeType"
+                    <label class="radio inline"><input type="radio" value="all" checked="checked" name="date"
                                                        data-selector="eventDate"><span>全部</span></label>
-                    <label class="radio inline"><input type="radio" value="week" name="timeType"
+                    <label class="radio inline"><input type="radio" value="week" name="date"
                                                        data-selector="eventDate"><span>未来一周</span></label>
-                    <label class="radio inline"><input type="radio" value="month" name="timeType"
+                    <label class="radio inline"><input type="radio" value="month" name="date"
                                                        data-selector="eventDate"><span>未来一月</span></label>
                 </td>
             </tr>
@@ -414,9 +414,9 @@
     </form>
 </div>
 <div class="tab-pane" id="findVenues">
-    <form method="get" action="/venue/search">
-        <input type="hidden" value="all" name="provinceId">
-        <input type="hidden" value="all" name="cityId">
+    <form method="get" action="__APP__/Venue">
+        <!--<input type="hidden" value="all" name="provinceId">
+        <input type="hidden" value="all" name="cityId">-->
         <table>
             <tbody>
             <tr>

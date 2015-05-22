@@ -19,9 +19,11 @@
                                     </td>
                                 </tr>-->
                                 <tr>
-                                    <th valign="top"><i class="icon16 icon16-search-items"></i>项目：<input type="hidden" data-selector="itemsValue" value="all" name="sportTypeId"></th>
+                                    <th valign="top"><i class="icon16 icon16-search-items"></i>项目：
+                                        </th>
                                     <td valign="top">
                                         <div data-selector="itemsList" class="item-panel" id="sportTypePanel">
+                                            <input type="hidden" data-selector="itemsValue" value="all" name="sportTypeId"/>
                                             <dl>
                                                 <?php $sport  = D('Public/Index')->sport_top();?>
                                                 <dt>
@@ -256,8 +258,8 @@
     <input type="hidden" id="state_over" name="statusOver" value="<{$_REQUEST['statusOver']}>"/>
     <input type="hidden" id="orderByNew" name="orderByNew" value="<{$_REQUEST['orderByNew']}>"/>
     <input type="hidden" id="order" name="order" value="<{$_REQUEST['order']}>"/>
-    <!--<input type="hidden" id="province" name="province" value="<{$_REQUEST['province']}>"/>-->
-    <input type="hidden" id="sportType" name="sportType" value="<{$_REQUEST['sportType']}>"/>
+    <input type="hidden" id="region" name="region" value="<{$_REQUEST['region']}>"/>
+    <input type="hidden" id="sportTypeId" name="sportTypeId" value="<{$_REQUEST['sportTypeId']}>"/>
     <input type="hidden" id="date" name="date" value="<{$_REQUEST['date']}>"/>
     <input type="hidden" id="keyword" name="keyword" value="<{$_REQUEST['keyword']}>"/>
 </form>

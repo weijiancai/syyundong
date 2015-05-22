@@ -64,7 +64,7 @@ $(function () {
     });
     $sportTypePanel.find('dd a').click(function() {
         $(this).addClass('current');
-        submit('sportType', $(this).data('value'));
+        submit('sportTypeId', $(this).data('value'));
     });
 
     // 时间

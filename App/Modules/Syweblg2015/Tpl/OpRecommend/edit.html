@@ -19,18 +19,18 @@
 </script>
 <div class="page">
     <div class="pageContent">
-        <form method="post" action="__URL__/group_update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+        <form method="post" action="__URL__/update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
                 <input type="hidden" value="<{$vo.id}>" name="id">
                 <dl>
                     <dt>赛事名称：</dt>
-                    <dd><input name="" class="required" type="text" value="<{$vo['game_id']|getGameName}>" readonly/>
-                        <input name="game_id" class="required" type="hidden" value="<{$vo.game_id}>"/>
+                    <dd><input name="" class="required" type="text" value="<{$vo['gc_id']|getRecommendName=$vo['recommend_type']}>" readonly/>
+                        <input name="gc_id" class="required" type="hidden" value="<{$vo.gc_id}>"/>
                     <dd>
                 </dl>
                 <dl>
-                    <dt>分组名称：</dt>
-                    <dd><input name="group_name" class="required" type="text" value="<{$vo.group_name}>"/></dd>
+                    <dt>排序：</dt>
+                    <dd><input name="sort_num" class="required" type="text" value="<{$vo.sort_num}>"/></dd>
                 </dl>
                 <dl>
                     <dt>录入人：</dt>

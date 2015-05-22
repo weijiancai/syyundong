@@ -21,7 +21,7 @@ Class BaseAction extends Action{
         $date['source_des'] =$des;
         $date['input_date'] =date('Y-m-d H:i:s');
         $date['input_user'] =deCode(I('session.mark_id'));
-        D('DbTimeLine')->add($date);
+        D('DbTimeline')->add($date);
     }
     /*
     * 功能：活动项目

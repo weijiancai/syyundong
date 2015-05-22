@@ -12,8 +12,8 @@
                         <p class="account-right-name">
                             <strong><{$user.nick_name}></strong>
                         </p>
-                        <p class="account-tip"><{$user.signature}></p>
-                        <p><span class="account-tip">运动喜好：路跑  肚皮舞</span></p>
+                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
+                        <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
                         <div class="alpha-bg"></div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                                 <tr>
                                     <th>证件类型：</th>
                                     <td>
-                                        <select name="certificateType" data-selector="certificateType" class="span3">
+                                        <select name="certificate_type" data-selector="certificate_type" class="span3">
                                             <option value="">选择证件类型</option>
                                             <option <eq name="user.certificate_type" value="身份证">selected=selected</eq>value="身份证">身份证</option>
                                             <option <eq name="user.certificate_type" value="军官证">selected=selected</eq>value="军官证">军官证</option>
