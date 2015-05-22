@@ -22,24 +22,13 @@
 
 <div class="page">
     <div class="pageHeader">
-        <form onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+        <form onsubmit="return navTabSearch(this);" action="__URL__/group" method="post">
             <div class="searchBar">
                 <table>
                     <tr>
-                        <td>名称：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium" size="10">&nbsp;&nbsp;
+                        <td>分组名称：<input type="text" name="group_name" value="<{$_REQUEST['group_name']}>" class="medium" size="10">&nbsp;&nbsp;
                         </td>
-                        <td>申请电话：<input type="text" name="apply_phone" value="<{$_REQUEST['apply_phone']}>"
-                                        class="medium" size="10">&nbsp;&nbsp;</td>
-                        <td>类别：<select name="sport_id" id="sport_id">
-                            <option value="">请选择</option>
-                            <volist name="dzSport" id="vo">
-                                <option value="<{$vo.id}>"
-                                <eq name="_REQUEST.sport_id" value="$vo.id">selected=selected</eq>
-                                ><{$vo.name}></option>
-                            </volist>
-                        </select>&nbsp;<select name="sport_sid" id="sport_sid">
-                            <option value="">请选择</option>
-                        </select></td>
+                        <input type="hidden" name="id" value="<{$_GET['id']}>">
                         <td>
                             <button type="submit">查询</button>
                         </td>
@@ -52,8 +41,8 @@
     <div class="pageContent">
         <div class="panelBar">
             <ul class="toolBar">
-                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="700" height="600" rel="vadd"><span>新增</span></a></li>
-                <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
+                <li><a class="add" href="__URL__/group_add/game_id/<{$_GET['id']}>" target="dialog" mask="true" width="300" height="300" rel="vadd"><span>新增</span></a></li>
+                <li><a class="edit" href="__URL__/group_edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
                        width="700" height="600" rel="vedit"><span>修改</span></a></li>
                 <li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
                        class="delete"><span>删除</span></a></li>
@@ -63,16 +52,10 @@
             <thead>
             <tr>
                 <th width="2%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
-                <th width="8%" align="center">名称</th>
-                <th width="8%" align="center">类别</th>
-                <th width="8%" align="center">赛事发起</th>
-                <th width="4%" align="center">人数</th>
-                <th width="4%" align="center">报名费</th>
-                <th width="4%" align="center">联系方式</th>
-                <th width="5%" align="center">申请人</th>
-                <th width="8%" align="center">申请电话</th>
-                <th width="4%" align="center">详情</th>
-                <th width="3%" align="center">状态</th>
+                <th width="8%" align="center">赛事名称</th>
+                <th width="8%" align="center">分组名称</th>
+                <th width="8%" align="center">录入人</th>
+                <th width="4%" align="center">录入时间</th>
                 <th width="4%" align="center">操作</th>
             </tr>
             </thead>
@@ -82,24 +65,11 @@
             <volist id="vo" name="list">
                 <tr target="sid_node" rel="<{$vo['id']}>">
                     <td height="25px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
-                    <td><{$vo.name}></td>
-                    <td><{$vo['sport_id']|getSportName}>
-                        <if condition="$vo.sport_sid neq null">
-                            -><{$vo['sport_sid']|getSportName}>
-                        </if>
-                    </td>
-                    <td><{$vo['sponsor']}></td>
-                    <td><{$vo['limit_count']}></td>
-                    <td><{$vo['cost']}></td>
-                    <td><{$vo['phone']}></td>
-                    <td><{$vo['apply_name']}></td>
-                    <td><{$vo['apply_phone']}></td>
-                    <td><a href="__URL__/detail/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600" rel="detail">详情</a><span style="color:red">|</span>
-                        <a href="__URL__/group/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600" rel="group">分组</a></td>
-                    <td><{$vo['is_verify']|getStatus}></td>
-                    <td><{$vo['is_verify']|showStatus=$vo['id'],'navTabAjaxDone','审核','禁用'}><span style="color:red">|</span>
-                        <a href="__URL__/recommendid/<{$vo['id']}>" target="ajaxTodo" style="text-decoration:none;">推荐</a>
-                    </td>
+                    <td><{$vo['game_id']|getGameName}></td>
+                    <td><{$vo['group_name']}></td>
+                    <td><{$vo['input_user']}></td>
+                    <td><{$vo['input_date']}></td>
+                    <td><a href="__URL__/group_edit/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600" rel="detail">编辑</a></td>
                 </tr>
             </volist>
 

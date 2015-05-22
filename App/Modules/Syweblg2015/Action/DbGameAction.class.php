@@ -107,17 +107,20 @@ class DbGameAction extends CommonAction
             echo $this->ajax('0', "更新失败", $name, "", "closeCurrent");
         }
     }
+
     /*
      * @功能：赛事删除
      * @时间：20150422
      */
-    public function delAll(){
+    public function delAll()
+    {
         $model = D('DbGame');
-        $pk=$model->getPk ();
-        $data[$pk]=array('in', $_POST['ids']);
+        $pk = $model->getPk();
+        $data[$pk] = array('in', $_POST['ids']);
         $model->where($data)->delete();
-        echo $this->ajax('1',"删除成功",$name,"","");
+        echo $this->ajax('1', "删除成功", $name, "", "");
     }
+
     /*
      * @功能：赛事分类
      * @时间：20150422
@@ -139,34 +142,40 @@ class DbGameAction extends CommonAction
         $data = D('DzSport')->field('id,name')->where($where)->select();
         echo json_encode($data);
     }
+
     /*
     * @功能：赛事其他详细信息
     * @时间：20150422
     */
-    public function detail(){
-        $id =$_GET['id'];
-        $list =  D('DbGame')->where('id='.$id)->find();
-        $this->assign('vo',$list);
+    public function detail()
+    {
+        $id = $_GET['id'];
+        $list = D('DbGame')->where('id=' . $id)->find();
+        $this->assign('vo', $list);
         $this->display();
     }
+
     /*
     * @功能：赛事其他详细信息编辑页面
     * @时间：20150422
     */
-    public function other_edit(){
-        $id =$_GET['id'];
-        $field =$_GET['field'];
-        $list =  D('DbGame')->where('id='.$id)->find();
-        $this->assign('vo',$list);
-        $this->assign('field',$field);
+    public function other_edit()
+    {
+        $id = $_GET['id'];
+        $field = $_GET['field'];
+        $list = D('DbGame')->where('id=' . $id)->find();
+        $this->assign('vo', $list);
+        $this->assign('field', $field);
         $this->display();
     }
+
     /*
     * @功能：赛事其他详细信息编辑页面
     * @时间：20150422
     */
-    public function other_update(){
-        $name="detail";
+    public function other_update()
+    {
+        $name = "detail";
         $model = D('DbGame');
         if (false === $model->create()) {
             $this->error($model->getError());
@@ -178,6 +187,7 @@ class DbGameAction extends CommonAction
             echo $this->ajax('0', "更新失败", $name, "", "closeCurrent");
         }
     }
+
     /*
      * @功能：禁用赛事
      * @时间：20150422
@@ -217,13 +227,88 @@ class DbGameAction extends CommonAction
     }
 
     /*
-     * @功能：ajax上传图片
+     * @功能：赛事分组
      * @时间：20150422
      */
+    public function group()
+    {
+        $model = D('OpGameGroup');
+        $id = $_REQUEST['id'];
+        $map['game_id'] = array('eq', $id);
+        if ($_REQUEST ['group_name']) {
+            $map['group_name'] = array('like', "%{$_REQUEST['group_name']}%");
+        }
+        $count = $model->where($map)->count();
+        if ($count > 0) {
+            import("ORG.Util.Page");
+            if (!empty ($_REQUEST ['listRows'])) {
+                $listRows = $_REQUEST ['listRows'];
+            } else {
+                $listRows = '';
+            }
+            $p = new Page ($count, $listRows);
+            $pageNum = empty($_REQUEST['numPerPage']) ? C('PAGE_LISTROWS') : $_REQUEST['numPerPage'];
+            $voList = $model->relation(true)->where($map)->order($order)->limit($pageNum)->page($_REQUEST[C('VAR_PAGE')])->select();
+            //分页跳转的时候保证查询条件
+            foreach ($map as $key => $val) {
+                if (!is_array($val)) {
+                    $p->parameter .= "$key=" . urlencode($val) . "&";
+                }
+            }
+            $page = $p->show();
+            $this->assign('list', $voList);
+            $this->assign('sort', $sort);
+            $this->assign('order', $order);
+            $this->assign('sortImg', $sortImg);
+            $this->assign('sortType', $sortAlt);
+            $this->assign("page", $page);
 
-
+        }
+        $this->assign('totalCount', $count);
+        $pageNum = empty($_REQUEST['numPerPage']) ? C('PAGE_LISTROWS') : $_REQUEST['numPerPage'];
+        $this->assign('numPerPage', $pageNum);
+        $this->assign('currentPage', !empty($_REQUEST[C('VAR_PAGE')]) ? $_REQUEST[C('VAR_PAGE')] : 1);
+        Cookie::set('_currentUrl_', __SELF__);
+        $this->display();
+    }
     /*
-     *	推送信息
+     * @功能：添加分组页面
+     * @时间：20150422
+     */
+    public function group_add(){
+        $this->assign('game_id',$_GET['game_id']);
+        $this->display();
+    }
+    /*
+     * @功能：添加赛事分组
+     * @时间：20150422
+     */
+    public function group_insert(){
+        $model = D('OpGameGroup');
+        $name="group";
+        if (false === $model->create()) {
+            $this->error($model->getError());
+        }
+        $list = $model->add();
+        if ($list !== false) {
+            echo $this->ajax('1', "添加成功", $name, "", "closeCurrent");
+        } else {
+            echo $this->ajax('0', "添加失败", $name, "", "closeCurrent");
+        }
+    }
+    /*
+     * @功能：添加分组页面
+     * @时间：20150422
+     */
+    public function group_edit(){
+        M('OpGameGroup')->where('id='.$_GET['id'])->find();
+
+        $this->assign('game_id',$_GET['game_id']);
+        $this->display();
+    }
+    /*
+     * @功能：推荐赛事
+     * @时间：20150422
      */
     public function  pull()
     {
