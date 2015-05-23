@@ -319,7 +319,8 @@ a:hover, a:focus {
 }
 
 .span1, .row .span1 {
-    width: 65px
+    width: 65px;
+    font-size:14px
 }
 
 .offset24 {
@@ -674,7 +675,8 @@ a:hover, a:focus {
 }
 
 p {
-    margin: 0 0 10px
+    margin: 0 0 10px;
+    margin-left:380px;
 }
 
 .lead {

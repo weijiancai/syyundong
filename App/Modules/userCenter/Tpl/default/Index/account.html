@@ -14,7 +14,7 @@
                             <strong><{$user.nick_name}></strong>
                         </p>
 
-                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
+                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$user.signature}></if></p>
                         <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
                         <div class="alpha-bg"></div>
                     </div>
@@ -36,80 +36,50 @@
             <div class="span16">
                 <div class="container ucenter-container">
                     <div class="main-block clearfix">
-                        <h4 class="main-title">账号设置 </h4>
+                        <h4 class="main-title">账号设置  <a href="/userCenter/accountEdit/<{$user.id}>" class="btn pull-right">编辑账号</a></h4>
+
                         <div class="account-set-wrap clearfix">
                             <div class="account-thumb-wrap pull-left">
                   <span id="" class="avator-120">
                       <div id="nickthumb" class="nickthumb">
-                          <if condition="$list['image'] eq null">
+                          <if condition="$user['user_head'] eq null">
                               <img name="user-head" src="/Public/images/default/web_pic.jpg" alt="">
                               <else/>
-                              <img src="<{$list['image']|getUserImage}>"/>
+                              <img src="<{$user['id']|getUsersImage}>"/>
                           </if>
 
                   </div>
                   </span>
-                                <div class="nickthubm-wrap">
 
-                                    <button type="button" class="btn" id="btnSetHeadIcon">设置头像</button>
-
-                                    <input type="file" class="file" id="fileupload" name="file" value="设置头像" style="position: static;display: none;">
-
-                                    <span id="show_mes" style="color:Red"></span>
-                                    <input type="hidden" value="<{$vo.image}>" name="user_head" id="user_head">
-                                    <input type="hidden" value="user" id="path">
-                                </div>
 
                             </div>
                             <div class="account-content">
                                 <p>
                                     <span class="p-ttl">昵称：</span>
-                                    <span><{$list.nick_name}></span>
+                                    <span><{$user.nick_name}></span>
                                 </p>
-                                <!--<p>
-                                    <span class="p-ttl">邮箱：</span>
-                                    <button class="btn btn-success" disabled>请在个人资料中编辑邮箱</button>
-                                </p>
-                                <p>
-                                    <span class="p-ttl">手机：</span>
-                                    <span>13521979127</span>
-                                    <button class="btn btn-success" disabled>已绑定</button>
-                                </p>-->
-
                                 <p>
                                     <span class="p-ttl">密码：</span>
                                     <span>******</span>
                                     <!-- 需要在data-url中传输登录的url -->
-                                    <button class="btn" id="changePassword">修改密码</button>
+                                    <a class="btn" href="/userCenter/ResetPwd">修改密码</a>
                                     <br>
                                     <span class="text-tip">建议您启动全部安全设置，以保障账户及资金安全</span>
                                 </p>
 
                                 <p data-selector="perfer-show">
                                     <span class="p-ttl">个人签名：</span>
-                                    <span class="prefer-txt">一句话介绍一下自己吧，让别人更了解你</span>
-
-                                    <!--<button class="btn pull-right" name="" data-selector="edit-perfer-btn">编辑</button>-->
+                                    <span class="prefer-txt"><{$user.signature}></span>
                                 </p>
-                                <form action="/userCenter/account/changeSignature" method="post">
-                                    <p class="hide" data-selector="perfer-edit">
-                                        <span class="p-ttl">个人签名：</span>
-                                        <input type="text" name="signature" id="signature" class="prefer-txt" maxlength="50" value="一句话介绍一下自己吧，让别人更了解你">
-                                        (最多50字)
-                                        <button class="btn btn-warning pull-right" name="" data-selector="submit-perfer-btn">确定</button>
-                                    </p>
-                                </form>
                                 <div class="interest-col clearfix">
                                     <span class="p-ttl">运动喜好：</span>
                                     <ul class="clearfix" data-selector="interest-col">
-                                        <li>
-                                            <img alt="" src="http://static.wisdom-china.cn/iyuesai/images/interest/1.jpg">
-                                            <!-- <img alt="" src="http://static.wisdom-china.cn/iyuesai/images/interest/1.jpg"> -->
-                                        </li>
-                                        <li>
-                                            <img alt="" src="http://static.wisdom-china.cn/iyuesai/images/interest/27.jpg">
-                                            <!-- <img alt="" src="http://static.wisdom-china.cn/iyuesai/images/interest/27.jpg"> -->
-                                        </li>
+                                        <volist name="fav" id="vo">
+                                            <li>
+                                                <img alt="<{$vo.name}>" src="<{$vo.local_url}>">
+                                            </li>
+                                         </volist>
+
                                     </ul>
                                     <!--<button class="btn pull-right" data-url="/userCenter/account/interest" data-action="/userCenter/account/changeinterest" data-params="{'userId':'123'}" data-selector="edit-interest">编辑</button>-->
                                 </div>
@@ -123,24 +93,7 @@
     </div>
 </div>
 
-<div id="modifyPasswordDialog" style="display: none;">
-    <form id="validatePassForm" method="post" action="/userCenter/account/changePassword">
-        <p>
-            <span class="span1">原始密码</span>
-            <input type="password" name="oldPassword" validate-title="原始密码" validate-rules="[['required']]">
-        </p>
 
-        <p>
-            <span class="span1">新密码</span>
-            <input type="password" name="newPassword" id="newPassword" validate-title="新密码" validate-rules="[['required']]">
-        </p>
-
-        <p>
-            <span class="span1">确认密码</span>
-            <input type="password" name="newPassword1" id="newPassword1"validate-title="确认密码">
-        </p>
-    </form>
-</div>
 
 <script type="text/javascript" src="/Public/js/pages/account.js"></script>
 <script src="__PUBLIC__/js/syweb/jquery.form.js" type="text/javascript"></script>

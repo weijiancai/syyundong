@@ -85,13 +85,14 @@
                 <dl>
                     <dt>录入人：</dt>
                     <dd><input name="" readonly class="required" type="text"
-                               value="<{$vo['input_user']|getUserName}>"></dd>
+                               value="<{$_SESSION[C('USER_AUTH_KEY')]|getUserName}>">
+                        <input name="input_user" value="<{$_SESSION[C('USER_AUTH_KEY')]}>" type="hidden"></dd>
                 </dl>
                 <dl>
                     <dt>录入时间：</dt>
-                    <dd><input type="text" name="reg_begin_date" value="<{$vo.input_date}>" class="date"
-                               dateFmt="yyyy-MM-dd HH:mm:ss" readonly="true"/>
-                        <a class="inputDateButton" href="javascript:;">选择</a></dd>
+                    <dd><input type="text" name="" class="" readonly
+                               value="<?php echo date('Y-m-d H:i:s')?>"/>
+                        <input name="input_date" value="<?php echo date('Y-m-d H:i:s')?>" type="hidden"></dd>
                 </dl>
                 <dl class="nowrap">
                     <dt>图片:</dt>

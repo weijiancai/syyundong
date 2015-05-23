@@ -102,4 +102,78 @@ $(function () {
             }
         }).width(350).showModal();
     });
+    //兴趣爱好取值
+    $("li").click(function () {
+        var name = $(this).data('name');
+        if($(this).hasClass('current')){
+            $(this).removeClass('current');
+            var str  = $('#interest').val()
+            $('#interest').val(str.replace($(this).data('id')+',',""));
+        }else{
+            $(this).addClass('current');
+            $('#interest').val($('#interest').val()+ $(this).data('id') + ',');
+        }
+        $('#cked-num').html($('.interest-list .current').length);
+    });
+
+    //账户设置
+    var $form = $('#accountForm');
+    jQuery.validator.addMethod("stringCheck", function (value, element) {
+        return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);
+    }, "只能包括中文字、英文字母、数字和下划线");
+
+    jQuery.validator.addMethod("byteRangeLength", function (value, element, param) {
+        var length = value.length;
+        for (var i = 0; i < value.length; i++) {
+            if (value.charCodeAt(i) > 127) {
+                length++;
+            }
+        }
+        return this.optional(element) || ( length >= param[0] && length <= param[1] );
+    }, "请确保输入的值在3-15个字节之间(一个中文字算2个字节)");
+
+        $form.validate({
+            rules: {
+                nick_name: {
+                    required: true,
+                    stringCheck: true,
+                    byteRangeLength: [3, 15],
+                    remote: {
+                        url: "/userCenter/index/isExistNc",       //后台处理程序
+                        type: "post",                      //数据发送方式
+                        dataType: "json",                 //接受数据格式
+                        data: {                           //要传递的数据
+                            nickName: function () {
+                                return $("#nick_name").val();
+                            }
+                        }
+
+                    }
+                }
+            },
+            messages: {
+                nick_name: {
+                    required: "请填写昵称",
+                    stringCheck: "昵称只能包括中文字、英文字母、数字和下划线",
+                    byteRangeLength: "请确保昵称在3-15个字节之间(一个中文字算2个字节)",
+                    remote: $.validator.format("该昵称已存在！")
+                }
+            },
+            submitHandler: function (form) {
+                jQuery.ajax({
+                    type: "post",
+                    url: "/userCenter/index/accountEditSubmit/",
+                    data: $form.serialize(),
+                    success: function (result) {
+                        if (result == 1) {
+                            $.dialog.success('修改成功！');
+                            //    window.location.href="";
+                        } else if (result == 2) {
+                            $.dialog.error('修改失败！');
+                        }
+                    }
+                });
+            }
+        });
+
 });

@@ -180,15 +180,86 @@ class IndexAction extends Action {
      * @时间:20150408
      */
     public function account(){
-        $list  = M('DbUser')->where('id='.deCode(session('mark_id')))->find();
-        $this->assign('list',$list);
+        $user = D('DbUser')->field('id,user_head,nick_name,signature,interest')->where('id='.deCode(I('session.mark_id')))->find();
+        $model = New Model();
+        $sport = $model->query('select dz_sport.id,name,db_images.local_url from dz_sport left join db_images on dz_sport.image = db_images.id where dz_sport.sport_type =1 and dz_sport.level=2  and (dz_sport.id IN ('.$user['interest'].'))');
+        $this->assign('fav',$sport);
+        $this->assign('user',$user);
+        $this->display();
+    }
+    /*
+     * @功能：账号修改
+     * @时间:20150408
+     */
+    public function accountEdit(){
+        $user = D('DbUser')->field('id,nick_name,signature,interest,user_head')->where('id='.$_GET['id'])->find();
+        $user['interest'] =$user['interest'].",";
+        $this->assign('user',$user);
+        $this->FavouriteGame();
+        $this->display();
+    }
+    /*
+     * @时间:20150408
+     * @功能：个人资料编辑
+     */
+    public function accountEditSubmit(){
+
+        $date['nick_name'] = $_POST['nick_name'];
+        $date['user_head'] = $_POST['user_head'];
+        $date['interest'] = substr($_POST['interest'], 0, -1);
+        $date['signature'] = trim($_POST['signature']);
+        $result = D('DbUser')->where('id='.$_POST['id'])->save($date);
+        if(false!==$result){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    /*
+      * @功能：校验昵称是否存在
+      * @时间：20150419
+      */
+    public function isExistNc()
+    {
+        if (IS_POST) {
+            if (empty($_POST['nickName'])) {
+                echo 'false';
+            } else {
+                $date['nick_name'] = array('eq', trim($_POST['nickName']));
+                $date['id'] = array('neq', deCode(session('mark_id')));
+                $result = D('DbUser')->where($date)->count();
+                if ($result) {
+                    echo 'false';
+                } else {
+                    echo 'true';
+                }
+            }
+        } else {
+            echo false;
+        }
+    }
+    /*
+     * @功能：用户喜好
+     * @时间：20150501
+     */
+    public function FavouriteGame(){
+        $model = New Model();
+        $list  = $model->query('select dz_sport.id,name from dz_sport left join db_images on dz_sport.image = db_images.id where dz_sport.sport_type =1 and dz_sport.level=2 ');
+        $this->assign('fav',$list);
+    }
+    /*
+     * @功能：修改密码页面
+     * @时间:20150408
+     */
+    public function ResetPwd(){
         $this->display();
     }
     /*
      * @功能：修改密码
      * @时间:20150408
      */
-    public function ResetPwd(){
+    public function ResetPwdSubmit(){
 
+        $this->display();
     }
 }

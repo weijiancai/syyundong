@@ -45,7 +45,7 @@ class PublicAction extends Action
             //存储图片
             $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
             list($day,$name) = split ('[/]', $info[0]['savename']);
-            $date['size2_url'] = '/Public/upload/' . $path . $day.'/s_' . $name;
+            $date['size2_url'] = '/Public/upload/' . $path . '/'.$day.'/s_' . $name;
             $result = D('DbImages')->add($date);
             //打水印
             /* $Image = new Image();

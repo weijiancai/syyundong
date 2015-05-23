@@ -1,4 +1,4 @@
-<include file="Public@default:Public:top" />
+<include file="Public@default:Public:top"/>
 
 <div class="ucenter-page account-bg clearfix">
     <div class="container">
@@ -7,6 +7,7 @@
                 <div class="account-top">
                     <div class="account-thumb">
                         <img name="user-head" src="<{$user['id']|getUsersImage}>">
+
                         <div class="alpha-bg"></div>
                     </div>
                     <div class="account-right">
@@ -14,8 +15,14 @@
                             <strong><{$user.nick_name}></strong>
                         </p>
 
-                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
+                        <p class="account-tip">
+                            <if condition="$user.signature eq null">一句话介绍一下自己吧，让别人更了解你
+                                <else/>
+                                <{$user.signature}>
+                            </if>
+                        </p>
                         <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
+
                         <div class="alpha-bg"></div>
                     </div>
                 </div>
@@ -37,83 +44,75 @@
                 <div class="container ucenter-container">
                     <div class="main-block clearfix">
                         <h4 class="main-title">账号设置 </h4>
+
                         <div class="account-set-wrap clearfix">
                             <div class="account-thumb-wrap pull-left">
                   <span id="" class="avator-120">
                       <div id="nickthumb" class="nickthumb">
-                          <if condition="$list['image'] eq null">
+                          <if condition="$user['user_head'] eq null">
                               <img name="user-head" src="/Public/images/default/web_pic.jpg" alt="">
                               <else/>
-                              <img src="<{$list['image']|getUserImage}>"/>
+                              <img src="<{$user['id']|getUsersImage}>"/>
                           </if>
 
-                  </div>
+                      </div>
                   </span>
+
                                 <div class="nickthubm-wrap">
 
                                     <button type="button" class="btn" id="btnSetHeadIcon">设置头像</button>
 
-                                    <input type="file" class="file" id="fileupload" name="file" value="设置头像" style="position: static;display: none;">
+                                    <input type="file" class="file" id="fileupload" name="file" value="设置头像"
+                                           style="position: static;display: none;">
 
                                     <span id="show_mes" style="color:Red"></span>
-                                    <input type="hidden" value="<{$vo.image}>" name="user_head" id="user_head">
+
                                     <input type="hidden" value="user" id="path">
                                 </div>
 
                             </div>
                             <div class="account-content">
-                                <p>
-                                    <span class="p-ttl">昵称：</span>
-                                    <span><{$list.nick_name}></span>
-                                </p>
-                                <!--<p>
-                                    <span class="p-ttl">邮箱：</span>
-                                    <button class="btn btn-success" disabled>请在个人资料中编辑邮箱</button>
-                                </p>
-                                <p>
-                                    <span class="p-ttl">手机：</span>
-                                    <span>13521979127</span>
-                                    <button class="btn btn-success" disabled>已绑定</button>
-                                </p>-->
-
-                                <p>
-                                    <span class="p-ttl">密码：</span>
-                                    <span>******</span>
-                                    <!-- 需要在data-url中传输登录的url -->
-                                    <button class="btn" id="changePassword">修改密码</button>
-                                    <br>
-                                    <span class="text-tip">建议您启动全部安全设置，以保障账户及资金安全</span>
-                                </p>
-
-                                <p data-selector="perfer-show">
-                                    <span class="p-ttl">个人签名：</span>
-                                    <span class="prefer-txt">一句话介绍一下自己吧，让别人更了解你</span>
-
-                                    <button class="btn pull-right" name="" data-selector="edit-perfer-btn">编辑</button>
-                                </p>
-                                <form action="/userCenter/account/changeSignature" method="post">
-                                    <p class="hide" data-selector="perfer-edit">
-                                        <span class="p-ttl">个人签名：</span>
-                                        <input type="text" name="signature" id="signature" class="prefer-txt" maxlength="50" value="一句话介绍一下自己吧，让别人更了解你">
-                                        (最多50字)
-                                        <button class="btn btn-warning pull-right" name="" data-selector="submit-perfer-btn">确定</button>
+                                <form action="/userCenter/index/accountEditSubmit/" method="post" name="accountForm" id="accountForm">
+                                    <input type="hidden" value="<{$user.user_head}>" name="user_head" id="user_head">
+                                    <input type="hidden" value="<{$user.id}>" name="id">
+                                    <p>
+                                        <span class="p-ttl">昵称：</span>
+                                        <span><input type="text" value="<{$user.nick_name}>" name="nick_name"/></span>
                                     </p>
-                                </form>
-                                <div class="interest-col clearfix">
-                                    <span class="p-ttl">运动喜好：</span>
-                                    <ul class="clearfix" data-selector="interest-col">
-                                        <li>
-                                            <img alt="" src="http://static.wisdom-china.cn/iyuesai/images/interest/1.jpg">
-                                            <!-- <img alt="" src="http://static.wisdom-china.cn/iyuesai/images/interest/1.jpg"> -->
-                                        </li>
-                                        <li>
-                                            <img alt="" src="http://static.wisdom-china.cn/iyuesai/images/interest/27.jpg">
-                                            <!-- <img alt="" src="http://static.wisdom-china.cn/iyuesai/images/interest/27.jpg"> -->
-                                        </li>
-                                    </ul>
-                                    <button class="btn pull-right" data-url="/userCenter/account/interest" data-action="/userCenter/account/changeinterest" data-params="{'userId':'123'}" data-selector="edit-interest">编辑</button>
-                                </div>
 
+                                    <p data-selector="perfer-edit">
+                                        <span class="p-ttl">个人签名：</span>
+                                        <textarea name="signature" id="signature" class="prefer-txt" maxlength="50"
+                                                  value=""><{$user.signature}>
+                                        </textarea>
+                                        (最多50字)
+
+                                    </p>
+                                    <div class="interest-col clearfix">
+                                        <span class="p-ttl">运动喜好：</span>
+                                        <div id="interest-pop" class="interest-list-wrap clearfix" data-selector="interest-box" data-url="/userCenter/account/interest" data-params="{'userId':'123'}"><div id="NTGUID__4">
+
+                                            <input type="hidden" id="interest" name="interest" data-selector="interest-arr" value="<{$user.interest}>">
+                                            <ul class="interest-list clearfix" data-selector="interestData">
+
+                                                <volist name="fav" id="vo">
+                                                    <li data-id="<{$vo.id}>" data-name="<{$vo.name}>" class=
+                                                        <?php $arr = strtoarr($user['interest']);
+                                                            foreach($arr as $value){if($vo['id']==$value){echo 'current';}}?>
+                                                     >
+                                                        <img src="<{$vo.image}>">
+                                                        <h4><{$vo.name}></h4>
+                                                        <i class="interest-border"></i><i class="iconplus"></i>
+                                                        <i class="icontick"></i>
+                                                    </li>
+                                                </volist>
+                                            </ul>
+                                        </div>
+
+
+                                    </div>
+                                    <button type="submit"  class="btn btn-warning pull-right" name="" data-selector="submit-perfer-btn">确定</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -124,4 +123,5 @@
 </div>
 
 <script src="__PUBLIC__/js/syweb/jquery.form.js" type="text/javascript"></script>
-<include file="Public@default:Public:bottom" />
+<script type="text/javascript" src="/Public/js/pages/account.js"></script>
+<include file="Public@default:Public:bottom"/>
