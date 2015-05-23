@@ -79,7 +79,7 @@ class IndexAction extends Action {
              $where['sport_id'] = $_POST['source_type'];
         }
         $last = $_POST['last'];
-        $amount = $_POST['amount']+$_POST['last'];
+        $amount = $_POST['amount'];//+$_POST['last'];
         $list = D('VTopic')->where($where)->order($order)->limit($last, $amount)->select();
        echo json_encode($list);
 
@@ -160,7 +160,7 @@ class IndexAction extends Action {
         $date['reply_to'] = $_POST['reply_to'];
         $date['user_id'] = deCode(I('session.mark_id'));
         $date['source_id'] = $_POST['source_id'];
-        $date['source_type'] = 1;
+        $date['source_type'] = $_POST['source_type'];
         $date['input_date'] = date('Y-m-d H:i:s');
         $result = $model->add($date);
         if (false !== $result) {

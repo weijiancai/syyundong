@@ -4,26 +4,26 @@
     <div class="container">
         <div class="row">
             <div class="span2 socila-span2">
-                <div data-url="/game/typelist" data-selector="social-nav-box" class="side-nav"><div id="NTGUID__5">
-                    <h6>赛友圈分类</h6>
-                    <div data-selector="socialNav">
-                        <div id="NTGUID__5NDTGUID__a">
-                       <volist name="sport" id="vo">
-                        <dl>
-                            <dt data-id="<{$vo.id}>"><{$vo.name}></dt>
-                            <dd>
-                             <volist name="vo.child" id="v">
-                                <a target="_blank" data-id="<{$v.id}>" href="/Friends/branch?sportTypeId=<{$v.id}>" class="normal">
-                                   <{$v.name}>
-                                </a>
+                <div data-url="/game/typelist" data-selector="social-nav-box" class="side-nav">
+                    <div id="NTGUID__5">
+                        <h6>赛友圈分类</h6>
+                        <div data-selector="socialNav">
+                            <div id="NTGUID__5NDTGUID__a">
+                                <volist name="sport" id="vo">
+                                    <dl>
+                                        <dt data-id="<{$vo.id}>"><{$vo.name}></dt>
+                                        <dd>
+                                            <volist name="vo.child" id="v">
+                                                <a target="_blank" data-id="<{$v.id}>" href="/Friends/branch?sportTypeId=<{$v.id}>" class="normal">
+                                                    <{$v.name}>
+                                                </a>
+                                            </volist>
+                                        </dd>
+                                    </dl>
                                 </volist>
-                            </dd>
-                        </dl>
-                        </volist>
+                            </div>
+                        </div>
                     </div>
-
-                    </div>
-                </div>
                 </div>
             </div>
             <div class="span10">
@@ -32,150 +32,21 @@
                         <a class="tab current" href="/Friends/index">热门话题</a>
                         <a class="tab" href="/Friends/selftopic">关注话题</a>
                     </div>
-<input type="hidden" value="" id="source_type">
+                    <input type="hidden" value="" id="source_type">
                     <!--热门帖子-->
                     <div id="hotTopicTabs" class="social-filter clearfix">
                         <a data-value="" href="javascript:;" data-selector="dateItem" class="current">全部</a>
                         <volist name="f_sport" id="vo">
                             <a data-value='<{$vo.id}>' href="javascript:;" data-selector="dateItem" ><{$vo.name}></a>
                         </volist>
-
                     </div>
-<script id="list" type="text/html">
-    {{if topic_image}}
-    <li class="topicli clearfix" style="display: list-item;">
 
-        <div class="social-topic-thumb pull-left">
-            <a target="_blank" href="/Friends/topic/{{id}}">
-                <img src="{{topic_image}}">
-            </a>
-        </div>
-
-        <div class="social-topic-content">
-            <dl>
-                <dt>
-                    <a target="_blank" href="/Friends/topic/{{id}}">{{content}}</a>
-                </dt>
-                <dd>
-                    <a target="_blank" href="/Friends/topic/{{id}}">{{content}}</a>
-                </dd>
-            </dl>
-            <div class="social-topic-feature">
-                <div class="social-topic-author">
-                    <a target="_blank" href="/friend/passport_90481/timeline">
-                        <img title="{{nick_name}}" src="{{user_image}}">
-                    </a>
-                    <h6>
-                        <a target="_blank" href="/friend/passport_90481/timeline">
-                            {{nick_name}}
-                        </a>
-                    </h6>
-
-                    <p>
-                        发表在<a target="_blank" href="/friends/tag/307" title="{{game_name}}">{{game_name}}</a>
-                    </p>
-
-
-                </div>
-                <div class="topic-bottom pull-right">
-                    <!--
-
-                    -->
-                    <a data-selector="comment-btn" href="javascript:void(0);">
-                        <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">28</span>
-                    </a>
-                    <a data-params="{'id':10873}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">19</span></a>
-                </div>
-            </div>
-        </div>
-        <!-- 评论框 开始 -->
-        <div class="comment-pop clearfix hide">
-            <div class="comment-form">
-                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.5891417272134298">
-                    <input type="hidden" value="10873" name="topicId">
-                    <input type="hidden" value="passport_90481" name="userId">
-                    <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
-                    <button class="btn btn-warning pull-right" type="submit">评论</button>
-                </form>
-            </div>
-            <div data-params="{'topicId':10873, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list"></div>
-            <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
-                <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10873">查看全部评论</a>
-            </div>
-        </div>
-        <!-- 评论框 结束 -->
-    </li>
-    {{else}}
-    <li class="topicli clearfix" style="display: list-item;">
-
-        <div class="social-topic-content">
-            <dl>
-                <dt>
-                    <a href="/Friends/topic/{{id}}" target="_blank">{{content}}</a>
-                </dt>
-                <dd>
-                    <a href="/Friends/topic/{{id}}" target="_blank">{{content}}</a>
-                </dd>
-            </dl>
-            <div class="social-topic-feature">
-                <div class="social-topic-author">
-                    <a href="/friend/passport_90398/timeline" target="_blank">
-                        <img src="{{user_image}}" title="{{nick_name}}">
-                    </a>
-                    <h6>
-                        <a href="/friend/passport_90398/timeline" target="_blank">
-                            {{nick_name}}
-                        </a>
-                    </h6>
-
-                    <p>
-                        发表在<a title="{{game_name}}" href="/friends/tag/305" target="_blank">{{game_name}}</a>
-                    </p>
-
-
-                </div>
-                <div class="topic-bottom pull-right">
-                    <!--
-
-                    -->
-                    <a href="javascript:void(0);" data-selector="comment-btn">
-                        <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">31</span>
-                    </a>
-                    <a href="javascript:;" data-selector="doPraise" data-url="/topic/comment-like" data-params="{'id':10771}"><i class="icon20 icon20-praise "></i>赞<span class="text-error">26</span></a>
-                </div>
-            </div>
-        </div>
-        <!-- 评论框 开始 -->
-        <div class="comment-pop clearfix hide">
-            <div class="comment-form">
-                <form action="/topic/publishTopicComment" method="post" iyuesai-plugins-valid="0.7230868407059461">
-                    <input type="hidden" name="topicId" value="10771">
-                    <input type="hidden" name="userId" value="passport_90398">
-                    <input class="comment-txt" type="text" name="content" validate-title="评论内容" validate-rules="[['required'],['reallength',{max:140}]]">
-                    <button type="submit" class="btn btn-warning pull-right">评论</button>
-                </form>
-            </div>
-            <div class="comment-list" data-url="/topic/getTopicComment" data-reply-action="/topic/publishTopicComment" data-params="{'topicId':10771, 'pageNum':1, 'pageSize':5}"></div>
-            <div data-selector="commentMore" style="display:none;margin:10px -10px -10px -10px;">
-                <a href="/Friends/topic/{{id}}" class="btn btn-block btn-warning" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" target="_blank">查看全部评论</a>
-            </div>
-        </div>
-        <!-- 评论框 结束 -->
-    </li>
-    {{/if}}
-</script>
                     <!-- 话题 开始 -->
                     <div data-like-action="/topic/comment-like" data-reply-action="/topic/publishTopicComment" data-comment-action="/topic/publishTopicComment" data-url="" data-star="true" data-selector="hot-topic-box" class="tab-content-wrap"><style>#NTGUID__6 .comment-pop{      background: #f5f5f5;      padding: 0 10px 10px 10px;      border-radius: 5px;      -moz-border-radius: 5px;      -webkit-border-radius: 5px;      zoom:1;      margin-top: 10px;      position: relative;    }#NTGUID__6 .comment-pop:after{      content: "";      width: 0;      height: 0;      border: transparent solid 8px;      position: absolute;      border-bottom-color: #f5f5f5;      right: 95px;      top: -16px;    }#NTGUID__6 .topicli{      display: none;    }#NTGUID__6 .comment-list dl{      border-bottom: 1px dotted #E0E0E0;      padding: 15px 0;      display: none;    }#NTGUID__6 .comment-list dl dt{      float: left;      width: 50px;      overflow: hidden;    }#NTGUID__6 .comment-list dl dt img{      border-radius: 50%;      -webkit-border-radius: 50%;      -moz-border-radius: 50%;      width: 40px;      height: 40px;    }#NTGUID__6 .comment-list dl dd{      display: block;      margin-left: 60px;    }#NTGUID__6 .comment-list dl dd .user-header{      display: block;      font-size: 14px;      margin-bottom: 5px;    }#NTGUID__6 .comment-list dl dd .user-header table{      width: 100%;      margin: 0;    }#NTGUID__6 .comment-list dl dd .user-header th{      text-align: left;      font-weight: normal;    }#NTGUID__6 .comment-list dl dd .user-header td{      text-align: right;    }#NTGUID__6 .comment-list dl dd .user-header span{      color: #C3C3C3;      margin-left: 20px;      font-size: 12px;      font-weight: normal;    }#NTGUID__6 .comment-list dl dd .user-header a{      color: #555;    }#NTGUID__6 .comment-list dl dd .comment-content{      margin: 0;      padding: 0;      font-size: 14px;      line-height: 22px;      overflow: hidden;      width: 90%;      color: #333;      font-weight: normal;      text-shadow: none;      -webkit-text-shadow: none;      -moz-text-shadow: none;    }#NTGUID__6 .comment-list .comment-textarea{      display: block;      width: 96%;      resize: none;    }#NTGUID__6 .comment-list .btn-warning{      padding-left: 20px;      padding-right: 20px;    }#NTGUID__6 .comment-list p{      margin: 0;      padding: 0;    }#NTGUID__6 .comment-list .reply-panel p a{      font-size: 14px;      color: #999;    }#NTGUID__6 .comment-list .reply-panel .reply-form{      display: none;      position: relative;      border: 1px solid #F5A623;      margin-top: 5px;      padding: 5px 0;      background: #fff;      border-radius: 4px;      -webkit-border-radius: 4px;      -moz-border-radius: 4px;    }#NTGUID__6 .comment-list .reply-panel .reply-form i.icon-up{      display: inline-block;      width:0;      height:0;      border-width:6px;      border-color:transparent transparent #fff transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 42px;      top: -13px;      z-index: 5;    }#NTGUID__6 .comment-list .reply-panel .reply-form .btn{      position: absolute;      right: 5px;      top: 5px;    }#NTGUID__6 .comment-list .reply-panel .reply-form em.icon-down{      display: inline-block;      width:0;      height:0;      border-width:8px;      border-color:transparent transparent #F5A623 transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 40px;      top: -17px;      z-index: 1;    }#NTGUID__6 .comment-list .reply-panel .reply-form input{      background: #fff;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;      width: 450px;      resize:none;    }#NTGUID__6 .comment-list .reply-panel .reply-form input:focus{      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;    }  </style><div id="NTGUID__6">
-                        <ul data-selector="topicData" class="social-topic-list clearfix">
-                        <!--<div id="NTGUID__6NDTGUID__c">-->
-                        <div id="commentData">
-
-
-                        </div>
-
+                        <ul id="topicData" class="social-topic-list clearfix">
 
                         </ul>
-                        <button data-last="0" data-selector="seeMore" class="btn btn-block" id="more">查看更多</button>
+                        <button data-last="0" class="btn btn-block" id="more">查看更多</button>
                     </div>
                     </div>
                     <!-- 话题 结束 -->
@@ -218,55 +89,192 @@
                         </ul>
 
                     </div>
-                <script id="lists" type="text/html">
-                    <li style="display: list-item;">
-                            <div class="friends-thumb">
-                            <a target="_blank" href="/Friends/passport/{{id}}">
-                            <img title="{{nick_name}}" src="{{image}}">
-                            </a>
+                        <script id="lists" type="text/html">
+                            <li style="display: list-item;">
+                                <div class="friends-thumb">
+                                    <a target="_blank" href="/Friends/passport/{{id}}">
+                                        <img title="{{nick_name}}" src="{{image}}">
+                                    </a>
+                                </div>
+                                <p class="friends-nickname">
+                                    {{if gender=='M'}}
+                                    <i title="男" class="icon16 icon16-boy"></i>
+                                    {{/if}}
+                                    {{if gender=='F'}}
+                                    <i title="女" class="icon16 icon16-girl"></i>
+                                    {{/if}}
+                                    {{nick_name}}
+                                </p>
+                                <p>
+
+                                    <button data-fid="passport_90514" data-selector="add-follow" class="btn btn-warning">加赛友</button>
+
+                                </p>
+                            </li>
+                        </script>
+
                     </div>
-                    <p class="friends-nickname">
-                        {{if gender=='M'}}
-                            <i title="男" class="icon16 icon16-boy"></i>
-                        {{/if}}
-                        {{if gender=='F'}}
-                        <i title="女" class="icon16 icon16-girl"></i>
-                        {{/if}}
-                        {{nick_name}}
-                    </p>
-                    <p>
-
-                    <button data-fid="passport_90514" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                    </p>
-                    </li>
-                </script>
-
-                    </div>
-
-
-
                 </div>
-
-                <!-- 推荐赛友 end -->
-                <!-- 广告位 start -->
-                <!--
-                <div class="side-ad">
-                  <a href="#"><img src="http://static.wisdom-china.cn/iyuesai/images/pages/side-ad1.png" alt=""></a>
-                </div>
-                -->
-                <!-- 广告位 end -->
-                <!-- 广告位 start -->
-                <!--
-                <div class="side-ad">
-                  <a href="#"><img src="http://static.wisdom-china.cn/iyuesai/images/pages/side-ad2.png" alt=""></a>
-                </div>
-                -->
-                <!-- 广告位 end -->
             </div>
         </div>
     </div>
 </div>
+
+<script id="list" type="text/html">
+    {{if topic_image}}
+    <li class="topicli clearfix" style="display: list-item;" data-source_type="4" data-source_id="{{id}}">
+        <div class="social-topic-thumb pull-left">
+            <a target="_blank" href="/Friends/topic/{{id}}">
+                <img src="{{topic_image}}">
+            </a>
+        </div>
+
+        <div class="social-topic-content">
+            <dl>
+                <dt>
+                    <a target="_blank" href="/Friends/topic/{{id}}">{{content}}</a>
+                </dt>
+                <dd>
+                    <a target="_blank" href="/Friends/topic/{{id}}">{{content}}</a>
+                </dd>
+            </dl>
+            <div class="social-topic-feature">
+                <div class="social-topic-author">
+                    <a target="_blank" href="/friend/passport_90481/timeline">
+                        <img title="{{nick_name}}" src="{{user_image}}">
+                    </a>
+                    <h6>
+                        <a target="_blank" href="/friend/passport_90481/timeline">
+                            {{nick_name}}
+                        </a>
+                    </h6>
+
+                    <p>
+                        发表在<a target="_blank" href="/friends/tag/307" title="{{game_name}}">{{game_name}}</a>
+                    </p>
+                </div>
+                <div class="topic-bottom pull-right">
+                    <a class="comment-btn" href="javascript:void(0);">
+                        <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{comment_count}}</span>
+                    </a>
+                    <a href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">{{laud_count}}</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- 评论框 开始 -->
+        <div class="comment-pop clearfix" style="display: none;">
+            <div class="comment-form">
+                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.5891417272134298">
+                    <input type="text" name="content" class="comment-txt">
+                    <button class="btn btn-warning pull-right" type="submit">评论</button>
+                </form>
+            </div>
+            <div class="comment-list"></div>
+            <div style="display:none;margin:10px -10px -10px -10px;" class="commentMore">
+                <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10873">查看全部评论</a>
+            </div>
+        </div>
+        <!-- 评论框 结束 -->
+    </li>
+    {{else}}
+    <li class="topicli clearfix" style="display: list-item;" data-source_type="4" data-source_id="{{id}}">
+
+        <div class="social-topic-content">
+            <dl>
+                <dt>
+                    <a href="/Friends/topic/{{id}}" target="_blank">{{content}}</a>
+                </dt>
+                <dd>
+                    <a href="/Friends/topic/{{id}}" target="_blank">{{content}}</a>
+                </dd>
+            </dl>
+            <div class="social-topic-feature">
+                <div class="social-topic-author">
+                    <a href="/friend/passport_90398/timeline" target="_blank">
+                        <img src="{{user_image}}" title="{{nick_name}}">
+                    </a>
+                    <h6>
+                        <a href="/friend/passport_90398/timeline" target="_blank">
+                            {{nick_name}}
+                        </a>
+                    </h6>
+
+                    <p>
+                        发表在<a title="{{game_name}}" href="/friends/tag/305" target="_blank">{{game_name}}</a>
+                    </p>
+                </div>
+                <div class="topic-bottom pull-right">
+                    <a href="javascript:void(0);" class="comment-btn">
+                        <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{comment_count}}</span>
+                    </a>
+                    <a href="javascript:;" data-selector="doPraise"><i class="icon20 icon20-praise "></i>赞<span class="text-error">{{laud_count}}</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- 评论框 开始 -->
+        <div class="comment-pop clearfix" style="display: none;">
+            <div class="comment-form">
+                <form action="/topic/publishTopicComment" method="post">
+                    <input class="comment-txt" type="text" name="content">
+                    <button type="submit" class="btn btn-warning pull-right">评论</button>
+                </form>
+            </div>
+            <div class="comment-list"></div>
+            <div data-selector="commentMore" style="display:none;margin:10px -10px -10px -10px;">
+                <a href="/Friends/topic/{{id}}" class="btn btn-block btn-warning" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" target="_blank">查看全部评论</a>
+            </div>
+        </div>
+        <!-- 评论框 结束 -->
+    </li>
+    {{/if}}
+</script>
+
+<!-- 回复话题模板 -->
+<script type="text/template" id="tpl_topic_comment">
+    <dl class="clearfix" style="display: block;">
+        <dt>
+            <!--<a target="_blank" href="/friend/passport_79472/timeline"></a>-->
+            <img title="{{nick_name}}" src="{{image}}">
+        </dt>
+        <dd>
+            <div class="user-header">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th><a target="_blank" href="/friend/passport_79472/timeline">{{nick_name}}</a><span title="{{input_date}}" data-timestamp="1419260340000">{{input_date}}</span></th>
+                        <td>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            {{if replyUserName}}
+            <p class="comment-content">回复
+                <!--<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline"></a>-->
+                @{{replyUserName}}：</p>
+            {{/if}}
+            <p class="comment-content"></p>
+            <pre class="comment-content">{{content}}</pre>
+            <div class="reply-panel">
+                <p class="text-right">
+                    {{if nowuser}}
+                    <a id="replaydel" data-replyid="308" data-selector="deleteComment" href="javascript:;">删除</a>
+                    {{/if}}
+                    <a id="replyLink" data-selector="replyLink" href="javascript:;">回复</a>
+                </p>
+                <div class="reply-form">
+                    <i class="icon-up"></i>
+                    <em class="icon-down"></em>
+                    <form method="post" action="/activity/index/CommentReply"  id="CommentReplyForm">
+                        <input type="hidden" value="{{id}}" name="replay_to">
+                        <input type="text" placeholder="回复 {{nick_name}}" name="content">
+                        <button class="btn btn-warning" type="submit">回复</button>
+                    </form>
+                </div>
+            </div>
+        </dd>
+    </dl>
+</script>
 
 <script type="text/javascript" src="/Public/js/pages/topic.js"></script>
 

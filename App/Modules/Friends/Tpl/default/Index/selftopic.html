@@ -1,427 +1,220 @@
 <include file="Public@default:Public:top"/>
 <div class="search-engines">
-<div class="container">
-<div class="row">
-<div class="span2 socila-span2">
-<div data-url="/game/typelist" data-selector="social-nav-box" class="side-nav"><div id="NTGUID__5">
-<h6>赛友圈分类</h6>
-<div data-selector="socialNav"><div id="NTGUID__5NDTGUID__a">
-<volist name="sport" id="vo">
-    <dl>
-        <dt data-id="<{$vo.id}>"><{$vo.name}></dt>
-        <dd>
-            <volist name="vo.child" id="v">
-                <a data-id="<{$v.id}>" href="/Friends/branch?sportTypeId=<{$v.id}>" class="normal">
-                    <{$v.name}>
+    <div class="container">
+        <div class="row">
+            <div class="span2 socila-span2">
+                <div data-url="/game/typelist" data-selector="social-nav-box" class="side-nav">
+                    <div id="NTGUID__5">
+                        <h6>赛友圈分类</h6>
+                        <div data-selector="socialNav">
+                            <div id="NTGUID__5NDTGUID__a">
+                                <volist name="sport" id="vo">
+                                    <dl>
+                                        <dt data-id="<{$vo.id}>"><{$vo.name}></dt>
+                                        <dd>
+                                            <volist name="vo.child" id="v">
+                                                <a data-id="<{$v.id}>" href="/Friends/branch?sportTypeId=<{$v.id}>" class="normal">
+                                                    <{$v.name}>
+                                                </a>
+                                            </volist>
+                                        </dd>
+                                    </dl>
+                                </volist>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span10">
+                <div class="main-block">
+                    <div data-selector="relevantTabs" class="public-tab-wrap clearfix">
+                        <a class="tab" href="/friends/index">热门话题</a>
+                        <a class="tab current" href="/friends/index/selftopic">关注话题</a>
+                    </div>
+
+                    <div data-like-action="/topic/comment-like" class="tab-content-wrap">
+                        <style scoped="scoped">#NTGUID__3 .comment-pop{      background: #f5f5f5;      padding: 0 10px 10px 10px;      border-radius: 5px;      -moz-border-radius: 5px;      -webkit-border-radius: 5px;      zoom:1;      margin-top: 10px;      position: relative;    }#NTGUID__3 .comment-pop:after{      content: "";      width: 0;      height: 0;      border: transparent solid 8px;      position: absolute;      border-bottom-color: #f5f5f5;      right: 95px;      top: -16px;    }#NTGUID__3 .topicli{      display: none;    }#NTGUID__3 .comment-list dl{      border-bottom: 1px dotted #E0E0E0;      padding: 15px 0;      display: none;    }#NTGUID__3 .comment-list dl dt{      float: left;      width: 50px;      overflow: hidden;    }#NTGUID__3 .comment-list dl dt img{      border-radius: 50%;      -webkit-border-radius: 50%;      -moz-border-radius: 50%;      width: 40px;      height: 40px;    }#NTGUID__3 .comment-list dl dd{      display: block;      margin-left: 60px;    }#NTGUID__3 .comment-list dl dd .user-header{      display: block;      font-size: 14px;      margin-bottom: 5px;    }#NTGUID__3 .comment-list dl dd .user-header table{      width: 100%;      margin: 0;    }#NTGUID__3 .comment-list dl dd .user-header th{      text-align: left;      font-weight: normal;    }#NTGUID__3 .comment-list dl dd .user-header td{      text-align: right;    }#NTGUID__3 .comment-list dl dd .user-header span{      color: #C3C3C3;      margin-left: 20px;      font-size: 12px;      font-weight: normal;    }#NTGUID__3 .comment-list dl dd .user-header a{      color: #555;    }#NTGUID__3 .comment-list dl dd .comment-content{      margin: 0;      padding: 0;      font-size: 14px;      line-height: 22px;      overflow: hidden;      width: 90%;      color: #333;      font-weight: normal;      text-shadow: none;      -webkit-text-shadow: none;      -moz-text-shadow: none;    }#NTGUID__3 .comment-list .comment-textarea{      display: block;      width: 96%;      resize: none;    }#NTGUID__3 .comment-list .btn-warning{      padding-left: 20px;      padding-right: 20px;    }#NTGUID__3 .comment-list p{      margin: 0;      padding: 0;    }#NTGUID__3 .comment-list .reply-panel p a{      font-size: 14px;      color: #999;    }#NTGUID__3 .comment-list .reply-panel .reply-form{      display: none;      position: relative;      border: 1px solid #F5A623;      margin-top: 5px;      padding: 5px 0;      background: #fff;      border-radius: 4px;      -webkit-border-radius: 4px;      -moz-border-radius: 4px;    }#NTGUID__3 .comment-list .reply-panel .reply-form i.icon-up{      display: inline-block;      width:0;      height:0;      border-width:6px;      border-color:transparent transparent #fff transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 42px;      top: -13px;      z-index: 5;    }#NTGUID__3 .comment-list .reply-panel .reply-form .btn{      position: absolute;      right: 5px;      top: 5px;    }#NTGUID__3 .comment-list .reply-panel .reply-form em.icon-down{      display: inline-block;      width:0;      height:0;      border-width:8px;      border-color:transparent transparent #F5A623 transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 40px;      top: -17px;      z-index: 1;    }#NTGUID__3 .comment-list .reply-panel .reply-form input{      background: #fff;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;      width: 450px;      resize:none;    }#NTGUID__3 .comment-list .reply-panel .reply-form input:focus{      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;    }  </style>
+                        <div id="NTGUID__3">
+                            <ul id="topicData" class="topic-list clearfix">
+                                <div id="NTGUID__3NDTGUID__b"></div>
+                            </ul>
+                            <button id="more" class="btn btn-block" data-last="0">查看更多</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span4">
+                <!-- 搜索 start -->
+                <div class="side-block">
+                    <form action="/friends/search">
+                        <input type="text" placeholder="搜索赛友圈" class="side-search-key" name="keyword">
+                        <button class="btn btn-warning">搜索</button>
+                    </form>
+                </div>
+                <!-- 搜索 end -->
+                <!-- 推荐赛友圈 start -->
+                <!--右侧栏，推荐赛友圈-->
+                <!-- 推荐赛友圈 start -->
+                <div class="side-block">
+                    <h4 class="slider-title">推荐赛友圈</h4>
+                    <ul class="social-tag-list clearfix">
+                        <volist name="recommend" id="vo" key="k">
+                            <li class="tag<{$k}>">
+                                <a href="/Friends/tag/<{$vo.id}>/topics"><{$vo.name}></a>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+                <!-- 推荐赛友圈 end -->
+                <!-- 推荐赛友圈 end -->
+                <!-- 推荐赛友 start -->
+                <div class="side-block">
+                    <h4 class="slider-title">推荐赛友</h4>
+
+                    <div style="min-height:500px;" class="friend-recommend-list clearfix">
+                        <style>#NTGUID__4 li{    display: none;  }  </style>
+                        <div id="NTGUID__4">
+                            <button data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i><span id="change">换一组</span></button>
+                            <ul data-selector="friendsData" class="clearfix" id="recommend">
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <script id="lists" type="text/html">
+                        <li style="display: list-item;">
+                            <div class="friends-thumb">
+                                <a target="_blank" href="/Friends/passport/{{id}}">
+                                    <img title="{{nick_name}}" src="{{image}}">
+                                </a>
+                            </div>
+                            <p class="friends-nickname">
+                                {{if gender=='M'}}
+                                <i title="男" class="icon16 icon16-boy"></i>
+                                {{/if}}
+                                {{if gender=='F'}}
+                                <i title="女" class="icon16 icon16-girl"></i>
+                                {{/if}}
+                                {{nick_name}}
+                            </p>
+                            <p>
+                                <button data-fid="passport_90514" data-selector="add-follow" class="btn btn-warning">加赛友</button>
+                            </p>
+                        </li>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" value="<{$_SESSION['mark_id']}>" id="free">
+<script type="text/template" id="list">
+    <li class="topicli clearfix" style="display: list-item;" data-source_type="4" data-source_id="{{id}}">
+        <!-- 作者头像 开始 -->
+        <div class="topic-host-thumb pull-left">
+            <a target="_blank" href="/Friends/passport/{{id}}" ><img title="{{user_name}}" src="{{user_image}}"></a>
+        </div>
+        <!-- 作者头像 结束 -->
+        <!-- 话题内容 开始 -->
+        <div class="topic-right">
+            <p class="topic-info">
+                <a target="_blank" href="/Friends/passport/{{id}}">{{user_name}}
                 </a>
-            </volist>
+                <span class="topic-time">{{input_date}}</span>
+            </p>
+            <pre class="topic-des"><a target="_blank" href="/Topic/{{id}}">{{content}}</a></pre>
+
+            <p class="topic-img-wrap yoxview">
+                {{each topic_images}}
+                <a href="{{$value.image}}">
+                    <img title="点击放大" alt="" src="{{$value.image}}">
+                </a>
+                {{/each}}
+            </p>
+            <div class="topic-bottom text-right">
+                <p class="topic-source pull-left">
+                    发表在<a target="_blank" href="/friends/tag/300">{{game_name}}</a>
+                </p>
+
+                <a class="comment-btn" href="javascript:void(0);" data-id="{{id}}">
+                    <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{comment_count}}</span>
+                </a>
+                <a data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;">
+                    <i class="icon20 icon20-praise "></i>赞<span class="text-error">{{laud_count}}</span>
+                </a>
+            </div>
+            <!-- 评论框 开始 -->
+            <div class="comment-pop clearfix hide">
+                <div class="comment-form">
+                    <form method="post" action="/topic/comment-add" id="GameTopicComment">
+                        <input type="hidden" value="{{id}}" name="source_id" id="source_id">
+                        <input type="hidden" value="passport_86004" name="userId">
+                        <input type="text" validate-title="评论内容" name="content" class="comment-txt" id="content">
+                        <button class="btn btn-warning pull-right" type="submit">评论</button>
+                    </form>
+                </div>
+                <div class="comment-list">
+
+                </div>
+                <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
+                    <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10836">查看全部评论</a>
+                </div>
+            </div>
+            <!-- 评论框 结束 -->
+        </div>
+        <!-- 话题内容 结束 -->
+    </li>
+</script>
+
+<!-- 回复话题模板 -->
+<script type="text/template" id="tpl_topic_comment">
+    <dl class="clearfix" style="display: block;">
+        <dt>
+            <!--<a target="_blank" href="/friend/passport_79472/timeline"></a>-->
+            <img title="{{nick_name}}" src="{{image}}">
+        </dt>
+        <dd>
+            <div class="user-header">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th><a target="_blank" href="/friend/passport_79472/timeline">{{nick_name}}</a><span title="{{input_date}}" data-timestamp="1419260340000">{{input_date}}</span></th>
+                        <td>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            {{if replyUserName}}
+            <p class="comment-content">回复
+                <!--<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline"></a>-->
+                @{{replyUserName}}：</p>
+            {{/if}}
+            <p class="comment-content"></p>
+            <pre class="comment-content">{{content}}</pre>
+            <div class="reply-panel">
+                <p class="text-right">
+                    {{if nowuser}}
+                    <a id="replaydel" data-replyid="308" data-selector="deleteComment" href="javascript:;">删除</a>
+                    {{/if}}
+                    <a id="replyLink" data-selector="replyLink" href="javascript:;">回复</a>
+                </p>
+                <div class="reply-form">
+                    <i class="icon-up"></i>
+                    <em class="icon-down"></em>
+                    <form method="post" action="/activity/index/CommentReply"  id="CommentReplyForm">
+                        <input type="hidden" value="{{id}}" name="replay_to">
+                        <input type="text" placeholder="回复 {{nick_name}}" name="content">
+                        <button class="btn btn-warning" type="submit">回复</button>
+                    </form>
+                </div>
+            </div>
         </dd>
     </dl>
-</volist>
+</script>
 
-</div>
-
-</div>
-</div>
-
-
-</div>
-</div>
-<div class="span10">
-<div class="main-block">
-<div data-selector="relevantTabs" class="public-tab-wrap clearfix">
-    <a class="tab" href="/friends/index">热门话题</a>
-    <a class="tab current" href="/friends/index/selftopic">关注话题</a>
-</div>
-
-<div data-like-action="/topic/comment-like" data-reply-action="/topic/publishTopicComment" data-comment-action="/topic/publishTopicComment" data-params="{'pageSize':5,'pageNum':0}" data-url="/friends/index/userfollowtopic" data-star="true" data-selector="topic-box" class="tab-content-wrap"><style>#NTGUID__3 .comment-pop{      background: #f5f5f5;      padding: 0 10px 10px 10px;      border-radius: 5px;      -moz-border-radius: 5px;      -webkit-border-radius: 5px;      zoom:1;      margin-top: 10px;      position: relative;    }#NTGUID__3 .comment-pop:after{      content: "";      width: 0;      height: 0;      border: transparent solid 8px;      position: absolute;      border-bottom-color: #f5f5f5;      right: 95px;      top: -16px;    }#NTGUID__3 .topicli{      display: none;    }#NTGUID__3 .comment-list dl{      border-bottom: 1px dotted #E0E0E0;      padding: 15px 0;      display: none;    }#NTGUID__3 .comment-list dl dt{      float: left;      width: 50px;      overflow: hidden;    }#NTGUID__3 .comment-list dl dt img{      border-radius: 50%;      -webkit-border-radius: 50%;      -moz-border-radius: 50%;      width: 40px;      height: 40px;    }#NTGUID__3 .comment-list dl dd{      display: block;      margin-left: 60px;    }#NTGUID__3 .comment-list dl dd .user-header{      display: block;      font-size: 14px;      margin-bottom: 5px;    }#NTGUID__3 .comment-list dl dd .user-header table{      width: 100%;      margin: 0;    }#NTGUID__3 .comment-list dl dd .user-header th{      text-align: left;      font-weight: normal;    }#NTGUID__3 .comment-list dl dd .user-header td{      text-align: right;    }#NTGUID__3 .comment-list dl dd .user-header span{      color: #C3C3C3;      margin-left: 20px;      font-size: 12px;      font-weight: normal;    }#NTGUID__3 .comment-list dl dd .user-header a{      color: #555;    }#NTGUID__3 .comment-list dl dd .comment-content{      margin: 0;      padding: 0;      font-size: 14px;      line-height: 22px;      overflow: hidden;      width: 90%;      color: #333;      font-weight: normal;      text-shadow: none;      -webkit-text-shadow: none;      -moz-text-shadow: none;    }#NTGUID__3 .comment-list .comment-textarea{      display: block;      width: 96%;      resize: none;    }#NTGUID__3 .comment-list .btn-warning{      padding-left: 20px;      padding-right: 20px;    }#NTGUID__3 .comment-list p{      margin: 0;      padding: 0;    }#NTGUID__3 .comment-list .reply-panel p a{      font-size: 14px;      color: #999;    }#NTGUID__3 .comment-list .reply-panel .reply-form{      display: none;      position: relative;      border: 1px solid #F5A623;      margin-top: 5px;      padding: 5px 0;      background: #fff;      border-radius: 4px;      -webkit-border-radius: 4px;      -moz-border-radius: 4px;    }#NTGUID__3 .comment-list .reply-panel .reply-form i.icon-up{      display: inline-block;      width:0;      height:0;      border-width:6px;      border-color:transparent transparent #fff transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 42px;      top: -13px;      z-index: 5;    }#NTGUID__3 .comment-list .reply-panel .reply-form .btn{      position: absolute;      right: 5px;      top: 5px;    }#NTGUID__3 .comment-list .reply-panel .reply-form em.icon-down{      display: inline-block;      width:0;      height:0;      border-width:8px;      border-color:transparent transparent #F5A623 transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 40px;      top: -17px;      z-index: 1;    }#NTGUID__3 .comment-list .reply-panel .reply-form input{      background: #fff;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;      width: 450px;      resize:none;    }#NTGUID__3 .comment-list .reply-panel .reply-form input:focus{      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;    }  </style><div id="NTGUID__3">
-<ul data-selector="topicData" class="topic-list clearfix"><div id="NTGUID__3NDTGUID__b">
-
-<li class="topicli clearfix" style="display: list-item;">
-    <!-- 作者头像 开始 -->
-    <div class="topic-host-thumb pull-left">
-        <a target="_blank" href="/friend/passport_204902/timeline"><img title="我动我乐" src="http://static.wisdom-china.cn//images/1/5430/2888/2982/e11f07e588bde8b3ec6e753350995354_2_40x40.jpg"></a>
-    </div>
-    <!-- 作者头像 结束 -->
-    <!-- 话题内容 开始 -->
-    <div class="topic-right">
-        <p class="topic-info">
-            <a target="_blank" href="/friend/passport_204902/timeline">我动我乐
-            </a>
-            <span title="2015-05-18 10:03:38" data-timestamp="1431914618000" class="topic-time">13小时前</span>
-        </p>
-        <pre class="topic-des"><a target="_blank" href="/topic/12079">真是一场有趣的马拉松，小伙伴们喜欢不？</a></pre>
-
-        <p class="topic-img-wrap">
-
-            <a data-large="/images/1/2437/4968/7529/31eebf1079d495905fb4767ae207b218_0_0.jpg" data-userurl="/friend/passport_204902/timeline" data-nickname="我动我乐" data-photo="http://static.wisdom-china.cn//images/1/5430/2888/2982/e11f07e588bde8b3ec6e753350995354_2_25x25.jpg" data-url="/topic/12079" data-selector="zoom" data-index="0" href="javascript:;">
-                <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/2437/4968/7529/31eebf1079d495905fb4767ae207b218_2_80x80.jpg">
-            </a>
-
-            <a data-large="/images/1/7472/1265/3538/7bed2596f54e49a663881577512bba18_0_0.png" data-userurl="/friend/passport_204902/timeline" data-nickname="我动我乐" data-photo="http://static.wisdom-china.cn//images/1/5430/2888/2982/e11f07e588bde8b3ec6e753350995354_2_25x25.jpg" data-url="/topic/12079" data-selector="zoom" data-index="1" href="javascript:;">
-                <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/7472/1265/3538/7bed2596f54e49a663881577512bba18_2_80x80.png">
-            </a>
-
-            <a data-large="/images/1/6726/7985/7438/64cbf36e83851abe2749780a110fb875_0_0.png" data-userurl="/friend/passport_204902/timeline" data-nickname="我动我乐" data-photo="http://static.wisdom-china.cn//images/1/5430/2888/2982/e11f07e588bde8b3ec6e753350995354_2_25x25.jpg" data-url="/topic/12079" data-selector="zoom" data-index="2" href="javascript:;">
-                <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/6726/7985/7438/64cbf36e83851abe2749780a110fb875_2_80x80.png">
-            </a>
-
-        </p>
-
-        <div class="topic-bottom text-right">
-
-            <p class="topic-source pull-left">
-                发表在<a target="_blank" href="/friends/tag/336">横店马拉松</a>
-            </p>
-
-
-            <a data-selector="comment-btn" href="javascript:void(0);">
-                <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">0</span>
-            </a>
-            <a data-params="{'id':12079}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">0</span></a>
-        </div>
-        <!-- 评论框 开始 -->
-        <div class="comment-pop clearfix hide">
-            <div class="comment-form">
-                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.21132102034553335">
-                    <input type="hidden" value="12079" name="topicId">
-                    <input type="hidden" value="passport_204902" name="userId">
-                    <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
-                    <button class="btn btn-warning pull-right" type="submit">评论</button>
-                </form>
-            </div>
-            <div data-params="{'topicId':12079, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list">
-            </div>
-            <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
-                <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/12079">查看全部评论</a>
-            </div>
-        </div>
-        <!-- 评论框 结束 -->
-    </div>
-    <!-- 话题内容 结束 -->
-</li>
-
-<li class="topicli clearfix" style="display: list-item;">
-    <!-- 作者头像 开始 -->
-    <div class="topic-host-thumb pull-left">
-        <a target="_blank" href="/friend/passport_198336/timeline"><img title="庆头儿" src="http://static.wisdom-china.cn//images/1/7692/1543/1219/c2805d78554b8a0d23c3e3a1a0916cc9_2_40x40.png?140x140"></a>
-    </div>
-    <!-- 作者头像 结束 -->
-    <!-- 话题内容 开始 -->
-    <div class="topic-right">
-        <p class="topic-info">
-            <a target="_blank" href="/friend/passport_198336/timeline">庆头儿
-            </a>
-            <span title="2015-05-18 09:13:56" data-timestamp="1431911636000" class="topic-time">14小时前</span>
-        </p>
-        <pre class="topic-des"><a target="_blank" href="/topic/12078">横店马拉松的穿越之旅</a></pre>
-
-        <p class="topic-img-wrap">
-
-        </p>
-
-        <div class="topic-bottom text-right">
-
-            <p class="topic-source pull-left">
-                发表在<a target="_blank" href="/friends/tag/336">横店马拉松</a>
-            </p>
-
-
-            <a data-selector="comment-btn" href="javascript:void(0);">
-                <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">0</span>
-            </a>
-            <a data-params="{'id':12078}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">0</span></a>
-        </div>
-        <!-- 评论框 开始 -->
-        <div class="comment-pop clearfix hide">
-            <div class="comment-form">
-                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.7804074870926024">
-                    <input type="hidden" value="12078" name="topicId">
-                    <input type="hidden" value="passport_198336" name="userId">
-                    <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
-                    <button class="btn btn-warning pull-right" type="submit">评论</button>
-                </form>
-            </div>
-            <div data-params="{'topicId':12078, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list">
-            </div>
-            <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
-                <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/12078">查看全部评论</a>
-            </div>
-        </div>
-        <!-- 评论框 结束 -->
-    </div>
-    <!-- 话题内容 结束 -->
-</li>
-
-<li class="topicli clearfix" style="display: list-item;">
-    <!-- 作者头像 开始 -->
-    <div class="topic-host-thumb pull-left">
-        <a target="_blank" href="/friend/passport_90880/timeline"><img title="曹凯" src="http://static.wisdom-china.cn//images/1/1366/3393/1015/f2ca5be65694be0f827a95000128e75a_2_40x40.jpg"></a>
-    </div>
-    <!-- 作者头像 结束 -->
-    <!-- 话题内容 开始 -->
-    <div class="topic-right">
-        <p class="topic-info">
-            <a target="_blank" href="/friend/passport_90880/timeline">曹凯
-            </a>
-            <span title="2015-05-18 09:07:16" data-timestamp="1431911236000" class="topic-time">14小时前</span>
-        </p>
-        <pre class="topic-des"><a target="_blank" href="/topic/12077">横店马拉松</a></pre>
-
-        <p class="topic-img-wrap">
-
-            <a data-large="/images/1/5587/0797/5755/d1e62042910411ac27497dfecd307125_0_0.jpg" data-userurl="/friend/passport_90880/timeline" data-nickname="曹凯" data-photo="http://static.wisdom-china.cn//images/1/1366/3393/1015/f2ca5be65694be0f827a95000128e75a_2_25x25.jpg" data-url="/topic/12077" data-selector="zoom" data-index="0" href="javascript:;">
-                <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/5587/0797/5755/d1e62042910411ac27497dfecd307125_2_80x80.jpg">
-            </a>
-
-        </p>
-
-        <div class="topic-bottom text-right">
-
-            <p class="topic-source pull-left">
-                发表在<a target="_blank" href="/friends/tag/336">横店马拉松</a>
-            </p>
-
-
-            <a data-selector="comment-btn" href="javascript:void(0);">
-                <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">0</span>
-            </a>
-            <a data-params="{'id':12077}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">0</span></a>
-        </div>
-        <!-- 评论框 开始 -->
-        <div class="comment-pop clearfix hide">
-            <div class="comment-form">
-                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.13644092316305267">
-                    <input type="hidden" value="12077" name="topicId">
-                    <input type="hidden" value="passport_90880" name="userId">
-                    <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
-                    <button class="btn btn-warning pull-right" type="submit">评论</button>
-                </form>
-            </div>
-            <div data-params="{'topicId':12077, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list">
-            </div>
-            <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
-                <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/12077">查看全部评论</a>
-            </div>
-        </div>
-        <!-- 评论框 结束 -->
-    </div>
-    <!-- 话题内容 结束 -->
-</li>
-
-<li class="topicli clearfix" style="display: list-item;">
-    <!-- 作者头像 开始 -->
-    <div class="topic-host-thumb pull-left">
-        <a target="_blank" href="/friend/passport_90881/timeline"><img title="侃侃侃" src="http://static.wisdom-china.cn//images/1/7047/5739/2362/fd6994201213c8569fda2811dc940f66_2_40x40.jpg"></a>
-    </div>
-    <!-- 作者头像 结束 -->
-    <!-- 话题内容 开始 -->
-    <div class="topic-right">
-        <p class="topic-info">
-            <a target="_blank" href="/friend/passport_90881/timeline">侃侃侃
-            </a>
-            <span title="2015-05-18 09:06:36" data-timestamp="1431911196000" class="topic-time">14小时前</span>
-        </p>
-        <pre class="topic-des"><a target="_blank" href="/topic/12076">奔跑吧，马拉松</a></pre>
-
-        <p class="topic-img-wrap">
-
-            <a data-large="/images/1/5672/7821/4111/a5f9fa201136b596a172d1e5e344ff7b_0_0.jpg" data-userurl="/friend/passport_90881/timeline" data-nickname="侃侃侃" data-photo="http://static.wisdom-china.cn//images/1/7047/5739/2362/fd6994201213c8569fda2811dc940f66_2_25x25.jpg" data-url="/topic/12076" data-selector="zoom" data-index="0" href="javascript:;">
-                <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/5672/7821/4111/a5f9fa201136b596a172d1e5e344ff7b_2_80x80.jpg">
-            </a>
-
-        </p>
-
-        <div class="topic-bottom text-right">
-
-            <p class="topic-source pull-left">
-                发表在<a target="_blank" href="/friends/tag/336">横店马拉松</a>
-            </p>
-
-
-            <a data-selector="comment-btn" href="javascript:void(0);">
-                <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">0</span>
-            </a>
-            <a data-params="{'id':12076}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">0</span></a>
-        </div>
-        <!-- 评论框 开始 -->
-        <div class="comment-pop clearfix hide">
-            <div class="comment-form">
-                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.05899057483655601">
-                    <input type="hidden" value="12076" name="topicId">
-                    <input type="hidden" value="passport_90881" name="userId">
-                    <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
-                    <button class="btn btn-warning pull-right" type="submit">评论</button>
-                </form>
-            </div>
-            <div data-params="{'topicId':12076, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list">
-            </div>
-            <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
-                <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/12076">查看全部评论</a>
-            </div>
-        </div>
-        <!-- 评论框 结束 -->
-    </div>
-    <!-- 话题内容 结束 -->
-</li>
-
-<li class="topicli clearfix" style="display: list-item;">
-    <!-- 作者头像 开始 -->
-    <div class="topic-host-thumb pull-left">
-        <a target="_blank" href="/friend/passport_90883/timeline"><img title="天天跑
-" src="http://static.wisdom-china.cn//images/1/9703/6712/5447/844c14cd1e824a17b3c2804f28457fdb_2_40x40.jpg"></a>
-    </div>
-    <!-- 作者头像 结束 -->
-    <!-- 话题内容 开始 -->
-    <div class="topic-right">
-        <p class="topic-info">
-            <a target="_blank" href="/friend/passport_90883/timeline">天天跑
-
-            </a>
-            <span title="2015-05-18 09:05:58" data-timestamp="1431911158000" class="topic-time">14小时前</span>
-        </p>
-        <pre class="topic-des"><a target="_blank" href="/topic/12075">碰见一群美女</a></pre>
-
-        <p class="topic-img-wrap">
-
-            <a data-large="/images/1/7788/1886/2102/90654140279a8e1ffdadce5c022a3fe6_0_0.jpg" data-userurl="/friend/passport_90883/timeline" data-nickname="天天跑
-" data-photo="http://static.wisdom-china.cn//images/1/9703/6712/5447/844c14cd1e824a17b3c2804f28457fdb_2_25x25.jpg" data-url="/topic/12075" data-selector="zoom" data-index="0" href="javascript:;">
-                <img title="点击放大" alt="" src="http://static.wisdom-china.cn//images/1/7788/1886/2102/90654140279a8e1ffdadce5c022a3fe6_2_80x80.jpg">
-            </a>
-
-        </p>
-
-        <div class="topic-bottom text-right">
-
-            <p class="topic-source pull-left">
-                发表在<a target="_blank" href="/friends/tag/336">横店马拉松</a>
-            </p>
-
-
-            <a data-selector="comment-btn" href="javascript:void(0);">
-                <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">0</span>
-            </a>
-            <a data-params="{'id':12075}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">0</span></a>
-        </div>
-        <!-- 评论框 开始 -->
-        <div class="comment-pop clearfix hide">
-            <div class="comment-form">
-                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.297602380517375">
-                    <input type="hidden" value="12075" name="topicId">
-                    <input type="hidden" value="passport_90883" name="userId">
-                    <input type="text" validate-rules="[['required'],['reallength',{max:140}]]" validate-title="评论内容" name="content" class="comment-txt">
-                    <button class="btn btn-warning pull-right" type="submit">评论</button>
-                </form>
-            </div>
-            <div data-params="{'topicId':12075, 'pageNum':1, 'pageSize':5}" data-reply-action="/topic/publishTopicComment" data-url="/topic/getTopicComment" class="comment-list">
-            </div>
-            <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
-                <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/12075">查看全部评论</a>
-            </div>
-        </div>
-        <!-- 评论框 结束 -->
-    </div>
-    <!-- 话题内容 结束 -->
-</li>
-
-</div>
-
-
-</ul>
-<button data-selector="seeMore" class="btn btn-block">查看更多</button>
-</div>
-
-
-</div>
-
-</div>
-</div>
-
-<div class="span4">
-    <!-- 搜索 start -->
-    <div class="side-block">
-        <form action="/friends/search">
-            <input type="text" placeholder="搜索赛友圈" class="side-search-key" name="keyword">
-            <button class="btn btn-warning">搜索</button>
-        </form>
-    </div>
-    <!-- 搜索 end -->
-    <!-- 推荐赛友圈 start -->
-    <!--右侧栏，推荐赛友圈-->
-    <!-- 推荐赛友圈 start -->
-    <div class="side-block">
-        <h4 class="slider-title">推荐赛友圈</h4>
-        <ul class="social-tag-list clearfix">
-            <volist name="recommend" id="vo" key="k">
-                <li class="tag<{$k}>">
-                    <a href="/Friends/tag/<{$vo.id}>/topics"><{$vo.name}></a>
-                </li>
-            </volist>
-        </ul>
-    </div>
-    <!-- 推荐赛友圈 end -->
-    <!-- 推荐赛友圈 end -->
-    <!-- 推荐赛友 start -->
-    <div class="side-block">
-        <h4 class="slider-title">推荐赛友</h4>
-
-        <div data-add-action="/friends/game-friend-add" data-url="/friends/recommenttaguser" data-reply-action="#" data-params="{'pageSize':6,'pageNum':0}" data-selector="recommend-friend-box" style="min-height:500px;" class="friend-recommend-list clearfix"><style>#NTGUID__4 li{    display: none;  }  </style><div id="NTGUID__4">
-            <button data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i><span id="change">换一组</span></button>
-            <ul data-selector="friendsData" class="clearfix" id="recommend"><div id="NTGUID__4NDTGUID__9">
-
-
-            </div>
-            </ul>
-        </div>
-
-
-        </div>
-
-
-        <script id="lists" type="text/html">
-            <li style="display: list-item;">
-                <div class="friends-thumb">
-                    <a target="_blank" href="/Friends/passport/{{id}}">
-                        <img title="{{nick_name}}" src="{{image}}">
-                    </a>
-                </div>
-                <p class="friends-nickname">
-                    {{if gender=='M'}}
-                    <i title="男" class="icon16 icon16-boy"></i>
-                    {{/if}}
-                    {{if gender=='F'}}
-                    <i title="女" class="icon16 icon16-girl"></i>
-                    {{/if}}
-                    {{nick_name}}
-                </p>
-                <p>
-
-                    <button data-fid="passport_90514" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                </p>
-            </li>
-        </script>
-    </div>
-
-    <!-- 推荐赛友 end -->
-    <!-- 广告位 start -->
-    <!--
-    <div class="side-ad">
-      <a href="#"><img src="http://static.wisdom-china.cn/iyuesai/images/pages/side-ad1.png" alt=""></a>
-    </div>
-    -->
-    <!-- 广告位 end -->
-    <!-- 广告位 start -->
-    <!--
-    <div class="side-ad">
-      <a href="#"><img src="http://static.wisdom-china.cn/iyuesai/images/pages/side-ad2.png" alt=""></a>
-    </div>
-    -->
-    <!-- 广告位 end -->
-</div>
-</div>
-</div>
-</div>
 <script type="text/javascript" src="/Public/js/pages/topic.js"></script>
 
 <include file="Public@default:Public:bottom"/>
