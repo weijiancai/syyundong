@@ -612,7 +612,7 @@
 
         <dd class="root-content hide" style="display: block;">
             <ul class="events-list">
-                <?php $all  = D('VChoiceGame')->limit(5)->order('input_date desc')->select();?>
+                <?php $all  = D('VChoiceGame')->limit(5)->select();?>
                 <volist name="all" id="ao" key="k">
                     <li <if condition="$k eq 1">class="first"</if>>
                     <a href="/Game/<{$ao.id}>" target="_blank"><img src="<{$ao.image}>"></a>

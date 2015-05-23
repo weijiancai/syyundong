@@ -5489,7 +5489,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
     left: 0;
     padding: 15px;
     background: #333;
-    background: rgba(0, 0, 0, 0.75)
+    background: rgba(0, 0, 0, 0.35)
 }
 
 .carousel-caption h4, .carousel-caption p {

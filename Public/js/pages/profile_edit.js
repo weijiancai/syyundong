@@ -64,7 +64,7 @@ $(function () {
             }
         });
 
-    //我要参加
+    //修改密码
     $('#changePassword').on('click', function() {
         var $dialog = $('#modifyPasswordDialog');
         var validate, $form;

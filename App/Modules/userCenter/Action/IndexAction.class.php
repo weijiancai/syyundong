@@ -184,4 +184,11 @@ class IndexAction extends Action {
         $this->assign('list',$list);
         $this->display();
     }
+    /*
+     * @功能：修改密码
+     * @时间:20150408
+     */
+    public function ResetPwd(){
+
+    }
 }
