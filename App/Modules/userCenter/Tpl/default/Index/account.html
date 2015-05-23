@@ -89,7 +89,7 @@
                                     <span class="p-ttl">个人签名：</span>
                                     <span class="prefer-txt">一句话介绍一下自己吧，让别人更了解你</span>
 
-                                    <button class="btn pull-right" name="" data-selector="edit-perfer-btn">编辑</button>
+                                    <!--<button class="btn pull-right" name="" data-selector="edit-perfer-btn">编辑</button>-->
                                 </p>
                                 <form action="/userCenter/account/changeSignature" method="post">
                                     <p class="hide" data-selector="perfer-edit">
@@ -111,7 +111,7 @@
                                             <!-- <img alt="" src="http://static.wisdom-china.cn/iyuesai/images/interest/27.jpg"> -->
                                         </li>
                                     </ul>
-                                    <button class="btn pull-right" data-url="/userCenter/account/interest" data-action="/userCenter/account/changeinterest" data-params="{'userId':'123'}" data-selector="edit-interest">编辑</button>
+                                    <!--<button class="btn pull-right" data-url="/userCenter/account/interest" data-action="/userCenter/account/changeinterest" data-params="{'userId':'123'}" data-selector="edit-interest">编辑</button>-->
                                 </div>
 
                             </div>
@@ -132,12 +132,12 @@
 
         <p>
             <span class="span1">新密码</span>
-            <input type="password" name="newPassword" validate-title="新密码" validate-rules="[['required']]">
+            <input type="password" name="newPassword" id="newPassword" validate-title="新密码" validate-rules="[['required']]">
         </p>
 
         <p>
             <span class="span1">确认密码</span>
-            <input type="password" name="newPassword1" validate-title="确认密码" validate-rules="[['required'],['equalto',{'name':'newPassword'}]]">
+            <input type="password" name="newPassword1" id="newPassword1"validate-title="确认密码">
         </p>
     </form>
 </div>
