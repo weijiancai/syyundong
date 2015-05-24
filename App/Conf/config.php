@@ -55,6 +55,7 @@ $Public_Config =  array(
         '/^Friends\/hotTopicLoad/' => 'Friends/index/hotTopicLoad',
         '/^Friends\/passport\/(\d+)$/' => 'Friends/index/passport?id=:1',
         '/^Friends\/selftopic$/' => 'Friends/index/selftopic',
+        '/^Friends\/LoadSelfTopic/' => 'Friends/index/LoadSelfTopic',
 
         '/^Association\/(\d+)$/' => 'Association/index/ass_detail?id=:1',
         '/^DoyenHall\/(\d+)$/' => 'DoyenHall/index/hall_detail?id=:1',
@@ -72,6 +73,7 @@ $Public_Config =  array(
         '/^userCenter\/friend/' => 'userCenter/index/friend',
         '/^userCenter\/timeline/' => 'userCenter/index/timeline',
         '/^userCenter\/ResetPwd/' => 'userCenter/index/ResetPwd',
+        '/^userCenter\/deletefriend\/(\d+)$/' => 'userCenter/index/deletefriend?id=:1',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',

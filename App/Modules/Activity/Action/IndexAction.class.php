@@ -33,7 +33,7 @@ class IndexAction extends BaseAction
             $map['name'] = array('like', '%' . trim($_GET['keyword']) . '%');
         }
         //赛事分类
-        if ($_GET['sportTypeId']) {
+        if (($_GET['sportTypeId'])&&($_GET['sportTypeId']!='all')) {
             $map['sport_sid'] = array('eq', $_GET['sportTypeId']);
         }
         //默认排序
@@ -241,6 +241,8 @@ class IndexAction extends BaseAction
         $date['input_user'] = deCode(I('session.mark_id'));
         $result = M('DbActivity')->add($date);
         if(false!==$result){
+            //记录足迹
+            $this->TimeLine($result,'','发起赛事','Activity');
             echo $result;
         }else{
             echo 'false';

@@ -84,22 +84,7 @@ $(function () {
             });
         }
     });
-    //加赛友
-    $('.add_friend').click(function () {
-        jQuery.ajax({
-            type: "post",
-            url: "/Game/GameAddFriend",
-            data: {friend_id: $(this).data('value')},
-            success: function (result) {
-                if (result == 1) {
-                    $.dialog.success('添加成功');
 
-                } else {
-                    $.dialog.error('添加赛友失败,请稍后重试');
-                }
-            }
-        });
-    });
     //赛友换一换
     /*    change();
      $('#change').click(change);

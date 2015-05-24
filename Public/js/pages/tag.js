@@ -4,8 +4,11 @@
 $(function () {
     // 注册body id
     $('body').attr('id', 'topic-detail');
-    // 回复
+
+    //topic:回复
+    var $topicData = $('#topic_comment');
     var $replyPanel = $('.reply-panel');
+    var $more = $('#topic_more');
     $replyPanel.find('a').click(function() {
         var $panel = $(this).parent().parent();
         $panel.find('.reply-form').toggle();
@@ -21,18 +24,9 @@ $(function () {
         submitHandler: function (form) {
             form.submit();
             $(form).parent().hide();
+            replay($topicData, $more, 'topic', {source_type: '4',source_id:$topicData.data('source_id')});
         }
     });
-    //赛友圈搜索
-    $('#branchform').validate({
-        rules: {
-            keyword: 'required'
-        },
-        messages: {
-            keyword: '搜索内容不能为空'
-        },
-        submitHandler: function (form) {
-           form.submit();
-        }
-    });
+
+    replay($topicData, $more, 'topic', {source_type: '4',source_id:$topicData.data('source_id')});
 });

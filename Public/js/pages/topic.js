@@ -26,10 +26,10 @@ $(function () {
         $(this).parent().find('a.current').removeClass('current');
         $(this).addClass('current');
 
-        replay($topicData, $more, 'list', '/Friends/hotTopicLoad', {source_type: $(this).data('value')}, true);
+        replay($topicData, $more, 'list', {source_type: $(this).data('value')}, true);
     });
 
-    replay($topicData, $more, 'list', '/Friends/hotTopicLoad', {source_type: ''});
+    replay($topicData, $more, 'list',{source_type: ''});
 
     //关注
     $("#topic_focus").click(function () {
@@ -63,25 +63,6 @@ $(function () {
             });
         }
     });
-    //推荐赛友
-    change();
-    $('#change').click(change);
-    function change() {
-        jQuery.ajax({
-            type: "post",
-            url: "/Friends/index/recommendFriend",
-            success: function ($result) {
-                if ($result) {
-                    var obj = eval($result);
-                    $('#recommend').empty();
-                    for (var i = 0; i < obj.length; i++) {
-                        var $li = $(template('lists', obj[i]));
-                        $('#recommend').append($li);
-                    }
-                }
-            }
-        })
-    }
-    //关注话题
+
 
 });

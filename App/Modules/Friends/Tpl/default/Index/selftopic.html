@@ -35,7 +35,7 @@
                     <div data-like-action="/topic/comment-like" class="tab-content-wrap">
                         <style scoped="scoped">#NTGUID__3 .comment-pop{      background: #f5f5f5;      padding: 0 10px 10px 10px;      border-radius: 5px;      -moz-border-radius: 5px;      -webkit-border-radius: 5px;      zoom:1;      margin-top: 10px;      position: relative;    }#NTGUID__3 .comment-pop:after{      content: "";      width: 0;      height: 0;      border: transparent solid 8px;      position: absolute;      border-bottom-color: #f5f5f5;      right: 95px;      top: -16px;    }#NTGUID__3 .topicli{      display: none;    }#NTGUID__3 .comment-list dl{      border-bottom: 1px dotted #E0E0E0;      padding: 15px 0;      display: none;    }#NTGUID__3 .comment-list dl dt{      float: left;      width: 50px;      overflow: hidden;    }#NTGUID__3 .comment-list dl dt img{      border-radius: 50%;      -webkit-border-radius: 50%;      -moz-border-radius: 50%;      width: 40px;      height: 40px;    }#NTGUID__3 .comment-list dl dd{      display: block;      margin-left: 60px;    }#NTGUID__3 .comment-list dl dd .user-header{      display: block;      font-size: 14px;      margin-bottom: 5px;    }#NTGUID__3 .comment-list dl dd .user-header table{      width: 100%;      margin: 0;    }#NTGUID__3 .comment-list dl dd .user-header th{      text-align: left;      font-weight: normal;    }#NTGUID__3 .comment-list dl dd .user-header td{      text-align: right;    }#NTGUID__3 .comment-list dl dd .user-header span{      color: #C3C3C3;      margin-left: 20px;      font-size: 12px;      font-weight: normal;    }#NTGUID__3 .comment-list dl dd .user-header a{      color: #555;    }#NTGUID__3 .comment-list dl dd .comment-content{      margin: 0;      padding: 0;      font-size: 14px;      line-height: 22px;      overflow: hidden;      width: 90%;      color: #333;      font-weight: normal;      text-shadow: none;      -webkit-text-shadow: none;      -moz-text-shadow: none;    }#NTGUID__3 .comment-list .comment-textarea{      display: block;      width: 96%;      resize: none;    }#NTGUID__3 .comment-list .btn-warning{      padding-left: 20px;      padding-right: 20px;    }#NTGUID__3 .comment-list p{      margin: 0;      padding: 0;    }#NTGUID__3 .comment-list .reply-panel p a{      font-size: 14px;      color: #999;    }#NTGUID__3 .comment-list .reply-panel .reply-form{      display: none;      position: relative;      border: 1px solid #F5A623;      margin-top: 5px;      padding: 5px 0;      background: #fff;      border-radius: 4px;      -webkit-border-radius: 4px;      -moz-border-radius: 4px;    }#NTGUID__3 .comment-list .reply-panel .reply-form i.icon-up{      display: inline-block;      width:0;      height:0;      border-width:6px;      border-color:transparent transparent #fff transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 42px;      top: -13px;      z-index: 5;    }#NTGUID__3 .comment-list .reply-panel .reply-form .btn{      position: absolute;      right: 5px;      top: 5px;    }#NTGUID__3 .comment-list .reply-panel .reply-form em.icon-down{      display: inline-block;      width:0;      height:0;      border-width:8px;      border-color:transparent transparent #F5A623 transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 40px;      top: -17px;      z-index: 1;    }#NTGUID__3 .comment-list .reply-panel .reply-form input{      background: #fff;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;      width: 450px;      resize:none;    }#NTGUID__3 .comment-list .reply-panel .reply-form input:focus{      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;    }  </style>
                         <div id="NTGUID__3">
-                            <ul id="topicData" class="topic-list clearfix">
+                            <ul id="topicData" class="topic-list clearfix" data-url="/Friends/LoadSelfTopic" data-replay="true">
                                 <div id="NTGUID__3NDTGUID__b"></div>
                             </ul>
                             <button id="more" class="btn btn-block" data-last="0">查看更多</button>
@@ -110,110 +110,8 @@
 </div>
 
 <input type="hidden" value="<{$_SESSION['mark_id']}>" id="free">
-<script type="text/template" id="list">
-    <li class="topicli clearfix" style="display: list-item;" data-source_type="4" data-source_id="{{id}}">
-        <!-- 作者头像 开始 -->
-        <div class="topic-host-thumb pull-left">
-            <a target="_blank" href="/Friends/passport/{{id}}" ><img title="{{user_name}}" src="{{user_image}}"></a>
-        </div>
-        <!-- 作者头像 结束 -->
-        <!-- 话题内容 开始 -->
-        <div class="topic-right">
-            <p class="topic-info">
-                <a target="_blank" href="/Friends/passport/{{id}}">{{user_name}}
-                </a>
-                <span class="topic-time">{{input_date}}</span>
-            </p>
-            <pre class="topic-des"><a target="_blank" href="/Topic/{{id}}">{{content}}</a></pre>
 
-            <p class="topic-img-wrap yoxview">
-                {{each topic_images}}
-                <a href="{{$value.image}}">
-                    <img title="点击放大" alt="" src="{{$value.image}}">
-                </a>
-                {{/each}}
-            </p>
-            <div class="topic-bottom text-right">
-                <p class="topic-source pull-left">
-                    发表在<a target="_blank" href="/friends/tag/300">{{game_name}}</a>
-                </p>
-
-                <a class="comment-btn" href="javascript:void(0);" data-id="{{id}}">
-                    <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{comment_count}}</span>
-                </a>
-                <a data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;">
-                    <i class="icon20 icon20-praise "></i>赞<span class="text-error">{{laud_count}}</span>
-                </a>
-            </div>
-            <!-- 评论框 开始 -->
-            <div class="comment-pop clearfix hide">
-                <div class="comment-form">
-                    <form method="post" action="/topic/comment-add" id="GameTopicComment">
-                        <input type="hidden" value="{{id}}" name="source_id" id="source_id">
-                        <input type="hidden" value="passport_86004" name="userId">
-                        <input type="text" validate-title="评论内容" name="content" class="comment-txt" id="content">
-                        <button class="btn btn-warning pull-right" type="submit">评论</button>
-                    </form>
-                </div>
-                <div class="comment-list">
-
-                </div>
-                <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
-                    <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10836">查看全部评论</a>
-                </div>
-            </div>
-            <!-- 评论框 结束 -->
-        </div>
-        <!-- 话题内容 结束 -->
-    </li>
-</script>
-
-<!-- 回复话题模板 -->
-<script type="text/template" id="tpl_topic_comment">
-    <dl class="clearfix" style="display: block;">
-        <dt>
-            <!--<a target="_blank" href="/friend/passport_79472/timeline"></a>-->
-            <img title="{{nick_name}}" src="{{image}}">
-        </dt>
-        <dd>
-            <div class="user-header">
-                <table>
-                    <tbody>
-                    <tr>
-                        <th><a target="_blank" href="/friend/passport_79472/timeline">{{nick_name}}</a><span title="{{input_date}}" data-timestamp="1419260340000">{{input_date}}</span></th>
-                        <td>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            {{if replyUserName}}
-            <p class="comment-content">回复
-                <!--<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline"></a>-->
-                @{{replyUserName}}：</p>
-            {{/if}}
-            <p class="comment-content"></p>
-            <pre class="comment-content">{{content}}</pre>
-            <div class="reply-panel">
-                <p class="text-right">
-                    {{if nowuser}}
-                    <a id="replaydel" data-replyid="308" data-selector="deleteComment" href="javascript:;">删除</a>
-                    {{/if}}
-                    <a id="replyLink" data-selector="replyLink" href="javascript:;">回复</a>
-                </p>
-                <div class="reply-form">
-                    <i class="icon-up"></i>
-                    <em class="icon-down"></em>
-                    <form method="post" action="/activity/index/CommentReply"  id="CommentReplyForm">
-                        <input type="hidden" value="{{id}}" name="replay_to">
-                        <input type="text" placeholder="回复 {{nick_name}}" name="content">
-                        <button class="btn btn-warning" type="submit">回复</button>
-                    </form>
-                </div>
-            </div>
-        </dd>
-    </dl>
-</script>
+<include file="Public@default:Public:template"/>
 
 <script type="text/javascript" src="/Public/js/pages/topic.js"></script>
 

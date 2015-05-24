@@ -57,7 +57,7 @@
                     <div data-url="/topic/getTopicComment" data-reply-action="/topic/publishTopicComment" data-comment-action="/topic/publishTopicComment" data-params="{'topicId':9395, 'pageNum':0, 'pageSize':5}" data-star="false" data-selector="commentList" class="tab-content-wrap"><style>#NTGUID__8 h5{      margin: 0;      padding: 0;      font-size: 20px;      line-height: 20px;      display: block;    }#NTGUID__8 h5 span,#NTGUID__8 h5 em{      vertical-align: bottom;    }#NTGUID__8 h5 em{      color: #999;      margin-left: 5px;    }#NTGUID__8 h5 em,#NTGUID__8 h5 i{      font-size: 12px;      font-weight: normal;      font-style: normal;    }#NTGUID__8 h5 i{      color: #363636;      padding: 0 5px;    }#NTGUID__8 .comment-list dl{      border-bottom: 1px dotted #E0E0E0;      padding: 15px 0;      display: none;    }#NTGUID__8 .btn-block{      margin-top: 28px;    }#NTGUID__8 .comment-list dl dt{      float: left;      width: 50px;      overflow: hidden;    }#NTGUID__8 .comment-list dl dt img{      border-radius: 50%;      -webkit-border-radius: 50%;      -moz-border-radius: 50%;      width: 40px;      height: 40px;    }#NTGUID__8 .comment-list dl dd{      display: block;      margin-left: 60px;    }#NTGUID__8 .comment-list dl dd .user-header{      display: block;      font-size: 14px;      margin-bottom: 5px;    }#NTGUID__8 .comment-list dl dd .user-header table{      width: 100%;      margin: 0;    }#NTGUID__8 .comment-list dl dd .user-header th{      text-align: left;      font-weight: normal;    }#NTGUID__8 .comment-list dl dd .user-header td{      text-align: right;    }#NTGUID__8 .comment-list dl dd .user-header span{      color: #C3C3C3;      font-weight: normal;      font-size: 12px;      margin-left: 20px;    }#NTGUID__8 .comment-list dl dd .user-header a{      color: #555;    }#NTGUID__8 .comment-list dl dd .comment-content{      margin: 0;      padding: 0;      font-size: 14px;      line-height: 22px;      overflow: hidden;      width: 90%;      color: #333;      font-weight: normal;      text-shadow: none;      -webkit-text-shadow: none;      -moz-text-shadow: none;    }#NTGUID__8 .comment-textarea{      display: block;      width: 96%;      resize: none;    }#NTGUID__8 .btn-warning{      padding-left: 20px;      padding-right: 20px;      margin-top: 20px;    }#NTGUID__8 p{      margin: 0;      padding: 0;    }#NTGUID__8 .reply-panel p a{      font-size: 14px;      color: #999;    }#NTGUID__8 .comment-list .reply-panel .reply-form{      display: none;      position: relative;      border: 1px solid #F5A623;      margin-top: 5px;      padding: 5px 0;      border-radius: 4px;      -webkit-border-radius: 4px;      -moz-border-radius: 4px;    }#NTGUID__8 .comment-list .reply-panel .reply-form i.icon-up{      display: inline-block;      width:0;      height:0;      border-width:6px;      border-color:transparent transparent #fff transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 42px;      top: -13px;      z-index: 5;    }#NTGUID__8 .comment-list .reply-panel .reply-form .btn{      position: absolute;      right: 5px;      top: 5px;      margin: 0;    }#NTGUID__8 .comment-list .reply-panel .reply-form em.icon-down{      display: inline-block;      width:0;      height:0;      border-width:8px;      border-color:transparent transparent #F5A623 transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 40px;      top: -17px;      z-index: 1;    }#NTGUID__8 .comment-list .reply-panel .reply-form input{      background: #fff;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;      width: 670px;      resize:none;    }#NTGUID__8 .comment-list .reply-panel .reply-form input:focus{      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;    }#NTGUID__8 .icon16{      display: inline-block;      width: 14px;      height: 16px;      margin-right: 0px;    }#NTGUID__8 .comment-star{      font-size: 14px;      line-height: 20px;      padding-bottom: 5px;    }#NTGUID__8 .comment-star .icon16{      cursor: pointer;    }#NTGUID__8 .comment-form{      margin-top: 2px;    }#NTGUID__8 .comment-form .btn-warning{      margin-top: 0;    }  </style><div id="NTGUID__8">
                         <h5>
                             <span>评论</span>
-                            <em>(共<i data-selector="commentTotal">6</i>条评论)</em>
+                            <em>(共<i data-selector="commentTotal"></i>条评论)</em>
                         </h5>
                         <div class="comment-list">
                             <div data-selector="commentFormData">
@@ -84,8 +84,7 @@
 
 
                             </div>
-                            <div id="topiccomment">
-
+                            <div id="topic_comment" data-url="/Friends/index/TopicCommentLoad" data-source_id="<{$_GET['id']}>" data-replay="false">
 
                             </div>
 
@@ -372,37 +371,45 @@
         </div>
     </div>
 </div>
-<script type="text/template" id="topic">
-    <dl class="clearfix" style="display: block;">
+
+<script id="topic" type="text/html">
+    <dl class="clearfix" style="display: block;" data-source_id="<{$_GET['id']}>" data-source_type="4" >
         <dt>
-            <a target="_blank" href="/friend/passport_83527/timeline">
-                <img title="{{nick_name}}" src="{{if user_name}}{{user_image}}{{else}}/Public/images/default/web_pic.jpg{{/if}}"></a>
+            <!--<a target="_blank" href="/friend/passport_79472/timeline"></a>-->
+            <img title="{{nick_name}}" src="{{image}}">
         </dt>
         <dd>
             <div class="user-header">
                 <table>
                     <tbody>
                     <tr>
-                        <th><a target="_blank" href="/friend/passport_83527/timeline">{{nick_name}}</a><span title="{{input_date}}">{{input_date}}</span></th>
+                        <th><a target="_blank" href="/friend/passport_79472/timeline">{{nick_name}}</a><span title="{{input_date}}" data-timestamp="1419260340000">{{input_date}}</span></th>
                         <td>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            {{if replyUserName}}
+            <p class="comment-content">回复
+                <!--<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline"></a>-->
+                @{{replyUserName}}：</p>
+            {{/if}}
             <p class="comment-content"></p>
             <pre class="comment-content">{{content}}</pre>
             <div class="reply-panel">
                 <p class="text-right">
-                    <a data-selector="replyLink" href="javascript:;">回复</a>
+                    {{if nowuser}}
+                    <a data-replyid="{{id}}" id="deleteComment" href="javascript:;">删除</a>
+                    {{/if}}
+                    <a id="replyLink" class="comment-btn" href="javascript:;">回复</a>
                 </p>
-                <div class="reply-form" style="display: none;">
+                <div class="reply-form comment-pop">
                     <i class="icon-up"></i>
                     <em class="icon-down"></em>
-                    <form method="post" action="/topic/publishTopicComment" >
-                        <input type="hidden" value="{{id}}" name="reply_to" >
-
-                        <input type="text" validate-rules="[['required']]" placeholder="回复 {{nick_name}}：" name="content" data-valid="false">
+                    <form method="post" action="/activity/index/CommentReply"  id="CommentReplyForm">
+                        <input type="hidden" value="{{id}}" name="replay_to">
+                        <input type="text" placeholder="回复 {{nick_name}}" name="content">
                         <button class="btn btn-warning" type="submit">回复</button>
                     </form>
                 </div>
@@ -410,5 +417,6 @@
         </dd>
     </dl>
 </script>
-<script type="text/javascript" src="/Public/js/pages/topic.js"></script>
+<script type="text/javascript" src="/Public/js/pages/tag.js"></script>
+
 <include file="Public@default:Public:bottom" />

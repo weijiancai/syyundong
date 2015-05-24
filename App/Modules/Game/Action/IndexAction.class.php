@@ -34,15 +34,15 @@ class IndexAction extends Action
             $map['name'] = array('like', '%' . trim($_GET['keyword']) . '%');
         }
         //赛事分类
-        if (($_GET['sportTypeId'])and($_GET['sportTypeId']!=='all')) {
-            $map['sport_sid'] =  $_GET['sportTypeId'];
+        if (($_GET['sportTypeId']) and ($_GET['sportTypeId'] !== 'all')) {
+            $map['sport_sid'] = $_GET['sportTypeId'];
         }
         //赛事区域
         if ($_GET['region']) {
-            $map['region'] =  $_GET['region'];
+            $map['region'] = $_GET['region'];
         }
         //默认排序
-        if (($_GET['orderByNew'] == 'S')or($_GET['orderByNew'] == '')) {
+        if (($_GET['orderByNew'] == 'S') or ($_GET['orderByNew'] == '')) {
             $order = 'reg_begin_date desc';
         }
         //最新赛事
@@ -57,12 +57,13 @@ class IndexAction extends Action
             $map['start_date'] = array('like', date('Y-m-d') . '%');
         } else if ($_GET['date'] == 'tomorrow') {
             $map['start_date'] = array('like', date("Y-m-d", strtotime("+1 day")) . '%');
-        }else if ($_GET['date'] == 'week') {
+        } else if ($_GET['date'] == 'week') {
             $map['start_date'] = array('like', date("Y-m-d", strtotime("+7 day")) . '%');
-        }else if ($_GET['date'] == 'month') {
+        } else if ($_GET['date'] == 'month') {
             $map['start_date'] = array('like', date("Y-m-d", strtotime("+30 day")) . '%');
         }
         $map['type'] = array('eq', 'game');
+        dump($map);
         $count = $model->where($map)->count();
         $Page = new Page($count, 10);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
@@ -86,7 +87,7 @@ class IndexAction extends Action
         //首先判断用户是否登录
         $mark = I('session.mark_id');
         if ($mark) {
-            $this->assign('region',D('Public/Index')->region());
+            $this->assign('region', D('Public/Index')->region());
             $this->display();
         } else {
             $str = ' <script> window.location.href="/login/login"</script>';
@@ -118,6 +119,8 @@ class IndexAction extends Action
         $date['input_user'] = deCode(I('session.mark_id'));
         $result = $model->add($date);
         if (false !== $result) {
+            //记录足迹
+            $this->TimeLine($result, '', '发布赛事', 'Game');
             //申请人ID
             $this->assign('applyID', date('Ymd') . $result);
             $this->assign('name', I('post.name'));
@@ -255,6 +258,7 @@ class IndexAction extends Action
         $this->assign('detail', $detail);
         $this->display();
     }
+
     /*
      * @时间: 20150415
      * @功能：赛事成绩查询
@@ -268,11 +272,11 @@ class IndexAction extends Action
         $this->assign('group', D('OpGameGroup')->where('game_id=' . $id)->select());
 
         $where['game_id'] = array('eq', $id);
-        if($_GET['groupId']){
+        if ($_GET['groupId']) {
             $where['group_id'] = array('eq', $_GET['groupId']);
         }
         $where['game_number'] = array('eq', $_GET['playerId']);
-        $list =  D('OpGameScore')->where($where)->order('score desc')->select();
+        $list = D('OpGameScore')->where($where)->order('score desc')->select();
         $this->assign('detail', $detail);
         $this->assign('list', $list);
         $this->display('game_score');
@@ -377,12 +381,13 @@ class IndexAction extends Action
 
     /*
     * @时间: 20150415
-    * @功能：取消赛事关注
+    * @功能：加赛友
     */
     public function GameAddFriend()
     {
         $date['user_id'] = deCode(session('mark_id'));
         $date['friend_id'] = $_POST['friend_id'];
+        $date['input_date'] = date('Y-m-d H:i:s');
         $result = D('OpUserFriend')->add($date);
         if (false !== $result) {
             echo 1;
@@ -462,7 +467,7 @@ class IndexAction extends Action
 
     /*
     * @时间: 20150415
-    * @功能：赛事话题加载
+    * @功能：赛事话题图片加载
     */
     public function GameImageLoad()
     {
@@ -498,6 +503,7 @@ class IndexAction extends Action
             echo 0;
         }
     }
+
     /*
     * @时间: 20150415
     * @功能: 加载评论回复
@@ -506,7 +512,7 @@ class IndexAction extends Action
     {
         $id = $_POST['topicId'];
         $model = D('v_comment');
-        $list = $model->where('source_id='.$id.' and source_type = 4')->limit(5)->order('input_date desc')->select();
+        $list = $model->where('source_id=' . $id . ' and source_type = 4')->limit(5)->order('input_date desc')->select();
         echo json_encode($list);
     }
 }

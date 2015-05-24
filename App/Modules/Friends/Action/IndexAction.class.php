@@ -47,6 +47,7 @@ class IndexAction extends Action {
      */
     public function tag(){
         $id  =$_GET['id'];
+        $this->assign('list',D('VGameActivity')->where('id='.$id)->find());
         $this->display();
     }
     /*
@@ -157,7 +158,7 @@ class IndexAction extends Action {
     {
         $model = D('OpComment');
         $date['content'] = $_POST['content'];
-        $date['reply_to'] = $_POST['reply_to'];
+        $date['replay_to'] = $_POST['replay_to'];
         $date['user_id'] = deCode(I('session.mark_id'));
         $date['source_id'] = $_POST['source_id'];
         $date['source_type'] = $_POST['source_type'];
@@ -171,7 +172,7 @@ class IndexAction extends Action {
     }
     /*
     * @时间: 20150415
-    * @功能:评论赛友圈
+    * @功能: 评论赛友圈
     */
     public function publishReply()
     {
@@ -216,15 +217,16 @@ class IndexAction extends Action {
     }
     /*
     * @时间: 20150415
-    * @功能: 关注话题页面跳转
+    * @功能: 关注话题页面
     */
     public function LoadSelfTopic(){
         $mark = deCode(I('session.mark_id'));
+        $last = $_POST['last'];
+        $amount = $_POST['amount'];
         $topic_id=M('OpFocus')->where('user_id='.$mark)->getField('source_id',true);
         $map['game_id'] =array('in',$topic_id);
         $map['user_id'] = array('eq',$mark);
-        $list = M('OpGameTopic')->where($map)->select();
-        dump($list);
+        $list = M('OpGameTopic')->where($map)->limit($last, $amount)->select();
         echo json_encode($list);
     }
     /*
@@ -261,5 +263,20 @@ class IndexAction extends Action {
         $map['id'] =array('in',$limit);
         $list = D('DbVenue')->where($map)->select();
         echo json_encode($list);
+    }
+    /*
+     * @时间: 20150415
+     * @功能：话题评论删除
+     */
+    public function CommentDel()
+    {
+        $model = D('OpComment');
+        $id= $_POST['id'];
+        $result =$model->where('id='.$id)->delete();
+        if (false !== $result) {
+            echo 1;
+        } else {
+            echo 0;
+        }
     }
 }
