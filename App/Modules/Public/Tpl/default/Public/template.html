@@ -1,3 +1,4 @@
+<!--关注话题|全部话题-->
 <script type="text/template" id="list">
     <li class="topicli clearfix" style="display: list-item;" data-source_type="4" data-source_id="{{id}}">
         <!-- 作者头像 开始 -->
@@ -102,7 +103,117 @@
         </dd>
     </dl>
 </script>
+<!--热门话题-->
+<script id="hot_list" type="text/html">
+    {{if topic_image}}
+    <li class="topicli clearfix" style="display: list-item;" data-source_type="4" data-source_id="{{id}}">
+        <div class="social-topic-thumb pull-left">
+            <a target="_blank" href="/Friends/topic/{{id}}">
+                <img src="{{topic_image}}">
+            </a>
+        </div>
 
+        <div class="social-topic-content">
+            <dl>
+                <dt>
+                    <a target="_blank" href="/Friends/topic/{{id}}">{{content}}</a>
+                </dt>
+                <dd>
+                    <a target="_blank" href="/Friends/topic/{{id}}">{{content}}</a>
+                </dd>
+            </dl>
+            <div class="social-topic-feature">
+                <div class="social-topic-author">
+                    <a target="_blank" href="/Friend/passport/{{id}}">
+                        <img title="{{nick_name}}" src="{{user_image}}">
+                    </a>
+                    <h6>
+                        <a target="_blank" href="/Friends/passport/{{id}}">
+                            {{nick_name}}
+                        </a>
+                    </h6>
+
+                    <p>
+                        发表在<a target="_blank" href="/Friends/tag/{{id}}" title="{{game_name}}">{{game_name}}</a>
+                    </p>
+                </div>
+                <div class="topic-bottom pull-right">
+                    <a class="comment-btn" href="javascript:void(0);">
+                        <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{comment_count}}</span>
+                    </a>
+                    <a href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">{{laud_count}}</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- 评论框 开始 -->
+        <div class="comment-pop clearfix" style="display: none;">
+            <div class="comment-form">
+                <form method="post" action="/topic/publishTopicComment" iyuesai-plugins-valid="0.5891417272134298">
+                    <input type="text" name="content" class="comment-txt">
+                    <button class="btn btn-warning pull-right" type="submit">评论</button>
+                </form>
+            </div>
+            <div class="comment-list"></div>
+            <div style="display:none;margin:10px -10px -10px -10px;" class="commentMore">
+                <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10873">查看全部评论</a>
+            </div>
+        </div>
+        <!-- 评论框 结束 -->
+    </li>
+    {{else}}
+    <li class="topicli clearfix" style="display: list-item;" data-source_type="4" data-source_id="{{id}}">
+
+        <div class="social-topic-content">
+            <dl>
+                <dt>
+                    <a href="/Friends/topic/{{id}}" target="_blank">{{content}}</a>
+                </dt>
+                <dd>
+                    <a href="/Friends/topic/{{id}}" target="_blank">{{content}}</a>
+                </dd>
+            </dl>
+            <div class="social-topic-feature">
+                <div class="social-topic-author">
+                    <a href="/friend/passport_90398/timeline" target="_blank">
+                        <img src="{{user_image}}" title="{{nick_name}}">
+                    </a>
+                    <h6>
+                        <a href="/Friends/passport/{{id}}" target="_blank">
+                            {{nick_name}}
+                        </a>
+                    </h6>
+
+                    <p>
+                        发表在<a title="{{game_name}}" href="/Friends/tag/{{id}}" target="_blank">{{game_name}}</a>
+                    </p>
+                </div>
+                <div class="topic-bottom pull-right">
+                    <a href="javascript:void(0);" class="comment-btn">
+                        <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{comment_count}}</span>
+                    </a>
+                    <a href="javascript:;" data-selector="doPraise"><i class="icon20 icon20-praise "></i>赞<span class="text-error">{{laud_count}}</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- 评论框 开始 -->
+        <div class="comment-pop clearfix" style="display: none;">
+            <div class="comment-form">
+                <form action="/topic/publishTopicComment" method="post">
+                    <input class="comment-txt" type="text" name="content">
+                    <button type="submit" class="btn btn-warning pull-right">评论</button>
+                </form>
+            </div>
+            <div class="comment-list"></div>
+            <div data-selector="commentMore" style="display:none;margin:10px -10px -10px -10px;">
+                <a href="/Friends/topic/{{id}}" class="btn btn-block btn-warning" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" target="_blank">查看全部评论</a>
+            </div>
+        </div>
+        <!-- 评论框 结束 -->
+    </li>
+    {{/if}}
+</script>
+
+<!--推荐赛友-->
 <script id="tpl_friend" type="text/html">
     <li style="display: list-item;">
         <div class="friends-thumb">

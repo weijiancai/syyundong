@@ -57,7 +57,7 @@ $(function () {
         friendChange();
     }
     // 加载新加入赛友
-    var $recommendFriend = $('#recommendFriend');
+  /*  var $recommendFriend = $('#recommendFriend');
     if($recommendFriend.length > 0) {
         function friendChange() {
             jQuery.ajax({
@@ -77,7 +77,7 @@ $(function () {
         }
         $('#tpl_friend_change').click(friendChange);
         friendChange();
-    }
+    }*/
 
     //加赛友
     $('.add_friend').click(function () {

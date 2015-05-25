@@ -26,10 +26,15 @@ $(function () {
         $(this).parent().find('a.current').removeClass('current');
         $(this).addClass('current');
 
-        replay($topicData, $more, 'list', {source_type: $(this).data('value')}, true);
+        replay($topicData, $more, 'hot_list', {source_type: $(this).data('value')}, true);
     });
-
-    replay($topicData, $more, 'list',{source_type: ''});
+    if ($('#topicData').data('topic') == 'hot_topic') {
+        replay($topicData, $more, 'hot_list', {source_type: ''});
+    }
+    //关注话题
+    if ($('#topicData').data('topic') == 'self_topic') {
+        replay($topicData, $more, 'list', {source_type: ''});
+    }
 
     //关注
     $("#topic_focus").click(function () {
@@ -63,6 +68,4 @@ $(function () {
             });
         }
     });
-
-
 });

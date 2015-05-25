@@ -10,17 +10,15 @@
             <img alt="" src="http://static.wisdom-china.cn//images/1/5875/1975/0554/9118ae32273564a55b89e9c9839b9943_0_0.jpg?640x442">
         </div>
         <div class="right-content">
-            <h1>2015武汉后官湖半程马拉松赛友圈<a class="btn" href="/game/429">赛事主页</a></h1>
-
-
+            <h1><{$list.name}><a class="btn" href="/Game/<{$list.id}>" target="_blank">赛事主页</a></h1>
 
             <button class="btn btn-danger" data-followed="0" data-url="/friends/followtag" data-tagid="313" data-selector="follow-btn">关注</button>
 
 
             <div class="pull-right clearfix">
-                <p>关注：24</p>
-                <p>话题：5</p>
-                <p>分类：<a class="btn btn-warning" href="/friends/branch?sportTypeId=7">路跑</a></p>
+                <p>关注：<{$list.focus_count}></p>
+                <p>话题：<{$list.topic_count}></p>
+                <p>分类：<a class="btn btn-warning" href="/Friends/branch?sportTypeId=<{$list.sport_sid}>"><{$list.sport_name}></a></p>
             </div>
         </div>
     </div>
@@ -28,17 +26,23 @@
 <div class="main-block">
 <div data-action="/topic/topic-add" data-selector="pub-wrap" class="publish-box clearfix">
     <p class="publish-box-ttl">发布新鲜事</p>
-    <form data-selector="publish-form" method="post" action="" iyuesai-plugins-valid="0.09656078574556326">
-        <textarea validate-rules="[['required'],['reallength',{min:10}]]" validate-title="话题" name="content"></textarea>
-        <input type="hidden" value="313" name="tagId">
-        <input type="hidden" value="" id="imgMsg" name="photos">
-        <button class="btn btn-warning send-btn">发布</button>
+    <form action="" method="post" data-selector="publish-form" id="TopicForm">
+        <textarea id="content" name="content" validate-title="话题" validate-rules="[['required'],['reallength',{min:10}]]"></textarea>
+        <input type="hidden" name="game_id" value="<{$list.id}>" />
+
+        <input type="hidden" id="imgMsg" value="" name="imgMsg"/>
+        <button type="submit" id="btn-topic" class="btn btn-warning send-btn">发布</button>
     </form>
     <div class="publish-box-bottom clearfix">
-        <iframe width="100%" height="30" frameborder="0" scrolling="no" src="/upload_iframe.html?callback=uploadfinished" id="activeFrame"></iframe>
-        <a href="javascript:void(0);" class="img-up-btn" id="imgUpBtn"><i class="icon20 icon20-img"></i>图片</a>
+
+        <a id="imgUpBtn" class="img-up-btn" href="javascript:void(0);"><i class="icon20 icon20-img"></i>图片</a>
+        <input type="file" class="file" id="fileupload" name="file" value="话题图片" style="position: static;display: none;">
+        <span id="show_mes" style="color:Red"></span>
+        <input type="hidden" value="<{$vo.image}>" name="user_head" id="user_head">
+        <input type="hidden" value="topic" id="path">
     </div>
-    <div class="store-wrap clearfix" id="store-wrap"></div>            </div>
+    <div id="store-wrap" class="store-wrap clearfix"></div>
+</div>
 <div data-selector="relevantTabs" class="public-tab-wrap clearfix">
     <a class="tab current" href="javascript:;">话题<span>(共5话题)</span></a>
     <a class="tab" href="/friends/tag/313/photos">图片墙<span>(共0张)</span></a>
@@ -314,5 +318,6 @@
         replay($('#topicData'), $('#seeMore'), 'list', {game_id:$('#topicData').data('game_id')});
     })
 </script>
-
+<script type="text/javascript" src="/Public/js/pages/topic_upimg.js"></script>
+<script type="text/javascript" src="/Public/js/syweb/jquery.form.js"></script>
 <include file="Public@default:Public:bottom" />

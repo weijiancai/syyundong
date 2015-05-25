@@ -17,6 +17,17 @@ class IndexAction extends Action {
      */
     public function branch(){
         $this->assign('sport',D('Public/Index')->sport_top());
+        //查询当前分类下话题
+        if($_GET['sportTypeId']){
+            $list= D('DbGame')->field('id,name')->where('sport_sid='.$_GET['sportTypeId'])->select();
+        }else{
+            $list = D('DbGame')->field('id,name')->select();
+        }
+        //当前分类下赛友圈(赛事)
+        $friend_game = M('VGameActivity')->field('id,name,image,focus_count,topic_count')->where('sport_sid='.$_GET['sportTypeId'])->limit(10)->select();
+        $this->assign('friend_game',$friend_game);
+        $this->assign('list',$list);
+        $this->firend_rcommend();
         $this->display();
     }
     /*
@@ -78,6 +89,9 @@ class IndexAction extends Action {
         $order  = 'comment_count desc';
         if(!empty($_POST['source_type'])){
              $where['sport_id'] = $_POST['source_type'];
+        }
+        if(!empty($_POST['sportTypeId'])){
+            $where['sport_sid'] = $_POST['sportTypeId'];
         }
         $last = $_POST['last'];
         $amount = $_POST['amount'];//+$_POST['last'];
@@ -209,6 +223,7 @@ class IndexAction extends Action {
         //首先判断用户是否登录
         $mark = deCode(I('session.mark_id'));
         if ($mark) {
+            $this->firend_rcommend();
             $this->display();
         } else {
             $str = ' <script> window.location.href="/login/login"</script>';
@@ -278,5 +293,20 @@ class IndexAction extends Action {
         } else {
             echo 0;
         }
+    }
+    /*
+     * @时间: 20150415
+     * @功能：热门话题
+     */
+    public function hotTopic()
+    {
+        $mark = deCode(I('session.mark_id'));
+        $last = $_POST['last'];
+        $amount = $_POST['amount'];
+        $topic_id=M('OpFocus')->where('user_id='.$mark)->getField('source_id',true);
+        $map['game_id'] =array('in',$topic_id);
+        $map['user_id'] = array('eq',$mark);
+        $list = M('OpGameTopic')->where($map)->limit($last, $amount)->select();
+        echo json_encode($list);
     }
 }
