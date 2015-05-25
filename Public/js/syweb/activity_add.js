@@ -39,6 +39,7 @@ $(document).ready(function () {
         }
     }
     //活动需要报名信息
+
     $.getJSON("/Syweblg2015/DbActivity/getCheck", {id: $("#id").val()}, function (data) {
         for (var i = 0; i < data.length; i++) {
             $('input[value=' + data[i] + ']').attr('checked', 'checked');

@@ -56,6 +56,28 @@ $(function () {
         $('#tpl_friend_change').click(friendChange);
         friendChange();
     }
+    // 加载新加入赛友
+    var $recommendFriend = $('#recommendFriend');
+    if($recommendFriend.length > 0) {
+        function friendChange() {
+            jQuery.ajax({
+                type: "post",
+                url: "/Friends/index/recommendFriend",
+                success: function ($result) {
+                    if ($result) {
+                        var obj = eval($result);
+                        $recommendFriend.empty();
+                        for (var i = 0; i < obj.length; i++) {
+                            var $li = $(template('tpl_friend', obj[i]));
+                            $recommendFriend.append($li);
+                        }
+                    }
+                }
+            })
+        }
+        $('#tpl_friend_change').click(friendChange);
+        friendChange();
+    }
 
     //加赛友
     $('.add_friend').click(function () {

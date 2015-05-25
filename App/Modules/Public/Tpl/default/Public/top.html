@@ -7,22 +7,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
     <meta name="author" content="www.syyundong.com"/>
     <meta name="Copyright" content="www.syyundong.com"/>
-    <meta name="Description" content="松原运动网致力于打造松原最大的体育健康互动平台，以互联网和移动互联网体育赛事服务、体育社交、体育线上线下互动业务为核心，形成新一代参与型大众体育健康消费的互联网新入口。"/>
-    <meta name="Keywords" content="松原运动|运动网|比赛|约活动 发布活动 发布赛事 赛事报名 马拉松 四季跑 社交 场馆 "/>
-    <title>松原运动网|爱运动|约个赛</title>
+    <meta name="Description" content="
+    <?php
+    if(site()){
+      $site = site($detail['name'],$detail['description']);
+      echo($site['Description']);
+    }else{
+      $seo = SEO();
+      echo($seo['Description']);
+    }?>"/>
+    <meta name="Keywords" content="
+    <?php
+    if(site()){
+      $site = site($detail['name'],$detail['description']);
+      echo($site['Keywords']);
+    }else{
+      $seo = SEO();
+      echo($seo['Keywords']);
+    }?>"/>
+
+    <title>
+        <?php
+    if(site()){
+      $site = site($detail['name'],$detail['description']);
+      echo($site['title']);
+    }else{
+      $seo = SEO();
+      echo($seo['title']);
+    }?>
+    </title>
 
     <link type="text/css" rel="stylesheet" href="__PUBLIC__/css/common.min.css">
     <link type="text/css" rel="stylesheet" href="__PUBLIC__/css/public.css">
     <link type="text/css" rel="stylesheet" href="__PUBLIC__/css/zm.css">
     <link type="text/css" rel="stylesheet" href="__PUBLIC__/css/plugins/dialog/ui-dialog.min.css">
-    <link type="text/css" rel="stylesheet" href="__PUBLIC__/js/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link type="text/css" rel="stylesheet"
+          href="__PUBLIC__/js/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
 
     <script type="text/javascript" src="__PUBLIC__/js/lib/jquery-1.11.1.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/lib/jquery.validate.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/lib/bootstrap.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/lib/yoxview/yoxview-init.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/js/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/js/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript"
+            src="__PUBLIC__/js/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript"
+            src="__PUBLIC__/js/lib/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/plugins/dialog.min.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/template.js"></script>
     <script type="text/javascript" src="__PUBLIC__/js/jquery.more.js"></script>
@@ -68,9 +97,12 @@
                                                                 name="user-head"></a>
                             <?php } ?>
                         </th>
-                        <td><a href="/userCenter/game"> <span><{$_SESSION['mark_id']|UserGameCount}></span><br> <em>赛事</em>
-                        </a> <i></i> <a href="/userCenter/activity"> <span><{$_SESSION['mark_id']|UserActivityCount}></span><br> <em>活动</em>
-                        </a> <i></i> <a href="/userCenter/topic"> <span name="user-topic"><{$_SESSION['mark_id']|UserTopicCount}></span><br> <em>话题</em>
+                        <td><a href="/userCenter/game"> <span><{$_SESSION['mark_id']|UserGameCount}></span><br>
+                            <em>赛事</em>
+                        </a> <i></i> <a href="/userCenter/activity">
+                            <span><{$_SESSION['mark_id']|UserActivityCount}></span><br> <em>活动</em>
+                        </a> <i></i> <a href="/userCenter/topic"> <span name="user-topic"><{$_SESSION['mark_id']|UserTopicCount}></span><br>
+                            <em>话题</em>
                         </a></td>
                     </tr>
                     </tbody>
@@ -79,7 +111,7 @@
             <?php }?>
             <div class="header-adwrap" data-selector="headerAdv">
                 <div id="">
-                    <a href="/Public/images/default/"></a>
+                    <img src="/Public/images/default/title.jpg"/>
                 </div>
             </div>
             <!--<h4 id="header-title">登录</h4>-->
@@ -100,7 +132,8 @@
                                     <dd>
                                         <volist name="vo.child" id="v">
                                             <eq name="v.sport_show" value="1">
-                                                <a href="__APP__/Game?keyword=<{$v.name}>" target="_blank"><{$v.name}></a>
+                                                <a href="__APP__/Game?keyword=<{$v.name}>"
+                                                   target="_blank"><{$v.name}></a>
                                             </eq>
                                         </volist>
                                     </dd>
@@ -141,5 +174,5 @@
             </div>
         </div>
     </div>
-    <input type="hidden" >
+    <input type="hidden">
 </div>

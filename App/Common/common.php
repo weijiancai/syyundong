@@ -1,5 +1,121 @@
 <?php
 /**
+ *  功能:SEO标题
+ */
+function SEO(){
+    $list = GROUP_NAME;
+    switch ($list) {
+        case 'Home':
+            $list = array(
+                'title'=>'松原运动网|爱运动|约个赛',
+                'Keywords'=>'松原运动|运动网|比赛|约活动 发布活动 发布赛事 赛事报名 马拉松 四季跑 社交 场馆 ',
+                'Description'=>'松原运动网致力于打造松原最大的体育健康互动平台，以互联网和移动互联网体育赛事服务、体育社交、体育线上线下互动业务为核心，形成新一代参与型大众体育健康消费的互联网新入口',
+            );
+            return $list;
+            break;
+
+        case 'Game':
+            $list = array(
+                'title'=>'松原运动|爱运动|赛事搜索',
+                'Keywords'=>'松原运动网|爱运动 爱比赛|赛事搜索|免费发布赛赛|最新最热门赛事 体育 球类项目 羽毛球  乒乓球  台球 网球  足球  篮球 曲棍球  垒球  棒球 高尔夫  排球 户外运动 自行车  轮滑  定向 攀岩  山地户外活动 航海模型  铁人三项 钓鱼 全民健身 门球  健美  体育舞蹈 健美操  排舞  瑜伽 中国风健身舞  龙舟 划船器  大力士 保龄球  肚皮舞 脚斗士 其他运动 跆拳道  风筝  举重 射击  射箭  游泳 马拉松路跑 马拉松  路跑 ',
+                'Description'=>'松原运动|爱运动|赛事搜索',
+            );
+            return $list;
+            break;
+
+        case 'Activity':
+            $list = array(
+                'title'=>'松原运动网|爱运动|约活动',
+                'Keywords'=>'松原运动网|爱运动|约活动 免费发布活动 参加活动 查找活动  查找附近活动  马拉松 路跑 羽毛球 乒乓球 台球 网球 自行车 山地户外活动 瑜伽 足球 篮球 游泳 钓鱼 ',
+                'Description'=>'松原运动网|爱运动|约活动',
+            );
+            return $list;
+            break;
+        case 'Friends':
+            $list = array(
+                'title'=>'松原运动网| 爱运动 | 赛友圈',
+                'Keywords'=>'松原运动网| 爱运动 | 赛友圈 ',
+                'Description'=>'松原运动网| 爱运动 | 赛友圈',
+            );
+            return $list;
+            break;
+        case 'Venue':
+            $list = array(
+                'title'=>'松原运动网 | 爱运动 |场馆',
+                'Keywords'=>'松原运动网 | 爱运动|场馆 运动场馆联系方式  运动场馆价格',
+                'Description'=>'松原运动网 | 爱运动 |场馆',
+            );
+            return $list;
+            break;
+        case 'Association':
+            $list = array(
+                'title'=>'松原运动网|体育协会|协会',
+                'Keywords'=>'松原运动网|体育协会 加协会|乒乓球协会 篮球协会 足球协会 羽毛球协会 自行车协会',
+                'Description'=>'松原运动网|体育协会|协会',
+            );
+            return $list;
+            break;
+        case 'Doyenhall':
+            $list = array(
+                'title'=>'松原运动网|达人堂|运动达人',
+                'Keywords'=>'松原运动网,运动达人,运动明星 ',
+                'Description'=>'松原运动网|达人堂|运动达人',
+            );
+            return $list;
+            break;
+        default:
+            $list = array(
+                'title'=>'松原运动网|爱运动|约个赛',
+                'Keywords'=>'松原运动|运动网|比赛|约活动 发布活动 发布赛事 赛事报名 马拉松 四季跑 社交 场馆 ',
+                'Description'=>'松原运动网致力于打造松原最大的体育健康互动平台，以互联网和移动互联网体育赛事服务、体育社交、体育线上线下互动业务为核心，形成新一代参与型大众体育健康消费的互联网新入口。',
+            );
+            return $list;
+            break;
+    }
+}
+/**
+ *  $功能：详细优化
+ */
+function site($name,$description){
+    $list = ACTION_NAME;
+    switch ($list) {
+        case 'game_detail':
+            $list = array(
+                'title'=>$name.'|松原运动|赛事|'.$name,
+                'Keywords'=>'松原运动|赛事|'.$name .'报名时间 报名费用 规则介绍 分享 照片 成绩查询 地点 主办方 赛事主办 话题讨论 赛事赛友 赛事图片墙',
+                'Description'=>'松原运动|赛事|'.$name,
+            );
+            return $list;
+            break;
+
+        case 'activity_detail':
+            $list = array(
+                'title'=>'松原运动|活动|'.$name,
+                'Keywords'=>'松原运动|活动|'.$name,
+                'Description'=>'松原运动|赛事|'.$name,
+            );
+            return $list;
+            break;
+
+        case 'venue_detail':
+            $list = array(
+                 'title'=>'松原运动|场馆|'.$name,
+                 'Keywords'=>'松原运动|场馆|'.$name,
+                 'Description'=>'松原运动|场馆|'.$name,
+            );
+            return $list;
+            break;
+        case 'passport':
+            $list = array(
+                'title'=>'松原运动网|爱运动|足迹',
+                'Keywords'=>'松原运动网|爱运动|足迹',
+                'Description'=>'松原运动网|爱运动|足迹',
+            );
+            return $list;
+            break;
+    }
+}
+/**
  *  $功能：加密算法
  */
 function enCode($string = '', $skey = 'dGzni5DcMNi1QaKF8507YcoWkqhzTCPI')

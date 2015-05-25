@@ -110,11 +110,11 @@ class IndexAction extends BaseAction
      */
     public function BannerImage(){
         $model= new Model();
-        $banner = $model->query('SELECT id,name,image FROM v_recommend_game ORDER BY input_date DESC, join_count DESC  LIMIT 0, 6');
+        $banner = $model->query('SELECT id,name,image FROM v_recommend_game ORDER BY sort_num asc, join_count DESC  LIMIT 0, 6');
         $this->assign('banner',$banner);
     }
     /*
-     * @功能：达仁堂
+     * @功能：达人堂
      * @时间:20150418
      */
     public function doyen(){

@@ -63,7 +63,6 @@ class IndexAction extends Action
             $map['start_date'] = array('like', date("Y-m-d", strtotime("+30 day")) . '%');
         }
         $map['type'] = array('eq', 'game');
-        dump($map);
         $count = $model->where($map)->count();
         $Page = new Page($count, 10);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
