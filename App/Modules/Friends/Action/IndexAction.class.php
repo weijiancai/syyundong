@@ -71,16 +71,7 @@ class IndexAction extends Action {
                                 where v.id = o.gc_id and o.recommend_type = "game" and v.type="game" order by o.sort_num limit 9');
         $this->assign('recommend', $list);
     }
-    /*
-    * @功能：推荐赛友
-    * @时间:20150418
-    */
-    public function recommend_friend_user(){
-        $model = New Model();
-        $list = $model->query('select v.id,o.sort_num, v.name,v.province,v.image,v.province,v.join_count from v_game_activity v,op_recommend o
-                                where v.id = o.gc_id and o.recommend_type = "game" and v.type="game" order by o.sort_num limit 9');
-        $this->assign('recommend', $list);
-    }
+
     /*
      * @功能：热门话题
      * @时间: 20150418
@@ -241,7 +232,7 @@ class IndexAction extends Action {
         $topic_id=M('OpFocus')->where('user_id='.$mark)->getField('source_id',true);
         $map['game_id'] =array('in',$topic_id);
         $map['user_id'] = array('eq',$mark);
-        $list = M('OpGameTopic')->where($map)->limit($last, $amount)->select();
+        $list = M('VTopic')->where($map)->limit($last, $amount)->select();
         echo json_encode($list);
     }
     /*
@@ -270,13 +261,14 @@ class IndexAction extends Action {
      */
     public function NewFriend(){
         $where['id'] = array('neq',$_POST['id']);
-        $id = D('DbVenue')->where($where)->getField('id',true);
+        $id = D('DbUser')->where($where)->getField('id',true);
         foreach($id as $key=>$value){
             $ids[$value]= $value;
         }
         $limit =array_rand($ids,4);
         $map['id'] =array('in',$limit);
-        $list = D('DbVenue')->where($map)->select();
+        $list = D('DbUser')->where($map)->order('input_date desc')->select();
+        dump(D('DbUser')->getLastSql());
         echo json_encode($list);
     }
     /*

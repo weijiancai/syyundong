@@ -61,7 +61,7 @@
                     <ul class="social-tag-list clearfix">
                         <volist name="recommend" id="vo" key="k">
                             <li class="tag<{$k}>">
-                                <a href="/Friends/tag/<{$vo.id}>/topics"><{$vo.name}></a>
+                                <a href="/Friends/tag/<{$vo.id}>"><{$vo.name}></a>
                             </li>
                         </volist>
                     </ul>
@@ -75,34 +75,13 @@
                     <div style="min-height:500px;" class="friend-recommend-list clearfix">
                         <style>#NTGUID__4 li{    display: none;  }  </style>
                         <div id="NTGUID__4">
-                            <button data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i><span id="change">换一组</span></button>
-                            <ul data-selector="friendsData" class="clearfix" id="recommend">
+                            <button data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i><span id="tpl_friend_change">换一组</span></button>
+                            <ul class="clearfix" id="recommendFriend">
 
                             </ul>
                         </div>
                     </div>
 
-                    <script id="lists" type="text/html">
-                        <li style="display: list-item;">
-                            <div class="friends-thumb">
-                                <a target="_blank" href="/Friends/passport/{{id}}">
-                                    <img title="{{nick_name}}" src="{{image}}">
-                                </a>
-                            </div>
-                            <p class="friends-nickname">
-                                {{if gender=='M'}}
-                                <i title="男" class="icon16 icon16-boy"></i>
-                                {{/if}}
-                                {{if gender=='F'}}
-                                <i title="女" class="icon16 icon16-girl"></i>
-                                {{/if}}
-                                {{nick_name}}
-                            </p>
-                            <p>
-                                <button data-fid="passport_90514" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-                            </p>
-                        </li>
-                    </script>
                 </div>
             </div>
         </div>

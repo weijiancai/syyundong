@@ -57,27 +57,27 @@ $(function () {
         friendChange();
     }
     // 加载新加入赛友
-  /*  var $recommendFriend = $('#recommendFriend');
-    if($recommendFriend.length > 0) {
-        function friendChange() {
+    var $NewFriendsData = $('#NewFriendsData');
+    if($NewFriendsData.length > 0) {
+        function NewfriendChange() {
             jQuery.ajax({
                 type: "post",
-                url: "/Friends/index/recommendFriend",
+                url: "/Friends/index/NewFriend",
                 success: function ($result) {
                     if ($result) {
                         var obj = eval($result);
-                        $recommendFriend.empty();
+                        $NewFriendsData.empty();
                         for (var i = 0; i < obj.length; i++) {
-                            var $li = $(template('tpl_friend', obj[i]));
-                            $recommendFriend.append($li);
+                            var $li = $(template('tpl_new_friend', obj[i]));
+                            $NewFriendsData.append($li);
                         }
                     }
                 }
             })
         }
-        $('#tpl_friend_change').click(friendChange);
-        friendChange();
-    }*/
+        $('#tpl_new_friend_change').click(NewfriendChange);
+        NewfriendChange();
+    }
 
     //加赛友
     $('.add_friend').click(function () {

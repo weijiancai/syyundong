@@ -251,7 +251,7 @@ class IndexAction extends BaseAction
 
     /*
      * @时间:20150408
-     * @功能：个人资料编辑
+     * @功能：我的赛友
      */
     public function friend()
     {
@@ -278,7 +278,7 @@ class IndexAction extends BaseAction
     public function deletefriend(){
         $date['friend_id'] = $_GET['id'];
         $date['user_id'] = deCode(session('mark_id'));
-        $result =M('OpUserFriend')->delete($date);
+        $result =M('OpUserFriend')->where($date)->delete();
         if($result!==false){
             $this->display('/userCenter/friend');
         }

@@ -13,7 +13,7 @@ $(function () {
             oldPassword: {
                 required: true,
                 remote: {
-                    url: "/userCenter/index/checkPwd",       //后台处理程序
+                    url: "/userCenter/index/checkPwd",  //后台处理程序
                     type: "post",                      //数据发送方式
                     dataType: "json",                 //接受数据格式
                     data: {                           //要传递的数据
@@ -141,5 +141,6 @@ $(function () {
                 });
             }
         });
+//删除赛友
 
 });
