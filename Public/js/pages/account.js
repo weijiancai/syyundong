@@ -7,7 +7,7 @@ $(function () {
 
 
     //修改密码
-  var $form = $('#pwdForm');
+    var $form = $('#pwdForm');
     $form.validate({
         rules: {
             oldPassword: {
@@ -55,13 +55,13 @@ $(function () {
             jQuery.ajax({
                 type: "post",
                 url: "/userCenter/index/ResetPwdSubmit",
-                data: {'newPassword':$('#newPassword').val()},
+                data: {'newPassword': $('#newPassword').val()},
                 success: function ($result) {
-                    if($result){
+                    if ($result) {
                         $.dialog.success('密码修改成功');
 
-                    //    window.location.href='/login/login';
-                    }else{
+                        //    window.location.href='/login/login';
+                    } else {
                         $.dialog.error('密码修改失败');
                     }
                 }
@@ -71,13 +71,13 @@ $(function () {
     //兴趣爱好取值
     $("li").click(function () {
         var name = $(this).data('name');
-        if($(this).hasClass('current')){
+        if ($(this).hasClass('current')) {
             $(this).removeClass('current');
-            var str  = $('#interest').val()
-            $('#interest').val(str.replace($(this).data('id')+',',""));
-        }else{
+            var str = $('#interest').val()
+            $('#interest').val(str.replace($(this).data('id') + ',', ""));
+        } else {
             $(this).addClass('current');
-            $('#interest').val($('#interest').val()+ $(this).data('id') + ',');
+            $('#interest').val($('#interest').val() + $(this).data('id') + ',');
         }
         $('#cked-num').html($('.interest-list .current').length);
     });
@@ -98,49 +98,95 @@ $(function () {
         return this.optional(element) || ( length >= param[0] && length <= param[1] );
     }, "请确保输入的值在3-15个字节之间(一个中文字算2个字节)");
 
-        $form.validate({
-            rules: {
-                nick_name: {
-                    required: true,
-                    stringCheck: true,
-                    byteRangeLength: [3, 15],
-                    remote: {
-                        url: "/userCenter/index/isExistNc",       //后台处理程序
-                        type: "post",                      //数据发送方式
-                        dataType: "json",                 //接受数据格式
-                        data: {                           //要传递的数据
-                            nickName: function () {
-                                return $("#nick_name").val();
-                            }
+    $form.validate({
+        rules: {
+            nick_name: {
+                required: true,
+                stringCheck: true,
+                byteRangeLength: [3, 15],
+                remote: {
+                    url: "/userCenter/index/isExistNc",       //后台处理程序
+                    type: "post",                      //数据发送方式
+                    dataType: "json",                 //接受数据格式
+                    data: {                           //要传递的数据
+                        nickName: function () {
+                            return $("#nick_name").val();
                         }
+                    }
 
+                }
+            }
+        },
+        messages: {
+            nick_name: {
+                required: "请填写昵称",
+                stringCheck: "昵称只能包括中文字、英文字母、数字和下划线",
+                byteRangeLength: "请确保昵称在3-15个字节之间(一个中文字算2个字节)",
+                remote: $.validator.format("该昵称已存在！")
+            }
+        },
+        submitHandler: function (form) {
+            jQuery.ajax({
+                type: "post",
+                url: "/userCenter/index/accountEditSubmit/",
+                data: $form.serialize(),
+                success: function (result) {
+                    if (result == 1) {
+                        $.dialog.success('修改成功！');
+                        //    window.location.href="";
+                    } else if (result == 2) {
+                        $.dialog.error('修改失败！');
                     }
                 }
-            },
-            messages: {
-                nick_name: {
-                    required: "请填写昵称",
-                    stringCheck: "昵称只能包括中文字、英文字母、数字和下划线",
-                    byteRangeLength: "请确保昵称在3-15个字节之间(一个中文字算2个字节)",
-                    remote: $.validator.format("该昵称已存在！")
+            });
+        }
+    });
+//删除赛友
+    $('#del_user_friend').click(function () {
+        jQuery.ajax({
+            type: "post",
+            url: "/userCenter/index/del_friend/",
+            data: {friend_id: $('#del_user_friend').data('friend')},
+            success: function ($result) {
+                if ($result) {
+                    dialog({
+                        content: '修改成功',
+                        ok: function () {
+                            window.location.href = ''
+                        },
+                        cancel: false
+                    }).show();
+                } else {
+                    $.dialog.error('修改失败！');
                 }
-            },
-            submitHandler: function (form) {
+            }
+        });
+    })
+    //删除评论
+    $('.del_topic').click(function () {
+        $url  =$(this).data('url');
+        $id =$(this).data('value')
+        dialog({
+            content: '确定要删除吗',
+            okValue: '确定',
+            ok: function () {
                 jQuery.ajax({
                     type: "post",
-                    url: "/userCenter/index/accountEditSubmit/",
-                    data: $form.serialize(),
-                    success: function (result) {
-                        if (result == 1) {
-                            $.dialog.success('修改成功！');
-                            //    window.location.href="";
-                        } else if (result == 2) {
-                            $.dialog.error('修改失败！');
+                    url: $url,
+                    data: {topic_id: $id},
+                    success: function ($result) {
+                        if ($result) {
+                      //      window.location.href = ''
+                        } else {
+                            $.dialog.error('删除失败！');
                         }
                     }
                 });
+                return false;
+            },
+            cancelValue: '取消',
+            cancel: function () {
             }
-        });
-//删除赛友
-
+        }).show();
+    })
 });

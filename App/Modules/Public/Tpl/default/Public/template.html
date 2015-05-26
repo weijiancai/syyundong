@@ -231,7 +231,12 @@
             {{nick_name}}
         </p>
         <p>
+            {{if add == '1'}}
+            <button data-fid="passport_90514" data-selector="add-follow" class="btn">已添加</button>
+            {{/if}}
+            {{if add =='0'}}
             <button data-fid="passport_90514" data-selector="add-follow" class="btn btn-warning add_friend">加赛友</button>
+            {{/if}}
         </p>
     </li>
 </script>
@@ -254,7 +259,12 @@
             {{nick_name}}
         </p>
         <p>
+            {{if add == '1'}}
+            <button data-fid="passport_90514" data-selector="add-follow" class="btn btn-warning">已添加</button>
+            {{/if}}
+            {{if add =='0'}}
             <button data-fid="passport_90514" data-selector="add-follow" class="btn btn-warning add_friend">加赛友</button>
+            {{/if}}
         </p>
     </li>
 </script>

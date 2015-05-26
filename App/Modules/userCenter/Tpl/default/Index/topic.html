@@ -6,24 +6,16 @@
             <div class="span16">
                 <div class="account-top">
                     <div class="account-thumb">
-                        <img name="user-head" src="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_110x110.jpg">
-                        <!-- <img src="http://static.wisdom-china.cn/iyuesai/images/pages/user-head.jpg">-->
+                        <img name="user-head" src="<{$user['id']|getUsersImage}>">
                         <div class="alpha-bg"></div>
                     </div>
                     <div class="account-right">
                         <p class="account-right-name">
-                            <strong>wei-jc</strong>
-                            <!--
-                            <span class="pull-right">高级达人 <em class="account-tip">积分</em>：3346.0</span>
-                            -->
+                            <strong><{$user.nick_name}></strong>
                         </p>
-                        <!--
-                        <p class="account-tip">一句话介绍一下自己吧，让别人更了解你</p>
-                        <p><span class="account-tip">运动喜好：</span>足球 自行车 攀岩 飞盘</p>
-                        -->
 
-                        <p class="account-tip">一句话介绍一下自己吧，让别人更了解你</p>
-                        <p><span class="account-tip">运动喜好：路跑  肚皮舞</span></p>
+                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$user.signature}></if></p>
+                        <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
                         <div class="alpha-bg"></div>
                     </div>
                 </div>
@@ -37,11 +29,6 @@
                         <li><a href="/userCenter/activity">我的活动</a></li>
                         <li><a href="/userCenter/topic" class="current">我的话题</a></li>
                         <li><a href="/userCenter/friend">我的赛友</a></li>
-                       <!-- <li><a href="/userCenter/message/msg-game">我的消息</a><i class="msg-tip" data-selector="unreadMsgCount">0</i></li>-->
-                        <!--
-                        <li><a href="/userCenter/orders">我的订单</a></li>
-                        <li><a href="/userCenter/venues">我的场馆</a></li>
-                        -->
                         <li><a href="/userCenter/account">账号设置</a></li>
                     </ul>
                 </div>
@@ -50,27 +37,57 @@
           <div class="span10">
             <div class="main-block clearfix"> -->
             <div class="span16">
-                <div class="container ucenter-container">
-                    <div class="main-block clearfix">
-                        <div class="public-tab-wrap clearfix" data-selector="relevantTabs">
-                            <a href="/userCenter/topic" class="tab current">我发表的</a> <a href="/userCenter/topic/reply" class="tab">我评论的</a> <a href="/userCenter/topic/like" class="tab">我赞的</a>
+            <div class="container ucenter-container">
+            <div class="main-block clearfix">
+            <div data-selector="relevantTabs" class="public-tab-wrap clearfix">
+                <a class="tab current" href="/userCenter/topic">我发表的</a>
+                <a class="tab" href="/userCenter/topic/replay">我评论的</a>
+                <a class="tab" href="/userCenter/topic/like">我赞的</a>
+            </div>
+            <!-- 我发表的 开始 -->
+            <div class="tab-content-wrap my-topic-wrap">
+            <ul class="topic-list clearfix">
+            <volist name="list" id="vo">
+                <li>
+                    <div class="topic-host-thumb pull-left">
+                        <img alt="" src="<{$vo.user_image}>">
+                    </div>
+                    <div class="topic-right">
+                        <!--   若以后赛友圈的url变化，此处需修改 -->
+                        <p class="topic-info">
+                            <{$vo.user_name}> <span class="topic-time">
+                          <{$vo.input_date}></span>
+                        </p>
+                        <p class="topic-des">
+                            <a target="_blank" href="/Friends/topic/<{$vo.id}>"><{$vo.content}></a>
+                        </p>
+                        <p class="topic-des">
+                            发表在赛友圈<a target="_blank" href="/Friends/tag/<{$vo.game_id}>"><span class="text-error">“<{$vo.game_name}>”</span></a>
+                        </p>
+                        <div class="topic-bottom pull-right">
+                            <a class="del_topic" data-url="/userCenter/index/del_topic" data-value="<{$vo.id}>" data-selector="deleteTopic"><i class="icon20"></i>删除</a>
+                            <a target="_blank" href="/Friends/topic/<{$vo.id}>"><i class="icon20 icon20-comment"></i>评论<span class="text-error"><{$vo.comment_count}></span></a> <a target="_blank" href="/topic/11872"><i class="icon20 icon20-praise"></i>赞<span class="text-error">0</span></a>
                         </div>
-                        <div class="nodata-module"></div>
                     </div>
-                </div>
-                <!--           <div class="span6">
-                  <div class="side-block">
-                    <h4 class="slider-title">我关注的赛友圈</h4>
-                    <div class="side-content">
-                       <p><a href="/friends/game/416" target="_blank">纽约马拉松</a></p>
-                       <p><a href="/friends/game/344" target="_blank">马拉松Break4精英团招募</a></p>
+                </li>
+            </volist>
+
+            </ul>
+            </div>
+            <!-- 分页 开始 -->
+            <div class="main-block pagging-block">
+                <form action="#" id="paging-form">
+                    <div class="paging-wrap">
+                        <{$page}>
                     </div>
-                  </div>
-                </div> -->
-                <!-- </div> -->
+                </form>
+            </div>
+            <!-- 分页 结束 -->
+            </div>
+            </div>
             </div>
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="/public/js/pages/account.js"/>
 <include file="Public@default:Public:bottom" />

@@ -253,6 +253,17 @@ class IndexAction extends Action {
         }
         $map['id'] =array('in',$limit);
         $list = D('VDoyenUser')->where($map)->select();
+        foreach ($list as $key =>$val){
+            $result = D('OpUserFriend')->where('user_id=' . $my . ' and friend_id=' . $val['id'])->select();
+            if ($result) {
+                //已添加
+                $val['add'] = 1;
+            } else {
+                //未添加
+                $val['add'] = 0;
+            }
+            $list[$key] = $val;
+        }
         echo json_encode($list);
     }
     /*

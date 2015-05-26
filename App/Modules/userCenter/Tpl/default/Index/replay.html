@@ -1,0 +1,89 @@
+<include file="Public@default:Public:top" />
+<div class="ucenter-page account-bg clearfix">
+<div class="container">
+<div class="row">
+<div class="span16">
+    <div class="account-top">
+        <div class="account-thumb">
+            <img name="user-head" src="<{$user['id']|getUsersImage}>">
+            <div class="alpha-bg"></div>
+        </div>
+        <div class="account-right">
+            <p class="account-right-name">
+                <strong><{$user.nick_name}></strong>
+            </p>
+
+            <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$user.signature}></if></p>
+            <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
+            <div class="alpha-bg"></div>
+        </div>
+    </div>
+</div>
+<div class="span16">
+    <div class="public-subnav clearfix">
+        <ul>
+            <li><a href="/userCenter/timeline">我的足迹</a></li>
+            <li><a href="/userCenter/profile">个人资料</a></li>
+            <li><a href="/userCenter/game">我的赛事</a></li>
+            <li><a href="/userCenter/activity">我的活动</a></li>
+            <li><a class="current" href="/userCenter/topic">我的话题</a></li>
+            <li><a href="/userCenter/friend">我的赛友</a></li>
+            <li><a href="/userCenter/account">账号设置</a></li>
+        </ul>
+    </div>
+</div>
+<div class="span16">
+<div class="container ucenter-container">
+<div class="main-block clearfix">
+<div data-selector="relevantTabs" class="public-tab-wrap clearfix">
+    <a class="tab" href="/userCenter/topic">我发表的</a>
+    <a class="tab current" href="/userCenter/topic/reply">我评论的</a>
+    <a class="tab" href="/userCenter/topic/like">我赞的</a>
+</div>
+<!-- 我发表的 开始 -->
+<div class="tab-content-wrap my-topic-wrap">
+<ul class="topic-list clearfix">
+<volist name="list" id="vo">
+    <li>
+        <div class="topic-host-thumb pull-left">
+            <img alt="" src="<{$vo.image}>">
+        </div>
+        <div class="topic-right">
+            <p class="topic-info">
+                <{$vo.nick_name}><span class="topic-time"><{$vo.input_date}>
+                          23:19:44</span>
+            </p>
+            <p class="topic-des">发表评论：<{$vo.content}></p>
+            <p class="topic-des">
+                回复话题：<a target="_blank" href="/Friends/topic/<{$vo.source_id}>">
+                <span class="text-error"><{$vo.topic_content}></span>
+            </a>
+                <a class="del_topic" style="color:#999" href="javascript:;" data-url="/userCenter/del_reply/"  data-value="<{$vo.id}>"><i class="icon20"></i>删除</a>
+            </p>
+            <div class="topic-bottom pull-right">
+                <a target="_blank" href="/Friends/topic/<{$vo.source_id}>"><i class="icon20 icon20-comment"></i>评论<span class="text-error">2</span></a> <a target="_blank" href="/topic/12012"><i class="icon20 icon20-praise"></i>赞<span class="text-error">1</span></a>
+            </div>
+        </div>
+    </li>
+</volist>
+
+</ul>
+</div>
+<!-- 分页 开始 -->
+<div class="main-block pagging-block">
+    <form action="#" id="paging-form" iyuesai-plugins-valid="0.5595042099046853">
+        <div class="paging-wrap">
+           <{$page}>
+        </div>
+    </form>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="/public/js/pages/account.js"/>
+<include file="Public@default:Public:bottom" />
