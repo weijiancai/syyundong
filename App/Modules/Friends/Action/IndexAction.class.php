@@ -58,7 +58,7 @@ class IndexAction extends Action {
      */
     public function tag(){
         $id  =$_GET['id'];
-        $this->assign('list',D('VGameActivity')->where("id=".$id." and type='game'")->find());
+        $this->assign('tag',D('VGameActivity')->where("id=".$id." and type='game'")->find());
         $this->display();
     }
     /*
@@ -364,15 +364,24 @@ class IndexAction extends Action {
      * @时间:20150418
      */
     public function DoPraise(){
+
         $date['user_id'] = deCode(session('mark_id'));
         $date['source_id'] = $_POST['source_id'];
         $date['source_type'] =$_POST['source_type'];
-        $date['input_date'] = date('Y-m-d H:i:s');
-        $result = M('OpFocus')->add($date);
-        if($result){
-            echo 'true';
-        }else{
+        $list = M('OpFocus')->where($date)->select();
+        if($list){
             echo 'false';
+        }else{
+            $date['input_date'] = date('Y-m-d H:i:s');
+            $result = M('OpFocus')->add($date);
+            if($result){
+                D('OpGameTopic')->where('id = '.$_POST['source_id'])->setInc('laud_count');
+                echo 'true';
+            }else{
+                echo 'error';
+            }
         }
+
     }
+
 }

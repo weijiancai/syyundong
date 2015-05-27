@@ -141,7 +141,29 @@ class IndexAction extends BaseAction
         D('OpJoinGame')->where($date)->delete();
         echo ' <script> window.location.href="/userCenter/game"</script>';
     }
-
+    /*
+     * @功能：我的赛事：我发起的
+     * @时间:20150408
+     */
+    public function creates()
+    {
+        import('ORG.Util.Page');
+        $model = D('VGameActivity');
+        $map['input_user'] = deCode(I('session.mark_id'));
+        $map['type'] = 'game';
+        $order = 'input_date desc';
+        $count = $model->where($map)->count();
+        $Page = new Page($count, 10);
+        $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+        $Page->rollPage = 10;
+        $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
+        $show = $Page->show();
+        $this->assign('page', $show);
+        $this->assign('creates', $list);
+        $this->assign('count', $count);
+        $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
+        $this->display();
+    }
     /*
     * @功能：我的赛事：报名详情
     * @时间:20150408

@@ -6,7 +6,7 @@
  * @VIEW:v_game_activity
  * @Author：liuliting
  */
-class IndexAction extends Action
+class IndexAction extends BaseAction
 {
     public function index()
     {
@@ -113,13 +113,13 @@ class IndexAction extends Action
         $date['apply_name'] = I('post.applyName');
         $date['apply_phone'] = I('post.applyPhone');
         $date['apply_email'] = I('post.applyEmail');
-        $date['is_verify'] = F;
+        $date['is_verify'] = 'F';
         $date['input_date'] = date('Y-m-d H:i:s');
         $date['input_user'] = deCode(I('session.mark_id'));
         $result = $model->add($date);
         if (false !== $result) {
             //记录足迹
-            $this->TimeLine($result, '', '发布赛事', 'Game');
+            $this->TimeLine($result, I('post.name'), '发布赛事', 'Game');
             //申请人ID
             $this->assign('applyID', date('Ymd') . $result);
             $this->assign('name', I('post.name'));

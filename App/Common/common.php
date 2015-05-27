@@ -627,7 +627,9 @@ function  UserGameCount($mark_id)
 {
     $map['user_id'] = deCode($mark_id);
     $count = D('VJoinGame')->where($map)->count();
-    return $count;
+    $where['input_user'] = deCode($mark_id);
+    $count1  =D('DbGame')->where($where)->count();
+    return $count+$count1;
 }
 
 /*
@@ -638,7 +640,9 @@ function  UserActivityCount($mark_id)
 {
     $map['user_id'] = deCode($mark_id);
     $count = D('VJoinActivity')->where($map)->count();
-    return $count;
+    $where['input_user'] = deCode($mark_id);
+    $count1  =D('DbActivity')->where($where)->count();
+    return $count+$count1;
 }
 
 /*

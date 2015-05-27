@@ -83,7 +83,6 @@ $(function () {
 
     //加赛友
     $('.add_friend').click(function () {
-        alert('55');
         var self = $(this);
         jQuery.ajax({
             type: "post",
@@ -155,17 +154,22 @@ function replay($container, $more, tpl_id, params, isReset) {
                     // 点赞
                     $row.find('a.doPraise').click(function () {
                         var self = $(this);
+                        var i = $(this).find(i);
                         if (isLogin()) {
                             jQuery.ajax({
                                 type: "post",
                                 url: "/Friends/index/DoPraise",
-                                data: {friend_id: $(this).data('value'), source_id: sourceId},
-                                success: function (result) {
-                                    if (result == 1) {
-                                        $.dialog.success('添加成功');
-                                        self.removeClass('btn-warning').attr('disabled', 'disabled');
+                                data: {source_id: sourceId, source_type: sourceType},
+                                success: function ($result) {
+                                    if ($result=='true') {
+                                        $.dialog.success('点赞成功');
+                                      //  i.addClass('icon20-praised');
+                                        self.find('i').addClass('icon20-praised');
+                                       // self.removeClass('btn-warning').attr('disabled', 'disabled');
+                                    }else if($result =='error'){
+                                        $.dialog.error('点赞失败');
                                     } else {
-                                        $.dialog.error('添加赛友失败,请稍后重试');
+                                        $.dialog.error('已赞过');
                                     }
                                 }
                             });

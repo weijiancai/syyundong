@@ -242,7 +242,7 @@ class IndexAction extends BaseAction
         $result = M('DbActivity')->add($date);
         if(false!==$result){
             //记录足迹
-            $this->TimeLine($result,'','发起赛事','Activity');
+            $this->TimeLine($result,'','发布活动','Activity');
             echo $result;
         }else{
             echo 'false';

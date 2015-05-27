@@ -24,13 +24,13 @@
             </p>
             <div class="topic-bottom text-right">
                 <p class="topic-source pull-left">
-                    发表在<a target="_blank" href="/Friends/tag/{{id}}">{{game_name}}</a>
+                    发表在<a target="_blank" href="/Friends/tag/{{game_id}}">{{game_name}}</a>
                 </p>
 
                 <a class="comment-btn" href="javascript:void(0);" data-id="{{id}}">
                     <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{comment_count}}</span>
                 </a>
-                <a data-url="/topic/comment-like" class="doPraise" href="javascript:;">
+                <a data-url="/topic/comment-like" class="doPraise" href="javascript:;" data-value="{{id}}" data-type="4">
                     <i class="icon20 icon20-praise "></i>赞<span class="text-error">{{laud_count}}</span>
                 </a>
             </div>
@@ -59,7 +59,7 @@
 
 <!-- 回复话题模板 -->
 <script type="text/template" id="tpl_topic_comment">
-    <dl class="clearfix" style="display: block;">
+    <dl class="clearfix" style="display: block;"  data-source_type="4" data-source_id="<{$_GET['id']}>">
         <dt>
             <!--<a target="_blank" href="/friend/passport_79472/timeline"></a>-->
             <img title="{{nick_name}}" src="{{image}}">
@@ -134,7 +134,7 @@
                     </h6>
 
                     <p>
-                        发表在<a target="_blank" href="/Friends/tag/{{id}}" title="{{game_name}}">{{game_name}}</a>
+                        发表在<a target="_blank" href="/Friends/tag/{{game_id}}" title="{{game_name}}">{{game_name}}</a>
                     </p>
                 </div>
                 <div class="topic-bottom pull-right">
@@ -184,7 +184,7 @@
                     </h6>
 
                     <p>
-                        发表在<a title="{{game_name}}" href="/Friends/tag/{{id}}" target="_blank">{{game_name}}</a>
+                        发表在<a title="{{game_name}}" href="/Friends/tag/{{game_id}}" target="_blank">{{game_name}}</a>
                     </p>
                 </div>
                 <div class="topic-bottom pull-right">
@@ -213,6 +213,7 @@
     </li>
     {{/if}}
 </script>
+
 
 <!--推荐赛友-->
 <script id="tpl_friend" type="text/html">
