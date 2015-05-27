@@ -81,9 +81,10 @@
                 <div class="side-block">
                     <h4 class="slider-title">推荐赛友</h4>
 
-                    <div data-add-action="/friends/game-friend-add" data-url="/friends/recommenttaguser" data-reply-action="#" data-params="{'pageSize':6,'pageNum':0}" data-selector="recommend-friend-box" style="min-height:500px;" class="friend-recommend-list clearfix"><style>#NTGUID__4 li{    display: none;  }  </style><div id="NTGUID__4">
-                        <button data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i>
-                            <span id="tpl_friend_change">换一组</span></button>
+                    <div data-add-action="/friends/game-friend-add" data-url="/friends/recommenttaguser"  data-selector="recommend-friend-box" style="min-height:500px;" class="friend-recommend-list clearfix"><style>#NTGUID__4 li{    display: none;  }  </style><div id="NTGUID__4">
+                        <button id="tpl_friend_change" data-selector="moreData" class="btn public-reload-link">
+                            <i class="icon-match icon-reload"></i>
+                            <span>换一组</span></button>
                         <ul class="clearfix" id="recommendFriend">
 
                         </ul>

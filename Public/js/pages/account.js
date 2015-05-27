@@ -152,7 +152,7 @@ $(function () {
                     dialog({
                         content: '修改成功',
                         ok: function () {
-                            window.location.href = ''
+                            window.location.href = '';
                         },
                         cancel: false
                     }).show();
@@ -173,10 +173,10 @@ $(function () {
                 jQuery.ajax({
                     type: "post",
                     url: $url,
-                    data: {topic_id: $id},
+                    data: {common_id: $id},
                     success: function ($result) {
                         if ($result) {
-                      //      window.location.href = ''
+                            window.location.href = ''
                         } else {
                             $.dialog.error('删除失败！');
                         }

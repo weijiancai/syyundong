@@ -11,12 +11,12 @@
                         </div>
                         <input type="hidden" value="<{$game.id}>" id="topic_id">
                         <div class="right-content">
-                            <h1><a href="/friends/tag/282"><{$game.name}></a><a class="btn" href="/Game/<{$game.id}>">赛事主页</a></h1>
+                            <h1><a href="/Friends/tag/<{$game.id}>"><{$game.name}></a><a class="btn" href="/Game/<{$game.id}>">赛事主页</a></h1>
                             <button id="topic_focus" class="btn btn-danger"data-value="<{$game.id}>" data-selector="follow-btn">关注</button>
                             <div class="pull-right clearfix">
                                 <p>关注：<{$game.focus_count}></p>
                                 <p>帖子：</p>
-                                <p>分类：<a class="btn btn-warning" href="/Friends/branch?sportTypeId=60"><{$game.sport_name}></a></p>
+                                <p>分类：<a class="btn btn-warning" href="/Friends/branch?sportTypeId=<{$game.sport_sid}>"><{$game.sport_name}></a></p>
                             </div>
                         </div>
                     </div>
@@ -69,11 +69,11 @@
                                             <img title="wei-jc" src="http://static.wisdom-china.cn//images/1/7026/5155/6160/d0bc19728943e09ba394210c04a533a1_2_40x40.png?140x140"></a>
                                     </dt>
                                     <dd>
-                                        <form method="post" action="/topic/publishTopicComment" class="clearfix" id="topiccommentform">
-                                            <input type="hidden" value="<{$topic.id}>" name="reply_to">
-                                            <input type="hidden" value="<{$game.id}>" name="game_id" id="game_id">
+                                        <form method="post" action="/topic/publishTopicComment" class="clearfix" name="topic_comment_form" id="topic_comment_form">
+                                            <input type="hidden" value="<{$game.id}>" name="source_id" id="source_id">
+                                            <input type="hidden" value="4" name="source_type" id="source_type">
                                             <div class="comment-form">
-                                                <input type="text"  name="content" class="comment-txt">
+                                                <input type="text"  id="content" name="content" class="comment-txt">
                                                 <button class="btn btn-warning pull-right" type="submit">评论</button>
                                             </div>
                                         </form>
@@ -90,7 +90,7 @@
 
                         </div>
                         <p>
-                            <button  id="topic_more" data-last="0" data-selector="seeMore" class="btn btn-block">查看更多</button>
+                            <button  data-last="0" id="seeMore" class="btn btn-block">查看更多</button>
                         </p>
                     </div>
 
@@ -102,123 +102,13 @@
                 <!-- 推荐赛友 start -->
                 <div class="side-block">
                     <h4 class="slider-title">推荐赛友</h4>
-                    <div data-url="/friends/friends-list/282" data-add-action="/friends/game-friend-add" data-params="{'pageSize':6,'pageNum':0}" data-selector="recommend-friend-box" class="friend-recommend-list clearfix"><style>#NTGUID__2 li{    display: none;  }  </style><div id="NTGUID__2">
-                        <button data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i>换一组</button>
-                        <ul data-selector="friendsData" class="clearfix"><div id="NTGUID__2NDTGUID__c">
+                    <div data-url="/friends/friends-list/282" data-add-action="/friends/game-friend-add" data-selector="recommend-friend-box" class="friend-recommend-list clearfix"><style>#NTGUID__2 li{    display: none;  }  </style><div id="NTGUID__2">
+                        <button id="tpl_friend_change" data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i>
+                            <span >换一组</span></button>
+                        <ul id="recommendFriend" class="clearfix">
+                            <div id="NTGUID__2NDTGUID__c">
 
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_83718/timeline">
-                                        <img title="猫熊妮妮" src="http://static.wisdom-china.cn//images/1/2553/4645/7894/170f8036f69470a147f946c5f27d7dc6_2_60x60.jpg">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
 
-                                    <i title="女" class="icon16 icon16-girl"></i>
-
-                                    猫熊妮妮
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_83718" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_81370/timeline">
-                                        <img title="right先生" src="http://static.wisdom-china.cn//images/1/5836/1870/9450/10efa6f869ed50e92c169671bce3de14_2_60x60.jpg">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
-
-                                    <i title="男" class="icon16 icon16-boy"></i>
-
-                                    right先生
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_81370" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_75733/timeline">
-                                        <img title="远山飞鸟" src="http://static.wisdom-china.cn//images/1/1985/4160/3510/faf7fdb3332ca76e07ecb022c9582e60_2_60x60.jpg">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
-
-                                    <i title="女" class="icon16 icon16-girl"></i>
-
-                                    远山飞鸟
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_75733" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_83533/timeline">
-                                        <img title="好球员败给狗裁判" src="http://static.wisdom-china.cn//images/1/5090/3934/0168/2f2854def560905c906232731e79175c_2_60x60.png">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
-
-                                    <i title="男" class="icon16 icon16-boy"></i>
-
-                                    好球员败给狗裁判
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_83533" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_84303/timeline">
-                                        <img title="哎哟矮油" src="http://static.wisdom-china.cn//images/1/1817/8146/0570/e2e01d2faa7d101f5808ed186cc548ee_2_60x60.jpg">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
-
-                                    <i title="男" class="icon16 icon16-boy"></i>
-
-                                    哎哟矮油
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_84303" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_83706/timeline">
-                                        <img title="幸运的丸子" src="http://static.wisdom-china.cn//images/1/4517/7523/7173/f91353315d9bb20a180c899b4eee7503_2_60x60.jpg">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
-
-                                    <i title="女" class="icon16 icon16-girl"></i>
-
-                                    幸运的丸子
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_83706" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
 
                         </div>
                         </ul>
@@ -233,121 +123,9 @@
                     <h4 class="slider-title">新加入赛友</h4>
                     <div data-url="/friends/friends-list/282" data-add-action="/friends/game-friend-add" data-params="{'friendsType':'recent','pageSize':6,'pageNum':0}" data-selector="new-friend-box" class="friend-recommend-list clearfix"><style>#NTGUID__3 li{    display: none;  }  </style><div id="NTGUID__3">
                         <button data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i>换一组</button>
-                        <ul data-selector="friendsData" class="clearfix"><div id="NTGUID__3NDTGUID__d">
+                        <ul id="NewFriendsData" class="clearfix"><div id="NTGUID__3NDTGUID__d">
 
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_86674/timeline">
-                                        <img title="王猛互联网" src="http://static.wisdom-china.cn//images/1/proxy/tp3!sinaimg!cn/1403389482/180/5632493033/1/1403389482_2_60x60.png">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
 
-                                    <i title="男" class="icon16 icon16-boy"></i>
-
-                                    王猛互联网
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_86674" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_81244/timeline">
-                                        <img title="跑步中的战斗机" src="http://static.wisdom-china.cn//images/1/2220/4284/9702/9f096367b5eaffce914f0d2c5b1599e1_2_60x60.jpg">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
-
-                                    <i title="男" class="icon16 icon16-boy"></i>
-
-                                    跑步中的战斗机
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_81244" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_81356/timeline">
-                                        <img title="时间煮雨" src="http://static.wisdom-china.cn//images/1/6564/0478/5359/dc8c3cd0c7c3a349488f4e246c8d843c_2_60x60.jpg">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
-
-                                    <i title="男" class="icon16 icon16-boy"></i>
-
-                                    时间煮雨
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_81356" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_84299/timeline">
-                                        <img title="青春何在" src="http://static.wisdom-china.cn//images/1/9078/9105/9268/d8ab2a66691e1c5bf500bd217f6ac56a_2_60x60.jpg">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
-
-                                    <i title="女" class="icon16 icon16-girl"></i>
-
-                                    青春何在
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_84299" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_84300/timeline">
-                                        <img title="一尾海参" src="http://static.wisdom-china.cn//images/1/2048/0343/9677/0dc29d6430ab4e53ca9a57dfea92c502_2_60x60.png">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
-
-                                    <i title="男" class="icon16 icon16-boy"></i>
-
-                                    一尾海参
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_84300" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
-
-                            <li style="display: list-item;">
-                                <div class="friends-thumb">
-                                    <a target="_blank" href="/friend/passport_84301/timeline">
-                                        <img title="鸣哒哒" src="http://static.wisdom-china.cn//images/1/9762/8064/2405/e4bd63cbd5b41a46ff15ce0325155b30_2_60x60.png">
-                                    </a>
-                                </div>
-                                <p class="friends-nickname">
-
-                                    <i title="女" class="icon16 icon16-girl"></i>
-
-                                    鸣哒哒
-                                </p>
-                                <p>
-
-                                    <button data-fid="passport_84301" data-selector="add-follow" class="btn btn-warning">加赛友</button>
-
-                                </p>
-                            </li>
 
                         </div>
                         </ul>
@@ -372,51 +150,14 @@
     </div>
 </div>
 
-<script id="topic" type="text/html">
-    <dl class="clearfix" style="display: block;" data-source_id="<{$_GET['id']}>" data-source_type="4" >
-        <dt>
-            <!--<a target="_blank" href="/friend/passport_79472/timeline"></a>-->
-            <img title="{{nick_name}}" src="{{image}}">
-        </dt>
-        <dd>
-            <div class="user-header">
-                <table>
-                    <tbody>
-                    <tr>
-                        <th><a target="_blank" href="/friend/passport_79472/timeline">{{nick_name}}</a><span title="{{input_date}}" data-timestamp="1419260340000">{{input_date}}</span></th>
-                        <td>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            {{if replyUserName}}
-            <p class="comment-content">回复
-                <!--<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline"></a>-->
-                @{{replyUserName}}：</p>
-            {{/if}}
-            <p class="comment-content"></p>
-            <pre class="comment-content">{{content}}</pre>
-            <div class="reply-panel">
-                <p class="text-right">
-                    {{if nowuser}}
-                    <a data-replyid="{{id}}" id="deleteComment" href="javascript:;">删除</a>
-                    {{/if}}
-                    <a id="replyLink" class="comment-btn" href="javascript:;">回复</a>
-                </p>
-                <div class="reply-form comment-pop">
-                    <i class="icon-up"></i>
-                    <em class="icon-down"></em>
-                    <form method="post" action="/activity/index/CommentReply"  id="CommentReplyForm">
-                        <input type="hidden" value="{{id}}" name="replay_to">
-                        <input type="text" placeholder="回复 {{nick_name}}" name="content">
-                        <button class="btn btn-warning" type="submit">回复</button>
-                    </form>
-                </div>
-            </div>
-        </dd>
-    </dl>
+
+<include file="Public@default:Public:template"/>
+<script type="text/javascript" src="/public/js/pages/tag.js"></script>
+
+<script type="text/javascript" >
+    $(function() {
+        replay($('#topic_comment'), $('#seeMore'), 'tpl_topic_comment', {source_id:$('#topic_comment').data('source_id'),source_type:4});
+    })
 </script>
-<script type="text/javascript" src="/Public/js/pages/tag.js"></script>
 
 <include file="Public@default:Public:bottom" />

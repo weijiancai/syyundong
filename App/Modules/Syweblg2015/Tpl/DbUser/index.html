@@ -26,20 +26,11 @@
             <div class="searchBar">
                 <table>
                     <tr>
-                        <td>名称：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium" size="10">&nbsp;&nbsp;
+                        <td>姓名：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium" size="10">&nbsp;&nbsp;
                         </td>
-                        <td>申请电话：<input type="text" name="apply_phone" value="<{$_REQUEST['apply_phone']}>"
+                        <td>手机电话：<input type="text" name="mobile" value="<{$_REQUEST['mobile']}>"
                                         class="medium" size="10">&nbsp;&nbsp;</td>
-                        <td>类别：<select name="sport_id" id="sport_id">
-                            <option value="">请选择</option>
-                            <volist name="dzSport" id="vo">
-                                <option value="<{$vo.id}>"
-                                <eq name="_REQUEST.sport_id" value="$vo.id">selected=selected</eq>
-                                ><{$vo.name}></option>
-                            </volist>
-                        </select>&nbsp;<select name="sport_sid" id="sport_sid">
-                            <option value="">请选择</option>
-                        </select></td>
+
                         <td>
                             <button type="submit">查询</button>
                         </td>
@@ -82,7 +73,7 @@
                     <td><{$vo['mobile']}></td>
                     <td><{$vo['email']}></td>
                     <td><{$vo['input_date']}></td>
-                    <td><a href="__URL__/detail/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600" rel="detail">编辑</a></td>
+                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="dialog" mask="true" width="700" height="600" rel="detail">编辑</a></td>
                 </tr>
             </volist>
 

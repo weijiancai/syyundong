@@ -51,6 +51,8 @@ $Public_Config =  array(
         '/^Friends\/branch$/' => 'Friends/index/branch',
         '/^Friends\/search$/' => 'Friends/index/search',
         '/^Friends\/tag\/(\d+)$/' => 'Friends/index/tag?id=:1',
+        '/^Friends\/tag\/(\d+)\/friends$/' => 'Friends/index/friends?id=:1',
+    '/^Friends\/tag\/(\d+)\/photos$/' => 'Friends/index/photos?id=:1',
         '/^Friends\/topic\/(\d+)$/' => 'Friends/index/topic?id=:1',
         '/^Friends\/hotTopicLoad/' => 'Friends/index/hotTopicLoad',
         '/^Friends\/passport\/(\d+)$/' => 'Friends/index/passport?id=:1',

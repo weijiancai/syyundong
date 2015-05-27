@@ -58,7 +58,7 @@ class IndexAction extends Action {
      */
     public function tag(){
         $id  =$_GET['id'];
-        $this->assign('list',D('VGameActivity')->where('id='.$id)->find());
+        $this->assign('list',D('VGameActivity')->where("id=".$id." and type='game'")->find());
         $this->display();
     }
     /*
@@ -179,14 +179,14 @@ class IndexAction extends Action {
     * @时间: 20150415
     * @功能: 评论赛友圈
     */
-    public function publishReply()
+    public function publishReplay()
     {
         $model = D('OpComment');
         $date['content'] = $_POST['content'];
         $date['reply_to'] = $_POST['reply_to'];
         $date['user_id'] = deCode(I('session.mark_id'));
-        $date['source_id'] = $_POST['game_id'];
-        $date['source_type'] = 1;
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] = $_POST['source_type'];;
         $date['input_date'] = date('Y-m-d H:i:s');
         $result = $model->add($date);
         if (false !== $result) {
@@ -271,7 +271,7 @@ class IndexAction extends Action {
      * @功能: 新加入赛友
      */
     public function NewFriend(){
-        $where['id'] = array('neq',$_POST['id']);
+        /*$where['id'] = array('neq',$_POST['id']);
         $id = D('DbUser')->where($where)->getField('id',true);
         foreach($id as $key=>$value){
             $ids[$value]= $value;
@@ -279,7 +279,32 @@ class IndexAction extends Action {
         $limit =array_rand($ids,4);
         $map['id'] =array('in',$limit);
         $list = D('DbUser')->where($map)->order('input_date desc')->select();
-        dump(D('DbUser')->getLastSql());
+        echo json_encode($list);*/
+
+        $id = D('DbUser')->getField('id',true);
+        $my = deCode(I('session.mark_id'));
+        unset($id[array_search($my,$id)]);
+        foreach($id as $key=>$value){
+            $ids[$value]= $value;
+        }
+        if(count($ids)>6){
+            $limit =array_rand($ids,6);
+        }else{
+            $limit=$ids;
+        }
+        $map['id'] =array('in',$limit);
+        $list = D('DbUser')->where($map)->order('input_date desc')->select();
+        foreach ($list as $key =>$val){
+            $result = D('OpUserFriend')->where('user_id=' . $my . ' and friend_id=' . $val['id'])->select();
+            if ($result) {
+                //已添加
+                $val['add'] = 1;
+            } else {
+                //未添加
+                $val['add'] = 0;
+            }
+            $list[$key] = $val;
+        }
         echo json_encode($list);
     }
     /*
@@ -311,5 +336,24 @@ class IndexAction extends Action {
         $map['user_id'] = array('eq',$mark);
         $list = M('OpGameTopic')->where($map)->limit($last, $amount)->select();
         echo json_encode($list);
+    }
+    /*
+     * @功能：赛友圈图片墙
+     * @时间:20150418
+     */
+    public function photos(){
+        $id  =$_GET['id'];
+        $this->assign('list',D('VGameActivity')->where("id=".$id." and type='game'")->find());
+        $this->display();
+    }
+    /*
+     * @功能：全部赛友
+     * @时间:20150418
+     */
+    public function friends(){
+        $id  =$_GET['id'];
+
+        $this->assign('list',D('VGameActivity')->where("id=".$id." and type='game'")->find());
+        $this->display();
     }
 }

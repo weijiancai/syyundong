@@ -1,0 +1,162 @@
+<include file="Public@default:Public:top" />
+<div class="search-engines">
+<div class="container">
+<div class="row">
+<div class="span12">
+    <div class="social-club-top clearfix">
+        <div class="social-club-des clearfix">
+            <div class="club-thumb pull-left">
+                <img alt="" src="<{$list.image}>">
+            </div>
+            <div class="right-content">
+                <h1><{$list.name}><a class="btn" href="/Game/<{$list.id}>" target="_blank">赛事主页</a></h1>
+
+                <button class="btn btn-danger" data-followed="0" data-url="/friends/followtag" data-tagid="313" data-selector="follow-btn">关注</button>
+
+                <div class="pull-right clearfix">
+                    <p>关注：<{$list.focus_count}></p>
+                    <p>话题：<{$list.topic_count}></p>
+                    <p>分类：<a class="btn btn-warning" href="/Friends/branch?sportTypeId=<{$list.sport_sid}>"><{$list.sport_name}></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-block">
+        <div data-action="/topic/topic-add" data-selector="pub-wrap" class="publish-box clearfix">
+            <p class="publish-box-ttl">发布新鲜事</p>
+            <form action="" method="post" data-selector="publish-form" id="TopicForm">
+                <textarea id="content" name="content" validate-title="话题" validate-rules="[['required'],['reallength',{min:10}]]"></textarea>
+                <input type="hidden" name="game_id" value="<{$list.id}>" />
+
+                <input type="hidden" id="imgMsg" value="" name="imgMsg"/>
+                <button type="submit" id="btn-topic" class="btn btn-warning send-btn">发布</button>
+            </form>
+            <div class="publish-box-bottom clearfix">
+
+                <a id="imgUpBtn" class="img-up-btn" href="javascript:void(0);"><i class="icon20 icon20-img"></i>图片</a>
+                <input type="file" class="file" id="fileupload" name="file" value="话题图片" style="position: static;display: none;">
+                <span id="show_mes" style="color:Red"></span>
+                <input type="hidden" value="<{$vo.image}>" name="user_head" id="user_head">
+                <input type="hidden" value="topic" id="path">
+            </div>
+            <div id="store-wrap" class="store-wrap clearfix"></div>
+        </div>
+        <div data-selector="relevantTabs" class="public-tab-wrap clearfix">
+            <a class="tab" href="/Friends/tag/<{$list.id}>">话题<span>(共5话题)</span></a>
+            <a class="tab current" href="/Friends/tag/<{$list.id}>/photos">图片墙<span>(共0张)</span></a>
+            <a class="tab" href="/Friends/tag/<{$list.id}>/friends">全部赛友<span>(共24人)</span></a>
+        </div>
+
+
+        <!-- 话题页-->
+        <!-- 图片墙  开始-->
+        <div id="gameFlow" class="tab-content-wrap" ><style>#NTGUID__5 .container-fluid{    padding: 20px;    width: 660px;    margin: 0 auto;  }#NTGUID__5 .box{    margin-bottom: 30px;    float: left;    width: 315px;    transform-origin:left top;    -webkit-transform-origin: left top;    -moz-transform-origin: left top;  }#NTGUID__5 .box img{    max-width: 100%;    width: 100%;  }#NTGUID__5 .box dt{    padding: 10px 10px;    width: 293px;    border:1px solid #EBEBEB;    border-top: 0;    background-color: #fff;  }#NTGUID__5 .box dt .user-info{    overflow: hidden;  }#NTGUID__5 .box dt .user-avatar{    width: 40px;    font-weight: normal;  }#NTGUID__5 .box dt .user-avatar img{    border-radius: 50%;    -webkit-border-radius: 50%;    -moz-border-radius: 50%;    transform:rotate(0deg);    transition-duration:0.5s;    transition-timing-function:cubic-bezier;    transition-delay:0.5s;  }#NTGUID__5 .box dt .user-avatar a:hover img{        transition-duration:0.5s;    transition-timing-function:cubic-bezier;    transition-delay:0.5s;    transform:rotate(360deg);  }#NTGUID__5 .box dt .user-name{    line-height: 40px;    overflow: hidden;    width: 130px;    margin-left: 10px;  }#NTGUID__5 .box dt .user-name a{    color: #999;  }#NTGUID__5 .box dt .user-name a:hover{    color:#F5A623;  }#NTGUID__5 .box dt .create-date{    color:#999;    line-height: 40px;  }#NTGUID__5 .box dt .comment-panel{    display: none;    margin-top: 10px;    padding-top: 10px;    border-top :1px solid #EBEBEB;  }#NTGUID__5 .box dt .comment-panel textarea{    width: 95%;    resize: none;  }#NTGUID__5 .box dt .comment-panel .btn{    margin-top: 10px;  }#NTGUID__5 .box dd{    position: relative;    overflow: hidden;  }#NTGUID__5 .box dd .topic-share{    overflow: hidden;    position: absolute;    padding:5px;    padding-left:0;    background:#fff;    border-radius: 0 0 0 4px;    -webkit-border-radius: 0 0 0 4px;    -moz-border-radius: 0 0 0 4px;    right: -80px;    top: 0px;    box-shadow: 0 0 5px rgba(0,0,0,0.3);    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.3);    border: 1px solid #9999;    border-width: 0 0 1px 1px;    height: 24px;  }#NTGUID__5 .box dd .topic-share a{    float: left;    margin-left: 5px;  }#NTGUID__5 .box dd .topic-container{    position: absolute;    bottom: 0px;    left: 0px;    width: 100%;    overflow: hidden;    display: none;  }#NTGUID__5 .box dd .topic-container .topic-background{    position: absolute;    left: 0px;    bottom: 0px;    overflow: hidden;    height: 100%;    width: 100%;    background-color: #000;    opacity: 0.6;    filter: alpha(opacity=60);    z-index: 1;  }#NTGUID__5 .box dd .topic-content{    padding: 10px;    overflow: hidden;    position: relative;    z-index: 5;    color: #fff;    line-height: 20px;  }#NTGUID__5 .box dd .topic-content p{    margin-bottom: 0;  }#NTGUID__5 .box dd .topic-content p.text-right a{    margin-left: 10px;    color:#999;  }</style><div id="NTGUID__5">
+            <div class="container-fluid" id="imagewall" data-game_id="<{$list.id}>"style="position: relative; height: 345px;">
+
+            </div>
+            <button data-last ="0" id="seeMoreList" class="btn btn-block">没有更多</button>
+        </div>
+
+
+        </div>
+
+        <!-- 图片墙 结束 -->
+
+
+    </div>
+</div>
+    <div class="span4">
+        <!-- 推荐赛友 start -->
+        <div class="side-block">
+            <h4 class="slider-title">推荐赛友</h4>
+            <div data-url="/friends/friends-list/282" data-add-action="/friends/game-friend-add" data-selector="recommend-friend-box" class="friend-recommend-list clearfix"><style>#NTGUID__2 li{    display: none;  }  </style><div id="NTGUID__2">
+                <button id="tpl_friend_change" data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i>
+                    <span >换一组</span></button>
+                <ul id="recommendFriend" class="clearfix">
+                    <div id="NTGUID__2NDTGUID__c">
+
+
+
+                    </div>
+                </ul>
+            </div>
+
+
+            </div>
+        </div>
+        <!-- 推荐赛友 end -->
+        <!-- 新加入赛友 start -->
+        <div class="side-block">
+            <h4 class="slider-title">新加入赛友</h4>
+            <div data-url="/friends/tag-friends/313" data-add-action="/friends/game-friend-add" data-params="{'tagId':'313','friendsType':'recent','pageSize':6,'pageNum':0}" data-selector="new-friend-box" style="min-height:500px;" class="friend-recommend-list clearfix"><style>#NTGUID__5 li{    display: none;  }  </style><div id="NTGUID__5">
+                <button id="tpl_new_friend_change" data-selector="moreData" class="btn public-reload-link"><i class="icon-match icon-reload"></i>
+                    换一组</button>
+                <ul id="NewFriendsData" class="clearfix"><div id="NTGUID__5NDTGUID__a">
+
+                </div>
+                </ul>
+            </div>
+
+
+            </div>
+        </div>
+        <!-- 新加入赛友 end -->
+        <!-- 广告位 start --
+        <div class="side-ad">
+          <a href="#"><img src="http://static.wisdom-china.cn/iyuesai/images/pages/side-ad1.png" alt=""></a>
+        </div>
+        !-- 广告位 end -->
+        <!-- 广告位 start --
+        <div class="side-ad">
+          <a href="#"><img src="http://static.wisdom-china.cn/iyuesai/images/pages/side-ad2.png" alt=""></a>
+        </div>
+        !-- 广告位 end -->
+    </div>
+</div>
+</div>
+</div>
+<!--图片墙-->
+<script type="text/template" id="seemore">
+    <div class="box" style="margin-right: 10px;">
+        <dl>
+            <dd>
+                <a href="/topic/10318"><img src="{{topic_image}}"></a>
+                <div class="topic-share clearfix" style="right: -185px;">
+
+                </div>
+                <div class="topic-container" style="display: none;">
+                    <i class="topic-background"></i>
+                    <div class="topic-content">
+                        <p>{{content}}</p>
+                        <p class="text-right">
+                            <a data-selector="doComment" data-status="1" href="javascript:;"><i class="icon20 icon20-comment"></i>评论<span class="text-error">1</span></a>
+                            <a data-params="{'id':10318}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">3</span></a>
+                        </p>
+                    </div>
+                </div>
+            </dd>
+            <dt>
+            <div class="user-info clearfix">
+                <div class="pull-left user-avatar">
+                    <a href="/friend/passport_81330/timeline"><img title="{{user_name}}" src="{{user_image}}"></a>
+                </div>
+                <div class="pull-left user-name">
+                    <a href="/friend/passport_81330/timeline"></a>
+                </div>
+                <div title="{{input_date}}" data-timestamp="1425263091000" class="pull-right create-date">{{input_date}}</div>
+            </div>
+            <div class="comment-panel">
+                <form method="post" action="/topic/comment-add" iyuesai-plugins-valid="0.42038238240160963">
+                    <input type="hidden" value="10318" name="topicId">
+                    <input type="hidden" value="passport_81330" name="userId">
+                    <textarea max-length="140" validate-rules="[['required'],['length',{'max':140}]]" validate-title="评论内容" rows="3" name="content"></textarea>
+                    <button type="submit" class="btn btn-block btn-warning">评论</button>
+                </form>
+            </div>
+            </dt>
+        </dl>
+    </div>
+</script>
+<include file="Public@default:Public:template" />
+<script type="text/javascript" src="/public/js/pages/tag.js"></script>
+<include file="Public@default:Public:bottom" />

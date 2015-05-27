@@ -414,4 +414,17 @@ class IndexAction extends BaseAction
         $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
         $this->display();
     }
+    /*
+     * @功能：话题->删除评论
+     * @时间: 20150408
+     */
+    public function del_replay(){
+        $common_id = $_POST['common_id'];
+        $result = M('OpComment')->where('id='.$common_id)->delete();
+        if($result){
+            echo 'true';
+        }else{
+            echo 'false';
+        }
+    }
 }

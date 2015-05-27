@@ -44,7 +44,7 @@
                 </dl>
                 <dl>
                     <dt>性别：</dt>
-                    <dd><select  name="gender" class="required">
+                    <dd><select  name="gender" class="">
                         <option value="">请选择</option>
                         <option <eq name="vo.gender" value ="F">selected=selected</eq> value="F">女</option>
                         <option <eq name="vo.gender" value ="T">selected=selected</eq> value="T">男</option>
@@ -59,7 +59,7 @@
                 </dl>
                 <dl>
                     <dt>血型：</dt>
-                    <dd><select  name="blood_type" class="required">
+                    <dd><select  name="blood_type" class="">
                         <option value="">请选择</option>
                         <option <eq name="vo.blood_type" value ="A">selected=selected</eq> value="A">A</option>
                         <option <eq name="vo.blood_type" value ="B">selected=selected</eq> value="B">B</option>
@@ -94,7 +94,7 @@
                 </dl>
                 <dl>
                     <dt>身高：</dt>
-                    <dd><input name="high" class="" type="text" value="<{$vo.high}>" size="15"/>cm</dd>
+                    <dd><input name="height" class="" type="text" value="<{$vo.height}>" size="15"/>cm</dd>
                 </dl>
 
                 <dl>
@@ -122,11 +122,11 @@
                     <dt>个性签名：</dt>
                     <dd><input name="signature" class="" type="text" value="<{$vo.signature}>"/></dd>
                 </dl>
-                <dl>
+                <!--<dl>
                     <dt>运动喜好：</dt>
                     <dd><input type="text" name="interest" class=""   value="<{$vo.interest}>"/></dd>
                 </dl>
-
+-->
                 <dl>
                     <dt>录入时间：</dt>
                     <dd><input type="text" name="input_date" class="" readonly value="<{$vo['input_date']}>"/></dd>
