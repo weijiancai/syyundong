@@ -30,7 +30,7 @@
                 <a class="comment-btn" href="javascript:void(0);" data-id="{{id}}">
                     <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{comment_count}}</span>
                 </a>
-                <a data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;">
+                <a data-url="/topic/comment-like" class="doPraise" href="javascript:;">
                     <i class="icon20 icon20-praise "></i>赞<span class="text-error">{{laud_count}}</span>
                 </a>
             </div>
@@ -141,7 +141,7 @@
                     <a class="comment-btn" href="javascript:void(0);">
                         <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{comment_count}}</span>
                     </a>
-                    <a href="javascript:;"><i class="icon20 icon20-praise "></i>赞<span class="text-error">{{laud_count}}</span></a>
+                    <a href="javascript:;" class="doPraise"><i class="icon20 icon20-praise "></i>赞<span class="text-error">{{laud_count}}</span></a>
                 </div>
             </div>
         </div>
@@ -191,7 +191,7 @@
                     <a href="javascript:void(0);" class="comment-btn">
                         <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{comment_count}}</span>
                     </a>
-                    <a href="javascript:;" data-selector="doPraise">
+                    <a href="javascript:;" class="doPraise">
                         <i class="icon20 icon20-praise "></i><span id="doPraise">赞</span><span class="text-error">{{laud_count}}</span></a>
                 </div>
             </div>

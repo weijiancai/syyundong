@@ -100,28 +100,7 @@ $(function () {
         });
     });
 });
-//话题点赞
-$('#doPraise').click(function () {
-    alert('44');
-    if ($('#top_head').data('value')) {
-        jQuery.ajax({
-            type: "post",
-            url: "/Friends/index/DoPraise",
-            data: {friend_id: $(this).data('value')},
-            success: function (result) {
-                if (result == 1) {
-                    $.dialog.success('添加成功');
-                    self.removeClass('btn-warning').attr('disabled', 'disabled');
-                } else {
-                    $.dialog.error('添加赛友失败,请稍后重试');
-                }
-            }
-        });
-    } else {
-        window.location.href='/login/login';
-    }
-    ;
-});
+
 // 评论回复
 function replay($container, $more, tpl_id, params, isReset) {
     var url = $container.data('url');
@@ -162,12 +141,34 @@ function replay($container, $more, tpl_id, params, isReset) {
                 (function ($row) {
                     var $commentPop = $row.find('.comment-pop');
                     var $commentList = $row.find('.comment-list');
+                    var sourceId = $row.data('source_id');
+                    var sourceType = $row.data('source_type');
                     // 注册事件
                     $row.find('a.comment-btn').click(function () {
-                        $commentPop.toggle();
-                        var sourceType = $row.data('source_type');
-                        if (isReplay && !$commentPop.is(':hidden')) {
-                            getTopicComment($commentList, $row.data('source_id'), sourceType);
+                        if(isLogin()) {
+                            $commentPop.toggle();
+                            if (isReplay && !$commentPop.is(':hidden')) {
+                                getTopicComment($commentList, sourceId, sourceType);
+                            }
+                        }
+                    });
+                    // 点赞
+                    $row.find('a.doPraise').click(function () {
+                        var self = $(this);
+                        if (isLogin()) {
+                            jQuery.ajax({
+                                type: "post",
+                                url: "/Friends/index/DoPraise",
+                                data: {friend_id: $(this).data('value'), source_id: sourceId},
+                                success: function (result) {
+                                    if (result == 1) {
+                                        $.dialog.success('添加成功');
+                                        self.removeClass('btn-warning').attr('disabled', 'disabled');
+                                    } else {
+                                        $.dialog.error('添加赛友失败,请稍后重试');
+                                    }
+                                }
+                            });
                         }
                     });
                     // 图片
@@ -184,16 +185,18 @@ function replay($container, $more, tpl_id, params, isReset) {
                             content: '确定要删除该评论吗?',
                             okValue: '确定',
                             ok: function () {
-                                jQuery.ajax({
-                                    type: "post",
-                                    url: "/Friends/index/CommentDel",
-                                    data: {id: $id},
-                                    success: function ($result) {
-                                        if ($result) {
-                                            reset($commentList, $row);
+                                if(isLogin()) {
+                                    jQuery.ajax({
+                                        type: "post",
+                                        url: "/Friends/index/CommentDel",
+                                        data: {id: $id},
+                                        success: function ($result) {
+                                            if ($result) {
+                                                reset($commentList, $row);
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             },
                             cancelValue: '取消',
                             cancel: function () {
@@ -303,5 +306,19 @@ function replay($container, $more, tpl_id, params, isReset) {
                 }
             }
         });
+    }
+}
+
+/**
+ * 是否登录，如果没有登陆，则跳转到登陆页面
+ *
+ * @returns {boolean}
+ */
+function isLogin() {
+    if($('#top_head').data('value')) {
+        return true;
+    } else {
+        window.location.href='/login/login';
+        return false;
     }
 }
