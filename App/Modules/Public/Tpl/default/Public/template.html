@@ -86,11 +86,11 @@
             <div class="reply-panel">
                 <p class="text-right">
                     {{if nowuser}}
-                    <a id="replaydel" data-replyid="308" data-selector="deleteComment" href="javascript:;">删除</a>
+                    <a id="deleteComment" data-replyid="{{id}}" href="javascript:;">删除</a>
                     {{/if}}
-                    <a id="replyLink" data-selector="replyLink" href="javascript:;">回复</a>
+                    <a id="replyLink" class="comment-btn" href="javascript:;">回复</a>
                 </p>
-                <div class="reply-form">
+                <div class="reply-form comment-pop">
                     <i class="icon-up"></i>
                     <em class="icon-down"></em>
                     <form method="post" action="/activity/index/CommentReply"  id="CommentReplyForm">
