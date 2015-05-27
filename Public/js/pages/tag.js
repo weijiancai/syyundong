@@ -100,4 +100,16 @@ $(function () {
     $semore.click(seemorelist);
     // 第一次加载
     seemorelist();
+    //赛友圈搜索
+    $('#fmSearch').validate({
+        rules: {
+            keyword: 'required'
+        },
+        messages: {
+            keyword: '搜索内容不能为空'
+        },
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
 });

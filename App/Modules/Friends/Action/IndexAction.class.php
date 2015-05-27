@@ -352,8 +352,11 @@ class IndexAction extends Action {
      */
     public function friends(){
         $id  =$_GET['id'];
-
-        $this->assign('list',D('VGameActivity')->where("id=".$id." and type='game'")->find());
+        $this->assign('game',D('VGameActivity')->where("id=".$id." and type='game'")->find());
+        $model = new Model();
+        $list = $model->query('select nick_name,user_head,(select size2_url from db_images where db_images.id = user_head) user_image from db_user
+                       where id in (select user_id from op_focus where source_id  ='.$id.')');
+        $this->assign('list',$list);
         $this->display();
     }
 }

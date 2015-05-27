@@ -66,6 +66,12 @@
     </div>
 </div>
     <div class="span4">
+        <div class="side-block">
+            <form action="/Friends/search" id="fmSearch" method="get">
+                <input type="text" placeholder="搜索赛友圈" class="side-search-key" name="keyword">
+                <button class="btn btn-warning">搜索</button>
+            </form>
+        </div>
         <!-- 推荐赛友 start -->
         <div class="side-block">
             <h4 class="slider-title">推荐赛友</h4>
@@ -158,5 +164,7 @@
     </div>
 </script>
 <include file="Public@default:Public:template" />
+
 <script type="text/javascript" src="/public/js/pages/tag.js"></script>
+
 <include file="Public@default:Public:bottom" />
