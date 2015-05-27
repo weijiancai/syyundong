@@ -36,7 +36,7 @@ $(function () {
 
     // 加载推荐赛友
     var $recommendFriend = $('#recommendFriend');
-    if($recommendFriend.length > 0) {
+    if ($recommendFriend.length > 0) {
         function friendChange() {
             jQuery.ajax({
                 type: "post",
@@ -53,12 +53,13 @@ $(function () {
                 }
             })
         }
+
         $('#tpl_friend_change').click(friendChange);
         friendChange();
     }
     // 加载新加入赛友
     var $NewFriendsData = $('#NewFriendsData');
-    if($NewFriendsData.length > 0) {
+    if ($NewFriendsData.length > 0) {
         function NewfriendChange() {
             jQuery.ajax({
                 type: "post",
@@ -75,12 +76,14 @@ $(function () {
                 }
             })
         }
+
         $('#tpl_new_friend_change').click(NewfriendChange);
         NewfriendChange();
     }
 
     //加赛友
     $('.add_friend').click(function () {
+        alert('55');
         var self = $(this);
         jQuery.ajax({
             type: "post",
@@ -97,7 +100,28 @@ $(function () {
         });
     });
 });
-
+//话题点赞
+$('#doPraise').click(function () {
+    alert('44');
+    if ($('#top_head').data('value')) {
+        jQuery.ajax({
+            type: "post",
+            url: "/Friends/index/DoPraise",
+            data: {friend_id: $(this).data('value')},
+            success: function (result) {
+                if (result == 1) {
+                    $.dialog.success('添加成功');
+                    self.removeClass('btn-warning').attr('disabled', 'disabled');
+                } else {
+                    $.dialog.error('添加赛友失败,请稍后重试');
+                }
+            }
+        });
+    } else {
+        window.location.href='/login/login';
+    }
+    ;
+});
 // 评论回复
 function replay($container, $more, tpl_id, params, isReset) {
     var url = $container.data('url');

@@ -359,4 +359,20 @@ class IndexAction extends Action {
         $this->assign('list',$list);
         $this->display();
     }
+    /*
+     * @功能：话题点赞
+     * @时间:20150418
+     */
+    public function DoPraise(){
+        $date['user_id'] = deCode(session('mark_id'));
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] =$_POST['source_type'];
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $result = M('OpFocus')->add($date);
+        if($result){
+            echo 'true';
+        }else{
+            echo 'false';
+        }
+    }
 }
