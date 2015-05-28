@@ -48,6 +48,8 @@ $(function () {
                         for (var i = 0; i < obj.length; i++) {
                             var $li = $(template('tpl_friend', obj[i]));
                             $recommendFriend.append($li);
+                            //加赛友
+                            $li.find('.add_friend').click(addFriend);
                         }
                     }
                 }
@@ -68,9 +70,12 @@ $(function () {
                     if ($result) {
                         var obj = eval($result);
                         $NewFriendsData.empty();
+
                         for (var i = 0; i < obj.length; i++) {
                             var $li = $(template('tpl_new_friend', obj[i]));
                             $NewFriendsData.append($li);
+                            //加赛友
+                            $li.find('.add_friend').click(addFriend);
                         }
                     }
                 }
@@ -80,9 +85,11 @@ $(function () {
         $('#tpl_new_friend_change').click(NewfriendChange);
         NewfriendChange();
     }
+});
 
-    //加赛友
-    $('.add_friend').click(function () {
+// 加赛友
+function addFriend() {
+    if(isLogin()) {
         var self = $(this);
         jQuery.ajax({
             type: "post",
@@ -97,8 +104,8 @@ $(function () {
                 }
             }
         });
-    });
-});
+    }
+}
 
 // 评论回复
 function replay($container, $more, tpl_id, params, isReset) {
