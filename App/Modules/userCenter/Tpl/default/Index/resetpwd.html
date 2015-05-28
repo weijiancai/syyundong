@@ -12,7 +12,7 @@
                         <p class="account-right-name">
                             <strong><{$user.nick_name}></strong>
                         </p>
-                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
+                        <p class="account-tip"><if condition="$vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
                         <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
                         <div class="alpha-bg"></div>
                     </div>

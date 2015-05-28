@@ -81,7 +81,14 @@
                     <td><{$vo['person_cost']}></td>
                     <td><{$vo['input_user']|getUserName}></td>
                     <td><{$vo['input_date']}></td>
-                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="400" rel="detail">编辑</a></td>
+                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="400" rel="detail">编辑</a>
+                        <span
+                        style="color:red">|</span>
+                        <?php  if(isGameRecommend($vo['id'],'venue')){ ?>
+                        <a href="__URL__/recommend/id/<{$vo['id']}>/type/venue" target="ajaxTodo" style="text-decoration:none;">推荐</a>
+                        <?php }else{ ?>
+                        已推荐
+                        <?php }?></td>
                 </tr>
             </volist>
 

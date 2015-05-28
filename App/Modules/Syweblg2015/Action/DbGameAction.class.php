@@ -191,24 +191,7 @@ class DbGameAction extends CommonAction
             echo $this->ajax('0', "更新失败", $name, "", "closeCurrent");
         }
     }
-    /*
-     * @功能：推荐赛事
-     * @时间：20150422
-     */
-    public function recommend()
-    {
-        $model = D('OpRecommend');
-        $date['gc_id'] = $_GET['id'];
-        $date['recommend_type'] = 'game';
-        $date['input_date'] = date('Y-m-d H:i:s');
-        $date['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
-        $list = $model->add($date);
-        if (false !== $list) {
-            echo $this->ajax('1', "推荐成功", $name, "", "");
-        } else {
-            echo $this->ajax('0', "推荐失败", $name, "", "");
-        }
-    }
+
     /*
      * @功能：禁用赛事
      * @时间：20150422

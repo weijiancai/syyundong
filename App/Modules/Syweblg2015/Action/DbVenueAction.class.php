@@ -124,6 +124,7 @@ class DbVenueAction extends CommonAction
         $model->where($data)->delete();
         echo $this->ajax('1',"删除成功",$name,"","");
     }
+
     /*
      * @功能：场馆分类
      * @时间：20150422

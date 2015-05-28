@@ -90,7 +90,7 @@ $(function () {
     }
 
     //我要报名
-    $('#game_apply').click(function(){
+    $('.game_apply').click(function(){
         dialog({
             id: 'id-demo',
             content: $('#game_declare').html(),

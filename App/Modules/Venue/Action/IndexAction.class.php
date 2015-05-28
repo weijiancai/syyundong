@@ -141,7 +141,7 @@ class IndexAction extends BaseAction {
         }
         $limit =array_rand($ids,4);
         $map['id'] =array('in',$limit);
-        $list = D('DbVenue')->where($map)->select();
+        $list = D('VVenue')->where($map)->select();
         echo json_encode($list);
     }
     /*

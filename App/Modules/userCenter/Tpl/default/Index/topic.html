@@ -14,7 +14,7 @@
                             <strong><{$user.nick_name}></strong>
                         </p>
 
-                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$user.signature}></if></p>
+                        <p class="account-tip"><if condition="$vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$user.signature}></if></p>
                         <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
                         <div class="alpha-bg"></div>
                     </div>
@@ -24,7 +24,7 @@
                 <div class="public-subnav clearfix">
                     <ul>
                         <li><a href="/userCenter/timeline">我的足迹</a></li>
-                        <li><a href="/userCenter/profile">个人资料</a></li>
+                        <li><a href="/userCenter/Profile">个人资料</a></li>
                         <li><a href="/userCenter/game">我的赛事</a></li>
                         <li><a href="/userCenter/activity">我的活动</a></li>
                         <li><a href="/userCenter/topic" class="current">我的话题</a></li>

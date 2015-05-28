@@ -85,7 +85,14 @@
                     <td><{$vo['interest_count']}></td>
                     <td><{$vo['input_user']|getUserName}></td>
                     <td><{$vo['input_date']}></td>
-                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600" rel="detail">编辑</a></td>
+                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600" rel="detail">编辑</a>
+                        <span
+                            style="color:red">|</span>
+                        <?php  if(isGameRecommend($vo['id'],'activity')){ ?>
+                        <a href="__URL__/recommend/id/<{$vo['id']}>/type/activity" target="ajaxTodo" style="text-decoration:none;">推荐</a>
+                        <?php }else{ ?>
+                        已推荐
+                        <?php }?></td>
                 </tr>
             </volist>
 

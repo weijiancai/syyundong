@@ -7,16 +7,16 @@
                 <div class="account-top">
                     <div class="account-thumb">
 
-                        <img name="user-head" src="<{$user['id']|getUsersImage}>">
+                        <img name="user-head" src="<{$pro_user['id']|getUsersImage}>">
                         <div class="alpha-bg"></div>
                     </div>
                     <div class="account-right">
                         <p class="account-right-name">
-                            <strong><{$user.nick_name}></strong>
+                            <strong><{$pro_user.nick_name}></strong>
                         </p>
 
-                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
-                        <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
+                        <p class="account-tip"><if condition="$pro_user.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$pro_user.signature}></if></p>
+                        <p><span class="account-tip">运动喜好：<{$pro_user['interest']|UserFavGame}></span></p>
                         <div class="alpha-bg"></div>
                     </div>
                 </div>
@@ -38,37 +38,37 @@
             <div class="span16">
                 <div class="container ucenter-container">
                     <div class="main-block clearfix">
-                        <h4 class="main-title">个人资料<a href="/userCenter/ProfileEdit/<{$user.id}>" class="btn pull-right">编辑个人资料</a></h4>
+                        <h4 class="main-title">个人资料<a href="/userCenter/ProfileEdit/<{$pro_user.id}>" class="btn pull-right">编辑个人资料</a></h4>
                         <div class="profile-wrap clearfix">
                             <table class="pull-left">
                                 <tbody>
                                 <tr>
                                     <th>姓名：</th>
-                                    <td><{$user.name}></td>
+                                    <td><{$pro_user.name}></td>
                                 </tr>
                                 <tr>
                                     <th>性别：</th>
-                                    <td><if condition="$user['gender'] eq M">男<else/>女</if></td>
+                                    <td><if condition="$pro_user['gender'] eq M">男<else/>女</if></td>
                                 </tr>
                                 <tr>
                                     <th>血型：</th>
-                                    <td><{$user.blood_type}></td>
+                                    <td><{$pro_user.blood_type}></td>
                                 </tr>
                                 <tr>
                                     <th>生日：</th>
-                                    <td><{$user.birthday}></td>
+                                    <td><{$pro_user.birthday}></td>
                                 </tr>
                                 <tr>
                                     <th>公司：</th>
-                                    <td><{$user.company}></td>
+                                    <td><{$pro_user.company}></td>
                                 </tr>
                                 <tr>
                                     <th>证件类型：</th>
-                                    <td><{$user.certificate_type}></td>
+                                    <td><{$pro_user.certificate_type}></td>
                                 </tr>
                                 <tr>
                                     <th>证件号码：</th>
-                                    <td><{$user.certificate_num}></td>
+                                    <td><{$pro_user.certificate_num}></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -76,7 +76,7 @@
                                 <tbody>
                                 <tr>
                                     <th>身高：</th>
-                                    <td><{$user.height}>  cm</td>
+                                    <td><{$pro_user.height}>  cm</td>
                                 </tr>
                                 <tr>
                                     <th>体重：</th>
@@ -84,19 +84,19 @@
                                 </tr>
                                 <tr>
                                     <th>手机：</th>
-                                    <td><{$user.mobile}></td>
+                                    <td><{$pro_user.mobile}></td>
                                 </tr>
                                 <tr>
                                     <th>邮箱：</th>
-                                    <td><{$user.email}></td>
+                                    <td><{$pro_user.email}></td>
                                 </tr>
                                 <tr>
                                     <th>邮编：</th>
-                                    <td><{$user.postal_code}></td>
+                                    <td><{$pro_user.postal_code}></td>
                                 </tr>
                                 <tr>
                                     <th>通讯地址：</th>
-                                    <td><{$user.address}></td>
+                                    <td><{$pro_user.address}></td>
                                 </tr>
                                 </tbody>
                             </table>

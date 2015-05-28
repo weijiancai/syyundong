@@ -58,7 +58,7 @@ class IndexAction extends Action {
      */
     public function tag(){
         $id  =$_GET['id'];
-        $this->assign('tag',D('VGameActivity')->where("id=".$id." and type='game'")->find());
+        $this->assign('list',D('VGameActivity')->where("id=".$id." and type='game'")->find());
         $this->display();
     }
     /*

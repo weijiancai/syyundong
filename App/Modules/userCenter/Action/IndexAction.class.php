@@ -30,7 +30,7 @@ class IndexAction extends BaseAction
         $id = deCode(I('session.mark_id'));
         $timeline = D('DbTimeline')->where('input_user=' . $id)->order('input_date desc')->select();
         $this->assign('timeline', $timeline);
-        $this->assign('user', D('DbUser')->where('id=' . $id)->find());
+        $this->assign('time_user', D('DbUser')->where('id=' . $id)->find());
         $this->display();
     }
 
@@ -41,7 +41,7 @@ class IndexAction extends BaseAction
     public function Profile()
     {
         $id = deCode(I('session.mark_id'));
-        $this->assign('user', D('DbUser')->where('id=' . $id)->find());
+        $this->assign('pro_user', D('DbUser')->where('id=' . $id)->find());
         $this->display();
     }
 
@@ -52,7 +52,7 @@ class IndexAction extends BaseAction
     public function ProfileEdit()
     {
         $id = $_GET['id'];
-        $this->assign('user', D('DbUser')->where('id=' . $id)->find());
+        $this->assign('pro_user', D('DbUser')->where('id=' . $id)->find());
         $this->display();
     }
 
@@ -103,7 +103,7 @@ class IndexAction extends BaseAction
         $this->assign('page', $show);
         $this->assign('game', $list);
         $this->assign('count', $count);
-        $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
+        $this->assign('game_user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
         $this->display();
     }
 
@@ -150,6 +150,7 @@ class IndexAction extends BaseAction
         import('ORG.Util.Page');
         $model = D('VGameActivity');
         $map['input_user'] = deCode(I('session.mark_id'));
+        $map['is_verify'] = 'T';
         $map['type'] = 'game';
         $order = 'input_date desc';
         $count = $model->where($map)->count();
@@ -336,7 +337,7 @@ class IndexAction extends BaseAction
     public function FavouriteGame()
     {
         $model = New Model();
-        $list = $model->query('select dz_sport.id,name from dz_sport left join db_images on dz_sport.image = db_images.id where dz_sport.sport_type =1 and dz_sport.level=2 ');
+        $list = $model->query('select dz_sport.id ,name ,(select local_url from db_images where db_images.id = image) image from dz_sport where sport_type=1 and level =2  ');
         $this->assign('fav', $list);
     }
 

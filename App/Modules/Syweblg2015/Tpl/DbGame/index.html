@@ -93,7 +93,7 @@
                     <td><{$vo['is_verify']|showStatus=$vo['id'],'navTabAjaxDone','审核','禁用'}><span
                             style="color:red">|</span>
                         <?php  if(isGameRecommend($vo['id'],'game')){ ?>
-                        <a href="__URL__/recommend/id/<{$vo['id']}>" target="ajaxTodo" style="text-decoration:none;">推荐</a>
+                        <a href="__URL__/recommend/id/<{$vo['id']}>/type/game" target="ajaxTodo" style="text-decoration:none;">推荐</a>
                         <?php }else{ ?>
                         已推荐
                         <?php }?>

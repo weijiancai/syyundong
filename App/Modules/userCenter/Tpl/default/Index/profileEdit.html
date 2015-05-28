@@ -5,15 +5,15 @@
             <div class="span16">
                 <div class="account-top">
                     <div class="account-thumb">
-                        <img name="user-head" src="<{$user['id']|getUsersImage}>">
+                        <img name="user-head" src="<{$pro_user['id']|getUsersImage}>">
                         <div class="alpha-bg"></div>
                     </div>
                     <div class="account-right">
                         <p class="account-right-name">
-                            <strong><{$user.nick_name}></strong>
+                            <strong><{$pro_user.nick_name}></strong>
                         </p>
-                        <p class="account-tip"><if condition="vo.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$vo.signature}></if></p>
-                        <p><span class="account-tip">运动喜好：<{$user['interest']|UserFavGame}></span></p>
+                        <p class="account-tip"><if condition="$pro_user.signature neq null">一句话介绍一下自己吧，让别人更了解你<else/><{$pro_user.signature}></if></p>
+                        <p><span class="account-tip">运动喜好：<{$pro_user['interest']|UserFavGame}></span></p>
                         <div class="alpha-bg"></div>
                     </div>
                 </div>
@@ -27,11 +27,7 @@
                         <li><a href="/userCenter/activity">我的活动</a></li>
                         <li><a href="/userCenter/topic">我的话题</a></li>
                         <li><a href="/userCenter/friend">我的赛友</a></li>
-                        <li><a href="/userCenter/message/msg-game">我的消息</a><i class="msg-tip" data-selector="unreadMsgCount" style="display: inline;">3</i></li>
-                        <!--
-                        <li><a href="/userCenter/orders">我的订单</a></li>
-                        <li><a href="/userCenter/venues">我的场馆</a></li>
-                        -->
+
                         <li><a href="/userCenter/account">账号设置</a></li>
                     </ul>
                 </div>
@@ -43,19 +39,19 @@
                             <button  type="submit" class="btn btn-warning pull-right">保存</button>
                         </h4>
                         <div class="profile-wrap clearfix">
-                            <input type="hidden" value="<{$user.id}>" name="id">
+                            <input type="hidden" value="<{$pro_user.id}>" name="id">
                             <table class="pull-left">
                                 <tbody>
                                 <tr>
                                     <th>姓名：</th>
-                                    <td><input type="text" name="name" value="<{$user.name}>" placeholder="姓名" class="span3" validate-title="姓名">
+                                    <td><input type="text" name="name" value="<{$pro_user.name}>" placeholder="姓名" class="span3" validate-title="姓名">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>性别：</th>
                                     <td>
-                                        <label class="radio inline"><input type="radio" name="gender" <if condition="$user.gender eq M">checked</if> value="M">男</label>
-                                        <label class="radio inline"><input type="radio" name="gender" <if condition="$user.gender eq F">checked</if> value="F">女</label>
+                                        <label class="radio inline"><input type="radio" name="gender" <if condition="$pro_user.gender eq M">checked</if> value="M">男</label>
+                                        <label class="radio inline"><input type="radio" name="gender" <if condition="$pro_user.gender eq F">checked</if> value="F">女</label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -85,7 +81,7 @@
                                 <tr>
                                     <th>公司：</th>
                                     <td>
-                                        <input type="text" name="company" value="<{$user.company}>" placceholder="公司" class="span3" validate-title="公司">
+                                        <input type="text" name="company" value="<{$pro_user.company}>" placceholder="公司" class="span3" validate-title="公司">
                                     </td>
                                 </tr>
                                 <tr>
@@ -93,17 +89,17 @@
                                     <td>
                                         <select name="certificate_type" data-selector="certificate_type" class="span3">
                                             <option value="">选择证件类型</option>
-                                            <option <eq name="user.certificate_type" value="身份证">selected=selected</eq>value="身份证">身份证</option>
-                                            <option <eq name="user.certificate_type" value="军官证">selected=selected</eq>value="军官证">军官证</option>
-                                            <option <eq name="user.certificate_type" value="学生证">selected=selected</eq>value="学生证">学生证</option>
-                                            <option <eq name="user.certificate_type" value="护照">selected=selected</eq>value="护照">护照</option>
+                                            <option <eq name="pro_user.certificate_type" value="身份证">selected=selected</eq>value="身份证">身份证</option>
+                                            <option <eq name="pro_user.certificate_type" value="军官证">selected=selected</eq>value="军官证">军官证</option>
+                                            <option <eq name="pro_user.certificate_type" value="学生证">selected=selected</eq>value="学生证">学生证</option>
+                                            <option <eq name="pro_user.certificate_type" value="护照">selected=selected</eq>value="护照">护照</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>证件号码：</th>
                                     <td>
-                                        <input type="text" value="<{$user.certificate_num}>" name="certificate_num" value="" placceholder="证件号码" class="span3" validate-title="证件号码" >
+                                        <input type="text" value="<{$pro_user.certificate_num}>" name="certificate_num" value="" placceholder="证件号码" class="span3" validate-title="证件号码" >
                                     </td>
                                 </tr>
                                 </tbody>
@@ -114,7 +110,7 @@
                                     <th>身高：</th>
                                     <td>
                                         <div class="input-prepend input-append">
-                                            <input type="text" name="height" value="<{$user.height}>" validate-title="身高"  class="span3">
+                                            <input type="text" name="height" value="<{$pro_user.height}>" validate-title="身高"  class="span3">
                                             <span class="add-on">cm</span>
                                         </div>
                                     </td>
@@ -123,7 +119,7 @@
                                     <th>体重：</th>
                                     <td>
                                         <div class="input-prepend input-append">
-                                            <input type="text" name="weight" value="<{$user.weight}>" validate-title="体重"  class="span3">
+                                            <input type="text" name="weight" value="<{$pro_user.weight}>" validate-title="体重"  class="span3">
                                             <span class="add-on">kg</span>
                                         </div>
                                     </td>
@@ -131,25 +127,25 @@
                                 <tr>
                                     <th>手机：</th>
                                     <td>
-                                        <input type="text" name="mobile" value="<{$user.mobile}>" class="span3" validate-title="手机" >
+                                        <input type="text" name="mobile" value="<{$pro_user.mobile}>" class="span3" validate-title="手机" >
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>邮箱：</th>
                                     <td>
-                                        <input type="text" name="email" value="<{$user.email}>" class="span3" validate-title="电子邮件" validate-rules="[['email','$格式不正确']]">
+                                        <input type="text" name="email" value="<{$pro_user.email}>" class="span3" validate-title="电子邮件" validate-rules="[['email','$格式不正确']]">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>邮编：</th>
                                     <td>
-                                        <input type="text" name="postal_code" value="<{$user.postal_code}>" class="span1">
+                                        <input type="text" name="postal_code" value="<{$pro_user.postal_code}>" class="span1">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>通讯地址：</th>
                                     <td>
-                                        <input type="text" name="address" value="<{$user.address}>" class="span3">
+                                        <input type="text" name="address" value="<{$pro_user.address}>" class="span3">
                                     </td>
                                 </tr>
                                 </tbody>

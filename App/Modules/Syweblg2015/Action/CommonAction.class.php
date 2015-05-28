@@ -193,9 +193,6 @@ class CommonAction extends Action {
         $this->display ();
     }
 
-    function read() {
-        $this->edit();
-    }
     function edit(){
         $name=$this->getActionName();
         $model = D($name );
@@ -521,6 +518,24 @@ class CommonAction extends Action {
                 .substr($charid,20,12)
                 .chr(125);
             return $uuid;
+        }
+    }
+    /*
+     * @功能：推荐场馆|赛事|活动
+     * @时间：20150422
+     */
+    public function recommend()
+    {
+        $model = D('OpRecommend');
+        $date['gc_id'] = $_GET['id'];
+        $date['recommend_type'] = $_GET['type'];
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $date['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
+        $list = $model->add($date);
+        if (false !== $list) {
+            echo $this->ajax('1', "推荐成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "推荐失败", $name, "", "");
         }
     }
 }
