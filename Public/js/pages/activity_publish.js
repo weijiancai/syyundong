@@ -6,7 +6,7 @@ $(function () {
     $('body').attr('id', 'match-post');
 
     // 日期控件
-    $('.date').daterangepicker({
+    $('.dateRange').daterangepicker({
         startDate: new Date(),
         format: 'YYYY-MM-DD HH:mm:ss',
         timePicker: true,
@@ -36,6 +36,7 @@ $(function () {
     });
 
     $('#acPublish').validate({
+        debug: true,
         rules: {
             sportTypeName: "required",
             name: 'required',
