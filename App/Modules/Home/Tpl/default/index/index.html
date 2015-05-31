@@ -706,7 +706,7 @@
                             <volist name="game_sport" id="vo" key="k">
                                 <dd class="topic-rankings "<if condition="$k neq 1">style="display:none"</if> >
                                     <ul>
-                                        <?php $hottopic  = D('VTopic')->where('sport_id='.$vo['id'])->limit(2)->order('comment_count desc')->select();?>
+                                        <?php $hottopic  = D('VTopic')->where('sport_id='.$vo['id']. ' and topic_image is not null')->limit(2)->order('comment_count desc')->select();?>
                                         <volist name="hottopic" id="to">
                                             <li>
                                                 <h2 class="ranking-number text-error"><i></i></h2>
@@ -730,7 +730,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="pull-right">
-                                                                    <a href="/topic/11860"><i class="icon20 icon20-comment"></i>评论&nbsp;<span class="text-error"><{$to.comment_count}></span></a>
+                                                                    <a href="/Friends/topic/<{$to.id}>" target="_blank"><i class="icon20 icon20-comment"></i>评论&nbsp;<span class="text-error"><{$to.comment_count}></span></a>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -756,7 +756,7 @@
                 <ul class="clearfix">
                     <volist name="recommend" id="vo" key="k">
                         <li >
-                            <a class="color<{$k}>" href="/Friends/tag/<{$vo.id}>/topics"><{$vo.name}></a>
+                            <a class="color<{$k}>" href="/Friends/tag/<{$vo.id}>" target="_blank"><{$vo.name}></a>
                         </li>
                     </volist>
 
@@ -771,7 +771,17 @@
                 <dd>
                     <ul class="clearfix">
                         <volist name="doyen_user" id="do">
-                            <li><a href="/Friends/passport/<{$do.id}>" target="_blank"><img src="<{$do['image']}>"></a></li>
+
+                            <li><a href="/Friends/passport/<{$do.id}>" target="_blank">
+                                <if condition = "$do.image neq null">
+                                    <img src="<{$do.image}>">
+                                <else/>
+                                    <img src="/public/images/default/web_pic.jpg">
+                                </if>
+                            </a>
+                            </li>
+
+
                         </volist>
 
                     </ul>
@@ -863,7 +873,7 @@
             <li class="">
                 <div class="li-content clearfix">
                     <dl>
-                        <dd><a href="/Venue/<{$no.id}>"><img title="<{$no.name}>" src="<{$no.venue_image}>"></a></dd>
+                        <dd><a href="/Venue/<{$no.id}>"><img title="<{$no.name}>" src="<{$no.image}>"></a></dd>
                         <dt>
                         <h4><a href="/Venue/<{$no.id}>"><{$no.name}></a></h4>
                         <p>
@@ -884,7 +894,7 @@
                 <li class="">
                     <div class="li-content clearfix">
                         <dl>
-                            <dd><a href="/Venue/<{$uo.id}>"><img title="<{$vo.name}>" src="<{$uo.venue_image}>"></a></dd>
+                            <dd><a href="/Venue/<{$uo.id}>"><img title="<{$vo.name}>" src="<{$uo.image}>"></a></dd>
                             <dt>
                             <h4><a href="/Venue/<{$uo.id}>"><{$uo.name}></a></h4>
                             <p>

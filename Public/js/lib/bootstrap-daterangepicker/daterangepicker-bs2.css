@@ -21,6 +21,7 @@
 .daterangepicker.openscenter .ranges, .daterangepicker.openscenter .calendar {
   float: right;
   margin: 4px;
+
 }
 
 .daterangepicker .ranges {
@@ -300,4 +301,14 @@
 
 .daterangepicker th.month {
   width: auto;
+}
+
+.daterangepicker .first {
+    *float: left;
+}
+.daterangepicker .second {
+    *float: left;
+}
+.daterangepicker .ranges {
+    *float: left;
 }

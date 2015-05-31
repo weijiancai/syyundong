@@ -130,7 +130,22 @@ class IndexAction extends Action {
             echo 2;
         }
     }
-
+    /*
+    * @时间: 20150415
+    * @功能：取消赛事关注
+    */
+    public function topicFocusCancel()
+    {
+        $date['user_id'] = deCode(session('mark_id'));
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] = 1;
+        $result = D('OpFocus')->where($date)->delete();
+        if (false !== $result) {
+            echo 1;
+        } else {
+            echo 2;
+        }
+    }
     /*
      * @时间：20150412
      * @功能：赛友圈评论加载
@@ -233,6 +248,11 @@ class IndexAction extends Action {
         $map['game_id'] =array('in',$topic_id);
         $map['user_id'] = array('eq',$mark);
         $list = M('VTopic')->where($map)->limit($last, $amount)->select();
+        foreach ($list as $key => $val) {
+            $topic_image = D('VTopicImages')->where('topic_id=' . $val['id'])->select();
+            $val['topic_images'] = $topic_image;
+            $list[$key] = $val;
+        }
         echo json_encode($list);
     }
     /*
@@ -369,6 +389,7 @@ class IndexAction extends Action {
         $date['source_id'] = $_POST['source_id'];
         $date['source_type'] =$_POST['source_type'];
         $list = M('OpFocus')->where($date)->select();
+        //M('OpGameTopic')->where('')->
         if($list){
             echo 'false';
         }else{

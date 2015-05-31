@@ -85,10 +85,26 @@
                     </dd>
                 </dl>
 
-                <dl>
+                <dl class="nowrap">
                     <dt>举办城市：</dt>
-                    <dd><label>吉林省</label>
-                        <input name="province" class="required" type="hidden" value="1"/></dd>
+                    <dd> <dd><select  name="province" id="province" class="required">
+                    <option value="">请选择</option>
+                    <volist name="province" id="po">
+                        <option <eq name="po.id" value ="$vo.province">selected=selected</eq> value="<{$po.id}>"><{$po.name}></option>
+                    </volist>
+                </select>
+                    <select  name="city" id="city" class="required">
+                        <option value="">请选择</option>
+                        <volist name="city" id="co">
+                            <option <eq name="co.id" value ="$vo.city">selected=selected</eq> value="<{$co.id}>"><{$co.name}></option>
+                        </volist>
+                    </select>
+                    <select  name="region" id="region" class="required">
+                        <option value="">请选择</option>
+                        <volist name="venue" id="uo">
+                            <option <eq name="uo.id" value ="$vo.region">selected=selected</eq> value="<{$uo.id}>"><{$uo.name}></option>
+                        </volist>
+                    </select></dd></dd>
                 </dl>
                 <dl>
                     <dt>地点：</dt>

@@ -9,8 +9,7 @@ $(document).ready(function () {
     function getActivityCity() {
         $("#city").empty();
         if ($("#province").val()) {
-            $.getJSON("/Syweblg2015/DbActivity/getActivityCity", {id: $("#province").val()}, function (data) {
-                alert(data);
+            $.getJSON("/Syweblg2015/DbActivity/getCity", {id: $("#province").val()}, function (data) {
                 $("<option></option>").val("").text("请选择").appendTo($("#city"));
                 if (data != null) {
                     $.each(data, function (i, item) {
@@ -28,7 +27,7 @@ $(document).ready(function () {
     function getActivityRegion() {
         $("#region").empty();
         if ($("#city").val()) {
-            $.getJSON("/Syweblg2015/DbActivity/getActivityCity", {id: $("#city").val()}, function (data) {
+            $.getJSON("/Syweblg2015/DbActivity/getCity", {id: $("#city").val()}, function (data) {
                 $("<option></option>").val("").text("请选择").appendTo($("#region"));
                 if (data != null) {
                     $.each(data, function (i, item) {

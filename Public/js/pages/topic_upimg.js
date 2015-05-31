@@ -9,6 +9,7 @@ imgUpBtn.click(function () {
 });
 $("#fileupload").wrap("<form id='myupload' action='/Public/Public/upimg' method='post' enctype='multipart/form-data'></form>");
 $("#fileupload").change(function (event) {
+    $("#show_mes").html('');
     var size = event.target.files[0].size;
     var name = event.target.files[0].name;
     var format = name.substring(name.lastIndexOf(".") + 1, name.length).toLowerCase();

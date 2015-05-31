@@ -91,10 +91,10 @@ $(function () {
 
     //我要报名
     $('.game_apply').click(function(){
-      //  alert($('.game_apply').parent());
+        var content = $(this).next('.game_declare').html();
         dialog({
             id: 'id-demo',
-            content: $('#game_declare').html(),
+            content: content,
             okValue: '已阅读,我同意',
             ok: function () {
                 window.location.href='/Game/apply/'+$('#game_id').val();

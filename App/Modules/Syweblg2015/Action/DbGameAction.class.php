@@ -51,6 +51,7 @@ class DbGameAction extends CommonAction
     function add()
     {
         $this->assign('dzSport', $this->DzSport());
+        $this->assign('province', $this->getProvince());
         $this->display();
     }
 
@@ -86,6 +87,15 @@ class DbGameAction extends CommonAction
         $sport = D('DzSport')->where($where)->select();
         $this->assign('sport', $sport);
         $this->assign('dzSport', $this->DzSport());
+        //活动城市
+        $where['pid'] = $vo['province'];
+        $city = D('DbRegion')->where($where)->select();
+        $this->assign('city', $city);
+        //活动区域
+        $where['pid'] = $vo['city'];
+        $venue = D('DbRegion')->where($where)->select();
+        $this->assign('venue', $venue);
+        $this->assign('province', $this->getProvince());
         $this->display();
     }
 

@@ -27,9 +27,9 @@ class PublicAction extends Action
         $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
         $upload->savePath = './Public/upload/' . $path . '/'; // 设置附件上传目录
         $upload->thumb = true;
-        $upload->thumbPrefix = 's_';
-        $upload->thumbMaxWidth = '150';
-        $upload->thumbMaxHeight = '150';
+        $upload->thumbPrefix = 'm_,s_';
+        $upload->thumbMaxWidth = '800,150';
+        $upload->thumbMaxHeight = '600,150';
         $upload->thumbType = 0;
         $upload->zipImages = true;
         $upload->autoSub = true;
@@ -43,7 +43,11 @@ class PublicAction extends Action
             $info = $upload->getUploadFileInfo();
 
             //存储图片
-            $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
+        //    $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
+
+            list($day,$name) = split ('[/]', $info[0]['savename']);
+            $date['local_url'] = '/Public/upload/' . $path . '/'.$day.'/m_' . $name;
+
             list($day,$name) = split ('[/]', $info[0]['savename']);
             $date['size2_url'] = '/Public/upload/' . $path . '/'.$day.'/s_' . $name;
             $result = D('DbImages')->add($date);

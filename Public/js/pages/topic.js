@@ -36,36 +36,5 @@ $(function () {
         replay($topicData, $more, 'list', {source_type: ''});
     }
 
-    //关注
-    $("#topic_focus").click(function () {
-        if ($("#topic_focus").html() == '关注') {
-            jQuery.ajax({
-                type: "post",
-                url: "/Friends/index/topicFocus",
-                data: {source_id: $("#topic_id").val()},
-                success: function (result) {
-                    if (result == 1) {
-                        $("#topic_focus").html('取消关注');
-                        $('#topic_focus').removeClass('btn-danger');
-                    } else {
-                        $.dialog.error('关注失败,请刷新页面重新尝试');
-                    }
-                }
-            });
-        } else {
-            jQuery.ajax({
-                type: "post",
-                url: "/Friends/index/topicFocus",
-                data: {source_id: $("#topic_id").val()},
-                success: function (result) {
-                    if (result == 1) {
-                        $("#topic_focus").html('关注');
-                        $('#topic_focus').addClass('btn-danger');
-                    } else {
-                        $.dialog.error('取消关注失败,请刷新页面重新尝试');
-                    }
-                }
-            });
-        }
-    });
+
 });

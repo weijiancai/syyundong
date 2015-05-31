@@ -455,6 +455,7 @@ class IndexAction extends BaseAction
     */
     public function GameCommentLoad()
     {
+        $markId = deCode(I('session.mark_id'));
         $last = $_POST['last'];
         $amount = $_POST['amount'] + $_POST['last'];
         $order = 'input_date desc';
@@ -462,8 +463,15 @@ class IndexAction extends BaseAction
         foreach ($list as $key => $val) {
             $topic_image = D('VTopicImages')->where('topic_id=' . $val['id'])->select();
             $val['topic_images'] = $topic_image;
+            $userId = $val['user_id'];
+            if ($markId == $userId) {
+                $val['nowuser'] = 1;
+            } else {
+                $val['nowuser'] = 0;
+            }
             $list[$key] = $val;
         }
+
         echo json_encode($list);
     }
 
@@ -477,11 +485,12 @@ class IndexAction extends BaseAction
         $amount = $_POST['amount'] + $_POST['last'];
         $order = 'input_date desc';
         $list = D('VTopic')->where('game_id=' . $_POST['game_id'] . ' and topic_image is not null')->order($order)->limit($last, $amount)->select();
-        foreach ($list as $key => $val) {
+    //    dump(D('VTopic')->getLastSql());
+        /*foreach ($list as $key => $val) {
             $topic_image = D('VTopicImages')->where('topic_id=' . $val['id'])->select();
             $val['topic_images'] = $topic_image;
             $list[$key] = $val;
-        }
+        }*/
         echo json_encode($list);
     }
 
@@ -512,9 +521,19 @@ class IndexAction extends BaseAction
     */
     public function LoadReply()
     {
+        $markId = deCode(I('session.mark_id'));
         $id = $_POST['topicId'];
         $model = D('v_comment');
         $list = $model->where('source_id=' . $id . ' and source_type = 4')->limit(5)->order('input_date desc')->select();
+        foreach ($list as $key => $val) {
+            $userId = $val['user_id'];
+            if ($markId == $userId) {
+                $val['nowuser'] = 1;
+            } else {
+                $val['nowuser'] = 0;
+            }
+            $list[$key] = $val;
+        }
         echo json_encode($list);
     }
 }

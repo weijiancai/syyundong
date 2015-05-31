@@ -146,23 +146,7 @@ class DbActivityAction extends CommonAction
     {
         return D('DzSport')->field('id,name')->where('pid=0 and sport_type=2')->select();
     }
-    /*
-     * @功能：活动省份
-     * @时间：20150422
-     */
-    public function getProvince(){
-        return D('DbRegion')->field('id,name')->where('pid=0 and level=1')->select();
-    }
-    /*
-     * @功能：活动城市
-     * @时间：20150422
-     */
-    public function getActivityCity()
-    {
-        $where['pid'] = $_GET['id'];
-        $data = D('DbRegion')->field('id,name')->where($where)->select();
-        echo json_encode($data);
-    }
+
     /*
      * @功能：活动报名填写信息
      * @时间：20150422

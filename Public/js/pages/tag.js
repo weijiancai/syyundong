@@ -5,29 +5,6 @@ $(function () {
     // 注册body id
     $('body').attr('id', 'topic-detail');
 
-    //topic:回复
-/*    var $topicData = $('#topic_comment');
-    var $replyPanel = $('.reply-panel');
-    var $more = $('#topic_more');
-    $replyPanel.find('a').click(function() {
-        var $panel = $(this).parent().parent();
-        $panel.find('.reply-form').toggle();
-    });
-    // 验证，提交回复
-    $replyPanel.find('.reply-form form').validate({
-        rules: {
-            content: 'required'
-        },
-        messages: {
-            content: '回复内容不能为空！'
-        },
-        submitHandler: function (form) {
-            form.submit();
-            $(form).parent().hide();
-            replay($topicData, $more, 'topic', {source_type: '4',source_id:$topicData.data('source_id')});
-        }
-    });
-    replay($topicData, $more, 'topic', {source_type: '4',source_id:$topicData.data('source_id')});*/
     //评论内容
     $('#topic_comment_form').validate({
         rules: {
@@ -37,17 +14,16 @@ $(function () {
             content: '评论内容不能为空'
         },
         submitHandler: function (form) {
-            //    form.submit();
             jQuery.ajax({
                 type: "post",
                 url: "/Friends/index/publishReplay",
                 data: $('#topic_comment_form').serialize(),
                 success: function ($result) {
-                    if ($result==1) {
+                    if ($result == 1) {
                         $('#topic_comment').empty();
                         $('#content').val('');
                         $('#seeMore').data('last', 0);
-                        replay($('#topic_comment'), $('#seeMore'), 'tpl_topic_comment', {source_id:$('#topic_comment').data('source_id'),source_type:4});
+                        replay($('#topic_comment'), $('#seeMore'), 'tpl_topic_comment', {source_id: $('#topic_comment').data('source_id'), source_type: 4});
                     } else {
                         $.dialog.error('评论失败');
                     }
@@ -59,6 +35,7 @@ $(function () {
     var $imagewall = $('#imagewall');
     var $semore = $('#seeMoreList');
     var game_id = $('#imagewall').data('game_id');
+
     function seemorelist() {
         var last = $semore.data('last');
         if (last == -1) {
@@ -92,7 +69,7 @@ $(function () {
                 });
                 // 注册事件
                 /*$dl.find('.comment-btn').click(onCommentClick);
-                $dl.find('.comment-pop form').validate(replyPanelValidateOption);*/
+                 $dl.find('.comment-pop form').validate(replyPanelValidateOption);*/
             }
         });
     }
@@ -110,6 +87,40 @@ $(function () {
         },
         submitHandler: function (form) {
             form.submit();
+        }
+    });
+    //关注
+    $("#topic_focus").click(function () {
+        if (isLogin()) {
+            if ($("#topic_focus").html() == '关注') {
+                jQuery.ajax({
+                    type: "post",
+                    url: "/Friends/index/topicFocus",
+                    data: {source_id: $("#topic_id").val()},
+                    success: function (result) {
+                        if (result == 1) {
+                            $("#topic_focus").html('取消关注');
+                            $('#topic_focus').removeClass('btn-danger');
+                        } else {
+                            $.dialog.error('关注失败,请刷新页面重新尝试');
+                        }
+                    }
+                });
+            } else {
+                jQuery.ajax({
+                    type: "post",
+                    url: "/Friends/index/topicFocusCancel",
+                    data: {source_id: $("#topic_id").val()},
+                    success: function (result) {
+                        if (result == 1) {
+                            $("#topic_focus").html('关注');
+                            $('#topic_focus').addClass('btn-danger');
+                        } else {
+                            $.dialog.error('取消关注失败,请刷新页面重新尝试');
+                        }
+                    }
+                });
+            }
         }
     });
 });

@@ -60,7 +60,7 @@
                         <p><span>主办：</span> <{$detail.sponsor}> </p>
                         <p class="text-right"><br />
 
-                        <input type="hidden" id="game_id" value="<{$detail.id}>">
+
                         <?php  if($detail['status']=='1'){?>
                            <button id="i_game_apply" data-gameid="<{$detail.id}>" class="btn btn-warning">我要报名</button>
                          <?php }else{ ?>
@@ -137,7 +137,7 @@
         <div class="row" id="detail_bottom">
             <div class="span10">
                 <div class="main-block">
-                    <h4 class="main-title"> <{$detail.name}> <span>（<em><{$detail.focus_count}></em>）人已关注赛事</span> </h4>
+                    <h4 class="main-title"> <{$detail.name}> <span>（<em class="focus_game_count"><{$detail.focus_count}></em>）人已关注赛事</span> </h4>
                     <div class="friends-list clearfix" style="min-height:210px;">
                         <div id="NTGUID__1">
                             <button data-selector="moreData" class="btn public-reload-link" id="change"><i class="icon-match icon-reload"></i>换一组</button>
@@ -180,8 +180,8 @@
                         <p class="publish-box-ttl">发布新鲜事</p>
                         <form action="" method="post" data-selector="publish-form" id="TopicForm">
                             <textarea id="content" name="content" validate-title="话题" validate-rules="[['required'],['reallength',{min:10}]]"></textarea>
-                            <input type="hidden" name="game_id" value="<{$detail.id}>" />
 
+                            <input type="hidden" id="game_id" value="<{$detail.id}>" name="game_id">
                             <input type="hidden" id="imgMsg" value="" name="imgMsg"/>
                             <button type="submit" id="btn-topic" class="btn btn-warning send-btn">发布</button>
                         </form>
@@ -207,23 +207,25 @@
                     <div id="gameTopic" class="tab-content-wrap" style="display: block;">
                         <style>#NTGUID__4 .comment-pop{      background: #f5f5f5;      padding: 0 10px 10px 10px;      border-radius: 5px;      -moz-border-radius: 5px;      -webkit-border-radius: 5px;      zoom:1;      margin-top: 10px;      position: relative;    }#NTGUID__4 .comment-pop:after{      content: "";      width: 0;      height: 0;      border: transparent solid 8px;      position: absolute;      border-bottom-color: #f5f5f5;      right: 95px;      top: -16px;    }#NTGUID__4 .topicli{      display: none;    }#NTGUID__4 .comment-list dl{      border-bottom: 1px dotted #E0E0E0;      padding: 15px 0;      display: none;    }#NTGUID__4 .comment-list dl dt{      float: left;      width: 50px;      overflow: hidden;    }#NTGUID__4 .comment-list dl dt img{      border-radius: 50%;      -webkit-border-radius: 50%;      -moz-border-radius: 50%;      width: 40px;      height: 40px;    }#NTGUID__4 .comment-list dl dd{      display: block;      margin-left: 60px;    }#NTGUID__4 .comment-list dl dd .user-header{      display: block;      font-size: 14px;      margin-bottom: 5px;    }#NTGUID__4 .comment-list dl dd .user-header table{      width: 100%;      margin: 0;    }#NTGUID__4 .comment-list dl dd .user-header th{      text-align: left;      font-weight: normal;    }#NTGUID__4 .comment-list dl dd .user-header td{      text-align: right;    }#NTGUID__4 .comment-list dl dd .user-header span{      color: #C3C3C3;      margin-left: 20px;      font-size: 12px;      font-weight: normal;    }#NTGUID__4 .comment-list dl dd .user-header a{      color: #555;    }#NTGUID__4 .comment-list dl dd .comment-content{      margin: 0;      padding: 0;      font-size: 14px;      line-height: 22px;      overflow: hidden;      width: 90%;      color: #333;      font-weight: normal;      text-shadow: none;      -webkit-text-shadow: none;      -moz-text-shadow: none;    }#NTGUID__4 .comment-list .comment-textarea{      display: block;      width: 96%;      resize: none;    }#NTGUID__4 .comment-list .btn-warning{      padding-left: 20px;      padding-right: 20px;    }#NTGUID__4 .comment-list p{      margin: 0;      padding: 0;    }#NTGUID__4 .comment-list .reply-panel p a{      font-size: 14px;      color: #999;    }#NTGUID__4 .comment-list .reply-panel .reply-form{      display: none;      position: relative;      border: 1px solid #F5A623;      margin-top: 5px;      padding: 5px 0;      background: #fff;      border-radius: 4px;      -webkit-border-radius: 4px;      -moz-border-radius: 4px;    }#NTGUID__4 .comment-list .reply-panel .reply-form i.icon-up{      display: inline-block;      width:0;      height:0;      border-width:6px;      border-color:transparent transparent #fff transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 42px;      top: -13px;      z-index: 5;    }#NTGUID__4 .comment-list .reply-panel .reply-form .btn{      position: absolute;      right: 5px;      top: 5px;    }#NTGUID__4 .comment-list .reply-panel .reply-form em.icon-down{      display: inline-block;      width:0;      height:0;      border-width:8px;      border-color:transparent transparent #F5A623 transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 40px;      top: -17px;      z-index: 1;    }#NTGUID__4 .comment-list .reply-panel .reply-form input{      background: #fff;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;      width: 450px;      resize:none;    }#NTGUID__4 .comment-list .reply-panel .reply-form input:focus{      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;    }  </style>
                         <div id="NTGUID__4">
-                        <ul id="topicData" class="topic-list clearfix" >
+                        <ul id="topicData" class="topic-list clearfix" data-game_id="<{$detail.id}>" data-url="/Game/index/GameCommentLoad"  data-replay="true">
 
 
                         </ul>
 
-                        <button id="more" data-last="0" data-selector="seeMore" class="btn btn-block">查看更多</button>
+
+                        <button data-last="0" class="btn btn-block" id="more">查看更多</button>
                     </div>
 
 
                     </div>
+
                     <!-- 话题 列表 结束 -->
                     <!-- 图片墙 开始 -->
                     <div id="gameFlow" class="tab-content-wrap hide" style="display: none;"><style>#NTGUID__5 .container-fluid{    padding: 20px;    width: 660px;    margin: 0 auto;  }#NTGUID__5 .box{    margin-bottom: 30px;    float: left;    width: 315px;    transform-origin:left top;    -webkit-transform-origin: left top;    -moz-transform-origin: left top;  }#NTGUID__5 .box img{    max-width: 100%;    width: 100%;  }#NTGUID__5 .box dt{    padding: 10px 10px;    width: 293px;    border:1px solid #EBEBEB;    border-top: 0;    background-color: #fff;  }#NTGUID__5 .box dt .user-info{    overflow: hidden;  }#NTGUID__5 .box dt .user-avatar{    width: 40px;    font-weight: normal;  }#NTGUID__5 .box dt .user-avatar img{    border-radius: 50%;    -webkit-border-radius: 50%;    -moz-border-radius: 50%;    transform:rotate(0deg);    transition-duration:0.5s;    transition-timing-function:cubic-bezier;    transition-delay:0.5s;  }#NTGUID__5 .box dt .user-avatar a:hover img{        transition-duration:0.5s;    transition-timing-function:cubic-bezier;    transition-delay:0.5s;    transform:rotate(360deg);  }#NTGUID__5 .box dt .user-name{    line-height: 40px;    overflow: hidden;    width: 130px;    margin-left: 10px;  }#NTGUID__5 .box dt .user-name a{    color: #999;  }#NTGUID__5 .box dt .user-name a:hover{    color:#F5A623;  }#NTGUID__5 .box dt .create-date{    color:#999;    line-height: 40px;  }#NTGUID__5 .box dt .comment-panel{    display: none;    margin-top: 10px;    padding-top: 10px;    border-top :1px solid #EBEBEB;  }#NTGUID__5 .box dt .comment-panel textarea{    width: 95%;    resize: none;  }#NTGUID__5 .box dt .comment-panel .btn{    margin-top: 10px;  }#NTGUID__5 .box dd{    position: relative;    overflow: hidden;  }#NTGUID__5 .box dd .topic-share{    overflow: hidden;    position: absolute;    padding:5px;    padding-left:0;    background:#fff;    border-radius: 0 0 0 4px;    -webkit-border-radius: 0 0 0 4px;    -moz-border-radius: 0 0 0 4px;    right: -80px;    top: 0px;    box-shadow: 0 0 5px rgba(0,0,0,0.3);    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.3);    border: 1px solid #9999;    border-width: 0 0 1px 1px;    height: 24px;  }#NTGUID__5 .box dd .topic-share a{    float: left;    margin-left: 5px;  }#NTGUID__5 .box dd .topic-container{    position: absolute;    bottom: 0px;    left: 0px;    width: 100%;    overflow: hidden;    display: none;  }#NTGUID__5 .box dd .topic-container .topic-background{    position: absolute;    left: 0px;    bottom: 0px;    overflow: hidden;    height: 100%;    width: 100%;    background-color: #000;    opacity: 0.6;    filter: alpha(opacity=60);    z-index: 1;  }#NTGUID__5 .box dd .topic-content{    padding: 10px;    overflow: hidden;    position: relative;    z-index: 5;    color: #fff;    line-height: 20px;  }#NTGUID__5 .box dd .topic-content p{    margin-bottom: 0;  }#NTGUID__5 .box dd .topic-content p.text-right a{    margin-left: 10px;    color:#999;  }</style><div id="NTGUID__5">
-                        <div class="container-fluid" id="game_id" style="position: relative; height: 345px;">
+                        <div class="container-fluid" id="imagewall" style="position: relative; height: 345px;">
 
                         </div>
-                        <button data-last ="0" id="seeMoreList" class="btn btn-block">没有更多</button>
+                        <button id="seeMoreList" class="btn btn-block" data-last="0">没有更多</button>
                     </div>
 
 
@@ -282,123 +284,15 @@
     </div>
 </div>
         <input type="hidden" value="<{$_SESSION['mark_id']}>" id="free">
-<script type="text/template" id="list">
-    <li class="topicli clearfix" style="display: list-item;">
-        <!-- 作者头像 开始 -->
-            <div class="topic-host-thumb pull-left">
-            <a target="_blank" href="/Friends/passport/{{id}}" ><img title="{{user_name}}" src="{{user_image}}"></a>
-    </div>
-        <!-- 作者头像 结束 -->
-        <!-- 话题内容 开始 -->
-    <div class="topic-right">
-            <p class="topic-info">
-            <a target="_blank" href="/Friends/passport/{{id}}">{{user_name}}
-            </a>
-    <span class="topic-time">{{input_date}}</span>
-    </p>
-    <pre class="topic-des"><a target="_blank" href="/Topic/{{id}}">{{content}}</a></pre>
 
-    <p class="topic-img-wrap yoxview">
-        {{each topic_images}}
-        <a href="{{$value.image}}">
-         <img title="点击放大" alt="" src="{{$value.image}}">
-        </a>
-        {{/each}}
-
-    </p>
-    <div class="topic-bottom text-right">
-
-            <p class="topic-source pull-left">
-            发表在<a target="_blank" href="/friends/tag/300">{{game_name}}</a>
-    </p>
-
-
-    <a class="comment-btn" href="javascript:void(0);" data-id="{{id}}">
-            <i class="icon20 icon20-comment"></i>评论<span class="comment-count text-error">{{}}</span>
-    </a>
-    <a data-params="{'id':10318}" data-url="/topic/comment-like" data-selector="doPraise" href="javascript:;">
-        <i class="icon20 icon20-praise "></i>赞<span class="text-error">3</span></a>
-    </div>
-        <!-- 评论框 开始 -->
-        <div class="comment-pop clearfix hide">
-            <div class="comment-form">
-                <form method="post" action="/topic/comment-add" id="GameTopicComment">
-                    <input type="hidden" value="{{id}}" name="source_id" id="source_id">
-                    <input type="hidden" value="passport_86004" name="userId">
-                    <input type="text" validate-title="评论内容" name="content" class="comment-txt" id="content">
-                    <button class="btn btn-warning pull-right" type="submit">评论</button>
-                </form>
-            </div>
-            <div class="comment-list">
-
-            </div>
-            <div style="display:none;margin:10px -10px -10px -10px;" data-selector="commentMore">
-                <a target="_blank" style="border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;" class="btn btn-block btn-warning" href="/topic/10836">查看全部评论</a>
-            </div>
-        </div>
-        <!-- 评论框 结束 -->
-
-    </div>
-        <!-- 话题内容 结束 -->
-    </li>
-</script>
-
-
-<!-- 回复话题模板 -->
-<script type="text/template" id="tpl_topic_comment">
-    <dl class="clearfix" style="display: block;">
-        <dt>
-            <!--<a target="_blank" href="/friend/passport_79472/timeline"></a>-->
-            <img title="{{nick_name}}" src="{{image}}">
-        </dt>
-        <dd>
-            <div class="user-header">
-                <table>
-                    <tbody>
-                    <tr>
-                        <th><a target="_blank" href="/friend/passport_79472/timeline">{{nick_name}}</a><span title="{{input_date}}" data-timestamp="1419260340000">{{input_date}}</span></th>
-                        <td>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            {{if replyUserName}}
-            <p class="comment-content">回复
-                <!--<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline"></a>-->
-                @{{replyUserName}}：</p>
-            {{/if}}
-            <p class="comment-content"></p>
-            <pre class="comment-content">{{content}}</pre>
-            <div class="reply-panel">
-                <p class="text-right">
-                    {{if nowuser}}
-                    <a id="replaydel" data-replyid="308" data-selector="deleteComment" href="javascript:;">删除</a>
-                    {{/if}}
-                    <a id="replyLink" data-selector="replyLink" href="javascript:;">回复</a>
-                </p>
-                <div class="reply-form">
-                    <i class="icon-up"></i>
-                    <em class="icon-down"></em>
-                    <form method="post" action="/activity/index/CommentReply"  id="CommentReplyForm">
-                        <input type="hidden" value="{{id}}" name="replay_to">
-                        <input type="hidden" value="" name="source_id">
-                        <input type="text" placeholder="回复 {{nick_name}}" name="content">
-                        <button class="btn btn-warning" type="submit">回复</button>
-                    </form>
-                </div>
-            </div>
-        </dd>
-    </dl>
-</script>
 
 
 <!--图片墙-->
-<script type="text/template" id="seemore">
+<script type="text/template" id="see_more">
     <div class="box" style="margin-right: 10px;">
         <dl>
             <dd>
-                <a href="/topic/10318"><img src="{{topic_image}}"></a>
+                <a  target="_blank" href="Friends/topic/{{game_id}}"><img src="{{topic_image}}"></a>
                 <div class="topic-share clearfix" style="right: -185px;">
 
                 </div>
@@ -434,6 +328,14 @@
             </dt>
         </dl>
     </div>
+</script>
+
+<include file="Public@default:Public:template" />
+
+<script type="text/javascript" >
+    $(function() {
+        replay($('#topicData'), $('#more'), 'list', {game_id:$('#topicData').data('game_id')});
+    })
 </script>
 <script type="text/javascript" src="/Public/js/pages/game_detail.js"></script>
 <script type="text/javascript" src="/Public/js/pages/topic_upimg.js"></script>

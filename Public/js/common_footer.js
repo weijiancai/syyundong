@@ -192,7 +192,10 @@ function replay($container, $more, tpl_id, params, isReset) {
                                 success: function ($result) {
                                     if ($result=='true') {
                                         $.dialog.success('点赞成功');
-                                      //  i.addClass('icon20-praised');
+                                        // 点赞数加1
+                                        var $laud_count = self.find('.laud_count');
+                                        var laud_count = parseInt($laud_count.text());
+                                        $laud_count.text(laud_count + 1);
                                         self.find('i').addClass('icon20-praised');
                                        // self.removeClass('btn-warning').attr('disabled', 'disabled');
                                     }else if($result =='error'){
@@ -212,7 +215,8 @@ function replay($container, $more, tpl_id, params, isReset) {
                         autoPlay: true
                     });
                     // 删除
-                    $row.find('#deleteComment').click(function () {
+                    $row.find('.deleteComment').click(function () {
+                        alert('22');
                         var $id = $(this).data('replyid');
                         dialog({
                             content: '确定要删除该评论吗?',
@@ -291,6 +295,7 @@ function replay($container, $more, tpl_id, params, isReset) {
 
     // 检索当前话题的评论
     function getTopicComment($commentList, topicId, sourceType) {
+        $commentList.empty();
         jQuery.ajax({
             type: "post",
             url: "/Game/index/LoadReply",
@@ -300,7 +305,7 @@ function replay($container, $more, tpl_id, params, isReset) {
                     return;
                 }
                 data = eval(data);
-                $commentList.empty();
+
 
                 for (var i = 0; i < data.length; i++) {
                     var $dl = $(template('tpl_topic_comment', data[i]));
@@ -309,6 +314,32 @@ function replay($container, $more, tpl_id, params, isReset) {
                     // 注册事件
                     $dl.find('#replyLink').click(function () {
                         $(this).parent().parent().find('.reply-form').toggle();
+                    });
+
+                    // 删除
+                    $dl.find('.deleteComment').click(function () {
+                        var $id = $(this).data('replyid');
+                        dialog({
+                            content: '确定要删除该评论吗?',
+                            okValue: '确定',
+                            ok: function () {
+                                if(isLogin()) {
+                                    jQuery.ajax({
+                                        type: "post",
+                                        url: "/Friends/index/CommentDel",
+                                        data: {id: $id},
+                                        success: function ($result) {
+                                            if ($result) {
+                                                getTopicComment($commentList, topicId);
+                                            }
+                                        }
+                                    });
+                                }
+                            },
+                            cancelValue: '取消',
+                            cancel: function () {
+                            }
+                        }).show();
                     });
                     $dl.find('.reply-form form').validate({
                         rules: {

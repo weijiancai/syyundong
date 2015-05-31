@@ -538,5 +538,22 @@ class CommonAction extends Action {
             echo $this->ajax('0', "推荐失败", $name, "", "");
         }
     }
+    /*
+     * @功能：活动省份
+     * @时间：20150422
+     */
+    public function getProvince(){
+        return D('DbRegion')->field('id,name')->where('pid=0 and level=1')->select();
+    }
+    /*
+     * @功能：活动城市
+     * @时间：20150422
+     */
+    public function getCity()
+    {
+        $where['pid'] = $_GET['id'];
+        $data = D('DbRegion')->field('id,name')->where($where)->select();
+        echo json_encode($data);
+    }
 }
 ?>

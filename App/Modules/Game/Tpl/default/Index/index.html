@@ -154,7 +154,7 @@
                                                     <{$vo.sponsor}>
                                                 </p>
 
-                                                <div class="game_declare" style="display: none"><{$vo.game_declare}></div>
+
                                                 <p class="item-list-bottom">
                                                     <a href="javascript:void(0);"><i class="icon-match icon-fav"></i>关注（<{$vo.focus_count}>）</a>
                                                     <a href="javascript:void(0);"><i
@@ -168,6 +168,7 @@
                                         <a href="javascript:;" class="game_apply btn btn-warning item-list-reg " data-declare="<{$vo.game_declare}>"
                                            data-gameid="<{$vo.id}>" data-action="/Game/apply/<{$vo.id}>" data-selector="joinMatch">我要报名</a>
                                           </if>
+                                        <div class="game_declare" style="display: none"><{$vo.game_declare}></div>
                                     </div>
                                 </div>
 
