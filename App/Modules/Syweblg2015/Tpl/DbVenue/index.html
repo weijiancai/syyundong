@@ -76,7 +76,7 @@
                     <td height="25px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
                     <td><{$vo.name}></td>
                     <td><{$vo['sport_id']|getSportName}></td>
-                    <td><{$vo.city}><{$vo.region}><{$vo['address']}></td>
+                    <td><{$vo['city']|getRegionName}><{$vo['region']|getRegionName}><{$vo['address']}></td>
                     <td><{$vo['phone']}></td>
                     <td><{$vo['person_cost']}></td>
                     <td><{$vo['input_user']|getUserName}></td>

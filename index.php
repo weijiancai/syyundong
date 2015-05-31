@@ -3,7 +3,7 @@
 	
 	define('APP_PATH','./App/');
 
-	define('APP_DEBUG',true);
+	define('APP_DEBUG',false);
 	
 	require './Codes/Codes.php';
 ?>

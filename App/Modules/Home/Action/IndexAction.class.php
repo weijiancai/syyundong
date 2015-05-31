@@ -22,6 +22,7 @@ class IndexAction extends BaseAction
         $this->assign('activity_sport', $this->activity_sport());
         $this->assign('venue_sport', $this->venue_sport());
         $this->assign('region', D('Public/Index')->region());
+        $this->NewRecommendVenue();
         $this->display();
     }
 
@@ -128,6 +129,14 @@ class IndexAction extends BaseAction
     public function association(){
         $association = M('VSportAssociation')->order('input_date desc')->limit(2)->select();
         $this->assign('association',$association);
+    }
+    /*
+     * @功能：最新推荐场馆
+     * @时间:20150418
+     */
+    public function NewRecommendVenue(){
+        $new_venue = D('VRecommendVenues')->limit(6)->order('input_date desc')->select();
+        $this->assign('new_venue',$new_venue);
     }
 
 }

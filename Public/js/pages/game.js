@@ -91,6 +91,7 @@ $(function () {
 
     //我要报名
     $('.game_apply').click(function(){
+      //  alert($('.game_apply').parent());
         dialog({
             id: 'id-demo',
             content: $('#game_declare').html(),

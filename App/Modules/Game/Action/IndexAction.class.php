@@ -315,7 +315,6 @@ class IndexAction extends BaseAction
         } else {
             echo ' <script> window.location.href="/login/login"</script>';
         }
-        $this->display();
     }
 
     /*

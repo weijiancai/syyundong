@@ -692,14 +692,16 @@
                         <dl>
                             <!-- && start 热门话题：v_topic 每个类目下取评论数最多的两个 -->
                             <dt class="topic-type">
-                                <volist name="game_sport" id="vo" key="k">
+                                <!-- <volist name="game_sport" id="vo" key="k">
                                     <a class="topic-typer" data-index="2" href="javascript:;">户外<br>运动</a>
-                                </volist>
+                                </volist> -->
                                 <a class="topic-typer current" data-index="8" href="javascript:;">球类<br>运动</a>
                                 <a class="topic-typer" data-index="2" href="javascript:;">户外<br>运动</a>
                                 <a class="topic-typer" data-index="3" href="javascript:;">全民<br>健身</a>
                                 <a class="topic-typer" data-index="4" href="javascript:;">马拉松<br>路跑</a>
-                                <a class="topic-typer" data-index="5" href="javascript:;">综合<br>其他</a>
+								<a class="topic-typer" data-index="5" href="javascript:;">棋牌</a>
+                                <a class="topic-typer" data-index="6" href="javascript:;">体育格斗<br>运动</a>
+                                <a class="topic-typer" data-index="7" href="javascript:;">综合<br>其他</a>
                             </dt>
                             <volist name="game_sport" id="vo" key="k">
                                 <dd class="topic-rankings "<if condition="$k neq 1">style="display:none"</if> >
@@ -850,13 +852,32 @@
 <dl>
 <dt class="root-title">
 <h4>推荐场馆</h4>
+    <a data-selector="tabChanger" class="current" data-value="<{$vo.id}>" href="javascript:;">最新</a>
 <volist name="city" id="vo" key="k">
-    <a data-selector="tabChanger" <if condition="$k eq 1">class="current"</if>data-value="<{$vo.id}>" href="javascript:;"><{$vo.name}></a>
+    <a data-selector="tabChanger" data-value="<{$vo.id}>" href="javascript:;"><{$vo.name}></a>
 </volist>
-
 </dt>
+    <dd class="root-content">
+    <ul class="clearfix">
+        <volist name="new_venue" id="no">
+            <li class="">
+                <div class="li-content clearfix">
+                    <dl>
+                        <dd><a href="/Venue/<{$no.id}>"><img title="<{$no.name}>" src="<{$no.venue_image}>"></a></dd>
+                        <dt>
+                        <h4><a href="/Venue/<{$no.id}>"><{$no.name}></a></h4>
+                        <p>
+                            <span class="muted">人均：</span><span class="text-error">¥<{$no.person_cost}></span>
+                        </p>
+                        </dt>
+                    </dl>
+                </div>
+            </li>
+        </volist>
+    </ul>
+    </dd>
 <volist name="city" id="vo" key ="k">
-    <dd class="root-content" <if condition="$k neq 1">style="display:none"</if>>
+    <dd class="root-content" style="display:none">
         <ul class="clearfix">
             <?php $venue  = D('VRecommendVenues')->where('region='.$vo['id'])->select();?>
             <volist name="venue" id="uo" key="k">

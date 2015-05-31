@@ -71,7 +71,7 @@ class IndexAction extends BaseAction
         $this->assign('venue_sport', $this->activity_sport());
         $this->hotactivity();
         $this->sport_doyen();
-
+        $this->display();
     }
 
     /*
