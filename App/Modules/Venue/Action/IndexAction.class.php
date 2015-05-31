@@ -49,7 +49,7 @@ class IndexAction extends BaseAction {
         import('ORG.Util.Page');
         $model = D('VVenue');
         $count = $model->where($map)->order($order)->count();
-        $Page = new Page($count, 3);
+        $Page = new Page($count, 10);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
         $Page->rollPage = 10;
         $list = $model->where($map)->limit($Page->firstRow . ',' . $Page->listRows)->order($order)->select();
