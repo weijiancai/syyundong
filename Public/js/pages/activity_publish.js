@@ -5,12 +5,42 @@ $(function () {
     // 注册body id
     $('body').attr('id', 'match-post');
 
+    // 日期控件
+    $('.date').daterangepicker({
+        startDate: new Date(),
+        format: 'YYYY-MM-DD HH:mm:ss',
+        timePicker: true,
+        timePickerSeconds: true,
+        timePickerIncrement: 1,
+        timePicker12Hour: false,
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-primary',
+        cancelClass: 'btn-default',
+        drops: 'down',
+        locale: {
+            applyLabel: '确定',
+            cancelLabel: '取消',
+            fromLabel: '从',
+            toLabel: '到',
+            weekLabel: '周',
+            customRangeLabel: '自定义',
+            daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+            monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            firstDay: 1
+        }
+    }, function(start, end, label) {
+        var startDate = this.element.data('start_date');
+        var endDate = this.element.data('end_date');
+        $(startDate).val(start.format('YYYY-MM-DD HH:mm:ss'));
+        $(endDate).val(end.format('YYYY-MM-DD HH:mm:ss'));
+    });
+
     $('#acPublish').validate({
         rules: {
             sportTypeName: "required",
             name: 'required',
-            regBeginDate:'required',
-            regEndDate:'required',
+            regDateRange:'required',
+            dateRange:'required',
             regionId: "required",
             address: 'required',
             limitCount:
@@ -22,8 +52,8 @@ $(function () {
         messages: {
             sportTypeName: "比赛项目不能为空！",
             name: '活动名称不能为空！',
-            regBeginDate:'报名开始时间不能为空',
-            regEndDate:'报名结束时间不能为空',
+            regDateRange:'报名时间不能为空',
+            dateRange:'活动时间不能为空',
             regionId: "请选择活动地点!",
             address: '请填写详细地址',
             limitCount: {

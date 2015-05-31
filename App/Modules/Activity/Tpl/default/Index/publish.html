@@ -65,9 +65,9 @@
                 <tr>
                   <td>
                     <div class="datepicker-panel">
-                      <input type="text" class="span-date hasDatepicker date" data-date-format="yyyy-mm-dd hh:ii" placeholder="开始时间" readonly="readonly" validate-title="报名开始时间"  id="regBeginDate" name="regBeginDate" value="<?php echo date('Y-m-d H:i:s')?>">
-                      &nbsp;至&nbsp;
-                      <input type="text" class="span-date hasDatepicker date" data-date-format="yyyy-mm-dd hh:ii" placeholder="截止时间" readonly="readonly" validate-title="报名截止时间" id="regEndDate" name="regEndDate">
+                        <input type="text" id="regDateRange" name="regDateRange" class="span5 hasDatepicker date" placeholder="开始时间 ~ 截止时间" readonly="readonly"  data-start_date="#regBeginDate" data-end_date="#regEndDate">
+                        <input type="hidden" id="regBeginDate" name="regBeginDate">
+                        <input type="hidden" id="regEndDate" name="regEndDate">
                     </div>
                   </td>
                 </tr>
@@ -79,9 +79,9 @@
                 <tr>
                   <td>
                     <div class="datepicker-panel">
-                      <input type="text" class="span-date hasDatepicker date" data-date-format="yyyy-mm-dd hh:ii" placeholder="开始时间" readonly="readonly" validate-title="活动开始时间" id="startDate" name="startDate">
-                      &nbsp;至&nbsp;
-                      <input type="text" class="span-date hasDatepicker date" data-date-format="yyyy-mm-dd hh:ii" placeholder="截止时间" readonly="readonly" validate-title="活动截止时间" id="endDate" name="endDate">
+                        <input type="text" id="dateRange" name="dateRange" class="span5 hasDatepicker date" placeholder="开始时间 ~ 截止时间" readonly="readonly" data-start_date="#startDate" data-end_date="#endDate">
+                        <input type="hidden" id="startDate" name="startDate">
+                        <input type="hidden" id="endDate" name="endDate">
                     </div>
                   </td>
                 </tr>
