@@ -15,9 +15,9 @@
             </p>
             <pre class="topic-des"><a target="_blank" href="/Friends/topic/{{id}}">{{content}}</a></pre>
 
-            <p class="topic-img-wrap yoxview">
+            <p class="topic-img-wrap yoxview" data-user_image="{{user_image}}" data-user_name="{{user_name}}">
                 {{each topic_images}}
-                <a href="{{$value.image}}">
+                <a data-href="{{$value.image}}">
                     <img title="点击放大" alt="" src="{{$value.image}}">
                 </a>
                 {{/each}}

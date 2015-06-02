@@ -208,12 +208,7 @@ function replay($container, $more, tpl_id, params, isReset) {
                         }
                     });
                     // 图片
-                    $row.find(".topic-img-wrap").yoxview({
-                        lang: "zh-cn",
-                        backgroundColor: 'Blue',
-                        playDelay: 5000,
-                        autoPlay: true
-                    });
+                    $row.find(".topic-img-wrap").imageView();
                     // 删除
                     $row.find('.deleteComment').click(function () {
                         alert('22');
