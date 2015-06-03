@@ -149,6 +149,14 @@ $(function () {
             $more.text('点击加载更多内容').data('last', ++last);
             data = eval(data);
             for (var i = 0; i < data.length; i++) {
+                var starCount = data[i]['star_count'];
+                var str = '';
+                if(starCount) {
+                    for(var j = 0; j < starCount; j++) {
+                        str += '<i class="icon16 icon16-starin"></i>';
+                    }
+                }
+                data[i]['starCount'] = str;
                 var $dl = $(template('list', data[i]));
                 $commentData.append($dl);
                 // 注册事件
