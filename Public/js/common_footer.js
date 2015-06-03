@@ -211,7 +211,6 @@ function replay($container, $more, tpl_id, params, isReset) {
                     $row.find(".topic-img-wrap").imageView();
                     // 删除
                     $row.find('.deleteComment').click(function () {
-                        alert('22');
                         var $id = $(this).data('replyid');
                         dialog({
                             content: '确定要删除该评论吗?',
@@ -248,7 +247,7 @@ function replay($container, $more, tpl_id, params, isReset) {
                             data.source_id = $row.data('source_id');
                             jQuery.ajax({
                                 type: "post",
-                                url: "/Friends/index/CommentReply",
+                                url: "/Public/public/CommentReply",
                                 data: data,
                                 success: function ($result) {
                                     if ($result == 1) {
@@ -349,7 +348,7 @@ function replay($container, $more, tpl_id, params, isReset) {
                             data.source_id = topicId;
                             jQuery.ajax({
                                 type: "post",
-                                url: "/Friends/index/CommentReply",
+                                url: "/Public/public/CommentReply",
                                 data: data,
                                 success: function ($result) {
                                     if ($result == 1) {

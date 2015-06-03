@@ -70,4 +70,25 @@ class PublicAction extends Action
         }
     }
 
+    /*
+    * @时间: 20150415
+    * @功能:评论回复
+    */
+    public function CommentReply()
+    {
+        $model = D('OpComment');
+        $date['content'] = $_POST['content'];
+        $date['replay_to'] = $_POST['replay_to'];
+        $date['user_id'] = deCode(I('session.mark_id'));
+        $date['source_id'] = $_POST['source_id'];
+        $date['source_type'] = $_POST['source_type'];
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $result = $model->add($date);
+        if (false !== $result) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
+
 }

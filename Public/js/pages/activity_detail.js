@@ -49,18 +49,16 @@ $(function () {
             content: '评论内容不能为空'
         },
         submitHandler: function (form) {
-            //    form.submit();
             jQuery.ajax({
                 type: "post",
                 url: "publishReply",
                 data: $('#commentform').serialize(),
                 success: function ($result) {
                     if ($result==1) {
-                        //$.dialog.success('评论成功');
+                        $('#commentData').empty();
                         $('#content').val('');
-                        $commentData.empty();
-                        $more.data('last', 0);
-                        more();
+                        $('#more').data('last', 0);
+                        replay($('#commentData'), $('#more'), 'tpl_topic_comment', {source_id:$('#commentData').data('value')});
                     } else {
                         $.dialog.error('评论失败');
                     }
@@ -69,87 +67,6 @@ $(function () {
         }
     });
 
-
-    // 回复
-    function onReplyClick() {
-        var $panel = $(this).parent().parent();
-        $panel.find('.reply-form').toggle();
-    }
-
-    var $replyPanel = $('.reply-panel');
-    $replyPanel.find('a').click(onReplyClick);
-
-    // 验证，提交回复
-    var replyPanelValidateOption = {
-        rules: {
-            content: 'required'
-        },
-        messages: {
-            content: '回复内容不能为空！'
-        },
-        submitHandler: function (form) {
-            var data = $(form).serializeJson();
-            data['source_id'] = $('#source_id').val();
-            jQuery.ajax({
-                type: "post",
-                url: "/Activity/index/CommentReply",
-                data: data,
-                success: function ($result) {
-                    if ($result==1) {
-                        $commentData.empty();
-                        $more.data('last', 0);
-                        more();
-                    } else {
-                        $.dialog.error('回复失败');
-                    }
-                }
-            });
-            $(form).parent().hide();
-        }
-    };
-    $replyPanel.find('.reply-form form').validate(replyPanelValidateOption);
-
-    //加载评论数据
-    var s_id = $('#s_id').val();
-    // 加载更多
-    var $commentData = $('#commentData');
-    var $more = $('#more');
-
-    function more() {
-        var last = $more.data('last');
-        if (last == -1) {
-            return;
-        }
-        $more.text('正在加载数据......');
-        $.post('ActivityCommentLoad', {
-            last: last * 10,
-            amount: 10,
-            source_id: s_id
-        }, function (data) {
-            if (!data || data == 'null') {
-                $more.text('没有更多内容').data('last', -1);
-                return;
-            }
-            data = eval(data);
-
-            if(data.length < 10) {
-                $more.text('没有更多内容').data('last', -1);
-            } else {
-                $more.text('点击加载更多内容').data('last', ++last);
-            }
-            for (var i = 0; i < data.length; i++) {
-                var $dl = $(template('list', data[i]));
-                $commentData.append($dl);
-                // 注册事件
-                $dl.find('.reply-panel').find('a').click(onReplyClick);
-                $dl.find('.reply-form form').validate(replyPanelValidateOption);
-            }
-        });
-    }
-
-    $more.click(more);
-    // 第一次加载
-    more();
 
     // 我要参加
     $('#joinBtn').on('click', function() {

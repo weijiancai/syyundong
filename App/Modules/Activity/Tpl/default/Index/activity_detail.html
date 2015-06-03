@@ -154,9 +154,9 @@
                         <div id="NTGUID__4NDTGUID__9">
                         <dl style="display: block;" class="clearfix">
                             <dt>
-                                <!--<a target="_blank" href="/friend/passport_90941/timeline"></a>-->
+                                <a target="_blank" href="/Friends/passport/<{$detail['input_user']}>">
                                     <img title="<{$detail['input_user']|getUserName}>" src="<{$detail['input_user']|getUsersImage}>">
-
+                                </a>
 
                             </dt>
                             <dd>
@@ -175,64 +175,18 @@
 
 
                     </div>
-                    <div data-selector="commentData" id="commentData">
+                    <div id="commentData" data-url="/Activity/index/ActivityCommentLoad" data-value="<{$detail['id']}>" data-replay="false">
+
                     </div>
-                    <script id="list" type="text/html">
-                    <dl class="clearfix" style="display: block;">
-                        <dt>
-                            <!--<a target="_blank" href="/friend/passport_79472/timeline"></a>-->
-                                <img title="{{nick_name}}" src="{{image}}">
-                        </dt>
-                        <dd>
-                            <div class="user-header">
-                                <table>
-                                    <tbody>
-                                    <tr>
-                                        <th><a target="_blank" href="/friend/passport_79472/timeline">{{nick_name}}</a><span title="{{input_date}}" data-timestamp="1419260340000">{{input_date}}</span></th>
-                                        <td>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            {{if replyUserName}}
-                            <p class="comment-content">回复
-                                <!--<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline"></a>-->
-                                @{{replyUserName}}：</p>
-                            {{/if}}
-                            <p class="comment-content"></p>
-                            <pre class="comment-content">{{content}}</pre>
-                            <div class="reply-panel">
-                                <p class="text-right">
-                                    {{if nowuser}}
-                                    <a id="replaydel" data-replyid="308" data-selector="deleteComment" href="javascript:;">删除</a>
-                                    {{/if}}
-                                    <a id="replyLink" data-selector="replyLink" href="javascript:;">回复</a>
-                                </p>
-                                <div class="reply-form">
-                                    <i class="icon-up"></i>
-                                    <em class="icon-down"></em>
-                                    <form method="post" action="/activity/index/CommentReply"  id="CommentReplyForm">
-                                        <input type="hidden" value="{{id}}" name="replay_to">
-                                        <input type="text" placeholder="回复 {{nick_name}}" name="content">
-                                        <button class="btn btn-warning" type="submit">回复</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </dd>
-                    </dl>
-                    </script>
+
                 </div>
                 <p>
-                    <!--<button data-selector="seeMore" class="btn btn-block">没有更多</button>-->
                     <button data-last="0" class="get_more btn btn-block" id="more">点击加载更多内容</button>
                 </p>
             </div>
 
 
             </div>
-
-
         </div>
 
 
@@ -277,7 +231,7 @@
 
     </div>
 </div>
-<input type="hidden" id="s_id" value="<{$detail.id}>" name="s_id">
+<input type="hidden" id="source_type" value="2" >
 <!--<script type="text/javascript">Loader.load(['page.activityDetail']);</script>-->
 <script type="text/javascript" src="/Public/js/pages/activity_detail.js"></script>
 
@@ -361,6 +315,12 @@
         </form>
     </div>
 </div>
+<include file="Public@default:Public:template" />
 
+<script type="text/javascript" >
+    $(function() {
+        replay($('#commentData'), $('#more'), 'tpl_topic_comment', {source_id:$('#commentData').data('value'),source_type:2});
+    })
+</script>
 
 <include file="Public@default:Public:bottom" />

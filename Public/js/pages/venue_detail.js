@@ -35,7 +35,7 @@ $(function () {
                 url: "publishReply",
                 data: $('#commentform').serialize(),
                 success: function ($result) {
-                    if ($result==1) {
+                    if ($result == 1) {
                         $commentData.empty();
                         $('#content').val('');
                         $more.data('last', 0);
@@ -75,19 +75,21 @@ $(function () {
     }
 
     //收藏
-    $('.venues-action').find('a').click(function() {
+    $('.venues-action').find('a').click(function () {
         jQuery.ajax({
             type: "post",
             url: "collection",
-            data: {source_id: $("#s_id").val()},
+            data: {source_id: $(this).data('value')},
             success: function ($result) {
-                if ($result==0) {
-                    window.location.href='/login/login';
-                }else if($result==2){
+                if ($result == 0) {
+                    window.location.href = '/login/login';
+                } else if ($result == 1) {
+                    $.dialog.error('已经收藏过啦');
+                } else if ($result == 2) {
                     $.dialog.error('收藏失败');
-                }else{
+                } else {
                     $.dialog.success('收藏成功');
-                    window.location.href='';
+                    window.location.href = '';
                 }
             }
         })
@@ -111,7 +113,7 @@ $(function () {
                 url: "/Venue/index/CommentReply",
                 data: data,
                 success: function ($result) {
-                    if ($result==1) {
+                    if ($result == 1) {
                         $commentData.empty();
                         $more.data('last', 0);
                         more();
@@ -149,6 +151,14 @@ $(function () {
             $more.text('点击加载更多内容').data('last', ++last);
             data = eval(data);
             for (var i = 0; i < data.length; i++) {
+                var starCount = data[i]['star_count'];
+                var str ='';
+                if(starCount){
+                    for(var j=0;j<starCount;j++){
+                        str +='<i class="icon16 icon16-starin"></i>';
+                    }
+                }
+                data[i]['starCount']=str;
                 var $dl = $(template('list', data[i]));
                 $commentData.append($dl);
                 // 注册事件

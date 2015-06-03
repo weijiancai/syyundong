@@ -59,17 +59,19 @@
 
 <!-- 回复话题模板 -->
 <script type="text/template" id="tpl_topic_comment">
-    <dl class="clearfix" style="display: block;"  data-source_type="4" data-source_id="<{$_GET['id']}>">
+    <dl class="clearfix" style="display: block;"  data-source_type=<?php if(ACTION_NAME=='activity_detail'){echo 2;}elseif(ACTION_NAME=='activity_detail'){echo 3;}else{echo 4;}?> data-source_id="<{$_GET['id']}>">
         <dt>
-            <!--<a target="_blank" href="/friend/passport_79472/timeline"></a>-->
+            <a target="_blank" href="/Friends/passport/{{user_id}}">
             <img title="{{nick_name}}" src="{{image}}">
+             </a>
         </dt>
         <dd>
             <div class="user-header">
                 <table>
                     <tbody>
                     <tr>
-                        <th><a target="_blank" href="/Friends/passport/{{user_id}}">{{nick_name}}</a><span title="{{input_date}}">{{input_date}}</span></th>
+                        <th><a target="_blank" href="/Friends/passport/{{user_id}}">{{nick_name}}</a>
+                            <span title="{{input_date}}">{{input_date}}</span></th>
                         <td>
                         </td>
                     </tr>
@@ -78,8 +80,8 @@
             </div>
             {{if replyUserName}}
             <p class="comment-content">回复
-                <!--<a class="text-warning" target="_blank" href="/friend/passport_90941/timeline"></a>-->
-                @{{replyUserName}}：</p>
+                <a target="_blank" href="/Friends/passport/{{user_id}}">
+                @{{replyUserName}}：</a></p>
             {{/if}}
             <p class="comment-content"></p>
             <pre class="comment-content">{{content}}</pre>

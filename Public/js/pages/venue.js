@@ -76,5 +76,28 @@ $(function () {
             }
         })
     }
-
+    //收藏
+    $('.item-list-bottom').find('a').click(function() {
+        var self= $(this);
+        jQuery.ajax({
+            type: "post",
+            url: "/Venue/collection",
+            data: {source_id: $(this).data('value')},
+            success: function ($result) {
+                if ($result==0) {
+                    window.location.href='/login/login';
+                }else if($result==1){
+                    $.dialog.error('已经收藏过啦');
+                }else if($result==2){
+                    $.dialog.error('收藏失败');
+                }else{
+                    $.dialog.success('收藏成功');
+                    var $follow_count = self.find('.follow_count');
+                    var follow_count = parseInt($follow_count.text());
+                    $follow_count.text(follow_count + 1);
+                    self.find('i').addClass('icon-faved');
+                }
+            }
+        })
+    });
 });

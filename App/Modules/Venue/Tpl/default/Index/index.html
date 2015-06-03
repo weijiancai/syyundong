@@ -107,18 +107,13 @@
                 <p class="item-list-ttl">
                     <strong><a href="/Venue/<{$vo.id}>"><{$vo.name}></a></strong>
                         <span class="star-lvl">
-                             <input type="hidden" value="<{$vo.star_count}>" id="star">
-                            <script type="text/javascript">
-                                var star  = $('#star').val();
-                                for(var i = 0; i < star; i++) {
-                                    document.write('<i class="icon16 icon16-starin"></i>');
-                                }
-                                for(var i = 0; i < 5 - star; i++) {
-                                    document.write('<i class="icon16 icon16-starout"></i>');
-                                }
-                            </script>
 
-
+                     <for start="0" end="$vo.star_count">
+                                <i class="icon16 icon16-starin"></i>
+                            </for>
+                      <for start="0" end="5-$vo['star_count']">
+                          <i class="icon16 icon16-starout"></i>
+                      </for>
                         </span>
                 </p>
                 <div class="item-list-detail">
@@ -128,8 +123,8 @@
                     </p>
                     <p><span>电话：</span><{$vo.phone}></p>
                     <p class="item-list-bottom">
-                        <a data-url="/venueuser/addFavoriteVenue" data-params="{'venueId':3567, 'followCount':6}" data-selector="collectButton" href="javascript:;">
-                            <i class="icon-match icon-fav "></i>收藏（<em><{$vo.followCount}></em>）</a>
+                        <a data-url="/venueuser/addFavoriteVenue" data-value="<{$vo.id}>" data-selector="collectButton" href="javascript:;">
+                            <i class="icon-match icon-fav "></i>收藏（<em class="follow_count"><{$vo.followCount}></em>）</a>
                         <a href="/venue/3567"><i class="icon-match icon-comment"></i><{$vo.commentCount}>人评论</a>
                     </p>
                 </div>
