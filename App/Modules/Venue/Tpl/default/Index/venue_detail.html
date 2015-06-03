@@ -45,7 +45,7 @@
                             </tbody>
                         </table>
                         <div class="venues-action">
-                            <a data-url="/venueuser/addFavoriteVenue" data-value="<{$detail.id}>" data-selector="collectButton" class="btn btn-collect" href="javascript:;">
+                            <a data-url="/venueuser/addFavoriteVenue" data-params="{'venueId':3567, 'followCount':6}" data-selector="collectButton" class="btn btn-collect" href="javascript:;">
                                 <i class="icon28 icon28-collect icon28-collected"></i>收藏(<em><{$detail.followCount}></em>)</a>
                         </div>
                     </div>
@@ -64,9 +64,7 @@
 
                         <dl style="display: block;" class="clearfix">
                             <dt>
-                                <a target="_blank" href="/Friends/passport/<{$detail['input_user']}>">
-                                    <img title="<{$detail['input_user']|getUserName}>" src="<{$detail['input_user']|getUsersImage}>">
-                                </a>
+                                <a target="_blank" href="/friend/passport_90941/timeline"><img title="wei-jc" src=""></a>
                             </dt>
                             <dd>
                                 <form method="post" id="commentform" action="publishReply" class="clearfix">
@@ -104,7 +102,7 @@
        <script id="list" type="text/html">
                         <dl class="clearfix" style="display: block;">
                             <dt>
-                                <a target="_blank" href="/Friends/passport/{{user_id}}">
+                                <a target="_blank" href="/friend/passport_137569/timeline">
                                     <img title="han" src="{{image}}"></a>
                             </dt>
                             <dd>
@@ -112,19 +110,14 @@
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <th><a target="_blank" href="/Friends/passport/{{user_id}}">{{nick_name}}</a><span title="{{input_date}}">{{input_date}}</span></th>
+                                            <th><a target="_blank" href="/friend/passport_137569/timeline">{{nick_name}}</a><span title="{{input_date}}" data-timestamp="1426748199000">{{input_date}}</span></th>
                                             <td>
-                                                {{#starCount}}
-
-                                            </td>
+                                                <i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i><i class="icon16 icon16-starin"></i></td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                {{if replyUserName}}
-                                <p class="comment-content">回复<a href="/Friends/passport/{{user_id}}" target="_blank" class="text-warning">
-                                    @{{nick_name}}</a>：</p>
-                                {{/if}}
+                                <p class="comment-content">回复<a href="/friend/passport_86004/timeline" target="_blank" class="text-warning">@{{nick_name}}</a>：</p>
                                 <p class="comment-content"></p>
                                 <pre class="comment-content">{{content}}</pre>
                                 <div class="reply-panel">
@@ -136,7 +129,7 @@
                                         <i class="icon-up"></i>
                                         <em class="icon-down"></em>
                                         <form method="post" action="/venueuser/publishReply">
-                                            <input type="text" value="{{id}}" name="replay_to">
+                                            <input type="hidden" value="{{id}}" name="reply_to">
 
                                             <input type="text"  placeholder="回复 {{nick_name}}：" name="content">
                                             <button class="btn btn-warning" type="submit">回复</button>
@@ -190,5 +183,4 @@
 </div>
 
 <script type="text/javascript" src="/Public/js/pages/venue_detail.js"></script>
-
 <include file="Public@default:Public:bottom" />
