@@ -639,22 +639,22 @@
         <volist name="city" id="vo" key ="k">
             <dd class="root-content hide" style="display: none;">
                 <ul class="events-list">
-                    <?php $cgame  = D('VChoiceGame')->where('region='.$vo['id'])->limit(5)->order('input_date desc')->select();?>
+                    <?php $cgame  = D('VChoiceGame')->where('region='.$vo['id'])->limit(5)->select();?>
                     <volist name="cgame" id="co" key="k">
                         <li <if condition="$k eq 1">class="first"</if>>
-                        <a href="/Game/<{$vo.id}>"><img src="<{$co.image}>"></a>
+                        <a href="/Game/<{$co.id}>"><img src="<{$co.image}>"></a>
                         <div class="description">
                             <div class="desc-bg"></div>
                             <div class="desc-content">
                                 <dl>
                                     <dt>
-                                        <a href="/Game/<{$ao.id}>"><{$ao.name}></a>
-                                        <i><{$ao['status']|getState}></i>
+                                        <a href="/Game/<{$co.id}>"><{$co.name}></a>
+                                        <i><{$co['status']|getState}></i>
                                     </dt>
                                     <dd style="display: none;">
-                                        <p><{$ao.address}>&nbsp;&nbsp;<{$ao.start_date}></p>
+                                        <p><{$co.address}>&nbsp;&nbsp;<{$co.start_date}></p>
                                         <p><!--报名 <span class="text-warning">140</span>/<span class="white">140</span>&nbsp;&nbsp;|&nbsp;&nbsp;-->
-                                            关注 <span class="white"><{$ao.focus_count}></span>&nbsp;&nbsp;|&nbsp;&nbsp;话题 <span class="white"><{$ao.topic_count}></span></p>
+                                            关注 <span class="white"><{$co.focus_count}></span>&nbsp;&nbsp;|&nbsp;&nbsp;话题 <span class="white"><{$co.topic_count}></span></p>
                                     </dd>
                                 </dl>
                             </div>
@@ -889,7 +889,7 @@
 <volist name="city" id="vo" key ="k">
     <dd class="root-content" style="display:none">
         <ul class="clearfix">
-            <?php $venue  = D('VRecommendVenues')->where('region='.$vo['id'])->select();?>
+            <?php $venue  = D('VRecommendVenues')->where("region='".$vo['name']."'")->select();?>
             <volist name="venue" id="uo" key="k">
                 <li class="">
                     <div class="li-content clearfix">
