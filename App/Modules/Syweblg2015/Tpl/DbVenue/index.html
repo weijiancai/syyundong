@@ -47,9 +47,9 @@
     <div class="pageContent">
         <div class="panelBar">
             <ul class="toolBar">
-                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="700" height="400" rel="vadd"><span>新增</span></a></li>
+                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="750" height="400" rel="vadd"><span>新增</span></a></li>
                 <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
-                       width="700" height="400" rel="vedit"><span>修改</span></a></li>
+                       width="750" height="400" rel="vedit"><span>修改</span></a></li>
                 <li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
                        class="delete"><span>删除</span></a></li>
             </ul>
@@ -81,7 +81,7 @@
                     <td><{$vo['person_cost']}></td>
                     <td><{$vo['input_user']|getUserName}></td>
                     <td><{$vo['input_date']}></td>
-                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="400" rel="detail">编辑</a>
+                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="dialog" mask="true" width="750" height="400" rel="detail">编辑</a>
                         <span
                         style="color:red">|</span>
                         <?php  if(isGameRecommend($vo['id'],'venue')){ ?>

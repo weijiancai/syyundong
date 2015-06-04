@@ -64,7 +64,7 @@ class IndexAction extends BaseAction
         $this->assign('region', D('Public/Index')->region());
         $this->assign('venue_sport', $this->venue_sport());
         $this->assign('new_comment', $this->new_comment());
-        if(I('session.mark_id')){
+        if (I('session.mark_id')) {
             $this->MyCollection();
         }
         $this->display();
@@ -219,11 +219,14 @@ class IndexAction extends BaseAction
     */
     public function MyCollection()
     {
-        $map['user_id']= deCode(I('session.mark_id'));
+        $map['user_id'] = deCode(I('session.mark_id'));
         $map['source_type'] = 3;
-        $list = M('OpFocus')->where($map)->limit(4)->order('input_date desc')->select();
-        $this->assign('Collection_list',$list);
-
+        $source_id = M('OpFocus')->where($map)->limit(4)->order('input_date desc')->getField('source_id', true);
+        if ($source_id) {
+            $date['id'] = array('in', $source_id);
+            $list = D('VVenue')->where($date)->select();
+            $this->assign('Collection_list', $list);
+        }
     }
 
 }

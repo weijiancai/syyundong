@@ -91,7 +91,7 @@ class IndexAction extends BaseAction
     */
     Public function getGameSport()
     {
-        return D('DzSport')->where('pid=0 and level =1 and sport_type=1')->select();
+        return D('DzSport')->where('pid=0 and level =1 and sport_type=1')->order('id asc')->select();
     }
 
     /*

@@ -4,3 +4,5 @@ select user_id,user_head,friend_id,op_user_friend.input_date,nick_name,gender,lo
 from op_user_friend,db_user
 left join db_images on (db_images.id = db_user.user_head)
  where friend_id =  db_user.id
+
+v_venue person_cost :varchar 32

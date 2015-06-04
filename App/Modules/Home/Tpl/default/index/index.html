@@ -706,7 +706,9 @@
                             <volist name="game_sport" id="vo" key="k">
                                 <dd class="topic-rankings "<if condition="$k neq 1">style="display:none"</if> >
                                     <ul>
-                                        <?php $hottopic  = D('VTopic')->where('sport_id='.$vo['id']. ' and topic_image is not null')->limit(2)->order('comment_count desc')->select();?>
+                                        <?php $hottopic  = D('VTopic')->where('sport_id='.$vo['id']. ' and topic_image is not null')->limit(2)->order('comment_count desc')->select();
+
+                                        ?>
                                         <volist name="hottopic" id="to">
                                             <li>
                                                 <h2 class="ranking-number text-error"><i></i></h2>

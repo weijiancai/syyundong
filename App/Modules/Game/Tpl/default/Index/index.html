@@ -25,7 +25,7 @@
                                         <div data-selector="itemsList" class="item-panel" id="sportTypePanel">
                                             <input type="hidden" data-selector="itemsValue" value="all" name="sportTypeId"/>
                                             <dl>
-                                                <?php $sport  = D('Public/Index')->sport_top();?>
+                                                <?php $sport  = D('DzSport')->sport_top();?>
                                                 <dt>
                                                     <a href="javascript:;" class="radio-item current" data-value="all" data-selector="itemsItem">全部</a>
                                                 <volist name="sport" id="vo">

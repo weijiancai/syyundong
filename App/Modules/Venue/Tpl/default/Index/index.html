@@ -174,24 +174,16 @@
 
                 <div style="height:200px;" class="">
                     <ul class="clearfix">
-
-                        <li style="display: list-item;">
-                            <a href="6286"><img src="http://static.wisdom-china.cn//images/1/7744/6427/3218/7b149d9725913158c7cd935b305f14a2_2_125x87.jpg?330x220" title="北工大游泳馆"></a>
-                            <p><a href="6286" title="北工大游泳馆">北工大游泳馆</a></p>
-                            <div class="clearfix">
-                                <span class="pull-left">通州区</span>
-                                <span class="pull-right">人均<span class="text-error">23</span>元</span>
-                            </div>
-                        </li>
-
-                        <li style="display: list-item;">
-                            <a href="3567"><img src="http://static.wisdom-china.cn//images/1/1240/0951/8574/3b3e51529d26838eba0bc45cbef38b5a_2_125x87.jpg?480x330" title="青浦游泳馆"></a>
-                            <p><a href="3567" title="青浦游泳馆">青浦游泳馆</a></p>
-                            <div class="clearfix">
-                                <span class="pull-left">青浦区</span>
-                                <span class="pull-right">人均<span class="text-error">20</span>元</span>
-                            </div>
-                        </li>
+                        <volist name="Collection_list" id="vo">
+                            <li style="display: list-item;">
+                                <a href="/Venue/<{$vo.id}>" target="_blank"><img src="<{$vo.image}>" title="<{$vo.name}>"></a>
+                                <p><a href="/Venue/<{$vo.id}>" target="_blank" title="<{$vo.name}>"><{$vo.name}></a></p>
+                                <div class="clearfix">
+                                    <span class="pull-left"><{$vo.address}></span>
+                                    <span class="pull-right">人均<span class="text-error"><{$vo.person_cost}></span>元</span>
+                                </div>
+                            </li>
+                        </volist>
 
                     </ul>
 

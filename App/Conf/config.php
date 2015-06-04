@@ -79,6 +79,7 @@ $Public_Config =  array(
         '/^userCenter\/topic$/' => 'userCenter/index/topic',
         '/^userCenter\/topic\/replay$/' => 'userCenter/index/replay',
         '/^userCenter\/deletefriend\/(\d+)$/' => 'userCenter/index/deletefriend?id=:1',
+        '/^userCenter\/Collection$/' => 'userCenter/index/Collection',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',

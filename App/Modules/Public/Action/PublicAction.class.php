@@ -90,5 +90,22 @@ class PublicAction extends Action
             echo 0;
         }
     }
+    /*
+     * @功能：网站顶部赛事
+     * @时间：
+     */
+    public function sport_top()
+    {
+        $model = D('DzSport');
+        $category = $model ->where('pid=0 and sport_type=1')->field('id,name')->order('id asc')->select();
+        if (!empty($category)) {
+            foreach ($category as $key => $val) {
+                $id = $val['id'];
+                $category [$key]['child'] = $model->where(array('pid' => $id))->select();
+            }
+        }
+
+        return $category;
+    }
 
 }

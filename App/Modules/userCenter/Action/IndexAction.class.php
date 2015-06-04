@@ -10,7 +10,7 @@ class IndexAction extends BaseAction
     {
         $id = deCode(session('mark_id'));
         if ($id) {
-            D('Users')->where("id = '%d'", $id)->find();
+            D('DbUser')->where("id = '%d'", $id)->find();
         } else {
             echo ' <script> window.location.href="/login/login"</script>';
         }
@@ -28,10 +28,12 @@ class IndexAction extends BaseAction
     public function timeline()
     {
         $id = deCode(I('session.mark_id'));
-        $timeline = D('DbTimeline')->where('input_user=' . $id)->order('input_date desc')->select();
-        $this->assign('timeline', $timeline);
-        $this->assign('time_user', D('DbUser')->where('id=' . $id)->find());
-        $this->display();
+        if ($id) {
+            $timeline = D('DbTimeline')->where('input_user=' . $id)->order('input_date desc')->select();
+            $this->assign('timeline', $timeline);
+            $this->assign('time_user', D('DbUser')->where('id=' . $id)->find());
+            $this->display();
+        }
     }
 
     /*
@@ -41,8 +43,10 @@ class IndexAction extends BaseAction
     public function Profile()
     {
         $id = deCode(I('session.mark_id'));
-        $this->assign('pro_user', D('DbUser')->where('id=' . $id)->find());
-        $this->display();
+        if ($id) {
+            $this->assign('pro_user', M('DbUser')->where('id=' . $id)->find());
+            $this->display();
+        }
     }
 
     /*
@@ -91,19 +95,22 @@ class IndexAction extends BaseAction
     public function Game()
     {
         import('ORG.Util.Page');
-        $model = D('VJoinGame');
-        $map['user_id'] = deCode(I('session.mark_id'));
-        $order = 'input_date desc';
-        $count = $model->where($map)->count();
-        $Page = new Page($count, 10);
-        $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
-        $Page->rollPage = 10;
-        $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
-        $show = $Page->show();
-        $this->assign('page', $show);
-        $this->assign('game', $list);
-        $this->assign('count', $count);
-        $this->assign('game_user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
+        $id = deCode(I('session.mark_id'));
+        if ($id) {
+            $model = D('VJoinGame');
+            $map['user_id'] = $id;
+            $order = 'input_date desc';
+            $count = $model->where($map)->count();
+            $Page = new Page($count, 10);
+            $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+            $Page->rollPage = 10;
+            $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
+            $show = $Page->show();
+            $this->assign('page', $show);
+            $this->assign('game', $list);
+            $this->assign('count', $count);
+            $this->assign('game_user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
+        }
         $this->display();
     }
 
@@ -114,19 +121,22 @@ class IndexAction extends BaseAction
     public function follow()
     {
         import('ORG.Util.Page');
-        $model = D('VFocusGame');
-        $map['user_id'] = deCode(I('session.mark_id'));
-        $order = 'input_date desc';
-        $count = $model->where($map)->count();
-        $Page = new Page($count, 10);
-        $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
-        $Page->rollPage = 10;
-        $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
-        $show = $Page->show();
-        $this->assign('page', $show);
-        $this->assign('follow', $list);
-        $this->assign('count', $count);
-        $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
+        $id = deCode(I('session.mark_id'));
+        if ($id) {
+            $model = D('VFocusGame');
+            $map['user_id'] = $id;
+            $order = 'input_date desc';
+            $count = $model->where($map)->count();
+            $Page = new Page($count, 10);
+            $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+            $Page->rollPage = 10;
+            $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
+            $show = $Page->show();
+            $this->assign('page', $show);
+            $this->assign('follow', $list);
+            $this->assign('count', $count);
+            $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
+        }
         $this->display();
     }
 
@@ -141,6 +151,7 @@ class IndexAction extends BaseAction
         D('OpJoinGame')->where($date)->delete();
         echo ' <script> window.location.href="/userCenter/game"</script>';
     }
+
     /*
      * @功能：我的赛事：我发起的
      * @时间:20150408
@@ -148,23 +159,27 @@ class IndexAction extends BaseAction
     public function creates()
     {
         import('ORG.Util.Page');
-        $model = D('VGameActivity');
-        $map['input_user'] = deCode(I('session.mark_id'));
-        $map['is_verify'] = 'T';
-        $map['type'] = 'game';
-        $order = 'input_date desc';
-        $count = $model->where($map)->count();
-        $Page = new Page($count, 10);
-        $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
-        $Page->rollPage = 10;
-        $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
-        $show = $Page->show();
-        $this->assign('page', $show);
-        $this->assign('creates', $list);
-        $this->assign('count', $count);
-        $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
+        $id = deCode(I('session.mark_id'));
+        if ($id) {
+            $model = D('VGameActivity');
+            $map['input_user'] = $id;
+            $map['is_verify'] = 'T';
+            $map['type'] = 'game';
+            $order = 'input_date desc';
+            $count = $model->where($map)->count();
+            $Page = new Page($count, 10);
+            $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+            $Page->rollPage = 10;
+            $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
+            $show = $Page->show();
+            $this->assign('page', $show);
+            $this->assign('creates', $list);
+            $this->assign('count', $count);
+            $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
+        }
         $this->display();
     }
+
     /*
     * @功能：我的赛事：报名详情
     * @时间:20150408
@@ -294,18 +309,21 @@ class IndexAction extends BaseAction
         $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
         $this->display();
     }
+
     /*
      * @时间:20150408
      * @功能：删除赛友
      */
-    public function del_friend(){
+    public function del_friend()
+    {
         $date['friend_id'] = $_POST['friend_id'];
         $date['user_id'] = deCode(session('mark_id'));
-        $result =M('OpUserFriend')->where($date)->delete();
-        if($result!==false){
+        $result = M('OpUserFriend')->where($date)->delete();
+        if ($result !== false) {
             echo 'true';
         }
     }
+
     /*
       * @功能：校验昵称是否存在
       * @时间：20150419
@@ -382,45 +400,51 @@ class IndexAction extends BaseAction
             echo 'false';
         }
     }
+
     /*
      * @功能：话题->我发表的
      * @时间:20150408
      */
-     public function topic(){
-         import('ORG.Util.Page');
-         $model = D('VTopic');
-         $map['user_id'] = deCode(I('session.mark_id'));
-         $order = 'input_date desc';
-         $count = $model->where($map)->count();
-         $Page = new Page($count, 10);
-         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
-         $Page->rollPage = 10;
-         $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
-         $show = $Page->show();
-         $this->assign('page', $show);
-         $this->assign('list', $list);
-         $this->assign('count', $count);
-         $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
-         $this->display();
-     }
+    public function topic()
+    {
+        import('ORG.Util.Page');
+        $model = D('VTopic');
+        $map['user_id'] = deCode(I('session.mark_id'));
+        $order = 'input_date desc';
+        $count = $model->where($map)->count();
+        $Page = new Page($count, 10);
+        $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+        $Page->rollPage = 10;
+        $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($map)->order($order)->select();
+        $show = $Page->show();
+        $this->assign('page', $show);
+        $this->assign('list', $list);
+        $this->assign('count', $count);
+        $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
+        $this->display();
+    }
+
     /*
      * @功能：话题->删除话题
      * @时间:20150408
      */
-    public function del_topic(){
+    public function del_topic()
+    {
         $topic_id = $_POST['topic_id'];
-        $result = M('OpGameTopic')->where('id='.$topic_id)->delete();
-        if($result){
+        $result = M('OpGameTopic')->where('id=' . $topic_id)->delete();
+        if ($result) {
             echo 'true';
-        }else{
+        } else {
             echo 'false';
         }
     }
+
     /*
      * @功能：话题->我评论的
      * @时间:20150408
      */
-    public function replay(){
+    public function replay()
+    {
         import('ORG.Util.Page');
         $model = D('VComment');
         $map['user_id'] = deCode(I('session.mark_id'));
@@ -437,17 +461,28 @@ class IndexAction extends BaseAction
         $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
         $this->display();
     }
+
     /*
      * @功能：话题->删除评论
      * @时间: 20150408
      */
-    public function del_replay(){
+    public function del_replay()
+    {
         $common_id = $_POST['common_id'];
-        $result = M('OpComment')->where('id='.$common_id)->delete();
-        if($result){
+        $result = M('OpComment')->where('id=' . $common_id)->delete();
+        if ($result) {
             echo 'true';
-        }else{
+        } else {
             echo 'false';
         }
+    }
+
+    /*
+     * @功能：我的收藏
+     * @时间: 20150408
+     */
+    public function collection()
+    {
+        $this->display();
     }
 }

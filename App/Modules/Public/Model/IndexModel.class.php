@@ -4,7 +4,7 @@
 	*@Index Model function
 	*@time 20150316
 	*/
-class IndexModel extends Model
+class IndexModel
 {
     /*
      * @功能：网站顶部赛事

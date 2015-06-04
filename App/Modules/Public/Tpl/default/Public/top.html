@@ -126,7 +126,7 @@
     </div>
     <div class="header-nav">
         <div class="container clearfix">
-            <?php $sport  = D('Public/Index')->sport_top();?>
+            <?php $sport  = D('DzSport')->sport_top();?>
             <div id="navigation">
                 <a href="javascript:;" class="navigation-title">全部赛事活动<i></i></a>
                 <!-- && start 赛事活动： dz_sort -->
@@ -149,7 +149,7 @@
                             <div class="navigation-item-content">
                                 <ul>
                                     <volist name="vo.child" id="v">
-                                        <li><a href="/game/search?keyword=马拉松" target="_blank"><{$v.name}></a></li>
+                                        <li><a href="/Game?keyword=<{$v.name}>" target="_blank"><{$v.name}></a></li>
                                     </volist>
                                 </ul>
                             </div>

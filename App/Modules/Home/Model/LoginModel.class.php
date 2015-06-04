@@ -3,7 +3,7 @@
 /**
  *@功能:登录model
  */
-class loginModel extends Model
+class loginModel
 {
 
     /**
