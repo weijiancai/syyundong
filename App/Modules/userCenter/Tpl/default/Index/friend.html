@@ -48,8 +48,8 @@
                                     <li class="clearfix">
                                         <div class="friends-thumb-wrap pull-left">
                                             <a href="/Friends/passport/<{$vo.friend_id}>" target="_blank">
-                                                <?php if(getUserImage($vo['friend_id'])){ ?>
-                                                <img src="<{$vo['friend_id']|getUserImage}>" alt="<{$vo.nick_name}>">
+                                                <?php if($vo['local_url']){ ?>
+                                                <img src="<{$vo.local_url}>" alt="<{$vo.nick_name}>">
                                                 <?php }else{?>
                                                 <img src="/Public/images/default/web_pic.jpg" alt="">
                                                 <?php }?>

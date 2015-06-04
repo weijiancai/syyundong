@@ -12,8 +12,14 @@
         <div class="right-content">
             <h1><{$list.name}><a class="btn" href="/Game/<{$list.id}>" target="_blank">赛事主页</a></h1>
 
-            <button class="btn btn-danger" data-followed="0" data-url="/friends/followtag" data-tagid="313" data-selector="follow-btn">关注</button>
 
+            <?php $result = getGameFocus($list['id'],$_SESSION['mark_id'],1);
+                            if($result ==1){
+                         ?>
+            <button id="topic_focus" data-selector="follow-btn" data-value="<{$list.id}>" class="btn btn-danger">关注</button>
+            <?php }else{ ?>
+            <button id="topic_focus" data-selector="follow-btn" data-value="<{$list.id}>" class="btn">取消关注</button>
+            <?php }?>
             <div class="pull-right clearfix">
                 <p>关注：<{$list.focus_count}></p>
                 <p>话题：<{$list.topic_count}></p>
@@ -52,7 +58,7 @@
 <!-- 话题页-->
 <!-- 话题  开始-->
 <div class="tab-content-wrap"><style>#NTGUID__4 .comment-pop{      background: #f5f5f5;      padding: 0 10px 10px 10px;      border-radius: 5px;      -moz-border-radius: 5px;      -webkit-border-radius: 5px;      zoom:1;      margin-top: 10px;      position: relative;    }#NTGUID__4 .comment-pop:after{      content: "";      width: 0;      height: 0;      border: transparent solid 8px;      position: absolute;      border-bottom-color: #f5f5f5;      right: 95px;      top: -16px;    }#NTGUID__4 .topicli{      display: none;    }#NTGUID__4 .comment-list dl{      border-bottom: 1px dotted #E0E0E0;      padding: 15px 0;      display: none;    }#NTGUID__4 .comment-list dl dt{      float: left;      width: 50px;      overflow: hidden;    }#NTGUID__4 .comment-list dl dt img{      border-radius: 50%;      -webkit-border-radius: 50%;      -moz-border-radius: 50%;      width: 40px;      height: 40px;    }#NTGUID__4 .comment-list dl dd{      display: block;      margin-left: 60px;    }#NTGUID__4 .comment-list dl dd .user-header{      display: block;      font-size: 14px;      margin-bottom: 5px;    }#NTGUID__4 .comment-list dl dd .user-header table{      width: 100%;      margin: 0;    }#NTGUID__4 .comment-list dl dd .user-header th{      text-align: left;      font-weight: normal;    }#NTGUID__4 .comment-list dl dd .user-header td{      text-align: right;    }#NTGUID__4 .comment-list dl dd .user-header span{      color: #C3C3C3;      margin-left: 20px;      font-size: 12px;      font-weight: normal;    }#NTGUID__4 .comment-list dl dd .user-header a{      color: #555;    }#NTGUID__4 .comment-list dl dd .comment-content{      margin: 0;      padding: 0;      font-size: 14px;      line-height: 22px;      overflow: hidden;      width: 90%;      color: #333;      font-weight: normal;      text-shadow: none;      -webkit-text-shadow: none;      -moz-text-shadow: none;    }#NTGUID__4 .comment-list .comment-textarea{      display: block;      width: 96%;      resize: none;    }#NTGUID__4 .comment-list .btn-warning{      padding-left: 20px;      padding-right: 20px;    }#NTGUID__4 .comment-list p{      margin: 0;      padding: 0;    }#NTGUID__4 .comment-list .reply-panel p a{      font-size: 14px;      color: #999;    }#NTGUID__4 .comment-list .reply-panel .reply-form{      display: none;      position: relative;      border: 1px solid #F5A623;      margin-top: 5px;      padding: 5px 0;      background: #fff;      border-radius: 4px;      -webkit-border-radius: 4px;      -moz-border-radius: 4px;    }#NTGUID__4 .comment-list .reply-panel .reply-form i.icon-up{      display: inline-block;      width:0;      height:0;      border-width:6px;      border-color:transparent transparent #fff transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 42px;      top: -13px;      z-index: 5;    }#NTGUID__4 .comment-list .reply-panel .reply-form .btn{      position: absolute;      right: 5px;      top: 5px;    }#NTGUID__4 .comment-list .reply-panel .reply-form em.icon-down{      display: inline-block;      width:0;      height:0;      border-width:8px;      border-color:transparent transparent #F5A623 transparent;      border-style:dashed dashed solid dashed ;      overflow:hidden;      position: absolute;      left: 40px;      top: -17px;      z-index: 1;    }#NTGUID__4 .comment-list .reply-panel .reply-form input{      background: #fff;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;      width: 450px;      resize:none;    }#NTGUID__4 .comment-list .reply-panel .reply-form input:focus{      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;      border: 1px solid #fff;    }  </style><div id="NTGUID__4">
-<ul id="topicData" class="topic-list clearfix" data-game_id="<{$list.id}>" data-url="/Game/index/GameCommentLoad"  data-replay="false" >
+<ul id="topicData" class="topic-list clearfix" data-game_id="<{$list.id}>" data-url="/Game/index/GameCommentLoad"  data-replay="true" >
 
 
 </ul>
@@ -129,5 +135,6 @@
 </script>
 <script type="text/javascript" src="/Public/js/pages/topic_upimg.js"></script>
 <script type="text/javascript" src="/Public/js/syweb/jquery.form.js"></script>
-<script type="text/javascript" src="/public/js/pages/friend_search.js"></script>
+<script type="text/javascript" src="/public/js/pages/tag.js"></script>
+
 <include file="Public@default:Public:bottom" />

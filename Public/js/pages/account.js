@@ -150,14 +150,14 @@ $(function () {
             success: function ($result) {
                 if ($result) {
                     dialog({
-                        content: '修改成功',
+                        content: '删除成功',
                         ok: function () {
                             window.location.href = '';
                         },
                         cancel: false
                     }).show();
                 } else {
-                    $.dialog.error('修改失败！');
+                    $.dialog.error('删除失败！');
                 }
             }
         });

@@ -293,8 +293,8 @@ class IndexAction extends Action {
         }else{
             $limit=$ids;
         }
-        $map['id'] =array('in',$limit);
-        $list = D('DbUser')->where($map)->order('input_date desc')->select();
+        $model = New Model();
+        $list = $model->query('select db_user.id,nick_name,user_head,gender,input_date,db_images.local_url from db_user left join db_images on (db_user.user_head = db_images.id) where db_user.id in('.ArrayToStr($limit).')');
         foreach ($list as $key =>$val){
             $result = D('OpUserFriend')->where('user_id=' . $my . ' and friend_id=' . $val['id'])->select();
             if ($result) {
