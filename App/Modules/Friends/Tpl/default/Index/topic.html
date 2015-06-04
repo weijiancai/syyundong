@@ -9,7 +9,6 @@
                         <div class="club-thumb pull-left">
                             <img alt="" src="<{$game.image}>">
                         </div>
-                        <input type="hidden" value="<{$game.id}>" id="topic_id">
                         <div class="right-content">
                             <h1><a href="/Friends/tag/<{$game.id}>"><{$game.name}></a><a class="btn" href="/Game/<{$game.id}>">赛事主页</a></h1>
                             <?php $result = getGameFocus($game['id'],$_SESSION['mark_id'],1);

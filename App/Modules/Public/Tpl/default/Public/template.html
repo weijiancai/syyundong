@@ -3,7 +3,14 @@
     <li class="topicli clearfix" style="display: list-item;" data-source_type="4" data-source_id="{{id}}">
         <!-- 作者头像 开始 -->
         <div class="topic-host-thumb pull-left">
-            <a target="_blank" href="/Friends/passport/{{id}}" ><img title="{{user_name}}" src="{{user_image}}"></a>
+            <a target="_blank" href="/Friends/passport/{{id}}" >
+            {{if user_image}}
+                <img title="{{user_name}}" src="{{user_image}}">
+            {{/if}}
+            {{if user_image==NULL}}
+            <img title="{{nick_name}}" src="/public/images/default/web_pic.jpg">
+            {{/if}}
+            </a>
         </div>
         <!-- 作者头像 结束 -->
         <!-- 话题内容 开始 -->
@@ -62,7 +69,12 @@
     <dl class="clearfix" style="display: block;"  data-source_type=<?php if(ACTION_NAME=='activity_detail'){echo 2;}elseif(ACTION_NAME=='activity_detail'){echo 3;}else{echo 4;}?> data-source_id="<{$_GET['id']}>">
         <dt>
             <a target="_blank" href="/Friends/passport/{{user_id}}">
-            <img title="{{nick_name}}" src="{{image}}">
+                {{if image}}
+                <img title="{{nick_name}}" src="{{image}}">
+                {{/if}}
+                {{if image==NULL}}
+                <img title="{{nick_name}}" src="/public/images/default/web_pic.jpg">
+                {{/if}}
              </a>
         </dt>
         <dd>
@@ -257,10 +269,10 @@
     <li style="display: list-item;">
         <div class="friends-thumb">
             <a target="_blank" href="/Friends/passport/{{id}}">
-                {{if image}}
-                <img title="{{nick_name}}" src="{{image}}">
+                {{if local_url}}
+                <img title="{{nick_name}}" src="{{local_url}}">
                 {{/if}}
-                {{if image==NULL}}
+                {{if local_url==NULL}}
                 <img title="{{nick_name}}" src="/public/images/default/web_pic.jpg">
                 {{/if}}
             </a>

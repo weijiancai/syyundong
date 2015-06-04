@@ -96,7 +96,7 @@ $(function () {
                 jQuery.ajax({
                     type: "post",
                     url: "/Friends/index/topicFocus",
-                    data: {source_id: $("#topic_id").val()},
+                    data: {source_id: $(this).data('value')},
                     success: function (result) {
                         if (result == 1) {
                             $("#topic_focus").html('取消关注');
@@ -110,7 +110,7 @@ $(function () {
                 jQuery.ajax({
                     type: "post",
                     url: "/Friends/index/topicFocusCancel",
-                    data: {source_id: $("#topic_id").val()},
+                    data: {source_id: $(this).data('value')},
                     success: function (result) {
                         if (result == 1) {
                             $("#topic_focus").html('关注');
