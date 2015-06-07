@@ -8,7 +8,7 @@ function SEO()
     switch ($list) {
         case 'Home':
             $list = array(
-                'title' => '松原运动网|松原比赛|爱运动|约个赛',
+                'title' => '松原运动网|松原比赛|爱运动|比个赛',
                 'Keywords' => '松原运动|运动网|比赛|约活动 发布活动 发布赛事 赛事报名 马拉松 四季跑 社交 场馆 ',
                 'Description' => '松原运动网致力于打造松原最大的体育健康互动平台，以互联网和移动互联网体育赛事服务、体育社交、体育线上线下互动业务为核心，形成新一代参与型大众体育健康消费的互联网新入口',
             );
@@ -17,8 +17,8 @@ function SEO()
 
         case 'Game':
             $list = array(
-                'title' => '松原运动|松原比赛|爱运动|赛事搜索',
-                'Keywords' => '松原运动网|爱运动 爱比赛|赛事搜索|免费发布赛赛|最新最热门赛事 体育 球类项目 羽毛球  乒乓球  台球 网球  足球  篮球 曲棍球  垒球  棒球 高尔夫  排球 户外运动 自行车  轮滑  定向 攀岩  山地户外活动 航海模型  铁人三项 钓鱼 全民健身 门球  健美  体育舞蹈 健美操  排舞  瑜伽 中国风健身舞  龙舟 划船器  大力士 保龄球  肚皮舞 脚斗士 其他运动 跆拳道  风筝  举重 射击  射箭  游泳 马拉松路跑 马拉松  路跑 ',
+                'title' => '松原运动|松原比赛|爱运动|赛事搜索|松原比赛',
+                'Keywords' => '松原运动网|爱运动 爱比赛|赛事搜索|免费发布赛赛|最新最热门赛事 松原体育 松原羽毛球  松原乒乓球  松原台球 松原网球  松原足球  松原篮球 松原曲棍球  松原垒球  松原棒球 松原高尔夫  松原排球 松原户外运动 松原自行车  松原轮滑  松原定向 松原攀岩  松原山地户外活动 松原航海模型  松原铁人三项 松原钓鱼 松原全民健身 松原门球  松原健美  松原体育舞蹈 松原健美操  松原排舞  松原瑜伽 松原中国风健身舞  松原龙舟 松原划船  松原大力士 松原保龄球  松原肚皮舞 松原脚斗士 松原其他运动 松原跆拳道 松原风筝  松原举重 松原射击  松原射箭  松原游泳 松原马拉松  松原路跑 松原扩展',
                 'Description' => '松原运动|爱运动|赛事搜索',
             );
             return $list;
@@ -51,7 +51,7 @@ function SEO()
         case 'Association':
             $list = array(
                 'title' => '松原运动网|体育协会|协会',
-                'Keywords' => '松原运动网|体育协会 加协会|乒乓球协会 篮球协会 足球协会 羽毛球协会 自行车协会',
+                'Keywords' => '松原运动网|体育协会 加协会|松原乒乓球协会 松原篮球协会 松原足球协会 松原羽毛球协会 松原自行车协会',
                 'Description' => '松原运动网|体育协会|协会',
             );
             return $list;
@@ -66,7 +66,7 @@ function SEO()
             break;
         default:
             $list = array(
-                'title' => '松原运动网|爱运动|约个赛',
+                'title' => '松原运动网|爱运动|比个赛',
                 'Keywords' => '松原运动|运动网|比赛|约活动 发布活动 发布赛事 赛事报名 马拉松 四季跑 社交 场馆 ',
                 'Description' => '松原运动网致力于打造松原最大的体育健康互动平台，以互联网和移动互联网体育赛事服务、体育社交、体育线上线下互动业务为核心，形成新一代参与型大众体育健康消费的互联网新入口。',
             );
@@ -190,6 +190,7 @@ function remove_xss($val)
     return $val;
 }
 
+
 /**
  * @功能：根据赛事状态返回时间
  * @时间：20150402
@@ -303,14 +304,14 @@ function showStatus($status, $id, $callback = "", $before, $after)
 {
     switch ($status) {
         case '0':
-        case"F":
+        case"T":
             $info = '<a href="__URL__/resume/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="' . $callback . '">' . $before . '</a>';
             break;
         case 2 :
             $info = '<a href="__URL__/pass/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="' . $callback . '">' . $before . '</a>';
             break;
         case '1' :
-        case "T" :
+        case "F" :
             $info = '<a href="__URL__/forbid/id/' . $id . '/navTabId/__MODULE__" target="ajaxTodo" callback="' . $callback . '">' . $after . '</a>';
             break;
         case -1 :
@@ -328,11 +329,11 @@ function getStatus($status, $imageShow = true)
 {
     switch ($status) {
         case '0' :
+        case 'T':
             $showText = '禁用';
             $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/locked.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="禁用">';
             break;
         case '3':
-        case 'F':
             $showText = '待审';
             $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/prected.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="待审">';
             break;
@@ -341,7 +342,7 @@ function getStatus($status, $imageShow = true)
             $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/del.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="删除">';
             break;
         case '1' :
-        case "T" :
+        case "F" :
         default :
             $showText = '正常';
             $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/ok.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="正常">';
@@ -390,6 +391,9 @@ function getSportType($type)
             break;
         case 3 :
             $result = '场馆';
+            break;
+        case 4 :
+            $result = '话题';
             break;
     }
     return $result;
@@ -462,13 +466,13 @@ function getJoinActivityVerify($verify)
 {
     switch ($verify) {
         case 0 :
-            $result = '待审核';
+            $result = '<span style="color:blue">待审核</span>';
             break;
         case 1 :
             $result = '通过';
             break;
         case 2 :
-            $result = '不通过';
+            $result = '<span style="color:red">不通过</span>';
             break;
     }
     return $result;
@@ -490,12 +494,14 @@ function getUserImage($id)
  */
 function getUsersImage($id)
 {
-    $user_head = D('DbUser')->where('id=' . $id)->getField('user_head');
-    $local_url = D('DbImages')->where('id=' . $user_head)->getField('size2_url');
-    if ($local_url) {
-        return $local_url;
-    } else {
-        return '/Public/images/default/web_pic.jpg';
+    if(isLogin()){
+        $user_head = D('DbUser')->where('id=' . $id)->getField('user_head');
+        $local_url = D('DbImages')->where('id=' . $user_head)->getField('size2_url');
+        if ($local_url) {
+            return $local_url;
+        } else {
+            return '/Public/images/default/web_pic.jpg';
+        }
     }
 }
 
@@ -526,13 +532,15 @@ function getGameGroup($group_id, $game_id)
  */
 function getGameFocus($source_id, $user_id, $source_type)
 {
-    $result = D('OpFocus')->where('user_id=' . deCode($user_id) . ' and source_id=' . $source_id . ' and source_type =' . $source_type)->select();
-    if ($result) {
-        //关注
-        return 0;
-    } else {
-        //取消关注
-        return 1;
+    if ($user_id) {
+        $result = D('OpFocus')->where('user_id=' . deCode($user_id) . ' and source_id=' . $source_id . ' and source_type =' . $source_type)->select();
+        if ($result) {
+            //关注
+            return 0;
+        } else {
+            //取消关注
+            return 1;
+        }
     }
 }
 
@@ -694,7 +702,42 @@ function  getRecommendName($id, $type)
         return D('DbVenue')->where('id=' . $id)->getField('name');
     }
 }
-
+/*
+ * @功能：评论来源
+ * @时间: 20150607
+ */
+function getCommentName($source_id,$source_type)
+{
+    switch ($source_type) {
+        //活动
+        case 2 :
+            $result =  D('DbActivity')->where('id=' . $source_id)->getField('name');
+            break;
+        //场馆
+        case 3 :
+            $result =  D('DbVenue')->where('id=' . $source_id)->getField('name');
+            break;
+        //话题
+        case 4 :
+            $game_id =  D('OpGameTopic')->where('id=' . $source_id)->getField('game_id');
+            $result = D('DbGame')->where('id='.$game_id)->getField('name');
+            break;
+    }
+    return $result;
+}
+/*
+* 功能：判断是否登录
+* 时间：20150407
+*/
+function isLogin()
+{
+    $mark = I('session.mark_id');
+    if ($mark) {
+        return true;
+    }else{
+        return false;
+    }
+}
 /*
  * @功能：数组转为字符串
  * @时间:20150419

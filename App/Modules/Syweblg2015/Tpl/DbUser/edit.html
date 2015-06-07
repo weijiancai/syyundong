@@ -23,14 +23,9 @@
             <div class="pageFormContent" layoutH="58">
                 <input type="hidden" value="<{$vo.id}>" name="id" id="id">
                 <div style="height:150;margin-left:180px">
-                    <if condition="($vo.PHOTO neq NULL)and($vo.PHOTO neq ' ')">
-                        <div ID="prev1"><img src="__PUBLIC__/Upload/member/<{$vo.ID}>/<{$vo.PHOTO}>" width="100px" height="100px">
-                            <a href="#" onclick="clear1()"><span style="margin-right:30px">清除</span></a></div>
-                        <else/>
-                        <img src="__PUBLIC__/images/default/web_pic.jpg">
-                    </if>
+                        <div ID="prev1"><img src="<{$vo['id']|getUsersImage}>" width="100px" height="100px">
+                            </div>
                     <input type="hidden" name="user_head" value="<{$vo.user_head}>" id="user_head">
-
                 </div>
                 <div class="divider"></div>
                 <dl>

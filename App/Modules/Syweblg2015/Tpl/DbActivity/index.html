@@ -9,16 +9,6 @@
     </volist>
 </form>
 <script src="__PUBLIC__/js/syweb/sy_game.js" type="text/javascript"></script>
-<script>
-    $(function () {
-        $("img").attr({ width: "15px", height: "15px", onclick: 'show(this.src)'});
-        $("img").attr('style', '');
-        $("embed").attr({ width: "15px", height: "15px"});
-    });
-    function show($temp) {
-        $.pdialog.open("__URL__/show?img=" + $temp, "show", "预览", {height: "600", width: "600", mask: "true"});　
-    }
-</script>
 
 <div class="page">
     <div class="pageHeader">
@@ -64,10 +54,11 @@
                 <th width="4%" align="center">活动人数</th>
                 <th width="4%" align="center">费用类型</th>
                 <th width="4%" align="center">费用</th>
-                <th width="5%" align="center">感兴趣人数</th>
+                <th width="4%" align="center">感兴趣</th>
                 <th width="4%" align="center">录入人</th>
                 <th width="8%" align="center">录入时间</th>
-                <th width="4%" align="center">操作</th>
+                <th width="3%" align="center">状态</th>
+                <th width="6%" align="center">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -85,9 +76,9 @@
                     <td><{$vo['interest_count']}></td>
                     <td><{$vo['input_user']|getUserName}></td>
                     <td><{$vo['input_date']}></td>
-                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="dialog" mask="true" width="800" height="600" rel="detail">编辑</a>
-                        <span
-                            style="color:red">|</span>
+                    <td><{$vo['is_verify']|getStatus}></td>
+                    <td><{$vo['is_verify']|showStatus=$vo['id'],'navTabAjaxDone','审核','禁用'}>
+                        <span style="color:red">|</span>
                         <?php  if(isGameRecommend($vo['id'],'activity')){ ?>
                         <a href="__URL__/recommend/id/<{$vo['id']}>/type/activity" target="ajaxTodo" style="text-decoration:none;">推荐</a>
                         <?php }else{ ?>

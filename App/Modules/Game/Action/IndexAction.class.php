@@ -63,6 +63,7 @@ class IndexAction extends BaseAction
             $map['start_date'] = array('like', date("Y-m-d", strtotime("+30 day")) . '%');
         }
         $map['type'] = array('eq', 'game');
+        $map['is_verify'] = array('eq', 'F');
         $count = $model->where($map)->count();
         $Page = new Page($count, 10);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
@@ -113,7 +114,7 @@ class IndexAction extends BaseAction
         $date['apply_name'] = I('post.applyName');
         $date['apply_phone'] = I('post.applyPhone');
         $date['apply_email'] = I('post.applyEmail');
-        $date['is_verify'] = 'F';
+        $date['is_verify'] = 'T';
         $date['input_date'] = date('Y-m-d H:i:s');
         $date['input_user'] = deCode(I('session.mark_id'));
         $result = $model->add($date);
@@ -168,7 +169,7 @@ class IndexAction extends BaseAction
         //赛事新闻
         $news = D('OpGameNews')->where('game_id=' . $id)->limit(2)->select();
         //赛事关注人物
-        $user_id = D('OpFocus')->where('source_id=' . $id . ' and source_type=1 and user_id !=' . $id)->getField('user_id', true);
+        $user_id = D('OpFocus')->where('source_id=' . $id . ' and source_type=1')->getField('user_id', true);
         $model = new Model();
         $user = $model->query('select u.id id,u.nick_name nick_name,u.mobile mobile,u.name name,u.gender gender,i.local_url image from db_user u LEFT JOIN db_images i  on (u.user_head = i.id) where u.id in(' . ArrayToStr($user_id) . ')');
         $this->assign('user', $user);

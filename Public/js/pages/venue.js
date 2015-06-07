@@ -77,7 +77,7 @@ $(function () {
         })
     }
     //收藏
-    $('.item-list-bottom').find('a').click(function() {
+    $('.item-list-bottom .collection').click(function() {
         var self= $(this);
         jQuery.ajax({
             type: "post",

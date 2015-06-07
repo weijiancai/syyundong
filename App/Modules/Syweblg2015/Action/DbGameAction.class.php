@@ -211,7 +211,7 @@ class DbGameAction extends CommonAction
         $name = "DbGame";
         $model = D('DbGame');
         $date['id'] = array('eq', $_GET['id']);
-        $date['is_verify'] = 'F';
+        $date['is_verify'] = 'T';
         $date['verify_date'] = date("Y-m-d H:i:s");
         $list = $model->save($date);
         if (false !== $list) {
@@ -230,7 +230,7 @@ class DbGameAction extends CommonAction
         $name = "DbGame";
         $model = D('DbGame');
         $date['id'] = array('eq', $_GET['id']);
-        $date['is_verify'] = 'T';
+        $date['is_verify'] = 'F';
         $date['verify_date'] = date("Y-m-d H:i:s");
         $list = $model->save($date);
         if (false !== $list) {

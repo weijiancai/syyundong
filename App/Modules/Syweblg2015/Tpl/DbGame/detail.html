@@ -8,9 +8,17 @@
      <input type="hidden" name="<{$key}>" value="<{$_REQUEST[$key]}>"/>
     </volist>
 </form>
+<script>
+    $(function () {
+        $("img").attr({ width: "15px", height: "15px"});
+        $("img").attr('style', '');
+        $("embed").attr({ width: "15px", height: "15px"});
+    });
+    function show($temp) {
+        $.pdialog.open("__URL__/show?img=" + $temp, "show", "预览", {height: "600", width: "600", mask: "true"});　
+    }
+</script>
 <div class="page">
-
-
 	<div class="pageContent">
 
 		<table class="table" width="100%" layoutH="50">
@@ -26,48 +34,42 @@
             <tr>
                 <td style="width:10%;height:25px">参赛声明</td>
                 <td text-align="left"><span style="line-height:200%">
-                        <?php echo str_replace(array('<p>','</p>'), '',strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($vo['game_declare']))),"<img>,<embed>
-                    "))?></span></td>
+                        <?php echo RemoveFormat($vo['game_declare']);?></span></td>
                 <td><a href="__URL__/other_edit/field/game_declare/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
             </tr>
 				<tr>
 					<td style="width:10%;height:25px">赛事介绍</td>
 					<td text-align="left"><span style="line-height:200%">
-                        <?php echo str_replace(array('<p>','</p>'), '',strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($vo['content']))),"<img>,<embed>
-                            "))?></span></td>
+                        <?php echo RemoveFormat($vo['content']);?></span></td>
 					<td><a href="__URL__/other_edit/field/content/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
 				</tr>
                 <tr>
                     <td height="25px">会员权益</td>
                     <td><span style="line-height:200%">
-                        <?php echo str_replace(array('<p>','</p>'), '',strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($vo['member_right']))),"<img>,<embed>
-                        "))?></span></td>
+                        <?php echo RemoveFormat($vo['member_right']);?></span></td>
                     <td><a href="__URL__/other_edit/field/member_right/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
                 </tr>
                 <tr >
                     <td height="25px">比赛路线</td>
                     <td><span style="line-height:200%">
-                        <?php echo str_replace(array('<p>','</p>'), '',strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($vo['aout_route']))),"<img>,<embed>
-                        "))?></span></td>
+                        <?php echo RemoveFormat($vo['aout_route']);?></span></td>
                     <td><a href="__URL__/other_edit/field/aout_route/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
                 </tr>
                 <tr>
                     <td height="25px">关于费用</td>
                     <td><span style="line-height:200%">
-                        <?php echo str_replace(array('<p>','</p>'), '',strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($vo['about_cost']))),"<img>,<embed>
-                        "))?></span></td>
+                        <?php echo RemoveFormat($vo['about_cost']);?></span></td>
                     <td><a href="__URL__/other_edit/field/about_cost/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
                 </tr>
                 <tr>
                     <td height="25px">行程安排</td>
                     <td><span style="line-height:200%">
-                        <?php echo str_replace(array('<p>','</p>'), '',strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($vo['about_trip']))),"<img>,<embed>
-                        "))?></span></td>
+                        <?php echo RemoveFormat($vo['about_trip']);?></span></td>
                     <td><a href="__URL__/other_edit/field/about_trip/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
                 </tr>
                 <tr>
                     <td height="25px">入住酒店</td>
-                    <td><{$vo['about_hotal']}></td>
+                    <td><?php echo RemoveFormat($vo['about_hotal']);?></td>
                     <td><a href="__URL__/other_edit/field/about_hotal/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
                 </tr>
 			

@@ -91,7 +91,7 @@ $(function () {
     });
     //活动免费-付费
     $(':radio').click(function(){
-        if(this.value==2){
+        if(this.value==1){
             $('#cost').removeAttr('disabled');
         }
     });

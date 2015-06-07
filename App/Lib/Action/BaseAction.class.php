@@ -41,7 +41,7 @@ Class BaseAction extends Action
         $date['source_des'] = $des;
         $date['input_date'] = date('Y-m-d H:i:s');
         $date['input_user'] = deCode(I('session.mark_id'));
-        D('DbTimeline')->add($date);
+        D('DbTimeLine')->add($date);
     }
 
     /*
@@ -57,11 +57,13 @@ Class BaseAction extends Action
      * 功能：场馆信息
      * 时间：20150407
      */
-    public
-    function venue_sport()
+    public function venue_sport()
     {
         return D('DzSport')->where('sport_type=3')->select();
     }
+
+
+
 }
 
 ?>

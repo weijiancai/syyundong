@@ -84,21 +84,21 @@
                     <dt>是否审核：</dt>
                     <dd><select  name="is_need_verify" class="required">
                         <option value="">请选择</option>
-                        <option <eq name="vo.is_need_verify" value ="T">selected=selected</eq> value="T">需要</option>
-                        <option <eq name="vo.is_need_verify" value ="F">selected=selected</eq> value="F">不需要</option>
+                        <option <eq name="vo.is_verify" value ="T">selected=selected</eq> value="T">需要</option>
+                        <option <eq name="vo.is_verify" value ="F">selected=selected</eq> value="F">不需要</option>
                     </select></dd>
                 </dl>
                 <dl>
                     <dt>活动人数：</dt>
                     <dd><input name="limit_count" class="required" type="text" value="<{$vo.limit_count}>"/></dd>
                 </dl>
-                <dl class="nowrap">
+                <!--<dl class="nowrap">
                     <dt>填写资料：</dt>
                     <dd><input name="join_need_info[]" class="required" type="checkbox" value="1" />真实姓名&nbsp;
                         <input name="join_need_info[]" class="required" type="checkbox" value="2"/>性别&nbsp;
                         <input name="join_need_info[]" class="required" type="checkbox" value="3"/>手机号码&nbsp;
                         <input name="join_need_info[]" class="required" type="checkbox" value="4"/>身份证号</dd>
-                </dl>
+                </dl>-->
                 <dl class="nowrap">
                     <dt>举办城市：</dt>
                     <dd><select  name="province" id="province" class="required">

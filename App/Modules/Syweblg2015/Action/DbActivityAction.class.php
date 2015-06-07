@@ -160,9 +160,40 @@ class DbActivityAction extends CommonAction
     }
 
     /*
-     * @功能：ajax上传图片
+     * @功能：禁用赛事
      * @时间：20150422
      */
+    public function forbid()
+    {
+        $name = "DbActivity";
+        $model = D('DbActivity');
+        $date['id'] = array('eq', $_GET['id']);
+        $date['is_verify'] = 'T';
+        $list = $model->save($date);
+        if (false !== $list) {
+            echo $this->ajax('1', "赛事禁止成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "赛事禁止失败", $name, "", "");
+        }
+    }
+
+    /*
+     * @功能：禁用恢复
+     * @时间：20150422
+     */
+    public function resume()
+    {
+        $name = "DbActivity";
+        $model = D('DbActivity');
+        $date['id'] = array('eq', $_GET['id']);
+        $date['is_verify'] = 'F';
+        $list = $model->save($date);
+        if (false !== $list) {
+            echo $this->ajax('1', "赛事恢复成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "赛事恢复失败", $name, "", "");
+        }
+    }
 }
 
 ?>

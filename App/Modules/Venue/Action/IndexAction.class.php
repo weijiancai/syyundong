@@ -169,7 +169,6 @@ class IndexAction extends BaseAction
     {
         //首先判断用户是否登录
         $mark = I('session.mark_id');
-
         if ($mark) {
             $date['user_id'] = deCode($mark);
             $date['source_id'] = $_POST['source_id'];

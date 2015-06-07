@@ -37,7 +37,7 @@
                 </tr>
 
                 <tr>
-                    <th valign="top"><i class="icon16 icon16-search-items"></i>项目：
+                    <th valign="top"><i class="icon16 icon16-search-items"></i>场馆：
                         <input type="hidden" data-selector="itemsValue" value="all" name="sportTypeId"></th>
                     <td valign="top">
                         <div data-selector="itemsList" class="item-panel" id="datalist">
@@ -123,9 +123,9 @@
                     </p>
                     <p><span>电话：</span><{$vo.phone}></p>
                     <p class="item-list-bottom">
-                        <a data-url="/venueuser/addFavoriteVenue" data-value="<{$vo.id}>" data-selector="collectButton" href="javascript:;">
+                        <a class="collection" data-url="/venueuser/addFavoriteVenue" data-value="<{$vo.id}>" data-selector="collectButton" href="javascript:;">
                             <i class="icon-match icon-fav "></i>收藏（<em class="follow_count"><{$vo.followCount}></em>）</a>
-                        <a href="/venue/3567"><i class="icon-match icon-comment"></i><{$vo.commentCount}>人评论</a>
+                        <a href="/Venue/<{$vo.id}>"><i class="icon-match icon-comment"></i><{$vo.commentCount}>人评论</a>
                     </p>
                 </div>
             </div>

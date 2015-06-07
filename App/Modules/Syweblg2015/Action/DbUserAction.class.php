@@ -79,86 +79,27 @@ class DbUserAction extends CommonAction
      * @时间：20150422
      */
     public function delAll(){
-        $model = D('DbGame');
+        $model = D('DbUser');
         $pk=$model->getPk ();
         $data[$pk]=array('in', $_POST['ids']);
         $model->where($data)->delete();
         echo $this->ajax('1',"删除成功",$name,"","");
     }
     /*
-    * @功能：赛事其他详细信息
-    * @时间：20150422
-    */
-    public function detail(){
-        $id =$_GET['id'];
-        $list =  D('DbGame')->where('id='.$id)->find();
-        $this->assign('vo',$list);
-        $this->display();
-    }
-    /*
-    * @功能：赛事其他详细信息编辑页面
-    * @时间：20150422
-    */
-    public function other_edit(){
-        $id =$_GET['id'];
-        $field =$_GET['field'];
-        $list =  D('DbGame')->where('id='.$id)->find();
-        $this->assign('vo',$list);
-        $this->assign('field',$field);
-        $this->display();
-    }
-    /*
-    * @功能：赛事其他详细信息编辑页面
-    * @时间：20150422
-    */
-    public function other_update(){
-        $name="detail";
-        $model = D('DbGame');
-        if (false === $model->create()) {
-            $this->error($model->getError());
-        }
-        $list = $model->save();
-        if ($list !== false) {
-            echo $this->ajax('1', "更新成功", $name, "", "closeCurrent");
-        } else {
-            echo $this->ajax('0', "更新失败", $name, "", "closeCurrent");
-        }
-    }
-    /*
-     * @功能：禁用赛事
+     * @功能：恢复密码
      * @时间：20150422
      */
-    public function forbid()
+    public function reset_pwd()
     {
-        $name = "DbGame";
-        $model = D('DbGame');
-        $date['id'] = array('eq', $_GET['id']);
-        $date['is_verify'] = 'F';
-        $date['verify_date'] = date("Y-m-d H:i:s");
-        $list = $model->save($date);
-        if (false !== $list) {
-            echo $this->ajax('1', "赛事禁止成功", $name, "", "");
-        } else {
-            echo $this->ajax('0', "赛事禁止失败", $name, "", "");
-        }
-    }
 
-    /*
-     * @功能：禁用恢复
-     * @时间：20150422
-     */
-    public function resume()
-    {
-        $name = "DbGame";
-        $model = D('DbGame');
-        $date['id'] = array('eq', $_GET['id']);
-        $date['is_verify'] = 'T';
-        $date['verify_date'] = date("Y-m-d H:i:s");
-        $list = $model->save($date);
-        if (false !== $list) {
-            echo $this->ajax('1', "赛事恢复成功", $name, "", "");
+        $model = D('DbUser');
+        $data['password'] = base64_encode(strtoupper(md5('000000')));
+        $data['id'] = $_GET['id'];
+        $vo = $model->save($data);
+        if (false !== $vo) {
+            echo $this->ajax("1", "恢复成功", $name, "", "");
         } else {
-            echo $this->ajax('0', "赛事恢复失败", $name, "", "");
+            echo $this->ajax("0", "恢复失败", $name, "", "");
         }
     }
 

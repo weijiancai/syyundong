@@ -21,20 +21,27 @@
 <script src="__PUBLIC__/ueditor/ueditor.all.js" type="text/javascript"></script>
 <div class="page">
     <div class="pageContent">
-        <form method="post" action="__URL__/other_update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+        <form method="post" action="__URL__/update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
                 <input type="hidden" value="<{$vo.id}>" name="id">
-                <dl>
+                <dl class="nowrap">
                     <dt>名称：</dt>
-                    <dd><input name="name" class="required" type="text" value="<{$vo.name}>"/>
+                    <dd><{$vo['source_id']|getCommentName=$vo['source_type']}>
                     <dd>
                 </dl>
                 <dl>
-                    <dd><b style="color:Red"><{$field|getGameField}></b></dd>
+                    <dt>评论人：</dt>
+                    <dd><input name="" readonly class="required" type="text"
+                               value="<{$vo['user_id']|getUserName}>"></dd>
+                </dl>
+                <dl>
+                    <dt>评论时间：</dt>
+                    <dd><input type="text" name="input_date" class="" readonly
+                               value="<{$vo['input_date']}>"/></dd>
                 </dl>
                 <dl class="nowrap">
                     <dt>内容:</dt>
-                    <dd><textarea name="<{$field}>" id="myEditor"><{$vo[$field]}></textarea>
+                    <dd><textarea name="content" id="myEditor"><{$vo['content']}></textarea>
                         <script type="text/javascript">
                             UE.getEditor('myEditor');
                         </script>

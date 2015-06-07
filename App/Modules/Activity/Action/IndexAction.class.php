@@ -22,22 +22,21 @@ class IndexAction extends BaseAction
             $status .= ',4';
         }
         $status = ltrim($status, ',');
-
         if ($_GET['state']) {
             $map['status'] = $_GET['state'];
         } else if ($status) {
-            $map['status'] = $status;
+            $map['status'] = array('in',strtoarr($status));
         }
         //关键字
         if (trim($_GET['keyword'])) {
             $map['name'] = array('like', '%' . trim($_GET['keyword']) . '%');
         }
         //赛事分类
-        if (($_GET['sportTypeId'])&&($_GET['sportTypeId']!='all')) {
+        if (($_GET['sportTypeId']) && ($_GET['sportTypeId'] != 'all')) {
             $map['sport_sid'] = array('eq', $_GET['sportTypeId']);
         }
         //默认排序
-        if (($_GET['orderByNew'] == 'S') or (empty($_GET['orderByNew']))){
+        if (($_GET['orderByNew'] == 'S') or (empty($_GET['orderByNew']))) {
             $order = 'input_date desc';
         }
         //最新活动
@@ -58,6 +57,7 @@ class IndexAction extends BaseAction
             $map['region'] = $_GET['region'];
         }
         $map['type'] = array('eq', 'activity');
+        $map['is_verify'] = array('eq','F');
         $count = $model->where($map)->count();
         $Page = new Page($count, 10);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
@@ -99,7 +99,7 @@ class IndexAction extends BaseAction
     public function hotactivity()
     {
         $model = New Model();
-        $list = $model->query('select v.id,o.sort_num, v.name,v.province,v.image,v.join_count,v.interest_count,v.cost,(v.limit_count-v.join_count) remain from v_game_activity v,op_recommend o
+        $list = $model->query('select v.id,o.sort_num, v.name,v.province,v.city,v.region,v.image,v.join_count,v.interest_count,v.cost,(v.limit_count-v.join_count) remain from v_game_activity v,op_recommend o
  where v.id = o.gc_id and o.recommend_type = "activity" and v.type="activity" order by o.sort_num');
         $this->assign('recommend', $list);
     }
@@ -111,28 +111,22 @@ class IndexAction extends BaseAction
     public function activity_detail()
     {
         $id = $_GET['id'];
-        $detail = D('VGameActivity')->where('id=' . $id.' and type=\'activity\'')->find();
+        //感兴趣人数
+        M('DbActivity')->where('id=' . $id)->setInc('interest_count', 1);
+        //详情
+        $detail = D('VGameActivity')->where('id=' . $id . ' and type=\'activity\'')->find();
         $this->assign('detail', $detail);
         //已通过报名
-        $this->assign('through',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=1')->select());
-        $this->assign('through_count',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=1')->count());
+        $this->assign('through', D('VJoinActivity')->where('activity_id=' . $id . ' and verify_state=1')->select());
+        $this->assign('through_count', D('VJoinActivity')->where('activity_id=' . $id . ' and verify_state=1')->count());
         //未通过报名
-        $this->assign('not_through',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=2')->select());
-        $this->assign('not_through_count',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=2')->count());
+        $this->assign('not_through', D('VJoinActivity')->where('activity_id=' . $id . ' and verify_state=2')->select());
+        $this->assign('not_through_count', D('VJoinActivity')->where('activity_id=' . $id . ' and verify_state=2')->count());
         //审核中
-        $this->assign('wait',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=0')->select());
-        $this->assign('wait_count',D('VJoinActivity')->where('activity_id='.$id.' and verify_state=0')->count());
+        $this->assign('wait', D('VJoinActivity')->where('activity_id=' . $id . ' and verify_state=0')->select());
+        $this->assign('wait_count', D('VJoinActivity')->where('activity_id=' . $id . ' and verify_state=0')->count());
         $this->display();
     }
-
-    /*
-     * 功能：活动项目
-     * 时间：20150407
-     */
-    /*public function venue_sport()
-    {
-        return D('DzSport')->where('sport_type=2')->select();
-    }*/
 
     /*
      * 功能:相似活动
@@ -171,6 +165,7 @@ class IndexAction extends BaseAction
             echo 0;
         }
     }
+
     /*
  * @时间: 20150415
  * @功能:评论回复
@@ -216,11 +211,13 @@ class IndexAction extends BaseAction
         }
         echo json_encode($list);
     }
+
     /*
      * @时间：20150512
      * @功能：发起活动
      */
-    public function AddActivity(){
+    public function AddActivity()
+    {
         $date['name'] = $_POST['name'];
         $date['sport_id'] = $_POST['sportTypeId'];
         $date['reg_begin_date'] = $_POST['regBeginDate'];
@@ -229,7 +226,7 @@ class IndexAction extends BaseAction
         $date['end_date'] = $_POST['endDate'];
         $date['limit_count'] = $_POST['limitCount'];
         $date['join_need_info'] = '1,2,3,4';
-        $date['is_need_verify'] = 0;
+        $date['is_verify'] = 'T';
         $date['cost_type'] = $_POST['money'];
         $date['cost'] = $_POST['cost'];
         $date['province'] = 1;
@@ -240,38 +237,52 @@ class IndexAction extends BaseAction
         $date['input_date'] = date('Y-m-d H:i:s');
         $date['input_user'] = deCode(I('session.mark_id'));
         $result = M('DbActivity')->add($date);
-        if(false!==$result){
+        if (false !== $result) {
             //记录足迹
-            $this->TimeLine($result,'','发布活动','Activity');
+            $this->TimeLine($result, '', '发布活动', 'Activity');
             echo $result;
-        }else{
-            echo 'false';
+        } else {
+            echo false;
         }
     }
+
     /*
      * @时间：20150512
      * @功能：参加活动
      */
-    public  function joinActivity(){
-        $date['true_name'] = $_POST['true_name'];
-        $date['gender'] = $_POST['gender'];
-        $date['mobile'] = $_POST['mobile'];
-        $date['certificate_num'] = $_POST['certificate_num'];
-        $date['message'] = $_POST['message'];
-        $date['activity_id'] = $_POST['activityId'];
-        $result = D('OpJoinActivity')->add($date);
-        if(false!==$result){
-            echo 'true';
-        }else{
-            echo 'false';
+    public function joinActivity()
+    {
+        $user_id = deCode(I('session.mark_id'));
+        if (M('OpJoinActivity')->where('user_id=' . $user_id . ' and activity_id =' . $_POST['activityId'])->find()) {
+            echo 'exist';
+            return false;
+        } else {
+            if ($_POST['judge']) {
+                $date['true_name'] = $_POST['true_name'];
+                $date['gender'] = $_POST['gender'];
+                $date['mobile'] = $_POST['mobile'];
+                $date['certificate_num'] = $_POST['certificate_num'];
+                $date['message'] = $_POST['message'];
+                $date['activity_id'] = $_POST['activityId'];
+                $date['user_id'] = deCode($_POST['userId']);
+                $date['input_date'] = date('Y-m-d H:i:s');
+                $result = D('OpJoinActivity')->add($date);
+                if (false !== $result) {
+                    echo 'success';
+                } else {
+                    echo 'error';
+                }
+            }
         }
     }
+
     /*
      * @功能：运动达人
      * @时间:20150418
      */
-    public function sport_doyen(){
+    public function sport_doyen()
+    {
         $doyen = M('VDoyenHall')->order('input_date desc')->limit(5)->select();
-        $this->assign('doyen',$doyen);
+        $this->assign('doyen', $doyen);
     }
 }

@@ -11,7 +11,6 @@ class RegisterAction extends BaseAction
      */
     public function index()
     {
-
         $this->display();
 
     }
@@ -34,7 +33,6 @@ class RegisterAction extends BaseAction
     public function  AddProfile()
     {
         $data['user_head'] = $_POST['user_head'];
-        $data['nick_name'] = $_POST['nick_name'];
         $data['gender'] = $_POST['gender'];
         $data['address'] = $_POST['address'];
         $data['interest'] = substr($_POST['interest'], 0, -1);
@@ -58,6 +56,7 @@ class RegisterAction extends BaseAction
     {
         $mobile = I('post.mobile');
         $picCode = I('post.picCode');
+        $nickname = I('post.nick_name');
         $password = I('post.password');
         $confirmPass = I('post.confirmPass');
         if ((!empty($mobile)) && (!empty($picCode)) && (!empty($password)) && (!empty($confirmPass))) {
@@ -80,6 +79,7 @@ class RegisterAction extends BaseAction
                     $date['mobile'] = trim(I('post.mobile'));
                     $date['password'] = base64_encode(strtoupper(md5(I('post.password'))));
                     $date['input_date'] = date('Y-m-d H:i:s');
+                    $date['nick_name'] = $_POST['nick_name'];
                     $result = D('DbUser')->data($date)->add();
                     $id = enCode($result);
                     session('mark_id', "$id");

@@ -818,7 +818,7 @@
                                             <p>地点：<{$ho.province}><{$ho.city}><{$ho.region}><{$ho.address}></p>
                                             <p>费用：<{$ho.cost}></p>
                                             <p>
-                                                <span class="info-text"><i class="icon16 icon16-person"></i><{$ho.focus_count}>人感兴趣</span>
+                                                <span class="info-text"><i class="icon16 icon16-person"></i><{$ho.interest_count}>人感兴趣</span>
                                                 <span class="info-text"><i class="icon16 icon16-joined"></i>已报名<{$ho.join_count}>人</span>
                                             </p>
                                         </dd>
@@ -838,10 +838,12 @@
         </div>
 
         </div>
-        <div class="span4 xiaomei-club">
+        <div class="span4 smart-info">
             <h4 class="slider-title">
                 <span>名人堂</span>
+                <a target="_blank" href="/Doyenhall"><span style="font-size: 12px;float:right">更多>></span></a>
             </h4>
+
             <div>
                 <volist name="doyen" id="vo">
                     <dl>
@@ -919,6 +921,7 @@
 <div class="span4 smart-info">
     <h4 class="slider-title">
         <span>体育协会</span>
+        <a target="_blank" href="/Association"><span style="font-size: 12px;float:right">更多>></span></a>
     </h4>
     <ul class="adv-list">
         <volist name="association" id="vo">

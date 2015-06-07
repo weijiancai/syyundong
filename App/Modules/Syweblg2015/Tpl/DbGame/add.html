@@ -136,7 +136,7 @@
                     <dt>录入人：</dt>
                     <dd><input name="" readonly class="required" type="text"
                                value="<{$_SESSION[C('USER_AUTH_KEY')]|getUserName}>">
-                        <input name="input_user" value="" type="hidden"></dd>
+                        <input name="input_user" value="<{$_SESSION[C('USER_AUTH_KEY')]}>" type="hidden"></dd>
                 </dl>
                 <dl>
                     <dt>录入时间：</dt>

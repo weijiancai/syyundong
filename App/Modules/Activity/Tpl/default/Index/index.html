@@ -162,7 +162,7 @@
                                 </div>
                                 </div>
                                 <if condition="$vo.status eq 1">
-                                    <button id="activity_apply" class="btn btn-warning item-list-reg btnJoin" data-value="<{$vo.id}>">我要参加</button>
+                                    <button id="activity_apply" class="btn btn-warning item-list-reg btnJoin" data-value="<{$vo.id}>" data-user_id="<{$_SESSION['mark_id']}>">我要参加</button>
                                   <else/>
                                     <button disabled="" class="btn item-list-reg btn-show">报名已结束</button>
                                 </if >
@@ -210,11 +210,11 @@
                                 <li style="display: list-item;">
                                     <h4><a title="哈哈哈" href="/activity/<{$vo.id}>"><{$vo.name}></a></h4>
                                     <p class="clearfix">
-                                        <span class="pull-left"><i class="icon16 icon16-person"></i><{$vo.inertest_coun}>人感兴趣</span>
+                                        <span class="pull-left"><i class="icon16 icon16-person"></i><{$vo.inertest_count}>人感兴趣</span>
                                         <span class="pull-right"><span class="text-warning"><{$vo.join_count}></span>人已报名/<span class="muted">剩余<{$vo.remain}>人</span></span>
                                     </p>
                                     <p>费用：<{$vo.cost}></p>
-                                    <p>地区：<{$vo.province}></p>
+                                    <p>地区：<{$vo['city']|getRegionName}><{$vo['region']|getRegionName}></p>
                                 </li>
                             </volist>
                             </ul>
@@ -278,7 +278,6 @@
     <input type="hidden" id="keyword" name="keyword" value="<{$_REQUEST['keyword']}>"/>
 </form>
 
-<!--<script type="text/javascript">Loader.load(['page.activity']);</script>-->
 <script type="text/javascript" src="/Public/js/pages/activity.js"></script>
 
 
@@ -324,9 +323,10 @@
         }
     </style>
     <div>
-        <input type="hidden" value="<{$_SESSION['mark_id']}>" id="mark_id">
         <form id="joinActivityForm" method="post" action="" name="joinActivityForm">
             <input type="hidden" value="" name="activityId" id="activityId">
+            <input type="hidden" value="" name="userId" id="userId">
+            <input type="hidden" value="1" name="judge" id="judge">
             <table>
                 <tbody>
 

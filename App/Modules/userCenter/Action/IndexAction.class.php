@@ -1,5 +1,6 @@
 <?php
 
+import('ORG.Util.Page');
 /**
  *@时间:20150408
  *@功能:用户中心
@@ -29,7 +30,7 @@ class IndexAction extends BaseAction
     {
         $id = deCode(I('session.mark_id'));
         if ($id) {
-            $timeline = D('DbTimeline')->where('input_user=' . $id)->order('input_date desc')->select();
+            $timeline = D('DbTimeLine')->where('input_user=' . $id)->order('input_date desc')->select();
             $this->assign('timeline', $timeline);
             $this->assign('time_user', D('DbUser')->where('id=' . $id)->find());
             $this->display();
@@ -94,11 +95,9 @@ class IndexAction extends BaseAction
      */
     public function Game()
     {
-        import('ORG.Util.Page');
-        $id = deCode(I('session.mark_id'));
-        if ($id) {
+        if (isLogin()) {
             $model = D('VJoinGame');
-            $map['user_id'] = $id;
+            $map['user_id'] = deCode(I('session.mark_id'));
             $order = 'input_date desc';
             $count = $model->where($map)->count();
             $Page = new Page($count, 10);
@@ -120,7 +119,6 @@ class IndexAction extends BaseAction
      */
     public function follow()
     {
-        import('ORG.Util.Page');
         $id = deCode(I('session.mark_id'));
         if ($id) {
             $model = D('VFocusGame');
@@ -158,7 +156,6 @@ class IndexAction extends BaseAction
      */
     public function creates()
     {
-        import('ORG.Util.Page');
         $id = deCode(I('session.mark_id'));
         if ($id) {
             $model = D('VGameActivity');
@@ -200,7 +197,6 @@ class IndexAction extends BaseAction
     */
     public function activity()
     {
-        import('ORG.Util.Page');
         $model = D('VJoinActivity');
         $map['user_id'] = deCode(I('session.mark_id'));
         $order = 'input_date desc';
@@ -223,7 +219,6 @@ class IndexAction extends BaseAction
      */
     public function create()
     {
-        import('ORG.Util.Page');
         $model = D('VGameActivity');
         $map['type'] = array('eq', 'activity');
         $map['input_user'] = array('eq', deCode(I('session.mark_id')));
@@ -293,7 +288,6 @@ class IndexAction extends BaseAction
      */
     public function friend()
     {
-        import('ORG.Util.Page');
         $model = D('VUserFriend');
         $map['user_id'] = deCode(I('session.mark_id'));
         $order = 'input_date desc';
@@ -407,7 +401,6 @@ class IndexAction extends BaseAction
      */
     public function topic()
     {
-        import('ORG.Util.Page');
         $model = D('VTopic');
         $map['user_id'] = deCode(I('session.mark_id'));
         $order = 'input_date desc';
@@ -445,7 +438,6 @@ class IndexAction extends BaseAction
      */
     public function replay()
     {
-        import('ORG.Util.Page');
         $model = D('VComment');
         $map['user_id'] = deCode(I('session.mark_id'));
         $order = 'input_date desc';
@@ -483,6 +475,24 @@ class IndexAction extends BaseAction
      */
     public function collection()
     {
-        $this->display();
+        if (isLogin()) {
+            $model = D('VVenue');
+            $map['user_id'] = deCode(I('session.mark_id'));
+            $map['source_type'] =3;
+            $source_id = M('OpFocus')->where($map)->getField('source_id', true);
+            $order = 'input_date desc';
+            $where['id'] = array('in', $source_id);
+            $count = $model->where($where)->count();
+            $Page = new Page($count, 10);
+            $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
+            $Page->rollPage = 10;
+            $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($where)->order($order)->select();
+            $show = $Page->show();
+            $this->assign('page', $show);
+            $this->assign('venue', $list);
+            $this->assign('count', $count);
+            $this->assign('user', D('DbUser')->field('id,nick_name,signature,interest')->where('id=' . deCode(I('session.mark_id')))->find());
+            $this->display();
+        }
     }
 }
