@@ -6259,3 +6259,9 @@ i.radioui-checked {
 .shareto16-tsohu {
     background-position: 0 -80px
 }
+.item-options{
+    font-size:14px;
+}
+.item-info{
+    margin-left:250px;
+}

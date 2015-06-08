@@ -27,8 +27,33 @@
             <div class="pageFormContent" layoutH="58">
                 <input type="hidden" value="<{$vo.id}>" name="id">
                 <dl>
-                    <dt>协会：</dt>
+                    <dt>协会名称：</dt>
                     <dd><input type="text" class="required" value="<{$vo.name}>" name="name"></dd>
+                </dl>
+                <dl>
+                    <dt>批准时间：</dt>
+                    <dd><input type="text" name="approval_time" class="date required" value="<{$vo.approval_time}>"/>
+                        <a class="inputDateButton"   href="javascript:;">选择</a></dd>
+                </dl>
+                <dl>
+                    <dt>会员人数：</dt>
+                    <dd><input type="text" class="required" value="<{$vo.member_count}>" name="member_count"></dd>
+                </dl>
+                <dl>
+                    <dt>活动人数：</dt>
+                    <dd><input type="text" class="required" value="<{$vo.activity_count}>" name="activity_count"></dd>
+                </dl>
+                <dl>
+                    <dt>法定代表：</dt>
+                    <dd><input type="text" class="required" value="<{$vo.legal_person}>" name="legal_person"></dd>
+                </dl>
+                <dl>
+                    <dt>联系电话：</dt>
+                    <dd><input type="text" class="required" value="<{$vo.mobile}>" name="mobile"></dd>
+                </dl>
+                <dl>
+                    <dt>协会地址：</dt>
+                    <dd><input type="text" class="required" value="<{$vo.address}>" name="address"></dd>
                 </dl>
                 <dl>
                     <dt>录入人：</dt>
