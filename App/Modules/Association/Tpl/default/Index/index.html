@@ -119,7 +119,7 @@
                         <{$vo.mobile}>
                         <span class="item-info">联系地址： <{$vo.address}></span>
                     </p>
-                    <p class="item-options"><span>简介：</span>
+                    <p class="item-options"><span>协会简介：</span>
                         <{$vo['description']|RemoveFormat}>
                     </p>
                 </div>
@@ -137,11 +137,11 @@
 <div class="main-block pagging-block">
         <div class="paging-wrap">
             <{$page}>
-            <label class="page-stage">
+            <!--<label class="page-stage">
 
                 到第 <input type="text" name="pageNumText" id="pageNumText"> 页
                 <input type="submit" value="确定" class="btn">
-            </label>
+            </label>-->
 
             <!--end of pageBean?? && (pages.total > -1) -->
             <input type="hidden" value="1" id="pageNum" name="pageNum">

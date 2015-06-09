@@ -231,7 +231,7 @@ class IndexAction extends BaseAction
             $model = D('OpGameNotice');
             $where['game_id'] = array('eq', $id);
             $count = $model->where($where)->count();
-            $Page = new Page($count, 1);
+            $Page = new Page($count, 10);
             $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
             $Page->rollPage = 10;
             $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($where)->order('input_date desc')->select();

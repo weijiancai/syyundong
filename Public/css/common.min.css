@@ -5625,7 +5625,7 @@ input.text-error, textarea.text-error {
     height: 16px;
     margin-right: .3em;
     vertical-align: middle;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/icon-16.png");
+    background-image: url("../images/icon/icon-16.png");
     background-position: 16px 16px;
     background-repeat: no-repeat
 }
@@ -5702,7 +5702,7 @@ input.text-error, textarea.text-error {
     margin-right: .3em;
     line-height: 64px;
     vertical-align: middle;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/icon-64.png");
+    background-image: url("../images/icon/icon-64.png");
     background-position: 64px 64px;
     background-repeat: no-repeat;
     overflow: hidden
@@ -5735,7 +5735,7 @@ input.text-error, textarea.text-error {
     margin-right: .3em;
     line-height: 28px;
     vertical-align: middle;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/icon-28.png");
+    background-image: url("../images/icon/icon-28.png");
     background-position: 28px 28px;
     background-repeat: no-repeat;
     overflow: hidden
@@ -5896,7 +5896,7 @@ i.radioui {
     border: 1px solid #ccc;
     text-align: center;
     vertical-align: middle;
-    background: url('http://static.wisdom-china.cn/iyuesai/images/icons/radio-bg.png') right -50px no-repeat;
+    background: url('../images/icon/radio-bg.png') right -50px no-repeat;
     font-style: normal
 }
 
@@ -5922,7 +5922,7 @@ i.radioui-checked {
 .iconTemp {
     display: inline-block;
     zoom: 1;
-    background: url('http://static.wisdom-china.cn/iyuesai/images/icons/icon_temp.png') no-repeat
+    background: url('../images/icon/icon_temp.png') no-repeat
 }
 
 .datadropdown, .datadropdown .datadropdown-head {
@@ -6013,7 +6013,7 @@ i.radioui-checked {
     margin-right: .3em;
     line-height: 48px;
     vertical-align: middle;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/plugins/dialog/default/icons.png");
+    background-image: url("../images/icon/icons.png");
     background-position: 0 0;
     background-repeat: no-repeat
 }
@@ -6132,7 +6132,7 @@ i.radioui-checked {
     height: 44px;
     margin: 0;
     vertical-align: middle;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/icon-44.png");
+    background-image: url("../images/icon/icon-44.png");
     background-position: 44px 44px;
     background-repeat: no-repeat
 }
@@ -6175,7 +6175,7 @@ i.radioui-checked {
     height: 40px;
     margin: 0;
     vertical-align: middle;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/radio-tick.png") top right;
+    background-image: url("../images/icon/radio-tick.png") top right;
     background-repeat: no-repeat
 }
 
@@ -6185,7 +6185,7 @@ i.radioui-checked {
     height: 40px;
     margin: 0;
     vertical-align: middle;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/radio-plus.png") top right;
+    background-image: url("../images/icon/radio-plus.png") top right;
     background-repeat: no-repeat
 }
 
@@ -6195,7 +6195,7 @@ i.radioui-checked {
     height: 24px;
     margin: 0;
     vertical-align: middle;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/icon-share.png");
+    background-image: url("../images/icon/icon-share.png");
     background-position: 24px 24px;
     background-repeat: no-repeat
 }
@@ -6231,7 +6231,7 @@ i.radioui-checked {
     margin: 0;
     margin-right: 4px;
     vertical-align: middle;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/icon-share16.png");
+    background-image: url("../images/icon/icon-share16.png");
     background-position: 16px 16px;
     background-repeat: no-repeat
 }

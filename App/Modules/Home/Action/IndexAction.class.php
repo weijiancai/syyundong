@@ -135,7 +135,7 @@ class IndexAction extends BaseAction
      * @时间:20150418
      */
     public function NewRecommendVenue(){
-        $new_venue = D('VRecommendVenues')->limit(6)->order('input_date desc')->select();
+        $new_venue = D('VRecommendVenues')->limit(8)->order('input_date desc')->select();
         $this->assign('new_venue',$new_venue);
     }
 

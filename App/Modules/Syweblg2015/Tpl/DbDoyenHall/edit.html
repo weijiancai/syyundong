@@ -31,6 +31,10 @@
                     <dd><input type="text" class="required" value="<{$vo.name}>" name="name"></dd>
                 </dl>
                 <dl>
+                    <dt>单位：</dt>
+                    <dd><input type="text" class="required" value="<{$vo.unit}>" name="unit"></dd>
+                </dl>
+                <dl>
                     <dt>录入人：</dt>
                     <dd><input name="" readonly class="required" type="text"
                                value="<{$_SESSION[C('USER_AUTH_KEY')]|getUserName}>">
