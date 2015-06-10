@@ -14,7 +14,7 @@ class IndexAction extends BaseAction
         $this->assign('hot_activity', $this->getHotActivity());
         $this->assign('doyen_user', $this->getDoyenUser());
         $this->assign('game_sport',$this->getGameSport());
-        $this->doyen();
+        $this->assign('new_game', $this->NewGameNews());
         $this->association();
         $this->friend_recommend();
         $this->BannerImage();
@@ -86,7 +86,7 @@ class IndexAction extends BaseAction
     }
 
     /*
-    * @功能：赛友达人堂
+    * @功能：运动赛事分类
     * @时间：20150501
     */
     Public function getGameSport()
@@ -115,7 +115,7 @@ class IndexAction extends BaseAction
         $this->assign('banner',$banner);
     }
     /*
-     * @功能：达人堂
+     * @功能：名人堂
      * @时间:20150418
      */
     public function doyen(){
@@ -127,7 +127,7 @@ class IndexAction extends BaseAction
      * @时间:20150418
      */
     public function association(){
-        $association = M('VSportAssociation')->order('input_date desc')->limit(2)->select();
+        $association = M('VSportAssociation')->order('input_date desc')->limit(3)->select();
         $this->assign('association',$association);
     }
     /*
@@ -138,5 +138,12 @@ class IndexAction extends BaseAction
         $new_venue = D('VRecommendVenues')->limit(8)->order('input_date desc')->select();
         $this->assign('new_venue',$new_venue);
     }
-
+    /*
+    * @功能：最新赛事新闻
+    * @时间：20150501
+    */
+    Public function NewGameNews()
+    {
+        return D('OpGameNews')->order('input_date desc')->limit(10)->select();
+    }
 }

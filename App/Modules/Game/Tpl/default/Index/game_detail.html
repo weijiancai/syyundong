@@ -80,35 +80,35 @@
                 <div class="main-block clearfix tab" style="display: none;">
                     <div class="article-block none-indent">
                         <h3 class="article-title">赛事介绍</h3>
-                        <p><{$detail.content}></p>
+                        <{$detail.content}>
                     </div>
                 </div>
 
                 <div class="main-block clearfix tab" style="display: none;">
                     <div class="article-block none-indent">
                         <h3 class="article-title">比赛路线</h3>
-                        <p><{$detail.aout_route}></p>
+                        <{$detail.aout_route}>
                     </div>
                 </div>
 
                 <div class="main-block clearfix tab" style="display: none;">
                     <div class="article-block none-indent">
                         <h3 class="article-title">关于费用</h3>
-                        <p><{$detail.about_cost}></p>
+                        <{$detail.about_cost}>
                     </div>
                 </div>
 
                 <div class="main-block clearfix tab" style="display: none;">
                     <div class="article-block none-indent">
                         <h3 class="article-title">行程安排</h3>
-                        <p><{$detail.about_trip}></p>
+                       <{$detail.about_trip}>
                     </div>
                 </div>
 
                 <div class="main-block clearfix tab" style="display: none;">
                     <div class="article-block none-indent">
                         <h3 class="article-title">入住酒店</h3>
-                        <p><{$detail.about_hotal}></p>
+                        <{$detail.about_hotal}>
                     </div>
                 </div>
 
@@ -236,7 +236,7 @@
             <div class="span6">
                 <div class="side-block">
                     <h4 class="slider-title">公告</h4>
-                    <a class="public-reload-link" href="/game/info/411/notice">更多公告</a>
+                    <a class="public-reload-link" href="/Game/<{$detail.id}>/notice">更多公告</a>
                     <div class="side-bull">
                         <if condition="$notice neq null">
                             <ul class="side-event-list">
@@ -255,8 +255,8 @@
 
                 <div class="side-block">
                     <h4 class="slider-title">比赛成绩快速查询</h4>
-                    <a href="../game/score/416" class="public-reload-link">高级查询</a>
-                    <form action="/game/score/416" method="get">
+                    <a href="/Game/score/<{$detail.id}>" class="public-reload-link">高级查询</a>
+                    <form action="" method="get">
                         <p class="side-search-wrap"> <input type="text" name="playerId" class="input-xlarge input-side-check" placeholder="输入选手报名ID" />
                             <submit class="btn btn-warning" onclick="this.parentNode.parentNode.submit()">
                                 查询
@@ -265,7 +265,7 @@
                 </div>
                 <div class="side-block">
                     <h4 class="slider-title">赛事新闻</h4>
-                    <a href="../game/info/416/news" class="public-reload-link">更多新闻</a>
+                    <a href="/Game/<{$detail.id}>/news" class="public-reload-link">更多新闻</a>
                     <if condition="$news neq null">
                         <ul class="side-event-list">
                             <volist name="news" id="vo">

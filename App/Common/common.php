@@ -494,15 +494,14 @@ function getUserImage($id)
  */
 function getUsersImage($id)
 {
-    if(isLogin()){
-        $user_head = D('DbUser')->where('id=' . $id)->getField('user_head');
-        $local_url = D('DbImages')->where('id=' . $user_head)->getField('size2_url');
-        if ($local_url) {
-            return $local_url;
-        } else {
-            return '/Public/images/default/web_pic.jpg';
-        }
+    $user_head = D('DbUser')->where('id=' . $id)->getField('user_head');
+    $local_url = D('DbImages')->where('id=' . $user_head)->getField('size2_url');
+    if ($local_url) {
+        return $local_url;
+    } else {
+        return '/Public/images/default/web_pic.jpg';
     }
+
 }
 
 /*
@@ -702,29 +701,31 @@ function  getRecommendName($id, $type)
         return D('DbVenue')->where('id=' . $id)->getField('name');
     }
 }
+
 /*
  * @功能：评论来源
  * @时间: 20150607
  */
-function getCommentName($source_id,$source_type)
+function getCommentName($source_id, $source_type)
 {
     switch ($source_type) {
         //活动
         case 2 :
-            $result =  D('DbActivity')->where('id=' . $source_id)->getField('name');
+            $result = D('DbActivity')->where('id=' . $source_id)->getField('name');
             break;
         //场馆
         case 3 :
-            $result =  D('DbVenue')->where('id=' . $source_id)->getField('name');
+            $result = D('DbVenue')->where('id=' . $source_id)->getField('name');
             break;
         //话题
         case 4 :
-            $game_id =  D('OpGameTopic')->where('id=' . $source_id)->getField('game_id');
-            $result = D('DbGame')->where('id='.$game_id)->getField('name');
+            $game_id = D('OpGameTopic')->where('id=' . $source_id)->getField('game_id');
+            $result = D('DbGame')->where('id=' . $game_id)->getField('name');
             break;
     }
     return $result;
 }
+
 /*
 * 功能：判断是否登录
 * 时间：20150407
@@ -734,10 +735,11 @@ function isLogin()
     $mark = I('session.mark_id');
     if ($mark) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
+
 /*
  * @功能：数组转为字符串
  * @时间:20150419

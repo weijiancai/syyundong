@@ -838,7 +838,17 @@
         </div>
 
         </div>
-        <div class="span4 smart-info">
+        <div class="span4 events-rankings">
+            <h4 class="slider-title">
+                <img src="/Public/images/icon/index-icon1.png"> <span>最新新闻</span>
+            </h4>
+            <ul data-selector="eventsRankings">
+                <volist name="new_game" id="vo" key="k">
+                    <li><i class="top<{$k}>"><{$k}></i><a href="/Game/<{$vo.game_id}>/news/<{$vo.id}>" target="_blank"><{$vo.title}></a></li>
+                </volist>
+            </ul>
+        </div>
+        <!--<div class="span4 smart-info">
             <h4 class="slider-title">
                 <span>名人堂</span>
                 <a target="_blank" href="/Doyenhall"><span style="font-size: 12px;float:right">更多>></span></a>
@@ -856,7 +866,7 @@
                     </dl>
                 </volist>
             </div>
-        </div>
+        </div>-->
     </div>
 </div>
 
