@@ -163,9 +163,13 @@ class DbGameAction extends CommonAction
     */
     public function detail()
     {
-        $id = $_GET['id'];
-        $list = D('DbGame')->where('id=' . $id)->find();
-        $this->assign('vo', $list);
+        $model = New Model();
+        $list = $model->query('select game_id,field_id,sort_num,field_value,
+                      (select name from db_game where id = game_id) game_name,
+                      (select name from mt_field_define where id = field_id) field_name
+                       from op_game_field where game_id='.$_GET['id']);
+        $this->assign('list', $list);
+        $this->assign('game_id',$_GET['id']);
         $this->display();
     }
 
@@ -176,20 +180,46 @@ class DbGameAction extends CommonAction
     public function other_add()
     {
         //字段名称
-        M('MtFieldDefine')->where('')
+        $this->assign('field',M('MtFieldDefine')->field('id,name,code')->where("category='game'")->select());
+        //赛事名称
+        $list = D('DbGame')->field('id,name')->where('id=' . $_GET['id'])->find();
+        //排序
+        $this->assign('max_sort',M('OpGameField')->where('game_id='.$_GET['id'])->max('sort_num')+1);
+        $this->assign('vo', $list);
         $this->display();
     }
+    /*
+    * @功能：赛事其他详细信息新增方法
+    * @时间：20150612
+    */
+    public function other_insert()
+    {
+        $model = D('OpGameField');
+        $name = "detail";
+        if (false === $model->create()) {
+            $this->error($model->getError());
+        }
+        $list = $model->add();
+        if ($list !== false) {
+            echo $this->ajax('1', "添加成功", $name, "", "closeCurrent");
+        } else {
+            echo $this->ajax('0', "添加失败", $name, "", "closeCurrent");
+        }
+        $this->display();
+    }
+
     /*
     * @功能：赛事其他详细信息编辑页面
     * @时间：20150422
     */
     public function other_edit()
     {
-        $id = $_GET['id'];
-        $field = $_GET['field'];
-        $list = D('DbGame')->where('id=' . $id)->find();
-        $this->assign('vo', $list);
-        $this->assign('field', $field);
+        $model = New Model();
+        $vo = $model->query('select game_id,field_id,sort_num,field_value,
+                      (select name from db_game where id = game_id) game_name,
+                      (select name from mt_field_define where id = field_id) field_name
+                       from op_game_field where game_id='.$_GET['game_id'].' and field_id='.$_GET['field_id']);
+        $this->assign('other', $vo[0]);
         $this->display();
     }
 
@@ -200,11 +230,13 @@ class DbGameAction extends CommonAction
     public function other_update()
     {
         $name = "detail";
-        $model = D('DbGame');
+        $date['game_id']=$_POST['game_id'];
+        $date['field_id']=$_POST['field_id'];
+        $model = D('OpGameField');
         if (false === $model->create()) {
             $this->error($model->getError());
         }
-        $list = $model->save();
+        $list = $model->where($date)->save();
         if ($list !== false) {
             echo $this->ajax('1', "更新成功", $name, "", "closeCurrent");
         } else {

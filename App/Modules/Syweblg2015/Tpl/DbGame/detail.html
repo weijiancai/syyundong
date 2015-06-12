@@ -1,11 +1,11 @@
 <form id="pagerForm" action="__URL__" method="post">
-	<input type="hidden" name="pageNum" value="<{$_REQUEST['pageNum']|default=1}>"/>
-	<input type="hidden" name="numPerPage" value="<{$numPerPage}>"/>
+    <input type="hidden" name="pageNum" value="<{$_REQUEST['pageNum']|default=1}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numPerPage}>"/>
     <input type="hidden" name="_order" value="<{$_REQUEST['_order']}>"/>
-	<input type="hidden" name="_sort" value="<{$_REQUEST['_sort']|default='1'}>"/>
+    <input type="hidden" name="_sort" value="<{$_REQUEST['_sort']|default='1'}>"/>
     <input type="hidden" name="listRows" value="<{$_REQUEST['listRows']}>"/>
     <volist name="map" id="m">
-     <input type="hidden" name="<{$key}>" value="<{$_REQUEST[$key]}>"/>
+        <input type="hidden" name="<{$key}>" value="<{$_REQUEST[$key]}>"/>
     </volist>
 </form>
 <script>
@@ -19,85 +19,64 @@
     }
 </script>
 <div class="page">
-	<div class="pageContent">
+    <div class="pageContent">
         <div class="panelBar">
             <ul class="toolBar">
-                <li><a class="add" href="__URL__/other_add" target="dialog" mask="true" width="800" height="600"
+                <li><a class="add" href="__URL__/other_add/id/<{$game_id}>" target="dialog" mask="true" width="1000"
+                       height="600"
                        rel="vadd"><span>新增</span></a></li>
-                <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
-                       width="800" height="600" rel="vedit"><span>修改</span></a></li>
                 <li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
                        class="delete"><span>删除</span></a></li>
             </ul>
         </div>
-		<table class="table" width="100%" layoutH="50">
-			<thead>
-			<tr>
-				<th width="10%" align="center"></th>
-				<th  width="80%" align="center" style="color:red;"><{$vo.name}></th>
-				<th  width="5%" align="center"></th>
-			</tr>
-			</thead>
-			<tbody>
+        <table class="table" width="100%" layoutH="50">
+            <thead>
             <tr>
-                <td style="width:10%;height:25px">参赛声明</td>
-                <td text-align="left"><span style="line-height:200%">
-                        <?php echo RemoveFormat($vo['game_declare']);?></span></td>
-                <td><a href="__URL__/other_edit/field/game_declare/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
+                <th width="10%" align="center"></th>
+                <th width="80%" align="center" style="color:red;"><{$vo.name}></th>
+                <th width="5%" align="center"></th>
             </tr>
-				<tr>
-					<td style="width:10%;height:25px">赛事介绍</td>
-					<td text-align="left"><span style="line-height:200%">
-                        <?php echo RemoveFormat($vo['content']);?></span></td>
-					<td><a href="__URL__/other_edit/field/content/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
-				</tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
                 <tr>
-                    <td height="25px">会员权益</td>
-                    <td><span style="line-height:200%">
-                        <?php echo RemoveFormat($vo['member_right']);?></span></td>
-                    <td><a href="__URL__/other_edit/field/member_right/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
+                    <td style="width:10%;height:25px"><{$vo.field_name}></td>
+                    <td text-align="left"><span style="line-height:200%">
+                        <?php echo RemoveFormat($vo['field_value']);?></span></td>
+                    <td><a href="__URL__/other_edit/game_id/<{$vo.game_id}>/field_id/<{$vo.field_id}>" target="dialog" mask="true"
+                           width="1000" height="600" rel="other_edit">编辑</a></td>
                 </tr>
-                <tr >
-                    <td height="25px">比赛路线</td>
-                    <td><span style="line-height:200%">
-                        <?php echo RemoveFormat($vo['aout_route']);?></span></td>
-                    <td><a href="__URL__/other_edit/field/aout_route/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
-                </tr>
-                <tr>
-                    <td height="25px">关于费用</td>
-                    <td><span style="line-height:200%">
-                        <?php echo RemoveFormat($vo['about_cost']);?></span></td>
-                    <td><a href="__URL__/other_edit/field/about_cost/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
-                </tr>
-                <tr>
-                    <td height="25px">行程安排</td>
-                    <td><span style="line-height:200%">
-                        <?php echo RemoveFormat($vo['about_trip']);?></span></td>
-                    <td><a href="__URL__/other_edit/field/about_trip/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
-                </tr>
-                <tr>
-                    <td height="25px">入住酒店</td>
-                    <td><?php echo RemoveFormat($vo['about_hotal']);?></td>
-                    <td><a href="__URL__/other_edit/field/about_hotal/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
-                </tr>
-			
-			</tbody>
-		</table>
-		<div class="panelBar">
-			<div class="pages">
-				<span>显示</span>
-			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
-				<option value="10" <eq name="numPerPage" value="10">selected=selected</eq>>10</option>
-				<option value="15" <eq name="numPerPage" value="15">selected=selected</eq>>15</option>
-				<option value="20" <eq name="numPerPage" value="20">selected=selected</eq>>20</option>
-				<option value="50" <eq name="numPerPage" value="50">selected=selected</eq>>50</option>
-				<option value="100" <eq name="numPerPage" value="100">selected=selected</eq>>100</option>
-				<option value="200" <eq name="numPerPage" value="200">selected=selected</eq>>200</option>
-			</select>
-				<span>共<{$totalCount}>条</span>
+            </volist>
+            </tbody>
+        </table>
+        <div class="panelBar">
+            <div class="pages">
+                <span>显示</span>
+                <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                    <option value="10"
+                    <eq name="numPerPage" value="10">selected=selected</eq>
+                    >10</option>
+                    <option value="15"
+                    <eq name="numPerPage" value="15">selected=selected</eq>
+                    >15</option>
+                    <option value="20"
+                    <eq name="numPerPage" value="20">selected=selected</eq>
+                    >20</option>
+                    <option value="50"
+                    <eq name="numPerPage" value="50">selected=selected</eq>
+                    >50</option>
+                    <option value="100"
+                    <eq name="numPerPage" value="100">selected=selected</eq>
+                    >100</option>
+                    <option value="200"
+                    <eq name="numPerPage" value="200">selected=selected</eq>
+                    >200</option>
+                </select>
+                <span>共<{$totalCount}>条</span>
 
-			</div>
-			<div class="pagination" targetType="navTab" totalCount="<{$totalCount}>" numPerPage="<{$numPerPage}>" pageNumShown="10" currentPage="<{$currentPage}>"></div>
-		</div>
-	</div>
+            </div>
+            <div class="pagination" targetType="navTab" totalCount="<{$totalCount}>" numPerPage="<{$numPerPage}>"
+                 pageNumShown="10" currentPage="<{$currentPage}>"></div>
+        </div>
+    </div>
 </div>

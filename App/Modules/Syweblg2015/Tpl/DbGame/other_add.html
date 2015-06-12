@@ -21,9 +21,10 @@
 <script src="__PUBLIC__/ueditor/ueditor.all.js" type="text/javascript"></script>
 <div class="page">
     <div class="pageContent">
-        <form method="post" action="__URL__/other_update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+        <form method="post" action="__URL__/other_insert/navTabId/__MODULE__" class="pageForm required-validate"
+              onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
-                <input type="hidden" value="<{$vo.id}>" name="id">
+                <input type="hidden" value="<{$vo.id}>" name="game_id">
                 <dl>
                     <dt>名称：</dt>
                     <dd><input name="name" class="required" type="text" value="<{$vo.name}>" readonly/>
@@ -31,21 +32,27 @@
                 </dl>
                 <dl>
                     <dt>字段：</dt>
-                    <dd><input name="name" class="required" type="text" value="<{$vo.name}>"/>
+                    <dd><select name="field_id" required>
+                        <option value="">请选择</option>
+                        <volist name="field" id="fo">
+                            <option value="<{$fo.id}>"><{$fo.name}></option>
+                        </volist>
+                    </select>
                     <dd>
                 </dl>
                 <dl>
-                    <dd><b style="color:Red"><{$field|getGameField}></b></dd>
+                    <dt>排序：</dt>
+                    <dd><input name="sort_num" class="required" type="text" value="<{$max_sort}>"/>
+                    <dd>
                 </dl>
                 <dl class="nowrap">
                     <dt>内容:</dt>
-                    <dd><textarea name="<{$field}>" id="myEditor"><{$vo[$field]}></textarea>
+                    <dd><textarea name="field_value" id="myEditor"></textarea>
                         <script type="text/javascript">
                             UE.getEditor('myEditor');
                         </script>
                     </dd>
                 </dl>
-                <input type="hidden" value="game" id="path">
             </div>
             <div class="formBar">
                 <ul>

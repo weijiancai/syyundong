@@ -23,25 +23,32 @@
     <div class="pageContent">
         <form method="post" action="__URL__/other_update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
-                <input type="hidden" value="<{$vo.id}>" name="id">
-                <dl>
-                    <dt>名称：</dt>
-                    <dd><input name="name" class="required" type="text" value="<{$vo.name}>" readonly/>
-                    <dd>
-                </dl>
-                <dl>
-                    <dd><b style="color:Red"><{$field|getGameField}></b></dd>
-                </dl>
-                <dl class="nowrap">
-                    <dt>内容:</dt>
-                    <dd><textarea name="<{$field}>" id="myEditor"><{$vo[$field]}></textarea>
-                        <script type="text/javascript">
-                            UE.getEditor('myEditor');
-                        </script>
-                    </dd>
-                </dl>
-                <input type="hidden" value="game" id="path">
-            </div>
+                    <input type="hidden" value="<{$other.game_id}>" name="game_id"/>
+                    <input type="hidden" value="<{$other.field_id}>" name="field_id"/>
+                    <dl>
+                        <dt>名称：</dt>
+                        <dd><input name="" class="required" type="text" value="<{$other.game_name}>" readonly/>
+                        <dd>
+                    </dl>
+                    <dl>
+                        <dt>字段：</dt>
+                        <dd><input name="" class="required" type="text" value="<{$other.field_name}>" readonly/>
+                        <dd>
+                    </dl>
+                    <dl>
+                        <dt>排序：</dt>
+                        <dd><input name="sort_num" class="required" type="text" value="<{$other.sort_num}>"/>
+                        <dd>
+                    </dl>
+                    <dl class="nowrap">
+                        <dt>内容:</dt>
+                        <dd><textarea name="field_value" id="myEditor"><{$other.field_value}></textarea>
+                            <script type="text/javascript">
+                                UE.getEditor('myEditor');
+                            </script>
+                        </dd>
+                    </dl>
+                </div>
             <div class="formBar">
                 <ul>
                     <li>
