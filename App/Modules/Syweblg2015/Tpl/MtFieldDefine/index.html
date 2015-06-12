@@ -8,16 +8,6 @@
         <input type="hidden" name="<{$key}>" value="<{$_REQUEST[$key]}>"/>
     </volist>
 </form>
-<script>
-    $(function () {
-        $("img").attr({ width: "15px", height: "15px", onclick: 'show(this.src)'});
-        $("img").attr('style', '');
-        $("embed").attr({ width: "15px", height: "15px"});
-    });
-    function show($temp) {
-        $.pdialog.open("__URL__/show?img=" + $temp, "show", "预览", {height: "500", width: "500", mask: "true"})
-    }
-</script>
 
 <div class="page">
     <div class="pageHeader">
@@ -25,7 +15,7 @@
             <div class="searchBar">
                 <table>
                     <tr>
-                        <td>协会：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium" size="8">&nbsp;&nbsp;
+                        <td>字段：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium" size="8">&nbsp;&nbsp;
                         <td>
                             <button type="submit">查询</button>
                         </td>
@@ -38,9 +28,9 @@
     <div class="pageContent">
         <div class="panelBar">
             <ul class="toolBar">
-                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="1100" height="720" rel="vadd"><span>新增</span></a></li>
+                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="400" height="200" rel="vadd"><span>新增</span></a></li>
                 <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
-                       width="1100" height="600" rel="vedit"><span>修改</span></a></li>
+                       width="400" height="200" rel="vedit"><span>修改</span></a></li>
                 <li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
                        class="delete"><span>删除</span></a></li>
             </ul>
@@ -49,15 +39,9 @@
             <thead>
             <tr>
                 <th width="2%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
-                <th width="10%" align="center">协会名称</th>
-                <th width="5%" align="center">批准时间</th>
-                <th width="6%" align="center">会员人数</th>
-                <th width="6%" align="center">活动人数</th>
-                <th width="6%" align="center">法定代表</th>
-                <th width="6%" align="center">联系电话</th>
-                <th width="8%" align="center">地址</th>
-                <th width="6%" align="center">录入人</th>
-                <th width="8%" align="center">录入时间</th>
+                <th width="10%" align="center">字段名称</th>
+                <th width="5%" align="center">英文名称</th>
+                <th width="6%" align="center">备注</th>
                 <th width="4%" align="center">操作</th>
             </tr>
             </thead>
@@ -67,11 +51,9 @@
                 <tr target="sid_node" rel="<{$vo['id']}>">
                     <td height="25px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
                     <td><{$vo['name']}></td>
-                    <td><img src="<{$vo['image']|getImageUrl}>" width="20px" height="20px"></td>
-                    <td><?php echo RemoveFormat(mb_substr($vo['description'],0,50,'utf-8'))?></td>
-                    <td><{$vo['input_user']|getUserName}></td>
-                    <td><{$vo['input_date']}></td>
-                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>
+                    <td><{$vo.code}></td>
+                    <td><{$vo.memo}></td>
+                    <td><a href="__URL__/edit/id/<{$vo.id}>" target="dialog" mask="true" width="400" height="200" rel="other_edit">编辑</a></td>
                 </tr>
             </volist>
 

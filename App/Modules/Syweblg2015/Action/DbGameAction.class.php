@@ -170,6 +170,16 @@ class DbGameAction extends CommonAction
     }
 
     /*
+    * @功能：赛事其他详细信息新增页面
+    * @时间：20150422
+    */
+    public function other_add()
+    {
+        //字段名称
+        M('MtFieldDefine')->where('')
+        $this->display();
+    }
+    /*
     * @功能：赛事其他详细信息编辑页面
     * @时间：20150422
     */

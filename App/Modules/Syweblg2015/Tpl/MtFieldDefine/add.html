@@ -17,30 +17,26 @@
         }
     }
 </script>
-<script src="__PUBLIC__/ueditor/ueditor.config.js" type="text/javascript"></script>
-<script src="__PUBLIC__/ueditor/ueditor.all.js" type="text/javascript"></script>
 <div class="page">
     <div class="pageContent">
-        <form method="post" action="__URL__/other_update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+        <form method="post" action="__URL__/insert/navTabId/__MODULE__" class="pageForm required-validate"
+              onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
-                <input type="hidden" value="<{$vo.id}>" name="id">
+
                 <dl>
-                    <dt>名称：</dt>
-                    <dd><input name="name" class="required" type="text" value="<{$vo.name}>" readonly/>
-                    <dd>
+                    <dt>字段名称：</dt>
+                    <dd><input type="text" class="required" value="" name="name"></dd>
                 </dl>
                 <dl>
-                    <dd><b style="color:Red"><{$field|getGameField}></b></dd>
+                    <dt>英文名称：</dt>
+                    <dd><input type="text" class="required" value="" name="code"></dd>
                 </dl>
-                <dl class="nowrap">
-                    <dt>内容:</dt>
-                    <dd><textarea name="<{$field}>" id="myEditor"><{$vo[$field]}></textarea>
-                        <script type="text/javascript">
-                            UE.getEditor('myEditor');
-                        </script>
-                    </dd>
+                <dl>
+                    <dt>备注：</dt>
+                    <dd><input type="text" class="" value="" name="memo"></dd>
                 </dl>
-                <input type="hidden" value="game" id="path">
+                <input type="hidden" value="1" name="field_type">
+                <input type="hidden" value="game" name="category">
             </div>
             <div class="formBar">
                 <ul>

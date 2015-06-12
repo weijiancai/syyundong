@@ -61,9 +61,9 @@
                 <th width="4%" align="center">报名费</th>
                 <th width="4%" align="center">联系方式</th>
                 <th width="5%" align="center">申请人</th>
-                <th width="8%" align="center">申请电话</th>
-                <th width="4%" align="center">详情</th>
+                <th width="6%" align="center">申请电话</th>
                 <th width="3%" align="center">状态</th>
+                <th width="6%" align="center">详情</th>
                 <th width="5%" align="center">操作</th>
             </tr>
             </thead>
@@ -85,11 +85,11 @@
                     <td><{$vo['phone']}></td>
                     <td><{$vo['apply_name']}></td>
                     <td><{$vo['apply_phone']}></td>
-                    <td><a href="__URL__/detail/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600"
-                           rel="detail">详情</a><span style="color:red">|</span>
-                        <a href="__URL__/group/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600"
-                           rel="group">分组</a></td>
                     <td><{$vo['is_verify']|getStatus}></td>
+                    <td><a href="__URL__/detail/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600"
+                           rel="detail">字段</a><span style="color:red">|</span>
+                        <a href="__URL__/group/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600"
+                           rel="group">分组</a>
                     <td><{$vo['is_verify']|showStatus=$vo['id'],'navTabAjaxDone','审核','禁用'}><span
                             style="color:red">|</span>
                         <?php  if(isGameRecommend($vo['id'],'game')){ ?>

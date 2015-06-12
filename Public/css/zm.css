@@ -1451,12 +1451,12 @@ padding: 0;
   position: relative;
 }
 #match-page .stemp-recommend{
-  background: url("http://static.wisdom-china.cn/iyuesai/images/pages/recommend-stemp.png") 328px bottom no-repeat;
+  background: url("../images/icon/recommend-stemp.png") 328px bottom no-repeat;
 }
 #match-page .match-page-summary .quote{
   width: 26px;
   height: 26px;
-  background: url("http://static.wisdom-china.cn/iyuesai/images/icons/match-icon.png") no-repeat;
+  background: url("../images/icon/match-icon.png") no-repeat;
   position: absolute;
 }
 #match-page .match-page-summary .quote-left{
