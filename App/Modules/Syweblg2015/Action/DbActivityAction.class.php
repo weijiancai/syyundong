@@ -168,7 +168,7 @@ class DbActivityAction extends CommonAction
         $name = "DbActivity";
         $model = D('DbActivity');
         $date['id'] = array('eq', $_GET['id']);
-        $date['is_verify'] = 'T';
+        $date['is_verify'] = 'F';
         $list = $model->save($date);
         if (false !== $list) {
             echo $this->ajax('1', "赛事禁止成功", $name, "", "");
@@ -186,12 +186,29 @@ class DbActivityAction extends CommonAction
         $name = "DbActivity";
         $model = D('DbActivity');
         $date['id'] = array('eq', $_GET['id']);
-        $date['is_verify'] = 'F';
+        $date['is_verify'] = 'T';
         $list = $model->save($date);
         if (false !== $list) {
             echo $this->ajax('1', "赛事恢复成功", $name, "", "");
         } else {
             echo $this->ajax('0', "赛事恢复失败", $name, "", "");
+        }
+    }
+    /*
+* @功能：批量审核
+* @时间：20150612
+*/
+    public function statusAll()
+    {
+        $model = M('DbActivity');
+        $date['id'] = array('in', $_POST['ids']);
+        $date['is_verify']= 'T';
+        $date['verify_date'] = date("Y-m-d H:i:s");
+        $list = $model->save($date);
+        if (false !== $list) {
+            echo $this->ajax('1', "审核成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "审核失败", $name, "", "");
         }
     }
 }

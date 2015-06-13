@@ -205,7 +205,6 @@ class DbGameAction extends CommonAction
         } else {
             echo $this->ajax('0', "添加失败", $name, "", "closeCurrent");
         }
-        $this->display();
     }
 
     /*
@@ -243,7 +242,39 @@ class DbGameAction extends CommonAction
             echo $this->ajax('0', "更新失败", $name, "", "closeCurrent");
         }
     }
-
+    /*
+     * @功能：字段定义删除
+     * @时间：20150422
+     */
+    public function other_delete()
+    {
+        $name='detail';
+        $model = D('OpGameField');
+        $date['game_id']=$_GET['game_id'];
+        $date['field_id']=$_GET['field_id'];
+        $result = $model->where($date)->delete();
+        if (false !== $result) {
+            echo $this->ajax('1', "删除成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "删除失败", $name, "", "");
+        }
+    }
+    /*
+     * @功能：字段定义删除
+     * @时间：20150422
+     */
+    public function Field_delAll()
+    {
+        $model = D('MtFieldDefine');
+        $pk = $model->getPk();
+        $data[$pk] = array('in', $_POST['ids']);
+        $result = $model->where($data)->delete();
+        if (false !== $result) {
+            echo $this->ajax('1', "删除成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "删除失败", $name, "", "");
+        }
+    }
     /*
      * @功能：禁用赛事
      * @时间：20150422
@@ -253,7 +284,7 @@ class DbGameAction extends CommonAction
         $name = "DbGame";
         $model = D('DbGame');
         $date['id'] = array('eq', $_GET['id']);
-        $date['is_verify'] = 'T';
+        $date['is_verify'] = 'F';
         $date['verify_date'] = date("Y-m-d H:i:s");
         $list = $model->save($date);
         if (false !== $list) {
@@ -262,6 +293,7 @@ class DbGameAction extends CommonAction
             echo $this->ajax('0', "赛事禁止失败", $name, "", "");
         }
     }
+
 
     /*
      * @功能：禁用恢复
@@ -272,7 +304,7 @@ class DbGameAction extends CommonAction
         $name = "DbGame";
         $model = D('DbGame');
         $date['id'] = array('eq', $_GET['id']);
-        $date['is_verify'] = 'F';
+        $date['is_verify'] = 'T';
         $date['verify_date'] = date("Y-m-d H:i:s");
         $list = $model->save($date);
         if (false !== $list) {
@@ -281,7 +313,23 @@ class DbGameAction extends CommonAction
             echo $this->ajax('0', "赛事恢复失败", $name, "", "");
         }
     }
-
+    /*
+     * @功能：批量审核
+     * @时间：20150612
+     */
+    public function statusAll()
+    {
+        $model = M('DbGame');
+        $date['id'] = array('in', $_POST['ids']);
+        $date['is_verify']= 'T';
+        $date['verify_date'] = date("Y-m-d H:i:s");
+        $list = $model->save($date);
+        if (false !== $list) {
+            echo $this->ajax('1', "审核成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "审核失败", $name, "", "");
+        }
+    }
     /*
      * @功能：赛事分组
      * @时间：20150422

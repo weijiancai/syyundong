@@ -5,31 +5,31 @@
             <div class="span16 public-page-top">
                 <h2 class="public-title"><span class="text-warning">[<{$detail.sport_id|getSportName}>]</span><{$detail.name}></h2>
                 <div class="public-desc clearfix">
-                    <p class="pull-left"> <span class="info-text enrolling"><{$detail.id|getState}></span>
+                    <p class="pull-left"> <span class="info-text enrolling"><{$detail.status|getState}></span>
                         <span class="info-text"><i class="icon16 icon16-person"></i><{$detail.id|getFocus=1}>人感兴趣</span>
                         <em class="info-slider"></em>
 
                     </p>
                 </div>
-            </div>        <div class="span16">
+            </div>
+            <div class="span16">
             <div class="public-subnav clearfix">
-                <ul>
+                <ul id="detailTabs">
                     <li><a href="__APP__/Game/<{$detail.id}>">赛事首页</a></li>
-                    <li><a href="__APP__/Game/<{$detail.id}>/content">赛事介绍</a></li>
-                    <li><a href="__APP__/Game/<{$detail.id}>/route">比赛路线</a></li>
-                    <li><a href="__APP__/Game/<{$detail.id}>/cost">关于费用</a></li>
-                    <li><a href="__APP__/Game/<{$detail.id}>/trip" >行程安排</a></li>
-                    <li><a href="__APP__/Game/<{$detail.id}>/hotel">入住酒店</a></li>
+                    <volist name="field_list" id='fo'>
+                        <li><a><{$fo.field_name}></a></li>
+                    </volist>
                     <li><a href="__APP__/Game/<{$detail.id}>/notice">赛事公告</a></li>
                     <li><a href="__APP__/Game/<{$detail.id}>/news">赛事新闻</a></li>
                     <li><a href="__APP__/Game/score/<{$detail.id}>" <if condition="$info eq score"> class="current"</if>">成绩查询</a></li>
-                    <li><a href="javascript:void(0);">赛友圈</a></li>
+                    <li><a href="__APP__/Friends/tag/<{$detail.id}>"">赛友圈</a></li>
                 </ul>
             </div>
         </div>
-            <div class="span16">
-                <div class="main-block clearfix">
-                    <div class="article-block">
+            <div class="span16" id="tabs">
+
+                <div class="main-block clearfix tab">
+                    <div class="article-block none-indent">
                         <h4 class="main-title">比赛成绩查询</h4>
                         <div class="query-block">
                             <form method="GET" action="/Game/score/<{$detail.id}>" id="scoreForm">
@@ -74,6 +74,15 @@
                         </div>
                     </div>
                 </div>
+
+                <volist name="field_list" id='vo'>
+                    <div class="main-block clearfix tab" style="display: none;">
+                        <div class="article-block none-indent">
+                            <h3 class="article-title"><{$vo.field_name}></h3>
+                            <{$vo.field_value}>
+                        </div>
+                    </div>
+                </volist>
             </div>
         </div>
     </div>

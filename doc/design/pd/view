@@ -20,3 +20,12 @@ db_doyen_hall:description:text
 db_activity:is_need_verify  改成：is_verify
 
 v_game_activity:power
+
+
+day--0613：
+
+view：v_game_activity: is_verify 查询 T
+
+      v_choice_game: 查询status
+
+      热门活动视图 is_verify

@@ -57,7 +57,6 @@ class IndexAction extends BaseAction
             $map['region'] = $_GET['region'];
         }
         $map['type'] = array('eq', 'activity');
-        $map['is_verify'] = array('eq','F');
         $count = $model->where($map)->count();
         $Page = new Page($count, 10);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");

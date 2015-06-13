@@ -25,15 +25,14 @@
                 <div class="public-subnav clearfix">
                     <ul id="detailTabs">
                         <li><a href="__APP__/Game" class="current">赛事首页</a></li>
-                        <li><a href="__APP__/Game/<{$detail.id}>/content">赛事介绍</a></li>
-                        <li><a href="__APP__/Game/<{$detail.id}>/route">比赛路线</a></li>
-                        <li><a href="__APP__/Game/<{$detail.id}>/cost">关于费用</a></li>
-                        <li><a href="__APP__/Game/<{$detail.id}>/trip">行程安排</a></li>
-                        <li><a href="__APP__/Game/<{$detail.id}>/hotel">入住酒店</a></li>
+
+                        <volist name="field_list" id='fo'>
+                            <li><a><{$fo.field_name}></a></li>
+                        </volist>
                         <li><a href="__APP__/Game/<{$detail.id}>/notice">赛事公告</a></li>
                         <li><a href="__APP__/Game/<{$detail.id}>/news">赛事新闻</a></li>
                         <li><a href="__APP__/Game/score/<{$detail.id}>">成绩查询</a></li>
-                        <li><a href="javascript:void(0);">赛友圈</a></li>
+                        <li><a href="__APP__/Friends/tag/<{$detail.id}>">赛友圈</a></li>
                     </ul>
                 </div>
             </div>
@@ -77,61 +76,16 @@
                     </div>
                 </div>
                 <div id="game_declare" style="display: none"><{$detail.game_declare}></div>
-                <div class="main-block clearfix tab" style="display: none;">
-                    <div class="article-block none-indent">
-                        <h3 class="article-title">赛事介绍</h3>
-                        <{$detail.content}>
-                    </div>
-                </div>
 
-                <div class="main-block clearfix tab" style="display: none;">
-                    <div class="article-block none-indent">
-                        <h3 class="article-title">比赛路线</h3>
-                        <{$detail.aout_route}>
+                <volist name="field_list" id='vo'>
+                    <div class="main-block clearfix tab" style="display: none;">
+                        <div class="article-block none-indent">
+                            <h3 class="article-title"><{$vo.field_name}></h3>
+                            <{$vo.field_value}>
+                        </div>
                     </div>
-                </div>
+                </volist>
 
-                <div class="main-block clearfix tab" style="display: none;">
-                    <div class="article-block none-indent">
-                        <h3 class="article-title">关于费用</h3>
-                        <{$detail.about_cost}>
-                    </div>
-                </div>
-
-                <div class="main-block clearfix tab" style="display: none;">
-                    <div class="article-block none-indent">
-                        <h3 class="article-title">行程安排</h3>
-                       <{$detail.about_trip}>
-                    </div>
-                </div>
-
-                <div class="main-block clearfix tab" style="display: none;">
-                    <div class="article-block none-indent">
-                        <h3 class="article-title">入住酒店</h3>
-                        <{$detail.about_hotal}>
-                    </div>
-                </div>
-
-                <div class="main-block clearfix tab" style="display: none;">
-                    <div class="article-block none-indent">
-                        <h3 class="article-title">赛事公告</h3>
-                        <p>要填充的数据</p>
-                    </div>
-                </div>
-
-                <div class="main-block clearfix tab" style="display: none;">
-                    <div class="article-block none-indent">
-                        <h3 class="article-title">赛事新闻</h3>
-                        <p>要填充的数据</p>
-                    </div>
-                </div>
-
-                <div class="main-block clearfix tab" style="display: none;">
-                    <div class="article-block none-indent">
-                        <h3 class="article-title">成绩查询</h3>
-                        <p>要填充的数据</p>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="row" id="detail_bottom">

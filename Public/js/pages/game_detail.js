@@ -9,10 +9,10 @@ $(function () {
     var $tabs = $('#tabs');
     $detailTabs.find('a').each(function (index) {
         $(this).click(function () {
-            if ($(this).text() == '赛友圈') {
+            /*if ($(this).text() == '赛友圈') {
                 alert('跳转到赛友圈！');
                 return;
-            }
+            }*/
             $detailTabs.find('a').removeClass('current');
             $(this).addClass('current');
 
@@ -120,7 +120,7 @@ $(function () {
             return;
         }
         $see_more.text('正在加载数据......');
-        $.post('index/GameImageLoad', {
+        $.post('/Game/index/GameImageLoad', {
             last: last * 10,
             amount: 10,
             game_id: $('#game_id').val()

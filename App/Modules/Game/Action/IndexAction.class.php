@@ -63,7 +63,6 @@ class IndexAction extends BaseAction
             $map['start_date'] = array('like', date("Y-m-d", strtotime("+30 day")) . '%');
         }
         $map['type'] = array('eq', 'game');
-        $map['is_verify'] = array('eq', 'F');
         $count = $model->where($map)->count();
         $Page = new Page($count, 10);
         $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
@@ -151,8 +150,8 @@ class IndexAction extends BaseAction
     public function hotrecommend()
     {
         $model = New Model();
-        $list = $model->query('select v.id,o.sort_num, v.name,v.province,v.image,v.province,v.join_count from v_game_activity v,op_recommend o
-                                where v.id = o.gc_id and o.recommend_type = "game" and v.type="game" order by o.sort_num limit 4');
+        $list = $model->query("select v.id,o.sort_num, v.name,v.province,v.image,v.province,v.join_count from v_game_activity v,op_recommend o
+                                where v.id = o.gc_id and o.recommend_type = 'game' and v.type='game' order by o.sort_num limit 4");
         $this->assign('recommend', $list);
     }
 
@@ -168,14 +167,23 @@ class IndexAction extends BaseAction
         $notice = D('OpGameNotice')->where('game_id=' . $id)->limit(2)->select();
         //赛事新闻
         $news = D('OpGameNews')->where('game_id=' . $id)->limit(2)->select();
+        //赛事字段
+        $model = New Model();
+        $field_list = $model->query('select game_id,field_id,sort_num,field_value,
+                      (select name from db_game where id = game_id) game_name,
+                      (select name from mt_field_define where id = field_id) field_name,
+                      (select code from mt_field_define where id = field_id) field_code
+                       from op_game_field where game_id=' . $_GET['id'] . " order by sort_num asc");
+
         //赛事关注人物
         $user_id = D('OpFocus')->where('source_id=' . $id . ' and source_type=1')->getField('user_id', true);
         $model = new Model();
         $user = $model->query('select u.id id,u.nick_name nick_name,u.mobile mobile,u.name name,u.gender gender,i.local_url image from db_user u LEFT JOIN db_images i  on (u.user_head = i.id) where u.id in(' . ArrayToStr($user_id) . ')');
         $this->assign('user', $user);
+        $this->assign('detail', $detail);
+        $this->assign('field_list', $field_list);
         $this->assign('notice', $notice);
         $this->assign('news', $news);
-        $this->assign('detail', $detail);
         $this->display();
     }
 
@@ -204,29 +212,13 @@ class IndexAction extends BaseAction
         import('ORG.Util.Page');
         $id = $_GET['id'];
         $info = $_GET['info'];
-        switch ($info) {
-            case 'content':
-                $info = 'content';
-                break;
-            case 'route':
-                $info = 'aout_route';
-                break;
-            case 'cost':
-                $info = 'about_cost';
-                break;
-            case 'trip':
-                $info = 'about_trip';
-                break;
-            case 'hotel':
-                $info = 'about_hotal';
-                break;
-        }
-        //赛事信息
-        $detail = D('DbGame')->field('id,sport_id,name')->where('id=' . $id)->find();
-
-        if (($info == 'content') || ($info == 'aout_route') || ($info == 'about_cost') || ($info == 'about_trip') || ($info == 'about_hotal')) {
-            $list = D('DbGame')->where('id=' . $id)->getField($info);
-        }
+        //赛事字段
+        $model = New Model();
+        $field_list = $model->query('select game_id,field_id,sort_num,field_value,
+                      (select name from db_game where id = game_id) game_name,
+                      (select name from mt_field_define where id = field_id) field_name,
+                      (select code from mt_field_define where id = field_id) field_code
+                       from op_game_field where game_id=' . $_GET['id'] . " order by sort_num asc");
         if ($info == 'notice') {
             $model = D('OpGameNotice');
             $where['game_id'] = array('eq', $id);
@@ -243,7 +235,7 @@ class IndexAction extends BaseAction
             $model = D('OpGameNews');
             $where['game_id'] = array('eq', $id);
             $count = $model->where($where)->count();
-            $Page = new Page($count, 1);
+            $Page = new Page($count, 10);
             $Page->setConfig("theme", "%first% %upPage%  %linkPage%  %downPage% %end% 共%totalPage% 页");
             $Page->rollPage = 10;
             $list = $model->limit($Page->firstRow . ',' . $Page->listRows)->where($where)->order('input_date desc')->select();
@@ -252,10 +244,13 @@ class IndexAction extends BaseAction
             $this->assign('count', $count);
         }
 
+        //赛事信息
+        $detail = D('VGameActivity')->where('id=' . $id)->find();
         $this->assign('id', $id);
         $this->assign('info', $info);
         $this->assign('other', $list);
         $this->assign('detail', $detail);
+        $this->assign('field_list', $field_list);
         $this->display();
     }
 
@@ -268,6 +263,13 @@ class IndexAction extends BaseAction
         $id = $_GET['id'];
         //赛事信息
         $detail = D('VGameActivity')->where('id=' . $id)->find();
+        //赛事字段
+        $model = New Model();
+        $field_list = $model->query('select game_id,field_id,sort_num,field_value,
+                      (select name from db_game where id = game_id) game_name,
+                      (select name from mt_field_define where id = field_id) field_name,
+                      (select code from mt_field_define where id = field_id) field_code
+                       from op_game_field where game_id=' . $_GET['id'] . " order by sort_num asc");
         //赛事组别
         $this->assign('group', D('OpGameGroup')->where('game_id=' . $id)->select());
 
@@ -279,6 +281,7 @@ class IndexAction extends BaseAction
         $list = D('OpGameScore')->where($where)->order('score desc')->select();
         $this->assign('detail', $detail);
         $this->assign('list', $list);
+        $this->assign('field_list', $field_list);
         $this->display('game_score');
     }
 
@@ -421,7 +424,7 @@ class IndexAction extends BaseAction
     {
         $mark = I('session.mark_id');
         if ($mark) {
-            if($_POST['game_id']){
+            if ($_POST['game_id']) {
                 $date['content'] = $_POST['content'];
                 $date['user_id'] = deCode(I('session.mark_id'));
                 $date['game_id'] = $_POST['game_id'];
@@ -445,7 +448,7 @@ class IndexAction extends BaseAction
             } else {
                 echo 3;
             }
-        }else{
+        } else {
             echo 4;
         }
     }
@@ -486,7 +489,7 @@ class IndexAction extends BaseAction
         $amount = $_POST['amount'] + $_POST['last'];
         $order = 'input_date desc';
         $list = D('VTopic')->where('game_id=' . $_POST['game_id'] . ' and topic_image is not null')->order($order)->limit($last, $amount)->select();
-    //    dump(D('VTopic')->getLastSql());
+        //    dump(D('VTopic')->getLastSql());
         /*foreach ($list as $key => $val) {
             $topic_image = D('VTopicImages')->where('topic_id=' . $val['id'])->select();
             $val['topic_images'] = $topic_image;
