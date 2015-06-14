@@ -33,7 +33,8 @@
                 </dl>
                 <dl>
                     <dt>赛事类别：</dt>
-                    <dd><select name="sport_id" id="game_add_id">
+                    <dd><select name="sport_id" id="game_add_id" class="required">
+                        <option value="">请选择</option>
                         <volist name="dzSport" id="so">
                             <option value="<{$so.id}>"><{$so.name}></option>
                         </volist>
