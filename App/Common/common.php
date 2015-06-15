@@ -739,6 +739,17 @@ function isLogin()
         return false;
     }
 }
+/*
+* 功能：省份->区域
+* 时间：20150615
+*/
+function getRegion($id,$level)
+{
+    if(($id!=1)&&($id!=0)&&($level==3)){
+        $list = M('DbRegion')->where('pid='.$id)->getField('name',true);
+        return implode(' | ', $list);
+    }
+}
 
 /*
  * @功能：数组转为字符串
