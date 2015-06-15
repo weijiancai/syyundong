@@ -1,0 +1,87 @@
+<form id="pagerForm" action="__URL__" method="post">
+    <input type="hidden" name="pageNum" value="<{$_REQUEST['pageNum']|default=1}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numPerPage}>"/>
+    <input type="hidden" name="_order" value="<{$_REQUEST['_order']}>"/>
+    <input type="hidden" name="_sort" value="<{$_REQUEST['_sort']|default='1'}>"/>
+    <input type="hidden" name="listRows" value="<{$_REQUEST['listRows']}>"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="<{$key}>" value="<{$_REQUEST[$key]}>"/>
+    </volist>
+</form>
+<div class="page">
+    <div class="pageHeader">
+        <form onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+            <div class="searchBar">
+                <table>
+                    <tr>
+                        <td>名称：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium" size="10">&nbsp;&nbsp;
+                        </td>
+                        <td>
+                            <button type="submit">查询</button>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </form>
+    </div>
+
+    <div class="pageContent">
+        <div class="panelBar">
+            <ul class="toolBar">
+                <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="500" height="350"
+                       callback="NavTabAjax" rel="vadd"><span>增加省份</span></a></li>
+                <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
+                       width="500" height="300" rel="vedit"><span>修改</span></a></li>
+                <li><a title="确实要删除吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
+                       class="delete"><span>删除</span></a></li>
+            </ul>
+        </div>
+        <table class="table" width="100%" layoutH="113">
+            <thead>
+            <tr>
+                <th width="2%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
+                <th width="8%" align="center">市区</th>
+                <th width="75%" align="center">区域</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist id="vo" name="list">
+                <tr target="sid_node" rel="<{$vo['id']}>">
+                    <td height="30px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
+                    <td><p style="text-indent:<?php echo ($vo['level']-1)*20;?>px;">
+                        <a href="__URL__/second/sid/<{$vo.id}>" target="dialog" mask="true" rel="sescond" width="700" height="600"
+                           callback="NavTabAjax"><span style="color:blue;"><{$vo['name']}></span></a></p>
+                    </td>
+                    <td><span style="line-height:25px"><{$vo['id']|getRegion=$vo['level']}></span></td>
+
+                </tr>
+            </volist>
+
+            </tbody>
+        </table>
+        <div class="panelBar">
+            <div class="pages">
+                <span>显示</span>
+                <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                    <option value="5"
+                    <eq name="numPerPage" value="5">selected=selected</eq>
+                    >5</option>
+                    <option value="10"
+                    <eq name="numPerPage" value="10">selected=selected</eq>
+                    >10</option>
+                    <option value="15"
+                    <eq name="numPerPage" value="15">selected=selected</eq>
+                    >15</option>
+                    <option value="20"
+                    <eq name="numPerPage" value="20">selected=selected</eq>
+                    >20</option>
+                </select>
+                <span>共<{$totalCount}>条</span>
+
+            </div>
+            <div class="pagination" targetType="navTab" totalCount="<{$totalCount}>" numPerPage="<{$numPerPage}>"
+                 pageNumShown="10" currentPage="<{$currentPage}>"></div>
+        </div>
+    </div>
+</div>
