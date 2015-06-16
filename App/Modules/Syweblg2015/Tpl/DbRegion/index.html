@@ -51,7 +51,7 @@
                     <td height="30px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
                     <td><p style="text-indent:<?php echo ($vo['level']-1)*20;?>px;">
                         <a href="__URL__/second/sid/<{$vo.id}>" target="dialog" mask="true" rel="sescond" width="700" height="600"
-                           callback="NavTabAjax"><span style="color:blue;"><{$vo['name']}></span></a></p>
+                           callback="NavTabAjax"><span style="color:blue;"><{$vo['name']}></span>(<{$vo['sort']}>)</a></p>
                     </td>
                     <td><span style="line-height:25px"><{$vo['id']|getRegion=$vo['level']}></span></td>
 

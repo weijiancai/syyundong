@@ -56,32 +56,13 @@ class DbRegionAction extends CommonAction
     }
 
     /*
-     * @功能：新增省份方法
-     * @时间：20150421
-    */
-    function insert()
-    {
-        $name = $this->getActionName();
-        $model = D($name);
-        if (false === $model->create()) {
-            $this->error($model->getError());
-        }
-        $list = $model->add();
-        if ($list !== false) {
-            echo $this->ajax('1', "新增成功", $name, "", "closeCurrent");
-        } else {
-            echo $this->ajax('0', "新增失败", $name, "", "closeCurrent");
-        }
-    }
-
-    /*
      * @功能：市区新增页面
      * @时间：201504021
      */
     public function second()
     {
         $sid = $_GET['sid'];
-        $list = D('DbRegion')->where('pid=' . $sid )->select();
+        $list = D('DbRegion')->where('pid=' . $sid )->order('sort asc')->select();
         $model = New Model();
         $max_id = $model->query('select max(id) max_id from db_region');
         $this->assign('list', $list);
@@ -103,7 +84,8 @@ class DbRegionAction extends CommonAction
         foreach ($_POST['id'] as $key => $val) {
             $dataNode['id'] = $val;
             $dataNode['name'] = $_POST['name'][$key];
-            $dataNode['level'] = 2;
+            $dataNode['sort'] = $_POST['sort'][$key];
+            $dataNode['level'] = $_POST['level'][$key];
             $dataNode['pid'] = $_GET['sid'];
             $data[$key] = $dataNode;
         }
@@ -121,84 +103,13 @@ class DbRegionAction extends CommonAction
     */
     public function delAll()
     {
-        $model = D('DzSport');
+        $model = D('DbRegion');
         $pk = $model->getPk();
         $data[$pk] = array('in', $_POST['ids']);
         if (false !== $model->where($data)->delete()) {
             $where['pid'] = array('in', $_POST['ids']);
             $model->where($where)->delete();
             echo $this->ajax('1', "删除成功", $name, "", "");
-        }
-    }
-
-    /*
-     * @功能：修改赛事
-     * @时间：20150421
-     */
-    function edit()
-    {
-        $name = $this->getActionName();
-        $model = D($name);
-        $vo = $model->find($_GET['id']);
-        $this->assign('vo', $vo);
-        $this->display();
-    }
-    /*
-     * @功能：赛事图片
-     * @时间：20150421
-     */
-    function lookup(){
-        $this->display();
-    }
-    /*
-     * @功能：ajax上传图片
-     * @时间：20150422
-     */
-    public function upimg()
-    {
-        import('ORG.Util.Image');
-        import('ORG.Net.UploadFile');
-        $path = 'sport';
-        $upload = new UploadFile(); // 实例化上传类
-        $upload->maxSize = 6291456; // 设置附件上传大小
-        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
-        $upload->savePath = './Public/upload/'.$path.'/'; // 设置附件上传目录
-        $upload->thumb = true;
-        $upload->thumbPrefix = '';
-        $upload->thumbMaxWidth = '600';
-        $upload->thumbMaxHeight = '400';
-        $upload->thumbType = 0;
-        $upload->zipImages = true;
-        $upload->autoSub = true;
-        $upload->subType = date;
-        if (!$upload->upload()) { // 上传错误提示错误信息
-            if ($upload->getErrorMsg() != "没有选择上传文件") { //不上传文件通过
-                $e = $this->error($upload->getErrorMsg());
-                echo $e;
-            }
-        } else { // 上传成功 获取上传文件信息
-            $info = $upload->getUploadFileInfo();
-
-            //存储图片
-            $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
-            $result = D('DbImages')->add($date);
-            //打水印
-            /* $Image = new Image();
-             foreach ($info as $value) {
-                 $$value['key'] = $value['savename'];
-                 $Image->water('./Public/Upload/game/' . $value['savename'], './Public/images/common/logo1.png'); //打水印
-             }*/
-            $arr = array(
-                'savename' => $info[0]['savename'],
-                'image[]' => $result,
-                'pic' => $info[0]['savepath'],
-                'size' => $info[0]['size'],
-                'ext' => $info[0]['extension'],
-                'path' => $path,
-            );
-         //   dump(array(true,$arr));
-         //  return $arr;
-            echo json_encode($arr);
         }
     }
 }

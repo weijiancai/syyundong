@@ -296,7 +296,14 @@ class IndexAction extends BaseAction
         $where['id'] = $_GET['d_id'];
         $list = D('op_game_' . $info)->where($where)->find();
         $this->assign('list', $list);
-        $this->assign('id', $_GET['id']);
+        //赛事字段
+        $model = New Model();
+        $field_list = $model->query('select game_id,field_id,sort_num,field_value,
+                      (select name from db_game where id = game_id) game_name,
+                      (select name from mt_field_define where id = field_id) field_name,
+                      (select code from mt_field_define where id = field_id) field_code
+                       from op_game_field where game_id=' . $_GET['id'] . " order by sort_num asc");
+        $this->assign('field_list', $field_list);
         //赛事信息
         $detail = D('DbGame')->field('id,sport_id,name')->where('id=' . $_GET['id'])->find();
         $this->assign('detail', $detail);

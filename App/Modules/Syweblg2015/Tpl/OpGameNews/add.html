@@ -24,7 +24,7 @@
         <form method="post" action="__URL__/insert/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
                 <input type="hidden" value="<{$vo.id}>" name="id">
-                <dl class="nowrap">
+                <dl>
                     <dt>赛事：</dt>
                     <input id="inputOrg1" name="game_id" value="" type="hidden"/>
                     <input class="required" name="game_name" type="text" postField="keyword" suggestFields="name"
@@ -33,7 +33,7 @@
                 </dl>
                 <dl>
                     <dt>标题：</dt>
-                    <dd><input type="text" class="required" value="<{$vo.title}>" name="title"></dd>
+                    <dd><input type="text" class="required" value="" name="title"></dd>
                 </dl>
                 <dl>
                     <dt>录入人：</dt>
@@ -45,6 +45,10 @@
                     <dt>录入时间：</dt>
                     <dd><input type="text" name="input_date" class="" readonly
                                value="<?php echo date('Y-m-d H:i:s')?>"/></dd>
+                </dl>
+                <dl class="nowrap">
+                    <dt>关键字：</dt>
+                    <dd><input type="text" class="required" value="" name="key" size="20"></dd>
                 </dl>
                 <dl class="nowrap">
                     <dt>内容:</dt>

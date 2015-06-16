@@ -37,7 +37,7 @@ class IndexAction extends BaseAction
         }
         //默认排序
         if (($_GET['orderByNew'] == 'S') or (empty($_GET['orderByNew']))) {
-            $order = 'input_date desc';
+            $order = 'status asc';
         }
         //最新活动
         if ($_GET['orderByNew'] == 'C') {

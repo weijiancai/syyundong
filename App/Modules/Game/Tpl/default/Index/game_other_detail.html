@@ -22,21 +22,19 @@
         </div>        <div class="span16">
         <div class="public-subnav clearfix">
             <ul id="detailTabs">
-                <li><a href="__APP__/Game/<{$id}>">赛事首页</a></li>
-                <li><a href="__APP__/Game/<{$id}>/content" <if condition="$info eq content"> class="current"</if>>赛事介绍</a></li>
-                <li><a href="__APP__/Game/<{$id}>/route" <if condition="$info eq aout_route"> class="current"</if>>比赛路线</a></li>
-                <li><a href="__APP__/Game/<{$id}>/cost" <if condition="$info eq about_cost"> class="current"</if>>关于费用</a></li>
-                <li><a href="__APP__/Game/<{$id}>/trip" <if condition="$info eq about_trip"> class="current"</if>>行程安排</a></li>
-                <li><a href="__APP__/Game/<{$id}>/hotel" <if condition="$info eq about_hotal"> class="current"</if>>入住酒店</a></li>
-                <li><a href="__APP__/Game/<{$id}>/notice" <if condition="$info eq notice"> class="current"</if>>赛事公告</a></li>
-                <li><a href="__APP__/Game/<{$id}>/news" <if condition="$info eq news"> class="current"</if>>赛事新闻</a></li>
+                <li><a href="__APP__/Game/<{$detail.id}>">赛事首页</a></li>
+                <volist name="field_list" id='fo'>
+                    <li><a><{$fo.field_name}></a></li>
+                </volist>
+                <li><a href="__APP__/Game/<{$detail.id}>/notice" <if condition="$info eq notice"> class="current"</if>>赛事公告</a></li>
+                <li><a href="__APP__/Game/<{$detail.id}>/news" <if condition="$info eq news"> class="current"</if>>赛事新闻</a></li>
                 <li><a href="javascript:void(0);">成绩查询</a></li>
                 <li><a href="javascript:void(0);">赛友圈</a></li>
             </ul>
         </div>
     </div>
-        <div class="span16">
-            <div class="main-block clearfix">
+        <div class="span16" id="tabs">
+            <div class="main-block clearfix tab">
                 <div class="article-block">
                     <h3 class="article-title"><{$list.title}></h3>
                     <h6 class="article-title-sub"><{$list.input_date}></h6>
@@ -45,6 +43,14 @@
                     </pre>
                 </div>
             </div>
+            <volist name="field_list" id='vo'>
+                <div class="main-block clearfix tab" style="display: none;">
+                    <div class="article-block none-indent">
+                        <h3 class="article-title"><{$vo.field_name}></h3>
+                        <{$vo.field_value}>
+                    </div>
+                </div>
+            </volist>
         </div>
     </div>
 </div>

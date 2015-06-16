@@ -28,15 +28,19 @@
                     <input name="name" class="required" value="<{$vo.name}>" type="text">
                 </p>
                 <p>
-                    <label>修改人：</label>
-                    <input name="" class="required" value="<{$vo.input_user|getUserName}>" type="text" disabled>
-                    <input name="input_user"  value="<{$vo.input_user}>" type="hidden">
+                    <label>等级：</label>
+                    <select name="level" class=" required">
+                        <option value="" >请选择</option>
+                        <option <eq name="vo.level" value="1">selected=selected</eq> value="1" >1级</option>
+                        <option <eq name="vo.level" value="2">selected=selected</eq> value="2" >2级</option>
+                        <option <eq name="vo.level" value="3">selected=selected</eq> value="3" >3级</option>
+                        <option <eq name="vo.level" value="4">selected=selected</eq> value="4" >4级</option>
+                    </select>
                 </p>
                 <p>
-                    <label>修改时间：</label>
-                    <input name="input_date" class="required" type="text" value="<?php echo date('Y-m-d H:i:s')?>" readonly>
+                    <label>排序：</label>
+                    <input name="sort" class="required" value="<{$vo.sort}>" type="text" >
                 </p>
-
             </div>
             <div class="formBar">
                 <ul>
