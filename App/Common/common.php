@@ -95,7 +95,7 @@ function site($name, $description)
             $list = array(
                 'title' => '松原运动|活动|' . $name,
                 'Keywords' => '松原运动|活动|' . $name,
-                'Description' => '松原运动|赛事|' . $name,
+                'Description' => '松原运动|活动|' . $name,
             );
             return $list;
             break;

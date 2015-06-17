@@ -454,18 +454,31 @@ class DbGameAction extends CommonAction
     }
 
     /*
-     * @功能：推荐赛事
+     * @功能：精选赛事
      * @时间：20150422
      */
-    public function  pull()
+    public function  ChoiceGame()
     {
-        $name = $this->getActionName();
-        $model = M($name);
-        $list = $model->where('ID=' . $_GET['ID'])->setField($_GET['item'], 0);
-        if ($list) {
-            echo $this->ajax('1', "滞留成功", $name, "", "");
+        $model = D('OpRecommend');
+
+        foreach ($_POST['ids'] as $key => $val) {
+            $date[$key]['gc_id']= $val;
+            $date[$key]['recommend_type'] = 'game';
+            $date[$key]['input_date'] = date('Y-m-d H:i:s');
+            $date[$key]['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
+            $date[$key]['category'] = 'choice';
+        }
+        /*$date['gc_id'] = array('in', $_POST['ids']);
+        $date['recommend_type'] = 'game';
+        $date['input_date'] = date('Y-m-d H:i:s');
+        $date['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
+        $date['category'] = 'choice';*/
+        echo $_POST['ids'];
+        $list = $model->addAll($date);
+        if (false !== $list) {
+            echo $this->ajax('1', "操作成功", $name, "", "");
         } else {
-            echo $this->ajax('0', "滞留失败", $name, "", "");
+            echo $this->ajax('0', "操作失败", $name, "", "");
         }
     }
 

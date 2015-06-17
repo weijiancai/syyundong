@@ -531,6 +531,7 @@ class CommonAction extends Action {
         $date['recommend_type'] = $_GET['type'];
         $date['input_date'] = date('Y-m-d H:i:s');
         $date['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
+        $date['category'] = 'recommend';
         $list = $model->add($date);
         if (false !== $list) {
             echo $this->ajax('1', "推荐成功", $name, "", "");
