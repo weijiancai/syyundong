@@ -52,6 +52,7 @@
                 </li>
                 <li><a title="确定是精选赛事吗?" target="selectedTodo" rel="ids[]" href="__URL__/ChoiceGame" class="icon"><span>精选赛事</span></a>
                 </li>
+
             </ul>
         </div>
         <table class="table" width="100%" layoutH="113">
@@ -67,6 +68,7 @@
                 <th width="5%" align="center">申请人</th>
                 <th width="6%" align="center">申请电话</th>
                 <th width="3%" align="center">状态</th>
+                <th width="3%" align="center">精选</th>
                 <th width="6%" align="center">详情</th>
                 <th width="5%" align="center">操作</th>
             </tr>
@@ -90,6 +92,7 @@
                     <td><{$vo['apply_name']}></td>
                     <td><{$vo['apply_phone']}></td>
                     <td><{$vo['is_verify']|getStatus}></td>
+                    <td><{$vo['id']|isChoiceGame}></td>
                     <td><a href="__URL__/detail/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600"
                            rel="detail">字段</a><span style="color:red">|</span>
                         <a href="__URL__/group/id/<{$vo.id}>" target="navTab" mask="true" width="900" height="600"

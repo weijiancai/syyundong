@@ -460,20 +460,18 @@ class DbGameAction extends CommonAction
     public function  ChoiceGame()
     {
         $model = D('OpRecommend');
-
+        $list_id=M('OpRecommend')->where("category='choice'")->getField('gc_id',true);
+        foreach($list_id as $k=>$value){
+            unset($_POST['ids'][array_search('81',$_POST['ids'])]);
+        }
+        sort($_POST['ids'] );
         foreach ($_POST['ids'] as $key => $val) {
-            $date[$key]['gc_id']= $val;
+            $date[$key]['gc_id']=  $val;
             $date[$key]['recommend_type'] = 'game';
             $date[$key]['input_date'] = date('Y-m-d H:i:s');
             $date[$key]['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
             $date[$key]['category'] = 'choice';
         }
-        /*$date['gc_id'] = array('in', $_POST['ids']);
-        $date['recommend_type'] = 'game';
-        $date['input_date'] = date('Y-m-d H:i:s');
-        $date['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
-        $date['category'] = 'choice';*/
-        echo $_POST['ids'];
         $list = $model->addAll($date);
         if (false !== $list) {
             echo $this->ajax('1', "操作成功", $name, "", "");

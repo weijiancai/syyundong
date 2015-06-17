@@ -677,12 +677,26 @@ function  UserTopicCount($mark_id)
  */
 function  isGameRecommend($id, $type)
 {
-    $list = M('OpRecommend')->where('recommend_type = "' . $type . '" and gc_id=' . $id)->find();
+    $list = M('OpRecommend')->where('category = "recommend" and recommend_type = "' . $type . '" and gc_id=' . $id)->find();
     if ($list) {
         return false;
     } else {
         return true;
     }
+}
+/*
+ * @功能：是否是精选赛事
+ * @时间: 20150617
+ */
+function  isChoiceGame($id)
+{
+    $result = M('OpRecommend')->where('category = "choice" and recommend_type="game" and gc_id=' . $id)->find();
+    if ($result) {
+        $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/ok.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="正常">';
+    } else {
+        $showImg = '<IMG SRC="' . __PUBLIC__ . '/images/default/locked.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="禁用">';
+    }
+    return $showImg;
 }
 
 /*
