@@ -92,6 +92,24 @@ class IndexAction extends BaseAction
     }
 
     /*
+     * @时间:20150618
+     * @功能：发起活动
+     */
+    public function update()
+    {
+        //首先判断用户是否登录
+        $mark = I('session.mark_id');
+        if ($mark) {
+            $this->assign('venue_sport', $this->activity_sport());
+            $this->assign('region', D('Public/Index')->region());
+            $this->display();
+        } else {
+            $str = '<script> window.location.href="/login/login"</script>';
+            echo $str;
+        }
+    }
+
+    /*
    * @时间:20150402
    * @功能：热门活动推荐
    */

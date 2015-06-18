@@ -42,6 +42,7 @@ $Public_Config =  array(
         '/^Venue\/collection$/' => 'Venue/index/collection',
 
         '/^Activity\/publish$/' => 'Activity/index/publish',
+        '/^Activity\/update$/' => 'Activity/index/update$',
         '/^Activity\/(\d+)$/' => 'Activity/index/activity_detail?id=:1',
         '/^Activity\/(\d+)$/' => 'Activity/index/activity_detail?id=:1',
         '/^Activity\/SimilarActivity$/' => 'Activity/index/SimilarActivity',

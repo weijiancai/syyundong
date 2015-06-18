@@ -1,0 +1,114 @@
+<include file="Public@default:Public:top"/>
+  <div class="container container-margin">
+    <div class="activity-publish">
+      <form name="fmPublish" id="fmPublish" action="/Game/addgame" method="post">
+        <div class="form-content clearfix">
+          <div class="pull-left">
+            <h4 class="form-title">基本信息</h4>
+            <table class="form-table">
+              <tbody>
+                <tr>
+                  <th><span class="help-required">*</span>比赛项目：</th>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="sportTypeId" >
+                      <option value="1">球类项目</option>
+                      <option value="2">户外运动</option>
+                      <option value="4">全民健身</option>
+                      <option value="5">其他运动</option>
+                      <option value="37">马拉松路跑</option>
+                    </select>
+                    <input name="sportTypeName" type="hidden" value="">
+                  </td>
+                </tr>
+                <tr>
+                  <th><span class="help-required">*</span>比赛名称：<span class="muted">为它起个响亮的标题吧，不要超过40个字</span></th>
+                </tr>
+                <tr>
+                  <td><input type="text" name="name" class="input-xxlarge" >
+                </td></tr>
+                <tr>
+                  <th><span class="help-required">*</span>举办地点：</th>
+                </tr>
+                <tr>
+                  <td>
+					<select name="regionId">
+                        <volist name="region" id="vo">
+                            <option value="<{$vo.id}>"><{$vo.name}></option>
+                        </volist>
+
+                    </select>
+                    <input name="hostLocation" type="hidden" value="">
+                  </td>
+                </tr>
+                <tr>
+                  <th><span class="help-required">*</span>赛事发起方：</th>
+                </tr>
+                <tr>
+                  <td><input type="text" name="sponsor" class="" placeholder=""></td>
+                </tr>
+                <tr>
+                  <th><span class="help-required">*</span>联系方式：</th>
+                </tr>
+                <tr>
+                  <td><input type="text" class="input-large" name="phone" placeholder="电话号码"></td>
+                </tr>
+				<tr>
+                  <th><span class="help-required">*</span>人数限制：</th>
+                </tr>
+                <tr>
+                  <td><input type="text" name="limitCount" class="input-large" ></td>
+                </tr>
+                <tr>
+                  <th><span class="help-required">*</span>赛事介绍：</th>
+                </tr>
+                <tr>
+                  <td><label><textarea name="description" cols="50" rows="3"  style="height: 60px;"></textarea><pre style="position: absolute; z-index: -10; left: -9999px; top: auto; padding: 10px 0px; font-size: 14px; line-height: 20px; width: 860px; font-family: &#39;Microsoft yahei&#39;, Arial; white-space: pre-wrap; word-wrap: break-word; font-weight: 400;">组委会娟的赛事呢</pre></label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pull-right">
+            <h4 class="form-title clearfix">申请人信息<label class="checkbox inline" style="float:right;padding-top: 0;">
+                <input id="copy_user_info" type="checkbox">复制会员信息</label></h4>
+            <table class="form-table">
+              <tbody>
+                <tr>
+                  <th><span class="help-required">*</span>申请人姓名：</th>
+                </tr>
+                <tr>
+                  <td>
+                  <input type="text" name="applyName" class="input-large" >
+                  <input type="hidden" name="applyUserId" value="">
+                  </td>
+                </tr>
+                <tr>
+                  <th><span class="help-required">*</span>申请人电话：</th>
+                </tr>
+                <tr>
+                  <td><input type="text" name="applyPhone" class="input-large" ></td>
+                </tr>
+                <tr>
+                  <th><span class="help-required">*</span>申请人邮箱：</th>
+                </tr>
+                <tr>
+                  <td><input type="text" class="input-large" name="applyEmail" ></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="form-content-foot form-content-nopt clearfix">
+          <div class="pull-right">
+            <button class="btn btn-warning" id="i_game_publish" type="submit">发起赛事</button>
+            <button class="btn" id="i_game_cancel" type="button">取消</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+<script type="text/javascript" src="/Public/js/pages/game_publish"></script>
+
+<include file="Public@default:Public:bottom"/>
