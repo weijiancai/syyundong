@@ -81,6 +81,7 @@ class OpRecommendAction extends CommonAction
     {
         $model = D('OpRecommend');
         $pk = $model->getPk();
+        $data['category'] = $_GET['category'];
         $data[$pk] = array('in', $_POST['ids']);
         $result = $model->where($data)->delete();
         if (false !== $result) {

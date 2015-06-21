@@ -461,10 +461,13 @@ class DbGameAction extends CommonAction
     {
         $model = D('OpRecommend');
         $list_id=M('OpRecommend')->where("category='choice'")->getField('gc_id',true);
-        foreach($list_id as $k=>$value){
-            unset($_POST['ids'][array_search('81',$_POST['ids'])]);
+        foreach($_POST['ids'] as $k=>$value){
+            dump(array_search($value,$list_id));
+            if(array_search($value,$list_id)){
+                unset($_POST['ids'][array_search($value,$_POST['ids'])]);
+            };
         }
-        sort($_POST['ids'] );
+        sort($_POST['ids']);
         foreach ($_POST['ids'] as $key => $val) {
             $date[$key]['gc_id']=  $val;
             $date[$key]['recommend_type'] = 'game';

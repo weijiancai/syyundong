@@ -111,7 +111,7 @@ class IndexAction extends BaseAction
      */
     public function BannerImage(){
         $model= new Model();
-        $banner = $model->query('SELECT id,name,image FROM v_recommend_game ORDER BY sort_num asc, join_count DESC  LIMIT 0, 6');
+        $banner = $model->query('SELECT id,name,image FROM v_recommend_game ORDER BY sort_num asc LIMIT 0, 6');
         $this->assign('banner',$banner);
     }
     /*

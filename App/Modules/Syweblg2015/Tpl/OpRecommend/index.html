@@ -14,9 +14,7 @@
     <div class="pageContent">
         <div class="panelBar">
             <ul class="toolBar">
-                <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
-                       width="300" height="300" rel="vedit"><span>修改</span></a></li>
-                <li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
+                <li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll/category/<{$_GET['category']}>"
                        class="delete"><span>删除</span></a></li>
             </ul>
         </div>

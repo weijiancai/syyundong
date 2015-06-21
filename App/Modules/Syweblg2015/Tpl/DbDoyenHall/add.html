@@ -17,8 +17,6 @@
         }
     }
 </script>
-<script src="__PUBLIC__/ueditor/ueditor.config.js" type="text/javascript"></script>
-<script src="__PUBLIC__/ueditor/ueditor.all.js" type="text/javascript"></script>
 <script src="__PUBLIC__/js/syweb/jquery.form.js" type="text/javascript"></script>
 <script src="__PUBLIC__/js/syweb/ajaxupload.js" type="text/javascript"></script>
 <div class="page">
@@ -48,10 +46,8 @@
 
                 <dl class="nowrap">
                     <dt>内容:</dt>
-                    <dd><textarea name="description" id="myEditor"><{$vo['description']}></textarea>
-                        <script type="text/javascript">
-                            UE.getEditor('myEditor');
-                        </script>
+                    <dd><textarea name="description" id="editor_id"><{$vo['description']}></textarea>
+
                     </dd>
                 </dl>
                 <dl class="nowrap">
@@ -88,3 +84,4 @@
 
     </div>
 </div>
+<script type="text/javascript" src="/public/js/syweb/kindeditor_all.js"/>

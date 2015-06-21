@@ -107,5 +107,44 @@ class PublicAction extends Action
 
         return $category;
     }
+    /*
+     * @功能：kindeditor 编辑器图片上传
+     * @时间：20150621
+     */
+    public function kind_img(){
+        import('ORG.Net.UploadFile');
+        import('ORG.Util.Image');
+        $upload = new UploadFile(); // 实例化上传类
+        $upload->maxSize = 3145728; // 设置附件上传大小
+        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
+        $upload->savePath = './Public/Upload/attached/'; // 设置附件上传目录
+        $upload->thumb = true;
+        $upload->thumbPrefix = 'm_';
+        $upload->thumbMaxWidth = '800';
+        $upload->thumbMaxHeight = '600';
+        $upload->thumbType = 0;
+        $upload->zipImages = true;
+        $upload->autoSub = true;
+        $upload->subType = date;
+        $upload->thumbRemoveOrigin=true;
+        if (!$upload->upload()) { // 上传错误提示错误信息
+            $data['error'] = 1;
+            $data['message'] = $upload->getErrorMsg();
+            $this->ajaxReturn($data, 'JSON');
+        } else { // 上传成功 获取上传文件信息
+            $info = $upload->getUploadFileInfo();
+
+            //打水印
+            /*$Image = new Image();
+            $Image->water('./Public/Upload/attached/' . $info[0]['savename'], './Public/images/common/logo1.png'); //打水印*/
+            list($day,$name) = split ('[/]', $info[0]['savename']);
+            $info[0]['savename']=$day.'/m_' . $name;
+
+            $url = '../../../Public/Upload/attached/' . $info[0]['savename'];
+            $data['error'] = 0;
+            $data['url'] = $url;
+            $this->ajaxReturn($data, 'JSON');
+        }
+    }
 
 }
