@@ -16,7 +16,7 @@ $(function () {
         } else {
             $("#myupload").ajaxSubmit({
                 dataType: 'json',
-                data: {path: $("#path").val()},
+                data: {path: $("#path").val(),water:$("#water").val()},
                 beforeSend: function () {
                     $('#showimg').html("<img width:52px height=52px src='/Public/images/default/upimg_loading.gif'>");
                 },

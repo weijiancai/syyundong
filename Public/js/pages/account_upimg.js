@@ -9,7 +9,7 @@ $setHeadIcon.click(function () {
 });
 $("#fileupload").wrap("<form id='myupload' action='/Public/Public/upimg' method='post' enctype='multipart/form-data'></form>");
 $("#fileupload").change(function (event) {
-    console.log($("#fileupload"));
+    var path = $("#path").val();
     var size = event.target.files[0].size;
     var name = event.target.files[0].name;
     var format = name.substring(name.lastIndexOf(".") + 1, name.length).toLowerCase();
@@ -30,7 +30,7 @@ $("#fileupload").change(function (event) {
                 var arr = data['savename'].split('/');
                 var img = "/Public/Upload/" + data.path + "/" + arr[0]+"/s_"+arr[1];
                 $("#nickthumb").html("<span class='delimg' rel='" + data.savename + "'></span><img width:52px height=52px src='" + img + "'>");
-                $('#user_head').val(data.label);
+                $('#image').val(data.label);
             },
             error: function (xhr) {
                 var str = '<span>出错啦!</span>';

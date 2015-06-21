@@ -53,7 +53,7 @@ class Image {
      * @param string $alpha  水印的透明度
      * @return void
      */
-    static public function water($source, $water, $savename=null, $alpha=80) {
+    static public function water($source, $water, $savename=null, $position=3,$alpha=80) {
         //检查文件是否存在
         if (!file_exists($source) || !file_exists($water))
             return false;
@@ -75,12 +75,69 @@ class Image {
         //设定图像的混色模式
         imagealphablending($wImage, true);
 
-        //图像位置,默认为右下角右对齐
+		//★水印图片位置★//
+		$ground_w=$sInfo["width"];
+		$ground_h=$sInfo["height"];
+		$w=$wInfo["width"];
+		$h=$wInfo["height"];
+
+		switch($position)
+		{
+			case 9://9为底端居右
+			$posX = $ground_w - $w;
+			$posY = $ground_h - $h;
+			break;
+			case 0://随机
+			$posX = rand(0,($ground_w - $w));
+			$posY = rand(0,($ground_h - $h));
+			break;
+			case 1://1为顶端居左
+			$posX = 0;
+			$posY = 0;
+			break;
+			case 2://2为顶端居中
+			$posX = ($ground_w - $w) / 2;
+			$posY = 0;
+			break;
+			case 3://3为顶端居右
+			$posX = $ground_w - $w;
+			$posY = 0;
+			break;
+			case 4://4为中部居左
+			$posX = 0;
+			$posY = ($ground_h - $h) / 2;
+			break;
+			case 5://5为中部居中
+			$posX = ($ground_w - $w) / 2;
+			$posY = ($ground_h - $h) / 2;
+			break;
+			case 6://6为中部居右
+			$posX = $ground_w - $w;
+			$posY = ($ground_h - $h) / 2;
+			break;
+			case 7://7为底端居左
+			$posX = 0;
+			$posY = $ground_h - $h;
+			break;
+			case 8://8为底端居中
+			$posX = ($ground_w - $w) / 2;
+			$posY = $ground_h - $h;
+			break;
+			
+			default://随机位置
+			$posX = rand(0,($ground_w - $w));
+			$posY = rand(0,($ground_h - $h));
+			break;
+		}
+		
+		/*★★★★★图像位置,默认为右下角右对齐（自带的只有右下角的,不要了）
         $posY = $sInfo["height"] - $wInfo["height"];
         $posX = $sInfo["width"] - $wInfo["width"];
+		*/
 
         //生成混合图像
         imagecopy($sImage, $wImage, $posX, $posY, 0, 0, $wInfo['width'], $wInfo['height']);
+		
 
         //输出图像
         $ImageFun = 'Image' . $sInfo['type'];

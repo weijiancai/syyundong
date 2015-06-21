@@ -83,7 +83,6 @@
                         <a class="inputDateButton" href="javascript:;">选择</a>
                     </dd>
                 </dl>
-
                 <dl class="nowrap">
                     <dt>举办城市：</dt>
                     <dd> <dd><select  name="province" id="province" class="required">
@@ -164,7 +163,8 @@
                     </dd>
                 </dl>
                 <dl class="nowrap">
-                    <dt>图片:</dt>
+
+                    <dt>图片(<span style="color:red">水印</span><input type="checkbox" name="is_has_water" id="is_has_water"/>)</dt>
                     <dd><input type="file" name="image" id="fileupload" />
                         <span id="show_mes" style="color:Red"></span>
                         <div id="showimg" style="height:40px"><img src="<{$vo['image']|getImageUrl}>" width="100px" height="100px"/></div>
@@ -173,6 +173,7 @@
                 </dl>
                 <input type="hidden" id="path_action" value="Syweblg2015/DbGame/upimg">
                 <input type="hidden" value="game" id="path">
+                <input type="hidden" value="" id="water">
             </div>
             <div class="formBar">
                 <ul>

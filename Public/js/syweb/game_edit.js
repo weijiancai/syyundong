@@ -52,5 +52,13 @@ $(document).ready(function () {
             });
         }
     }
+    $('#is_has_water').click(function(){
+        if($('#is_has_water').is(":checked"))
+        {
+            $('#water').val('1');
+        }else{
+            $('#water').val('');
+        }
+    })
 });
 

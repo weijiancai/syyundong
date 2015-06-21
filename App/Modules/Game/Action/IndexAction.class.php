@@ -113,7 +113,8 @@ class IndexAction extends BaseAction
         $date['apply_name'] = I('post.applyName');
         $date['apply_phone'] = I('post.applyPhone');
         $date['apply_email'] = I('post.applyEmail');
-        $date['is_verify'] = 'T';
+        $date['image'] = I('post.image');
+        $date['is_verify'] = 'F';
         $date['input_date'] = date('Y-m-d H:i:s');
         $date['input_user'] = deCode(I('session.mark_id'));
         $result = $model->add($date);

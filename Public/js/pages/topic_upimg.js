@@ -27,7 +27,8 @@ $("#fileupload").change(function (event) {
                 $('#store-wrap').append("<div class='uplist'><img width:52px height=52px src='/Public/images/default/upimg_loading.gif'></div>");
             },
             success: function (data) {
-                var img = "/Public/Upload/" + data.path + "/" + data.savename;
+                var arr = data['savename'].split('/');
+                var img = "/Public/Upload/" + data.path + "/" + arr[0]+"/m_"+arr[1];
                 $(".publish-box .store-wrap").show();
                 var $delUplist = $("<div><img width:52px height=52px src='" + img + "'><a  href='javascript:void(0);' class='delUplist'>删除</a></div>");
                 $("#store-wrap .uplist:last-child").html($delUplist);

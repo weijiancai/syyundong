@@ -25,7 +25,7 @@ class PublicAction extends Action
         $upload = new UploadFile(); // 实例化上传类
         $upload->maxSize = 6291456; // 设置附件上传大小
         $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
-        $upload->savePath = './Public/upload/' . $path . '/'; // 设置附件上传目录
+        $upload->savePath = './Public/Upload/' . $path . '/'; // 设置附件上传目录
         $upload->thumb = true;
         $upload->thumbPrefix = 'm_,s_';
         $upload->thumbMaxWidth = '800,150';
@@ -34,6 +34,7 @@ class PublicAction extends Action
         $upload->zipImages = true;
         $upload->autoSub = true;
         $upload->subType = date;
+        $upload->thumbRemoveOrigin=true;
         if (!$upload->upload()) { // 上传错误提示错误信息
             if ($upload->getErrorMsg() != "没有选择上传文件") { //不上传文件通过
                 $e = $this->error($upload->getErrorMsg());
@@ -46,17 +47,17 @@ class PublicAction extends Action
         //    $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
 
             list($day,$name) = split ('[/]', $info[0]['savename']);
-            $date['local_url'] = '/Public/upload/' . $path . '/'.$day.'/m_' . $name;
+            $date['local_url'] = '/Public/Upload/' . $path . '/'.$day.'/m_' . $name;
 
-            list($day,$name) = split ('[/]', $info[0]['savename']);
-            $date['size2_url'] = '/Public/upload/' . $path . '/'.$day.'/s_' . $name;
+            $date['size2_url'] = '/Public/Upload/' . $path . '/'.$day.'/s_' . $name;
             $result = D('DbImages')->add($date);
             //打水印
-            /* $Image = new Image();
-             foreach ($info as $value) {
-                 $$value['key'] = $value['savename'];
-                 $Image->water('./Public/Upload/game/' . $value['savename'], './Public/images/common/logo1.png'); //打水印
-             }*/
+            $Image = new Image();
+            foreach ($info as $value) {
+                // $Image->water('./Public/Upload/' . $path.'/' . $value['savename'], './Public/images/default/water.png'); //打水印
+                list($w_day,$w_name) = split ('[/]', $value['savename']);
+                $Image->water('./Public/Upload/' . $path.  '/' . $w_day.'/m_' . $w_name, './Public/images/default/water.png');
+            }
             $arr = array(
                 'savename' => $info[0]['savename'],
                 'name' => $info[0]['name'],
