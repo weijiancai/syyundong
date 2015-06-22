@@ -462,8 +462,8 @@ class DbGameAction extends CommonAction
         $model = D('OpRecommend');
         $list_id=M('OpRecommend')->where("category='choice'")->getField('gc_id',true);
         foreach($_POST['ids'] as $k=>$value){
-            dump(array_search($value,$list_id));
-            if(array_search($value,$list_id)){
+            $result = array_search($value,$list_id);
+            if(in_array($value,$list_id)){
                 unset($_POST['ids'][array_search($value,$_POST['ids'])]);
             };
         }

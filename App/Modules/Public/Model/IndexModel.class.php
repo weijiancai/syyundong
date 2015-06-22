@@ -32,6 +32,15 @@ class IndexModel
        return  D('DbRegion')->where('level=3')->select();
 
     }
+    /*
+     * @功能：查询省市
+     * @时间：20150412
+     */
+    public function city()
+    {
+        return  D('DbRegion')->where('level=2')->select();
+
+    }
 
 }
 ?>

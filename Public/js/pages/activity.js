@@ -5,6 +5,7 @@ $(function () {
     // 注册body id
     $('body').attr('id', 'activity');
     var $form = $('#searchForm');
+
     // 区域
     $('#regionList').find('a').click(function () {
         $(this).parent().find('a.current').removeClass('current');
@@ -25,12 +26,12 @@ $(function () {
     });
 
     // 省
-    /*    $('#provinceId').change(function () {
-     var province = $(this).val();
-     if (province != '') {
-     submit('province', province);
+    $('#tplCity').change(function () {
+     var cityId = $(this).val();
+     if (cityId != '') {
+     submit('cityId', cityId);
      }
-     });*/
+     });
 
     // 排序
     $('.order-group').find('li a').click(function () {

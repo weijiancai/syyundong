@@ -52,6 +52,13 @@ class IndexAction extends BaseAction
         } else if ($_GET['date'] == 'tomorrow') {
             $map['start_date'] = array('like', date("Y-m-d", strtotime("+1 day")) . '%');
         }
+        //省市
+        if ($_GET['cityId']) {
+            if ($_GET['cityId'] != 'all') {
+                $map['city'] = array('eq', $_GET['cityId']);
+                $buss = D('DbRegion')->where('pid = ' . $_GET['cityId'])->select();
+            }
+        }
         //区域
         if ($_GET['region']) {
             $map['region'] = $_GET['region'];
@@ -66,8 +73,9 @@ class IndexAction extends BaseAction
         $this->assign('page', $show);
         $this->assign('activity', $list);
         $this->assign('count', $count);
-        $this->assign('region', D('Public/Index')->region());
+        $this->assign('city', D('Public/Index')->city());
         $this->assign('venue_sport', $this->activity_sport());
+        $this->assign('buss', $buss);
         $this->hotactivity();
         $this->sport_doyen();
         $this->display();
