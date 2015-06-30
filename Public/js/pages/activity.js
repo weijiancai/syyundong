@@ -5,7 +5,13 @@ $(function () {
     // 注册body id
     $('body').attr('id', 'activity');
     var $form = $('#searchForm');
-
+    // 省市
+    $('#tplCity').change(function () {
+        var cityId = $(this).val();
+        if (cityId != '') {
+            submit('cityId', cityId);
+        }
+    });
     // 区域
     $('#regionList').find('a').click(function () {
         $(this).parent().find('a.current').removeClass('current');
@@ -24,14 +30,6 @@ $(function () {
     $('#statusOver').change(function () {
         submit('state_over', $(this).get(0).checked ? 'T' : 'F');
     });
-
-    // 省
-    $('#tplCity').change(function () {
-     var cityId = $(this).val();
-     if (cityId != '') {
-     submit('cityId', cityId);
-     }
-     });
 
     // 排序
     $('.order-group').find('li a').click(function () {

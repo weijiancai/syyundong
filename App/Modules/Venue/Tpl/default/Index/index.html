@@ -10,6 +10,21 @@
         <div data-selector="province">
             <table>
                 <tbody>
+
+                <tr>
+                    <th><i class="icon16 icon16-search-city"></i>省市：</th>
+                    <td>
+                        <!--<select id="tplProvince" class="span2" name="provinceId"><option value="all">全部省份</option><option value="2">北京市</option><option value="360">天津市</option><option value="691">河北省</option><option value="3352">山西省</option><option value="5021">内蒙古</option><option value="6373">辽宁省</option><option value="8144">吉林省</option><option value="9239">黑龙江</option><option value="11330">上海市</option><option value="11613">江苏省</option><option value="13539">浙江省</option><option value="15391">安徽省</option><option value="17266">福建省</option><option value="18634">江西省</option><option value="20799">山东省</option><option value="23139">河南省</option><option value="25898">湖北省</option><option value="27561">湖南省</option><option value="30374">广东省</option><option value="32864">广西</option><option value="34336">海南省</option><option value="34712">重庆市</option><option value="35869">四川省</option><option value="40206">贵州省</option><option value="41902">云南省</option><option value="43748">西藏</option><option value="44605">陕西省</option><option value="46517">甘肃省</option><option value="48081">青海省</option><option value="48579">宁夏</option><option value="48911">新疆</option></select>-->
+
+                        <select id="tplCity" style="margin-left:10px;" class="span2" name="tplCity">
+                            <option value="all">全部城市</option>
+                            <volist name="city" id="co">
+                                <option <eq name="co.id" value="$_REQUEST['cityId']">selected</eq> value="<{$co.id}>"><{$co.name}></option>
+                            </volist>
+                        </select>
+
+                    </td>
+                </tr>
                 <tr>
                     <th valign="top"><i class="icon16 icon16-search-region"></i>区域：
                         <input type="hidden" data-selector="regionValue" value="all" name="regionId"></th>
@@ -142,15 +157,15 @@
 <div class="main-block pagging-block">
         <div class="paging-wrap">
             <{$page}>
-            <label class="page-stage">
+           <!-- <label class="page-stage">
 
                 到第 <input type="text" validate-rules="[['required'],['number',{'max':101,'min':1}]]" validate-title="页码" name="pageNumText" id="pageNumText"> 页
                 <input type="submit" value="确定" class="btn">
             </label>
 
-            <!--end of pageBean?? && (pages.total > -1) -->
+            &lt;!&ndash;end of pageBean?? && (pages.total > -1) &ndash;&gt;
             <input type="hidden" value="1" id="pageNum" name="pageNum">
-            <input type="hidden" value="20" id="pageSize" name="pageSize">
+            <input type="hidden" value="20" id="pageSize" name="pageSize">-->
         </div>
 </div>
 
@@ -217,7 +232,7 @@
                         <a href="/Venue/{{id}}" target="_blank"><img title="{{name}}" src="{{image}}"></a>
                         <p><a title="{{name}}" href="/Venue/{{id}}" target="_blank">{{name}}</a></p>
                         <div class="clearfix">
-                            <span class="pull-left">{{region}}</span>
+                            <span class="pull-left">{{region_name}}</span>
                             <span class="pull-right">人均<span class="text-error">{{person_cost}}</span>元</span>
                         </div>
                     </li>
@@ -255,6 +270,7 @@
 <!-- 表单提交 -->
 <form id="searchForm" action="__APP__/Venue?">
     <input type="hidden" id="region" name="region" value="<{$_REQUEST['region']}>"/>
+    <input type="hidden" id="cityId" name="cityId" value="<{$_REQUEST['cityId']}>"/>
     <input type="hidden" id="business" name="business" value="<{$_REQUEST['business']}>"/>
     <input type="hidden" id="sportType" name="sportType" value="<{$_REQUEST['sportType']}>"/>
     <input type="hidden" id="keyword" name="keyword" value="<{$_REQUEST['keyword']}>"/>

@@ -10,14 +10,17 @@
                         <div>
                             <table>
                                 <tbody>
-                               <!-- <tr>
+                                <tr>
                                     <th><i class="icon16 icon16-search-city"></i>省市：</th>
                                     <td>
-                                        <select class="span2" style="margin-left: 0;margin-top:10px;" name="provinceId" id="provinceId">
-                                            <option value="1">吉林省</option>
+                                        <select class="span2" style="margin-left: 0;margin-top:10px;" name="tplCity" id="tplCity">
+                                            <option value="all">全部城市</option>
+                                            <volist name="city" id="co">
+                                                <option <eq name="co.id" value="$_REQUEST['cityId']">selected</eq> value="<{$co.id}>"><{$co.name}></option>
+                                            </volist>
                                         </select>
                                     </td>
-                                </tr>-->
+                                </tr>
                                 <tr>
                                     <th valign="top"><i class="icon16 icon16-search-items"></i>项目：
                                         </th>
@@ -262,6 +265,7 @@
     <input type="hidden" id="sportTypeId" name="sportTypeId" value="<{$_REQUEST['sportTypeId']}>"/>
     <input type="hidden" id="date" name="date" value="<{$_REQUEST['date']}>"/>
     <input type="hidden" id="keyword" name="keyword" value="<{$_REQUEST['keyword']}>"/>
+    <input type="hidden" id="cityId" name="cityId" value="<{$_REQUEST['cityId']}>"/>
 </form>
 
 <script type="text/javascript" src="/Public/js/pages/game.js"></script>

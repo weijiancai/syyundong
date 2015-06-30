@@ -37,6 +37,13 @@ class IndexAction extends BaseAction
         if (($_GET['sportTypeId']) and ($_GET['sportTypeId'] !== 'all')) {
             $map['sport_sid'] = $_GET['sportTypeId'];
         }
+        //省市
+        if ($_GET['cityId']) {
+            if ($_GET['cityId'] != 'all') {
+                $map['city'] = array('eq', $_GET['cityId']);
+                $buss = D('DbRegion')->where('pid = ' . $_GET['cityId'])->select();
+            }
+        }
         //赛事区域
         if ($_GET['region']) {
             $map['region'] = $_GET['region'];
@@ -73,6 +80,7 @@ class IndexAction extends BaseAction
         $this->assign('game', $list);
         $this->assign('count', $count);
         $this->hotgame();
+        $this->assign('city', D('Public/Index')->city());
         $this->hotrecommend();
         $this->display();
     }

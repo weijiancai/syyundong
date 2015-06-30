@@ -134,7 +134,12 @@ class PublicAction extends Action
             $this->ajaxReturn($data, 'JSON');
         } else { // 上传成功 获取上传文件信息
             $info = $upload->getUploadFileInfo();
-
+            $Image = new Image();
+            foreach ($info as $value) {
+                // $Image->water('./Public/Upload/' . $path.'/' . $value['savename'], './Public/images/default/water.png'); //打水印
+                list($w_day,$w_name) = split ('[/]', $value['savename']);
+                $Image->water('./Public/Upload/attached/' . $w_day.'/m_' . $w_name, './Public/images/default/water.png');
+            }
             //打水印
             /*$Image = new Image();
             $Image->water('./Public/Upload/attached/' . $info[0]['savename'], './Public/images/common/logo1.png'); //打水印*/

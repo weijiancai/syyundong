@@ -26,7 +26,13 @@ $(function () {
             submit('province', province);
         }
     });*/
-
+    // 省市
+    $('#tplCity').change(function () {
+        var cityId = $(this).val();
+        if (cityId != '') {
+            submit('cityId', cityId);
+        }
+    });
 
     // 排序
     $('#order-group').find('li a').click(function() {

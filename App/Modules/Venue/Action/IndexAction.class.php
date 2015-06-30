@@ -29,6 +29,13 @@ class IndexAction extends BaseAction
             }
 
         }
+        //省市
+        if ($_GET['cityId']) {
+            if ($_GET['cityId'] != 'all') {
+                $map['city'] = array('eq', $_GET['cityId']);
+                $region = D('DbRegion')->where('pid = ' . $_GET['cityId'])->select();
+            }
+        }
         //商圈
         if ($_GET['business']) {
             $map['business'] = array('eq', $_GET['business']);
@@ -61,7 +68,8 @@ class IndexAction extends BaseAction
         $this->assign('venue', $list);
         $this->assign('count', $count);
         $this->assign('buss', $buss);
-        $this->assign('region', D('Public/Index')->region());
+        $this->assign('region',$region);
+        $this->assign('city', D('Public/Index')->city());
         $this->assign('venue_sport', $this->venue_sport());
         $this->assign('new_comment', $this->new_comment());
         if (I('session.mark_id')) {

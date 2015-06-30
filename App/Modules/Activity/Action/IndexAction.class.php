@@ -60,7 +60,7 @@ class IndexAction extends BaseAction
             }
         }
         //区域
-        if ($_GET['region']) {
+        if (($_GET['region'])&&($_GET['region']!='all')) {
             $map['region'] = $_GET['region'];
         }
         $map['type'] = array('eq', 'activity');

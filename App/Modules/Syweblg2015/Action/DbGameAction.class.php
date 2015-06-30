@@ -214,7 +214,7 @@ class DbGameAction extends CommonAction
     public function other_edit()
     {
         $model = New Model();
-        $vo = $model->query('select game_id,field_id,sort_num,field_value,
+        $vo = $model->query('select game_id,field_id,sort_num,field_value,key_word,
                       (select name from db_game where id = game_id) game_name,
                       (select name from mt_field_define where id = field_id) field_name
                        from op_game_field where game_id='.$_GET['game_id'].' and field_id='.$_GET['field_id']);
