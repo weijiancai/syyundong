@@ -153,33 +153,22 @@ class DbUserAction extends CommonAction
             echo json_encode($arr);
         }
     }
-
     /*
-     *	推送信息
+     * @功能：设置管理员
+     * @时间：20150422
      */
-    public function  pull()
+    public function  setManager()
     {
         $name = $this->getActionName();
         $model = M($name);
-        $list = $model->where('ID=' . $_GET['ID'])->setField($_GET['item'], 0);
+        $list = $model->where('id=' . $_GET['id'])->setField('status', 1);
         if ($list) {
-            echo $this->ajax('1', "滞留成功", $name, "", "");
+            echo $this->ajax('1', "设置成功", $name, "", "");
         } else {
-            echo $this->ajax('0', "滞留失败", $name, "", "");
+            echo $this->ajax('0', "设置失败", $name, "", "");
         }
     }
 
-    public function  push()
-    {
-        $name = $this->getActionName();
-        $model = M($name);
-        $list = $model->where('ID=' . $_GET['ID'])->setField($_GET['item'], 1);
-        if ($list) {
-            echo $this->ajax('1', "顶贴成功", $name, "", "");
-        } else {
-            echo $this->ajax('0', "顶贴失败", $name, "", "");
-        }
-    }
 }
 
 ?>

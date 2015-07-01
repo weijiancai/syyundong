@@ -84,6 +84,7 @@ class CommonAction extends Action
             $this->_list($model, $map, $order);
         }
         $this->display();
+        dump('44');
         return;
     }
 
