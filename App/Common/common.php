@@ -200,7 +200,7 @@ function getGroupName($id) {
     if ($list = F ( 'groupName' )) {
         return $list [$id];
     }
-    $dao = D ( "LRole" );
+    $dao = D ( "DbRole" );
     $list = $dao->select ( array ('field' => 'id,name' ) );
     foreach ( $list as $vo ) {
         $nameList [$vo ['id']] = $vo ['name'];

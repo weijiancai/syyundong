@@ -21,7 +21,7 @@ class DbRoleModel extends CommonModel {
 		}
 		$id = implode(',',$appIdList);
 		$where = 'a.id ='.$groupId.' AND b.id in('.$id.')';
-		$result = $this->db->execute('INSERT INTO '.$this->tablePrefix.'l_access (role_id,node_id,pid,level) SELECT a.id, b.id,b.pid,b.level FROM '.$this->tablePrefix.'role a, '.$this->tablePrefix.'node b WHERE '.$where);
+		$result = $this->db->execute('INSERT INTO '.$this->tablePrefix.'db_access (role_id,node_id,pid,level) SELECT a.id, b.id,b.pid,b.level FROM '.$this->tablePrefix.'role a, '.$this->tablePrefix.'node b WHERE '.$where);
 		if($result===false) {
 			return false;
 		}else {
@@ -30,13 +30,13 @@ class DbRoleModel extends CommonModel {
 	}
 	function getGroupAppList($groupId)
 	{
-		$rs = $this->db->query('select b.id,b.title,b.name from '.$this->tablePrefix.'l_access as a ,'.$this->tablePrefix.'l_node as b where a.node_id=b.id and  b.pid=0 and a.role_id='.$groupId.' ');
+		$rs = $this->db->query('select b.id,b.title,b.name from '.$this->tablePrefix.'db_access as a ,'.$this->tablePrefix.'db_node as b where a.node_id=b.id and  b.pid=0 and a.role_id='.$groupId.' ');
 		return $rs;
 	}
 
 	function delGroupApp($groupId)
 	{
-		$table = $this->tablePrefix.'l_access';
+		$table = $this->tablePrefix.'db_access';
 		$result = $this->db->execute('delete from '.$table.' where level=1 and role_id='.$groupId);
 		if($result===false) {
 			return false;
@@ -47,7 +47,7 @@ class DbRoleModel extends CommonModel {
 
 	function delGroupModule($groupId,$appId)
 	{
-		$table = $this->tablePrefix.'L_access';
+		$table = $this->tablePrefix.'db_access';
 		$result = $this->db->execute('delete from '.$table.' where level=2 and pid='.$appId.' and role_id='.$groupId);
 		if($result===false) {
 			return false;
@@ -58,8 +58,8 @@ class DbRoleModel extends CommonModel {
 
 	function getGroupModuleList($groupId,$appId)
 	{
-		$table = $this->tablePrefix.'L_access';
-		$rs = $this->db->query('select b.id,b.title,b.name from '.$table.' as a ,'.$this->tablePrefix.'L_node as b where a.node_id=b.id and  b.pid='.$appId.' and a.role_id='.$groupId.' ');
+		$table = $this->tablePrefix.'db_access';
+		$rs = $this->db->query('select b.id,b.title,b.name from '.$table.' as a ,'.$this->tablePrefix.'db_node as b where a.node_id=b.id and  b.pid='.$appId.' and a.role_id='.$groupId.' ');
 		return $rs;
 	}
 
@@ -72,7 +72,7 @@ class DbRoleModel extends CommonModel {
 			$moduleIdList = implode(',',$moduleIdList);
 		}
 		$where = 'a.id ='.$groupId.' AND b.id in('.$moduleIdList.')';
-		$rs = $this->db->execute('INSERT INTO '.$this->tablePrefix.'L_access (role_id,node_id,pid,level) SELECT a.id, b.id,b.pid,b.level FROM '.$this->tablePrefix.'L_role a, '.$this->tablePrefix.'L_node b WHERE '.$where);
+		$rs = $this->db->execute('INSERT INTO '.$this->tablePrefix.'db_access (role_id,node_id,pid,level) SELECT a.id, b.id,b.pid,b.level FROM '.$this->tablePrefix.'db_role a, '.$this->tablePrefix.'db_node b WHERE '.$where);
 		if($result===false) {
 			return false;
 		}else {
@@ -82,7 +82,7 @@ class DbRoleModel extends CommonModel {
 
 function delGroupAction($groupId,$moduleId)
 {
-    $table = $this->tablePrefix.'L_access';
+    $table = $this->tablePrefix.'db_access';
 
     $result = $this->db->execute('delete from '.$table.' where level=3 and pid='.$moduleId.' and role_id='.$groupId);
     if($result===false) {
@@ -94,8 +94,8 @@ function delGroupAction($groupId,$moduleId)
 
 function getGroupActionList($groupId,$moduleId)
 {
-    $table = $this->tablePrefix.'L_access';
-    $rs = $this->db->query('select b.id,b.title,b.name from '.$table.' as a ,'.$this->tablePrefix.'L_node as b where a.node_id=b.id and  b.pid='.$moduleId.' and  a.role_id='.$groupId.' ');
+    $table = $this->tablePrefix.'db_access';
+    $rs = $this->db->query('select b.id,b.title,b.name from '.$table.' as a ,'.$this->tablePrefix.'db_node as b where a.node_id=b.id and  b.pid='.$moduleId.' and  a.role_id='.$groupId.' ');
     return $rs;
 }
 
@@ -108,7 +108,7 @@ function setGroupActions($groupId,$actionIdList)
 	    $actionIdList = implode(',',$actionIdList);
 	}
     $where = 'a.id ='.$groupId.' AND b.id in('.$actionIdList.')';
-    $rs = $this->db->execute('INSERT INTO '.$this->tablePrefix.'L_access (role_id,node_id,pid,level) SELECT a.id, b.id,b.pid,b.level FROM '.$this->tablePrefix.'L_role a, '.$this->tablePrefix.'L_node b WHERE '.$where);
+    $rs = $this->db->execute('INSERT INTO '.$this->tablePrefix.'db_access (role_id,node_id,pid,level) SELECT a.id, b.id,b.pid,b.level FROM '.$this->tablePrefix.'db_role a, '.$this->tablePrefix.'db_node b WHERE '.$where);
     if($result===false) {
         return false;
     }else {
@@ -118,16 +118,16 @@ function setGroupActions($groupId,$actionIdList)
 
 	function getGroupUserList($groupId)
 	{
-		$table = $this->tablePrefix.'l_role_user';
-		$rs = $this->db->query('select b.id,b.nickname from '.$table.' as a ,'.$this->tablePrefix.'l_user as b where a.user_id=b.id and  a.role_id='.$groupId.' ');
-		return $rs;
+		$table = $this->tablePrefix.'db_role_user';
+		$rs = $this->db->query('select b.id,b.nick_name from '.$table.' as a ,'.$this->tablePrefix.'db_user as b where a.user_id=b.id and  a.role_id='.$groupId.' ');
+        return $rs;
 	}
 
 	function delGroupUser($groupId)
 	{
-		$table = $this->tablePrefix.'l_role_user';
+		$table = $this->tablePrefix.'db_role_user';
 
-		$result = $this->db->execute('delete from l_role_user where role_id='.$groupId);
+		$result = $this->db->execute('delete from db_role_user where role_id='.$groupId);
 
 		if($result===false) {
 			return false;
@@ -137,7 +137,7 @@ function setGroupActions($groupId,$actionIdList)
 	}
 
 	function setGroupUser($groupId,$userId) {
-		$sql	=	"INSERT INTO ".$this->tablePrefix.'l_role_user (role_id,user_id) values ('.$groupId.','.$userId.')';
+		$sql	=	"INSERT INTO ".$this->tablePrefix.'db_role_user (role_id,user_id) values ('.$groupId.','.$userId.')';
 		$result	=	$this->execute($sql);
 		if($result===false) {
 			return false;
@@ -157,7 +157,7 @@ function setGroupActions($groupId,$actionIdList)
 		array_walk($userIdList, array($this, 'fieldFormat'));
 		$userIdList	 =	 implode(',',$userIdList);
 		$where = 'a.id ='.$groupId.' AND b.id in('.$userIdList.')';
-		$rs = $this->execute('INSERT INTO '.$this->tablePrefix.'l_role_user (role_id,user_id) SELECT a.id, b.id FROM '.$this->tablePrefix.'l_role a, '.$this->tablePrefix.'l_user b WHERE '.$where);
+		$rs = $this->execute('INSERT INTO '.$this->tablePrefix.'db_role_user (role_id,user_id) SELECT a.id, b.id FROM '.$this->tablePrefix.'db_role a, '.$this->tablePrefix.'db_user b WHERE '.$where);
 		if($result===false) {
 			return false;
 		}else {

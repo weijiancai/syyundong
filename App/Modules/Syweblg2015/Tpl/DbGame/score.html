@@ -1,0 +1,108 @@
+<form id="pagerForm" action="__URL__" method="post">
+    <input type="hidden" name="pageNum" value="<{$_REQUEST['pageNum']|default=1}>"/>
+    <input type="hidden" name="numPerPage" value="<{$numPerPage}>"/>
+    <input type="hidden" name="_order" value="<{$_REQUEST['_order']}>"/>
+    <input type="hidden" name="_sort" value="<{$_REQUEST['_sort']|default='1'}>"/>
+    <input type="hidden" name="listRows" value="<{$_REQUEST['listRows']}>"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="<{$key}>" value="<{$_REQUEST[$key]}>"/>
+    </volist>
+</form>
+<script src="__PUBLIC__/js/syweb/sy_game.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        $("img").attr({ width: "15px", height: "15px", onclick: 'show(this.src)'});
+        $("img").attr('style', '');
+        $("embed").attr({ width: "15px", height: "15px"});
+    });
+    function show($temp) {
+        $.pdialog.open("__URL__/show?img=" + $temp, "show", "预览", {height: "600", width: "600", mask: "true"});　
+    }
+</script>
+
+<div class="page">
+    <div class="pageHeader">
+        <form onsubmit="return navTabSearch(this);" action="__URL__/group" method="post">
+            <div class="searchBar">
+                <table>
+                    <tr>
+                        <td>分组名称：<input type="text" name="group_name" value="<{$_REQUEST['group_name']}>" class="medium" size="10">&nbsp;&nbsp;
+                        </td>
+                        <input type="hidden" name="id" value="<{$_GET['id']}>">
+                        <td>
+                            <button type="submit">查询</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+
+    <div class="pageContent">
+        <div class="panelBar">
+            <ul class="toolBar">
+                <li><a class="add" href="__URL__/group_add/game_id/<{$_GET['id']}>" target="dialog" mask="true" width="300" height="300" rel="vadd"><span>新增</span></a></li>
+                <li><a class="edit" href="__URL__/group_edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
+                       width="300" height="300" rel="vedit"><span>修改</span></a></li>
+                <li><a title="确实要删除吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/group_del"
+                       class="delete"><span>删除</span></a></li>
+            </ul>
+        </div>
+        <table class="table" width="100%" layoutH="113">
+            <thead>
+            <tr>
+                <th width="2%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
+                <th width="8%" align="center">赛事名称</th>
+                <th width="8%" align="center">分组名称</th>
+                <th width="8%" align="center">录入人</th>
+                <th width="4%" align="center">录入时间</th>
+                <th width="4%" align="center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <volist id="vo" name="list">
+                <tr target="sid_node" rel="<{$vo['id']}>">
+                    <td height="25px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
+                    <td><{$vo['game_id']|getGameName}></td>
+                    <td><{$vo['group_name']}></td>
+                    <td><{$vo['input_user']|getUserName}></td>
+                    <td><{$vo['input_date']}></td>
+                    <td><a href="__URL__/group_edit/id/<{$vo.id}>" target="dialog" mask="true" width="300" height="300" rel="detail">编辑</a></td>
+                </tr>
+            </volist>
+
+            </tbody>
+        </table>
+        <div class="panelBar">
+            <div class="pages">
+                <span>显示</span>
+                <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                    <option value="10"
+                    <eq name="numPerPage" value="10">selected=selected</eq>
+                    >10</option>
+                    <option value="15"
+                    <eq name="numPerPage" value="15">selected=selected</eq>
+                    >15</option>
+                    <option value="20"
+                    <eq name="numPerPage" value="20">selected=selected</eq>
+                    >20</option>
+                    <option value="50"
+                    <eq name="numPerPage" value="50">selected=selected</eq>
+                    >50</option>
+                    <option value="100"
+                    <eq name="numPerPage" value="100">selected=selected</eq>
+                    >100</option>
+                    <option value="200"
+                    <eq name="numPerPage" value="200">selected=selected</eq>
+                    >200</option>
+                </select>
+                <span>共<{$totalCount}>条</span>
+
+            </div>
+            <div class="pagination" targetType="navTab" totalCount="<{$totalCount}>" numPerPage="<{$numPerPage}>"
+                 pageNumShown="10" currentPage="<{$currentPage}>"></div>
+        </div>
+    </div>
+</div>

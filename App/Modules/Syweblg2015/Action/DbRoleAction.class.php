@@ -4,6 +4,7 @@
  * 角色管理
  * @Author  liuliting
  */
+
 class DbRoleAction extends CommonAction
 {
     function _filter(&$map)
@@ -320,11 +321,11 @@ class DbRoleAction extends CommonAction
         //读取系统的用户列表
         $user = D("DbUser");
         $where['status'] = 1;
-        $list2 = $user->where($where)->field('id,name,nickname')->select();
-        echo $user->getlastsql();
+        $list2 = $user->where($where)->field('id,name,nick_name')->select();
+
         //dump(	$user);
         foreach ($list2 as $vo) {
-            $userList[$vo['id']] = $vo['account'] . ' ' . $vo['nickname'];
+            $userList[$vo['id']] = $vo['name'] . ' ' . $vo['nick_name'];
         }
         $group = D("DbRole");
         $list = $group->field('id,name')->select();
@@ -406,7 +407,7 @@ class DbRoleAction extends CommonAction
         $name = 'DbRole';
         $role_id = $_POST['role_id'];
         $data = $dataNode = array();
-        M("Dbaccess")->where(array('role_id' => "$role_id"))->delete();
+        M("DbAccess")->where(array('role_id' => "$role_id"))->delete();
 
         foreach ($_POST['node_id'] as $key => $val) {
             $postNode = explode('_', $val);
@@ -416,15 +417,13 @@ class DbRoleAction extends CommonAction
             $dataNode['pid'] = $postNode['2'];
             $dataNode['group_id'] = $postNode['3'];
             $data[] = $dataNode;
-            $accNum = M("l_access")->add($data[$key]);
         }
-        echo $this->ajax('1', "授权成功", $name, "", "");
-        /*      $accNum=M("l_access")->addAll($data);
-                if($accNum){
-                    echo $this->ajax('1', "授权成功",$name,"","");
-                }else{
-                    echo $this->ajax('0', "授权失败",$name,"","");
-                } */
+        $accNum = M("DbAccess")->addAll($data);
+        if ($accNum) {
+            echo $this->ajax('1', "授权成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "授权失败", $name, "", "");
+        }
     }
 
     /*状态恢复*/
@@ -452,15 +451,17 @@ class DbRoleAction extends CommonAction
             echo $this->ajax('0', "状态禁用失败！！", $name, "", "");
         }
     }
-	/*清除角色*/
-	public function delzj(){
-		$ids = M('DbRole')->getField('id',true);
-		$where['role_id'] = array('not in',$ids);
-		M('DbRoleUser')->where($where)->delete();
-		M('DbAccess')->where($where)->delete();
-		dump(M('LAccess')->getLastSql());
-	}
-	
+
+    /*清除角色*/
+    public function delzj()
+    {
+        $ids = M('DbRole')->getField('id', true);
+        $where['role_id'] = array('not in', $ids);
+        M('DbRoleUser')->where($where)->delete();
+        M('DbAccess')->where($where)->delete();
+        dump(M('LAccess')->getLastSql());
+    }
+
     public function foreverdelete()
     {
         $name = $this->getActionName();
