@@ -8,17 +8,6 @@
         <input type="hidden" name="<{$key}>" value="<{$_REQUEST[$key]}>"/>
     </volist>
 </form>
-<script src="__PUBLIC__/js/syweb/sy_game.js" type="text/javascript"></script>
-<script>
-    $(function () {
-        $("img").attr({ width: "15px", height: "15px", onclick: 'show(this.src)'});
-        $("img").attr('style', '');
-        $("embed").attr({ width: "15px", height: "15px"});
-    });
-    function show($temp) {
-        $.pdialog.open("__URL__/show?img=" + $temp, "show", "预览", {height: "600", width: "600", mask: "true"});　
-    }
-</script>
 
 <div class="page">
     <div class="pageHeader">

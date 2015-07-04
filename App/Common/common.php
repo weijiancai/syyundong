@@ -811,6 +811,14 @@ function getRegion($id,$level)
         return implode(' | ', $list);
     }
 }
+/*
+* 功能：分组名称
+* 时间：20150615
+*/
+function getGameGroupName($id)
+{
+   return  M('OpGameGroup')->where('id='.$id)->getField('group_name');
+}
 
 /*
  * @功能：数组转为字符串

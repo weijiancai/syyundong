@@ -22,7 +22,6 @@ class DbRegionAction extends CommonAction
             $this->_list($model, $map, $order);
         }
         $this->display();
-        return;
     }
 
     /*

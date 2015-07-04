@@ -19,36 +19,37 @@
 </script>
 <div class="page">
     <div class="pageContent">
-        <form method="post" action="__URL__/score_insert/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+        <form method="post" action="__URL__/score_update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
+                <input name="id" value="<{$vo.id}>" type="hidden">
                 <dl>
                     <dt>赛事名称：</dt>
-                    <dd><input name="" class="required" type="text" value="<{$game_id|getGameName}>"/>
-                        <input name="game_id" class="required" type="hidden" value="<{$game_id}>"/>
+                    <dd><input name="" class="required" type="text" value="<{$vo['game_id']|getGameName}>"/>
+                        <input name="game_id" class="required" type="hidden" value="<{$vo.game_id}>"/>
                     <dd>
                 </dl>
                 <dl>
                     <dt>选手分组：</dt>
                     <dd><select name="group_id">
                             <option value="">请选择</option>
-                            <volist name="game_group" id="vo">
-                            <option value="<{$vo.id}>"><{$vo.group_name}></option>
+                            <volist name="game_group" id="v">
+                            <option <eq name="v.id" value="$vo.group_id">selected=selected</eq> value="<{$v.id}>"><{$v.group_name}></option>
                             </volist>
                         </select></dd>
                 </dl>
                 <dl>
                     <dt>选手姓名：</dt>
-                    <dd><input name="user_name" class="required" type="text" value=""/>
+                    <dd><input name="user_name" class="required" type="text" value="<{$vo.user_name}>"/>
                     <dd>
                 </dl>
                 <dl>
                     <dt>参赛号码：</dt>
-                    <dd><input name="game_number" class="required" type="text" value=""/>
+                    <dd><input name="game_number" class="required" type="text" value="<{$vo.game_number}>"/>
                     <dd>
                 </dl>
                 <dl>
                     <dt>选手分数：</dt>
-                    <dd><input name="score" class="required" type="text" value=""/>
+                    <dd><input name="score" class="required" type="text" value="<{$vo.score}>"/>
                     <dd>
                 </dl>
                 <dl>

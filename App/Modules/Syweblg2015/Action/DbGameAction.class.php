@@ -218,7 +218,7 @@ class DbGameAction extends CommonAction
                       (select name from db_game where id = game_id) game_name,
                       (select name from mt_field_define where id = field_id) field_name
                        from op_game_field where game_id='.$_GET['game_id'].' and field_id='.$_GET['field_id']);
-        $this->assign('other', $vo[0]);
+        $this->assign('other', $vo);
         $this->display();
     }
 
@@ -331,6 +331,105 @@ class DbGameAction extends CommonAction
         }
     }
     /*
+     * @功能：赛事分数
+     * @时间：20150630
+     */
+    public function score()
+    {
+        $model = D('OpGameScore');
+        $id = $_REQUEST['id'];
+        $map['game_id'] = array('eq', $id);
+        if ($_REQUEST ['user_name']) {
+            $map['user_name'] = array('like', "%{$_REQUEST['user_name']}%");
+        }
+        /*if ($_REQUEST ['game_id']) {
+            $map['game_id'] = array('eq',$_REQUEST['game_id']);
+        }*/
+        $count = $model->where($map)->count();
+        if ($count > 0) {
+            import("ORG.Util.Page");
+            if (!empty ($_REQUEST ['listRows'])) {
+                $listRows = $_REQUEST ['listRows'];
+            } else {
+                $listRows = '';
+            }
+            $p = new Page ($count, $listRows);
+            $pageNum = empty($_REQUEST['numPerPage']) ? C('PAGE_LISTROWS') : $_REQUEST['numPerPage'];
+            $voList = $model->relation(true)->where($map)->order($order)->limit($pageNum)->page($_REQUEST[C('VAR_PAGE')])->select();
+            //分页跳转的时候保证查询条件
+            foreach ($map as $key => $val) {
+                if (!is_array($val)) {
+                    $p->parameter .= "$key=" . urlencode($val) . "&";
+                }
+            }
+            $page = $p->show();
+            $this->assign('list', $voList);
+            $this->assign('sort', $sort);
+            $this->assign('order', $order);
+            $this->assign('sortImg', $sortImg);
+            $this->assign('sortType', $sortAlt);
+            $this->assign("page", $page);
+
+        }
+        $this->assign('totalCount', $count);
+        $pageNum = empty($_REQUEST['numPerPage']) ? C('PAGE_LISTROWS') : $_REQUEST['numPerPage'];
+        $this->assign('numPerPage', $pageNum);
+        $this->assign('currentPage', !empty($_REQUEST[C('VAR_PAGE')]) ? $_REQUEST[C('VAR_PAGE')] : 1);
+        Cookie::set('_currentUrl_', __SELF__);
+        $this->display();
+    }
+    /*
+     * @功能：添加分数页面
+     * @时间：20150422
+     */
+    public function score_add()
+    {
+        $this->assign('game_id', $_GET['game_id']);
+        $this->assign('game_group',M('OpGameGroup')->where('game_id='.$_GET['game_id'])->select());
+        $this->display();
+    }
+    /*
+     * @功能：添加分数方法
+     * @时间：20150704
+     */
+    public function score_insert(){
+        $model = D('OpGameScore');
+        $name = "score";
+        if (false === $model->create()) {
+            $this->error($model->getError());
+        }
+        $list = $model->add();
+        if ($list !== false) {
+            echo $this->ajax('1', "添加成功", $name, "", "closeCurrent");
+        } else {
+            echo $this->ajax('0', "添加失败", $name, "", "closeCurrent");
+        }
+    }
+    /*
+     * @功能：编辑分数页面
+     * @时间：20150704
+     */
+    public function score_edit(){
+        $vo = M('OpGameScore')->where('id=' . $_GET['id'])->find();
+        $this->assign('game_group',M('OpGameGroup')->where('game_id='.$vo['game_id'])->select());
+        $this->assign('vo', $vo);
+        $this->display();
+    }
+    /*
+     * @功能：赛事分组更新
+     * @时间：20150422
+     */
+    public function score_update(){
+        $this->common_update('OpGameScore','score');
+    }
+    /*
+     * @功能：选手分数删除
+     * @时间：20150704
+     */
+    public function score_del(){
+        $this->common_del('OpGameScore','score');
+    }
+    /*
      * @功能：赛事分组
      * @时间：20150422
      */
@@ -441,16 +540,7 @@ class DbGameAction extends CommonAction
      */
     public function group_del()
     {
-        $name = 'group';
-        $model = D('OpGameGroup');
-        $pk = $model->getPk();
-        $data[$pk] = array('in', $_POST['ids']);
-        $result = $model->where($data)->delete();
-        if (false !== $result) {
-            echo $this->ajax('1', "删除成功", $name, "", "");
-        } else {
-            echo $this->ajax('0', "删除失败", $name, "", "");
-        }
+        $this->common_del('OpGameGroup','group');
     }
 
     /*
@@ -492,6 +582,39 @@ class DbGameAction extends CommonAction
             echo $this->ajax('1', "顶贴成功", $name, "", "");
         } else {
             echo $this->ajax('0', "顶贴失败", $name, "", "");
+        }
+    }
+    /*
+     * @功能：公共修改方法
+     * @时间：20150422
+     */
+    function common_update($model,$name)
+    {
+        $model = D($model);
+        if (false === $model->create()) {
+            $this->error($model->getError());
+        }
+        $list = $model->save();
+        if ($list !== false) {
+            echo $this->ajax('1', "更新成功", $name, "", "closeCurrent");
+        } else {
+            echo $this->ajax('0', "更新失败", $name, "", "closeCurrent");
+        }
+    }
+    /*
+     * @功能：公共删除方法
+     * @时间：20150422
+     */
+    public function common_del($model,$name)
+    {
+        $model = D($model);
+        $pk = $model->getPk();
+        $data[$pk] = array('in', $_POST['ids']);
+        $result = $model->where($data)->delete();
+        if (false !== $result) {
+            echo $this->ajax('1', "删除成功", $name, "", "");
+        } else {
+            echo $this->ajax('0', "删除失败", $name, "", "");
         }
     }
 }

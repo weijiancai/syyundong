@@ -8,17 +8,6 @@
         <input type="hidden" name="<{$key}>" value="<{$_REQUEST[$key]}>"/>
     </volist>
 </form>
-<script src="__PUBLIC__/js/syweb/sy_game.js" type="text/javascript"></script>
-<script>
-    $(function () {
-        $("img").attr({ width: "15px", height: "15px", onclick: 'show(this.src)'});
-        $("img").attr('style', '');
-        $("embed").attr({ width: "15px", height: "15px"});
-    });
-    function show($temp) {
-        $.pdialog.open("__URL__/show?img=" + $temp, "show", "预览", {height: "600", width: "600", mask: "true"});　
-    }
-</script>
 
 <div class="page">
     <div class="pageHeader">
@@ -26,8 +15,9 @@
             <div class="searchBar">
                 <table>
                     <tr>
-                        <td>分组名称：<input type="text" name="group_name" value="<{$_REQUEST['group_name']}>" class="medium" size="10">&nbsp;&nbsp;
-                        </td>
+                        <td>选手编号：<input type="text" name="group_number" value="<{$_REQUEST['group_number']}>" class="medium" size="10">&nbsp;&nbsp;</td>
+                        <td>选手姓名：<input type="text" name="user_name" value="<{$_REQUEST['user_name']}>" class="medium" size="10">&nbsp;&nbsp;</td>
+
                         <input type="hidden" name="id" value="<{$_GET['id']}>">
                         <td>
                             <button type="submit">查询</button>
@@ -41,10 +31,10 @@
     <div class="pageContent">
         <div class="panelBar">
             <ul class="toolBar">
-                <li><a class="add" href="__URL__/group_add/game_id/<{$_GET['id']}>" target="dialog" mask="true" width="300" height="300" rel="vadd"><span>新增</span></a></li>
-                <li><a class="edit" href="__URL__/group_edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
-                       width="300" height="300" rel="vedit"><span>修改</span></a></li>
-                <li><a title="确实要删除吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/group_del"
+                <li><a class="add" href="__URL__/score_add/game_id/<{$_GET['id']}>" target="dialog" mask="true" width="350" height="350" rel="vadd"><span>新增</span></a></li>
+                <li><a class="edit" href="__URL__/score_edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
+                       width="350" height="350" rel="vedit"><span>修改</span></a></li>
+                <li><a title="确实要删除吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/score_del"
                        class="delete"><span>删除</span></a></li>
             </ul>
         </div>
@@ -53,7 +43,10 @@
             <tr>
                 <th width="2%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
                 <th width="8%" align="center">赛事名称</th>
-                <th width="8%" align="center">分组名称</th>
+                <th width="8%" align="center">选手分组</th>
+                <th width="8%" align="center">选手编号</th>
+                <th width="8%" align="center">选手姓名</th>
+                <th width="8%" align="center">分数</th>
                 <th width="8%" align="center">录入人</th>
                 <th width="4%" align="center">录入时间</th>
                 <th width="4%" align="center">操作</th>
@@ -66,10 +59,13 @@
                 <tr target="sid_node" rel="<{$vo['id']}>">
                     <td height="25px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
                     <td><{$vo['game_id']|getGameName}></td>
-                    <td><{$vo['group_name']}></td>
+                    <td><{$vo['group_id']|getGameGroupName}></td>
+                    <td><{$vo['game_number']}></td>
+                    <td><{$vo['user_name']}></td>
+                    <td><{$vo['score']}></td>
                     <td><{$vo['input_user']|getUserName}></td>
                     <td><{$vo['input_date']}></td>
-                    <td><a href="__URL__/group_edit/id/<{$vo.id}>" target="dialog" mask="true" width="300" height="300" rel="detail">编辑</a></td>
+                    <td><a href="__URL__/score_edit/id/<{$vo.id}>" target="dialog" mask="true" width="350" height="350" rel="detail">编辑</a></td>
                 </tr>
             </volist>
 
