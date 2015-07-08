@@ -5,14 +5,14 @@ $(function () {
     // 注册body id
     $('body').attr('id', 'match-page');
     //
-    var $detailTabs = $('#detailTabs');
+/*    var $detailTabs = $('#detailTabs');
     var $tabs = $('#tabs');
     $detailTabs.find('a').each(function (index) {
         $(this).click(function () {
-            /*if ($(this).text() == '赛友圈') {
+            *//*if ($(this).text() == '赛友圈') {
                 alert('跳转到赛友圈！');
                 return;
-            }*/
+            }*//*
             $detailTabs.find('a').removeClass('current');
             $(this).addClass('current');
 
@@ -23,7 +23,7 @@ $(function () {
                 $('#detail_bottom').hide();
             }
         });
-    });
+    });*/
 
     $('#relevantTabs').find('a').each(function (index) {
         $(this).click(function () {

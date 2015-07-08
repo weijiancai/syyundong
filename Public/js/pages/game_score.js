@@ -5,7 +5,7 @@ $(function () {
     // 注册body id
     $('body').attr('id', 'match-page');
     //Tab切换
-    var $detailTabs = $('#detailTabs');
+   /* var $detailTabs = $('#detailTabs');
     var $tabs = $('#tabs');
     $detailTabs.find('a').each(function (index) {
         $(this).click(function () {
@@ -19,7 +19,7 @@ $(function () {
                 $('#detail_bottom').hide();
             }
         });
-    });
+    });*/
     //成绩查询校验
     var $form = $('#scoreForm');
     $form.validate({

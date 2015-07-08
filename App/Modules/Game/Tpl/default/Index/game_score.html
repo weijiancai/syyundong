@@ -17,7 +17,7 @@
                 <ul id="detailTabs">
                     <li><a href="__APP__/Game/<{$detail.id}>">赛事首页</a></li>
                     <volist name="field_list" id='fo'>
-                        <li><a><{$fo.field_name}></a></li>
+                        <li><a href="__APP__/Game/<{$detail.id}>/field/<{$fo.field_id}>"><{$fo.field_name}></a></li>
                     </volist>
                     <li><a href="__APP__/Game/<{$detail.id}>/notice">赛事公告</a></li>
                     <li><a href="__APP__/Game/<{$detail.id}>/news">赛事新闻</a></li>
@@ -64,7 +64,7 @@
                                     <tbody>
                                     <volist name="list" id="vo" key="k">
                                         <eq name="ao.id" value="$vo.group_id">
-                                    <tr><td><{$k}></td><td><{$vo['user_id']|getUserName}></td><td><{$vo.game_number}></td><td><{$vo.score}></td></tr>
+                                    <tr><td><{$k}></td><td><{$vo['user_name']}></td><td><{$vo.game_number}></td><td><{$vo.score}></td></tr>
                                         </eq>
                                     </volist>
                                     </tbody>

@@ -170,7 +170,7 @@ class IndexAction extends BaseAction
     public function game_detail()
     {
         $id = $_GET['id'];
-        $detail = D('VGameActivity')->where('id=' . $id)->find();
+        $detail = D('VGameActivity')->where("id=" . $id ." and type='game'")->find();
         //赛事公告
         $notice = D('OpGameNotice')->where('game_id=' . $id)->limit(2)->select();
         //赛事新闻
@@ -253,7 +253,7 @@ class IndexAction extends BaseAction
         }
 
         //赛事信息
-        $detail = D('VGameActivity')->where('id=' . $id)->find();
+        $detail = D('VGameActivity')->where("id=" . $id ." and type='game'")->find();
         $this->assign('id', $id);
         $this->assign('info', $info);
         $this->assign('other', $list);
@@ -270,7 +270,7 @@ class IndexAction extends BaseAction
     {
         $id = $_GET['id'];
         //赛事信息
-        $detail = D('VGameActivity')->where('id=' . $id)->find();
+        $detail = D('VGameActivity')->where("id=" . $id ." and type='game'")->find();
         //赛事字段
         $model = New Model();
         $field_list = $model->query('select game_id,field_id,sort_num,field_value,
@@ -301,7 +301,11 @@ class IndexAction extends BaseAction
     {
         $info = $_GET['info'];
         $where['game_id'] = $_GET['id'];
-        $where['id'] = $_GET['d_id'];
+        if($info=='field'){
+            $where['field_id'] = $_GET['d_id'];
+        }else{
+            $where['id'] = $_GET['d_id'];
+        }
         $list = D('op_game_' . $info)->where($where)->find();
         $this->assign('list', $list);
         //赛事字段
@@ -313,7 +317,7 @@ class IndexAction extends BaseAction
                        from op_game_field where game_id=' . $_GET['id'] . " order by sort_num asc");
         $this->assign('field_list', $field_list);
         //赛事信息
-        $detail = D('DbGame')->field('id,sport_id,name')->where('id=' . $_GET['id'])->find();
+        $detail = D('VGameActivity')->where("id=" . $_GET['id'] ." and type='game'")->find();
         $this->assign('detail', $detail);
         $this->display();
     }
@@ -554,5 +558,14 @@ class IndexAction extends BaseAction
             $list[$key] = $val;
         }
         echo json_encode($list);
+    }
+    /*
+     * @时间: 20150709
+     * @功能: 最新新闻
+     */
+    public function  news_detail(){
+        $news = M('OpGameNews')->where('id='.$_GET['id'])->find();
+        $this->assign('news',$news);
+        $this->display();
     }
 }

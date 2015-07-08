@@ -136,7 +136,7 @@
                                         </div>
                                         <div class="item-list-right" onclick="window.location.href='/Game/<{$vo.id}>'">
                                             <p class="item-list-ttl">
-                                                <span class="icon-55 <if condition='$vo.status eq 1'>match-enroll<elseif condition='$vo.status eq 2'/>match-ready <elseif condition='$vo.status eq 3'/>match-going<elseif condition='$vo.status eq 4'/>match-end</if>"></span>
+                                                <span class="icon-55 <if condition='$vo.status eq 1'>match-enroll<elseif condition='$vo.status eq 2'/>match-ready <elseif condition='$vo.status eq 3'/>match-going<elseif condition='$vo.status eq 4'/>match-end<elseif condition='$vo.status eq 5'/>match-arrange</if>"></span>
                                                 <strong><span>[<{$vo['sport_id']|getSportName}>]</span><a
                                                         href="/Game/<{$vo.id}>"><{$vo.name}></a></strong>
                                             </p>

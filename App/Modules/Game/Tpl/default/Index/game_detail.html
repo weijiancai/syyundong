@@ -27,7 +27,7 @@
                         <li><a href="__APP__/Game/<{$detail.id}>" class="current">赛事首页</a></li>
 
                         <volist name="field_list" id='fo'>
-                            <li><a><{$fo.field_name}></a></li>
+                            <li><a href="__APP__/Game/<{$detail.id}>/field/<{$fo.field_id}>"><{$fo.field_name}></a></li>
                         </volist>
                         <li><a href="__APP__/Game/<{$detail.id}>/notice">赛事公告</a></li>
                         <li><a href="__APP__/Game/<{$detail.id}>/news">赛事新闻</a></li>

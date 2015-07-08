@@ -164,7 +164,7 @@ class DbGameAction extends CommonAction
     public function detail()
     {
         $model = New Model();
-        $list = $model->query('select game_id,field_id,sort_num,field_value,
+        $list = $model->query('select id,game_id,field_id,sort_num,field_value,
                       (select name from db_game where id = game_id) game_name,
                       (select name from mt_field_define where id = field_id) field_name
                        from op_game_field where game_id='.$_GET['id']);
@@ -218,7 +218,7 @@ class DbGameAction extends CommonAction
                       (select name from db_game where id = game_id) game_name,
                       (select name from mt_field_define where id = field_id) field_name
                        from op_game_field where game_id='.$_GET['game_id'].' and field_id='.$_GET['field_id']);
-        $this->assign('other', $vo);
+        $this->assign('other', $vo[0]);
         $this->display();
     }
 

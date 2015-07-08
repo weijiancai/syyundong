@@ -844,7 +844,11 @@
             </h4>
             <ul data-selector="eventsRankings">
                 <volist name="new_game" id="vo" key="k">
-                    <li><i class="top<{$k}>"><{$k}></i><a href="/Game/<{$vo.game_id}>/news/<{$vo.id}>" target="_blank"><{$vo.title}></a></li>
+                    <if condition="$vo.game_id eq 0">
+                    <li><i class="top<{$k}>"><{$k}></i><a href="/Game/news_detail/<{$vo.id}>" target="_blank"><{$vo.title}></a></li>
+                     <else/>
+                        <li><i class="top<{$k}>"><{$k}></i><a href="/Game/<{$vo.game_id}>/news/<{$vo.id}>" target="_blank"><{$vo.title}></a></li>
+                     </if>
                 </volist>
             </ul>
         </div>
@@ -942,11 +946,7 @@
     </ul></div>
 </div>
 </div>
-<script type="text/javascript" src="__PUBLIC__/kindeditor/kindeditor.js"></script>
-<script type="text/javascript" src="__PUBLIC__/kindeditor/lang/zh_CN.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/syweb/kindeditor_all.js"></script>
 
-        <textarea id="editor_id"></textarea>
 <script type="text/javascript" src="/Public/js/pages/index.js"></script>
 
 

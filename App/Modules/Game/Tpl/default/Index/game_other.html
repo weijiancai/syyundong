@@ -25,7 +25,7 @@
             <ul id="detailTabs">
                 <li><a href="__APP__/Game/<{$id}>">赛事首页</a></li>
                 <volist name="field_list" id='fo'>
-                    <li><a><{$fo.field_name}></a></li>
+                    <li><a href="__APP__/Game/<{$detail.id}>/field/<{$fo.field_id}>"><{$fo.field_name}></a></li>
                 </volist>
                 <li><a href="__APP__/Game/<{$id}>/notice" <if condition="$info eq notice"> class="current"</if>>赛事公告</a></li>
                 <li><a href="__APP__/Game/<{$id}>/news" <if condition="$info eq news"> class="current"</if>>赛事新闻</a></li>
@@ -55,14 +55,14 @@
                 </div>
             </div>
 
-            <volist name="field_list" id='vo'>
+            <!--<volist name="field_list" id='vo'>
                 <div class="main-block clearfix tab" style="display: none;">
                     <div class="article-block none-indent">
                         <h3 class="article-title"><{$vo.field_name}></h3>
                         <{$vo.field_value}>
                     </div>
                 </div>
-            </volist>
+            </volist>-->
             <div class="main-block pagging-block clearfix tab">
                 <div class="paging-wrap">
                     <{$page}>

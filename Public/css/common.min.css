@@ -1940,23 +1940,23 @@ table td[class*="span"], table th[class*="span"], .row-fluid table td[class*="sp
     *margin-right: .3em;
     line-height: 14px;
     vertical-align: text-top;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/glyphicons-halflings.png");
+    background-image: url("../images/icon/glyphicons-halflings.png");
     background-position: 14px 14px;
     background-repeat: no-repeat
 }
 
 .icon-white, .nav-pills > .active > a > [class^="icon-"], .nav-pills > .active > a > [class*=" icon-"], .nav-list > .active > a > [class^="icon-"], .nav-list > .active > a > [class*=" icon-"], .navbar-inverse .nav > .active > a > [class^="icon-"], .navbar-inverse .nav > .active > a > [class*=" icon-"], .dropdown-menu > li > a:hover > [class^="icon-"], .dropdown-menu > li > a:focus > [class^="icon-"], .dropdown-menu > li > a:hover > [class*=" icon-"], .dropdown-menu > li > a:focus > [class*=" icon-"], .dropdown-menu > .active > a > [class^="icon-"], .dropdown-menu > .active > a > [class*=" icon-"], .dropdown-submenu:hover > a > [class^="icon-"], .dropdown-submenu:focus > a > [class^="icon-"], .dropdown-submenu:hover > a > [class*=" icon-"], .dropdown-submenu:focus > a > [class*=" icon-"] {
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/glyphicons-halflings-white.png")
+    background-image: url("../images/icon/glyphicons-halflings-white.png")
 }
 
 .icon-match {
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/match-icon.png")
+    background-image: url("../images/icon/match-icon.png")
 }
 
 .icon-55 {
     width: 55px;
     height: 20px;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/icon-55.png");
+    background-image: url("../images/icon/icon-55.png");
     display: inline-block;
     vertical-align: top;
     margin-right: 10px;
@@ -5764,7 +5764,7 @@ input.text-error, textarea.text-error {
     margin-right: .3em;
     line-height: 20px;
     vertical-align: middle;
-    background-image: url("http://static.wisdom-china.cn/iyuesai/images/icons/icon-20.png");
+    background-image: url("../images/icon/icon-20.png");
     background-position: 20px 20px;
     background-repeat: no-repeat;
     overflow: hidden
