@@ -1,0 +1,100 @@
+<script language="Javascript">
+    function navTabAjaxDone(json) {
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok) {
+            if (json.navTabId) { //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                setTimeout(function () {
+                    navTab.closeCurrentTab();
+                }, 100);
+            } else if ("forward" == json.callbackType) {
+                navTab.reload(json.forwardUrl);
+            }
+        }
+    }
+</script>
+<script src="__PUBLIC__/js/syweb/jquery.form.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/syweb/ajaxupload.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/syweb/venue.js" type="text/javascript"></script>
+<div class="page">
+    <div class="pageContent">
+        <form method="post" action="__URL__/update/navTabId/__MODULE__" class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+            <div class="pageFormContent" layoutH="58">
+                <input type="hidden" value="<{$vo.id}>" name="id">
+                <dl>
+                    <dt>场地：</dt>
+                    <dd><input type="text" class="required" value="<{$vo.name}>" name="name"></dd>
+                </dl>
+                <dl>
+                    <dt>地点：</dt>
+                    <dd><select name="province" id="province" class="required">
+                        <option value="">请选择</option>
+                        <volist name="province" id="po">
+                            <option  <eq name="po.id" value="$vo.province">selected=selected</eq>
+                              value="<{$po.id}>"><{$po.name}></option>
+                        </volist>
+                    </select>
+                        <select name="city" id="city" class="required">
+                            <option value="">请选择</option>
+                            <volist name="city" id="co">
+                                <option  <eq name="co.id" value="$vo.city">selected=selected</eq>
+                                   value="<{$co.id}>"><{$co.name}></option>
+                            </volist>
+                        </select></dd>
+                </dl>
+                <dl>
+                    <dt>录入人：</dt>
+                    <dd><input name="" readonly class="required" type="text"
+                               value="<{$_SESSION[C('USER_AUTH_KEY')]|getUserName}>">
+                        <input name="input_user" value="<{$_SESSION[C('USER_AUTH_KEY')]}>" type="hidden"></dd>
+                </dl>
+                <dl>
+                    <dt>录入时间：</dt>
+                    <dd><input type="text" name="input_date" class="" readonly
+                               value="<?php echo date('Y-m-d H:i:s')?>"/></dd>
+                </dl>
+
+                <dl class="nowrap">
+                    <dt>内容:</dt>
+                    <dd><textarea name="content" id="editor_id"><{$vo['content']}></textarea>
+
+                    </dd>
+                </dl>
+                <dl class="nowrap">
+                    <dt>图片:</dt>
+                    <dd><input type="file" name="image" id="fileupload" />
+                        <span id="show_mes" style="color:Red"></span>
+                        <div id="showimg" style="height:40px"><img src="<{$vo['image']|getImageUrl}>" width="100px" height="100px"/></div>
+                        <input type="hidden" value="<{$vo.image}>" name="image" id="image">
+                    </dd>
+                </dl>
+                <input type="hidden" id="path_action" value="Syweblg2015/DbTourism/upimg">
+                <input type="hidden" value="doyen" id="tourism">
+            </div>
+            <div class="formBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">保存</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button">
+                            <div class="buttonContent">
+                                <button type="button" class="close">取消</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
+    </div>
+</div>
+<script type="text/javascript" src="/public/js/syweb/kindeditor_all.js"/>

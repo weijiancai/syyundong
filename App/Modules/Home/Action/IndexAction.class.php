@@ -23,6 +23,7 @@ class IndexAction extends BaseAction
         $this->assign('venue_sport', $this->venue_sport());
         $this->assign('region', D('Public/Index')->region());
         $this->NewRecommendVenue();
+        $this->assign('tourism',$this->Tourism());
         $this->display();
     }
 
@@ -145,5 +146,12 @@ class IndexAction extends BaseAction
     Public function NewGameNews()
     {
         return D('OpGameNews')->order('input_date desc')->limit(10)->select();
+    }
+    /*
+     * @功能：旅游场地
+     * @时间：20150803
+     */
+    public function Tourism(){
+        return D('DbTourism')->order('input_date desc')->limit(4)->select();
     }
 }
