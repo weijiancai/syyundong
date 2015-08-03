@@ -17,7 +17,7 @@
                 <ul id="detailTabs">
                     <li><a href="__APP__/Game/<{$detail.id}>">赛事首页</a></li>
                     <volist name="field_list" id='fo'>
-                        <li><a href="__APP__/Game/<{$detail.id}>/field/<{$fo.field_id}>"><{$fo.field_name}></a></li>
+                        <li><a><{$fo.field_name}></a></li>
                     </volist>
                     <li><a href="__APP__/Game/<{$detail.id}>/notice">赛事公告</a></li>
                     <li><a href="__APP__/Game/<{$detail.id}>/news">赛事新闻</a></li>
@@ -44,7 +44,8 @@
                                 </div>
                                 <div>
                                     <input type="text" placeholder="请输入选手参赛号码" value="" class="input-large" name="playerId" id="playerId">
-                                    <input type="submit" class="btn btn-warning" value="查询"/>
+                                    <input type="text" placeholder="请输入选手姓名" value="" class="input-large" name="playerName" id="playerName">
+									<input type="submit" class="btn btn-warning" value="查询"/>
                                     <!--<button class="btn btn-warning" data-gameid="427" id="i_score_search">查询</button>-->
                                 </div>
                             </form>
@@ -64,7 +65,7 @@
                                     <tbody>
                                     <volist name="list" id="vo" key="k">
                                         <eq name="ao.id" value="$vo.group_id">
-                                    <tr><td><{$k}></td><td><{$vo['user_name']}></td><td><{$vo.game_number}></td><td><{$vo.score}></td></tr>
+                                    <tr><td><{$vo.ranking}></td><td><{$vo['user_name']}></td><td><{$vo.game_number}></td><td><{$vo.score}></td></tr>
                                         </eq>
                                     </volist>
                                     </tbody>

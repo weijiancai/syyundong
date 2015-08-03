@@ -907,7 +907,7 @@
 <volist name="city" id="vo" key ="k">
     <dd class="root-content" style="display:none">
         <ul class="clearfix">
-            <?php $venue  = D('VRecommendVenues')->where("region='".$vo['name']."'")->select();?>
+            <?php $venue  = D('VRecommendVenues')->where("region='".$vo['id']."'")->select();?>
             <volist name="venue" id="uo" key="k">
                 <li class="">
                     <div class="li-content clearfix">

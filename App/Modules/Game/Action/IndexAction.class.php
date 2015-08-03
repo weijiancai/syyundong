@@ -285,8 +285,14 @@ class IndexAction extends BaseAction
         if ($_GET['groupId']) {
             $where['group_id'] = array('eq', $_GET['groupId']);
         }
+		if($_GET['playerId']){
         $where['game_number'] = array('eq', $_GET['playerId']);
-        $list = D('OpGameScore')->where($where)->order('score desc')->select();
+		}
+		if($_GET['playerName']){
+		$where['user_name'] = array('eq', $_GET['playerName']);
+		}
+        $list = D('OpGameScore')->where($where)->order('ranking desc')->select();
+		
         $this->assign('detail', $detail);
         $this->assign('list', $list);
         $this->assign('field_list', $field_list);

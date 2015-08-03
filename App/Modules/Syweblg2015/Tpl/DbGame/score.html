@@ -1,9 +1,10 @@
-<form id="pagerForm" action="__URL__" method="post">
+<form id="pagerForm" action="__URL__/score" method="post">
     <input type="hidden" name="pageNum" value="<{$_REQUEST['pageNum']|default=1}>"/>
     <input type="hidden" name="numPerPage" value="<{$numPerPage}>"/>
     <input type="hidden" name="_order" value="<{$_REQUEST['_order']}>"/>
     <input type="hidden" name="_sort" value="<{$_REQUEST['_sort']|default='1'}>"/>
     <input type="hidden" name="listRows" value="<{$_REQUEST['listRows']}>"/>
+    <input type="hidden" name="game_id" value="<{$_REQUEST['game_id']}>"/>
     <volist name="map" id="m">
         <input type="hidden" name="<{$key}>" value="<{$_REQUEST[$key]}>"/>
     </volist>
@@ -11,14 +12,21 @@
 
 <div class="page">
     <div class="pageHeader">
-        <form onsubmit="return navTabSearch(this);" action="__URL__/group" method="post">
+        <form onsubmit="return navTabSearch(this);" action="__URL__/score" method="post">
             <div class="searchBar">
                 <table>
                     <tr>
-                        <td>选手编号：<input type="text" name="group_number" value="<{$_REQUEST['group_number']}>" class="medium" size="10">&nbsp;&nbsp;</td>
+                        <td>赛事分组：<select name="group_id">
+                            <option value="">请选择</option>
+                                <volist name="game_group" id="vo">
+                                    <option value="<{$vo.id}>" <eq name="_REQUEST.group_id" value="$vo.id">selected=selected</eq>><{$vo.group_name}></option>
+                                </volist>
+                            </select>&nbsp;
+                        </td>
+                        <td>选手编号：<input type="text" name="game_number" value="<{$_REQUEST['game_number']}>" class="medium" size="10">&nbsp;&nbsp;</td>
                         <td>选手姓名：<input type="text" name="user_name" value="<{$_REQUEST['user_name']}>" class="medium" size="10">&nbsp;&nbsp;</td>
 
-                        <input type="hidden" name="id" value="<{$_GET['id']}>">
+                        <input type="hidden" name="game_id" value="<{$_REQUEST['game_id']}>">
                         <td>
                             <button type="submit">查询</button>
                         </td>
@@ -31,7 +39,7 @@
     <div class="pageContent">
         <div class="panelBar">
             <ul class="toolBar">
-                <li><a class="add" href="__URL__/score_add/game_id/<{$_GET['id']}>" target="dialog" mask="true" width="350" height="350" rel="vadd"><span>新增</span></a></li>
+                <li><a class="add" href="__URL__/score_add/game_id/<{$_REQUEST['game_id']}>" target="dialog" mask="true" width="350" height="350" rel="vadd"><span>新增</span></a></li>
                 <li><a class="edit" href="__URL__/score_edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
                        width="350" height="350" rel="vedit"><span>修改</span></a></li>
                 <li><a title="确实要删除吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/score_del"
@@ -42,9 +50,10 @@
             <thead>
             <tr>
                 <th width="2%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
-                <th width="8%" align="center">赛事名称</th>
+                <th width="10%" align="center">赛事名称</th>
                 <th width="8%" align="center">选手分组</th>
                 <th width="8%" align="center">选手编号</th>
+                <th width="5%" align="center">名次</th>
                 <th width="8%" align="center">选手姓名</th>
                 <th width="8%" align="center">分数</th>
                 <th width="8%" align="center">录入人</th>
@@ -61,6 +70,7 @@
                     <td><{$vo['game_id']|getGameName}></td>
                     <td><{$vo['group_id']|getGameGroupName}></td>
                     <td><{$vo['game_number']}></td>
+                    <td><{$vo['ranking']}></td>
                     <td><{$vo['user_name']}></td>
                     <td><{$vo['score']}></td>
                     <td><{$vo['input_user']|getUserName}></td>

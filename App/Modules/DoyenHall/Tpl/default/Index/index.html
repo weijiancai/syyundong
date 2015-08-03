@@ -115,7 +115,7 @@
                         <{$vo.unit}>
                     </p>
                     <p class="item-options"><span>达人简介：</span>
-                        <{$vo['description']|RemoveFormat}>
+                        <{$vo['description']|RemoveFormat|mb_substr=0,200,'utf-8'}>
                     </p>
 
 

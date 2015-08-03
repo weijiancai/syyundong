@@ -274,6 +274,9 @@ function getState($status)
         case 4:
             $status = '已结束';
             break;
+		case 5:
+            $status = '筹备中';
+            break;
     }
 
     return $status;
@@ -629,6 +632,9 @@ function getStates($id)
             break;
         case 4 :
             $result = '已结束';
+            break;
+		case 5:
+            $status = '筹备中';
             break;
     }
     return $result;
