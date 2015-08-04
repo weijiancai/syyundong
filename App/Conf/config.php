@@ -82,6 +82,8 @@ $Public_Config =  array(
         '/^userCenter\/topic\/replay$/' => 'userCenter/index/replay',
         '/^userCenter\/deletefriend\/(\d+)$/' => 'userCenter/index/deletefriend?id=:1',
         '/^userCenter\/Collection$/' => 'userCenter/index/Collection',
+
+        '/^Tourism\/(\d+)$/' => 'Tourism/index/tourism_detail?id=:1',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',
@@ -95,7 +97,7 @@ $Public_Config =  array(
 
 	/*子域名服务*/
 	'APP_GROUP_MODE'	 => 1,
-	'APP_GROUP_LIST'     => 'Home,Public,Game,Activity,Friends,Users,Venue,Association,DoyenHall,userCenter,Syweblg2015',
+	'APP_GROUP_LIST'     => 'Home,Public,Game,Activity,Friends,Users,Venue,Association,DoyenHall,Tourism,userCenter,Syweblg2015',
 	'DEFAULT_GROUP'      => 'Home',
 	'HTML_CACHE_ON'	=>true,
 	'HTML_CACHE_TIME'	=>true,

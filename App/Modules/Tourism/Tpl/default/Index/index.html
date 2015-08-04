@@ -1,0 +1,220 @@
+<include file="Public@default:Public:top" />
+
+<div class="search-engines">
+<div class="container">
+<div class="row">
+<div class="span12" style="width:1002px">
+<!-- 赛事筛选模块 开始 -->
+<div data-for="venue" data-params="{'orderBy':'pv'}" data-selector="searchEngines" class="main-block"><style>#NTGUID__3{      line-height: 22px;      margin-top: -10px;      margin-bottom: -10px;    }#NTGUID__3 table{      width: 100%;      margin: 0;    }#NTGUID__3 th{      width: 72px;      font-weight: normal;      text-align: left;      color: #313131;    }#NTGUID__3 th,#NTGUID__3 td{      padding-bottom: 15px;    }#NTGUID__3 .icon16{      margin-right: 6px;    }#NTGUID__3 a.radio-item,#NTGUID__3 a.taber-item{      display: inline-block;      line-height: 20px;      height: 20px;      overflow: hidden;      margin: 0 5px 5px 0;      padding: 0 8px;      border-radius: 3px;      -webkit-border-radius: 3px;      -moz-border-radius: 3px;      text-align: center;      color: #555;      word-break: break-all;      vertical-align: top;    }#NTGUID__3 a.radio-item.current{      background-color: #F5A623;      color: #fff;    }#NTGUID__3 a.taber-item{      border-radius: 3px 3px 0 0;      -webkit-border-radius: 3px 3px 0 0;      -moz-border-radius: 3px 3px 0 0;      position: relative;      z-index: 10;      padding: 0 10px;    }#NTGUID__3 a.taber-item.current{      border: 1px solid #F5A623;      border-bottom: 1px solid #fff;      color: #F5A623;      height: 22px;    }#NTGUID__3 .input-prepend .add-on{      background-color: #fff;      border-right: 0;      position: relative;      z-index: 10;      padding: 4px 2px 4px 6px;    }#NTGUID__3 .input-prepend .add-on .icon16{      margin: 0;    }#NTGUID__3 .input-prepend input{      border-left:0;      margin-left: -1px;      box-shadow: none;      -webkit-box-shadow: none;      -moz-box-shadow: none;    }#NTGUID__3 .input-prepend .span4{      margin: 0;    }#NTGUID__3 .input-prepend .btn{      padding-left: 25px;      padding-right: 25px;    }#NTGUID__3 .input-prepend input:focus{      border-color: #ebebeb;    }#NTGUID__3 .item-panel{      overflow: hidden;      margin-bottom: -5px;    }#NTGUID__3 .item-panel dd{      border-top: 1px solid #F5A623;      padding-top: 10px;      margin-top: -6px;    }#NTGUID__3 .item-panel dt{      font-weight: normal;    }  </style><div id="NTGUID__3">
+    <form id="searchEnginesForm" method="get" action="">
+        <div data-selector="province">
+            <table>
+                <tbody>
+                <tr>
+                    <th><i class="icon16 icon16-search-city"></i>省市：</th>
+                    <td>
+
+
+                        <select id="tplCity" style="margin-left:10px;" class="span2" name="tplCity">
+                            <option value="all">全部城市</option>
+                            <volist name="city" id="co">
+                                <option <eq name="co.id" value="$_REQUEST['cityId']">selected</eq> value="<{$co.id}>"><{$co.name}></option>
+                            </volist>
+                        </select>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th valign="top"><i class="icon16 icon16-search-region"></i>区域：
+                        <input type="hidden" data-selector="regionValue" value="all" name="regionId"></th>
+                    <td valign="top">
+                        <div data-selector="regionList" class="item-panel" id="v_region">
+
+                       <a href="javascript:;" class="radio-item <if condition="($_REQUEST['region'] eq all)or($_REQUEST['region'] eq '')">current</if>" data-value="all" data-selector="regionItem">全部</a>
+                        <volist name="region" id="vo">
+                          <a href="javascript:;" class="radio-item <if condition="$_REQUEST['region'] eq $vo['id']">current</if>" data-value="<{$vo.id}>" data-selector="regionItem"><{$vo.name}></a>
+                        </volist>
+                    </div></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <div class="input-prepend input-append">
+                            <span class="add-on"><i class="icon16 icon16-search-search"></i></span>
+                            <input type="text" value="<{$_REQUEST['keyword']}>" name="keyword" class="span4">
+                            <button class="btn btn-warning" type="submit" id="btnSearchKeyword">搜本类</button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <input type="hidden" name="orderBy" value="pv"></form>
+</div>
+
+
+</div>
+<!-- 赛事筛选模块 结束 -->
+<!--<div class="main-block order-block">
+    <ul class="order-group" id="order-group">
+        <li <if condition="($_REQUEST['orderByNew'] eq M) or($_REQUEST['orderByNew'] eq '')"> class="current" </if>><a data-value="pv" data-name="orderBy" data-selector="orderBy" href="javascript:;">默认排序 <i class="icon-match icon-down"></i></a></li>
+        <li <if condition="$_REQUEST['orderByNew'] eq S"> class="current" </if>><a data-value="star" data-name="orderBy" data-selector="orderBy" href="javascript:;">评价 <i class="icon-match icon-down"></i></a></li>
+        <li <if condition="$_REQUEST['orderByNew'] eq C"> class="current" </if>><a data-value="comment" data-name="orderBy" data-selector="orderBy" href="javascript:;">人气 <i class="icon-match icon-down"></i></a></li>
+        <li <if condition="$_REQUEST['orderByNew'] eq P"> class="current" </if>><a data-value="price" data-name="orderBy" data-selector="orderBy" href="javascript:;">价格 <i class="icon-match icon-down"></i></a></li>
+    </ul>
+    &lt;!&ndash;<div class="filter-paging">
+        <a class="page-prev" href="javascript:void(0);">
+            <i class="icon-match icon-prev"></i>
+        </a>
+        <span>1/101</span>
+        <a onclick="jumpPage(2,20 );" class="page-next" href="javascript:void(0);">
+            <i class="icon-match icon-next"></i>
+        </a>
+    </div>&ndash;&gt;
+
+
+</div>-->
+<!--  赛事列表 开始 -->
+<div class="main-block item-list">
+<ul>
+<!-- 循环 开始 -->
+<volist name="tourism" id="vo">
+<li class="match-chosen">
+    <div class="item-list-content">
+        <div class="item-list-wrap clearfix">
+            <div class="thumbnail-wrap">
+                <a href="/Tourism/<{$vo.id}>">
+                    <img alt="" src="<{$vo['image']|getImageUrl}>">
+                </a>
+            </div>
+            <div class="item-list-right">
+                <p class="item-list-ttl">
+                    <strong><a href="/Tourism/<{$vo.id}>"><{$vo.name}></a></strong>
+                        <span class="star-lvl">
+                        </span>
+                </p>
+                <div class="item-list-detail">
+
+                    <p class="item-options"><span>场地简介：</span>
+                        <{$vo['content']|RemoveFormat|mb_substr=0,200,'utf-8'}>
+                    </p>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</li>
+</volist>
+<!-- 循环 结束 -->
+</ul>
+</div>
+<!-- 赛事列表 结束 -->
+<!-- 分页 开始 -->
+<div class="main-block pagging-block">
+        <div class="paging-wrap">
+            <{$page}>
+           <!-- <label class="page-stage">
+
+                到第 <input type="text"  name="pageNumText" id="pageNumText"> 页
+                <input type="submit" value="确定" class="btn">
+            </label>-->
+
+            <!--end of pageBean?? && (pages.total > -1) -->
+            <input type="hidden" value="1" id="pageNum" name="pageNum">
+            <input type="hidden" value="20" id="pageSize" name="pageSize">
+        </div>
+</div>
+
+
+<!-- 分页 结束 -->
+</div>
+
+<!--<div class="span4">
+    <div data-url="/venue/getUserFavoriteVenue" data-title="我的收藏" data-refresh="hide" data-params="{'pageSize':4}" data-selector="myCollect" class="side-block"><style>#NTGUID__4 dt{    overflow: hidden;    margin-bottom: 15px;  }#NTGUID__4 dt h4{    margin: 0;    color: #363636;    font-size: 20px;  }#NTGUID__4 dd{    overflow: hidden;  }#NTGUID__4 dd ul{    display: block;    width: 270px;    overflow: hidden;    margin-bottom: -10px;  }#NTGUID__4 dd li{    overflow: hidden;    display: none;    width: 125px;    float: left;    margin-right: 10px;    height: 156px;    margin-bottom: 10px;  }#NTGUID__4 dd li img{    display: block;    width: 125px;    height: 87px;    margin-bottom: 5px;  }#NTGUID__4 dd li a:hover img{    opacity: .8;    filter: alpha(opacity=80);  }#NTGUID__4 dd li p{    margin: 0;    padding: 0;    line-height: 20px;    color: #555;    font-size: 14px;    overflow: hidden;    height: 44px;  }#NTGUID__4 dd li div{    color: #999;    font-size: 12px;  }#NTGUID__4 .text-error{    color: #FF3B30;  }  </style><div id="NTGUID__4">
+        <dl>
+            <dt class="clearfix">
+            <div class="pull-left">
+                <h4>我的收藏</h4>
+            </div>
+            <div class="pull-right">
+                <a style="visibility: hidden;" data-selector="changeDate" href="javascript:;"><i class="icon16 icon16-refresh"></i>换一组</a>
+            </div>
+            </dt>
+            <dd data-selector="subRoot"><div id="NTGUID__4NDTGUID__8">
+
+                <div style="height:200px;" class="nodata-module"></div>
+
+            </div>
+            </dd>
+        </dl>
+
+    </div>
+
+
+    </div>
+    <div data-url="/venue/getHotVenue" data-title="热门场馆" data-params="{'pageSize':4,'regionId':1,'venueTypeId':0}" data-selector="hotVenues" class="side-block"><style>#NTGUID__5 dt{    overflow: hidden;    margin-bottom: 15px;  }#NTGUID__5 dt h4{    margin: 0;    color: #363636;    font-size: 20px;  }#NTGUID__5 dd{    overflow: hidden;  }#NTGUID__5 dd ul{    display: block;    width: 270px;    overflow: hidden;    margin-bottom: -10px;  }#NTGUID__5 dd li{    overflow: hidden;    display: none;    width: 125px;    float: left;    margin-right: 10px;    height: 156px;    margin-bottom: 10px;  }#NTGUID__5 dd li img{    display: block;    width: 125px;    height: 87px;    margin-bottom: 5px;  }#NTGUID__5 dd li a:hover img{    opacity: .8;    filter: alpha(opacity=80);  }#NTGUID__5 dd li p{    margin: 0;    padding: 0;    line-height: 20px;    color: #555;    font-size: 14px;    overflow: hidden;    height: 44px;  }#NTGUID__5 dd li div{    color: #999;    font-size: 12px;  }#NTGUID__5 .text-error{    color: #FF3B30;  }  </style><div id="NTGUID__5">
+        <dl>
+            <dt class="clearfix">
+            <div class="pull-left">
+                <h4>热门场馆</h4>
+            </div>
+            <div class="pull-right">
+                <a data-selector="changeDate" href="javascript:;"><i class="icon16 icon16-refresh"></i><span id="change">换一组</span></a>
+            </div>
+            </dt>
+            <dd data-selector="subRoot"><div id="NTGUID__5NDTGUID__9">
+
+                <ul class="clearfix" id="hot">
+
+                </ul>
+                <script id="list" type="text/html">
+                    <li style="display: list-item;">
+                        <a href="3135"><img title="{{name}}" src="http://static.wisdom-china.cn//images/1/2288/9222/0650/a6e26849a7ffb306cea23bd58f5debc2_2_125x87.jpg?480x330"></a>
+                        <p><a title="{{name}}" href="3135">{{name}}</a></p>
+                        <div class="clearfix">
+                            <span class="pull-left">{{region}}</span>
+                            <span class="pull-right">人均<span class="text-error">{{person_cost}}</span>元</span>
+                        </div>
+                    </li>
+                </script>
+            </div>
+            </dd>
+        </dl>
+
+    </div>
+
+
+    </div>
+    <div class="side-block">
+        <h4 class="slider-title">最新评论</h4>
+        <ul class="side-comment-col">
+        <volist name="new_comment" id="vo">
+            <li>
+                <div class="side-comment-thumb pull-left">
+                    <img alt="" src="<{$vo.image}>">
+                </div>
+                <div class="side-comment-right">
+                    <p class="side-comment-name"><strong><{$vo.nick_name}></strong><span class="side-lbs pull-right"><{$vo.name}></span></p>
+                    <p class="side-comment-detail"><{$vo.content}></p>
+                    <p class="side-comment-time"><{$vo.input_date|m_date}></p>
+                </div>
+            </li>
+
+        </volist>
+        </ul>
+    </div>
+</div>-->
+</div>
+</div>
+</div>
+<!-- 表单提交 -->
+<form id="searchForm" action="__APP__/tourism?">
+    <input type="hidden" id="cityId" name="cityId" value="<{$_REQUEST['cityId']}>"/>
+    <input type="hidden" id="region" name="region" value="<{$_REQUEST['region']}>"/>
+    <input type="hidden" id="keyword" name="keyword" value="<{$_REQUEST['keyword']}>"/>
+</form>
+<script type="text/javascript" src="/Public/js/pages/tourism.js"></script>
+
+<include file="Public@default:Public:bottom" />

@@ -1,0 +1,74 @@
+<script language="Javascript">
+    function navTabAjaxDone(json) {
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok) {
+            if (json.navTabId) { //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                setTimeout(function () {
+                    navTab.closeCurrentTab();
+                }, 100);
+            } else if ("forward" == json.callbackType) {
+                navTab.reload(json.forwardUrl);
+            }
+        }
+    }
+</script>
+<div class="page">
+    <div class="pageContent">
+        <form enctype="multipart/form-data" method="post" action="__URL__/insert/navTabId/__MODULE__"
+              class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+            <div class="pageFormContent" layoutH="58">
+                <p>
+                    <label>ID：</label>
+                    <input name="id" class="required" value="<{$max_id}>" type="text" readonly>
+                </p>
+                <p>
+                    <label>名称：</label>
+                    <input name="name" class="required" value="" type="text" >
+                </p>
+                <p>
+                    <label>类型：</label>
+                    <label>赛事</label>
+                    <input name="sport_type" class="required" value="1" type="hidden" >
+                </p>
+                <p>
+                    <label>等级：</label>
+                    <label>一级</label>
+                    <input name="level" class="required" value="1" type="hidden">
+                </p>
+                <p>
+                    <label>录入时间：</label>
+                    <input name="input_date" class="required" type="text" value="<?php echo date('Y-m-d H:i:s')?>">
+                </p>
+                <p>
+                    <label>录入人：</label>
+                    <input name="" class="required" type="text" value="<{$_SESSION[C('USER_AUTH_KEY')]|getUserName}>">
+                    <input name="input_user"  value="<{$_SESSION[C('USER_AUTH_KEY')]}>" type="hidden">
+                </p>
+            </div>
+            <div class="formBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">保存</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button">
+                            <div class="buttonContent">
+                                <button type="button" class="close">取消</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
+    </div>
+</div>

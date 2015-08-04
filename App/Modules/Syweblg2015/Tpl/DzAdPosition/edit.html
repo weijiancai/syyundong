@@ -1,0 +1,62 @@
+<script language="Javascript">
+    function navTabAjaxDone(json) {
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok) {
+            if (json.navTabId) { //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                setTimeout(function () {
+                    navTab.closeCurrentTab();
+                }, 100);
+            } else if ("forward" == json.callbackType) {
+                navTab.reload(json.forwardUrl);
+            }
+        }
+    }
+</script>
+<div class="page">
+    <div class="pageContent">
+        <form id="form1" method="post" enctype="multipart/form-data" action="__URL__/update/navTabId/__MODULE__"
+              class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+            <div class="pageFormContent" layoutH="58">
+                <input type="hidden" value="<{$vo.id}>" name="id">
+                <p>
+                    <label>名称：</label>
+                    <input name="name" class="required" value="<{$vo.name}>" type="text">
+                </p>
+                <p>
+                    <label>修改人：</label>
+                    <input name="" class="required" value="<{$vo.input_user|getUserName}>" type="text" disabled>
+                    <input name="input_user"  value="<{$vo.input_user}>" type="hidden">
+                </p>
+                <p>
+                    <label>修改时间：</label>
+                    <input name="input_date" class="required" type="text" value="<?php echo date('Y-m-d H:i:s')?>" readonly>
+                </p>
+
+            </div>
+            <div class="formBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit" id="sub">保存</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button">
+                            <div class="buttonContent">
+                                <button type="button" class="close">取消</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
+    </div>
+</div>

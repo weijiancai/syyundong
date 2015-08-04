@@ -84,6 +84,10 @@ class DbTourismAction extends CommonAction
         $where['pid'] = $vo['province'];
         $city = D('DbRegion')->where($where)->select();
         $this->assign('city', $city);
+        //活动区域
+        $where['pid'] = $vo['city'];
+        $venue = D('DbRegion')->where($where)->select();
+        $this->assign('venue', $venue);
         $this->assign('province', $this->getProvince());
         $this->display();
     }

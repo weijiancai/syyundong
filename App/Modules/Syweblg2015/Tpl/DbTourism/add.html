@@ -29,7 +29,7 @@
                     <dt>名称：</dt>
                     <dd><input type="text" class="required" value="" name="name"></dd>
                 </dl>
-                <dl>
+                <dl class="nowrap">
                     <dt>地点：</dt>
                     <dd><select name="province" id="province" class="required">
                         <option value="">请选择</option>
@@ -42,7 +42,11 @@
                             <volist name="city" id="co">
                                 <option  value="<{$co.id}>"><{$co.name}></option>
                             </volist>
+                        </select>
+                        <select  name="region" id="region" class="required">
+                            <option value="">请选择</option>
                         </select></dd>
+
                 </dl>
                 <dl>
                     <dt>录入人：</dt>
