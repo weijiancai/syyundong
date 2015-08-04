@@ -27,7 +27,7 @@
         <div class="panelBar">
             <ul class="toolBar">
                 <li><a class="add" href="__URL__/add" target="dialog" mask="true" width="500" height="350"
-                       callback="NavTabAjax" rel="vadd"><span>增加赛事</span></a></li>
+                       callback="NavTabAjax" rel="vadd"><span>增加位置</span></a></li>
                 <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
                        width="500" height="300" rel="vedit"><span>修改</span></a></li>
                 <li><a title="确实要删除吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll"
@@ -39,9 +39,9 @@
             <tr>
                 <th width="2%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
                 <th width="6%" align="center">页面</th>
-                <th width="75%" align="center">位置</th>
+                <th width="70%" align="center">位置</th>
                 <th width="12%" align="center">录入时间</th>
-                <th width="5%" align="center">录入人</th>
+                <th width="8%" align="center">录入人</th>
             </tr>
             </thead>
             <tbody>
@@ -49,8 +49,8 @@
                 <tr target="sid_node" rel="<{$vo['id']}>">
                     <td height="30px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
                     <td><a href="__URL__/second/sid/<{$vo.id}>" target="dialog" mask="true" rel="sescond" width="700" height="600"
-                           callback="NavTabAjax"><span style="color:blue"><{$vo['name']}></span></a></td>
-                    <td><span style="line-height:25px"><{$vo['id']|getSecondSport}></span></td>
+                           callback="NavTabAjax"><span style="color:blue"><{$vo['name']}>(<{$vo['id']}>)</span></a></td>
+                    <td><span style="line-height:25px"><{$vo['id']|getSecondPosition}></span></td>
                     <td><{$vo['input_date']}></td>
                     <td><{$vo['input_user']|getUserName}></td>
                 </tr>

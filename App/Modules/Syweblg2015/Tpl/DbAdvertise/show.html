@@ -1,0 +1,63 @@
+<script language="Javascript">
+    function navTabAjaxDone(json) {
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok) {
+            if (json.navTabId) { //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                setTimeout(function () {
+                    navTab.closeCurrentTab();
+                }, 100);
+            } else if ("forward" == json.callbackType) {
+                navTab.reload(json.forwardUrl);
+            }
+        }
+    }
+</script>
+<script language="Javascript">
+    function disappear() {
+        document.getElementById('imgs').value = '';
+        $('#prev1').hide();
+    }
+</script>
+<div class="page">
+    <form enctype="multipart/form-data" method="post" action="__URL__/Upic/navTabId/__MODULE__"
+          class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+        <div class="pageContent">
+            <div class="pageFormContent" layoutH="60">
+                <div id="prev1">
+                    <if condition="($str eq 'jpg') OR ($str eq 'gif') ">
+                        <img src="__PUBLIC__/Upload/<{$path}>/<{$img}>">
+                        <else/>
+                        <embed src="__PUBLIC__/Upload/<{$path}>/<{$img}>">
+                    </if>
+                </div>
+            </div>
+            <input type="hidden" value="<{$flag}>" name="temp" id="">
+            <input type="hidden" value="<{$ID}>" name="ID" id="">
+            <input type="hidden" value="<{$img}>" name="Pic" id="imgs">
+
+        </div>
+        <div class="formBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button onclick="disappear()" type="button">清除</button>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit">保存</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>

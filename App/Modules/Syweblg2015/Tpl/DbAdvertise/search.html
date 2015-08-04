@@ -1,0 +1,67 @@
+<script language="Javascript">
+	function navTabAjaxDone(json){
+      DWZ.ajaxDone(json);
+      if (json.statusCode == DWZ.statusCode.ok){
+            if (json.navTabId){ //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                  navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                  navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                  setTimeout(function(){navTab.closeCurrentTab();}, 100);
+            } else if ("forward" == json.callbackType) {
+                 navTab.reload(json.forwardUrl);
+            }
+      }
+}	
+</script>
+<script>
+ $("#wmtype").change(function(){   
+	getmSale2();
+ });
+  function getmSale2()
+ {
+     $("#wmtype2").empty();
+	 $("<option></option>").val("").text("请选择").appendTo($("#wmtype2"));
+		 if(($("#wmtype").val())!=''){
+		 $.getJSON("__URL__/getSale2", {id:$("#wmtype").val()}, function(data) {
+			
+			if(data && data !== 'null'){
+			  $.each(data, function(i, item) {
+				$("<option></option>").val(item['id']).text(item['name']).appendTo($("#wmtype2"));
+			  });
+		  }
+		 });
+	 }
+   }
+</script>
+<div class="page">
+<form onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+	<div class="pageContent">
+		<div class="pageFormContent" layoutH="60">	
+			<p>
+				<label>商家一级：</label>
+				<select class="" name="wtype1" id="wmtype">
+						<option value="">请选择</option>
+							<volist name="smtype" id="t2">
+								<option <eq name="_REQUEST.wtype1" value="$t2.id">selected=selected</eq> value="<{$t2['id']}>" ><{$t2['name']}></option>
+							</volist>
+				</select>
+			</p>
+			<p>
+			<label>商家二级：</label>
+			<select class="" name="wtype2" id="wmtype2">
+						<option value="">请选择</option>
+					</select>
+			</p>
+		</div>
+
+	</div>
+	<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="reset">清空输入</button></div></div></li>
+			</ul>
+	</div>
+	</form>
+</div>

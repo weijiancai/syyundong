@@ -46,13 +46,11 @@ class DzAdPositionAction extends CommonAction
         return $map;
     }
     /*
-    * @功能：新增赛事页面
+    * @功能：新增广告位置页面
     * @时间：20150421
    */
     function add(){
-        $model = New Model();
-        $max_id = $model->query('select max(id) max_id from dz_sport');
-        $this->assign('max_id', $max_id[0]['max_id']+1);
+
         $this->display();
     }
 
@@ -82,12 +80,9 @@ class DzAdPositionAction extends CommonAction
     public function second()
     {
         $sid = $_GET['sid'];
-        $list = D('DzSport')->where('pid=' . $sid . ' and sport_type=1')->select();
-        $model = New Model();
-        $max_id = $model->query('select max(id) max_id from dz_sport');
+        $list = D('DzAdPosition')->where('pid=' . $sid . ' and status=1')->select();
         $this->assign('list', $list);
         $this->assign('sid', $sid);
-        $this->assign('max_id', $max_id[0]['max_id']);
         $this->display();
     }
 
@@ -97,19 +92,15 @@ class DzAdPositionAction extends CommonAction
      */
     public function insert_second()
     {
-        $model = D('DzSport');
+        $model = D('DzAdPosition');
         $where['pid'] = $_GET['sid'];
         //删除之前的赛事,插入新内容
         $model->where($where)->delete();
-        foreach ($_POST['id'] as $key => $val) {
-            $dataNode['id'] = $val;
+        foreach ($_POST['name'] as $key => $val) {
             $dataNode['name'] = $_POST['name'][$key];
-            $dataNode['sport_show'] = $_POST['sport_show'][$key];
-            $dataNode['image'] = $_POST['image'][$key];
-            $dataNode['sport_type'] = 1;
+            $dataNode['status'] = $_POST['status'][$key];
             $dataNode['input_date'] = date('Y-m-d H:i:s');
             $dataNode['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
-            $dataNode['level'] = 2;
             $dataNode['pid'] = $_GET['sid'];
             $data[$key] = $dataNode;
         }

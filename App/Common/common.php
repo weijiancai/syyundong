@@ -189,35 +189,38 @@ function remove_xss($val)
     }
     return $val;
 }
+
 /**
  * @功能：角色管理分组名称
  * @时间：20150701
  */
-function getGroupName($id) {
+function getGroupName($id)
+{
     if ($id == 0) {
         return '无上级组';
     }
-    if ($list = F ( 'groupName' )) {
+    if ($list = F('groupName')) {
         return $list [$id];
     }
-    $dao = D ( "DbRole" );
-    $list = $dao->select ( array ('field' => 'id,name' ) );
-    foreach ( $list as $vo ) {
+    $dao = D("DbRole");
+    $list = $dao->select(array('field' => 'id,name'));
+    foreach ($list as $vo) {
         $nameList [$vo ['id']] = $vo ['name'];
     }
     $name = $nameList [$id];
-    F ( 'groupName', $nameList );
+    F('groupName', $nameList);
     return $name;
 }
+
 /**
  * @功能：角色管理分组授权树形
  * @时间：20150701
  */
-function list_to_tree($list, $pk='id',$pid = 'pid',$child = '_child',$root=0)
+function list_to_tree($list, $pk = 'id', $pid = 'pid', $child = '_child', $root = 0)
 {
     // 创建Tree
     $tree = array();
-    if(is_array($list)) {
+    if (is_array($list)) {
         // 创建基于主键的数组引用
         $refer = array();
         foreach ($list as $key => $data) {
@@ -228,8 +231,8 @@ function list_to_tree($list, $pk='id',$pid = 'pid',$child = '_child',$root=0)
             $parentId = $data[$pid];
             if ($root == $parentId) {
                 $tree[] =& $list[$key];
-            }else{
-                if(isset($refer[$parentId])) {
+            } else {
+                if (isset($refer[$parentId])) {
                     $parent =& $refer[$parentId];
                     $parent[$child][] =& $list[$key];
                 }
@@ -238,6 +241,7 @@ function list_to_tree($list, $pk='id',$pid = 'pid',$child = '_child',$root=0)
     }
     return $tree;
 }
+
 /**
  * @功能：根据赛事状态返回时间
  * @时间：20150402
@@ -274,7 +278,7 @@ function getState($status)
         case 4:
             $status = '已结束';
             break;
-		case 5:
+        case 5:
             $status = '筹备中';
             break;
     }
@@ -633,7 +637,7 @@ function getStates($id)
         case 4 :
             $result = '已结束';
             break;
-		case 5:
+        case 5:
             $status = '筹备中';
             break;
     }
@@ -737,6 +741,7 @@ function  isGameRecommend($id, $type)
         return true;
     }
 }
+
 /*
  * @功能：是否是精选赛事
  * @时间: 20150617
@@ -806,26 +811,83 @@ function isLogin()
         return false;
     }
 }
+
 /*
 * 功能：省份->区域
 * 时间：20150615
 */
-function getRegion($id,$level)
+function getRegion($id, $level)
 {
-    if(($id!=1)&&($id!=0)&&($level==3)){
-        $list = M('DbRegion')->where('pid='.$id)->getField('name',true);
+    if (($id != 1) && ($id != 0)) {
+        $list = M('DbRegion')->where('pid=' . $id)->getField('name', true);
         return implode(' | ', $list);
     }
 }
+
 /*
 * 功能：分组名称
 * 时间：20150615
 */
 function getGameGroupName($id)
 {
-   return  M('OpGameGroup')->where('id='.$id)->getField('group_name');
+    return M('OpGameGroup')->where('id=' . $id)->getField('group_name');
 }
 
+/*
+ * @功能：广告位置详情
+ * @时间:20150419
+ */
+function getSecondPosition($id)
+{
+    $list = D('DzAdPosition')->where('pid=' . $id)->getField('name', true);
+    return implode(' | ', $list);
+}
+
+/*
+ * @功能：广告调用
+ * @时间:20150804
+ */
+function ads($id)
+{
+    $list = D('Public/Ads')->ads_list($id);
+    date_default_timezone_set('Asia/Shanghai');
+    foreach ($list AS $vo) {
+        //整体判断开始结束时间
+        $t = round(($vo['stoptime'] - time()) / 3600 / 24); //到期时间  - 当前时间
+        if ($t > 0) {
+            //长条广告 1190*60
+            if ($vo['type'] == '1') {
+                if (trim($vo['img1']) == '' and trim($vo['link1']) == '') {
+                    echo '<div class="ad"><img src="__PUBLIC__/Upload/qz/' . $vo['img1'] . '"/></div>';
+                } else {
+                    echo '<div class="ad"><a target="_blank" href="' . larger($vo['id']) . '"><img src="__PUBLIC__/Upload/qz/' . $vo['img1'] . '"/></a></div>';
+                }
+            }
+        }
+
+    }
+}
+/*
+ * @功能：广告大图插件
+ * @时间:20150804
+ */
+function larger($val)
+{
+    $list = D('db_advertise')->field('id,link2,img2')->where("ID = '%d'", $val)->find();
+    if ($list['link1'] != null or !empty($list['link1'])) {
+        if ((trim($list['link1']) == null) && ($list['img2'] == null or empty($list['img2']))) {
+            return '#';
+        } else {
+            return U('/larger/' . $list['id'] . '@www.songyuan163.com');
+        }
+    } else {
+        if ($list['img2'] == null or empty($list['img2'])) {
+            return '#';
+        } else {
+            return U('/larger/' . $list['id'] . '@www.songyuan163.com');
+        }
+    }
+}
 /*
  * @功能：数组转为字符串
  * @时间:20150419

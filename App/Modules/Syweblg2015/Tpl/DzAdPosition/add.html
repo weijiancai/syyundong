@@ -22,24 +22,21 @@
         <form enctype="multipart/form-data" method="post" action="__URL__/insert/navTabId/__MODULE__"
               class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
-                <p>
-                    <label>ID：</label>
-                    <input name="id" class="required" value="<{$max_id}>" type="text" readonly>
-                </p>
+
                 <p>
                     <label>名称：</label>
                     <input name="name" class="required" value="" type="text" >
                 </p>
                 <p>
-                    <label>类型：</label>
-                    <label>赛事</label>
-                    <input name="sport_type" class="required" value="1" type="hidden" >
+                    <label>状态：</label>
+                    <select name="status">
+                        <option value="">请选择</option>
+                        <option value="0">显示</option>
+                        <option value="1">不显示</option>
+                    </select>
+
                 </p>
-                <p>
-                    <label>等级：</label>
-                    <label>一级</label>
-                    <input name="level" class="required" value="1" type="hidden">
-                </p>
+                <input type="hidden" value="0" name="pid">
                 <p>
                     <label>录入时间：</label>
                     <input name="input_date" class="required" type="text" value="<?php echo date('Y-m-d H:i:s')?>">
