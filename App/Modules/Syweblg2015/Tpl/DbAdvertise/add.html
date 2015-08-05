@@ -1,0 +1,165 @@
+<script language="Javascript">
+    function navTabAjaxDone(json) {
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok) {
+            if (json.navTabId) { //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                navTabPageBreak();
+            }
+            if ("closeCurrent" == json.callbackType) {
+                setTimeout(function () {
+                    navTab.closeCurrentTab();
+                }, 100);
+            } else if ("forward" == json.callbackType) {
+                navTab.reload(json.forwardUrl);
+            }
+        }
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        getQy();
+        $("#a_station1").change(function () {
+            getQy();
+        });
+        function getQy() {
+            if (($("#a_station1").val()) != '') {
+                $("#a_station2").empty();
+                $.getJSON("__URL__/getAdStation", {id: $("#a_station1").val()}, function (data) {
+                    $("<option></option>").val("").text("请选择").appendTo($("#a_station2"));
+                    if (data != null) {
+                        $.each(data, function (i, item) {
+                            $("<option></option>").val(item['id']).text(item['name']).appendTo($("#a_station2"));
+                        });
+                    }
+                });
+            }
+        }
+    });
+</script>
+
+<div class="page">
+<div class="pageContent">
+<form enctype="multipart/form-data" method="post" action="__URL__/insert/navTabId/__MODULE__"
+      class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
+<div class="pageFormContent" layoutH="58">
+    <dl>
+        <dt>广告名称:</dt>
+        <dd><input name="name" class="required" type="text" value="" size="35"/>
+        </dd>
+    </dl>
+    <dl>
+        <dt>广告位置:</dt>
+        <dd>
+            <select class="required" name="station1" id="a_station1">
+                <option value="">请选择</option>
+                <volist name="station" id="so">
+                    <option value="<{$so['id']}>"><{$so['name']}></option>
+                </volist>
+            </select><span style="color:red;font-size:16px">*</span>
+        </dd>
+    </dl>
+    <dl>
+        <dt>广告区块：</dt>
+        <dd><select class="required" name="station2" id="a_station2">
+            <option value="">请选择</option>
+        </select><span style="color:red;font-size:16px">*</span>
+        </dd>
+    </dl>
+    <dl>
+        <dt>广告类型：</dt>
+        <dd><select class="required" name="type" id="a_type">
+            <option value="">请选择</option>
+            <volist name="type" id="to">
+               <option value="<{$to['code']}>"><{$to['name']}></option>
+            </volist>
+        </select>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>广告小图:</dt>
+        <dd><input type="file" name="img1" class="required" style="border:0px"/>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>广告大图：</dt>
+        <dd><input type="file" name="img2"/>
+        </dd>
+    </dl>
+    <dl>
+        <dt>到期时间：</dt>
+        <dd><input type="text" name="stoptime" class="date required" value=""/>
+            <a class="inputDateButton"  href="javascript:;">选择</a></dd>
+    </dl>
+    <dl>
+        <dt>小图链接：</dt>
+        <dd><input name="link1" class="" type="text" value=""/></dd>
+    </dl>
+    <dl>
+        <dt>大图链接：</dt>
+        <dd><input name="link2" class="" type="text" value=""/></dd>
+    </dl>
+    <dl id="c2">
+        <dt>负责人：</dt>
+        <dd><input name="chargeman" id="chargeman" class="required" type="text" value=""/></dd>
+    </dl>
+    <dl id="ct2">
+        <dt>负责人电话：</dt>
+        <dd><input name="chargetel" id="chargetel" class="required" type="text" value=""/></dd>
+    </dl>
+    <dl>
+        <dt>排序：</dt>
+        <dd><input name="sort" class="" type="text" value="<{$max_id}>"/></dd>
+    </dl>
+    <dl>
+        <dt>状态:</dt>
+        <dd><select name="status">
+            <option value="">请选择</option>
+            <option value="1">已审核</option>
+            <option value="0">未审核</option>
+        </select></dd>
+    </dl>
+    <dl>
+        <dt>备注：</dt>
+        <dd><input name="remark" class="" type="text" value=""/></dd>
+    </dl>
+    <dl>
+        <dt> 添加人：</dt>
+        <dd><input readonly name="input_user" class="" type="text" value="<{$_SESSION['account']}>"/></dd>
+    </dl>
+
+    <dl>
+        <dt>添加时间：</dt>
+        <dd><input name="input_time" readonly class="" type="text" value="<?php echo date('Y-m-d H:i:s')?>"/></dd>
+    </dl>
+
+    <dl class="nowrap">
+        <dt>百度优化：</dt>
+        <dd><textarea name="seo" cols="25" rows="3" class="required" id="seo"></textarea></dd>
+    </dl>
+    </div>
+<div class="formBar">
+    <ul>
+        <li>
+            <div class="buttonActive">
+                <div class="buttonContent">
+                    <button type="submit">保存</button>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="button">
+                <div class="buttonContent">
+                    <button type="button" class="close">取消</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</form>
+
+</div>
+</div>

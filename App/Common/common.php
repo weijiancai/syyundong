@@ -867,6 +867,7 @@ function ads($id)
 
     }
 }
+
 /*
  * @功能：广告大图插件
  * @时间:20150804
@@ -888,6 +889,19 @@ function larger($val)
         }
     }
 }
+
+/*
+ * @功能：广告位置
+ * @时间:20150804
+ */
+function getAdPosition($id)
+{
+    $model = M('DzAdPosition');
+    $where['id'] = $id;
+    $name = $model->where($where)->getField('name');
+    return $name;
+}
+
 /*
  * @功能：数组转为字符串
  * @时间:20150419

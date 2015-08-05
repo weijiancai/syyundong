@@ -12,24 +12,18 @@ class DbAdvertiseAction extends CommonAction
      */
     public function index()
     {
-        $name = 'MAds';
-        $map = $this->_search('MAds');
+        $name = 'DbAdvertise';
+        $map = $this->_search('DbAdvertise');
         $this->assign('map', $map);
         if (method_exists($this, '_filter')) {
             $this->_filter($map);
         }
         $model = D($name);
-        $model = D($name);
-        if (!empty ($model)) {
-            $order = "(((ustime + adstime*86400)-(UNIX_TIMESTAMP(NOW()))) / 3600 / 24 ) asc";
-            $this->_list($model, $map, $order);
-        }
-        $this->info();
-        $this->getArea();
-        $this->saleType();
-        $this->UpdateMLife();
-        $this->assign('adslist', $this->AdsClassInfo());
-        $this->assign('userinfo', $this->LuserInfo());
+        $order="";
+        $this->_list($model, $map, $order);
+
+        $this->assign('station',$this->adStation());
+
         $this->display();
     }
 
@@ -42,25 +36,16 @@ class DbAdvertiseAction extends CommonAction
             if (isset ($_REQUEST [$val]) && $_REQUEST [$val] != '') {
                 $_REQUEST [$val] = $_REQUEST[$val];
                 $map[$val] = array('like', "%{$_REQUEST[$val]}%");
-                if ($val == 'tstation') {
+                if ($val == 'station1') {
                     $map[$val] = array('eq', $_REQUEST[$val]);
                 }
-                if ($val == 'tname') {
+                if ($val == 'type') {
                     $map[$val] = array('eq', $_REQUEST[$val]);
                 }
             }
         }
-        if (isset ($_REQUEST ['ID']) && $_REQUEST ['ID'] != '') {
-            $map['ID'] = array('eq', $_REQUEST['ID']);
-        }
-        $time = 2592000 + time();
-        if ($_REQUEST ['ashow'] == "") {
-            $map['ashow'] = array('neq', 2);
-        }
-        //通过管理员等级判断广告显示页面
-        $userinfo = $this->LuserInfo();
-        if ($userinfo['level'] == 2) {
-            $map['clientmanger'] = array(array('eq', $userinfo['code']), array('eq', ''), 'or');
+        if (isset ($_REQUEST ['id']) && $_REQUEST ['id'] != '') {
+            $map['id'] = array('eq', $_REQUEST['id']);
         }
         return $map;
     }
@@ -74,6 +59,7 @@ class DbAdvertiseAction extends CommonAction
     protected function _list($model, $map, $order, $sortBy = '', $asc = true)
     {
         $pk = $model->getPk();
+        $order .= $pk . " desc";
         $dbArray = $model->getDbFields();
         unset($dbArray['_autoinc']); // _autoinc 表示主键是否自动增长类型
         unset($dbArray['_pk']); //_pk 表示主键字段名称
@@ -91,7 +77,6 @@ class DbAdvertiseAction extends CommonAction
             $pageNum = empty($_REQUEST['numPerPage']) ? C('PAGE_LISTROWS') : $_REQUEST['numPerPage'];
             //分页查询数据
             $voList = $model->relation(true)->where($map)->order($order)->limit($pageNum)->page($_REQUEST[C('VAR_PAGE')])->select();
-
             //分页跳转的时候保证查询条件
             foreach ($map as $key => $val) {
                 if (!is_array($val)) {
@@ -119,205 +104,69 @@ class DbAdvertiseAction extends CommonAction
     }
 
     /**
-     *    新增广告页面
-     * @date   2014-09-30
-     * @author liuliting
+     * 功能：新增广告页面
+     * 时间：2015-08-05
      */
-    public function AdsAdd()
+    public function add()
     {
-        $this->class1();
-        $this->zhaopin();
-        $this->info();
-        $this->type();
-        $this->typed();
-        $this->getArea();
-        $this->saleType();
-        $this->assign('userinfo', $this->LuserInfo());
-        $zjxq = M('ZjXq');
-        $xq = $zjxq->where('qy=' . $aid)->select();
-        $this->assign('xq', $xq);
-        //状态信息
-        $sta = $this->backstate('info_status');
-        $this->assign('sta', $sta);
+        $this->assign('station',$this->adStation());
+        $this->assign('type',$this->adType());
+        $model = New Model();
+        $max_id = $model->query('select max(id) max_id from Db_advertise');
+        $this->assign('max_id', $max_id[0]['max_id']+1);
         $this->display();
     }
 
     /**
-     *  新增广告方法
-     * @date   2014-09-30
-     * @author liuliting
+     * 功能：新增广告方法
+     * 时间：2015-08-05
      */
-    function AdsInsert()
+    function insert()
     {
-        $rel = "AdsInfo";
-        $name = 'MAds';
+        $name = 'DbAdvertise';
         $model = D($name);
-        //生成生活信息  14-06-24  liuliting
-        if ((trim(I('post.Topic')) != '') || (trim(I('post.Topic')) != NULL)) {
-            $life = D('LifeInfo');
-            $data['qy'] = I('post.qy');
-            $data['class1'] = I('post.Class1');
-            if ($_POST['ms'] != null) {
-                $data['class2'] = $_POST['ms'][0];
-            } else {
-                $data['class2'] = $_POST['class2'];
-            }
-            $data['Topic'] = I('post.Topic');
-            $data['Content'] = I('post.Content');
-            $data['ContactMan'] = I('post.ContactMan');
-            //	$data['Tel'] = trim(I('post.Tel'));
-            if ((substr(trim(I('post.Tel')), 0, 1)) == 0) {
-                $data['Tel'] = substr(trim(I('post.Tel')), 0, 12);
-            } else {
-                $data['Tel'] = substr(trim(I('post.Tel')), 0, 11);
-            }
-            $data['State'] = I('post.State');
-            $data['ip'] = get_client_ip();
-            $data['uid'] = randnum(8, 0, 9);
-            $data['autostate'] = I('post.autostate');
-            $data['lx'] = I('post.lx');
-            $data['lc'] = I('post.lc');
-            $data['hx'] = I('post.hx');
-            $data['zx'] = I('post.zx');
-            $data['mj'] = I('post.mj');
-            $data['jg'] = I('post.jg');
-            $data['xq'] = getXq(I('post.xq'));
-            $data['color'] = I('post.color');
-            $data['nd'] = I('post.nd');
-            $data['gls'] = I('post.gls');
-            $data['bsq'] = I('post.bsq');
-            $data['pl'] = I('post.pl');
-            $data['brand'] = I('post.brand');
-            $data['types'] = I('post.types');
-            $data['qq'] = I('post.qq');
-            $data['cause'] = I('post.cause');
-            if ($_POST['Class1'] == 104) {
-                $arr = $_POST['ms'];
-                $str = "";
-                for ($i = 0; $i < count($arr); $i++) {
-                    $str .= $arr[$i] . ',';
-                }
-            }
-            $str = ',' . $str;
-            $data['ms'] = $str;
-            $data['CreateTime'] = $_POST['CreateTime'];
-            $data['auditer'] = $_SESSION['account'];
-            $result = $life->add($data);
-        }
-        //广告信息
-        $up = $this->uploads('qz');
+        $up = $this->uploads('ad');
         if (false === $model->create()) {
             $this->error($model->getError());
         }
         if ($up[0]) {
             $info = $up[1];
-            $model->adsimg = $info[0]['savename']; // 保存上传的照片根据需要自行组装
-            $model->adsimg1 = $info[1]['savename'];
+            $model->img1 = $info[0]['savename']; // 保存上传的照片根据需要自行组装
+            $model->img2 = $info[1]['savename'];
         }
-        $model->uip = $_SESSION['ip'];
-        $model->uname = $_SESSION['account'];
-        $model->ustime = time();
-        $model->adsclick = 1;
-        $model->adspx = $model->max('adspx') + 1;
-        $_POST['adslink1'] = trim($_POST['adslink1']);
-        $_POST['adslink'] = trim($_POST['adslink']);
-        $model->alid = $result;
-        if (empty($_POST['adslink1'])) {
-            $model->adslink1 = NUll;
+        $model->click = 1;
+        if (empty($_POST['link1'])) {
+            $model->link1 = NUll;
         }
-        if (empty($_POST['adslink'])) {
-            $model->adslink = NUll;
-        }
-        if ($_POST['bigtype'] != 3) {
-            $model->ashow = 0;
-        } else {
-            $model->ashow = 1;
+        if (empty($_POST['link2'])) {
+            $model->link2 = NUll;
         }
         $list = $model->add();
         if ($list !== false) {
-            echo $this->ajax('1', "新增成功！！", $rel, "", "closeCurrent");
+            echo $this->ajax('1', "新增成功", $rel, "", "closeCurrent");
         } else {
-            echo $this->ajax('0', "新增失败！！！", $rel, "", "closeCurrent");
+            echo $this->ajax('0', "新增失败", $rel, "", "closeCurrent");
         }
     }
 
-    /*
-     *查找单个广告
+    /**
+     * 功能：编辑广告页面
+     * 时间：2015-08-05
      */
-    function AdsEdit()
+    function edit()
     {
-        $model = D('MAds');
+        $model = D('DbAdvertise');
         $ID = $_REQUEST [$model->getPk()];
         $vo = $model->find($ID);
         $this->assign('vo', $vo);
-        $list = $this->adtype();
-        $this->assign('list', $list);
-        $this->info();
-        //广告位置
-        $mtype = M('MAdsType');
-        $where['adsstation'] = $vo['tstation'];
-        $arr = $mtype->where($where)->select();
-        $this->assign('ttype', $arr);
-        $this->getArea();
-        //商家一级分类
-        $this->saleType();
-        //商家二级分类
-        if ($vo['wtype1'] != 0) {
-            $stype = M('ZjSaletype');
-            $data['parent'] = $vo['wtype1'];
-            $sarr = $stype->where($data)->select();
-            $this->assign('stype', $sarr);
-        }
-        $this->type();
-        //查询生活信息
-        if (($vo['alid'] != ' ') && ($vo['alid'] != NULL)) {
-            $life = D('LifeInfo')->where('ID=' . $vo['alid'])->find();
-        }
-        $this->assign('life', $life);
-        $this->class1();
-        //默认显示的二级分类
-        $class2 = M('Class2');
-        if (($life['Class1'] != ' ') && ($life['Class1'] != NULL)) {
-            $arr = $class2->where('Class1=' . $life['Class1'])->select();
-        }
-        $this->assign('class2', $arr);
-        $this->zhaopin();
-        $this->typed();
-        //小区信息
-        if ($life['Class1'] == '117') {
-            $area = M('Area');
-            $data['qy'] = $life['qy'];
-            $aid = $area->where($data)->getField('ID');
-            $zjxq = M('ZjXq');
-            $xq = $zjxq->where('qy=' . $aid)->select();
-            $this->assign('xq', $xq);
-        }
-        //状态信息
-        $sta = $this->backstate('info_status');
-        $this->assign('sta', $sta);
+        $this->assign('station',$this->adStation());
 
-        //权限判断
-        $where['module'] = $this->getActionName();
-        $where['userid'] = $_SESSION[C('USER_AUTH_KEY')];
-        $list = D('Page')->where($where)->find();
-        if ($list) {
-            $data['pid'] = $list['nodeid'];
-            $data['userid'] = $_SESSION [C('USER_AUTH_KEY')];
-            $data['level'] = 4;
-            $info = D('Page')->where($data)->getField('module', true);
-            foreach ($info as $value => $key) {
-                $str .= $key . ',';
-            }
-        }
-        $this->assign('module', $str);
-        $this->assign('userinfo', $this->LuserInfo());
-        $code = M("MAdsType")->where('ID=' . $vo['tname'])->getField('code');
-        //计算广告天数
-        $now = time();
-        $end = $vo['ustime'] + $vo['adstime'] * 86400;
-        $t = round(($now - $end) / 3600 / 24); //当前时间  - 到期时间
-        $this->assign('atime', $t);
-        $this->assign('code', $code);
+        //广告位置
+        $position = M('DzAdPosition');
+        $where['pid'] = $vo['station1'];
+        $arr = $position->where($where)->select();
+        $this->assign('arr', $arr);
+
         $this->display();
     }
 
@@ -608,7 +457,7 @@ class DbAdvertiseAction extends CommonAction
     /*
      * 功能：清除点击量
      * 时间：15-07-18
-     * */
+     */
     public function CleanClick(){
         $model = D('MAds');
         $pk = $model->getPk();
@@ -630,29 +479,38 @@ class DbAdvertiseAction extends CommonAction
         $model->where($data)->delete();
         echo $this->ajax('1', "删除成功", $rel, "", "");
     }
-
     /*
-     *广告类别
+     * 功能：广告类型
+     * 时间：15-08-05
      */
-    public
-    function adtype()
+    public function adType()
     {
-        $type = M('MAdsType');
-        $list = $type->select();
+        $model = M('DzAdType');
+        $list = $model->select();
+        return $list;
+    }
+    /*
+     * 功能：广告位置查询
+     * 时间：15-08-05
+     */
+    public function adStation()
+    {
+        $model = M('DzAdPosition');
+        $list = $model->where('pid=0')->select();
         return $list;
     }
 
     /*
-     *@查询广告位置
+     * 功能：广告位置查询
+     * 时间：15-08-05
      */
-    public
-    function info()
+    public function getAdStation()
     {
-        $model = new Model();
-        $types = $model->query('select * from zjboee_datatict where STATUS =1 and TYPE=' . "'" . position . "'" . ' order by CONVERT(CODE,SIGNED)');
-        $this->assign('types', $types);
+        $pid = $_GET['id'];
+        $model = M('DzAdPosition');
+        $list = $model->where('pid='.$pid)->select();
+        echo json_encode($list);
     }
-
     /**
      * 根据位置查询区块
      * @date   2014-10-04
@@ -692,16 +550,6 @@ class DbAdvertiseAction extends CommonAction
         echo json_encode($data);
     }
 
-    /*地理区域*/
-    public
-    function getArea()
-    {
-        $model = M('Area');
-        $arr = $model->select();
-        $this->assign('area', $arr);
-
-    }
-
     public
     function type()
     {
@@ -709,29 +557,6 @@ class DbAdvertiseAction extends CommonAction
         $where['types'] = 'ads';
         $type = $model->where($where)->select();
         $this->assign('type', $type);
-    }
-
-    /*
-     *@查询商家一级分类
-     */
-    public
-    function saleType()
-    {
-        $model = M('ZjSaletype');
-        $type = $model->where('parent=0')->select();
-        $this->assign('smtype', $type);
-    }
-
-    /*
-     *@查询商家二级分类
-     */
-    public
-    function getSale2()
-    {
-        $ID = $_GET['id'];
-        $class2 = M("ZjSaletype");
-        $data = $class2->field('ID,name')->where("parent=" . $ID)->select();
-        echo json_encode($data);
     }
 
     /*
@@ -743,31 +568,6 @@ class DbAdvertiseAction extends CommonAction
         $model = M('Class1');
         $class1 = $model->select();
         $this->assign('class1', $class1);
-    }
-
-    /*
-     *@查询二级招聘信息
-     */
-    public
-    function zhaopin()
-    {
-        $model = M('Class2');
-        $where['Class1'] = '104';
-        $class2 = $model->where($where)->select();
-        $this->assign('zhaopin', $class2);
-    }
-
-    /*
-     *@查询招聘职位
-     */
-    public
-    function getCheck()
-    {
-        $model = D('LifeInfo');
-        $where['ID'] = $_GET['id'];
-        $vo = $model->where($where)->find();
-        $code = explode(",", $vo['ms']);
-        echo json_encode($code);
     }
 
     /*
@@ -784,72 +584,6 @@ class DbAdvertiseAction extends CommonAction
         echo json_encode($data);
     }
 
-    /*
-     *@查询小区
-     */
-    public
-    function getXq()
-    {
-        $where['qy'] = getgb($_GET['qy']);
-        $qy = M('Area')->where($where)->getField('ID');
-        $data = M("ZjXq")->field('ID,sx,name')->where("qy=" . $qy)->select();
-        echo json_encode($data);
-    }
-
-    /*
-     *@信息状态
-     */
-    public
-    function status()
-    {
-        $model = M('ZjboeeDatatict');
-        $where['TYPE'] = 'info_status';
-        $sta = $model->where($where)->select();
-        $this->assign('sta', $sta);
-    }
-
-    /*
-     * @相关信息
-     */
-    public
-    function typed()
-    {
-        $model = M('ZjTypes');
-        $type = $model->select();
-        $this->assign('typed', $type);
-    }
-
-    /**
-     * 到期用户不自动更新
-     * @date   2014-10-7
-     * @author liuliting
-     */
-    public
-    function UpdateMLife()
-    {
-        $model = D('MAds');
-        $where['alid'] = array('neq', '');
-        $where['ashow'] = array('neq', 2);
-        $info = $model->query('select ID,alid,((UNIX_TIMESTAMP()-(adstime*86400+ustime))/3600/24) remain_time,ashow from m_ads where ashow!=2 and ((UNIX_TIMESTAMP()-(adstime*86400+ustime))/3600/24)>7');
-        if ($info) {
-            $ids = "";
-            $lids = "";
-            foreach ($info as $key => $value) {
-                $ids .= $value['ID'] . ",";
-                if ($value['alid']) {
-                    $alids .= $value['alid'] . ",";
-                }
-            }
-            $ids = substr($ids, 0, strlen($ids) - 1);
-            $alids = substr($alids, 0, strlen($alids) - 1);
-            $map['ID'] = array('in', $ids);
-            $model->where($map)->setField('ashow', 2);
-            $date['ID'] = array('in', $alids);
-            $date['autostate'] = 0;
-            $date['state'] = 5;
-            D('LifeInfo')->save($date);
-        }
-    }
 
     /**
      *    广告归属分配页面

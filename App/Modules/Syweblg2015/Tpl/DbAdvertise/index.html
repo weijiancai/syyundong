@@ -10,39 +10,23 @@
 </form>
 <script>
     $(document).ready(function () {
-        if ($("#alevel").val() == 2) {
-            $('#clientmanger').attr("disabled", "disabled");
-        }
         getQy();
-        $("#istation").change(function () {
+        $("#station1").change(function () {
             getQy();
         });
         function getQy() {
-            if (($("#istation").val()) != '') {
-                $("#iname").empty();
-                $.getJSON("__URL__/gettname", {id: $("#istation").val()}, function (data) {
-                    $("<option></option>").val("").text("请选择").appendTo($("#iname"));
+            if (($("#station1").val()) != '') {
+                $("#station2").empty();
+                $.getJSON("__URL__/getAdStation", {id: $("#station1").val()}, function (data) {
+                    $("<option></option>").val("").text("请选择").appendTo($("#station2"));
                     if (data != null) {
                         $.each(data, function (i, item) {
-                            $("<option></option>").val(item['ID']).text(item['typename']).appendTo($("#iname"));
+                            $("<option></option>").val(item['id']).text(item['name']).appendTo($("#station2"));
                         });
                     }
                 });
             }
         }
-
-        $("#AdsClass").click(function () {
-            var ids = $("input[name='ids[]']");
-            var value = new Array();
-            for (var i = 0; i < ids.length; i++) {
-                if (ids[i].checked)
-                    value.push(ids[i].value);
-            }
-            if (value == '') {
-                alert('请勾选分类广告');
-            }
-            $('#AdsClass').attr('href', '__URL__/AdsClass?id=' + value);
-        });
     });
 </script>
 <div class="page">
@@ -51,54 +35,35 @@
             <div class="searchBar">
                 <table>
                     <tr>
-                        <td>ID：<input type="text" name="ID" value="<{$_REQUEST['ID']}>" class="medium" size="1">&nbsp;&nbsp;
+                        <td>ID：<input type="text" name="id" value="<{$_REQUEST['id']}>" class="medium" size="1">&nbsp;&nbsp;
                         </td>
-                        <td>名称：<input type="text" name="adsname" value="<{$_REQUEST['adsname']}>" class="medium"
+                        <td>名称：<input type="text" name="name" value="<{$_REQUEST['name']}>" class="medium"
                                       size="8">&nbsp;&nbsp;</td>
-                        <td>位置：<select class="" name="tstation" id="istation">
+                        <td>位置：<select class="" name="station1" id="station1">
                             <option value="">请选择</option>
-                            <volist name="types" id="s">
+                            <volist name="station" id="so">
                                 <option
-                                <eq name="_REQUEST.tstation" value="$s.CODE">selected=selected</eq>
-                                value="<{$s['CODE']}>" ><{$s['NAME']}></option>
+                                <eq name="_REQUEST.station1" value="$so.id">selected=selected</eq>
+                                value="<{$so['id']}>" ><{$so['name']}></option>
                             </volist>
                         </select>&nbsp;&nbsp;</td>
-                        <td>区块：<select class="" name="tname" id="iname">
+                        <td>区块：<select class="" name="station2" id="station2">
                             <option value="">请选择</option>
                         </select>&nbsp;&nbsp;</td>
-                        <td>客户经理：<select class="required" name="clientmanger" id="clientmanger">
-                            <option value="">请选择</option>
-                            <volist name="adslist" id="vo">
-                                <option value="<{$vo.code}>"><{$vo.nickname}></option>
-                            </volist>
-                        </select>&nbsp;&nbsp;</td>
-                        <td>客户电话：<input type="text" name="clienttel" value="<{$_REQUEST['clienttel']}>" class=""
-                                        size="3">&nbsp;&nbsp;</td>
-                        <td>状态：<select name="ashow">
+
+                        <td>状态：<select name="status">
                             <option value="">请选择</option>
                             <option value="1"
-                            <eq name="_REQUEST.ashow" value="1">selected=selected</eq>
+                            <eq name="_REQUEST.status" value="1">selected=selected</eq>
                             >已审核</option>
                             <option value="0"
-                            <eq name="_REQUEST.ashow" value="0">selected=selected</eq>
+                            <eq name="_REQUEST.status" value="0">selected=selected</eq>
                             >未审核</option>
                             <option value="2"
-                            <eq name="_REQUEST.ashow" value="2">selected=selected</eq>
+                            <eq name="_REQUEST.status" value="2">selected=selected</eq>
                             >已删除</option>
                         </select>&nbsp;&nbsp;</td>
-                        <td>公司：<select name="company">
-                            <option value="">请选择</option>
-                            <option value="1"
-                            <eq name="_REQUEST.company" value="1">selected=selected</eq>
-                            >是</option>
-                            <option value="0"
-                            <eq name="_REQUEST.company" value="0">selected=selected</eq>
-                            >否</option>
-                        </select>&nbsp;&nbsp;</td>
-                        <!--<td>备注：<input type="text" name="adsremark" value="<{$_REQUEST['adsremark']}>" class="" size="5">&nbsp;&nbsp;
-                        </td>-->
-                        <td>票号：<input type="text" name="ticket_number" value="<{$_REQUEST['ticket_number']}>" class="" size="5">&nbsp;&nbsp;
-                        </td>
+
                         <td>
                             <div class="buttonActive">
                                 <div class="buttonContent">
@@ -116,20 +81,18 @@
     <div class="pageContent">
         <div class="panelBar">
             <ul class="toolBar">
-                <li><a class="add" href="__URL__/AdsAdd" target="dialog" mask="true" height="700" width="1200"
+                <li><a class="add" href="__URL__/add" target="dialog" mask="true" height="600" width="1100"
                        callback="NavTabAjax" rel="add"><span>新增</span></a></li>
                 <li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/standAll"
                        class="delete"><span>删除</span></a></li>
-                <li><a class="edit" href="__URL__/AdsEdit/ID/{sid_node}" target="dialog" mask="true" warn="请选择节点"
+                <li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"
                        height="700" width="1200" rel="edit"><span>修改</span></a></li>
-                <li><a class="icon" id="AdsClass" href="__URL__/AdsClass/ID/{sid_node}" target="dialog" mask="true"
-                       warn="请选择节点" width="400" height="250"><span>分类</span></a></li>
                 <li><a class="delete" href="__URL__/AllResume" title="确实全部审核吗?" target="selectedTodo" rel="ids[]"><span>审核</span></a>
                 </li>
                 <li><a class="delete" href="__URL__/DeleteAll" title="确实全部删除吗?" target="selectedTodo" rel="ids[]"><span>彻底删除</span></a>
                 </li>
-                <li><a class="delete" href="__URL__/CleanClick" title="确实全部删除吗?" target="selectedTodo" rel="ids[]"><span>清除点击量</span></a>
-                </li>
+                <!--<li><a class="delete" href="__URL__/CleanClick" title="确实全部删除吗?" target="selectedTodo" rel="ids[]"><span>清除点击量</span></a>
+                </li>-->
             </ul>
         </div>
         <table class="table" width="100%" layoutH="115">
@@ -137,15 +100,13 @@
             <tr>
                 <th width="5%" align="center"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
                 <th width="13%" align="center">名称</th>
+                <th width="9%" align="center">添加时间</th>
+                <th width="9%" align="center">到期时间</th>
                 <th width="10%" align="center">位置</th>
                 <th width="8%" align="center">区块</th>
-                <th width="4%" align="center">时间</th>
-                <th width="9%" align="center">到期时间</th>
                 <th width="8%" align="center">客户经理</th>
                 <th width="8%" align="center">客户电话</th>
                 <th width="3%" align="center">点击</th>
-                <th width="4%" align="center">自动</th>
-				<th width="3%" align="center">排序</th>
                 <th width="13%" align="center">备注</th>
                 <th width="6%" align="center">操作人</th>
                 <th width="3%" align="center">状态</th>
@@ -154,23 +115,20 @@
             </thead>
             <tbody>
             <volist id="vo" name="list">
-                <tr target="sid_node" rel="<{$vo['ID']}>">
-                    <td height="25px"><input name="ids[]" value="<{$vo['ID']}>" type="checkbox"><{$vo['ID']}></td>
-                    <td><{$vo['adsname']}></td>
-                    <td><{$vo['tstation']|getMads}></td>
-                    <td><{$vo['tname']|getPlace}></td>
-                    <td><{$vo['adstime']|getNameByCode}></td>
-                    <td><{$vo['ustime']|tdate=$vo['adstime']}></td>
-                    <td><{$vo['clientmanger']|getLuserInfo}></td>
-                    <td><{$vo['clienttel']}></td>
-                    <td><{$vo['adsclick']}></td>
-                    <td><{$vo['alid']|auto}>
-                    </td>
-					<td><a href="__URL__/EditNum/ID/<{$vo.ID}>" target="dialog" mask="true"><{$vo['adspx']}></a></td>
-                    <td><{$vo['adsremark']}></td>
-                    <td><{$vo['uname']}></td>
-                    <td><{$vo['ashow']|getStatus}></td>
-                    <td><{$vo['ashow']|AdsStatus=$vo['ID'],'navTabAjaxDone','审核','禁用'}></td>
+                <tr target="sid_node" rel="<{$vo['id']}>">
+                    <td height="25px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"><{$vo['id']}></td>
+                    <td><{$vo['name']}></td>
+                    <td><{$vo['input_date']}></td>
+                    <td><{$vo['stoptime']}></td>
+                    <td><{$vo['station1']|getAdPosition}></td>
+                    <td><{$vo['station2']|getAdPosition}></td>
+                    <td><{$vo['chargeman']}></td>
+                    <td><{$vo['chargetel']}></td>
+                    <td><{$vo['click']}></td></td>
+                    <td><{$vo['remark']}></td>
+                    <td><{$vo['input_user']}></td>
+                    <td><{$vo['status']|getStatus}></td>
+                    <td><{$vo['status']|showStatus=$vo['id'],'navTabAjaxDone','审核','禁用'}></td>
                 </tr>
             </volist>
 
