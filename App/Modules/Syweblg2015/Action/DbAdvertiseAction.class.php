@@ -156,17 +156,19 @@ class DbAdvertiseAction extends CommonAction
     function edit()
     {
         $model = D('DbAdvertise');
-        $ID = $_REQUEST [$model->getPk()];
-        $vo = $model->find($ID);
+        $vo = $model->find($_GET['id']);
         $this->assign('vo', $vo);
-        $this->assign('station',$this->adStation());
 
         //广告位置
+        $this->assign('station',$this->adStation());
+
         $position = M('DzAdPosition');
         $where['pid'] = $vo['station1'];
         $arr = $position->where($where)->select();
         $this->assign('arr', $arr);
 
+        //广告类型
+        $this->assign('type',M('DzAdType')->select());
         $this->display();
     }
 

@@ -55,7 +55,7 @@
             <select class="required" name="station1" id="a_station1">
                 <option value="">请选择</option>
                 <volist name="station" id="so">
-                    <option value="<{$so['id']}>"><{$so['name']}></option>
+                    <option value="<{$so['id']}>" <eq name="vo.station1" value="$so.id">selected=selected</eq>><{$so['name']}></option>
                 </volist>
             </select><span style="color:red;font-size:16px">*</span>
         </dd>
@@ -65,7 +65,7 @@
         <dd><select class="required" name="station2" id="a_station2">
             <option value="">请选择</option>
             <volist name="arr" id="ao">
-                <option value="<{$ao['id']}>"><{$ao['name']}></option>
+                <option value="<{$ao['id']}>" <eq name="vo.station2" value="$ao.id">selected=selected</eq>><{$ao['name']}></option>
             </volist>
         </select><span style="color:red;font-size:16px">*</span>
         </dd>
@@ -75,31 +75,48 @@
         <dd><select class="required" name="type" id="a_type">
             <option value="">请选择</option>
             <volist name="type" id="to">
-               <option value="<{$to['code']}>"><{$to['name']}></option>
+               <option value="<{$to['code']}>" <eq name="vo.type" value="$to.code">selected=selected</eq>><{$to['name']}></option>
             </volist>
         </select>
         </dd>
     </dl>
 
     <dl>
-        <dt>广告小图:</dt>
+        <dt>
+            <if condition="($vo.img1 neq null)&&($vo.img1 neq ' ')">
+                <a href="__URL__/show?img=<{$vo['img1']}> && flag=img1 && id=<{$vo['id']}>" mask="true"
+                   target="dialog" width="700" height="400" style="text-decoration:none"><span
+                        style="color:red">广告小图：</span></a>
+                <else/>
+                广告小图：
+            </if>
+        </dt>
         <dd><input type="file" name="img1" class="required" style="border:0px"/>
         </dd>
     </dl>
 
     <dl>
-        <dt>广告大图：</dt>
+        <dt>
+            <if condition="($vo.img2 neq null)&&($vo.img2 neq ' ')">
+                <a href="__URL__/show?img=<{$vo.img2}> && flag=img2 && id=<{$vo['id']}>" mask="true"
+                   target="dialog" width="700" height="400" style="text-decoration:none">
+                    <span style="color:red" id="bigred">广告大图：</span></a>
+                <a onclick="disappear()" style="text-decoration : none">(清除)</a>
+                <else/>
+                广告大图：
+            </if>
+        </dt>
         <dd><input type="file" name="img2"/>
         </dd>
     </dl>
     <dl>
         <dt>到期时间：</dt>
-        <dd><input type="text" name="stoptime" class="date required" value=""/>
+        <dd><input type="text" name="stoptime" class="date required" value="<{$vo.stoptime}>"/>
             <a class="inputDateButton"  href="javascript:;">选择</a></dd>
     </dl>
     <dl>
         <dt>小图链接：</dt>
-        <dd><input name="link1" class="" type="text" value=""/></dd>
+        <dd><input name="link1" class="" type="text" value="<{$vo.link1}>"/></dd>
     </dl>
     <dl>
         <dt>大图链接：</dt>
