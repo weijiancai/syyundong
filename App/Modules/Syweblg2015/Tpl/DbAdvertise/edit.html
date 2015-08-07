@@ -19,7 +19,6 @@
 </script>
 <script>
     $(document).ready(function () {
-        getQy();
         $("#a_station1").change(function () {
             getQy();
         });
@@ -41,12 +40,13 @@
 
 <div class="page">
 <div class="pageContent">
-<form enctype="multipart/form-data" method="post" action="__URL__/insert/navTabId/__MODULE__"
+<form enctype="multipart/form-data" method="post" action="__URL__/update/navTabId/__MODULE__"
       class="pageForm required-validate" onsubmit="return iframeCallback(this,dialogAjaxDone)">
 <div class="pageFormContent" layoutH="58">
+    <input type="hidden" value="<{$vo.id}>" name="id">
     <dl>
         <dt>广告名称:</dt>
-        <dd><input name="name" class="required" type="text" value="<{$name}>" size="35"/>
+        <dd><input name="name" class="required" type="text" value="<{$vo.name}>" size="35"/>
         </dd>
     </dl>
     <dl>
@@ -84,24 +84,23 @@
     <dl>
         <dt>
             <if condition="($vo.img1 neq null)&&($vo.img1 neq ' ')">
-                <a href="__URL__/show?img=<{$vo['img1']}> && flag=img1 && id=<{$vo['id']}>" mask="true"
+                <a href="__URL__/show?flag=img1 && id=<{$vo['id']}>" mask="true"
                    target="dialog" width="700" height="400" style="text-decoration:none"><span
                         style="color:red">广告小图：</span></a>
                 <else/>
                 广告小图：
             </if>
         </dt>
-        <dd><input type="file" name="img1" class="required" style="border:0px"/>
+        <dd><input type="file" name="img1" class="" style="border:0px"/>
         </dd>
     </dl>
 
     <dl>
         <dt>
             <if condition="($vo.img2 neq null)&&($vo.img2 neq ' ')">
-                <a href="__URL__/show?img=<{$vo.img2}> && flag=img2 && id=<{$vo['id']}>" mask="true"
+                <a href="__URL__/show?flag=img2 && id=<{$vo['id']}>" mask="true"
                    target="dialog" width="700" height="400" style="text-decoration:none">
                     <span style="color:red" id="bigred">广告大图：</span></a>
-                <a onclick="disappear()" style="text-decoration : none">(清除)</a>
                 <else/>
                 广告大图：
             </if>
@@ -111,7 +110,7 @@
     </dl>
     <dl>
         <dt>到期时间：</dt>
-        <dd><input type="text" name="stoptime" class="date required" value="<{$vo.stoptime}>"/>
+        <dd><input type="text" name="stoptime" class="date required" value="<?php echo substr($vo['stoptime'],0,-9);?>"/>
             <a class="inputDateButton"  href="javascript:;">选择</a></dd>
     </dl>
     <dl>
@@ -120,31 +119,31 @@
     </dl>
     <dl>
         <dt>大图链接：</dt>
-        <dd><input name="link2" class="" type="text" value=""/></dd>
+        <dd><input name="link2" class="" type="text" value="<{$vo.link2}>"/></dd>
     </dl>
     <dl id="c2">
         <dt>负责人：</dt>
-        <dd><input name="chargeman" id="chargeman" class="required" type="text" value=""/></dd>
+        <dd><input name="chargeman" id="chargeman" class="required" type="text" value="<{$vo.chargeman}>"/></dd>
     </dl>
     <dl id="ct2">
         <dt>负责人电话：</dt>
-        <dd><input name="chargetel" id="chargetel" class="required" type="text" value=""/></dd>
+        <dd><input name="chargetel" id="chargetel" class="required" type="text" value="<{$vo.chargetel}>"/></dd>
     </dl>
     <dl>
         <dt>排序：</dt>
-        <dd><input name="sort" class="" type="text" value="<{$max_id}>"/></dd>
+        <dd><input name="sort" class="" type="text" value="<{$vo.sort}>"/></dd>
     </dl>
     <dl>
         <dt>状态:</dt>
         <dd><select name="status">
             <option value="">请选择</option>
-            <option value="1">已审核</option>
-            <option value="0">未审核</option>
+            <option value="1" <eq name="vo.status" value="1">selected=selected</eq>>已审核</option>
+            <option value="0" <eq name="vo.status" value="0">selected=selected</eq>>未审核</option>
         </select></dd>
     </dl>
     <dl>
         <dt>备注：</dt>
-        <dd><input name="remark" class="" type="text" value=""/></dd>
+        <dd><input name="remark" class="" type="text" value="<{$vo.remark}>"/></dd>
     </dl>
     <dl>
         <dt> 添加人：</dt>
@@ -158,9 +157,11 @@
 
     <dl class="nowrap">
         <dt>百度优化：</dt>
-        <dd><textarea name="seo" cols="25" rows="3" class="required" id="seo"></textarea></dd>
+        <dd><textarea name="seo" cols="25" rows="3" class="required" id="seo"><{$vo.seo}></textarea></dd>
     </dl>
     </div>
+    <input type="hidden" value="<{$vo.img1}>" name="default1" id="default1">
+    <input type="hidden" value="<{$vo.img2}>" name="default2" id="default2">
 <div class="formBar">
     <ul>
         <li>

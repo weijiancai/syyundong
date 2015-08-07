@@ -30,15 +30,15 @@
             <div class="pageFormContent" layoutH="60">
                 <div id="prev1">
                     <if condition="($str eq 'jpg') OR ($str eq 'gif') ">
-                        <img src="__PUBLIC__/Upload/<{$path}>/<{$img}>">
+                        <img src="__PUBLIC__/Upload/ad/<{$img}>">
                         <else/>
-                        <embed src="__PUBLIC__/Upload/<{$path}>/<{$img}>">
+                        <embed src="__PUBLIC__/Upload/ad/<{$img}>">
                     </if>
                 </div>
             </div>
-            <input type="hidden" value="<{$flag}>" name="temp" id="">
-            <input type="hidden" value="<{$ID}>" name="ID" id="">
-            <input type="hidden" value="<{$img}>" name="Pic" id="imgs">
+            <input type="text" value="<{$flag}>" name="temp">
+            <input type="text" value="<{$vo.id}>" name="id">
+            <input type="text" value="<{$img}>" name="Pic" id="img">
 
         </div>
         <div class="formBar">

@@ -19,10 +19,10 @@ class DbAdvertiseAction extends CommonAction
             $this->_filter($map);
         }
         $model = D($name);
-        $order="";
+        $order = "";
         $this->_list($model, $map, $order);
 
-        $this->assign('station',$this->adStation());
+        $this->assign('station', $this->adStation());
 
         $this->display();
     }
@@ -109,11 +109,11 @@ class DbAdvertiseAction extends CommonAction
      */
     public function add()
     {
-        $this->assign('station',$this->adStation());
-        $this->assign('type',$this->adType());
+        $this->assign('station', $this->adStation());
+        $this->assign('type', $this->adType());
         $model = New Model();
         $max_id = $model->query('select max(id) max_id from Db_advertise');
-        $this->assign('max_id', $max_id[0]['max_id']+1);
+        $this->assign('max_id', $max_id[0]['max_id'] + 1);
         $this->display();
     }
 
@@ -160,7 +160,7 @@ class DbAdvertiseAction extends CommonAction
         $this->assign('vo', $vo);
 
         //广告位置
-        $this->assign('station',$this->adStation());
+        $this->assign('station', $this->adStation());
 
         $position = M('DzAdPosition');
         $where['pid'] = $vo['station1'];
@@ -168,159 +168,42 @@ class DbAdvertiseAction extends CommonAction
         $this->assign('arr', $arr);
 
         //广告类型
-        $this->assign('type',M('DzAdType')->select());
+        $this->assign('type', M('DzAdType')->select());
         $this->display();
     }
 
-    /*
-     *修改广告
+    /**
+     * 功能：编辑广告方法
+     * 时间：2015-08-05
      */
-    function AdsUpdate()
+    function update()
     {
-        $model = D('MAds');
-        $rel = "AdsInfo";
-        $alid = $_POST['alid'];
-        if ((trim(I('post.Topic')) != '') || (trim(I('post.Topic')) != NULL)) {
-            if ($alid) {
-                $vos = M('LifeInfo')->where('ID=' . $alid)->find();
-            }
-            $value = '';
-            $life = D('LifeInfo');
-            $data['qy'] = I('post.qy');
-            $data['class1'] = I('post.Class1');
-            if ($_POST['ms'] != null) {
-                $data['class2'] = $_POST['ms'][0];
-            } else {
-                $data['class2'] = $_POST['class2'];
-            }
-            $data['Topic'] = I('post.Topic');
-            $data['Content'] = I('post.Content');
-            $data['ContactMan'] = I('post.ContactMan');
-            if ((substr(trim(I('post.Tel')), 0, 1)) == 0) {
-                $data['Tel'] = substr(trim(I('post.Tel')), 0, 12);
-            } else {
-                $data['Tel'] = substr(trim(I('post.Tel')), 0, 11);
-            }
-            $data['State'] = I('post.State');
-            $data['ip'] = get_client_ip();
-            $data['uid'] = randnum(8, 0, 9);
-            $data['autostate'] = I('post.autostate');
-            $data['lx'] = I('post.lx');
-            $data['lc'] = I('post.lc');
-            $data['hx'] = I('post.hx');
-            $data['zx'] = I('post.zx');
-            $data['mj'] = I('post.mj');
-            $data['jg'] = I('post.jg');
-            $data['xq'] = getXq(I('post.xq'));
-            $data['color'] = I('post.color');
-            $data['nd'] = I('post.nd');
-            $data['gls'] = I('post.gls');
-            $data['bsq'] = I('post.bsq');
-            $data['pl'] = I('post.pl');
-            $data['brand'] = I('post.brand');
-            $data['types'] = I('post.types');
-            $data['qq'] = I('post.qq');
-            $data['cause'] = I('post.cause');
-            if ($_POST['Class1'] == 104) {
-                $arr = $_POST['ms'];
-                $str = "";
-                for ($i = 0; $i < count($arr); $i++) {
-                    $str .= $arr[$i] . ',';
-                }
-            }
-            $str = ',' . $str;
-            $data['ms'] = $str;
-            $data['CreateTime'] = $_POST['CreateTime'];
-            $data['audittime'] = date('Y-m-d H:i:s');
-            $data['auditer'] = $_SESSION['account'];
-            if (empty($vos)) {
-                //新增生活信息
-                if (!empty($_POST['Topic'])) {
-                    $result = $life->add($data);
-                    $value = $result;
-                }
-            } else {
-                $life->where('ID=' . $alid)->save($data);
-                $value = $alid;
-            }
-        }
-        if ($alid) {
-            if ((!empty($_POST['bigtype'])) && ($_POST['bigtype'] != 1)) {
-                D('LifeInfo')->where('ID=' . $alid)->setField('autostate', NULL);
-                D('LifeInfo')->where('ID=' . $alid)->setField('State', 5);
-            }
-        }
-        //新增广告
-        $up = $this->uploads('qz');
+        $model = D('DbAdvertise');
+        $rel = "DbAdvertise";
+
+        $up = $this->uploads('ad');
         if (false === $model->create()) {
             $this->error($model->getError());
         }
         if ($up[0]) {
             $info = $up[1];
-            if ((!empty($_POST['p1'])) && (!empty($_POST['p2']))) {
-                $model->adsimg = $info[0]['savename']; // 保存上传的照片根据需要自行组装
-                $model->adsimg1 = $info[1]['savename'];
-            } elseif ((empty($_POST['p1'])) && (!empty($_POST['p2']))) {
-                $model->adsimg = $_POST['default'];
-                $model->adsimg1 = $info[0]['savename'];
-            } else {
-                $model->adsimg = $info[0]['savename'];
-                $model->adsimg1 = $_POST['default1'];
+            $count = count($info);
+            for ($i = 0; $i < $count; $i++) {
+                $temp = array();
+                for ($j = 1; $j < 3; $j++) {
+                    $img = 'img' . $j;
+                    if ($info[$i]['key'] == $img) {
+                        $model->$img = $info[$i]['savename'];
+                    }
+                }
             }
         } else {
-            $model->adsimg = $_POST['default'];
-            $model->adsimg1 = $_POST['default1'];
+            $model->img1 = $_POST['default1'];
+            $model->img2 = $_POST['default2'];
         }
-        $model->adsname = $_POST['adsname'];
-        $model->bigtype = $_POST['bigtypes'];
-        $model->adstime = $_POST['adstimes'];
-        $model->alid = $value;
-        $model->uip = $_SESSION['ip'];
-        $model->uname = $_SESSION['account'];
-        $model->uetime = time();
-        $_POST['adslink1'] = trim($_POST['adslink1']);
-        $_POST['adslink'] = trim($_POST['adslink']);
-        if ($_POST['bigtypes'] == 3) {
-            $model->adsimg1 = "";
-            $model->adslink = "";
-        }
-        if (empty($_POST['adslink1'])) {
-            $model->adslink1 = NUll;
-        }
-        if (empty($_POST['adslink'])) {
-            $model->adslink = NUll;
-        }
-        //得到管理员等级
-        $map['id'] = $_SESSION[C('USER_AUTH_KEY')];
-        $level = D('LUser')->field('level,code')->where($map)->find();
-        //查找广告时间
-        //  $adsold = $model->where('ID=' . $_POST['ID'])->field('adstime,bigtype')->find();
-        $adstime = $model->where('ID=' . $_POST['ID'])->getField('adstime');
-        $bigtype = $model->where('ID=' . $_POST['ID'])->getField('bigtype');
-        $ashow = $model->where('ID=' . $_POST['ID'])->getField('ashow');
-        if ($ashow == 2) {
-            $model->clientmanger = $level['code'];
-        }
-        if ($_POST['adstime']) {
-            if ($level['level'] == 1) {
-                $model->ustime = time();
-                $model->ashow = 1;
-            }
-            if ($level['level'] == 2) {
-                $model->ashow = 0;
-                $model->ustime = time();
-            }
-        }
-        if ($level['level'] == 2) {
-            if ($_POST['bigtypes']) {
-                if (($bigtype != $_POST['bigtypes']) && ($_POST['bigtypes'] != 3)) {
-                    $model->ashow = 0;
-                }
-                if (($bigtype != $_POST['bigtypes']) && ($_POST['bigtypes'] == 3)) {
-                    $model->ashow = 1;
-                }
-            }
-        }
+        $model->input_user = $_SESSION[C('USER_AUTH_KEY')];
+        $model->input_date = date('Y-m-d H:i:s');
+
         $list = $model->save();
         if ($list) {
             echo $this->ajax('1', "编辑成功", $rel, "", "closeCurrent");
@@ -329,53 +212,37 @@ class DbAdvertiseAction extends CommonAction
         }
     }
 
-    /*删除广告后图片删除*/
-    public
-    function deleteimg()
-    {
-        $name = $this->getActionName();
-        $model = D($name);
-        if (!empty ($model)) {
-            $pk = $model->getPk();
-            $ID = $_REQUEST [$pk];
-            if (isset ($ID)) {
-                $condition = array($pk => array('in', explode(',', $ID)));
-                $arr = $model->find($ID);
-                $this->delpic($arr['adsimg'], '');
-                $this->delpic($arr['adsimg1'], '');
-                if (false !== $model->where($condition)->delete()) {
-                    echo $this->ajax('1', "删除成功！！！", $name, "", "");
-                } else {
-                    echo $this->ajax('0', "删除失败！！！", $name, "", "");
-                }
-            } else {
-                $this->error('非法操作');
-            }
-        }
-    }
-
+    /**
+     * 功能：广告图片预览
+     * 时间：2015-08-05
+     */
     public
     function show()
     {
-        $this->assign('img', $_GET['img']);
-        $this->assign('path', 'qz');
-        $this->assign('flag', $_GET['flag']);
-        $this->assign('ID', $_GET['ID']);
-        $str = substr($_GET['img'], -4, 3);
-        $this->assign('str', $str);
+        $vo = M('DbAdvertise')->find($_GET['id']);
+        if ($_GET['flag'] == 'img1') {
+            $img = $vo['img1'];
+        } else {
+            $img = $vo['img2'];
+        }
+        $this->assign('img', $img);
+        $this->assign('vo', $vo);
         $this->display();
     }
 
-    /*修改照片信息*/
+    /**
+     * 功能：广告图片预览编辑
+     * 时间：2015-08-05
+     */
     public
     function Upic()
     {
-        $model = D('MAds');
-        $rel = "AdsEdit";
+        $model = D('DbAdvertise');
+        $rel = "edit";
         $data[$_POST['temp']] = trim($_POST['Pic']);
-        $arr = $model->where('ID=' . $_POST['ID'])->find();
-        $this->delpic($arr[trim($_POST['temp'])], 'qz');
-        $list = $model->where('ID=' . $_POST['ID'])->save($data);
+        $arr = $model->where('id=' . $_POST['id'])->find();
+        $this->delpic($arr[trim($_POST['temp'])], 'ad');
+        $list = $model->where('id=' . $_POST['id'])->save($data);
         if (false !== $list) {
             echo $this->ajax('1', "修改成功", $rel, "", "closeCurrent");
         } else {
@@ -460,7 +327,8 @@ class DbAdvertiseAction extends CommonAction
      * 功能：清除点击量
      * 时间：15-07-18
      */
-    public function CleanClick(){
+    public function CleanClick()
+    {
         $model = D('MAds');
         $pk = $model->getPk();
         $data[$pk] = array('in', $_POST['ids']);
@@ -470,6 +338,7 @@ class DbAdvertiseAction extends CommonAction
         $model->where($data)->setField('adsclick', 0);
         echo $this->ajax('1', "点击量清除成功", $rel, "", "");
     }
+
     /*
      *	广告彻底删除
      */
@@ -481,6 +350,7 @@ class DbAdvertiseAction extends CommonAction
         $model->where($data)->delete();
         echo $this->ajax('1', "删除成功", $rel, "", "");
     }
+
     /*
      * 功能：广告类型
      * 时间：15-08-05
@@ -491,6 +361,7 @@ class DbAdvertiseAction extends CommonAction
         $list = $model->select();
         return $list;
     }
+
     /*
      * 功能：广告位置查询
      * 时间：15-08-05
@@ -510,9 +381,10 @@ class DbAdvertiseAction extends CommonAction
     {
         $pid = $_GET['id'];
         $model = M('DzAdPosition');
-        $list = $model->where('pid='.$pid)->select();
+        $list = $model->where('pid=' . $pid)->select();
         echo json_encode($list);
     }
+
     /**
      * 根据位置查询区块
      * @date   2014-10-04
@@ -704,4 +576,5 @@ class DbAdvertiseAction extends CommonAction
         }
     }
 }
+
 ?>

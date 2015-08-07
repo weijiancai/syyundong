@@ -853,14 +853,14 @@ function ads($id)
     date_default_timezone_set('Asia/Shanghai');
     foreach ($list AS $vo) {
         //整体判断开始结束时间
-        $t = round(($vo['stoptime'] - time()) / 3600 / 24); //到期时间  - 当前时间
+        $t = round((strtotime($vo['stoptime']) - time()) / 3600 / 24); //到期时间  - 当前时间
         if ($t > 0) {
             //长条广告 1190*60
             if ($vo['type'] == '1') {
-                if (trim($vo['img1']) == '' and trim($vo['link1']) == '') {
-                    echo '<div class="ad"><img src="__PUBLIC__/Upload/qz/' . $vo['img1'] . '"/></div>';
+                if (trim($vo['img2']) == '' and trim($vo['link2']) == '') {
+                    echo '<div class="ad container"><img src="__PUBLIC__/Upload/ad/' . $vo['img1'] . '"/></div>';
                 } else {
-                    echo '<div class="ad"><a target="_blank" href="' . larger($vo['id']) . '"><img src="__PUBLIC__/Upload/qz/' . $vo['img1'] . '"/></a></div>';
+                    echo '<div class="ad container"><a target="_blank" href="' . larger($vo['id']) . '"><img src="__PUBLIC__/Upload/ad/' . $vo['img1'] . '"/></a></div>';
                 }
             }
         }
@@ -900,6 +900,26 @@ function getAdPosition($id)
     $where['id'] = $id;
     $name = $model->where($where)->getField('name');
     return $name;
+}
+
+/*
+ * @功能：广告到期时间
+ * @时间:20150804
+ */
+function due_date($val)
+{
+    $time = time();
+    $stop = strtotime($val);
+    $temp = round(($stop - $time) / 3600 / 24); //到期时间  - 当前时间
+    //$temp = $temp +1;
+    if ($temp < 0) {
+        $info = substr($val, 0, -8) .'|<span style="color:red">' . '过' . abs($temp) . '</span>';
+    } elseif ($temp >= 0 and $temp <= 7) {
+        $info = substr($val, 0, -8) .'|<span style="color:red">' . '剩' . abs($temp) . '</span>';
+    } else {
+        $info = substr($val, 0, -8) .'|<span style="color:red">' . '剩' . abs($temp) . '</span>';
+    }
+    return $info;
 }
 
 /*
