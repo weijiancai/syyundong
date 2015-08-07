@@ -24,18 +24,17 @@
               onsubmit="return iframeCallback(this,dialogAjaxDone)">
             <div class="pageFormContent" layoutH="58">
                 <dl class="nowrap">
-                    <dt>页面位置</dt>
+                    <dt>页面位置(<{$max_code}>)</dt>
                     <dd style="width:500px">
                         <div class="tabsContent">
                             <div>
                                 <table class="list nowrap itemDetails" addButton="添加位置">
                                     <thead>
                                     <tr>
-                                        <th type="text" class="required" name="name[]" defaultVal=""
-                                            size="12" fieldClass="required">名称
+                                        <th type="text" class="required" name="name[]" defaultVal=""size="12" fieldClass="required">名称
                                         </th>
                                         <th type="enum" name="status[]" enumUrl="__URL__/state" size="12">显示</th>
-
+                                        <th type="text" class="required" name="code[]" defaultVal=""size="12" fieldClass="required">标识</th>
                                         <th type="del" width="60">操作</th>
                                     </tr>
                                     </thead>
@@ -52,12 +51,13 @@
                                                 <eq name="vo.status" value="0">selected=selected</eq>
                                                 value="0" >不显示</option>
                                             </select></td>
+                                            <td><input type="text" class="required" name="code[]" size="12"
+                                                       value="<{$vo.code}>"/></td>
                                             <td>
                                            <a href="javascript:void(0)" class="btnDel">删除</a>(<{$vo.id}>)
                                             </td>
                                         </tr>
                                     </volist>
-                                    <!--<input type="hidden" value="<{$sid}>" name="pid">-->
                                     </tbody>
                                 </table>
                             </div>

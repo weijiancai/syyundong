@@ -55,7 +55,7 @@ class DzAdPositionAction extends CommonAction
     }
 
     /*
-     * @功能：新增赛事方法
+     * @功能：新增页面位置方法
      * @时间：20150421
     */
     function insert()
@@ -74,20 +74,21 @@ class DzAdPositionAction extends CommonAction
     }
 
     /*
-     * @功能：详细赛事新增页面
+     * @功能：广告位置新增页面
      * @时间：201504021
      */
     public function second()
     {
-        $sid = $_GET['sid'];
-        $list = D('DzAdPosition')->where('pid=' . $sid . ' and status=1')->select();
+        $list = D('DzAdPosition')->where('pid=' . $_GET['sid'] . ' and status=1')->select();
         $this->assign('list', $list);
-        $this->assign('sid', $sid);
+        $model = New Model();
+        $max_id = $model->query('select max(code) max_code from Dz_ad_position');
+        $this->assign('max_code', $max_id[0]['max_code']+1);
         $this->display();
     }
 
     /*
-     * @功能：详细赛事新增方法
+     * @功能：广告位置新增方法
      * @时间：201504021
      */
     public function insert_second()
@@ -99,6 +100,7 @@ class DzAdPositionAction extends CommonAction
         foreach ($_POST['name'] as $key => $val) {
             $dataNode['name'] = $_POST['name'][$key];
             $dataNode['status'] = $_POST['status'][$key];
+            $dataNode['code'] = $_POST['code'][$key];
             $dataNode['input_date'] = date('Y-m-d H:i:s');
             $dataNode['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
             $dataNode['pid'] = $_GET['sid'];
@@ -129,7 +131,7 @@ class DzAdPositionAction extends CommonAction
     }
 
     /*
-     * @功能：修改赛事
+     * @功能：修改广告位置
      * @时间：20150421
      */
     function edit()
@@ -139,64 +141,6 @@ class DzAdPositionAction extends CommonAction
         $vo = $model->find($_GET['id']);
         $this->assign('vo', $vo);
         $this->display();
-    }
-    /*
-     * @功能：赛事图片
-     * @时间：20150421
-     */
-    function lookup(){
-        $this->display();
-    }
-    /*
-     * @功能：ajax上传图片
-     * @时间：20150422
-     */
-    public function upimg()
-    {
-        import('ORG.Util.Image');
-        import('ORG.Net.UploadFile');
-        $path = 'sport';
-        $upload = new UploadFile(); // 实例化上传类
-        $upload->maxSize = 6291456; // 设置附件上传大小
-        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg'); // 设置附件上传类型
-        $upload->savePath = './Public/upload/'.$path.'/'; // 设置附件上传目录
-        $upload->thumb = true;
-        $upload->thumbPrefix = '';
-        $upload->thumbMaxWidth = '600';
-        $upload->thumbMaxHeight = '400';
-        $upload->thumbType = 0;
-        $upload->zipImages = true;
-        $upload->autoSub = true;
-        $upload->subType = date;
-        if (!$upload->upload()) { // 上传错误提示错误信息
-            if ($upload->getErrorMsg() != "没有选择上传文件") { //不上传文件通过
-                $e = $this->error($upload->getErrorMsg());
-                echo $e;
-            }
-        } else { // 上传成功 获取上传文件信息
-            $info = $upload->getUploadFileInfo();
-
-            //存储图片
-            $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
-            $result = D('DbImages')->add($date);
-            //打水印
-            /* $Image = new Image();
-             foreach ($info as $value) {
-                 $$value['key'] = $value['savename'];
-                 $Image->water('./Public/Upload/game/' . $value['savename'], './Public/images/common/logo1.png'); //打水印
-             }*/
-            $arr = array(
-                'savename' => $info[0]['savename'],
-                'image[]' => $result,
-                'pic' => $info[0]['savepath'],
-                'size' => $info[0]['size'],
-                'ext' => $info[0]['extension'],
-                'path' => $path,
-            );
-         //   dump(array(true,$arr));
-         //  return $arr;
-            echo json_encode($arr);
-        }
     }
 }
 

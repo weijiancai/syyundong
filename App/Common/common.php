@@ -897,7 +897,7 @@ function larger($val)
 function getAdPosition($id)
 {
     $model = M('DzAdPosition');
-    $where['id'] = $id;
+    $where['code'] = $id;
     $name = $model->where($where)->getField('name');
     return $name;
 }

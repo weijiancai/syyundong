@@ -55,7 +55,7 @@
             <select class="required" name="station1" id="a_station1">
                 <option value="">请选择</option>
                 <volist name="station" id="so">
-                    <option value="<{$so['id']}>" <eq name="vo.station1" value="$so.id">selected=selected</eq>><{$so['name']}></option>
+                    <option value="<{$so['code']}>" <eq name="vo.station1" value="$so.code">selected=selected</eq>><{$so['name']}></option>
                 </volist>
             </select><span style="color:red;font-size:16px">*</span>
         </dd>
@@ -65,7 +65,7 @@
         <dd><select class="required" name="station2" id="a_station2">
             <option value="">请选择</option>
             <volist name="arr" id="ao">
-                <option value="<{$ao['id']}>" <eq name="vo.station2" value="$ao.id">selected=selected</eq>><{$ao['name']}></option>
+                <option value="<{$ao['code']}>" <eq name="vo.station2" value="$ao.code">selected=selected</eq>><{$ao['name']}></option>
             </volist>
         </select><span style="color:red;font-size:16px">*</span>
         </dd>
