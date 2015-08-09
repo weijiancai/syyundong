@@ -23,7 +23,7 @@
 			$model = New model();
 			$ads = $model->table('db_advertise ads,dz_ad_type type')
 						 ->field('ads.id,ads.name,ads.stoptime,ads.img1,ads.img2,ads.link1,ads.type,ads.status,ads.station2')
-						 ->where("ads.type=type.id AND ads.station2=$id and ads.status=1")
+						 ->where("ads.type=type.code AND ads.station2=$id and ads.status=1")
 						 ->order('ads.sort ASC')
 						 ->query('select %FIELD% from %TABLE% %WHERE% %ORDER%',true);
 			return $ads;

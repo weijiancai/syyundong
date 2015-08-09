@@ -152,5 +152,39 @@ class PublicAction extends Action
             $this->ajaxReturn($data, 'JSON');
         }
     }
-
+    /*
+     * @功能：大图模式
+     * @时间：20150809
+     */
+    public function larger()
+    {
+        $where['id'] = I('get.id');
+        $list = D('DbAdvertise')->where($where)->find();
+        //增加点击量
+        if (empty($list['click'])) {
+            D('DbAdvertise')->where('id=' . I('get.id'))->setField('click', 1);
+        } else {
+            D('DbAdvertise')->where('id=' . I('get.id'))->setInc('click');
+        }
+        if ($list['adslink']) {
+            if (strstr($list['adslink'], 'bigimg')) {
+                $last = strrpos($list['adslink'], "/"); //字符最后一次出现的位置
+                $str = substr($list['adslink'], $last, 8);
+                $num = preg_replace('/[^\d]/', '', $str);
+                if ($num == $list['ID']) {
+                    $this->assign('list', $list);
+                    $this->display();
+                } else {
+                    $this->adslink = $list['adslink'];
+                    $this->display('clicktj');
+                }
+            } else {
+                $this->adslink = $list['adslink'];
+                $this->display('clicktj');
+            }
+        } else {
+            $this->assign('list', $list);
+            $this->display();
+        }
+    }
 }

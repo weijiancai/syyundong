@@ -856,7 +856,7 @@ function ads($id)
         $t = round((strtotime($vo['stoptime']) - time()) / 3600 / 24); //到期时间  - 当前时间
         if ($t > 0) {
             //长条广告 1190*60
-            if ($vo['type'] == '1') {
+            if ($vo['type'] == '2') {
                 if (trim($vo['img2']) == '' and trim($vo['link2']) == '') {
                     echo '<div class="ad container"><img src="__PUBLIC__/Upload/ad/' . $vo['img1'] . '"/></div>';
                 } else {
