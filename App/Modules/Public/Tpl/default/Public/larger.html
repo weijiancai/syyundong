@@ -9,8 +9,12 @@
 </head>
 <body >
 <div align="center">
-  <p><?php
-  if(trim($list['adslink1']) != ''){?><a href="<{$list['adslink1']}>" target="_blank"><?php }?><img src="__PUBLIC__/Upload/qz/<{$list['adsimg1']}>" width="1002" border="0"/></a><?php }?>
+  <p>
+      <?php if(trim($list['link2']){?>
+      <a href="<{$list['link2']}>" target="_blank">
+   <?php }?>
+      <img src="__PUBLIC__/Upload/ad/<{$list['img2']}>" width="1002" border="0"/>
+          <?php if((trim($list['link2']) == '')&&(trim($list['img2']) == '')){?></a><?php }?>
   </p>
 </div>
 </body>

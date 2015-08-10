@@ -85,7 +85,7 @@ $Public_Config =  array(
 
         '/^Tourism\/(\d+)$/' => 'Tourism/index/tourism_detail?id=:1',
 
-        '/^larger\/(\d+)$/'=>'Public/public/bigimg?id=:1',
+        '/^larger\/(\d+)$/'=>'Public/public/larger?id=:1',
 	),
 	'URL_HTML_SUFFIX'	=>'.html',
 	'VAR_FILTERS'=>'htmlspecialchars,stripslashes,strip_tags',

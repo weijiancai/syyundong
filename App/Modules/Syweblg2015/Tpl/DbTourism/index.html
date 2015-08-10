@@ -52,7 +52,7 @@
                 <tr target="sid_node" rel="<{$vo['id']}>">
                     <td height="25px"><input name="ids[]" value="<{$vo['id']}>" type="checkbox"></td>
                     <td><{$vo['name']}></td>
-                    <td><?php echo RemoveFormat(mb_substr($vo['content'],0,50,'utf-8'))?></td>
+                    <td><?php echo mb_substr(RemoveFormat($vo['content']),0,50,'utf-8')?></td>
                     <td><{$vo['input_user']|getUserName}></td>
                     <td><{$vo['input_date']}></td>
                     <td><a href="__URL__/edit/id/<{$vo.id}>" target="dialog" mask="true" width="900" height="600" rel="other_edit">编辑</a></td>

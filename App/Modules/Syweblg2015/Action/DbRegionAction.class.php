@@ -40,8 +40,8 @@ class DbRegionAction extends CommonAction
                 $map[$val] = array('like', "%{$_REQUEST[$val]}%");
             }
         }
-        $map['level'] = array('eq', 1);
-      //  $map['level'] = array('in', array('1','2','3'));
+        /* $map['level'] = array('in', array('1','2','3')); */
+		$map['level'] = array('eq', 1);
         return $map;
     }
     /*

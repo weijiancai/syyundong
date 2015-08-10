@@ -84,6 +84,7 @@ class DzAdPositionAction extends CommonAction
         $model = New Model();
         $max_id = $model->query('select max(code) max_code from Dz_ad_position');
         $this->assign('max_code', $max_id[0]['max_code']+1);
+		$this->assign('sid',$_GET['sid']);
         $this->display();
     }
 
@@ -94,6 +95,7 @@ class DzAdPositionAction extends CommonAction
     public function insert_second()
     {
         $model = D('DzAdPosition');
+		$pid = $_GET['sid'];
         $where['pid'] = $_GET['sid'];
         //删除之前的赛事,插入新内容
         $model->where($where)->delete();
@@ -103,7 +105,7 @@ class DzAdPositionAction extends CommonAction
             $dataNode['code'] = $_POST['code'][$key];
             $dataNode['input_date'] = date('Y-m-d H:i:s');
             $dataNode['input_user'] = $_SESSION[C('USER_AUTH_KEY')];
-            $dataNode['pid'] = $_GET['sid'];
+            $dataNode['pid'] = $pid;
             $data[$key] = $dataNode;
         }
         $list = $model->addAll($data);
@@ -120,7 +122,7 @@ class DzAdPositionAction extends CommonAction
     */
     public function delAll()
     {
-        $model = D('DzSport');
+        $model = D('DzAdPosition');
         $pk = $model->getPk();
         $data[$pk] = array('in', $_POST['ids']);
         if (false !== $model->where($data)->delete()) {

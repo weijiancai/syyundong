@@ -135,6 +135,7 @@ class DbAdvertiseAction extends CommonAction
             $model->img2 = $info[1]['savename'];
         }
         $model->click = 1;
+		$model->input_date = date('Y_m-d H:i:s');
         if (empty($_POST['link1'])) {
             $model->link1 = NUll;
         }
@@ -226,6 +227,7 @@ class DbAdvertiseAction extends CommonAction
             $img = $vo['img2'];
         }
         $this->assign('img', $img);
+        $this->assign('flag', $_GET['flag']);
         $this->assign('vo', $vo);
         $this->display();
     }
@@ -240,8 +242,6 @@ class DbAdvertiseAction extends CommonAction
         $model = D('DbAdvertise');
         $rel = "edit";
         $data[$_POST['temp']] = trim($_POST['Pic']);
-        $arr = $model->where('id=' . $_POST['id'])->find();
-        $this->delpic($arr[trim($_POST['temp'])], 'ad');
         $list = $model->where('id=' . $_POST['id'])->save($data);
         if (false !== $list) {
             echo $this->ajax('1', "修改成功", $rel, "", "closeCurrent");
@@ -253,12 +253,10 @@ class DbAdvertiseAction extends CommonAction
     /*
      *	状态禁用
      */
-    function AdsForbid()
+    function forbid()
     {
-        $model = D('MAds');
-        $model->where('ID=' . $_GET['ID'])->setField('uname', $_SESSION['account']);
-        $model->where('ID=' . $_GET['ID'])->setField('uetime', time());
-        $list = $model->where('ID=' . $_GET['ID'])->setField('ashow', 0);
+        $model = D('DbAdvertise');
+        $list = $model->where('id=' . $_GET['id'])->setField('status', 0);
         if ($list) {
             echo $this->ajax('1', "禁用成功", $name, "", "");
         } else {

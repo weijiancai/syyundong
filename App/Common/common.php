@@ -857,7 +857,7 @@ function ads($id)
         if ($t > 0) {
             //长条广告 1190*60
             if ($vo['type'] == '2') {
-                if (trim($vo['img2']) == '' and trim($vo['link2']) == '') {
+                if (trim($vo['img2']) == '' and trim($vo['link1']) == '') {
                     echo '<div class="ad container"><img src="__PUBLIC__/Upload/ad/' . $vo['img1'] . '"/></div>';
                 } else {
                     echo '<div class="ad container"><a target="_blank" href="' . larger($vo['id']) . '"><img src="__PUBLIC__/Upload/ad/' . $vo['img1'] . '"/></a></div>';
@@ -874,18 +874,18 @@ function ads($id)
  */
 function larger($val)
 {
-    $list = D('db_advertise')->field('id,link2,img2')->where("ID = '%d'", $val)->find();
-    if ($list['link1'] != null or !empty($list['link1'])) {
+    $list = D('db_advertise')->field('id,link1,link2,img2,img1')->where("ID = '%d'", $val)->find();
+    if ($list['link1'] != null or !empty($list['link1'])){
         if ((trim($list['link1']) == null) && ($list['img2'] == null or empty($list['img2']))) {
             return '#';
         } else {
-            return U('/larger/' . $list['id'] . '@www.songyuan163.com');
+            return U('/larger/' . $list['id'] . '@www.syyundong.com');
         }
     } else {
         if ($list['img2'] == null or empty($list['img2'])) {
             return '#';
         } else {
-            return U('/larger/' . $list['id'] . '@www.songyuan163.com');
+            return U('/larger/' . $list['id'] . '@www.syyundong.com');
         }
     }
 }
@@ -954,7 +954,7 @@ function  strtoarr($strs)
  */
 function  RemoveFormat($str)
 {
-    return str_replace(array('<p>', '</p>'), '', strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($str))), "<img>"));
+    return str_replace(array('<p>', '</p>'), '', strip_tags(htmlspecialchars_decode(stripcslashes(stripslashes($str)))));
 }
 
 ?>

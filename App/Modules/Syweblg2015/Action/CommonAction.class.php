@@ -84,7 +84,6 @@ class CommonAction extends Action
             $this->_list($model, $map, $order);
         }
         $this->display();
-        dump('44');
         return;
     }
 
@@ -285,7 +284,29 @@ class CommonAction extends Action
             }
         }
     }
-
+    /*
+     * @时间: 20150415
+     * @功能: 带路径参数图片上传
+     */
+    public function uploads($path){
+        $upload = new UploadFile();
+        $upload->maxSize  = 3145728;
+        $upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg','doc','swf');
+        $upload->savePath =  './Public/Upload/'.$path.'/';
+        $upload->thumb = true;
+        $upload->autoSub=true;
+        $upload->subType=date;
+        if(!$upload->upload()) {
+        // 上传错误提示错误信息
+            if($upload->getErrorMsg() !="没有选择上传文件") {//不上传文件通过
+                $e=$this->error($upload->getErrorMsg());
+                return array(false,$e);}
+        }else{
+        // 上传成功 获取上传文件信息
+            $info =  $upload->getUploadFileInfo();
+            return array(true,$info);
+        }
+    }
 
     /**
      * +----------------------------------------------------------
@@ -362,7 +383,7 @@ class CommonAction extends Action
     public function forbid()
     {
         $name = $this->getActionName();
-        $model = CM($name);
+        $model = M($name);
         $pk = $model->getPk();
         $id = $_REQUEST [$pk];
         $condition = array($pk => array('in', $id));
@@ -377,7 +398,7 @@ class CommonAction extends Action
     public function checkPass()
     {
         $name = $this->getActionName();
-        $model = CM($name);
+        $model = M($name);
         $pk = $model->getPk();
         $id = $_GET [$pk];
         $condition = array($pk => array('in', $id));
@@ -480,29 +501,7 @@ class CommonAction extends Action
         );
         return json_encode($arr);
     }
-    /*
-     * @时间: 20150415
-     * @功能: 带路径参数图片上传
-     */
-    public function uploads($path){
-        $upload = new UploadFile();
-        $upload->maxSize  = 3145728;
-        $upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg','doc','swf');
-        $upload->savePath =  './Public/Upload/'.$path.'/';
-        $upload->thumb = true;
-        $upload->autoSub=true;
-        $upload->subType=date;
-        if(!$upload->upload()) {
-        // 上传错误提示错误信息
-            if($upload->getErrorMsg() !="没有选择上传文件") {//不上传文件通过
-                $e=$this->error($upload->getErrorMsg());
-                return array(false,$e);}
-        }else{
-        // 上传成功 获取上传文件信息
-            $info =  $upload->getUploadFileInfo();
-            return array(true,$info);
-        }
-    }
+
     /*
      * @时间: 20150415
      * @功能: 图片上传
