@@ -850,13 +850,12 @@ function getSecondPosition($id)
 function ads($id)
 {
     $list = D('Public/Ads')->ads_list($id);
-    date_default_timezone_set('Asia/Shanghai');
     foreach ($list AS $vo) {
         //整体判断开始结束时间
         $t = round((strtotime($vo['stoptime']) - time()) / 3600 / 24); //到期时间  - 当前时间
         if ($t > 0) {
             //长条广告 1190*60
-            if ($vo['type'] == '2') {
+            if ($vo['type'] == '1') {
                 if (trim($vo['img2']) == '' and trim($vo['link1']) == '') {
                     echo '<div class="ad container"><img src="__PUBLIC__/Upload/ad/' . $vo['img1'] . '"/></div>';
                 } else {

@@ -13,7 +13,6 @@ class PublicAction extends Action
     {
         $this->display();
     }
-
     /*
      * 功能：ajax上传图片
      * 时间：20150501
@@ -35,29 +34,29 @@ class PublicAction extends Action
         $upload->zipImages = true;
         $upload->autoSub = true;
         $upload->subType = date;
-        $upload->thumbRemoveOrigin = true;
+        $upload->thumbRemoveOrigin=true;
         if (!$upload->upload()) { // 上传错误提示错误信息
             if ($upload->getErrorMsg() != "没有选择上传文件") { //不上传文件通过
                 $e = $this->error($upload->getErrorMsg());
                 echo $e;
-            }
+        }
         } else { // 上传成功 获取上传文件信息
             $info = $upload->getUploadFileInfo();
 
             //存储图片
-            //    $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
+        //    $date['local_url'] = '/Public/upload/' . $path . '/' . $info[0]['savename'];
 
-            list($day, $name) = split('[/]', $info[0]['savename']);
-            $date['local_url'] = '/Public/Upload/' . $path . '/' . $day . '/m_' . $name;
+            list($day,$name) = split ('[/]', $info[0]['savename']);
+            $date['local_url'] = '/Public/Upload/' . $path . '/'.$day.'/m_' . $name;
 
-            $date['size2_url'] = '/Public/Upload/' . $path . '/' . $day . '/s_' . $name;
+            $date['size2_url'] = '/Public/Upload/' . $path . '/'.$day.'/s_' . $name;
             $result = D('DbImages')->add($date);
             //打水印
             $Image = new Image();
             foreach ($info as $value) {
                 // $Image->water('./Public/Upload/' . $path.'/' . $value['savename'], './Public/images/default/water.png'); //打水印
-                list($w_day, $w_name) = split('[/]', $value['savename']);
-                $Image->water('./Public/Upload/' . $path . '/' . $w_day . '/m_' . $w_name, './Public/images/default/water.png');
+                list($w_day,$w_name) = split ('[/]', $value['savename']);
+                $Image->water('./Public/Upload/' . $path.  '/' . $w_day.'/m_' . $w_name, './Public/images/default/water.png');
             }
             $arr = array(
                 'savename' => $info[0]['savename'],
@@ -92,7 +91,6 @@ class PublicAction extends Action
             echo 0;
         }
     }
-
     /*
      * @功能：网站顶部赛事
      * @时间：
@@ -100,7 +98,7 @@ class PublicAction extends Action
     public function sport_top()
     {
         $model = D('DzSport');
-        $category = $model->where('pid=0 and sport_type=1')->field('id,name')->order('id asc')->select();
+        $category = $model ->where('pid=0 and sport_type=1')->field('id,name')->order('id asc')->select();
         if (!empty($category)) {
             foreach ($category as $key => $val) {
                 $id = $val['id'];
@@ -110,13 +108,11 @@ class PublicAction extends Action
 
         return $category;
     }
-
     /*
      * @功能：kindeditor 编辑器图片上传
      * @时间：20150621
      */
-    public function kind_img()
-    {
+    public function kind_img(){
         import('ORG.Net.UploadFile');
         import('ORG.Util.Image');
         $upload = new UploadFile(); // 实例化上传类
@@ -131,7 +127,7 @@ class PublicAction extends Action
         $upload->zipImages = true;
         $upload->autoSub = true;
         $upload->subType = date;
-        $upload->thumbRemoveOrigin = true;
+        $upload->thumbRemoveOrigin=true;
         if (!$upload->upload()) { // 上传错误提示错误信息
             $data['error'] = 1;
             $data['message'] = $upload->getErrorMsg();
@@ -141,14 +137,14 @@ class PublicAction extends Action
             $Image = new Image();
             foreach ($info as $value) {
                 // $Image->water('./Public/Upload/' . $path.'/' . $value['savename'], './Public/images/default/water.png'); //打水印
-                list($w_day, $w_name) = split('[/]', $value['savename']);
-                $Image->water('./Public/Upload/attached/' . $w_day . '/m_' . $w_name, './Public/images/default/water.png');
+                list($w_day,$w_name) = split ('[/]', $value['savename']);
+                $Image->water('./Public/Upload/attached/' . $w_day.'/m_' . $w_name, './Public/images/default/water.png');
             }
             //打水印
             /*$Image = new Image();
             $Image->water('./Public/Upload/attached/' . $info[0]['savename'], './Public/images/common/logo1.png'); //打水印*/
-            list($day, $name) = split('[/]', $info[0]['savename']);
-            $info[0]['savename'] = $day . '/m_' . $name;
+            list($day,$name) = split ('[/]', $info[0]['savename']);
+            $info[0]['savename']=$day.'/m_' . $name;
 
             $url = '../../../Public/Upload/attached/' . $info[0]['savename'];
             $data['error'] = 0;
@@ -156,7 +152,6 @@ class PublicAction extends Action
             $this->ajaxReturn($data, 'JSON');
         }
     }
-
     /*
      * @功能：大图模式
      * @时间：20150809
@@ -171,13 +166,27 @@ class PublicAction extends Action
         } else {
             D('DbAdvertise')->where('id=' . I('get.id'))->setInc('click');
         }
-        if ($list['link1']) {
-            $this->link1 = $list['link1'];
-            $this->display('link_jump');
-
+		$this->assign('list', $list);
+            $this->display();
+      /*   if ($list['adslink']) {
+            if (strstr($list['adslink'], 'bigimg')) {
+                $last = strrpos($list['adslink'], "/"); //字符最后一次出现的位置
+                $str = substr($list['adslink'], $last, 8);
+                $num = preg_replace('/[^\d]/', '', $str);
+                if ($num == $list['ID']) {
+                    $this->assign('list', $list);
+                    $this->display();
+                } else {
+                    $this->adslink = $list['adslink'];
+                    $this->display('clicktj');
+                }
+            } else {
+                $this->adslink = $list['adslink'];
+                $this->display('clicktj');
+            }
         } else {
             $this->assign('list', $list);
             $this->display();
-        }
+        } */
     }
 }

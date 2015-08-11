@@ -3,10 +3,10 @@ $DB_Config = require 'config.inc.php';
 $debug = require 'debug.php';
 $Public_Config =  array(
 	//错误指向
- 	/*'TMPL_EXCEPTION_FILE'=>'D:\APP\Modules\Public\Tpl\default\Public\error1.html',
-	'ERROR_PAGE'=>'D:\APP\Modules\Public\Tpl\default\Public\error1.html',*/
-	/*'TMPL_ACTION_SUCCESS' => 'Public@Public:success',
-	'TMPL_ACTION_ERROR'   => 'Public@Public:error',*/
+ 	'TMPL_EXCEPTION_FILE'=>'D:\APP\Modules\Public\Tpl\default\Public\error1.html',
+	'ERROR_PAGE'=>'D:\APP\Modules\Public\Tpl\default\Public\error1.html',
+	'TMPL_ACTION_SUCCESS' => 'Public@Public:success',
+	'TMPL_ACTION_ERROR'   => 'Public@Public:error',
 	//URL模式
 	'LOG_RECORD' => false,
 	'LIMIT_REFLESH_TIME'=>'10',
